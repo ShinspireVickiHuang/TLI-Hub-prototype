@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TLI Connect 會員區－續費／加購</title>
+<style>
+:root{
+  --c-primary:#1B4E8C;--c-primary-dark:#123A68;--c-accent:#E8792B;--c-accent-dark:#CF691F;--c-secondary:#0F9B79;
+  --c-bg:#F5F7FA;--c-border:#E4E7EC;--c-muted:#667085;--c-text:#101828;
+  --radius:12px;--radius-sm:8px;--shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04);--shadow-lg:0 8px 24px rgba(16,24,40,.16);
+  --topbar-h:52px;--bottomnav-h:64px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.55;font-size:15px;-webkit-tap-highlight-color:transparent;}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+button{font-family:inherit;}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--c-primary);outline-offset:2px;}
+.app{min-height:100vh;position:relative;}
+.topbar{position:sticky;top:0;z-index:60;height:var(--topbar-h);background:#fff;border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:10px;}
+.topbar-left{display:flex;align-items:center;gap:8px;min-width:0;}
+.topbar-logo-wrap{width:26px;height:22px;overflow:hidden;position:relative;flex:none;}
+.topbar-logo-wrap img{position:absolute;left:0;top:0;height:22px;width:auto;max-width:none;}
+.back-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--c-border);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--c-text);flex:none;cursor:pointer;}
+.back-btn svg{width:16px;height:16px;}
+.topbar-title{font-size:16.5px;font-weight:700;color:var(--c-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.topbar-actions{display:flex;align-items:center;gap:6px;position:relative;}
+.mini-select{border:1px solid var(--c-border);border-radius:6px;padding:4px 6px;font-size:11.5px;background:#fff;color:var(--c-muted);font-family:inherit;max-width:96px;}
+.bell-btn{position:relative;width:32px;height:32px;border-radius:50%;border:1px solid var(--c-border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--c-muted);}
+.bell-btn svg{width:16px;height:16px;}
+.bell-btn .dot{position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--c-accent);border:1.5px solid #fff;}
+.bell-panel{display:none;position:absolute;right:0;top:40px;width:264px;background:#fff;border:1px solid var(--c-border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:6px 0;z-index:90;}
+.bell-panel.open{display:block;}
+.bell-panel h4{margin:0;padding:8px 14px 6px;font-size:12.5px;color:var(--c-muted);font-weight:700;}
+.bell-item{padding:9px 14px;font-size:12.5px;border-top:1px solid var(--c-border);display:flex;gap:8px;}
+.bell-item .b-dot{width:6px;height:6px;border-radius:50%;background:var(--c-accent);margin-top:5px;flex:none;}
+.bell-item p{margin:0;color:var(--c-text);}
+.bell-item span{color:var(--c-muted);font-size:11px;}
+.side-nav{display:none;}
+@media(min-width:1024px){
+  .side-nav{display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;width:310px;background:#fff;border-right:1px solid var(--c-border);padding:18px 12px;z-index:50;}
+  .side-brand{display:flex;align-items:center;padding:0 8px 18px;}
+  .side-brand img{height:28px;width:auto;}
+  .side-identity{padding:0 8px 14px;margin-bottom:6px;font-size:12.5px;font-weight:700;color:var(--c-text);border-bottom:1px solid var(--c-border);}
+  .side-link{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:8px;font-size:14px;font-weight:600;color:var(--c-muted);margin-bottom:2px;}
+  .side-link svg{width:19px;height:19px;flex:none;}
+  .side-link.active{background:#E6EEF8;color:var(--c-primary);}
+  .side-link:hover:not(.active){background:var(--c-bg);}
+  .app.has-side .topbar{margin-left:310px;}
+  .app.has-side .content{margin-left:310px;}
+}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--c-border);display:flex;height:var(--bottomnav-h);padding-bottom:env(safe-area-inset-bottom,0);box-shadow:0 -2px 10px rgba(16,24,40,.06);}
+.bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;color:var(--c-muted);font-weight:600;min-height:44px;}
+.bottom-nav a svg{width:22px;height:22px;}
+.bottom-nav a.active{color:var(--c-primary);}
+@media(min-width:1024px){.bottom-nav{display:none;}}
+.content{max-width:960px;margin:0 auto;padding:18px 16px calc(var(--bottomnav-h) + 24px);}
+@media(min-width:1024px){.content{padding:26px 32px 40px;}}
+.page-sub{color:var(--c-muted);font-size:13px;margin:0 0 18px;}
+.section-title{font-size:15px;font-weight:700;margin:24px 0 12px;}
+.section-title.first{margin-top:4px;}
+.card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+.card + .card{margin-top:12px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:720px){.grid-3{grid-template-columns:1fr;}}
+.flex-between{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.stack{display:flex;flex-direction:column;gap:10px;}
+.muted{color:var(--c-muted);}
+.small{font-size:12px;}
+.divider{border:none;border-top:1px solid var(--c-border);margin:14px 0;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:var(--radius-sm);padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;min-height:44px;}
+.btn-primary{background:var(--c-primary);color:#fff;}
+.btn-primary:hover{background:var(--c-primary-dark);}
+.btn-outline{background:#fff;border:1px solid var(--c-border);color:var(--c-text);}
+.btn-outline:hover{background:var(--c-bg);}
+.btn:disabled{background:var(--c-border)!important;color:#98A2B3!important;cursor:not-allowed;border-color:var(--c-border)!important;}
+.btn-block{width:100%;}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:700;white-space:nowrap;}
+.badge-info{background:#E6EEF8;color:var(--c-primary);}
+.badge-muted{background:var(--c-border);color:var(--c-muted);}
+.hidden{display:none!important;}
+.toast{position:fixed;left:50%;bottom:calc(var(--bottomnav-h) + 18px);transform:translateX(-50%);background:#101828;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:700;z-index:120;box-shadow:var(--shadow-lg);white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;}
+.toast.hidden{display:none;}
+@media(min-width:1024px){.toast{bottom:24px;}}
+.thumb-bar{position:sticky;bottom:var(--bottomnav-h);left:0;right:0;background:#fff;border-top:1px solid var(--c-border);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));margin:20px -16px calc(-1 * (var(--bottomnav-h) + 24px));display:flex;gap:10px;align-items:center;z-index:75;}
+@media(min-width:1024px){.thumb-bar{margin:20px -32px -40px;bottom:0;}}
+.field select,.field input{border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:10px 11px;font-size:14px;font-family:inherit;color:var(--c-text);background:#fff;min-height:44px;width:100%;}
+.radio-line{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--c-border);font-size:13.5px;cursor:pointer;}
+.radio-line:first-child{border-top:none;}
+.radio-line .rl-body{flex:1;}
+.radio-line .rl-note{font-size:11.5px;color:var(--c-muted);margin-top:2px;}
+.plan-card{border:1.5px solid var(--c-border);border-radius:var(--radius);padding:14px;cursor:pointer;background:#fff;position:relative;}
+.plan-card.selected{border-color:var(--c-primary);background:#F7FAFF;}
+.plan-card h4{margin:0 0 4px;font-size:14.5px;}
+.plan-card .price{font-size:19px;font-weight:800;color:var(--c-primary);}
+.plan-card .price span{font-size:12px;font-weight:400;color:var(--c-muted);}
+.plan-card .tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;}
+.sheet-overlay{position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:100;display:flex;align-items:flex-end;justify-content:center;}
+.sheet-overlay.hidden{display:none;}
+.sheet{background:#fff;width:100%;max-width:480px;border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom,0));max-height:86vh;overflow-y:auto;animation:sheetUp .18s ease-out;}
+@keyframes sheetUp{from{transform:translateY(16px);opacity:.6;}to{transform:translateY(0);opacity:1;}}
+.sheet-handle{width:36px;height:4px;background:var(--c-border);border-radius:4px;margin:0 auto 14px;}
+.sheet h3{margin:0 0 4px;font-size:16px;}
+@media(min-width:640px){.sheet-overlay{align-items:center;}.sheet{border-radius:16px;}}
+.field{margin-bottom:12px;}
+.field label{font-size:12.5px;font-weight:700;display:block;margin-bottom:4px;}
+.channel-card{border:1.5px solid var(--c-border);border-radius:var(--radius);padding:13px 14px;cursor:pointer;background:#fff;margin-top:10px;}
+.channel-card.selected{border-color:var(--c-primary);background:#F7FAFF;}
+.channel-card h4{margin:0 0 2px;font-size:14px;}
+.channel-card p{margin:0;font-size:12px;color:var(--c-muted);}
+.channel-sub{margin-top:8px;padding-left:2px;}
+.channel-sub.hidden{display:none;}
+.gateway-view{display:none;}
+.gateway-view.open{display:block;}
+.gw-header-newebpay{background:#0F9B79;color:#fff;padding:16px;border-radius:var(--radius) var(--radius) 0 0;text-align:center;font-weight:800;font-size:16px;}
+.gw-header-stripe{background:#fff;border-bottom:1px solid var(--c-border);padding:16px;text-align:center;font-weight:800;font-size:18px;color:#635BFF;letter-spacing:.5px;}
+.gw-body{background:#fff;border:1px solid var(--c-border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:18px;}
+.gw-row{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px dashed var(--c-border);}
+.gw-row:last-child{border-bottom:none;}
+.va-box{background:var(--c-bg);border-radius:var(--radius-sm);padding:14px;text-align:center;margin:14px 0;}
+.va-box .va-num{font-size:19px;font-weight:800;letter-spacing:1px;color:var(--c-primary);margin:6px 0;word-break:break-all;}
+.explore-link{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--c-primary);white-space:nowrap;padding:4px 2px;flex:none;}
+.explore-link svg{width:15px;height:15px;flex:none;}
+@media(max-width:639px){.explore-link-text{display:none;}}
+/* ---------- 空狀態 ---------- */
+.empty-state{text-align:center;padding:40px 16px;color:var(--c-muted);}
+.empty-state .e-icon{width:52px;height:52px;margin:0 auto 14px;color:var(--c-border);}
+.empty-state h4{color:var(--c-text);font-size:15px;margin:0 0 6px;}
+.empty-state p{font-size:13px;margin:0 0 16px;}
+/* ---------- 示範用：會員狀態切換（僅供內部展示，非正式功能） ---------- */
+@media(max-width:400px){}
+.demo-note{font-weight:400;color:var(--c-muted);margin-left:6px;}
+
+/* ---------- 次層切換（segment，跨頁導覽） ---------- */
+.nav-segment{display:flex;gap:4px;border-bottom:1px solid var(--c-border);margin:0 0 16px;overflow-x:auto;}
+.nav-segment-link{padding:9px 14px;font-size:13.5px;font-weight:700;color:var(--c-muted);white-space:nowrap;border-bottom:2px solid transparent;flex:none;}
+.nav-segment-link.active{color:var(--c-primary);border-color:var(--c-primary);}
+.nav-segment-link:hover:not(.active){color:var(--c-text);}
+</style>
+</head>
+<body>
+<div class="app has-side">
+  <nav class="side-nav" aria-label="主導覽">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity">Emma Johnson｜學員</div>
+    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
+    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
+    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
+    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
+    <a class="side-link active" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>我的方案</a>
+    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>回官網</a>
+  </nav>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a>
+      <button class="back-btn" onclick="if(history.length>1){history.back();}else{location.href='m01_home.html';}" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="topbar-title" id="renewTitle" data-i18n-zh="續費／加購" data-i18n-en="Renew / Add-on">續費／加購</div>
+    </div>
+    <div class="topbar-actions">
+      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        <span class="explore-link-text">探索課程</span>
+      </a>
+      <select class="mini-select" id="currencySelect" aria-label="語言與幣別" onchange="setCurrency(this.value)">
+        <option value="zh-TW">繁體中文・TWD</option>
+        <option value="zh-CN">简体中文・CNY</option>
+        <option value="en">English・USD</option>
+      </select>
+      <button class="bell-btn" onclick="toggleBell()" aria-label="通知">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <div class="bell-panel" id="bellPanel">
+        <h4>通知</h4>
+        <div class="bell-item"><span class="b-dot"></span><div><p>你的方案將於 14 天後到期</p><span>今天 09:20</span></div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <nav class="nav-segment" aria-label="次選單">
+      <a class="nav-segment-link" href="m04_course_detail.html">我的方案</a>
+      <a class="nav-segment-link active" href="m06_renew.html">續約與加購</a>
+    </nav>
+
+  <div id="viewDefault">
+    <p class="page-sub" id="renewSub" data-i18n-zh="選擇方案並確認付款方式。" data-i18n-en="Choose a plan and confirm payment.">選擇方案並確認付款方式。</p>
+
+    <div id="mainForm">
+    <div class="grid-3" id="planGrid">
+      <div class="plan-card selected" data-plan="A" onclick="selectPlan('A')">
+        <span class="badge badge-info">延續目前方案</span>
+        <h4 style="margin-top:8px;">中文一對一 50 分・30 堂</h4>
+        <div class="tags"><span class="badge badge-muted">適用對象：一般會員(B)／企業會員(G)</span></div>
+        <div class="price" data-price-for="A">NT$27,000</div>
+        <p class="small muted" style="margin:2px 0 0;">每堂 NT$900・效期 200 天</p>
+      </div>
+      <div class="plan-card" data-plan="B" onclick="selectPlan('B')">
+        <span class="badge badge-muted">大方案</span>
+        <h4 style="margin-top:8px;">中文一對一 50 分・60 堂</h4>
+        <div class="tags"><span class="badge badge-muted">適用對象：一般會員(B)／企業會員(G)</span></div>
+        <div class="price" data-price-for="B">NT$51,000</div>
+        <p class="small muted" style="margin:2px 0 0;">每堂 NT$850・效期 300 天</p>
+      </div>
+      <div class="plan-card" data-plan="C" onclick="selectPlan('C')">
+        <span class="badge badge-muted">教材加購</span>
+        <h4 style="margin-top:8px;">教材加購包（不含堂數）</h4>
+        <div class="tags"><span class="badge badge-muted">適用對象：全會員</span></div>
+        <div class="price" data-price-for="C">NT$1,200</div>
+        <p class="small muted" style="margin:2px 0 0;">一次性費用</p>
+      </div>
+    </div>
+
+    <div class="section-title">付款方式</div>
+    <div class="card">
+      <label class="radio-line">
+        <input type="radio" name="pay" value="full" checked onchange="selectPayment('full')">
+        <div class="rl-body">一次付清<div class="rl-note">下單後立即收取全額</div></div>
+      </label>
+      <label class="radio-line">
+        <input type="radio" name="pay" value="deposit" onchange="selectPayment('deposit')">
+        <div class="rl-body">訂金＋尾款<div class="rl-note">訂金 30%，尾款於開課日前收取</div></div>
+      </label>
+      <label class="radio-line">
+        <input type="radio" name="pay" value="installment" onchange="selectPayment('installment')">
+        <div class="rl-body">分期<div class="rl-note">依期數平均分攤</div></div>
+      </label>
+      <div class="hidden" id="installmentWrap" style="padding:10px 0 0 30px;">
+        <select onchange="setInstallments(this.value)">
+          <option value="3">3 期</option>
+          <option value="6">6 期</option>
+          <option value="12">12 期</option>
+        </select>
+      </div>
+      <div class="divider"></div>
+      <div class="flex-between">
+        <span class="small muted">應付總額</span>
+        <span style="font-size:20px;font-weight:800;" id="totalAmount">NT$27,000</span>
+      </div>
+      <div class="small muted" id="breakdownText" style="margin-top:4px;"></div>
+    </div>
+
+    <div class="section-title">支付渠道</div>
+    <div class="channel-card selected" data-channel="newebpay" onclick="selectChannel('newebpay')" id="channelNewebpay">
+      <h4>藍新金流 NewebPay</h4>
+      <p>信用卡／ATM 虛擬帳號／超商代碼・新台幣（TWD）</p>
+      <div class="channel-sub" id="newebpaySub">
+        <label class="radio-line" style="padding:8px 0;">
+          <input type="radio" name="npMethod" value="credit" checked onchange="selectSubMethod('credit')">
+          <div class="rl-body">信用卡</div>
+        </label>
+        <label class="radio-line" style="padding:8px 0;">
+          <input type="radio" name="npMethod" value="atm" onchange="selectSubMethod('atm')">
+          <div class="rl-body">ATM 虛擬帳號</div>
+        </label>
+        <label class="radio-line" style="padding:8px 0;">
+          <input type="radio" name="npMethod" value="cvs" onchange="selectSubMethod('cvs')">
+          <div class="rl-body">超商代碼</div>
+        </label>
+      </div>
+    </div>
+    <div class="channel-card" data-channel="stripe" onclick="selectChannel('stripe')" id="channelStripe" style="margin-bottom:96px;">
+      <h4>Stripe</h4>
+      <p>海外信用卡，支援多幣別（USD／JPY）</p>
+    </div>
+
+    <div class="thumb-bar">
+      <div style="flex:1;"><div class="small muted" id="channelSummaryText">已選擇 藍新金流・信用卡</div></div>
+      <button class="btn btn-primary" onclick="goToGateway()">前往付款</button>
+    </div>
+    </div>
+
+    <div class="gateway-view" id="gatewayView">
+      <button class="btn btn-outline btn-sm" onclick="backFromGateway()" style="margin-bottom:14px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>返回</button>
+
+      <div id="gwNewebpay" class="hidden">
+        <div class="gw-header-newebpay">藍新金流 NewebPay</div>
+        <div class="gw-body">
+          <div class="gw-row"><span class="muted">商店名稱</span><strong>TLI 士林校區</strong></div>
+          <div class="gw-row"><span class="muted">訂單編號</span><strong id="npOrderNo">－</strong></div>
+          <div class="gw-row"><span class="muted">應付金額</span><strong id="npAmount">－</strong></div>
+          <div id="npCreditBlock" class="hidden">
+            <div class="field" style="margin-top:14px;"><label for="npCardNo">信用卡卡號</label><input type="text" id="npCardNo" placeholder="4000 1234 5678 9010"></div>
+            <div class="flex-between" style="gap:10px;">
+              <div class="field" style="flex:1;"><label for="npCardExp">有效期限</label><input type="text" id="npCardExp" placeholder="MM/YY"></div>
+              <div class="field" style="flex:1;"><label for="npCardCvc">安全碼</label><input type="text" id="npCardCvc" placeholder="CVC"></div>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="confirmGatewayPayment()">確認付款</button>
+          </div>
+          <div id="npVaBlock" class="hidden">
+            <div class="banner banner-warn" style="margin-top:14px;">取號完成，請於 3 日內繳費</div>
+            <div class="va-box">
+              <div class="small muted" id="vaLabel">ATM 虛擬帳號</div>
+              <div class="va-num" id="vaValue">－</div>
+              <div class="small muted">繳費期限 2026-08-28 23:59</div>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="confirmGatewayPayment()">確認付款</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="gwStripe" class="hidden">
+        <div class="gw-header-stripe">Stripe</div>
+        <div class="gw-body">
+          <div class="gw-row"><span class="muted">商店名稱</span><strong>TLI Shilin Campus</strong></div>
+          <div class="gw-row"><span class="muted">Order No.</span><strong id="stOrderNo">－</strong></div>
+          <div class="gw-row"><span class="muted">Amount</span><strong id="stAmount">－</strong></div>
+          <p class="small muted" id="stCurrencyNote" style="margin:10px 0 0;">－</p>
+          <div class="field" style="margin-top:14px;"><label for="stCardNo">Card number</label><input type="text" id="stCardNo" placeholder="4242 4242 4242 4242"></div>
+          <div class="flex-between" style="gap:10px;">
+            <div class="field" style="flex:1;"><label for="stCardExp">Expiry</label><input type="text" id="stCardExp" placeholder="MM/YY"></div>
+            <div class="field" style="flex:1;"><label for="stCardCvc">CVC</label><input type="text" id="stCardCvc" placeholder="CVC"></div>
+          </div>
+          <button class="btn btn-primary btn-block" onclick="confirmGatewayPayment()">確認付款</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 新學員（尚無任何方案，無可續費項目）空狀態：網址帶 ?new=1 顯示 ===== -->
+  <div id="viewNew" class="hidden">
+    <div class="card">
+      <div class="empty-state" style="padding:28px 16px 8px;">
+        <svg class="e-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.6 13.4a2 2 0 002 1.6h9.7a2 2 0 002-1.6L23 6H6"/></svg>
+        <h4>還沒有可續費的方案</h4>
+        <p>先選一個方案開始上課，之後才會出現在這裡</p>
+        <button class="btn btn-primary" onclick="location.href='../公開網站/p03_course_detail.html'">查看課程方案</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 已到期學員（方案已到期，可重新購買）情境：網址帶 ?expired=1 顯示 ===== -->
+  <div id="viewExpired" class="hidden">
+    <p class="page-sub" style="margin:0 0 14px;">你目前沒有進行中的方案，以下是已到期方案，可再次購買延續學習</p>
+    <div class="card">
+      <div id="expiredList"></div>
+      <div class="empty-state hidden" id="expiredEmpty" style="padding:12px 0;">
+        <p class="small muted" style="margin:0;">目前沒有已到期的方案紀錄。</p>
+      </div>
+      <div class="hidden" id="expiredMoreWrap" style="text-align:center;margin-top:10px;">
+        <button class="btn btn-outline btn-sm" onclick="showMoreExpired()">載入更多（還有 <span id="expiredMoreCount">0</span> 筆）</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:14px;">
+      <button class="btn btn-outline" onclick="location.href='../公開網站/p03_course_detail.html'">看看其他課程方案</button>
+    </div>
+  </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
+    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
+    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
+    <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
+    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+  </nav>
+</div>
+
+<div class="sheet-overlay hidden" id="successOverlay" onclick="if(event.target===this) closeSuccessOverlay()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div style="display:flex;justify-content:flex-end;">
+      <button class="modal-close-btn" onclick="closeSuccessOverlay()" aria-label="關閉" style="background:none;border:none;cursor:pointer;color:var(--c-muted);padding:6px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div style="text-align:center;padding:6px 0 4px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0F9B79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px;margin:0 auto 10px;"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      <h3>付款完成</h3>
+      <p class="muted small" id="successDetail">－</p>
+      <p class="small muted" style="margin:4px 0 0;">付款渠道：<span id="successChannel">－</span></p>
+    </div>
+    <div class="divider"></div>
+    <div class="banner banner-info" id="successInvoice">－</div>
+    <div class="stack">
+      <button class="btn btn-primary btn-block" onclick="location.href='m04_course_detail.html'">查看我的方案</button>
+      <button class="btn btn-outline btn-block" onclick="location.href='m04_course_detail.html?tab=billing'">查看訂單</button>
+      <button class="btn btn-ghost btn-block" onclick="location.href='m01_home.html'">回首頁</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.bell-btn')&&!e.target.closest('.bell-panel'))document.getElementById('bellPanel').classList.remove('open');
+});
+
+var PLANS={
+  A:{name:'中文一對一 50 分・30 堂',priceTWD:27000,credits:30,validityDays:200},
+  B:{name:'中文一對一 50 分・60 堂',priceTWD:51000,credits:60,validityDays:300},
+  C:{name:'教材加購包',priceTWD:1200,credits:0,validityDays:null}
+};
+var RATES={TWD:{rate:1,symbol:'NT$'},USD:{rate:31.5,symbol:'US$'},JPY:{rate:0.211,symbol:'¥'}};
+var state={plan:'A',payment:'full',installments:3,currency:'TWD'};
+var currentRemaining=8;
+
+function fmt(amountTWD){
+  var r=RATES[state.currency];
+  var v=amountTWD/r.rate;
+  var decimals=state.currency==='TWD'?0:(state.currency==='JPY'?0:2);
+  return r.symbol+v.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+}
+function selectPlan(id){
+  state.plan=id;
+  document.querySelectorAll('.plan-card').forEach(function(c){c.classList.toggle('selected',c.dataset.plan===id);});
+  updateTotal();
+}
+function selectPayment(method){
+  state.payment=method;
+  document.getElementById('installmentWrap').classList.toggle('hidden',method!=='installment');
+  updateTotal();
+}
+function setInstallments(n){
+  state.installments=parseInt(n,10);
+  updateTotal();
+}
+function setCurrency(lang){
+  var curMap={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
+  var cur=curMap[lang]||'TWD';
+  state.currency=cur;
+  document.querySelectorAll('.plan-card').forEach(function(c){
+    var id=c.dataset.plan;
+    c.querySelector('[data-price-for="'+id+'"]').textContent=fmt(PLANS[id].priceTWD);
+  });
+  updateTotal();
+  document.querySelectorAll('[data-i18n-zh]').forEach(function(el){
+    el.textContent = (lang==='zh-TW') ? el.getAttribute('data-i18n-zh') : el.getAttribute('data-i18n-en');
+  });
+  var sel=document.getElementById('currencySelect');
+  if(lang==='zh-CN'||lang==='de'){
+    var names={'zh-CN':'简体中文','de':'Deutsch'};
+    showToast('已切換為 '+names[lang]);
+  } else {
+    showToast('顯示語言／幣別已切換為 '+sel.options[sel.selectedIndex].text);
+  }
+}
+function showToast(msg){
+  var t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;
+  t.classList.remove('hidden');
+  clearTimeout(window._toastTimer);
+  window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
+}
+function updateTotal(){
+  var plan=PLANS[state.plan];
+  document.getElementById('totalAmount').textContent=fmt(plan.priceTWD);
+  var note='';
+  if(state.payment==='deposit'){
+    var deposit=plan.priceTWD*0.3;
+    var balance=plan.priceTWD*0.7;
+    note='訂金 '+fmt(deposit)+'（下單即付）・尾款 '+fmt(balance)+'（開課日前收取）';
+  }else if(state.payment==='installment'){
+    var per=plan.priceTWD/state.installments;
+    note='每期 '+fmt(per)+'・共 '+state.installments+' 期';
+  }else{
+    note='下單後立即收取全額';
+  }
+  document.getElementById('breakdownText').textContent=note;
+}
+/* ================= 支付渠道／第三方付款模擬 ================= */
+state.channel='newebpay';
+state.subMethod='credit';
+var orderNo=null, invoiceNo=null;
+
+function selectChannel(ch){
+  state.channel=ch;
+  document.getElementById('channelNewebpay').classList.toggle('selected', ch==='newebpay');
+  document.getElementById('channelStripe').classList.toggle('selected', ch==='stripe');
+  document.getElementById('newebpaySub').classList.toggle('hidden', ch!=='newebpay');
+  updateChannelSummary();
+}
+function selectSubMethod(m){
+  state.subMethod=m;
+  state.channel='newebpay';
+  document.getElementById('channelNewebpay').classList.add('selected');
+  document.getElementById('channelStripe').classList.remove('selected');
+  updateChannelSummary();
+}
+function updateChannelSummary(){
+  var label = state.channel==='newebpay'
+    ? ('藍新金流・'+(state.subMethod==='credit'?'信用卡':state.subMethod==='atm'?'ATM 虛擬帳號':'超商代碼'))
+    : 'Stripe・海外信用卡';
+  document.getElementById('channelSummaryText').textContent='已選擇 '+label;
+}
+function genOrderNo(){
+  return 'TLI20260825'+String(Math.floor(100+Math.random()*900));
+}
+function genInvoiceNo(prefix){
+  return prefix+'-'+Math.floor(10000000+Math.random()*89999999);
+}
+function genVirtualAccount(){
+  return '822'+String(Math.floor(1000000000+Math.random()*8999999999)).slice(0,12);
+}
+function genCvsCode(){
+  return String(Math.floor(100000000000+Math.random()*899999999999));
+}
+function goToGateway(){
+  orderNo=genOrderNo();
+  document.getElementById('mainForm').classList.add('hidden');
+  document.getElementById('gatewayView').classList.add('open');
+  var amountText=document.getElementById('totalAmount').textContent;
+  if(state.channel==='newebpay'){
+    document.getElementById('gwNewebpay').classList.remove('hidden');
+    document.getElementById('gwStripe').classList.add('hidden');
+    document.getElementById('npOrderNo').textContent=orderNo;
+    document.getElementById('npAmount').textContent=amountText;
+    var creditBlock=document.getElementById('npCreditBlock');
+    var vaBlock=document.getElementById('npVaBlock');
+    creditBlock.classList.toggle('hidden', state.subMethod!=='credit');
+    vaBlock.classList.toggle('hidden', state.subMethod==='credit');
+    if(state.subMethod==='atm'){
+      document.getElementById('vaLabel').textContent='ATM 虛擬帳號';
+      document.getElementById('vaValue').textContent=genVirtualAccount();
+    }else if(state.subMethod==='cvs'){
+      document.getElementById('vaLabel').textContent='超商代碼';
+      document.getElementById('vaValue').textContent=genCvsCode();
+    }
+  }else{
+    document.getElementById('gwNewebpay').classList.add('hidden');
+    document.getElementById('gwStripe').classList.remove('hidden');
+    document.getElementById('stOrderNo').textContent=orderNo;
+    document.getElementById('stAmount').textContent=amountText;
+    document.getElementById('stCurrencyNote').textContent='將以目前選擇幣別（'+state.currency+'）計價扣款，可於右上角切換幣別。';
+  }
+  window.scrollTo(0,0);
+}
+function backFromGateway(){
+  document.getElementById('gatewayView').classList.remove('open');
+  document.getElementById('mainForm').classList.remove('hidden');
+}
+function confirmGatewayPayment(){
+  var channelLabel = state.channel==='newebpay'
+    ? ('藍新金流・'+(state.subMethod==='credit'?'信用卡':state.subMethod==='atm'?'ATM 虛擬帳號':'超商代碼'))
+    : 'Stripe・海外信用卡';
+  invoiceNo = genInvoiceNo(state.channel==='newebpay'?'NP':'ST');
+  document.getElementById('gatewayView').classList.remove('open');
+  finishPayment(channelLabel, invoiceNo);
+}
+function finishPayment(channelLabel, invNo){
+  var plan=PLANS[state.plan];
+  var msg=plan.name+'・'+fmt(plan.priceTWD);
+  if(plan.credits>0){
+    var newRemaining=currentRemaining+plan.credits;
+    var expiry=new Date(2026,7,25);
+    expiry.setDate(expiry.getDate()+plan.validityDays);
+    var expiryStr=expiry.getFullYear()+'-'+String(expiry.getMonth()+1).padStart(2,'0')+'-'+String(expiry.getDate()).padStart(2,'0');
+    msg+='・新剩餘堂數 '+newRemaining+' 堂・新效期至 '+expiryStr;
+  }else{
+    msg+='・教材已開通，不影響現有堂數與效期';
+  }
+  document.getElementById('successDetail').textContent=msg;
+  document.getElementById('successChannel').textContent=channelLabel;
+  document.getElementById('successInvoice').textContent='電子發票已由 Ezpay 開立，發票號碼 '+invNo+'，已寄至 Email';
+  document.getElementById('successOverlay').classList.remove('hidden');
+}
+updateTotal();
+updateChannelSummary();
+
+// 續費頁狀態切換（示範用）：依網址參數決定顯示「有課程學員／新學員／已到期學員」畫面
+function getMemberState(){
+  var params = new URLSearchParams(window.location.search);
+  if(params.get('expired')==='1') return 'expired';
+  if(params.get('new')==='1') return 'new';
+  return 'default';
+}
+function renderMemberState(state){
+  var views={default:'viewDefault',new:'viewNew',expired:'viewExpired'};
+  Object.keys(views).forEach(function(key){
+    document.getElementById(views[key]).classList.toggle('hidden', key!==state);
+  });}
+function rebuyExpiredPlan(planId){
+  location.href='m06_renew.html?plan='+planId;
+}
+
+/* ===== 已到期方案列表（示範資料，依到期日新到舊排序＋預設 10 筆＋載入更多） ===== */
+var EXPIRED_PLANS=[
+  {id:'A',name:'中文一對一 50 分・30 堂方案',expiredAt:'2026-06-30',note:'尚餘 0 堂'},
+  {id:'B',name:'TLI 彈性團體直播班・中級會話直播班',expiredAt:'2026-05-31',note:''},
+  {id:'A',name:'中文一對一 50 分・20 堂方案',expiredAt:'2026-03-15',note:'尚餘 2 堂・逾期未使用'},
+  {id:'C',name:'發音基礎 20 講（自學課程）',expiredAt:'2026-02-20',note:'已完成 14／20 講'},
+  {id:'B',name:'TLI 彈性團體直播班・初級會話直播班',expiredAt:'2025-12-31',note:''},
+  {id:'A',name:'中文一對一 50 分・10 堂方案',expiredAt:'2025-10-05',note:'尚餘 0 堂'},
+  {id:'C',name:'商務華語情境 16 講（自學課程）',expiredAt:'2025-08-18',note:'已完成 6／16 講'},
+  {id:'B',name:'TLI 彈性團體直播班・日常會話直播班',expiredAt:'2025-06-30',note:''},
+  {id:'A',name:'中文一對一 50 分・30 堂方案（首購）',expiredAt:'2025-04-12',note:'尚餘 0 堂'},
+  {id:'C',name:'旅遊華語會話 12 講（自學課程）',expiredAt:'2025-02-01',note:'已完成 12／12 講'},
+  {id:'A',name:'中文一對一 25 分・20 堂方案',expiredAt:'2024-11-20',note:'尚餘 0 堂'},
+  {id:'B',name:'TLI 彈性團體直播班・體驗場加購包',expiredAt:'2024-08-15',note:''}
+].sort(function(a,b){ return new Date(b.expiredAt) - new Date(a.expiredAt); });
+var EXPIRED_PAGE_SIZE=10;
+var expiredShown=EXPIRED_PAGE_SIZE;
+function renderExpiredList(){
+  var wrap=document.getElementById('expiredList');
+  var empty=document.getElementById('expiredEmpty');
+  var moreWrap=document.getElementById('expiredMoreWrap');
+  if(EXPIRED_PLANS.length===0){
+    wrap.innerHTML='';
+    empty.classList.remove('hidden');
+    moreWrap.classList.add('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  var shown=EXPIRED_PLANS.slice(0,expiredShown);
+  wrap.innerHTML=shown.map(function(p,i){
+    return '<div class="list-row">'+
+      '<div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>'+
+      '<div class="body"><h4>'+p.name+'</h4><p>效期已於 '+p.expiredAt+' 到期'+(p.note?'・'+p.note:'')+'</p></div>'+
+      '<div class="trail"><button class="btn btn-primary btn-sm" onclick="rebuyExpiredPlan(\''+p.id+'\')">重新購買</button></div>'+
+    '</div>';
+  }).join('');
+  var remain=EXPIRED_PLANS.length-shown.length;
+  if(remain>0){
+    moreWrap.classList.remove('hidden');
+    document.getElementById('expiredMoreCount').textContent=remain;
+  }else{
+    moreWrap.classList.add('hidden');
+  }
+}
+function showMoreExpired(){
+  expiredShown+=EXPIRED_PAGE_SIZE;
+  renderExpiredList();
+}
+renderExpiredList();
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var preselect=params.get('plan');
+  if(preselect && PLANS[preselect]){ selectPlan(preselect); }
+})();
+renderMemberState(getMemberState());
+
+// 關閉「付款完成」提示（僅關閉視窗，不導頁）
+function closeSuccessOverlay(){ document.getElementById('successOverlay').classList.add('hidden'); }
+
+// 全域 ESC 關閉：關閉目前開啟中的 sheet-overlay
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Escape') return;
+  document.querySelectorAll('.sheet-overlay:not(.hidden)').forEach(function(el){
+    el.classList.add('hidden');
+  });
+});
+</script>
+<div class="toast hidden" id="toast">已完成</div>
+</body>
+</html>

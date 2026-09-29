@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TLI Connect 會員區－團體聊天室</title>
+<style>
+:root{
+  --c-primary:#1B4E8C;--c-primary-dark:#123A68;--c-accent:#E8792B;--c-accent-dark:#CF691F;--c-secondary:#0F9B79;
+  --c-bg:#F5F7FA;--c-border:#E4E7EC;--c-muted:#667085;--c-text:#101828;
+  --radius:12px;--radius-sm:8px;--shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04);--shadow-lg:0 8px 24px rgba(16,24,40,.16);
+  --topbar-h:52px;--bottomnav-h:64px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;overflow-x:hidden;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.55;font-size:15px;-webkit-tap-highlight-color:transparent;}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+button{font-family:inherit;}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--c-primary);outline-offset:2px;}
+.app{min-height:100vh;position:relative;}
+.topbar{position:sticky;top:0;z-index:60;height:var(--topbar-h);background:#fff;border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:10px;}
+.topbar-left{display:flex;align-items:center;gap:8px;min-width:0;}
+.topbar-logo-wrap{width:26px;height:22px;overflow:hidden;position:relative;flex:none;}
+.topbar-logo-wrap img{position:absolute;left:0;top:0;height:22px;width:auto;max-width:none;}
+.topbar-title{font-size:16.5px;font-weight:700;color:var(--c-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.topbar-actions{display:flex;align-items:center;gap:6px;position:relative;}
+.bell-btn{position:relative;width:32px;height:32px;border-radius:50%;border:1px solid var(--c-border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--c-muted);}
+.bell-btn svg{width:16px;height:16px;}
+.bell-btn .dot{position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--c-accent);border:1.5px solid #fff;}
+.bell-panel{display:none;position:absolute;right:0;top:40px;width:264px;background:#fff;border:1px solid var(--c-border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:6px 0;z-index:90;}
+.bell-panel.open{display:block;}
+.bell-panel h4{margin:0;padding:8px 14px 6px;font-size:12.5px;color:var(--c-muted);font-weight:700;}
+.bell-item{padding:9px 14px;font-size:12.5px;border-top:1px solid var(--c-border);display:flex;gap:8px;}
+.bell-item .b-dot{width:6px;height:6px;border-radius:50%;background:var(--c-accent);margin-top:5px;flex:none;}
+.bell-item p{margin:0;color:var(--c-text);}
+.bell-item span{color:var(--c-muted);font-size:11px;}
+.side-nav{display:none;}
+@media(min-width:1024px){
+  .side-nav{display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;width:310px;background:#fff;border-right:1px solid var(--c-border);padding:18px 12px;z-index:50;overflow-y:auto;}
+  .side-brand{display:flex;align-items:center;padding:0 8px 18px;}
+  .side-brand img{height:28px;width:auto;}
+  .side-identity{padding:0 8px 14px;margin-bottom:6px;font-size:12.5px;font-weight:700;color:var(--c-text);border-bottom:1px solid var(--c-border);}
+  .side-link{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:8px;font-size:14px;font-weight:600;color:var(--c-muted);margin-bottom:2px;}
+  .side-link svg{width:19px;height:19px;flex:none;}
+  .side-link.active{background:#E6EEF8;color:var(--c-primary);}
+  .side-link:hover:not(.active){background:var(--c-bg);}
+  .app.has-side .topbar{margin-left:310px;}
+  .app.has-side .content{margin-left:310px;}
+}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--c-border);display:flex;height:var(--bottomnav-h);padding-bottom:env(safe-area-inset-bottom,0);box-shadow:0 -2px 10px rgba(16,24,40,.06);}
+.bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10.5px;color:var(--c-muted);font-weight:600;min-height:44px;}
+.bottom-nav a svg{width:20px;height:20px;}
+.bottom-nav a.active{color:var(--c-primary);}
+@media(min-width:1024px){.bottom-nav{display:none;}}
+.content{max-width:840px;margin:0 auto;padding:18px 16px calc(var(--bottomnav-h) + 24px);}
+@media(min-width:1024px){.content{padding:26px 32px 40px;}}
+.page-h{font-size:19px;font-weight:700;margin:2px 0 4px;}
+.page-sub{color:var(--c-muted);font-size:13px;margin:0 0 18px;}
+.section-title{font-size:15px;font-weight:700;margin:22px 0 12px;}
+.section-title.first{margin-top:4px;}
+.card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+.card + .card{margin-top:12px;}
+.muted{color:var(--c-muted);}
+.small{font-size:12px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:var(--radius-sm);padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;min-height:44px;}
+.btn-primary{background:var(--c-primary);color:#fff;}
+.btn-primary:hover{background:var(--c-primary-dark);}
+.btn-accent{background:var(--c-accent);color:#fff;}
+.btn-accent:hover{background:var(--c-accent-dark);}
+.btn-outline{background:#fff;border:1px solid var(--c-border);color:var(--c-text);}
+.btn-outline:hover{background:var(--c-bg);}
+.btn:disabled{background:var(--c-border)!important;color:#98A2B3!important;cursor:not-allowed;}
+.btn-sm{padding:7px 12px;font-size:12.5px;min-height:36px;}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:700;white-space:nowrap;}
+.badge-info{background:#E6EEF8;color:var(--c-primary);}
+.badge-warn{background:#FCEBDC;color:var(--c-accent-dark);}
+.badge-ok{background:#E4F5F0;color:#0B6B52;}
+.badge-muted{background:var(--c-border);color:var(--c-muted);}
+.badge-danger{background:#FBEAEA;color:#B42318;}
+.badge-invite{background:#F3E8FD;color:#6B21A8;}
+.noshow-line{color:#B42318;margin:0 0 12px;font-size:12.5px;display:flex;gap:6px;align-items:flex-start;}
+.noshow-line svg{flex:none;margin-top:1px;}
+.hidden{display:none!important;}
+.banner{border-radius:var(--radius);padding:12px 14px;margin-bottom:14px;font-size:13px;display:flex;gap:9px;align-items:flex-start;}
+.banner-info{background:#E6EEF8;color:var(--c-primary-dark);border:1px solid #C7DAF0;}
+.banner svg{flex:none;margin-top:1px;}
+.list-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--c-border);}
+.list-row:first-child{border-top:none;padding-top:0;}
+.list-row .icon-box{width:38px;height:38px;border-radius:9px;background:var(--c-bg);display:flex;align-items:center;justify-content:center;flex:none;color:var(--c-primary);}
+.list-row .icon-box svg{width:18px;height:18px;}
+.list-row .body{flex:1;min-width:0;}
+.list-row .body h4{margin:0;font-size:13.5px;font-weight:700;}
+.list-row .body p{margin:2px 0 0;font-size:12px;color:var(--c-muted);}
+.list-row .trail{flex:none;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.mytab-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.mytab-btn{background:#fff;border:1px solid var(--c-border);border-radius:20px;padding:7px 14px;font-size:12.5px;font-family:inherit;color:var(--c-text);cursor:pointer;}
+.mytab-btn.active{background:var(--c-primary);color:#fff;border-color:var(--c-primary);}
+.mybucket-label{font-size:11.5px;color:var(--c-muted);font-weight:700;margin:14px 0 6px;}
+.mybucket-label:first-child{margin-top:0;}
+.toast{position:fixed;left:50%;bottom:calc(var(--bottomnav-h) + 18px);transform:translateX(-50%);background:#101828;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:700;z-index:120;box-shadow:var(--shadow-lg);white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;}
+.toast.hidden{display:none;}
+@media(min-width:1024px){.toast{bottom:24px;}}
+/* ---------- 聊天室權益層／示範狀態切換（20260910f 新增） ---------- */
+.entgate-icon{width:34px;height:34px;border-radius:9px;background:var(--c-bg);display:flex;align-items:center;justify-content:center;color:var(--c-primary);flex:none;margin-bottom:10px;}
+.entgate-icon svg{width:18px;height:18px;}
+/* ---------- 時間維度重排（20260910j 新增） ---------- */
+.select-sm{font-size:12.5px;padding:7px 10px;border:1px solid var(--c-border);border-radius:8px;background:#fff;color:var(--c-text);font-family:inherit;}
+.legend-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:18px 0 10px;}
+.legend-list{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--c-muted);}
+.legend-item{display:inline-flex;align-items:center;gap:5px;}
+.filter-row2{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.period-nav2{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;}
+.period-nav-btn2{background:#fff;border:1px solid var(--c-border);border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--c-muted);flex:none;font-size:16px;line-height:1;}
+.period-mid2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;}
+.week-grid-desktop{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-bottom:14px;}
+.week-day2{border:1px solid var(--c-border);border-radius:var(--radius-sm);background:#fff;padding:8px 6px;min-height:170px;display:flex;flex-direction:column;min-width:0;}
+.week-day2.today2{border-color:var(--c-primary);}
+.wd-label2{font-size:10.5px;color:var(--c-muted);text-align:center;}
+.wd-date2{font-size:13px;font-weight:700;text-align:center;margin:2px 0 6px;}
+.week-day2.today2 .wd-date2{color:var(--c-primary);}
+.wd-chips{display:flex;flex-direction:column;gap:4px;max-height:160px;overflow-y:auto;}
+.day-chip{display:flex;align-items:center;gap:4px;border:none;border-radius:6px;padding:4px 6px;font-size:10.5px;font-weight:600;text-align:left;cursor:pointer;font-family:inherit;width:100%;line-height:1.35;}
+.day-chip.open{background:#E6EEF8;color:var(--c-primary-dark);}
+.day-chip.assigned{background:#FCEBDC;color:#9A4A0F;}
+.day-chip.invited{background:#F3E8FD;color:#6B21A8;}
+.day-chip.record{background:var(--c-bg);color:var(--c-muted);}
+.day-chip.full2{opacity:.55;}
+.src-dot{width:7px;height:7px;border-radius:50%;flex:none;}
+.src-dot.open{background:var(--c-primary);}
+.src-dot.assigned{background:var(--c-accent-dark);}
+.src-dot.invited{background:#6B21A8;}
+.chip-src-label{font-weight:700;margin-right:1px;white-space:nowrap;}
+.chip-check{width:11px;height:11px;color:#0B6B52;flex:none;margin-left:auto;}
+.chip-pending{font-size:9px;font-weight:700;color:#9A4A0F;margin-left:auto;white-space:nowrap;}
+.week-list-mobile{display:none;}
+.week-row-mobile{border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:8px 10px;}
+.week-row-mobile.today2{border-color:var(--c-primary);}
+.wr-date{font-size:12px;font-weight:700;margin-bottom:6px;}
+.wr-chips{display:flex;flex-direction:column;gap:4px;max-height:160px;overflow-y:auto;}
+@media(max-width:640px){
+  .week-grid-desktop{display:none;}
+  .week-list-mobile{display:flex;flex-direction:column;gap:8px;}
+}
+.month-weekday-row2{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;}
+.month-weekday-row2 span{text-align:center;font-size:11px;color:var(--c-muted);font-weight:700;}
+.month-grid2{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px;}
+.month-day2{border:1px solid var(--c-border);border-radius:8px;background:#fff;min-height:56px;padding:5px 4px;display:flex;flex-direction:column;align-items:center;cursor:pointer;font-family:inherit;}
+.month-day-empty2{visibility:hidden;pointer-events:none;border:none;}
+.month-day2.today2{border-color:var(--c-primary);border-width:2px;}
+.month-day2.selected2{background:#E6EEF8;}
+.md-num2{font-size:12px;font-weight:700;}
+.md-dots2{display:flex;gap:2px;margin-top:4px;flex-wrap:wrap;justify-content:center;align-items:center;}
+.month-dot{width:6px;height:6px;border-radius:50%;}
+.month-dot.open{background:var(--c-primary);}
+.month-dot.assigned{background:var(--c-accent-dark);}
+.month-dot.invited{background:#6B21A8;}
+.month-dot.muted2{background:var(--c-border);}
+.md-count2{font-size:9px;color:var(--c-muted);margin-left:2px;}
+.month-agenda-hint{font-size:12.5px;color:var(--c-muted);padding:10px 2px;}
+.drawer-overlay{position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:110;display:flex;justify-content:flex-end;}
+.drawer-overlay.hidden{display:none;}
+.drawer{background:#fff;width:100%;max-width:420px;height:100%;overflow-y:auto;padding:20px;box-shadow:var(--shadow-lg);}
+@media(max-width:640px){
+  .drawer-overlay{align-items:flex-end;justify-content:center;}
+  .drawer{max-width:100%;height:auto;max-height:88vh;border-radius:18px 18px 0 0;}
+}
+.next-card-tag{font-size:12px;color:var(--c-muted);font-weight:700;margin-bottom:6px;}
+
+/* ---------- 次層切換（segment，跨頁導覽） ---------- */
+.nav-segment{display:flex;gap:4px;border-bottom:1px solid var(--c-border);margin:0 0 16px;overflow-x:auto;}
+.nav-segment-link{padding:9px 14px;font-size:13.5px;font-weight:700;color:var(--c-muted);white-space:nowrap;border-bottom:2px solid transparent;flex:none;}
+.nav-segment-link.active{color:var(--c-primary);border-color:var(--c-primary);}
+.nav-segment-link:hover:not(.active){color:var(--c-text);}
+</style>
+</head>
+<body>
+<div class="app has-side">
+  <nav class="side-nav" aria-label="主導覽">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity">Emma Johnson｜學員</div>
+    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
+    <a class="side-link active" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
+    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
+    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
+    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>我的方案</a>
+    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>回官網</a>
+  </nav>
+
+  <header class="topbar">
+    <div class="topbar-left"><a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a><div class="topbar-title">團體聊天室</div></div>
+    <div class="topbar-actions">
+      <button class="bell-btn" onclick="toggleBell()" aria-label="通知">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <div class="bell-panel" id="bellPanel">
+        <h4>通知</h4>
+        <div class="bell-item"><span class="b-dot"></span><div><p>明天場次即將開始，記得準時上線</p><span>提醒</span></div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <nav class="nav-segment" aria-label="次選單">
+      <a class="nav-segment-link" href="m02_booking.html">團體與活動報名</a>
+      <a class="nav-segment-link active" href="m14_chat_booking.html">聊天室場次</a>
+      <a class="nav-segment-link" href="m10_events.html">活動</a>
+    </nav>
+
+    <div class="page-h">團體聊天室</div>
+    <p class="page-sub">團體聊天室：30 分鐘、老師帶、名額依設定；與團體直播課不同，不計堂數。</p>
+
+    <div class="card hidden" id="entGateCard"></div>
+
+    <div id="entitledSections">
+    <div class="section-title first">下一場</div>
+    <div class="card" id="nextCard"></div>
+
+    <div class="small muted" id="quotaLine" style="margin:10px 2px;"></div>
+
+    <div class="noshow-line hidden" id="noshowBanner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div>你有 <b id="noshowCountText">1</b> 次未出席紀錄</div>
+    </div>
+
+    <div class="legend-row">
+      <div class="legend-list">
+        <span class="legend-item"><span class="src-dot assigned"></span>指定＝公司或學校為你安排</span>
+        <span class="legend-item"><span class="src-dot invited"></span>邀請＝老師或窗口邀你參加，可接受或婉拒</span>
+        <span class="legend-item"><span class="src-dot open"></span>開放＝名額內自由報名</span>
+      </div>
+      <div class="mytab-row" style="margin:0;">
+        <button type="button" class="mytab-btn active" id="viewSegWeek" onclick="setViewMode('week')">週</button>
+        <button type="button" class="mytab-btn" id="viewSegMonth" onclick="setViewMode('month')">月</button>
+      </div>
+    </div>
+
+    <div class="filter-row2">
+      <div class="mytab-row" style="margin:0;">
+        <button type="button" class="mytab-btn active" id="mineFilterAll" onclick="setMineFilter(false)">全部可報名</button>
+        <button type="button" class="mytab-btn" id="mineFilterMine" onclick="setMineFilter(true)">只看我的</button>
+      </div>
+      <select class="select-sm" id="topicFilterSelect" onchange="setTopicFilter(this.value)" aria-label="主題類型篩選"></select>
+    </div>
+
+    <div class="period-nav2">
+      <button type="button" class="period-nav-btn2" onclick="shiftPeriod(-1)" aria-label="上一個期間">‹</button>
+      <div class="period-mid2"><strong id="periodLabel">－</strong><button type="button" class="btn btn-outline btn-sm" id="periodResetBtn" onclick="resetPeriod()">本週</button></div>
+      <button type="button" class="period-nav-btn2" onclick="shiftPeriod(1)" aria-label="下一個期間">›</button>
+    </div>
+
+    <div id="weekViewWrap">
+      <div class="week-grid-desktop" id="weekGridDesktop"></div>
+      <div class="week-list-mobile" id="weekListMobile"></div>
+    </div>
+
+    <div id="monthViewWrap" class="hidden">
+      <div class="month-weekday-row2"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+      <div class="month-grid2" id="monthGrid"></div>
+      <div id="monthAgenda"></div>
+    </div>
+    </div>
+
+    <div class="section-title">我的紀錄</div>
+    <div class="card">
+      <button type="button" class="btn btn-outline btn-sm" id="myRecordToggleBtn" onclick="toggleMyRecord()">展開我的紀錄（已完成／已取消）</button>
+      <div id="myRecordBody" class="hidden" style="margin-top:14px;">
+                <div class="mytab-row" id="myTabRow"></div>
+        <div id="myBookingList"></div>
+        <div style="text-align:center;margin-top:10px;">
+          <button type="button" class="btn btn-outline btn-sm hidden" id="loadMoreBtn" onclick="loadMoreMyBookings()">載入更多</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
+    <a href="m02_booking.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
+    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
+    <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
+    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+  </nav>
+</div>
+
+<div class="drawer-overlay hidden" id="drawerOverlay" onclick="handleOverlayClick(event)">
+  <div class="drawer" id="drawerPanel">
+    <div id="drawerBody"></div>
+    <button type="button" class="btn btn-outline" style="width:100%;margin-top:14px;" onclick="closeDrawer()">關閉</button>
+  </div>
+</div>
+
+<div class="toast hidden" id="toast">已完成</div>
+
+<script>
+function showToast(msg){
+  var t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;
+  t.classList.remove('hidden');
+  clearTimeout(window._toastTimer);
+  window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
+}
+function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.bell-btn')&&!e.target.closest('.bell-panel'))document.getElementById('bellPanel').classList.remove('open');
+});
+
+/* ---------- 聊天室權益層（20260910f 新增） ----------
+   依 ?role=b2c|b2b|inst 與 ?chat=none|whitelist_out 示範參數渲染三種狀態：
+   (a) 有權益（無 chat 參數或非 none/whitelist_out）→ 正常顯示可報名場次（既有畫面不變）
+   (b) chat=none：方案／合約未含團體聊天室型態 → 不顯示場次清單，改顯示說明卡
+   (c) chat=whitelist_out：企業／學校採白名單報名，本人不在名單 → 顯示說明卡
+   實際權益應由 a04（方案 courseTypes）／a19（合約 contractParams.courseTypes／chatRegMode）決定，此處以 query string 示範三態切換。 */
+function qs(name){
+  var m = new RegExp('[?&]'+name+'=([^&]*)').exec(location.search);
+  return m ? decodeURIComponent(m[1]) : null;
+}
+var DEMO_ROLE = qs('role') || 'b2c';
+var DEMO_CHAT = qs('chat') || 'entitled';
+/* 科系限定聊天室場次示範（2026-09-11 新增）：?stuDept=deptA|deptB 切換示範學生所屬科系，
+   僅機構學生（inst）情境有意義；場次「適用科系」比對此固定示範屬性，不做完整帳號科系綁定。 */
+var DEMO_STU_DEPT = qs('stuDept') || 'deptA';
+var DEMO_STUDENT_DEPT_NAME = DEMO_STU_DEPT==='deptB' ? '應用外語學系' : '資訊工程學系';
+function entGateMessage(){
+  if (DEMO_CHAT === 'none'){
+    if (DEMO_ROLE === 'b2c'){
+      return {
+        title:'尚未開通團體聊天室',
+        body:'你目前的方案未含團體聊天室型態，加購含聊天室的方案後即可查看並報名場次。',
+        action:'<a class="btn btn-accent btn-sm" href="../公開網站/p02_courses.html">加購含聊天室的方案</a>'
+      };
+    }
+    var who = DEMO_ROLE === 'inst' ? '學校窗口' : 'HR';
+    return {
+      title:'尚未開通團體聊天室',
+      body:'貴'+(DEMO_ROLE==='inst'?'校':'公司')+'目前合約未含團體聊天室型態，如需開通請洽貴公司 HR／學校窗口。',
+      action:''
+    };
+  }
+  if (DEMO_CHAT === 'whitelist_out'){
+    return {
+      title:'目前不在報名白名單內',
+      body:'貴公司採白名單報名，如需加入請洽 HR。',
+      action:''
+    };
+  }
+  return null;
+}
+function applyEntitlementGate(){
+  var msg = entGateMessage();
+  var gateCard = document.getElementById('entGateCard');
+  var sections = document.getElementById('entitledSections');
+  if (!msg){
+    gateCard.classList.add('hidden');
+    sections.classList.remove('hidden');
+    return;
+  }
+  sections.classList.add('hidden');
+  gateCard.classList.remove('hidden');
+  gateCard.innerHTML =
+    '<div class="entgate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
+    '<div style="font-size:15px;font-weight:700;margin-bottom:6px;">'+msg.title+'</div>' +
+    '<div class="small muted" style="line-height:1.7;margin-bottom:'+(msg.action?'14px':'0')+';">'+msg.body+'</div>' +
+    (msg.action || '');
+}
+
+/* 每週可報名次數上限待定，此為內部示範用常數，畫面文字不呈現具體上限數字 */
+var WEEKLY_LIMIT_DEMO = 5;
+
+function addDays(base, days){ var d=new Date(base); d.setDate(d.getDate()+days); return d; }
+function fmtDate(d){ return (d.getMonth()+1)+'/'+d.getDate(); }
+function stripTime(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(); }
+function pad2(n){ return n<10 ? '0'+n : ''+n; }
+var TODAY = new Date('2026-09-09T09:00:00');
+/* 雙時區顯示：以台北時間為主，示範第二時區為美國廠區（美國西部時間，UTC-7），與台北相差 15 小時（全站慣例，示範用簡化換算） */
+function secondZoneLabel(date, time){
+  var parts = time.split(':');
+  var dt = new Date(date);
+  dt.setHours(parseInt(parts[0],10), parseInt(parts[1],10), 0, 0);
+  var dt2 = new Date(dt.getTime() - 15*60*60*1000);
+  var dayDiff = dt2.getDate() === dt.getDate() ? '' : (dt2 < dt ? '（前一天）' : '（隔天）');
+  var hh = String(dt2.getHours()).padStart(2,'0');
+  var mm = String(dt2.getMinutes()).padStart(2,'0');
+  return hh+':'+mm+dayDiff;
+}
+function combineDateTime(date, time){
+  var parts = time.split(':');
+  var dt = new Date(date);
+  dt.setHours(parseInt(parts[0],10), parseInt(parts[1],10), 0, 0);
+  return dt;
+}
+function hoursUntil(s){ return (combineDateTime(s.date, s.time).getTime() - TODAY.getTime()) / 3600000; }
+function isPast(s){ return combineDateTime(s.date, s.time).getTime() + 30*60000 < TODAY.getTime(); }
+function canEnter(s){
+  var start = combineDateTime(s.date, s.time).getTime();
+  var now = TODAY.getTime();
+  return now >= start - 5*60000 && now <= start + 30*60000;
+}
+function mondayOf(d){
+  var dt = new Date(d);
+  var day = dt.getDay();
+  var diff = (day===0 ? -6 : 1-day);
+  dt.setDate(dt.getDate()+diff);
+  dt.setHours(0,0,0,0);
+  return dt;
+}
+var WEEK0_MONDAY = mondayOf(TODAY);
+
+/* ---------- 老師與主題介紹（每場聊天室都要有介紹）----------
+   每個主題含：適合等級、主題簡介（2-3 句）、討論題綱 3 條、事前準備（可選）、語言。
+   帶領老師依主題分工，各附一句簡介；主題與老師資料延續既有兩題（日常對話練習／時事話題討論），並擴充 4 個主題與 2 位老師以呈現真實的每週場次多樣性。 */
+var TEACHERS = [
+  {id:'t1', name:'林俊傑老師（TLI）', intro:'資深華語教師，擅長生活會話與文化主題引導，教學風格活潑親切。', topics:['日常對話練習','旅遊實用會話']},
+  {id:'t2', name:'陳美惠老師（TLI）', intro:'主授商務與正式情境會話，重視表達邏輯與用詞得體。', topics:['商務情境會話']},
+  {id:'t3', name:'王淑芬老師（TLI）', intro:'長年帶領時事與影視討論課程，擅長引導深度對話。', topics:['時事話題討論','影視片段討論','文化觀察分享']}
+];
+var TOPIC_INFO = {
+  '日常對話練習':{ level:'初中級', language:'中文（可搭配英文輔助說明）',
+    intro:'從日常生活情境出發，練習點餐、問路、購物等實用會話，強化聽說反應速度。',
+    outline:['分享今天做了哪些事','描述一個你常去的地方','練習點餐或詢價的對話'],
+    prep:'建議先預習教材第 3 課生詞' },
+  '時事話題討論':{ level:'中高級', language:'中文',
+    intro:'挑選一則近期新聞或話題，引導學員以華語表達觀點並練習論述性語句。',
+    outline:['簡述這則新聞的重點','說說你對這件事的看法','舉一個相關的生活經驗'],
+    prep:null },
+  '商務情境會話':{ level:'中高級', language:'中文',
+    intro:'模擬會議、電話聯繫、簡報等職場情境，練習正式且得體的表達方式。',
+    outline:['自我介紹與工作內容','模擬一通業務聯繫電話','練習簡短的會議發言'],
+    prep:'建議準備一份簡單的自我介紹' },
+  '旅遊實用會話':{ level:'初級', language:'中文（可搭配英文輔助說明）',
+    intro:'情境設定在機場、飯店、景點，練習旅行中最常用到的華語表達。',
+    outline:['詢問交通與方向','在飯店辦理入住的對話','推薦一個你想去的景點'],
+    prep:null },
+  '影視片段討論':{ level:'中級', language:'中文',
+    intro:'觀看短片段後，練習描述劇情、表達感受，累積口語表達的豐富度。',
+    outline:['描述片段中的主要情節','說出一句印象深刻的台詞','分享你的感想'],
+    prep:'建議事先看過老師指定的短片連結' },
+  '文化觀察分享':{ level:'中高級', language:'中文',
+    intro:'以節慶、飲食、生活習慣為題，讓學員比較文化異同並練習長句表達。',
+    outline:['介紹一個你熟悉的節慶或習俗','比較兩地文化的異同','分享一次印象深刻的文化體驗'],
+    prep:null }
+};
+var TOPICS = Object.keys(TOPIC_INFO);
+function teacherForTopic(topic){
+  var t = TEACHERS.find(function(x){ return x.topics.indexOf(topic)>=0; });
+  return t || TEACHERS[0];
+}
+
+/* ---------- 場次資料：以週為單位產生至少 4 週、每週 6-10 場，三種來源（開放／指定／邀請）都涵蓋 ---------- */
+var TIMES = ['09:00','10:00','11:00','14:00','15:30','16:30','19:00','20:00'];
+function buildSessions(){
+  var list = [];
+  var counts = [5,7,9,6];
+  var idx = 0;
+  for(var w=0; w<counts.length; w++){
+    for(var i=0; i<counts[w]; i++){
+      idx++;
+      var dayOffset = (i*5 + w*2) % 7;
+      var date = addDays(WEEK0_MONDAY, w*7 + dayOffset);
+      var time = TIMES[(i+w) % TIMES.length];
+      var topic = TOPICS[(i + w*3) % TOPICS.length];
+      var teacher = teacherForTopic(topic);
+      var registered = 2 + ((i*3+w) % 7);
+      list.push({
+        id:'s'+idx, topic:topic, teacherId:teacher.id, teacherName:teacher.name,
+        date:date, time:time, source:'open', myState:null,
+        registered:registered, full:registered>=8
+      });
+    }
+  }
+  /* 明確示範案例：被指定、受邀待回覆、受邀已接受、已報名（含 12 小時內／外各一），確保驗收情境都存在 */
+  list.push({id:'e1', topic:'日常對話練習', teacherId:'t1', teacherName:'林俊傑老師（TLI）', date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()), time:'09:00', source:'open', myState:'registered', registered:4, full:false});
+  list.push({id:'e2', topic:'時事話題討論', teacherId:'t3', teacherName:'王淑芬老師（TLI）', date:addDays(TODAY,2), time:'19:00', source:'invited', myState:'invited_pending', registered:5, full:false});
+  list.push({id:'e3', topic:'商務情境會話', teacherId:'t2', teacherName:'陳美惠老師（TLI）', date:addDays(TODAY,3), time:'14:00', source:'assigned', myState:'assigned', registered:6, full:false});
+  list.push({id:'e4', topic:'旅遊實用會話', teacherId:'t1', teacherName:'林俊傑老師（TLI）', date:addDays(TODAY,4), time:'10:00', source:'open', myState:'registered', registered:3, full:false});
+  list.push({id:'e5', topic:'商務情境會話', teacherId:'t2', teacherName:'陳美惠老師（TLI）', date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()), time:'20:00', source:'open', myState:'registered', registered:5, full:false});
+  list.push({id:'e6', topic:'影視片段討論', teacherId:'t3', teacherName:'王淑芬老師（TLI）', date:addDays(TODAY,5), time:'16:30', source:'invited', myState:'invited_accepted', registered:4, full:false});
+  list.push({id:'e7', topic:'文化觀察分享', teacherId:'t3', teacherName:'王淑芬老師（TLI）', date:addDays(TODAY,10), time:'11:00', source:'open', myState:'registered', registered:5, full:false});
+  /* 科系限定聊天室場次示範（2026-09-11 新增，僅機構學生情境）：場次設定「適用科系」後，
+     示範學生所屬科系（見 DEMO_STUDENT_DEPT_NAME）不在名單內即不可報名，比照教師端 t04 適用科系設定的呈現方式。 */
+  if (DEMO_ROLE === 'inst'){
+    list.push({id:'instd1', topic:'商務情境會話', teacherId:'t2', teacherName:'陳美惠老師（TLI）', date:addDays(TODAY,1), time:'10:00', source:'open', myState:null, registered:5, full:false, restrictedDepts:['資訊工程學系','機械工程學系']});
+    list.push({id:'instd2', topic:'旅遊實用會話', teacherId:'t1', teacherName:'林俊傑老師（TLI）', date:addDays(TODAY,4), time:'11:00', source:'open', myState:null, registered:3, full:false, restrictedDepts:['應用外語學系','歷史學系']});
+  }
+  return list;
+}
+var SESSIONS = buildSessions();
+
+/* ---------- 我的紀錄（已完成／已取消），與週／月檢視共用同一份資料以呈現歷史場次 ---------- */
+function genMyRecord(){
+  var arr = [];
+  var doneOffsets = [-1,-2,-3,-4,-5,-6,-8,-10,-14,-20,-28,-35,-40];
+  doneOffsets.forEach(function(off,i){
+    var topic = TOPICS[i % TOPICS.length];
+    var teacher = teacherForTopic(topic);
+    arr.push({id:'done'+i, topic:topic, teacherName:teacher.name, date:addDays(TODAY,off), time:TIMES[i % TIMES.length], status:(i%5===0?'noshow':'done')});
+  });
+  var cancelOffsets = [-1,-2,-3,-5,-6,-9,-12,-15,-19,-22,-27,-33];
+  cancelOffsets.forEach(function(off,i){
+    var topic = TOPICS[(i+1) % TOPICS.length];
+    var teacher = teacherForTopic(topic);
+    arr.push({id:'can'+i, topic:topic, teacherName:teacher.name, date:addDays(TODAY,off), time:TIMES[(i+2) % TIMES.length], status:'cancelled'});
+  });
+  return arr;
+}
+var MY_RECORD = genMyRecord();
+var NOSHOW_COUNT_DEMO = MY_RECORD.filter(function(b){ return b.status==='noshow'; }).length;
+
+/* ---------- 週配額：以「該場次所屬週」計算已報名場次數，取消／報名後即時重算，不再手動加減 ---------- */
+function usedInWeekOf(d){
+  var ws = mondayOf(d).getTime();
+  return SESSIONS.filter(function(s){
+    return s.myState==='registered' && mondayOf(s.date).getTime()===ws;
+  }).length;
+}
+function renderQuotaLine(){
+  var used = usedInWeekOf(TODAY);
+  var remain = Math.max(WEEKLY_LIMIT_DEMO-used, 0);
+  document.getElementById('quotaLine').textContent = '本週已報名 '+used+' 場・剩餘可報名 '+remain+' 場（上限依設定）';
+}
+function renderNoshowBanner(){
+  var el = document.getElementById('noshowBanner');
+  if (NOSHOW_COUNT_DEMO > 0){
+    document.getElementById('noshowCountText').textContent = NOSHOW_COUNT_DEMO;
+    el.classList.remove('hidden');
+  } else {
+    el.classList.add('hidden');
+  }
+}
+
+/* ---------- 篩選狀態 ---------- */
+var FILTER_MINE = false;
+var FILTER_TOPIC = 'all';
+var VIEW_MODE = 'week';
+var weekOffset = 0;
+var monthOffset = 0;
+var selectedDay = null;
+
+function renderTopicFilterOptions(){
+  var sel = document.getElementById('topicFilterSelect');
+  var html = '<option value="all">全部主題</option>';
+  TOPICS.forEach(function(t){ html += '<option value="'+t+'">'+t+'</option>'; });
+  sel.innerHTML = html;
+}
+function setMineFilter(mine){
+  FILTER_MINE = mine;
+  document.getElementById('mineFilterAll').classList.toggle('active', !mine);
+  document.getElementById('mineFilterMine').classList.toggle('active', mine);
+  renderPeriod();
+}
+function setTopicFilter(val){
+  FILTER_TOPIC = val;
+  renderPeriod();
+}
+function setViewMode(mode){
+  VIEW_MODE = mode;
+  document.getElementById('viewSegWeek').classList.toggle('active', mode==='week');
+  document.getElementById('viewSegMonth').classList.toggle('active', mode==='month');
+  document.getElementById('weekViewWrap').classList.toggle('hidden', mode!=='week');
+  document.getElementById('monthViewWrap').classList.toggle('hidden', mode!=='month');
+  if (mode==='month' && !selectedDay) selectedDay = new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+  renderPeriod();
+}
+function shiftPeriod(dir){
+  if (VIEW_MODE==='week'){ weekOffset += dir; } else { monthOffset += dir; selectedDay = null; }
+  renderPeriod();
+}
+function resetPeriod(){
+  if (VIEW_MODE==='week'){ weekOffset = 0; } else { monthOffset = 0; selectedDay = new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()); }
+  renderPeriod();
+}
+function renderPeriod(){
+  renderPeriodLabel();
+  if (VIEW_MODE==='week'){ renderWeek(); } else { renderMonth(); }
+}
+function renderPeriodLabel(){
+  var resetBtn = document.getElementById('periodResetBtn');
+  if (VIEW_MODE==='week'){
+    var start = addDays(WEEK0_MONDAY, weekOffset*7), end = addDays(start,6);
+    document.getElementById('periodLabel').textContent = fmtDate(start)+'－'+fmtDate(end);
+    resetBtn.textContent = '本週';
+    /* 已在本週時，「本週」按鈕沒有東西可以再切換，改呈現停用樣式，不留下看起來可點但沒反應的按鈕 */
+    resetBtn.disabled = (weekOffset===0);
+  } else {
+    var base = new Date(TODAY.getFullYear(), TODAY.getMonth()+monthOffset, 1);
+    document.getElementById('periodLabel').textContent = base.getFullYear()+'年'+(base.getMonth()+1)+'月';
+    resetBtn.textContent = '本月';
+    resetBtn.disabled = (monthOffset===0);
+  }
+}
+
+/* ---------- 依日期取得該天所有場次（僅取 SESSIONS；已完成／已取消歷史紀錄只收在頁尾「我的紀錄」，不佈主畫面） ---------- */
+function itemsForDate(d){
+  var out = [];
+  SESSIONS.forEach(function(s){
+    if (stripTime(s.date)===stripTime(d)){
+      out.push({kind:'session', id:s.id, time:s.time, topic:s.topic, source:s.source, myState:s.myState, full:s.full});
+    }
+  });
+  out.sort(function(a,b){ return a.time < b.time ? -1 : 1; });
+  return out;
+}
+function filteredItemsForDate(d){
+  return itemsForDate(d).filter(function(it){
+    if (FILTER_TOPIC!=='all' && it.topic!==FILTER_TOPIC) return false;
+    if (FILTER_MINE && it.kind==='session' && !it.myState) return false;
+    return true;
+  });
+}
+function chipHTML(it){
+  if (it.kind==='record'){
+    var label = it.status==='cancelled' ? '已取消' : (it.status==='noshow' ? '未出席' : '已完成');
+    var cls = it.status==='noshow' ? 'badge-danger' : (it.status==='cancelled' ? 'badge-muted' : 'badge-ok');
+    return '<button type="button" class="day-chip record" onclick="openDrawer(\''+it.id+'\',\'record\')"><span class="badge '+cls+'" style="margin-right:5px;">'+label+'</span>'+it.time+' '+it.topic+'</button>';
+  }
+  var srcLabel = it.source==='assigned' ? '指定' : (it.source==='invited' ? '邀請' : '開放');
+  var mark = '';
+  if (it.myState==='registered' || it.myState==='invited_accepted'){
+    mark = '<svg class="chip-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  } else if (it.myState==='invited_pending'){
+    mark = '<span class="chip-pending">待回覆</span>';
+  }
+  return '<button type="button" class="day-chip '+it.source+(it.full?' full2':'')+'" onclick="openDrawer(\''+it.id+'\',\'session\')" data-session-id="'+it.id+'"><span class="src-dot '+it.source+'"></span><span class="chip-src-label">'+srcLabel+'</span>'+it.time+' '+it.topic+mark+'</button>';
+}
+
+/* ---------- 週檢視：桌機 7 欄格線／375 寬垂直日期列（雙容器同資料，避免橫向溢出） ---------- */
+var WEEKDAY_NAMES = ['一','二','三','四','五','六','日'];
+function renderWeek(){
+  var start = addDays(WEEK0_MONDAY, weekOffset*7);
+  var deskHtml = '', mobHtml = '';
+  for (var i=0; i<7; i++){
+    var d = addDays(start, i);
+    var items = filteredItemsForDate(d);
+    var isToday = stripTime(d)===stripTime(TODAY);
+    var chips = items.map(chipHTML).join('') || '<span class="small muted" style="font-size:11px;">－</span>';
+    deskHtml += '<div class="week-day2'+(isToday?' today2':'')+'"><span class="wd-label2">'+WEEKDAY_NAMES[i]+'</span><span class="wd-date2">'+fmtDate(d)+'</span><div class="wd-chips">'+chips+'</div></div>';
+    mobHtml += '<div class="week-row-mobile'+(isToday?' today2':'')+'"><div class="wr-date">'+WEEKDAY_NAMES[i]+'　'+fmtDate(d)+(isToday?'<span class="badge badge-info" style="margin-left:6px;">今天</span>':'')+'</div><div class="wr-chips">'+chips+'</div></div>';
+  }
+  document.getElementById('weekGridDesktop').innerHTML = deskHtml;
+  document.getElementById('weekListMobile').innerHTML = mobHtml;
+}
+
+/* ---------- 月檢視：格子只放色點＋數字，點日期在格線下方展開當日場次 ---------- */
+function daysInMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0).getDate(); }
+function renderMonth(){
+  var base = new Date(TODAY.getFullYear(), TODAY.getMonth()+monthOffset, 1);
+  var total = daysInMonth(base);
+  var firstWeekday = (base.getDay()+6) % 7;
+  var html = '';
+  for (var e=0; e<firstWeekday; e++){ html += '<div class="month-day2 month-day-empty2"></div>'; }
+  for (var day=1; day<=total; day++){
+    var d = new Date(base.getFullYear(), base.getMonth(), day);
+    var items = filteredItemsForDate(d);
+    var isToday = stripTime(d)===stripTime(TODAY);
+    var isSelected = selectedDay && stripTime(d)===stripTime(selectedDay);
+    var dots = items.slice(0,4).map(function(it){
+      var cls = it.kind==='record' ? 'muted2' : it.source;
+      return '<span class="month-dot '+cls+'"></span>';
+    }).join('');
+    html += '<button type="button" class="month-day2'+(isToday?' today2':'')+(isSelected?' selected2':'')+'" onclick="selectMonthDay('+day+')">'+
+      '<span class="md-num2">'+day+'</span>'+
+      (items.length ? '<span class="md-dots2">'+dots+'<span class="md-count2">'+items.length+'</span></span>' : '')+
+      '</button>';
+  }
+  document.getElementById('monthGrid').innerHTML = html;
+  renderMonthAgenda();
+}
+function selectMonthDay(day){
+  var base = new Date(TODAY.getFullYear(), TODAY.getMonth()+monthOffset, 1);
+  selectedDay = new Date(base.getFullYear(), base.getMonth(), day);
+  renderMonth();
+}
+function renderMonthAgenda(){
+  var el = document.getElementById('monthAgenda');
+  if (!selectedDay){
+    el.innerHTML = '<div class="month-agenda-hint">點選日期查看當日場次</div>';
+    return;
+  }
+  var items = filteredItemsForDate(selectedDay);
+  var head = '<div class="small" style="font-weight:700;margin:10px 2px 6px;">'+fmtDate(selectedDay)+'（'+['日','一','二','三','四','五','六'][selectedDay.getDay()]+'）</div>';
+  if (!items.length){
+    el.innerHTML = head + '<div class="month-agenda-hint">當天沒有符合篩選條件的場次</div>';
+    return;
+  }
+  el.innerHTML = head + '<div class="wr-chips" style="max-height:none;">'+items.map(chipHTML).join('')+'</div>';
+}
+
+/* ---------- 下一場：與我有關（已報名／被指定／受邀）且尚未結束的最近一場 ---------- */
+function nextCandidate(){
+  var now = TODAY.getTime();
+  var list = SESSIONS.filter(function(s){
+    return ['registered','assigned','invited_pending','invited_accepted'].indexOf(s.myState)>=0 &&
+      combineDateTime(s.date,s.time).getTime()+30*60000 >= now;
+  });
+  list.sort(function(a,b){ return combineDateTime(a.date,a.time)-combineDateTime(b.date,b.time); });
+  return list[0] || null;
+}
+function renderNextCard(){
+  var el = document.getElementById('nextCard');
+  var s = nextCandidate();
+  if (!s){
+    el.innerHTML = '<div class="small muted">目前沒有即將到來、與你有關的場次。</div>';
+    return;
+  }
+  el.innerHTML = '<div class="next-card-tag">你的下一場</div>' + sessionDetailHTML(s);
+}
+
+/* ---------- 場次詳情（下一場卡片與抽屜共用） ---------- */
+function sessionDetailHTML(s){
+  var info = TOPIC_INFO[s.topic];
+  var teacher = TEACHERS.find(function(t){ return t.id===s.teacherId; }) || TEACHERS[0];
+  var srcLabel = s.source==='assigned' ? '指定' : (s.source==='invited' ? '邀請' : '開放');
+  var srcCls = s.source==='assigned' ? 'badge-warn' : (s.source==='invited' ? 'badge-invite' : 'badge-info');
+  var statusLabel = s.myState==='registered' ? '已報名' : s.myState==='assigned' ? '公司／學校指定' : s.myState==='invited_pending' ? '受邀・待回覆' : s.myState==='invited_accepted' ? '受邀・已接受' : s.myState==='invited_declined' ? '已婉拒邀請' : '開放報名中';
+  var html = '';
+  html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;flex-wrap:wrap;"><span class="badge '+srcCls+'">'+srcLabel+'</span><span class="small muted">'+statusLabel+'</span></div>';
+  html += '<div style="margin:8px 0 4px;font-size:16.5px;font-weight:700;">'+s.topic+'</div>';
+  html += '<div class="small muted" style="margin-bottom:10px;line-height:1.7;">台北 '+fmtDate(s.date)+'（'+['日','一','二','三','四','五','六'][s.date.getDay()]+'）'+s.time+'　<span style="color:#98A2B3;">／ 美國廠區（美國西部時間，UTC-7）'+secondZoneLabel(s.date,s.time)+'</span></div>';
+  html += '<div class="small" style="margin-bottom:4px;"><b>帶領老師：</b>'+teacher.name+'．'+teacher.intro+'</div>';
+  html += '<div class="small muted" style="margin-bottom:10px;">適合等級：'+info.level+'　語言：'+info.language+'</div>';
+  html += '<div style="font-size:13.5px;line-height:1.7;margin-bottom:10px;">'+info.intro+'</div>';
+  html += '<div class="small" style="font-weight:700;margin-bottom:4px;">討論題綱</div>';
+  html += '<ul style="margin:0 0 10px;padding-left:18px;font-size:13px;line-height:1.8;">'+info.outline.map(function(o){ return '<li>'+o+'</li>'; }).join('')+'</ul>';
+  if (info.prep){
+    html += '<div class="small muted" style="margin-bottom:10px;"><b>事前準備：</b>'+info.prep+'</div>';
+  }
+  html += '<div class="small muted" style="margin-bottom:14px;">已報名 '+s.registered+' 人／名額（依型態設定）</div>';
+  if (s.restrictedDepts && s.restrictedDepts.length){
+    html += '<div class="small muted" style="margin-bottom:14px;">限定科系：'+s.restrictedDepts.join('、')+'</div>';
+  }
+  html += '<div>'+sessionActionsHTML(s)+'</div>';
+  return html;
+}
+/* 科系限定：場次設定「適用科系」時，示範學生所屬科系（DEMO_STUDENT_DEPT_NAME）不在名單內即不可報名，
+   顯示原因文字取代報名按鈕；不影響已報名／被指定／受邀等既有狀態的動作。 */
+function deptRestrictionReason(s){
+  if (!s.restrictedDepts || !s.restrictedDepts.length) return null;
+  if (s.restrictedDepts.indexOf(DEMO_STUDENT_DEPT_NAME) > -1) return null;
+  return '此場次限'+s.restrictedDepts.join('、')+'學生報名';
+}
+function sessionActionsHTML(s){
+  if (canEnter(s) && (s.myState==='registered' || s.myState==='invited_accepted' || s.myState==='assigned')){
+    return '<button type="button" class="btn btn-primary" style="width:100%;" onclick="location.href=\'m16_classroom.html?lesson='+s.id+'&type=chat\'">進教室</button>';
+  }
+  if (s.myState==='assigned'){
+    return '<div class="small muted">由公司／學校指定，如需異動請洽 HR／學校窗口</div>';
+  }
+  if (s.myState==='invited_pending'){
+    return '<button type="button" class="btn btn-accent" style="width:100%;margin-bottom:8px;" onclick="acceptInvite(\''+s.id+'\')">接受</button>'+
+      '<button type="button" class="btn btn-outline" style="width:100%;" onclick="declineInvite(\''+s.id+'\')">婉拒</button>';
+  }
+  if (s.myState==='invited_declined'){
+    return '<div class="small muted">已婉拒此邀請</div>';
+  }
+  if (s.myState==='registered' || s.myState==='invited_accepted'){
+    if (hoursUntil(s) >= 12){
+      return '<button type="button" class="btn btn-outline" style="width:100%;" onclick="cancelSession(\''+s.id+'\')">取消報名</button>';
+    }
+    return '<div class="small muted">已在 12 小時內，無法取消；未出席將記錄</div>';
+  }
+  if (isPast(s)){
+    return '<div class="small muted">場次已結束</div>';
+  }
+  if (s.full){
+    return '<div class="small muted">已額滿</div>';
+  }
+  var deptReason = deptRestrictionReason(s);
+  if (deptReason){
+    return '<div class="small muted">'+deptReason+'</div>';
+  }
+  if (WEEKLY_LIMIT_DEMO - usedInWeekOf(s.date) <= 0){
+    return '<div class="small muted">已達本週上限</div>';
+  }
+  return '<button type="button" class="btn btn-accent" style="width:100%;" onclick="registerSession(\''+s.id+'\')">報名</button>';
+}
+
+/* ---------- 抽屜（場次詳情／我的紀錄詳情） ---------- */
+var currentDrawer = null;
+function openDrawer(id, kind){
+  currentDrawer = {id:id, kind:kind};
+  var body = document.getElementById('drawerBody');
+  if (kind==='session'){
+    var s = SESSIONS.find(function(x){ return x.id===id; });
+    body.innerHTML = s ? sessionDetailHTML(s) : '';
+  } else {
+    var r = MY_RECORD.find(function(x){ return x.id===id; });
+    body.innerHTML = r ? recordDetailHTML(r) : '';
+  }
+  document.getElementById('drawerOverlay').classList.remove('hidden');
+}
+function closeDrawer(){
+  document.getElementById('drawerOverlay').classList.add('hidden');
+  currentDrawer = null;
+}
+function handleOverlayClick(e){
+  if (e.target && e.target.id==='drawerOverlay') closeDrawer();
+}
+function recordDetailHTML(r){
+  var info = TOPIC_INFO[r.topic];
+  var label = r.status==='cancelled' ? '已取消' : (r.status==='noshow' ? '未出席' : '已完成');
+  var cls = r.status==='noshow' ? 'badge-danger' : (r.status==='cancelled' ? 'badge-muted' : 'badge-ok');
+  var html = '';
+  html += '<div style="margin-bottom:2px;"><span class="badge '+cls+'">'+label+'</span></div>';
+  html += '<div style="margin:8px 0 4px;font-size:16.5px;font-weight:700;">'+r.topic+'</div>';
+  html += '<div class="small muted" style="margin-bottom:10px;">台北 '+fmtDate(r.date)+' '+r.time+'</div>';
+  html += '<div class="small" style="margin-bottom:10px;"><b>帶領老師：</b>'+r.teacherName+'</div>';
+  if (info){ html += '<div style="font-size:13px;line-height:1.7;color:var(--c-muted);">'+info.intro+'</div>'; }
+  return html;
+}
+
+/* ---------- 動作：報名／取消／接受／婉拒（進教室已改連 m16 前置頁，見 sessionActionsHTML） ---------- */
+function registerSession(id){
+  var s = SESSIONS.find(function(x){ return x.id===id; });
+  if (!s || s.myState || s.full || isPast(s) || deptRestrictionReason(s)) return;
+  if (WEEKLY_LIMIT_DEMO - usedInWeekOf(s.date) <= 0){ showToast('本週已達可報名場次上限'); return; }
+  s.myState = 'registered';
+  s.registered++;
+  renderAll();
+  showToast('已完成報名');
+  closeDrawer();
+}
+function cancelSession(id){
+  var s = SESSIONS.find(function(x){ return x.id===id; });
+  if (!s || hoursUntil(s) < 12) return;
+  if (s.myState==='registered'){
+    s.myState = null;
+    if (s.registered>0) s.registered--;
+  } else if (s.myState==='invited_accepted'){
+    s.myState = 'invited_declined';
+  } else {
+    return;
+  }
+  renderAll();
+  showToast('已取消報名');
+  closeDrawer();
+}
+function acceptInvite(id){
+  var s = SESSIONS.find(function(x){ return x.id===id; });
+  if (!s) return;
+  s.myState = 'invited_accepted';
+  renderAll();
+  showToast('已接受邀請');
+  closeDrawer();
+}
+function declineInvite(id){
+  var s = SESSIONS.find(function(x){ return x.id===id; });
+  if (!s) return;
+  s.myState = 'invited_declined';
+  renderAll();
+  showToast('已婉拒邀請');
+  closeDrawer();
+}
+
+/* ---------- 我的紀錄：已完成／已取消兩分頁，預設收合、10 筆＋載入更多 ---------- */
+var MY_TABS = [{key:'done',label:'已完成'},{key:'cancelled',label:'已取消'}];
+var myActiveTab = 'done';
+var MY_TAB_PAGE_SIZE = 10;
+var myVisibleCount = {done:MY_TAB_PAGE_SIZE, cancelled:MY_TAB_PAGE_SIZE};
+function myTabItems(key){
+  var list = MY_RECORD.filter(function(b){
+    if (key==='done') return b.status==='done' || b.status==='noshow';
+    return b.status==='cancelled';
+  });
+  list.sort(function(a,b){ return b.date - a.date; });
+  return list;
+}
+function myBucketLabel(d){
+  var diffDays = Math.round((stripTime(d) - stripTime(TODAY)) / 86400000);
+  if (diffDays === 0) return '今天';
+  if (Math.abs(diffDays) <= 7) return '本週';
+  return '更早';
+}
+function renderMyTabRow(){
+  var wrap = document.getElementById('myTabRow');
+  wrap.innerHTML = MY_TABS.map(function(t){
+    var count = myTabItems(t.key).length;
+    return '<button type="button" class="mytab-btn'+(t.key===myActiveTab?' active':'')+'" onclick="selectMyTab(\''+t.key+'\')">'+t.label+'（'+count+'）</button>';
+  }).join('');
+}
+function selectMyTab(key){
+  myActiveTab = key;
+  renderMyTabRow();
+  renderMyBookingList();
+}
+function loadMoreMyBookings(){
+  myVisibleCount[myActiveTab] += MY_TAB_PAGE_SIZE;
+  renderMyBookingList();
+}
+function toggleMyRecord(){
+  var body = document.getElementById('myRecordBody');
+  var btn = document.getElementById('myRecordToggleBtn');
+  var opening = body.classList.contains('hidden');
+  body.classList.toggle('hidden');
+  btn.textContent = opening ? '收合我的紀錄' : '展開我的紀錄（已完成／已取消）';
+}
+function renderMyBookingList(){
+  var all = myTabItems(myActiveTab);
+  var visible = all.slice(0, myVisibleCount[myActiveTab]);
+  var wrap = document.getElementById('myBookingList');
+  var lastBucket = null;
+  var html = '';
+  visible.forEach(function(b){
+    var bucket = myBucketLabel(b.date);
+    if (bucket !== lastBucket){
+      html += '<div class="mybucket-label">'+bucket+'</div>';
+      lastBucket = bucket;
+    }
+    var badge = b.status==='cancelled' ? '<span class="badge badge-muted">已取消</span>'
+      : b.status==='noshow' ? '<span class="badge badge-danger">未出席</span>'
+      : '<span class="badge badge-ok">已完成</span>';
+    html += '<div class="list-row" style="cursor:pointer;" onclick="openDrawer(\''+b.id+'\',\'record\')">'+
+      '<div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>'+
+      '<div class="body"><h4>'+b.topic+'．'+fmtDate(b.date)+' '+b.time+'</h4><p>帶領老師：'+b.teacherName+'</p></div>'+
+      '<div class="trail">'+badge+'</div>'+
+      '</div>';
+  });
+  if (!visible.length){
+    html = '<div class="small muted" style="padding:16px 0;">此分類目前沒有場次紀錄。</div>';
+  }
+  wrap.innerHTML = html;
+  var moreBtn = document.getElementById('loadMoreBtn');
+  if (all.length > visible.length){
+    moreBtn.classList.remove('hidden');
+    moreBtn.textContent = '載入更多（還有 '+(all.length-visible.length)+' 筆）';
+  } else {
+    moreBtn.classList.add('hidden');
+  }
+}
+
+function renderAll(){
+  renderQuotaLine();
+  renderNextCard();
+  renderPeriod();
+  renderMyTabRow();
+  renderMyBookingList();
+}
+
+renderTopicFilterOptions();
+renderNoshowBanner();
+renderAll();
+applyEntitlementGate();
+
+// 全域 ESC 關閉：關閉目前開啟中的 drawer
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Escape') return;
+  if(!document.getElementById('drawerOverlay').classList.contains('hidden')) closeDrawer();
+});
+</script>
+</body>
+</html>

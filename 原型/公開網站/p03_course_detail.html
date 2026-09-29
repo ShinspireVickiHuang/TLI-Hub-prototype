@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta_title">TLI Connect｜中文一對一線上課程詳情</title>
+<meta name="description" content="中文一對一線上課與 彈性團體直播 課程詳情：課程資訊、上課方式、適合對象、銷售方案卡（含適用對象與報價方式）。" data-i18n="meta_description" data-i18n-attr="content">
+<style>
+:root{
+  --c-primary:#1B4E8C;--c-primary-dark:#123A66;--c-accent:#E8792B;--c-accent-dark:#CF691F;
+  --c-secondary:#0F9B79;--c-bg:#F5F7FA;--c-border:#E4E7EC;--c-muted:#667085;--c-text:#101828;
+  --radius:10px;--shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04);--shadow-lg:0 8px 24px rgba(16,24,40,.10);
+}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.65;font-size:15px;}
+a{color:inherit;text-decoration:none;}img{max-width:100%;display:block;}ul{margin:0;padding:0;list-style:none;}h1,h2,h3,p{margin:0;}
+
+
+.site-header{background:#fff;border-bottom:1px solid var(--c-border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:40;}
+.brand{font-weight:700;font-size:20px;color:var(--c-primary);display:flex;align-items:center;gap:8px;}
+.brand img{height:32px;width:auto;display:block;}
+
+.site-nav{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:600;}
+.site-nav a:hover{color:var(--c-primary);}
+.header-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.lang-select{border:1px solid var(--c-border);border-radius:6px;padding:6px 8px;font-size:13px;background:#fff;color:var(--c-text);}
+.menu-toggle{display:none;background:none;border:1px solid var(--c-border);border-radius:6px;padding:6px 10px;font-size:16px;cursor:pointer;}
+@media(max-width:780px){
+  .brand img{height:26px;}.site-nav{display:none;width:100%;order:3;flex-direction:column;align-items:flex-start;gap:12px;padding-top:12px;border-top:1px solid var(--c-border);margin-top:10px;}.site-nav.open{display:flex;}.menu-toggle{display:inline-block;min-width:44px;min-height:44px;}
+  .site-nav a{display:flex;align-items:center;width:100%;min-height:44px;box-sizing:border-box;}}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#101828;color:#fff;font-size:13.5px;padding:12px 20px;border-radius:8px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:6px;padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.btn-primary{background:var(--c-primary);color:#fff;}.btn-primary:hover{background:var(--c-primary-dark);}
+.btn-accent{background:var(--c-accent);color:#fff;}.btn-accent:hover{background:var(--c-accent-dark);}
+.btn-outline{background:#fff;border:1px solid var(--c-border);color:var(--c-text);}.btn-outline:hover{background:var(--c-bg);}
+.btn-sm{padding:7px 14px;font-size:13px;}
+.btn-block{width:100%;}
+
+.breadcrumb{max-width:1120px;margin:16px auto 0;padding:0 20px;font-size:13px;color:var(--c-muted);}
+.breadcrumb a:hover{color:var(--c-primary);text-decoration:underline;}
+
+main{max-width:1120px;margin:0 auto;padding:16px 20px 60px;}
+
+.example-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.example-tab{border:1px solid var(--c-border);background:#fff;border-radius:20px;padding:9px 16px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--c-muted);min-height:40px;}
+.example-tab.active{background:var(--c-primary);border-color:var(--c-primary);color:#fff;}
+
+.mode-badge{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:12px;}
+.mode-badge.booking{background:#E6F4EF;color:var(--c-secondary);}
+.mode-badge.live{background:#FDECDD;color:var(--c-accent-dark);}
+
+.mode-explain{background:#EAF1F9;border:1px solid #CBDCF0;border-radius:10px;padding:14px 16px;margin:16px 0;}
+.mode-explain.live{background:#FDF3EB;border-color:#F3D9BD;}
+.mode-explain h4{font-size:13.5px;font-weight:800;margin-bottom:8px;color:var(--c-primary);}
+.mode-explain.live h4{color:var(--c-accent-dark);}
+.mode-explain li{font-size:12.5px;color:var(--c-muted);margin-bottom:5px;padding-left:14px;position:relative;}
+.mode-explain li:before{content:"•";position:absolute;left:0;color:var(--c-secondary);}
+
+.detail-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;margin-bottom:40px;}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr;}}
+
+.title-block{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;}
+.title-block .nick{color:var(--c-secondary);font-weight:700;font-size:13px;margin-bottom:8px;}
+.title-block h1{font-size:25px;font-weight:800;margin-bottom:10px;}
+.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0;}
+@media(max-width:520px){.fact-grid{grid-template-columns:1fr;}}
+.fact{background:var(--c-bg);border-radius:8px;padding:12px 14px;}
+.fact .k{font-size:12px;color:var(--c-muted);margin-bottom:2px;}
+.fact .v{font-size:14.5px;font-weight:700;}
+.level-row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;}
+.chip{background:var(--c-bg);color:var(--c-muted);font-size:12.5px;padding:4px 11px;border-radius:12px;}
+.suit-list{margin-top:14px;}
+.suit-list h3{font-size:14.5px;font-weight:700;margin-bottom:8px;}
+.suit-list li{font-size:13.5px;color:var(--c-muted);margin-bottom:6px;padding-left:16px;position:relative;}
+.suit-list li:before{content:"";position:absolute;left:0;top:3px;width:13px;height:13px;background:var(--c-secondary);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center/contain;}
+
+/* ===== 包含內容清單（第二層：產品；note 為第三層資源說明） ===== */
+.includes-list{margin-bottom:14px;display:flex;flex-direction:column;gap:8px;}
+.includes-item{display:flex;align-items:flex-start;gap:10px;background:var(--c-bg);border-radius:8px;padding:10px 12px;}
+.includes-badge{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--c-primary);border-radius:6px;padding:3px 8px;white-space:nowrap;margin-top:1px;}
+.includes-text{font-size:13px;}
+.includes-text b{font-weight:700;}
+.includes-text span{color:var(--c-muted);display:block;font-size:12px;margin-top:2px;}
+
+/* ===== 有效期與規則摘要 ===== */
+.rules-box{background:var(--c-bg);border-radius:10px;padding:14px 16px;margin-top:16px;}
+.rules-box h4{font-size:13.5px;font-weight:800;margin-bottom:6px;}
+.rules-box p{font-size:12.5px;color:var(--c-muted);}
+
+/* ===== 組合包：本組合包含的方案（可展開） ===== */
+.package-members{margin-top:18px;border-top:1px solid var(--c-border);padding-top:16px;}
+.package-toggle{background:none;border:none;font-family:inherit;font-size:14px;font-weight:700;color:var(--c-primary);cursor:pointer;padding:0;display:flex;align-items:center;gap:6px;}
+.package-members-list{margin-top:10px;display:flex;flex-direction:column;gap:8px;}
+.package-members-list[hidden]{display:none;}
+.package-members-list li{display:flex;justify-content:space-between;gap:8px;background:var(--c-bg);border-radius:8px;padding:10px 12px;font-size:13px;}
+.package-members-list li a{color:var(--c-primary);font-weight:700;}
+.package-members-list li a:hover{text-decoration:underline;}
+
+/* ===== 銷售標籤徽章（沿用 .chip，疊加顏色） ===== */
+.chip.tag-hot{background:var(--c-accent);color:#fff;}
+.chip.tag-promo{background:var(--c-secondary);color:#fff;}
+.chip.tag-new{background:var(--c-primary);color:#fff;}
+
+/* ===== 側欄：同分類其他方案 ===== */
+.sidebar-plan-list{display:flex;flex-direction:column;gap:10px;}
+.sidebar-plan-list li{display:flex;flex-direction:column;}
+.sidebar-plan-list li a{font-size:13px;font-weight:700;color:var(--c-text);margin-bottom:2px;}
+.sidebar-plan-list li a:hover{color:var(--c-primary);}
+.sidebar-plan-list li span{font-size:12px;color:var(--c-muted);}
+
+.side-card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:16px;}
+.side-card h3{font-size:14.5px;font-weight:700;margin-bottom:10px;}
+.side-card p{font-size:13px;color:var(--c-muted);margin-bottom:14px;}
+
+.section-title{font-size:20px;font-weight:800;margin-bottom:4px;}
+.section-sub{color:var(--c-muted);font-size:13.5px;margin-bottom:20px;}
+
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.plan-grid{grid-template-columns:1fr;}}
+.plan-card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;}
+.plan-card.featured{border:2px solid var(--c-accent);position:relative;}
+.plan-badge{position:absolute;top:-12px;left:20px;background:var(--c-accent);color:#fff;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:10px;}
+.plan-audience{font-size:11.5px;font-weight:700;color:var(--c-primary);background:var(--c-bg);display:inline-block;padding:3px 9px;border-radius:10px;margin-bottom:12px;}
+.plan-card h3{font-size:17px;font-weight:800;margin-bottom:6px;}
+.plan-card .plan-desc{font-size:13px;color:var(--c-muted);margin-bottom:16px;flex:1;}
+.plan-price{font-size:16px;font-weight:800;color:var(--c-accent-dark);margin-bottom:4px;}
+.plan-price small{display:block;font-size:11.5px;color:var(--c-muted);font-weight:400;margin-top:2px;}
+.plan-includes{margin-bottom:18px;}
+.plan-includes li{font-size:12.5px;color:var(--c-muted);margin-bottom:6px;padding-left:16px;position:relative;}
+.plan-includes li:before{content:"•";position:absolute;left:2px;color:var(--c-secondary);}
+.plan-sales-mode{font-size:11px;color:var(--c-muted);margin-bottom:14px;}
+.plan-card.demo-custom{background:#F2F4F7;border-style:dashed;}
+.plan-card.demo-custom .plan-price{color:var(--c-muted);}
+
+.site-footer{background:#101828;color:#CBD3DE;padding:44px 24px 24px;}
+.footer-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-inner{grid-template-columns:1fr;}}
+.footer-inner h4{color:#fff;font-size:14px;margin-bottom:12px;}
+.footer-inner li{font-size:13px;margin-bottom:8px;color:#9AA4B2;}
+.footer-bottom img{display:block;margin:0 auto 10px;height:24px;width:auto;}
+.footer-bottom{max-width:1120px;margin:26px auto 0;padding-top:18px;border-top:1px solid #2A3241;font-size:12px;color:#7C879A;text-align:center;}
+
+
+/* AI 線上諮詢浮動元件（全站共用，右下角） */
+.ai-fab{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;box-shadow:0 8px 24px rgba(16,24,40,.16);font-size:23px;cursor:pointer;z-index:150;display:flex;align-items:center;justify-content:center;}
+.ai-fab:hover{background:var(--c-primary-dark);}
+.ai-fab-label{position:fixed;right:84px;bottom:36px;background:#101828;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;z-index:150;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;}
+.ai-fab:hover + .ai-fab-label,.ai-fab-label.show{opacity:1;}
+.ai-overlay{position:fixed;inset:0;background:rgba(16,24,40,.4);display:none;align-items:flex-end;justify-content:flex-end;z-index:200;padding:20px;}
+.ai-overlay.show{display:flex;}
+@media(max-width:780px){.ai-overlay{align-items:flex-end;justify-content:center;padding:0;}}
+.ai-sheet{background:#fff;width:380px;max-width:100%;height:600px;max-height:85vh;border-radius:16px;box-shadow:0 8px 24px rgba(16,24,40,.16);display:flex;flex-direction:column;overflow:hidden;}
+@media(max-width:780px){.ai-sheet{width:100%;height:85vh;max-height:85vh;border-radius:16px 16px 0 0;}}
+.ai-sheet.minimized{height:auto;}
+.ai-sheet.minimized .ai-body,.ai-sheet.minimized .ai-chips,.ai-sheet.minimized .ai-inputrow,.ai-sheet.minimized .ai-disclaimer{display:none;}
+.ai-head{background:var(--c-primary);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex:none;gap:8px;}
+.ai-head-info{display:flex;align-items:center;gap:10px;min-width:0;}
+.ai-avatar{flex:none;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;}
+.ai-avatar.sm{width:24px;height:24px;background:var(--c-primary);}
+.ai-avatar svg{display:block;}
+.ai-head-text{min-width:0;}
+.ai-head-title{font-weight:700;font-size:14.5px;line-height:1.3;}
+.ai-head-status{font-size:11px;color:rgba(255,255,255,.82);display:flex;align-items:center;gap:5px;margin-top:1px;}
+.ai-status-dot{width:6px;height:6px;border-radius:50%;background:#3FCF8E;flex:none;}
+.ai-head-actions{display:flex;gap:6px;flex:none;}
+.ai-head-btn{background:rgba(255,255,255,.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.ai-head-btn:hover{background:rgba(255,255,255,.32);}
+.ai-minimize-btn svg{transition:transform .2s;}
+.ai-sheet.minimized .ai-minimize-btn svg{transform:rotate(180deg);}
+.ai-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;background:var(--c-bg);}
+.ai-msg-row{display:flex;align-items:flex-end;gap:8px;max-width:100%;}
+.ai-msg-row.user{justify-content:flex-end;}
+.ai-msg-stack{display:flex;flex-direction:column;max-width:82%;}
+.ai-msg-row.user .ai-msg-stack{align-items:flex-end;}
+.ai-msg-row.bot .ai-msg-stack{align-items:flex-start;}
+.ai-msg{font-size:13.5px;line-height:1.6;padding:10px 13px;border-radius:12px;}
+.ai-msg.user{background:var(--c-primary);color:#fff;border-bottom-right-radius:3px;}
+.ai-msg.bot{background:#fff;border:1px solid var(--c-border);color:var(--c-text);border-bottom-left-radius:3px;}
+.ai-msg-time{font-size:10.5px;color:var(--c-muted);margin-top:4px;padding:0 3px;}
+.ai-msg .ai-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.ai-msg .ai-actions button,.ai-msg .ai-actions a{font-size:12px;font-weight:700;border-radius:6px;padding:8px 11px;min-height:36px;border:1px solid var(--c-border);background:#fff;cursor:pointer;color:var(--c-text);font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;}
+.ai-msg .ai-thumbs{display:flex;gap:8px;margin-top:8px;align-items:center;}
+.ai-msg .ai-thumbs span{font-size:12px;color:var(--c-muted);}
+.ai-msg .ai-thumbs button{border:none;background:none;cursor:pointer;padding:4px;opacity:.5;color:var(--c-muted);display:flex;align-items:center;}
+.ai-msg .ai-thumbs button.picked{opacity:1;color:var(--c-secondary);}
+.ai-msg .ai-thumbs-thanks{font-size:11.5px;color:var(--c-secondary);margin-top:6px;}
+.ai-typing .ai-typing-dots{display:flex;gap:4px;padding:2px 0;}
+.ai-typing .ai-typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--c-muted);opacity:.5;animation:aiTypingBounce 1.1s infinite ease-in-out;}
+.ai-typing .ai-typing-dots span:nth-child(2){animation-delay:.15s;}
+.ai-typing .ai-typing-dots span:nth-child(3){animation-delay:.3s;}
+@keyframes aiTypingBounce{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+.ai-live-btn{margin-top:8px;background:#fff;border:1px solid var(--c-border);border-radius:6px;padding:8px 11px;font-size:12px;font-weight:700;cursor:pointer;color:var(--c-text);font-family:inherit;}
+.ai-chips{display:flex;flex-wrap:nowrap;gap:8px;padding:10px 14px;flex:none;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
+.ai-chips::-webkit-scrollbar{display:none;}
+.ai-chip{flex:none;background:#fff;border:1px solid var(--c-border);border-radius:16px;padding:8px 13px;font-size:12.5px;cursor:pointer;font-family:inherit;min-height:36px;white-space:nowrap;}
+.ai-chip:hover{background:var(--c-bg);}
+.ai-chip.ai-chip-primary{border-color:var(--c-accent);color:var(--c-accent-dark);font-weight:700;}
+.ai-quiz-choices{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.ai-quiz-choices button{background:#fff;border:1px solid var(--c-border);border-radius:18px;padding:8px 13px;font-size:12.5px;cursor:pointer;font-family:inherit;min-height:36px;}
+.ai-quiz-choices button:hover{background:var(--c-bg);}
+.ai-plan-card{background:#fff;border:1px solid var(--c-accent);border-radius:10px;padding:12px;margin-top:8px;}
+.ai-plan-card h4{font-size:13.5px;font-weight:800;margin-bottom:4px;color:var(--c-accent-dark);}
+.ai-plan-card p{font-size:12px;color:var(--c-muted);margin:0;}
+.ai-plan-card + .ai-plan-card{margin-top:8px;}
+.ai-inputrow{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--c-border);background:#fff;flex:none;}
+.ai-inputrow input{flex:1;border:1px solid var(--c-border);border-radius:20px;padding:10px 14px;font-size:13.5px;font-family:inherit;min-width:0;}
+.ai-inputrow button{background:var(--c-accent);color:#fff;border:none;border-radius:20px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;min-height:40px;}
+.ai-inputrow button:disabled{opacity:.45;cursor:not-allowed;}
+.ai-disclaimer{font-size:10.5px;color:var(--c-muted);text-align:center;padding:0 14px 10px;flex:none;background:#fff;}
+.ai-mini-form{background:#fff;border:1px solid var(--c-border);border-radius:10px;padding:12px;margin-top:8px;display:flex;flex-direction:column;gap:8px;}
+.ai-mini-form input{border:1px solid var(--c-border);border-radius:6px;padding:9px 10px;font-size:13px;font-family:inherit;}
+.ai-mini-form button{align-self:flex-start;min-height:38px;}
+.ai-timeline{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.ai-tl-step{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--c-muted);opacity:.4;transition:opacity .3s;}
+.ai-tl-step.done{opacity:1;color:var(--c-text);}
+.ai-tl-step .dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--c-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:transparent;margin-top:1px;}
+.ai-tl-step.done .dot{background:var(--c-secondary);border-color:var(--c-secondary);color:#fff;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="p01_home.html"><img src="../assets/tli-logo.svg" alt="TLI"></a>
+  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n="menu_toggle_aria" data-i18n-attr="aria-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <nav class="site-nav">
+    <a href="p02_courses.html" data-i18n="nav_courses">課程</a>
+    <a href="p10_enterprise.html">企業培訓</a>
+    <a href="p09_events.html" data-i18n="nav_events">活動</a>
+    <a href="p04_teachers.html" data-i18n="nav_teachers">師資</a>
+    <a href="p05_about_locations.html" data-i18n="nav_about">品牌與校區</a>
+    <a href="p08_faq.html" data-i18n="nav_faq">常見問題</a>
+  </nav>
+  <div class="header-right">
+    <select class="lang-select" onchange="setLang(this.value)" aria-label="語言切換" data-i18n="lang_select_aria" data-i18n-attr="aria-label">
+      <option value="zh-TW">繁體中文</option>
+      <option value="zh-CN">简体中文</option>
+      <option value="en">English</option>
+      <option value="ja">日本語</option>
+      <option value="de">Deutsch</option>
+    </select>
+    <a class="btn btn-primary btn-sm" data-i18n="btn_consult" href="p06_trial.html?type=consult">預約諮詢</a>
+    <a class="btn btn-accent btn-sm" data-i18n="btn_trial" href="p06_trial.html?type=trial">預約試聽</a>
+    <a class="btn btn-outline btn-sm" data-i18n="btn_login" href="p07_login_register.html">登入</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="p01_home.html" data-i18n="p03_bc_home">首頁</a> ／
+  <a href="p02_courses.html" data-i18n="p03_bc_courses">課程總覽</a> ／
+  <a href="p02_courses.html" id="bcCategory">銷售方案</a> ／
+  <span id="bcCurrent">方案名稱</span>
+</div>
+
+<main>
+  <div class="detail-grid">
+    <div class="title-block">
+      <div class="nick" id="pdKind">銷售方案</div>
+      <h1><span id="pdTitle">方案名稱</span> <span class="mode-badge" id="pdModeBadge"></span></h1>
+      <div id="pdTagsRow" style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;"></div>
+      <p id="pdPitch" style="color:var(--c-muted);font-size:14px;margin:4px 0 4px;"></p>
+
+      <div class="fact-grid">
+        <div class="fact"><div class="k">價格</div><div class="v" id="pdPrice"></div></div>
+        <div class="fact"><div class="k">銷售模式</div><div class="v" id="pdSalesMode"></div></div>
+        <div class="fact"><div class="k">上課方式與制度</div><div class="v" id="pdDeliverySched"></div></div>
+        <div class="fact"><div class="k">有效期</div><div class="v" id="pdValidity"></div></div>
+      </div>
+
+      <div>
+        <div style="font-size:13px;color:var(--c-muted);margin-bottom:8px;">包含內容</div>
+        <ul class="includes-list" id="pdIncludesList"></ul>
+      </div>
+
+      <div class="suit-list">
+        <h3 data-i18n="p03_suit_h">適合誰</h3>
+        <ul id="pdSuitList"></ul>
+      </div>
+
+      <div class="rules-box">
+        <h4>有效期與規則摘要</h4>
+        <p id="pdRulesText"></p>
+      </div>
+
+      <div id="pdPackageSection" class="package-members" hidden>
+        <button type="button" class="package-toggle" id="pdPackageToggle" onclick="togglePackageList()">本組合包含的方案 <span id="pdPackageToggleIcon">▾</span></button>
+        <ul class="package-members-list" id="pdPackageList" hidden></ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="side-card">
+        <h3 id="pdCtaHeading">立即購買</h3>
+        <p id="pdCtaDesc"></p>
+        <a class="btn btn-accent btn-block" id="pdCtaBtn" href="#">立即購買</a>
+      </div>
+      <div class="side-card">
+        <h3 data-i18n="p03_side2_h">已是會員？</h3>
+        <p>登入後可直接於會員區查看方案內容與使用權益，或聯繫顧問確認組合方案。</p>
+        <a class="btn btn-outline btn-block" href="../會員區/m13_checkout.html">登入會員區</a>
+      </div>
+      <div class="side-card" id="pdSidebarBox">
+        <h3>同分類其他方案</h3>
+        <ul class="sidebar-plan-list" id="pdSidebarList"></ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4 data-i18n="footer_brand_name">TLI 中華語文研習所</h4>
+      <li data-i18n="footer_brand_line1">1956 年創立於美國紐澤西，同年於台北建校</li>
+      <li data-i18n="footer_brand_line2">1976 年教育部核定校名為「中華語文研習所」</li>
+    </div>
+    <div>
+      <h4 data-i18n="footer_col_courses">課程</h4>
+      <ul>
+        <li><a href="p02_courses.html" data-i18n="footer_link_chinese">中文課程</a></li>
+        <li><a href="p02_courses.html" data-i18n="footer_link_foreign">外語課程</a></li>
+        <li><a href="p04_teachers.html" data-i18n="footer_link_teachers">師資介紹</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="footer_col_about">關於 TLI</h4>
+      <ul>
+        <li><a href="p05_about_locations.html" data-i18n="footer_link_history">品牌沿革</a></li>
+        <li><a href="p05_about_locations.html" data-i18n="footer_link_locations">四校地址</a></li>
+        <li><a href="p08_faq.html" data-i18n="footer_link_faq">常見問題</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="footer_col_start">開始學習</h4>
+      <ul>
+        <li><a href="p06_trial.html" data-i18n="footer_link_trial">免費試聽</a></li>
+        <li><a href="p07_login_register.html" data-i18n="footer_link_login">會員登入／註冊</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom"><img src="../assets/tli-logo.svg" alt="TLI"><span data-i18n="footer_copyright">© 2026 TLI 中華語文研習所．保留所有權利。</span></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+</script>
+
+<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n="ai_fab_aria" data-i18n-attr="aria-label"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+<div class="ai-fab-label" data-i18n="ai_fab_label">線上諮詢</div>
+
+<div class="ai-overlay" id="aiOverlay-fab" onclick="if(event.target===this) aiClose('fab')">
+  <div class="ai-sheet" id="aiSheet-fab">
+    <div class="ai-head">
+      <div class="ai-head-info">
+        <div class="ai-avatar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg></div>
+        <div class="ai-head-text">
+          <div class="ai-head-title" data-i18n="ai_title">TLI 小幫手</div>
+          <div class="ai-head-status"><span class="ai-status-dot"></span><span data-i18n="ai_status">線上・通常 1 分鐘內回覆</span></div>
+        </div>
+      </div>
+      <div class="ai-head-actions">
+        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n="ai_minimize_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n="ai_close_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+    </div>
+    <div class="ai-body" id="aiBody-fab"></div>
+    <div class="ai-chips" id="aiChips-fab"></div>
+    <form class="ai-inputrow" onsubmit="return aiSubmitInput(event,'fab')">
+      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-ph="ai_input_placeholder" data-i18n="ai_input_aria" data-i18n-attr="aria-label">
+      <button type="submit" id="aiSend-fab" disabled data-i18n="ai_send">送出</button>
+    </form>
+    <div class="ai-disclaimer" data-i18n="ai_disclaimer">回覆由 AI 產生，重要事項請以顧問確認為準</div>
+  </div>
+</div>
+
+<script>
+
+var TLI_AVATAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg>';
+
+/* ===================== i18n：共用引擎 ===================== */
+var TLI_LANG_KEY = 'tli_lang';
+window.TLI_CURRENT_LANG = 'zh-TW';
+function tliFmt(str, obj){
+  if(!str) return str;
+  return str.replace(/\{(\w+)\}/g, function(_, k){ return (obj && obj[k] !== undefined) ? obj[k] : ''; });
+}
+function tliDict(){
+  var lang = window.TLI_CURRENT_LANG;
+  return Object.assign({}, I18N_COMMON[lang] || I18N_COMMON['zh-TW'] || {}, I18N_PAGE[lang] || I18N_PAGE['zh-TW'] || {});
+}
+function applyLang(lang){
+  window.TLI_CURRENT_LANG = lang;
+  document.documentElement.lang = ({'zh-TW':'zh-Hant','zh-CN':'zh-Hans','en':'en','ja':'ja','de':'de'})[lang] || 'zh-Hant';
+  var dict = tliDict();
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    var v = dict[key];
+    if(v === undefined) return;
+    var attr = el.getAttribute('data-i18n-attr');
+    if(attr){
+      attr.split(',').forEach(function(a){ el.setAttribute(a.trim(), v); });
+    } else {
+      el.textContent = v;
+    }
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    var key = el.getAttribute('data-i18n-ph');
+    var v = dict[key];
+    if(v !== undefined) el.setAttribute('placeholder', v);
+  });
+  if(dict.meta_title) document.title = dict.meta_title;
+  if(dict.meta_description){
+    var m = document.querySelector('meta[name="description"]');
+    if(m) m.setAttribute('content', dict.meta_description);
+  }
+  var sel = document.querySelector('.lang-select');
+  if(sel) sel.value = lang;
+  if(lang!=='zh-TW' && lang!=='en' && lang!=='ja' && typeof showToast==='function'){
+    var __langNames={'zh-CN':'简体中文','de':'Deutsch'};
+    showToast('已切換為 '+(__langNames[lang]||lang));
+  }
+}
+function setLang(lang){
+  try{ localStorage.setItem(TLI_LANG_KEY, lang); }catch(e){}
+  applyLang(lang);
+}
+function initLang(){
+  var lang = 'zh-TW';
+  try{ lang = localStorage.getItem(TLI_LANG_KEY) || 'zh-TW'; }catch(e){}
+  applyLang(lang);
+}
+
+/* ===================== i18n：共用字典 I18N_COMMON ===================== */
+var I18N_COMMON = {
+'zh-TW': {
+  nav_courses: '課程', nav_events: '活動', nav_teachers: '師資', nav_about: '品牌與校區', nav_faq: '常見問題',
+  btn_consult: '預約諮詢', btn_trial: '預約試聽', btn_login: '登入',
+  menu_toggle_aria: '開啟選單', lang_select_aria: '語言切換',
+  footer_brand_name: 'TLI 中華語文研習所',
+  footer_brand_line1: '1956 年創立於美國紐澤西，同年於台北建校',
+  footer_brand_line2: '1976 年教育部核定校名為「中華語文研習所」',
+  footer_col_courses: '課程', footer_link_chinese: '中文課程', footer_link_foreign: '外語課程',
+  footer_link_events: '線上活動', footer_link_teachers: '師資介紹',
+  footer_col_about: '關於 TLI', footer_link_history: '品牌沿革', footer_link_locations: '四校地址', footer_link_faq: '常見問題',
+  footer_col_start: '開始學習', footer_link_trial: '免費試聽', footer_link_login: '會員登入／註冊',
+  footer_copyright: '© 2026 TLI 中華語文研習所．保留所有權利。',
+  ai_fab_label: '線上諮詢', ai_fab_aria: '開啟線上諮詢',
+  ai_title: 'TLI 小幫手', ai_status: '線上・通常 1 分鐘內回覆',
+  ai_minimize_aria: '最小化', ai_close_aria: '關閉',
+  ai_input_placeholder: '輸入您的問題…', ai_input_aria: '輸入問題', ai_send: '送出',
+  ai_disclaimer: '回覆由 AI 產生，重要事項請以顧問確認為準',
+  ai_chip_trial: '試聽怎麼預約',
+  ai_greeting_default: '您好，我是 TLI 小幫手，歡迎詢問退費、請假改期、簽證、發票、付款、上課方式或老師配對等問題，也可以直接輸入您的問題。',
+  ai_thumbs_prompt: '這有幫助嗎？', ai_thumbs_thanks: '感謝回饋',
+  ai_action_trial: '預約試聽', ai_action_contact: '聯繫顧問',
+  ai_repeat: '剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？',
+  ai_fallback: '這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。',
+  ai_escalate_user_msg: '我想直接聯繫顧問',
+  ai_form_name_ph: '姓名', ai_form_contact_ph: 'Email 或 LINE ID',
+  ai_form_submit: '送出，請顧問聯繫我', ai_live_btn: '轉真人客服',
+  ai_live_queued: '已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。',
+  ai_toast_fill_required: '請填寫姓名與聯絡方式',
+  ai_ticket_created: '已建立諮詢工單 #{ticket}',
+  ai_tl_assigned: '已指派專責顧問（{advisor}）',
+  ai_tl_followup: '顧問 1 個工作日內聯繫（{contact}）'
+},
+en: {
+  nav_courses: 'Courses', nav_events: 'Events', nav_teachers: 'Teachers', nav_about: 'About & Locations', nav_faq: 'FAQ',
+  btn_consult: 'Book Consultation', btn_trial: 'Free Trial', btn_login: 'Log in',
+  menu_toggle_aria: 'Open menu', lang_select_aria: 'Language',
+  footer_brand_name: 'TLI - Taipei Language Institute',
+  footer_brand_line1: 'Founded in New Jersey, USA in 1956; the Taipei campus opened the same year',
+  footer_brand_line2: 'Renamed "Taipei Language Institute" by Taiwan’s Ministry of Education in 1976',
+  footer_col_courses: 'Courses', footer_link_chinese: 'Chinese Courses', footer_link_foreign: 'Foreign Language Courses',
+  footer_link_events: 'Online Events', footer_link_teachers: 'Our Teachers',
+  footer_col_about: 'About TLI', footer_link_history: 'Our History', footer_link_locations: 'Campus Locations', footer_link_faq: 'FAQ',
+  footer_col_start: 'Get Started', footer_link_trial: 'Free Trial', footer_link_login: 'Member Login / Sign Up',
+  footer_copyright: '© 2026 TLI - Taipei Language Institute. All rights reserved.',
+  ai_fab_label: 'Chat with us', ai_fab_aria: 'Open live chat',
+  ai_title: 'TLI Assistant', ai_status: 'Online · Usually replies within 1 min',
+  ai_minimize_aria: 'Minimize', ai_close_aria: 'Close',
+  ai_input_placeholder: 'Type your question…', ai_input_aria: 'Type a question', ai_send: 'Send',
+  ai_disclaimer: 'Replies are AI-generated; please confirm important details with an advisor',
+  ai_chip_trial: 'How to book a trial',
+  ai_greeting_default: 'Hi, I’m the TLI Assistant. Ask me about refunds, rescheduling, visas, invoices, payment, class formats, or teacher matching — or type your own question.',
+  ai_thumbs_prompt: 'Was this helpful?', ai_thumbs_thanks: 'Thanks for your feedback',
+  ai_action_trial: 'Book a Trial', ai_action_contact: 'Contact an Advisor',
+  ai_repeat: 'As mentioned about “{chip}”: {short} Is there anything else you’d like to know?',
+  ai_fallback: 'Let me have an advisor follow up on this one — please leave your contact info and we’ll reach out within 1 business day.',
+  ai_escalate_user_msg: 'I’d like to speak with an advisor',
+  ai_form_name_ph: 'Name', ai_form_contact_ph: 'Email or LINE ID',
+  ai_form_submit: 'Submit — have an advisor contact me', ai_live_btn: 'Talk to a live agent',
+  ai_live_queued: 'You’re in the queue — 1 person ahead of you. An agent will assist you as soon as they’re online.',
+  ai_toast_fill_required: 'Please fill in your name and contact info',
+  ai_ticket_created: 'Consultation ticket #{ticket} has been created',
+  ai_tl_assigned: 'Assigned to advisor: {advisor}',
+  ai_tl_followup: 'Advisor will contact you within 1 business day via {contact}'
+},
+ja: {
+  nav_courses: 'コース', nav_events: 'イベント', nav_teachers: '講師陣', nav_about: '沿革と校舎', nav_faq: 'よくある質問',
+  btn_consult: '相談予約', btn_trial: '無料体験', btn_login: 'ログイン',
+  menu_toggle_aria: 'メニューを開く', lang_select_aria: '言語切替',
+  footer_brand_name: 'TLI（台北語文学院）',
+  footer_brand_line1: '1956年に米国ニュージャージーで創立、同年台北校を開校',
+  footer_brand_line2: '1976年、台湾教育部により「中華語文研習所」に改称認可',
+  footer_col_courses: 'コース', footer_link_chinese: '中国語コース', footer_link_foreign: '外国語コース',
+  footer_link_events: 'オンラインイベント', footer_link_teachers: '講師紹介',
+  footer_col_about: 'TLIについて', footer_link_history: '沿革', footer_link_locations: '校舎所在地', footer_link_faq: 'よくある質問',
+  footer_col_start: '学習を始める', footer_link_trial: '無料体験', footer_link_login: '会員ログイン／登録',
+  footer_copyright: '© 2026 TLI（台北語文学院） All rights reserved.',
+  ai_fab_label: 'オンライン相談', ai_fab_aria: 'オンライン相談を開く',
+  ai_title: 'TLIアシスタント', ai_status: 'オンライン・通常1分以内に返信',
+  ai_minimize_aria: '最小化', ai_close_aria: '閉じる',
+  ai_input_placeholder: 'ご質問を入力してください…', ai_input_aria: '質問を入力', ai_send: '送信',
+  ai_disclaimer: '回答はAIによる自動生成です。重要事項は必ずアドバイザーにご確認ください',
+  ai_chip_trial: '体験レッスンの予約方法',
+  ai_greeting_default: 'こんにちは、TLIアシスタントです。返金、振替・キャンセル、ビザ、領収書、お支払い、受講形式、講師のマッチングなどについてお気軽にご質問ください。',
+  ai_thumbs_prompt: '役に立ちましたか？', ai_thumbs_thanks: 'フィードバックありがとうございます',
+  ai_action_trial: '体験レッスン予約', ai_action_contact: 'アドバイザーに連絡',
+  ai_repeat: '先ほどの「{chip}」についてですが：{short}他にご質問はございますか？',
+  ai_fallback: 'こちらはアドバイザーより回答させていただきます。ご連絡先をご記入いただければ1営業日以内にご連絡いたします。',
+  ai_escalate_user_msg: 'アドバイザーと直接話したいです',
+  ai_form_name_ph: 'お名前', ai_form_contact_ph: 'メールアドレスまたはLINE ID',
+  ai_form_submit: '送信して連絡してもらう', ai_live_btn: '有人対応に切り替える',
+  ai_live_queued: 'ただいま順番待ちです（前に1名）。担当者がオンラインになり次第、すぐに対応いたします。',
+  ai_toast_fill_required: 'お名前とご連絡先をご入力ください',
+  ai_ticket_created: 'お問い合わせチケット #{ticket} を作成しました',
+  ai_tl_assigned: '担当アドバイザー：{advisor}',
+  ai_tl_followup: '1営業日以内に{contact}宛にご連絡いたします'
+}
+};
+
+/* ===================== i18n：本頁專屬字典 I18N_PAGE（p03 課程詳情） ===================== */
+var I18N_PAGE = {
+'zh-TW': {
+  meta_title: 'TLI Connect｜中文一對一線上課程詳情',
+  meta_description: '中文一對一線上課與 彈性團體直播 課程詳情：課程資訊、上課方式、適合對象、銷售方案卡（含適用對象與報價方式）。',
+  p03_bc_home: '首頁', p03_bc_courses: '課程總覽', p03_bc_category: '一對一線上課', p03_bc_current: '中文一對一線上課',
+  p03_tab_1on1: '範例：中文一對一線上課（預約制）', p03_tab_flex: '範例：彈性團體直播（直播制）',
+  p03_badge_booking: '預約制', p03_badge_live: '直播制',
+  p03_level_label: '程度分級',
+  p03_level_lv1: 'Lv.1–4 初級', p03_level_lv2: 'Lv.5–8 中級', p03_level_lv3: 'Lv.9 中高級', p03_level_lv4: 'Lv.H 高級',
+  p03_suit_h: '適合誰', p03_side2_h: '已是會員？',
+  p03_section_title: '銷售方案',
+  p03_section_sub: '以下方案由顧問依學員程度與需求提供正式報價，實際內容以顧問確認之訂單為準',
+  p03_plan_trial_h: '體驗方案', p03_plan_standard_h: '標準方案',
+  p03_plan_badge_popular: '最多學員選擇',
+  p03_plan_audience_general: '適用對象：一般學員',
+  p03_plan_audience_mixed: '適用對象：一般學員',
+  p03_plan_audience_enterprise: '適用對象：企業方案學員',
+  p03_plan_inc_test: '免費入班程度測試', p03_plan_inc_nomaterial: '不含教材',
+  p03_plan_inc_material: '含分級指定教材一套',
+  p03_plan_inc_bycontract: '堂數與教材依合約約定',
+  p03_flex_plan_inc_bycontract: '梯次時段與堂數依合約約定',
+  p03_plan_inc_cert: '可對應 TLI-CPT、HSK、TOCFL 檢定準備',
+  p03_plan_inc_invoice: '提供企業月結發票',
+  p03_plan_price_advisor: '顧問報價',
+  p03_plan_price_note1: '線上課程，價格依堂數與方案而定',
+  p03_plan_price_note2: '線上課程，價格依合約規模而定',
+  p03_plan_price_demo_note: '實際依參數設定',
+  p03_plan_sales_mode_direct: '銷售模式：線上直購', p03_plan_sales_mode_advisor: '銷售模式：顧問報價',
+  p03_btn_buy_trial_slot: '選時段購買體驗課', p03_btn_book_consult: '預約諮詢',
+  p03_plan_custom_h: '客製方案（企業／長期規劃）',
+  p03_1on1_plan1_price: 'NT$12,000', p03_1on1_plan2_price: 'NT$33,000',
+  p03_flex_plan1_price: 'NT$3,600', p03_flex_plan2_price: 'NT$9,600',
+  p03_btn_login_purchase: '登入後購買', p03_btn_contact_enterprise: '洽詢企業方案',
+  p03_1on1_nick: '老師陪我練・線上一對一', p03_1on1_title: '中文一對一線上課',
+  p03_1on1_fact1_k: '單堂時長', p03_1on1_fact1_v: '50 分鐘',
+  p03_1on1_fact2_k: '授課老師', p03_1on1_fact2_v: '至少 3 位輪替教學，由顧問依你的時段安排',
+  p03_1on1_fact3_k: '建議頻率', p03_1on1_fact3_v: '每週至少 2 堂',
+  p03_1on1_fact4_k: '教材', p03_1on1_fact4_v: '依程度另購',
+  p03_1on1_explain_h: '上課方式：預約制',
+  p03_1on1_explain_li1: '登入會員區後，於課表提出方便的時段，由顧問安排老師',
+  p03_1on1_explain_li2: '每堂 50 分鐘，上課前 12 小時內可申請改期',
+  p03_1on1_explain_li3: '透過會員區「進入教室」按鈕一鍵進入 Zoom 教室，連結不外流',
+  p03_1on1_explain_li4: '每堂課後可查看老師回饋，並為老師與課程評分',
+  p03_1on1_suit_li1: '零基礎或初學者，需要從發音、基礎會話建立信心',
+  p03_1on1_suit_li2: '時間彈性、希望依自己步調安排上課時段',
+  p03_1on1_suit_li3: '想加強口說與聽力反應，需要密集一對一練習',
+  p03_1on1_suit_li4: '短期來台工作或求學，需要快速累積生活會話能力',
+  p03_1on1_side1_h: '快速預約',
+  p03_1on1_side1_p: '不確定哪個方案適合自己？先預約一堂免費線上試聽，由顧問協助評估程度並推薦方案。',
+  p03_1on1_side2_p: '登入後可直接選購方案、進入會員區預約老師與時段。',
+  p03_1on1_plan1_desc: '10 堂中文一對一線上課程，適合初次接觸或想先試水溫的學習者。',
+  p03_1on1_plan1_inc1: '10 堂 × 50 分鐘',
+  p03_1on1_plan2_desc: '30 堂課程搭配指定教材，適合規劃三個月以上的學習計畫。',
+  p03_1on1_plan2_inc1: '30 堂 × 50 分鐘',
+  p03_1on1_plan2_inc3: '可申請簽證所需之上課證明',
+  p03_1on1_plan3_h: '企業包班方案',
+  p03_1on1_plan3_desc: '依企業員工人數與學習目標客製化排課，線上進行、可分批分時段上課。',
+  p03_flex_nick: '同好一起學・彈性團體直播課', p03_flex_title: '彈性團體直播',
+  p03_flex_fact1_k: '單堂時長', p03_flex_fact1_v: '50 分鐘',
+  p03_flex_fact2_k: '開班人數', p03_flex_fact2_v: '4–8 人小組直播',
+  p03_flex_fact3_k: '上課頻率', p03_flex_fact3_v: '每週固定 1–2 時段',
+  p03_flex_fact4_k: '教材', p03_flex_fact4_v: '含分級教材一套',
+  p03_flex_explain_h: '上課方式：直播制',
+  p03_flex_explain_li1: '每週固定時段開課，報名即可入班，不需另約老師與時段',
+  p03_flex_explain_li2: '與其他學員一起直播上課，主題式練習聽說與互動',
+  p03_flex_explain_li3: '若當週提供課程回放，錯過直播仍可於會員區補看',
+  p03_flex_explain_li4: '同一梯次固定授課老師，維持學習節奏與同儕默契',
+  p03_flex_suit_li1: '想找同好一起學習、喜歡小組互動與同儕氛圍',
+  p03_flex_suit_li2: '每週有固定時段可以上課，不需要彈性約課',
+  p03_flex_suit_li3: '預算考量，希望比一對一課程更划算',
+  p03_flex_suit_li4: '想透過團體討論練習口說與聽力反應',
+  p03_flex_side1_h: '了解本週開班時段',
+  p03_flex_side1_p: '先預約一次免費試聽，實際體驗直播上課方式，再決定要不要報名入班。',
+  p03_flex_side2_p: '登入後可直接查看本期開班時段並報名入班。',
+  p03_flex_side2_btn: '登入後報名',
+  p03_flex_plan1_desc: '4 堂直播體驗，適合先感受團體直播上課方式的學習者。',
+  p03_flex_plan1_inc1: '4 堂 × 50 分鐘直播課',
+  p03_flex_plan2_desc: '12 堂一期搭配指定教材，跟隨固定梯次同儕一起完成整期課程。',
+  p03_flex_plan2_inc1: '12 堂 × 50 分鐘直播課・一期',
+  p03_flex_plan2_inc3: '提供課程回放（若當期開放）',
+  p03_flex_plan3_h: '企業團班方案',
+  p03_flex_plan3_desc: '為企業員工開設專屬直播梯次，固定時段線上團體上課。'
+},
+en: {
+  meta_title: 'TLI Connect | Chinese 1-on-1 Online Course Details',
+  meta_description: 'Course details for Chinese 1-on-1 Online and Flexible Group Livestream classes — course info, class format, who it’s for, and plan cards with pricing guidance.',
+  p03_bc_home: 'Home', p03_bc_courses: 'All Courses', p03_bc_category: '1-on-1 Online Classes', p03_bc_current: 'Chinese 1-on-1 Online',
+  p03_tab_1on1: 'Example: Chinese 1-on-1 Online (Booking-based)', p03_tab_flex: 'Example: Flexible Group Livestream (Fixed-schedule)',
+  p03_badge_booking: 'Booking-based', p03_badge_live: 'Fixed-schedule',
+  p03_level_label: 'Level',
+  p03_level_lv1: 'Lv.1–4 Beginner', p03_level_lv2: 'Lv.5–8 Intermediate', p03_level_lv3: 'Lv.9 Upper-Intermediate', p03_level_lv4: 'Lv.H Advanced',
+  p03_suit_h: 'Who It’s For', p03_side2_h: 'Already a Member?',
+  p03_section_title: 'Course Plans',
+  p03_section_sub: 'Plans below are for reference — your advisor will confirm the official quote based on your level and needs; final details follow the order confirmed with your advisor.',
+  p03_plan_trial_h: 'Trial Plan', p03_plan_standard_h: 'Standard Plan',
+  p03_plan_badge_popular: 'Most Popular',
+  p03_plan_audience_general: 'For: Individual Learners',
+  p03_plan_audience_mixed: 'For: Individual Learners',
+  p03_plan_audience_enterprise: 'For: Corporate Learners',
+  p03_plan_inc_test: 'Free Level Placement Test', p03_plan_inc_nomaterial: 'Materials not included',
+  p03_plan_inc_material: 'Includes one set of level-based course materials',
+  p03_plan_inc_bycontract: 'Lesson count and materials per contract',
+  p03_flex_plan_inc_bycontract: 'Cohort schedule and lesson count per contract',
+  p03_plan_inc_cert: 'Can prepare you for TLI-CPT, HSK, and TOCFL exams',
+  p03_plan_inc_invoice: 'Monthly corporate invoicing available',
+  p03_plan_price_advisor: 'Advisor Quote',
+  p03_plan_price_note1: 'Online course; price depends on lesson count and plan',
+  p03_plan_price_note2: 'Online course; price depends on contract scale',
+  p03_plan_price_demo_note: 'Actual price depends on configured parameters',
+  p03_plan_sales_mode_direct: 'Sales Mode: Direct Online Purchase', p03_plan_sales_mode_advisor: 'Sales Mode: Advisor Quote',
+  p03_btn_buy_trial_slot: 'Pick a Slot & Buy Trial', p03_btn_book_consult: 'Book a Consultation',
+  p03_plan_custom_h: 'Custom Plan (Corporate / Long-Term)',
+  p03_1on1_plan1_price: 'NT$12,000', p03_1on1_plan2_price: 'NT$33,000',
+  p03_flex_plan1_price: 'NT$3,600', p03_flex_plan2_price: 'NT$9,600',
+  p03_btn_login_purchase: 'Log In to Purchase', p03_btn_contact_enterprise: 'Ask About Corporate Plans',
+  p03_1on1_nick: 'Practice One-on-One with a Teacher', p03_1on1_title: 'Chinese 1-on-1 Online',
+  p03_1on1_fact1_k: 'Lesson Length', p03_1on1_fact1_v: '50 minutes',
+  p03_1on1_fact2_k: 'Teachers', p03_1on1_fact2_v: 'At least 3 rotating teachers; choose your own',
+  p03_1on1_fact3_k: 'Recommended Frequency', p03_1on1_fact3_v: 'At least 2 lessons per week',
+  p03_1on1_fact4_k: 'Materials', p03_1on1_fact4_v: 'Purchased separately based on level',
+  p03_1on1_explain_h: 'Class Format: Booking-based',
+  p03_1on1_explain_li1: 'Log in to the member area to submit a convenient time — our advisor will arrange a teacher',
+  p03_1on1_explain_li2: 'Each lesson is 50 minutes; reschedule up to 12 hours before class',
+  p03_1on1_explain_li3: 'One click from the member area’s "Enter Classroom" button takes you straight into Zoom — no shareable link involved',
+  p03_1on1_explain_li4: 'Review your teacher’s feedback after each lesson, and rate your teacher and the class',
+  p03_1on1_suit_li1: 'Absolute beginners building confidence from pronunciation and basic conversation',
+  p03_1on1_suit_li2: 'Flexible schedules who want to set their own pace',
+  p03_1on1_suit_li3: 'Learners who want intensive 1-on-1 practice to sharpen speaking and listening',
+  p03_1on1_suit_li4: 'Short-term visitors working or studying in Taiwan who need everyday conversation skills fast',
+  p03_1on1_side1_h: 'Book a Trial Now',
+  p03_1on1_side1_p: 'Not sure which plan fits you? Book a free online trial lesson first — your advisor will assess your level and recommend a plan.',
+  p03_1on1_side2_p: 'Log in to purchase a plan directly and book your teacher and time slot in the member area.',
+  p03_1on1_plan1_desc: '10 lessons of Chinese 1-on-1 online classes — ideal for first-timers or anyone wanting to test the waters.',
+  p03_1on1_plan1_inc1: '10 lessons × 50 minutes',
+  p03_1on1_plan2_desc: '30 lessons with designated course materials — ideal for a study plan of 3 months or longer.',
+  p03_1on1_plan2_inc1: '30 lessons × 50 minutes',
+  p03_1on1_plan2_inc3: 'Attendance certificate available for visa applications',
+  p03_1on1_plan3_h: 'Corporate Group Plan',
+  p03_1on1_plan3_desc: 'Custom-scheduled around your company’s headcount and learning goals — fully online, with flexible group time slots.',
+  p03_flex_nick: 'Learn Together in a Live Group', p03_flex_title: 'Flexible Group Livestream',
+  p03_flex_fact1_k: 'Lesson Length', p03_flex_fact1_v: '50 minutes',
+  p03_flex_fact2_k: 'Class Size', p03_flex_fact2_v: '4–8 students per live group',
+  p03_flex_fact3_k: 'Class Frequency', p03_flex_fact3_v: '1–2 fixed time slots per week',
+  p03_flex_fact4_k: 'Materials', p03_flex_fact4_v: 'Includes one set of level-based materials',
+  p03_flex_explain_h: 'Class Format: Fixed-schedule Livestream',
+  p03_flex_explain_li1: 'Runs on a fixed weekly schedule — enroll and you’re in, no need to arrange a teacher or time separately',
+  p03_flex_explain_li2: 'Join a live class with fellow learners, practicing speaking and listening through themed activities',
+  p03_flex_explain_li3: 'If a recording is offered that week, you can catch up in the member area even if you miss the live session',
+  p03_flex_explain_li4: 'The same teacher stays with your cohort throughout, keeping your pace and group rapport consistent',
+  p03_flex_suit_li1: 'Learners who want to study alongside peers and enjoy group interaction',
+  p03_flex_suit_li2: 'Those with a fixed weekly slot who don’t need flexible booking',
+  p03_flex_suit_li3: 'Budget-conscious learners looking for better value than 1-on-1 classes',
+  p03_flex_suit_li4: 'Learners who want to build speaking and listening skills through group discussion',
+  p03_flex_side1_h: 'Check This Week’s Class Times',
+  p03_flex_side1_p: 'Book a free trial first to experience the livestream format before deciding whether to enroll.',
+  p03_flex_side2_p: 'Log in to view this term’s class times and enroll directly.',
+  p03_flex_side2_btn: 'Log In to Enroll',
+  p03_flex_plan1_desc: '4 livestream trial lessons — ideal for getting a feel for the group livestream format.',
+  p03_flex_plan1_inc1: '4 lessons × 50-minute livestream classes',
+  p03_flex_plan2_desc: 'One 12-lesson term with designated materials, completed together with your fixed cohort.',
+  p03_flex_plan2_inc1: '12 lessons × 50-minute livestream classes, one term',
+  p03_flex_plan2_inc3: 'Recording provided if available that term',
+  p03_flex_plan3_h: 'Corporate Group Plan',
+  p03_flex_plan3_desc: 'A dedicated livestream cohort for your company’s employees, at a fixed online group time slot.'
+},
+ja: {
+  meta_title: 'TLI Connect｜中国語 1対1 オンラインコース詳細',
+  meta_description: '中国語 1対1 オンラインおよび彈性団体ライブ配信コースの詳細ページ：コース情報、受講形式、対象者、料金プランカード（対象者・見積り方法を含む）をご案内します。',
+  p03_bc_home: 'ホーム', p03_bc_courses: 'コース一覧', p03_bc_category: '1対1オンラインクラス', p03_bc_current: '中国語 1対1 オンライン',
+  p03_tab_1on1: '例：中国語 1対1 オンライン（予約制）', p03_tab_flex: '例：彈性団体ライブ配信（ライブ配信制）',
+  p03_badge_booking: '予約制', p03_badge_live: 'ライブ配信制',
+  p03_level_label: 'レベル',
+  p03_level_lv1: 'Lv.1–4 初級', p03_level_lv2: 'Lv.5–8 中級', p03_level_lv3: 'Lv.9 中上級', p03_level_lv4: 'Lv.H 上級',
+  p03_suit_h: 'こんな方におすすめ', p03_side2_h: '会員の方へ',
+  p03_section_title: '料金プラン',
+  p03_section_sub: '以下のプランは目安です。実際の正式なお見積りはレベルとご要望に応じてアドバイザーがご案内し、最終内容はアドバイザーが確認した注文内容に基づきます。',
+  p03_plan_trial_h: '体験プラン', p03_plan_standard_h: 'スタンダードプラン',
+  p03_plan_badge_popular: '一番人気',
+  p03_plan_audience_general: '対象：個人受講生',
+  p03_plan_audience_mixed: '対象：個人受講生',
+  p03_plan_audience_enterprise: '対象：法人受講生',
+  p03_plan_inc_test: '無料レベル診断テスト', p03_plan_inc_nomaterial: '教材は含まれません',
+  p03_plan_inc_material: 'レベル別指定教材一式込み',
+  p03_plan_inc_bycontract: 'レッスン回数・教材は契約内容によります',
+  p03_flex_plan_inc_bycontract: '開講スケジュール・レッスン回数は契約内容によります',
+  p03_plan_inc_cert: 'TLI-CPT、HSK、TOCFL試験対策にも対応',
+  p03_plan_inc_invoice: '法人向け月締め請求書に対応',
+  p03_plan_price_advisor: 'アドバイザー見積り',
+  p03_plan_price_note1: 'オンラインコース、料金はレッスン回数・プランにより異なります',
+  p03_plan_price_note2: 'オンラインコース、料金は契約規模により異なります',
+  p03_plan_price_demo_note: '実際の料金は設定条件により異なります',
+  p03_plan_sales_mode_direct: '販売方式：オンライン直接購入', p03_plan_sales_mode_advisor: '販売方式：アドバイザー見積り',
+  p03_btn_buy_trial_slot: '時間帯を選んで体験を購入', p03_btn_book_consult: '相談を予約する',
+  p03_plan_custom_h: 'カスタムプラン（法人・長期プラン）',
+  p03_1on1_plan1_price: 'NT$12,000', p03_1on1_plan2_price: 'NT$33,000',
+  p03_flex_plan1_price: 'NT$3,600', p03_flex_plan2_price: 'NT$9,600',
+  p03_btn_login_purchase: 'ログインして購入', p03_btn_contact_enterprise: '法人プランについて問い合わせる',
+  p03_1on1_nick: '先生とマンツーマン練習・オンライン1対1', p03_1on1_title: '中国語 1対1 オンライン',
+  p03_1on1_fact1_k: '1回のレッスン時間', p03_1on1_fact1_v: '50分',
+  p03_1on1_fact2_k: '担当講師', p03_1on1_fact2_v: '3名以上のローテーション講師制、講師を選択可能',
+  p03_1on1_fact3_k: '推奨頻度', p03_1on1_fact3_v: '週2回以上',
+  p03_1on1_fact4_k: '教材', p03_1on1_fact4_v: 'レベルに応じて別途購入',
+  p03_1on1_explain_h: '受講形式：予約制',
+  p03_1on1_explain_li1: '会員エリアにログイン後、ご都合の良い時間帯をお伝えいただければアドバイザーが講師を手配します',
+  p03_1on1_explain_li2: '1回50分、授業の12時間前まで振替申請が可能です',
+  p03_1on1_explain_li3: '会員エリアの「教室に入る」ボタンからワンクリックでZoom教室へ、リンクが流出する心配はありません',
+  p03_1on1_explain_li4: '授業後は講師のフィードバックを確認し、講師とクラスを評価できます',
+  p03_1on1_suit_li1: '発音や基礎会話から自信をつけたい初心者・未経験者',
+  p03_1on1_suit_li2: '自分のペースでスケジュールを組みたい方',
+  p03_1on1_suit_li3: 'スピーキングとリスニングを集中的に一対一で鍛えたい方',
+  p03_1on1_suit_li4: '短期で台湾に滞在し、仕事や学業のため日常会話力を早く身につけたい方',
+  p03_1on1_side1_h: 'すぐに予約',
+  p03_1on1_side1_p: 'どのプランが合うか分からない方は、まず無料のオンライン体験レッスンをご予約ください。アドバイザーがレベルを評価し、最適なプランをご提案します。',
+  p03_1on1_side2_p: 'ログイン後はプランを直接購入し、会員エリアで講師と時間帯を予約できます。',
+  p03_1on1_plan1_desc: '中国語1対1オンラインレッスン10回、初めての方やまず試してみたい方に最適です。',
+  p03_1on1_plan1_inc1: '10回 × 50分',
+  p03_1on1_plan2_desc: '指定教材付き30回コース、3か月以上の学習計画を立てたい方に最適です。',
+  p03_1on1_plan2_inc1: '30回 × 50分',
+  p03_1on1_plan2_inc3: 'ビザ申請に必要な出席証明の発行に対応',
+  p03_1on1_plan3_h: '法人団体プラン',
+  p03_1on1_plan3_desc: '企業の人数と学習目標に応じてスケジュールをカスタマイズ、オンラインで実施し、グループ・時間帯を分けての受講も可能です。',
+  p03_flex_nick: '仲間と一緒に学ぶ・彈性団体ライブ配信', p03_flex_title: '彈性団体ライブ配信',
+  p03_flex_fact1_k: '1回のレッスン時間', p03_flex_fact1_v: '50分',
+  p03_flex_fact2_k: '定員', p03_flex_fact2_v: '4〜8名の少人数ライブグループ',
+  p03_flex_fact3_k: '開講頻度', p03_flex_fact3_v: '週1〜2回、固定時間帯',
+  p03_flex_fact4_k: '教材', p03_flex_fact4_v: 'レベル別教材一式込み',
+  p03_flex_explain_h: '受講形式：ライブ配信制',
+  p03_flex_explain_li1: '毎週決まった時間に開講、申込めばそのまま参加でき、講師や時間の個別調整は不要です',
+  p03_flex_explain_li2: '他の受講生と一緒にライブで受講し、テーマ別にスピーキング・リスニングと交流を練習します',
+  p03_flex_explain_li3: 'その週に録画提供がある場合、ライブを見逃しても会員エリアで視聴できます',
+  p03_flex_explain_li4: '同じ期は同じ講師が担当し、学習リズムと仲間との一体感を維持します',
+  p03_flex_suit_li1: '仲間と一緒に学びたい、グループでの交流が好きな方',
+  p03_flex_suit_li2: '毎週決まった時間に受講でき、柔軟な予約を必要としない方',
+  p03_flex_suit_li3: '予算を重視し、1対1レッスンよりお得に学びたい方',
+  p03_flex_suit_li4: 'グループディスカッションでスピーキングとリスニングを鍛えたい方',
+  p03_flex_side1_h: '今週の開講時間を確認',
+  p03_flex_side1_p: 'まずは無料体験レッスンをご予約いただき、ライブ配信の受講形式を体験してから入会をご検討ください。',
+  p03_flex_side2_p: 'ログイン後、今期の開講時間を確認し、そのまま申込みいただけます。',
+  p03_flex_side2_btn: 'ログインして申込む',
+  p03_flex_plan1_desc: 'ライブ配信体験4回、団体ライブ配信の受講形式をまず体験したい方に最適です。',
+  p03_flex_plan1_inc1: 'ライブ配信レッスン4回 × 50分',
+  p03_flex_plan2_desc: '指定教材付き全12回の1期コース、固定の仲間と一緒に修了を目指します。',
+  p03_flex_plan2_inc1: 'ライブ配信レッスン12回 × 50分・1期',
+  p03_flex_plan2_inc3: 'その期に提供がある場合は録画視聴が可能',
+  p03_flex_plan3_h: '法人グループプラン',
+  p03_flex_plan3_desc: '企業の従業員向けに専用のライブ配信クラスを開講し、固定時間でオンライン団体受講します。'
+}
+};
+
+/* ===================== 銷售方案／組合包資料模型（與 p02 課程總覽同一份資料，示範版直接複製維護）
+   三層結構：銷售方案／組合包 → 產品（課程／活動／預約，見 includes）→ 資源（教材、堂數、場次等以 note 呈現）
+   本頁依 ?plan=<id> 讀取單一方案或組合包並渲染，內容為示範版繁中資料，不隨語系切換 ===================== */
+var CATEGORY_DEFS = [
+  {key:'zh', labelKey:'p02_cat_zh', fallback:'中文'},
+  {key:'foreign', labelKey:'p02_cat_foreign', fallback:'外文'},
+  {key:'culture', labelKey:'p02_cat_culture', fallback:'文化'},
+  {key:'corp', labelKey:'p02_cat_corp', fallback:'商業'},
+  {key:'cert', labelKey:'p02_cat_cert', fallback:'師培'}
+];
+var DELIVERY_DEFS = [
+  {key:'online', labelKey:'p02_delivery_online', fallback:'線上'},
+  {key:'offline', labelKey:'p02_delivery_offline', fallback:'實體'}
+];
+var SCHEDULE_DEFS = [
+  {key:'semester', labelKey:'p02_sched_semester', fallback:'學期制'},
+  {key:'flexible', labelKey:'p02_sched_flexible', fallback:'彈性制'}
+];
+var PRODUCT_TYPE_LABEL = {
+  'booking':'一對一課程', 'group-live':'團體直播課', 'chatroom':'聊天室權限',
+  'self-paced':'自學影音課程', 'activity':'活動'
+};
+var PRODUCT_TYPE_UNIT = {booking:'堂', 'group-live':'堂', 'self-paced':'門', activity:'場'};
+var SALES_TAG_LABEL = { hot:'熱門', promo:'促銷', 'new':'新上架' };
+
+var PLANS = [
+  {id:'zh-1on1-trial', name:'中文一對一體驗方案', categoryKeys:['zh'], salesTag:'hot', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:12000,
+   validity:'購買後 90 天內使用完畢', audience:'零基礎或初次接觸中文的學員',
+   pitch:'先上 10 堂感受一對一教學，確認老師與步調再決定是否延伸方案。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:10, label:'中文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天，課後可加入練習'}
+   ],
+   suitFor:['零基礎或初學者，需要從發音、基礎會話建立信心','想先體驗一對一教學再決定是否延伸方案','時間彈性、希望自己安排上課時段']},
+
+  {id:'zh-1on1-standard', name:'中文一對一標準方案', categoryKeys:['zh'], salesTag:'hot', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:33000,
+   validity:'購買後 180 天內使用完畢', audience:'規劃三個月以上學習計畫的學員',
+   pitch:'30 堂課程搭配指定教材與自學影音，適合中長期規劃的學習者。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:30, label:'中文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'中文發音強化影音'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+   ],
+   suitFor:['已有基礎、想密集加強口說與聽力反應','短期來台工作或求學，需快速累積生活會話能力','需要申請簽證所需之上課證明']},
+
+  {id:'zh-1on1-corp', name:'中文一對一企業客製方案', categoryKeys:['zh','corp'], salesTag:null, mode:'advisor-quote',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:null,
+   validity:'依合約約定期間使用', audience:'企業員工個人化中文培訓',
+   pitch:'依員工人數與學習目標客製排課，線上進行、可分批分時段上課。',
+   rulesSummary:'請假、改期、退費依合約條款辦理，由顧問於報價時一併說明。',
+   includes:[
+     {type:'booking', qty:'依合約', label:'中文一對一線上課', note:'堂數與教材依合約約定'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'依合約期間開放'}
+   ],
+   suitFor:['企業想為個別員工安排一對一中文培訓','需要企業月結發票與客製報表','員工分批分時段上課，不影響排班']},
+
+  {id:'en-1on1-trial', name:'英文一對一體驗方案', categoryKeys:['foreign'], salesTag:null, mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:13000,
+   validity:'購買後 90 天內使用完畢', audience:'需加強多益、雅思口說與聽力的學員',
+   pitch:'先上 10 堂體驗一對一教學，對應 TOEFL／IELTS／TOEIC／GEPT。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:10, label:'英文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天'}
+   ],
+   suitFor:['準備多益、雅思等檢定考試','想先體驗一對一教學再決定是否延伸方案','需要針對口說與聽力密集練習']},
+
+  {id:'en-1on1-standard', name:'英文一對一標準方案', categoryKeys:['foreign'], salesTag:'hot', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:34000,
+   validity:'購買後 180 天內使用完畢', audience:'規劃三個月以上學習計畫的學員',
+   pitch:'30 堂課程搭配自學影音，對應 11 級 CEFR 對照表。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:30, label:'英文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'TOEIC 聽力影音包'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+   ],
+   suitFor:['需要對應多益、雅思成績目標','希望密集累積職場英文能力','想搭配自學影音持續練習聽力']},
+
+  {id:'jp-1on1-standard', name:'日文一對一標準方案', categoryKeys:['foreign'], salesTag:'new', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:34000,
+   validity:'購買後 180 天內使用完畢', audience:'準備 JLPT 檢定或赴日工作的學員',
+   pitch:'30 堂課程對應 JLPT，搭配自學影音加強應試能力。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:30, label:'日文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'JLPT N3 衝刺影音'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+   ],
+   suitFor:['準備 JLPT 各級檢定','赴日工作或求學前密集加強','想有系統地準備聽解與文法']},
+
+  {id:'ko-1on1-standard', name:'韓文一對一標準方案', categoryKeys:['foreign'], salesTag:null, mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:34000,
+   validity:'購買後 180 天內使用完畢', audience:'準備 TOPIK 檢定或生活會話需求的學員',
+   pitch:'30 堂課程對應 TOPIK，生活、旅遊、商用主題皆備。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:30, label:'韓文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+   ],
+   suitFor:['準備 TOPIK 各級檢定','喜愛韓劇韓綜想加強生活會話','短期赴韓旅遊或求學前惡補']},
+
+  {id:'de-1on1-standard', name:'德文一對一標準方案', categoryKeys:['foreign'], salesTag:null, mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:35000,
+   validity:'購買後 180 天內使用完畢', audience:'生活、商用德文需求的學員',
+   pitch:'30 堂課程涵蓋生活、旅遊、商用主題，企業培訓可包班。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:30, label:'德文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+   ],
+   suitFor:['計畫赴德工作、留學或移居','企業指派學習商用德文','希望紮實建立文法基礎']},
+
+  {id:'fr-1on1-standard', name:'法文一對一標準方案', categoryKeys:['foreign'], salesTag:null, mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['1on1'], price:35000,
+   validity:'購買後 180 天內使用完畢', audience:'準備 DELF／DALF 檢定的學員',
+   pitch:'30 堂課程對應 DELF／DALF／TCF 檢定。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'booking', qty:30, label:'法文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+   ],
+   suitFor:['準備 DELF／DALF／TCF 檢定','計畫赴法留學或工作','希望有系統地累積口說能力']},
+
+  {id:'flex-zh-trial', name:'中文彈性團體體驗方案', categoryKeys:['zh'], salesTag:'promo', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'semester', formatKeys:['group-live'], price:3600,
+   validity:'依當期梯次開課日至結束日', audience:'想找同好一起學習的學員',
+   pitch:'4 堂直播體驗，感受固定時段團體上課的節奏。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'group-live', qty:4, label:'中文彈性團體直播課', note:'50 分鐘／堂，固定時段開課'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天'}
+   ],
+   suitFor:['想找同好一起學習、喜歡小組互動','每週有固定時段可以上課','預算考量，希望比一對一更划算']},
+
+  {id:'flex-zh-standard', name:'中文彈性團體標準方案', categoryKeys:['zh'], salesTag:'hot', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'semester', formatKeys:['group-live'], price:9600,
+   validity:'依當期梯次開課日至結束日', audience:'跟隨固定梯次完成整期課程的學員',
+   pitch:'12 堂一期搭配指定教材，跟隨固定同儕完成整期課程。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'group-live', qty:12, label:'中文彈性團體直播課', note:'50 分鐘／堂，一期課程'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'生活會話影音包'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'60 天'}
+   ],
+   suitFor:['想透過團體討論練習口說與聽力反應','每週有固定時段可以上課','預算考量，希望比一對一更划算']},
+
+  {id:'flex-en-standard', name:'英文彈性團體標準方案', categoryKeys:['foreign'], salesTag:null, mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'semester', formatKeys:['group-live'], price:10200,
+   validity:'依當期梯次開課日至結束日', audience:'跟隨固定梯次完成整期課程的學員',
+   pitch:'12 堂一期，主題式練習口說與聽力，跟同好一起學。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'group-live', qty:12, label:'英文彈性團體直播課', note:'50 分鐘／堂，一期課程'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'60 天'}
+   ],
+   suitFor:['想透過團體討論練習口說與聽力反應','每週有固定時段可以上課','預算考量，希望比一對一更划算']},
+
+  {id:'self-zh-pack', name:'中文自學影音組合方案', categoryKeys:['zh'], salesTag:'promo', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['self-paced'], price:2400,
+   validity:'購買後 365 天內可反覆觀看', audience:'想搭配正課自主複習的學員',
+   pitch:'三門自學影音課程，隨時看、依自己步調複習。',
+   rulesSummary:'數位內容依規定不適用退費，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'中文發音強化影音'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'生活會話影音包'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'文化速覽影音（茶道・書法）'}
+   ],
+   suitFor:['已在上正課、想額外加強複習','時間零碎、想利用空檔自學','想先熟悉教材內容再報名正課']},
+
+  {id:'culture-zh-single', name:'文化體驗單場方案', categoryKeys:['culture'], salesTag:null, mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['activity'], price:1200,
+   validity:'依報名場次當日使用', audience:'想體驗單一文化主題的學員',
+   pitch:'單場茶道體驗直播，輕鬆認識中華文化。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'activity', qty:1, label:'活動', note:'茶道體驗場次'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'14 天'}
+   ],
+   suitFor:['對中華文化有興趣、想輕鬆體驗','想找非語言課程的主題活動','外派來台想快速認識在地文化']},
+
+  {id:'culture-zh-season', name:'文化主題季票方案', categoryKeys:['culture'], salesTag:'new', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'semester', formatKeys:['activity'], price:3200,
+   validity:'依當季 3 場活動日期使用', audience:'想連續參加多場文化主題活動的學員',
+   pitch:'茶道、書法、時事聊天，一次報名參加當季 3 場直播體驗。',
+   rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'activity', qty:3, label:'活動', note:'茶道／書法／時事聊天，共 3 場'},
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天'}
+   ],
+   suitFor:['想連續參加多場主題活動','對中華文化有興趣、想深入體驗','想結識同樣對文化有興趣的同好']},
+
+  {id:'corp-training-custom', name:'企業線上培訓客製方案', categoryKeys:['corp'], salesTag:null, mode:'advisor-quote',
+   deliveryKeys:['online'], scheduleKey:'semester', formatKeys:['group-live'], price:null,
+   validity:'依合約約定期間使用', audience:'企業內訓、員工分批分時段上課',
+   pitch:'依員工人數與學習目標客製排課，線上進行，員工可分批分時段上課。',
+   rulesSummary:'請假、改期、退費依合約條款辦理，由顧問於報價時一併說明。',
+   includes:[
+     {type:'group-live', qty:'依合約', label:'企業內訓直播課', note:'梯次時段與堂數依合約約定'},
+   ],
+   suitFor:['企業想為部門或全員安排語言培訓','需要企業月結發票與客製報表','員工分批分時段上課，不影響排班']},
+
+  {id:'cert-teacher-2026', name:'2026 師資認證線上課程方案', categoryKeys:['cert'], salesTag:'new', mode:'advisor-quote',
+   deliveryKeys:['online'], scheduleKey:'semester', formatKeys:['group-live'], price:null,
+   validity:'依梯次開課日至結業日', audience:'欲取得國際華語教師認證的學員',
+   pitch:'118 小時線上直播訓練，取得 TLI 國際華語教師認證。',
+   rulesSummary:'報名需先經顧問資格確認，退費依合約條款辦理。',
+   includes:[
+     {type:'group-live', qty:118, label:'師資認證直播課程', note:'118 小時，分梯次上課'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'教學觀摩影音庫'}
+   ],
+   suitFor:['想取得國際華語教師認證','現職華語教師想強化教學方法','計畫赴海外任教中文教師']},
+
+  {id:'semester-zh-campus', name:'中文學期密集班（實體校區）', categoryKeys:['zh'], salesTag:null, mode:'advisor-quote',
+   deliveryKeys:['offline'], scheduleKey:'semester', formatKeys:['1on1'], price:null,
+   validity:'依校區學期起訖日使用', audience:'需要在台密集學習、申請學生簽證的學員',
+   pitch:'實體校區學期密集班，週時數達申請學生簽證所需條件。',
+   rulesSummary:'請假、退費依校區學則辦理，詳細條款由校區顧問說明。',
+   includes:[
+     {type:'booking', qty:'依學期', label:'學期密集班實體課', note:'依校區課表安排上課'},
+     {type:'activity', qty:2, label:'活動', note:'校園文化活動 2 場'}
+   ],
+   suitFor:['計畫在台長期學習、需申請學生簽證','希望有實體教室與同儕互動','想全天密集沉浸式學習']},
+
+  {id:'chatroom-pass-90', name:'聊天室 90 天強化方案', categoryKeys:['zh'], salesTag:'promo', mode:'online-direct',
+   deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['chatroom'], price:1800,
+   validity:'購買後 90 天內開放使用', audience:'想額外加強口說練習頻率的學員',
+   pitch:'90 天聊天室權限，隨時找老師或同儕練習口說。',
+   rulesSummary:'數位內容依規定不適用退費，詳細條款於購買頁揭露。',
+   includes:[
+     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'},
+     {type:'self-paced', qty:1, label:'自學影音課程', note:'生活會話影音包'}
+   ],
+   suitFor:['已在上正課、想增加口說練習頻率','希望不受限於排課時段、隨時練習','搭配自學影音複習後想立即實作']}
+];
+
+var PACKAGES = [
+  {id:'pkg-zh-starter', name:'中文起步組合包', planIds:['zh-1on1-trial','self-zh-pack','chatroom-pass-90'], comboPrice:14500,
+   pitch:'體驗一對一課＋自學影音＋聊天室權限，新手起步一次到位。'},
+  {id:'pkg-zh-fulltrack', name:'中文全效組合包', planIds:['zh-1on1-standard','flex-zh-standard'], comboPrice:44800,
+   pitch:'一對一標準課＋彈性團體課，個人課與團體課雙軌並行。'},
+  {id:'pkg-en-boost', name:'英文加強組合包', planIds:['en-1on1-trial','flex-en-standard'], comboPrice:21000,
+   pitch:'一對一體驗課先抓弱點，再加入團體直播課持續練習。'},
+  {id:'pkg-culture-explorer', name:'文化探索組合包', planIds:['culture-zh-single','culture-zh-season','chatroom-pass-90'], comboPrice:5400,
+   pitch:'單場體驗＋當季文化季票＋聊天室權限，深度認識中華文化。'}
+];
+function planById(id){ return PLANS.filter(function(p){ return p.id === id; })[0]; }
+function packageById(id){ return PACKAGES.filter(function(p){ return p.id === id; })[0]; }
+function fmtPrice(n){ return 'NT$' + n.toLocaleString('en-US'); }
+function categoryLabel(key){
+  var c = CATEGORY_DEFS.filter(function(x){ return x.key === key; })[0];
+  return c ? c.fallback : key;
+}
+function includesItemHtml(item){
+  var badge = PRODUCT_TYPE_LABEL[item.type] || item.label;
+  var unit = PRODUCT_TYPE_UNIT[item.type] || '';
+  var qtyText = '';
+  if(item.qty !== undefined && item.qty !== 1){
+    qtyText = typeof item.qty === 'number' ? ('・' + item.qty + unit) : ('・' + item.qty);
+  }
+  return '<li class="includes-item"><span class="includes-badge">' + badge + '</span>' +
+    '<span class="includes-text"><b>' + item.label + qtyText + '</b>' + (item.note ? ('<span>' + item.note + '</span>') : '') + '</span></li>';
+}
+function findEntity(id){
+  var plan = planById(id);
+  if(plan) return {kind:'plan', data:plan};
+  var pkg = packageById(id);
+  if(pkg) return {kind:'package', data:pkg};
+  return null;
+}
+function aggregatePackageIncludes(pkg){
+  var items = [];
+  pkg.planIds.forEach(function(pid){
+    var p = planById(pid);
+    if(p) items = items.concat(p.includes);
+  });
+  return items;
+}
+function aggregatePackageSuit(pkg){
+  var out = [];
+  pkg.planIds.forEach(function(pid){
+    var p = planById(pid);
+    if(p) p.suitFor.forEach(function(s){ if(out.indexOf(s) === -1) out.push(s); });
+  });
+  return out.slice(0, 4);
+}
+function packageCategoryKeys(pkg){
+  var out = [];
+  pkg.planIds.forEach(function(pid){
+    var p = planById(pid);
+    if(p) p.categoryKeys.forEach(function(k){ if(out.indexOf(k) === -1) out.push(k); });
+  });
+  return out;
+}
+function packageDeliveryScheduleText(pkg){
+  var deliv = [], sched = [];
+  pkg.planIds.forEach(function(pid){
+    var p = planById(pid);
+    if(!p) return;
+    p.deliveryKeys.forEach(function(k){
+      var d = DELIVERY_DEFS.filter(function(x){ return x.key === k; })[0];
+      if(d && deliv.indexOf(d.fallback) === -1) deliv.push(d.fallback);
+    });
+    var s = SCHEDULE_DEFS.filter(function(x){ return x.key === p.scheduleKey; })[0];
+    if(s && sched.indexOf(s.fallback) === -1) sched.push(s.fallback);
+  });
+  return deliv.join('／') + '・' + sched.join('／');
+}
+function renderDetail(){
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('plan');
+  var entity = id ? findEntity(id) : null;
+  if(!entity){ window.location.href = 'p02_courses.html'; return; }
+
+  var isPkg = entity.kind === 'package';
+  var p = entity.data;
+
+  var categoryKeys = isPkg ? packageCategoryKeys(p) : p.categoryKeys;
+  var price = isPkg ? p.comboPrice : p.price;
+  /* 目前 4 組組合包皆由線上直購方案組成，故銷售模式一律線上直購；
+     若未來組合包含顧問報價方案，需改為依成員方案判斷 */
+  var mode = isPkg ? 'online-direct' : p.mode;
+  var includesItems = isPkg ? aggregatePackageIncludes(p) : p.includes;
+  var suitList = isPkg ? aggregatePackageSuit(p) : p.suitFor;
+  var validityText = isPkg ? '依組合內各方案之有效期規則使用，詳見各方案說明' : p.validity;
+  var rulesText = isPkg ? '請假、改期、退費依組合內各方案規則辦理，詳細條款於購買頁揭露。' : p.rulesSummary;
+  var deliverySchedText = isPkg ? packageDeliveryScheduleText(p) :
+    (DELIVERY_DEFS.filter(function(x){ return p.deliveryKeys.indexOf(x.key) > -1; }).map(function(x){ return x.fallback; }).join('／') +
+     '・' + ((SCHEDULE_DEFS.filter(function(x){ return x.key === p.scheduleKey; })[0] || {}).fallback || ''));
+
+  document.getElementById('bcCurrent').textContent = p.name;
+  var bcCat = document.getElementById('bcCategory');
+  bcCat.textContent = categoryKeys.map(categoryLabel).join('／') || '銷售方案';
+  bcCat.href = 'p02_courses.html?category=' + (categoryKeys[0] || '');
+
+  document.getElementById('pdKind').textContent = isPkg ? '組合包' : '銷售方案';
+  document.getElementById('pdTitle').textContent = p.name;
+  var modeBadge = document.getElementById('pdModeBadge');
+  modeBadge.textContent = mode === 'online-direct' ? '線上直購' : '顧問報價';
+  modeBadge.className = 'mode-badge ' + (mode === 'online-direct' ? 'booking' : 'live');
+
+  var tagsHtml = categoryKeys.map(function(k){ return '<span class="chip">' + categoryLabel(k) + '</span>'; }).join('');
+  if(!isPkg && p.salesTag){ tagsHtml += '<span class="chip tag-' + p.salesTag + '">' + SALES_TAG_LABEL[p.salesTag] + '</span>'; }
+  document.getElementById('pdTagsRow').innerHTML = tagsHtml;
+
+  document.getElementById('pdPitch').textContent = p.pitch;
+  document.getElementById('pdPrice').textContent = price !== null ? fmtPrice(price) : '顧問報價';
+  document.getElementById('pdSalesMode').textContent = mode === 'online-direct' ? '線上直購' : '顧問報價';
+  document.getElementById('pdDeliverySched').textContent = deliverySchedText;
+  document.getElementById('pdValidity').textContent = validityText;
+
+  document.getElementById('pdIncludesList').innerHTML = includesItems.map(includesItemHtml).join('');
+  document.getElementById('pdSuitList').innerHTML = suitList.map(function(s){ return '<li>' + s + '</li>'; }).join('');
+  document.getElementById('pdRulesText').textContent = rulesText;
+
+  var pkgSection = document.getElementById('pdPackageSection');
+  if(isPkg){
+    pkgSection.hidden = false;
+    document.getElementById('pdPackageList').innerHTML = p.planIds.map(function(pid){
+      var mp = planById(pid);
+      if(!mp) return '';
+      return '<li><a href="p03_course_detail.html?plan=' + pid + '">' + mp.name + '</a><span>' + (mp.price !== null ? fmtPrice(mp.price) : '顧問報價') + '</span></li>';
+    }).join('');
+  } else {
+    pkgSection.hidden = true;
+  }
+
+  var ctaBtn = document.getElementById('pdCtaBtn');
+  var ctaHeading = document.getElementById('pdCtaHeading');
+  var ctaDesc = document.getElementById('pdCtaDesc');
+  if(mode === 'online-direct'){
+    ctaHeading.textContent = '立即購買';
+    ctaDesc.textContent = '登入後直接完成付款，購買後顧問會主動聯繫規劃學習計畫。';
+    ctaBtn.textContent = '立即購買';
+    ctaBtn.href = '../會員區/m13_checkout.html?plan=' + p.id;
+    ctaBtn.className = 'btn btn-accent btn-block';
+  } else {
+    ctaHeading.textContent = '預約顧問諮詢';
+    ctaDesc.textContent = '由顧問依需求提供正式報價與規劃建議。';
+    ctaBtn.textContent = '預約顧問諮詢';
+    ctaBtn.href = 'p06_trial.html?type=consult&plan=' + p.id;
+    ctaBtn.className = 'btn btn-primary btn-block';
+  }
+
+  var pool = PLANS.filter(function(x){ return x.id !== p.id; });
+  var sameCat = pool.filter(function(x){ return x.categoryKeys.some(function(k){ return categoryKeys.indexOf(k) > -1; }); });
+  var others = pool.filter(function(x){ return sameCat.indexOf(x) === -1; });
+  var picks = sameCat.concat(others).slice(0, 3);
+  document.getElementById('pdSidebarList').innerHTML = picks.map(function(x){
+    return '<li><a href="p03_course_detail.html?plan=' + x.id + '">' + x.name + '</a><span>' + (x.price !== null ? fmtPrice(x.price) : '顧問報價') + '</span></li>';
+  }).join('');
+
+  document.title = p.name + '｜TLI Connect';
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if(metaDesc) metaDesc.setAttribute('content', p.pitch || p.name);
+}
+function togglePackageList(){
+  var list = document.getElementById('pdPackageList');
+  var icon = document.getElementById('pdPackageToggleIcon');
+  var hidden = list.hidden;
+  list.hidden = !hidden;
+  icon.textContent = hidden ? '▴' : '▾';
+}
+
+/* ===================== i18n：TLI_KB 語系版本 ===================== */
+var TLI_KB_I18N = {
+'zh-TW': [
+  {id:'refund', chip:'退費', q:'如何申請退費？', a:'課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。', short:'開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。'},
+  {id:'reschedule', chip:'請假改期', q:'臨時無法上課，可以退堂或改期嗎？', a:'請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。', short:'上課前 12 小時可申請改期或退堂，逾時視同已上課。'},
+  {id:'visa', chip:'簽證', q:'上課時數與簽證申請有什麼關係？', a:'台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。', short:'週時數達 15 小時的學期班即符合學生簽證申請條件。'},
+  {id:'invoice', chip:'發票', q:'會開立發票嗎？', a:'是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。', short:'付款完成後會開立發票，企業包班可申請月結。'},
+  {id:'payment', chip:'付款方式', q:'有哪些付款方式？', a:'提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。', short:'可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。'},
+  {id:'format', chip:'上課方式', q:'一對一與彈性團體直播差在哪？', a:'一對一線上課是預約制，你提出方便的時段，由顧問安排老師；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。', short:'一對一是預約制、由顧問安排老師與時段；團體直播是固定時段、費用較划算。'},
+  {id:'classroom', chip:'線上教室', q:'線上教室怎麼進入？連結會不會外流？', a:'上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。', short:'登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。'},
+  {id:'pricing', chip:'價格與報價', q:'課程費用怎麼估算？', a:'費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。', short:'費用依語言、上課方式與堂數而定，可請顧問提供試算報價。'},
+  {id:'trial', chip:'試聽', q:'可以先試聽嗎？', a:'可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。', short:'提供免費試聽，顧問會依程度與目標安排合適老師與時段。'},
+  {id:'teacher', chip:'老師配對', q:'老師怎麼配對？', a:'顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。', short:'依語言、程度與目標配對合適老師，開課後不合適可申請更換。'}
+],
+en: [
+  {id:'refund', chip:'Refunds', q:'How do I request a refund?', a:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.', short:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.'},
+  {id:'reschedule', chip:'Rescheduling', q:'Can I cancel or reschedule a class on short notice?', a:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.', short:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.'},
+  {id:'visa', chip:'Student Visa', q:'How do class hours relate to visa applications?', a:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.', short:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.'},
+  {id:'invoice', chip:'Invoices', q:'Will I receive an invoice or receipt?', a:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.', short:'An invoice is issued after payment; corporate clients can request monthly billing.'},
+  {id:'payment', chip:'Payment Options', q:'What payment methods are available?', a:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.', short:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.'},
+  {id:'format', chip:'Class Formats', q:'What’s the difference between 1-on-1 and flexible group livestream classes?', a:'1-on-1 online classes are booking-based — you submit your available times and our advisor arranges a teacher for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.', short:'1-on-1 is booking-based — our advisor arranges the teacher and time based on your availability; group livestream runs on a fixed schedule and costs less.'},
+  {id:'classroom', chip:'Online Classroom', q:'How do I join the online classroom? Could the link leak to others?', a:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.', short:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.'},
+  {id:'pricing', chip:'Pricing', q:'How is the course fee calculated?', a:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.', short:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.'},
+  {id:'trial', chip:'Trial Class', q:'Can I try a class before signing up?', a:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.', short:'A free trial is available, matched to your level and goals before you commit.'},
+  {id:'teacher', chip:'Teacher Matching', q:'How are teachers matched to students?', a:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.', short:'Matched to a certified teacher by language, level, and goals; you can request a change later.'}
+],
+ja: [
+  {id:'refund', chip:'返金', q:'返金の申請方法は？', a:'開講14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。', short:'開講14日前までなら全額返金、開講後は受講済み回数に応じて算出します。'},
+  {id:'reschedule', chip:'振替・キャンセル', q:'急に受講できなくなった場合、キャンセルや振替はできますか？', a:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。', short:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。'},
+  {id:'visa', chip:'学生ビザ', q:'授業時間数はビザ申請にどう関係しますか？', a:'台湾キャンパスの学期制コースで週15時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。', short:'週15時間以上の学期制コースは学生ビザの出席条件を満たします。'},
+  {id:'invoice', chip:'領収書', q:'領収書は発行されますか？', a:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。', short:'お支払い後に領収書を発行、法人は月締め請求も可能です。'},
+  {id:'payment', chip:'お支払い方法', q:'どのようなお支払い方法がありますか？', a:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。', short:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。'},
+  {id:'format', chip:'受講形式', q:'一対一とグループライブ配信の違いは何ですか？', a:'一対一のオンライン授業は予約制で、ご都合の良い時間帯をお伝えいただければ、アドバイザーが講師を手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。', short:'一対一は予約制でアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。'},
+  {id:'classroom', chip:'オンライン教室', q:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？', a:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。', short:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。'},
+  {id:'pricing', chip:'料金・見積り', q:'コース料金はどのように算出されますか？', a:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。', short:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。'},
+  {id:'trial', chip:'体験レッスン', q:'事前に体験レッスンを受けられますか？', a:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。', short:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。'},
+  {id:'teacher', chip:'講師のマッチング', q:'講師はどのようにマッチングされますか？', a:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。', short:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。'}
+]
+};
+
+/* ===================== i18n：顧問姓名語系版本 ===================== */
+var TLI_ADVISORS_I18N = {
+  'zh-TW': ['王顧問','李顧問','陳顧問','張顧問','林顧問'],
+  en: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin'],
+  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー']
+};
+function aiPickAdvisor(){
+  var list = TLI_ADVISORS_I18N[window.TLI_CURRENT_LANG] || TLI_ADVISORS_I18N['zh-TW'];
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+var TLI_CHAT_KEY = 'tliChatState_v1';
+var aiAskedIntents = {};
+var TLI_AI_GREETING_KEY = 'ai_greeting_default';
+
+function aiTicketNo(){
+  return 'TL-2026' + String(Math.floor(1000 + Math.random() * 9000));
+}
+function aiNowStr(){
+  var d = new Date();
+  return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+}
+function aiMakeChipBtn(label, handler){
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'ai-chip';
+  b.textContent = label;
+  b.onclick = handler;
+  return b;
+}
+function aiRenderChips(target){
+  var wrap = document.getElementById('aiChips-'+target);
+  if(!wrap) return;
+  var dict = tliDict();
+  var kb = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  wrap.innerHTML = '';
+  wrap.appendChild(aiMakeChipBtn(dict.ai_chip_trial, function(){ aiAsk(dict.ai_chip_trial, target); }));
+  kb.forEach(function(item){
+    if(item.id === 'trial') return;
+    wrap.appendChild(aiMakeChipBtn(item.chip, function(){ aiAsk(item.chip, target); }));
+  });
+}
+function aiToggleSend(target){
+  var input = document.getElementById('aiInput-'+target);
+  var btn = document.getElementById('aiSend-'+target);
+  if(!input || !btn) return;
+  btn.disabled = !input.value.trim();
+}
+function aiInit(target){
+  var body = document.getElementById('aiBody-'+target);
+  if(!body || body.dataset.inited) return;
+  body.dataset.inited = '1';
+  if(aiRestoreState(target)){ aiRenderChips(target); return; }
+  var dict = tliDict();
+  aiAppendBot(target, (window.TLI_AI_GREETING_KEY && dict[window.TLI_AI_GREETING_KEY]) ? dict[window.TLI_AI_GREETING_KEY] : dict.ai_greeting_default);
+  aiRenderChips(target);
+}
+function aiOpen(target){
+  document.getElementById('aiOverlay-'+target).classList.add('show');
+  var sheet = document.getElementById('aiSheet-'+target);
+  if(sheet) sheet.classList.remove('minimized');
+  aiInit(target);
+  setTimeout(function(){ var i=document.getElementById('aiInput-'+target); if(i) i.focus(); }, 100);
+}
+function aiClose(target){
+  document.getElementById('aiOverlay-'+target).classList.remove('show');
+}
+function aiMinimize(target){
+  var sheet = document.getElementById('aiSheet-'+target);
+  if(sheet) sheet.classList.toggle('minimized');
+}
+function aiScrollBottom(target){
+  var body = document.getElementById('aiBody-'+target);
+  if(body) body.scrollTop = body.scrollHeight;
+}
+function aiAppendUser(target, text){
+  var body = document.getElementById('aiBody-'+target);
+  var row = document.createElement('div');
+  row.className = 'ai-msg-row user';
+  row.innerHTML = '<div class="ai-msg-stack"><div class="ai-msg user"></div><div class="ai-msg-time">'+aiNowStr()+'</div></div>';
+  row.querySelector('.ai-msg').textContent = text;
+  body.appendChild(row);
+  aiScrollBottom(target);
+  aiSaveState(target);
+}
+function aiAppendBot(target, html){
+  var body = document.getElementById('aiBody-'+target);
+  var row = document.createElement('div');
+  row.className = 'ai-msg-row bot';
+  row.innerHTML = '<div class="ai-avatar sm" aria-hidden="true">'+TLI_AVATAR_SVG+'</div><div class="ai-msg-stack"><div class="ai-msg bot">'+html+'</div><div class="ai-msg-time">'+aiNowStr()+'</div></div>';
+  body.appendChild(row);
+  aiScrollBottom(target);
+  aiSaveState(target);
+  return row.querySelector('.ai-msg');
+}
+function aiShowTyping(target){
+  var body = document.getElementById('aiBody-'+target);
+  if(!body) return;
+  var row = document.createElement('div');
+  row.className = 'ai-msg-row bot';
+  row.id = 'aiTypingRow-'+target;
+  row.innerHTML = '<div class="ai-avatar sm" aria-hidden="true">'+TLI_AVATAR_SVG+'</div><div class="ai-msg-stack"><div class="ai-msg bot ai-typing"><span class="ai-typing-dots"><span></span><span></span><span></span></span></div></div>';
+  body.appendChild(row);
+  aiScrollBottom(target);
+}
+function aiHideTyping(target){
+  var row = document.getElementById('aiTypingRow-'+target);
+  if(row) row.remove();
+}
+function aiMatch(text){
+  var t = text.trim();
+  var kbTc = TLI_KB_I18N['zh-TW'], kbCur = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  var KEYWORDS = {
+    refund:['退費','退款','退學費','可以退','取消課程','退錢','refund','返金'],
+    reschedule:['請假','改期','退堂','取消上課','調課','reschedule','cancel class','振替','キャンセル'],
+    visa:['簽證','visa','學生簽證','居留','ビザ'],
+    invoice:['發票','收據','電子發票','invoice','receipt','領収書'],
+    payment:['付款','付費','分期','刷卡','轉帳','怎麼付錢','payment','pay','installment','支払い'],
+    format:['上課方式','預約制','直播制','怎麼上課','一對一','團體班','class format','1-on-1','group','受講形式'],
+    classroom:['線上教室','怎麼進入','連結','教室連結','外流','Zoom','classroom','教室'],
+    pricing:['價格','報價','費用','學費多少','多少錢','price','pricing','cost','料金'],
+    trial:['試聽','免費體驗','體驗課','試聽怎麼預約','trial','free class','体験'],
+    teacher:['老師','配對','老師怎麼選','指定老師','換老師','teacher','matching','講師']
+  };
+  for(var i=0;i<kbTc.length;i++){
+    var id = kbTc[i].id;
+    var kws = KEYWORDS[id] || [];
+    for(var j=0;j<kws.length;j++){
+      if(t.toLowerCase().indexOf(String(kws[j]).toLowerCase()) !== -1){
+        for(var k=0;k<kbCur.length;k++){ if(kbCur[k].id === id) return kbCur[k]; }
+      }
+    }
+  }
+  return null;
+}
+function aiReplyForMatch(target, match){
+  var dict = tliDict();
+  var asked = aiAskedIntents[match.id];
+  var html;
+  if(asked){
+    html = tliFmt(dict.ai_repeat, {chip: match.chip, short: match.short});
+  }else{
+    html = '<b>'+match.q+'</b><br>'+match.a+
+      '<div class="ai-thumbs"><span>'+dict.ai_thumbs_prompt+'</span>'+
+      '<button type="button" onclick="aiThumb(this,true)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.3a2 2 0 0 0 2-1.7l1.4-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></button>'+
+      '<button type="button" onclick="aiThumb(this,false)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.7a2 2 0 0 0-2 1.7l-1.4 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg></button></div>'+
+      '<div class="ai-actions"><a href="p06_trial.html?type=trial">'+dict.ai_action_trial+'</a><button type="button" onclick="aiEscalate(\''+target+'\')">'+dict.ai_action_contact+'</button></div>';
+    aiAskedIntents[match.id] = true;
+  }
+  aiAppendBot(target, html);
+}
+function aiAsk(text, target){
+  if(!text || !text.trim()) return;
+  aiAppendUser(target, text);
+  var match = aiMatch(text);
+  var dict = tliDict();
+  aiShowTyping(target);
+  var delay = 600 + Math.floor(Math.random()*600);
+  setTimeout(function(){
+    aiHideTyping(target);
+    if(match){
+      aiReplyForMatch(target, match);
+    }else{
+      aiAppendBot(target, dict.ai_fallback);
+      aiShowEscalateForm(target);
+    }
+  }, delay);
+}
+function aiSubmitInput(e, target){
+  e.preventDefault();
+  var input = document.getElementById('aiInput-'+target);
+  var val = input.value;
+  if(!val.trim()) return false;
+  aiAsk(val, target);
+  input.value = '';
+  aiToggleSend(target);
+  return false;
+}
+function aiThumb(btn, helpful){
+  var dict = tliDict();
+  var wrap = btn.parentElement;
+  wrap.querySelectorAll('button').forEach(function(b){ b.classList.remove('picked'); });
+  btn.classList.add('picked');
+  var thanks = wrap.nextElementSibling;
+  if(!thanks || !thanks.classList || !thanks.classList.contains('ai-thumbs-thanks')){
+    thanks = document.createElement('div');
+    thanks.className = 'ai-thumbs-thanks';
+    wrap.insertAdjacentElement('afterend', thanks);
+  }
+  thanks.textContent = dict.ai_thumbs_thanks;
+}
+function aiEscalate(target){
+  var dict = tliDict();
+  aiAppendUser(target, dict.ai_escalate_user_msg);
+  aiShowEscalateForm(target);
+}
+function aiShowEscalateForm(target){
+  var dict = tliDict();
+  var html = '<div class="ai-mini-form">'+
+    '<input id="aiName-'+target+'" placeholder="'+dict.ai_form_name_ph+'" required>'+
+    '<input id="aiContact-'+target+'" placeholder="'+dict.ai_form_contact_ph+'" required>'+
+    '<button type="button" class="btn btn-accent btn-sm" onclick="aiSubmitEscalate(\''+target+'\')">'+dict.ai_form_submit+'</button>'+
+    '</div>'+
+    '<button type="button" class="ai-live-btn" onclick="aiLiveQueue(\''+target+'\')">'+dict.ai_live_btn+'</button>';
+  aiAppendBot(target, html);
+}
+function aiLiveQueue(target){
+  var dict = tliDict();
+  aiAppendUser(target, dict.ai_live_btn);
+  aiShowTyping(target);
+  setTimeout(function(){
+    aiHideTyping(target);
+    aiAppendBot(target, dict.ai_live_queued);
+  }, 700);
+}
+function aiSubmitEscalate(target){
+  var dict = tliDict();
+  var nameEl = document.getElementById('aiName-'+target);
+  var contactEl = document.getElementById('aiContact-'+target);
+  var name = nameEl ? nameEl.value.trim() : '';
+  var contact = contactEl ? contactEl.value.trim() : '';
+  if(!name || !contact){ if(typeof showToast === 'function') showToast(dict.ai_toast_fill_required); return; }
+  var ticket = aiTicketNo();
+  var advisor = aiPickAdvisor();
+  var body = document.getElementById('aiBody-'+target);
+  var row = document.createElement('div');
+  row.className = 'ai-msg-row bot';
+  row.innerHTML = '<div class="ai-avatar sm" aria-hidden="true">'+TLI_AVATAR_SVG+'</div><div class="ai-msg-stack"><div class="ai-msg bot"><b>'+tliFmt(dict.ai_ticket_created,{ticket:ticket})+'</b><div class="ai-timeline" id="aiTl-'+target+'-'+Date.now()+'"></div></div><div class="ai-msg-time">'+aiNowStr()+'</div></div>';
+  body.appendChild(row);
+  var tlId = row.querySelector('.ai-timeline').id;
+  aiScrollBottom(target);
+  aiPlayTimeline(tlId, [tliFmt(dict.ai_tl_assigned,{advisor:advisor}), tliFmt(dict.ai_tl_followup,{contact:contact})], function(){
+    aiSaveState(target);
+  });
+}
+function aiPlayTimeline(containerId, steps, onDone){
+  var el = document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML = '';
+  steps.forEach(function(s){
+    var row = document.createElement('div');
+    row.className = 'ai-tl-step';
+    row.innerHTML = '<span class="dot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>'+s+'</span>';
+    el.appendChild(row);
+  });
+  var rows = el.querySelectorAll('.ai-tl-step');
+  var i = 0;
+  function step(){
+    if(i >= rows.length){ if(onDone) onDone(); return; }
+    rows[i].classList.add('done');
+    var wrap = el.closest('.ai-body');
+    if(wrap) wrap.scrollTop = wrap.scrollHeight;
+    i++;
+    setTimeout(step, 600);
+  }
+  setTimeout(step, 300);
+}
+function aiSaveState(target){
+  try{
+    var body = document.getElementById('aiBody-'+target);
+    if(!body) return;
+    var state = {html: body.innerHTML, asked: aiAskedIntents};
+    sessionStorage.setItem(TLI_CHAT_KEY, JSON.stringify(state));
+  }catch(e){}
+}
+function aiRestoreState(target){
+  try{
+    var raw = sessionStorage.getItem(TLI_CHAT_KEY);
+    if(!raw) return false;
+    var state = JSON.parse(raw);
+    if(!state || !state.html) return false;
+    var body = document.getElementById('aiBody-'+target);
+    body.innerHTML = state.html;
+    aiAskedIntents = state.asked || {};
+    aiScrollBottom(target);
+    return true;
+  }catch(e){ return false; }
+}
+initLang();
+renderDetail();
+</script>
+</body>
+</html>
