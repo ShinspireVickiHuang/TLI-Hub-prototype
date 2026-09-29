@@ -136,6 +136,7 @@
   @media (max-width:700px){.wrap{padding:10px 12px;height:auto}.canvas-outer{min-height:70vh}.principle{max-width:none}}
   @media (max-width:900px){.main{flex-direction:column}.editor:not(.open){display:none}.editor.open{width:100%;height:45%;flex:none}}
 </style>
+<style>/* 客戶版：不提供編輯 */#editToggleBtn,#editor{display:none!important}</style>
 </head>
 <body>
 <div class="wrap">
@@ -216,7 +217,7 @@
 <!-- ===== 內建大綱文字（可直接在此改，或用頁面上的「編輯文字」改） ===== -->
 <script type="text/plain" id="outlineSrc">
 == 標題 ==
-TLI Hub 平台架構心智圖 v58
+TLI Hub 平台架構心智圖
 Hub 是底層管理平台，Connect 是對外的線上學習品牌。教學供給集中在 Hub，會員分兩池——直營與代理屬 TLI 官方，經銷與加盟掛各自租戶。
 
 == 原則 ==
@@ -701,7 +702,7 @@ window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.return
 
 // ===== 啟動：優先載入瀏覽器存檔，否則用內建 =====
 (function init(){
-  let saved=null;try{saved=localStorage.getItem(STORAGE_KEY);}catch(e){}
+  let saved=null;try{saved=null;}catch(e){}
   ta.value=saved||BUILTIN;
   if(saved){markClean('已載入上次儲存在瀏覽器的版本');}
   render();
