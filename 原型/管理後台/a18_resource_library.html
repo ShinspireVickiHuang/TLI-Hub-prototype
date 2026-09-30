@@ -104,7 +104,7 @@ border-radius:8px;padding:9px 14px;margin-bottom:10px;font-size:13px;flex-wrap:w
 .batchbar .bcount{font-weight:600;color:var(--navy);}
 .pagerbar{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12.5px;
 color:var(--g500);flex-wrap:wrap;gap:10px;}
-.pagerbtns{display:flex;gap:6px;align-items:center;}
+.pagerbtns{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
 .pagerbtns button{padding:5px 10px;border:1px solid var(--g200);background:#fff;border-radius:6px;
 font-size:12.5px;cursor:pointer;font-family:inherit;}
 .pagerbtns button:disabled{color:var(--g200);cursor:not-allowed;}
@@ -303,10 +303,10 @@ cursor:pointer;font-family:inherit;}
 </head>
 <body>
 <div class="app">
-<div class="sidebar" id="sidebar"><a class="brand" href="../顧問工作台/c01_today.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small class="navtext" data-i18n="brand.adminPortal">管理後台</small></a><nav><div class="navgroup" data-group="sales"><div class="sec-label" onclick="toggleNavGroup(event,'sales')"><span class="navtext" data-i18n="nav.group.sales">銷售</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'sales')" aria-label="收合銷售"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a21" href="a21_projects.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="14.6" x2="11" y2="14.6"/></svg><span class="navtext" data-i18n="nav.a21">專案設定</span></a><a data-nav="a04" href="a04_packages.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="10" rx="1"/><path d="M3 7l7-4 7 4"/><line x1="10" y1="7" x2="10" y2="17"/></svg><span class="navtext" data-i18n="nav.a04">銷售方案</span></a><a data-nav="a05" href="a05_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10v16l-2-1.3L11 18l-2-1.3L7 18l-2-1.3V2z"/><line x1="7.5" y1="6" x2="12.5" y2="6"/><line x1="7.5" y1="9" x2="12.5" y2="9"/></svg><span class="navtext" data-i18n="nav.a05">訂單</span></a><a data-nav="a20" href="a20_agents.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6" r="2.3"/><path d="M2.5 16c0-2.6 1.8-4.3 4-4.3s4 1.7 4 4.3"/><circle cx="14.5" cy="8.5" r="1.8"/><path d="M17.3 16c0-1.9-1.3-3.4-2.8-3.4"/><path d="M9 6l3-1.5"/></svg><span class="navtext" data-i18n="nav.a20">合作夥伴</span></a></div></div><div class="navgroup" data-group="customer"><div class="sec-label" onclick="toggleNavGroup(event,'customer')"><span class="navtext" data-i18n="nav.group.customer">客戶</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'customer')" aria-label="收合客戶"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a01" href="a01_member_rules.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg><span class="navtext" data-i18n="nav.a01">會員管理</span></a><a data-nav="a19" href="a19_b2b_enterprise.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="7" height="14" rx="1"/><rect x="10.5" y="7.5" width="6" height="9.5" rx="1"/><line x1="5.5" y1="6" x2="7.5" y2="6"/><line x1="5.5" y1="9" x2="7.5" y2="9"/><line x1="5.5" y1="12" x2="7.5" y2="12"/><line x1="12.5" y1="10.5" x2="14.5" y2="10.5"/><line x1="12.5" y1="13.5" x2="14.5" y2="13.5"/></svg><span class="navtext" data-i18n="nav.a19">組織客戶</span></a><a data-nav="a14" href="a14_feedback.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8l-4 3v-3H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg><span class="navtext" data-i18n="nav.a14">學員回饋</span></a></div></div><div class="navgroup" data-group="teaching"><div class="sec-label" onclick="toggleNavGroup(event,'teaching')"><span class="navtext" data-i18n="nav.group.teaching">教學</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'teaching')" aria-label="收合教學"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a02" href="a02_products.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l7-3.5L17 6v8l-7 3.5L3 14V6z"/><path d="M3 6l7 3.5L17 6"/><line x1="10" y1="9.5" x2="10" y2="17.5"/></svg><span class="navtext" data-i18n="nav.a02">產品管理</span></a><a data-nav="a10" href="a10_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="15" height="9.5" rx="1.5"/><path d="M7 6.5V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="2.5" y1="10.5" x2="17.5" y2="10.5"/></svg><span class="navtext" data-i18n="nav.a10">老師管理</span></a><a data-nav="a18" class="active" href="a18_resource_library.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="10" cy="4.5" rx="7" ry="2.5"/><path d="M3 4.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/><path d="M3 9.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/></svg><span class="navtext" data-i18n="nav.a18">資源庫</span></a><a data-nav="a16" href="a16_events.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="6.5" y1="2" x2="6.5" y2="5.5"/><line x1="13.5" y1="2" x2="13.5" y2="5.5"/><circle cx="10" cy="12.3" r="2"/></svg><span class="navtext" data-i18n="nav.a16">活動管理</span></a><a data-nav="a22" href="a22_quizzes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="12" height="15" rx="1.5"/><path d="M7 7l1.5 1.5L11 6"/><line x1="12.5" y1="7.5" x2="14" y2="7.5"/><path d="M7 12l1.5 1.5L11 11"/><line x1="12.5" y1="12.5" x2="14" y2="12.5"/></svg><span class="navtext" data-i18n="nav.a22">測驗管理</span></a></div></div><div class="navgroup" data-group="finance"><div class="sec-label" onclick="toggleNavGroup(event,'finance')"><span class="navtext" data-i18n="nav.group.finance">財務</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'finance')" aria-label="收合財務"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a23" href="a23_payment_gateways.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><line x1="2.5" y1="8.5" x2="17.5" y2="8.5"/><circle cx="13.5" cy="12" r="1.2"/></svg><span class="navtext" data-i18n="nav.a23">收款與發票</span></a><a data-nav="a24" href="a24_partner_settlement.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><line x1="6" y1="8" x2="14" y2="8"/><line x1="6" y1="11" x2="11" y2="11"/><path d="M12.5 13.5l1.2 1.2 2.3-2.4"/></svg><span class="navtext" data-i18n="nav.a24">結算與對帳</span></a><a data-nav="a07" href="a07_reports.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span class="navtext" data-i18n="nav.a07">營運報表</span></a></div></div><div class="navgroup" data-group="system"><div class="sec-label" onclick="toggleNavGroup(event,'system')"><span class="navtext" data-i18n="nav.group.system">系統</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'system')" aria-label="收合系統"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a17" href="a17_master_data.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="5" x2="16" y2="5"/><circle cx="8" cy="5" r="1.6"/><line x1="4" y1="10" x2="16" y2="10"/><circle cx="13" cy="10" r="1.6"/><line x1="4" y1="15" x2="16" y2="15"/><circle cx="10" cy="15" r="1.6"/></svg><span class="navtext" data-i18n="nav.a17">基礎資料設定</span></a><a data-nav="a09" href="a09_permissions_notify.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l6.5 2.5v5C16.5 14 13.8 17 10 18c-3.8-1-6.5-4-6.5-8.5v-5L10 2z"/></svg><span class="navtext" data-i18n="nav.a09">權限管理</span></a><a data-nav="a15" href="a15_notifications.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="navtext" data-i18n="nav.a15">通知管理</span></a><a data-nav="a08" href="a08_content_cms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="15" height="14" rx="1.5"/><line x1="8" y1="3" x2="8" y2="17"/></svg><span class="navtext" data-i18n="nav.a08">內容管理</span></a></div></div></nav><div class="sidebar-user" id="sidebarUser"><div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar" id="suAvatar">王</span><span class="navtext su-info"><span class="su-name" id="suName">王大明</span><span class="su-roletag" id="suRoleTag" data-i18n="role.hqAdmin">總公司管理者</span></span><svg class="navtext su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div><div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="../顧問工作台/c01_today.html" data-i18n="nav_ext.consultantWorkbench">前往顧問工作台</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="main"><div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title" data-i18n="nav.a18">資源庫</div><div class="tb-actions"><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar"><a class="brand" href="../顧問工作台/c01_today.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small class="navtext" data-i18n="brand.adminPortal">管理後台</small></a><nav><div class="navgroup" data-group="sales"><div class="sec-label" onclick="toggleNavGroup(event,'sales')"><span class="navtext" data-i18n="nav.group.sales">銷售</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'sales')" aria-label="收合銷售" data-i18n-aria-label="aria.collapseSales"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a21" href="a21_projects.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="14.6" x2="11" y2="14.6"/></svg><span class="navtext" data-i18n="nav.a21">專案設定</span></a><a data-nav="a04" href="a04_packages.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="10" rx="1"/><path d="M3 7l7-4 7 4"/><line x1="10" y1="7" x2="10" y2="17"/></svg><span class="navtext" data-i18n="nav.a04">銷售方案</span></a><a data-nav="a05" href="a05_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10v16l-2-1.3L11 18l-2-1.3L7 18l-2-1.3V2z"/><line x1="7.5" y1="6" x2="12.5" y2="6"/><line x1="7.5" y1="9" x2="12.5" y2="9"/></svg><span class="navtext" data-i18n="nav.a05">訂單</span></a><a data-nav="a20" href="a20_agents.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6" r="2.3"/><path d="M2.5 16c0-2.6 1.8-4.3 4-4.3s4 1.7 4 4.3"/><circle cx="14.5" cy="8.5" r="1.8"/><path d="M17.3 16c0-1.9-1.3-3.4-2.8-3.4"/><path d="M9 6l3-1.5"/></svg><span class="navtext" data-i18n="nav.a20">合作夥伴</span></a></div></div><div class="navgroup" data-group="customer"><div class="sec-label" onclick="toggleNavGroup(event,'customer')"><span class="navtext" data-i18n="nav.group.customer">客戶</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'customer')" aria-label="收合客戶" data-i18n-aria-label="aria.collapseCustomer"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a01" href="a01_member_rules.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg><span class="navtext" data-i18n="nav.a01">會員管理</span></a><a data-nav="a19" href="a19_b2b_enterprise.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="7" height="14" rx="1"/><rect x="10.5" y="7.5" width="6" height="9.5" rx="1"/><line x1="5.5" y1="6" x2="7.5" y2="6"/><line x1="5.5" y1="9" x2="7.5" y2="9"/><line x1="5.5" y1="12" x2="7.5" y2="12"/><line x1="12.5" y1="10.5" x2="14.5" y2="10.5"/><line x1="12.5" y1="13.5" x2="14.5" y2="13.5"/></svg><span class="navtext" data-i18n="nav.a19">組織客戶</span></a><a data-nav="a14" href="a14_feedback.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8l-4 3v-3H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg><span class="navtext" data-i18n="nav.a14">學員回饋</span></a></div></div><div class="navgroup" data-group="teaching"><div class="sec-label" onclick="toggleNavGroup(event,'teaching')"><span class="navtext" data-i18n="nav.group.teaching">教學</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'teaching')" aria-label="收合教學" data-i18n-aria-label="aria.collapseTeaching"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a02" href="a02_products.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l7-3.5L17 6v8l-7 3.5L3 14V6z"/><path d="M3 6l7 3.5L17 6"/><line x1="10" y1="9.5" x2="10" y2="17.5"/></svg><span class="navtext" data-i18n="nav.a02">產品管理</span></a><a data-nav="a10" href="a10_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="15" height="9.5" rx="1.5"/><path d="M7 6.5V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="2.5" y1="10.5" x2="17.5" y2="10.5"/></svg><span class="navtext" data-i18n="nav.a10">老師管理</span></a><a data-nav="a18" class="active" href="a18_resource_library.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="10" cy="4.5" rx="7" ry="2.5"/><path d="M3 4.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/><path d="M3 9.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/></svg><span class="navtext" data-i18n="nav.a18">資源庫</span></a><a data-nav="a16" href="a16_events.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="6.5" y1="2" x2="6.5" y2="5.5"/><line x1="13.5" y1="2" x2="13.5" y2="5.5"/><circle cx="10" cy="12.3" r="2"/></svg><span class="navtext" data-i18n="nav.a16">活動管理</span></a><a data-nav="a22" href="a22_quizzes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="12" height="15" rx="1.5"/><path d="M7 7l1.5 1.5L11 6"/><line x1="12.5" y1="7.5" x2="14" y2="7.5"/><path d="M7 12l1.5 1.5L11 11"/><line x1="12.5" y1="12.5" x2="14" y2="12.5"/></svg><span class="navtext" data-i18n="nav.a22">測驗管理</span></a></div></div><div class="navgroup" data-group="finance"><div class="sec-label" onclick="toggleNavGroup(event,'finance')"><span class="navtext" data-i18n="nav.group.finance">財務</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'finance')" aria-label="收合財務" data-i18n-aria-label="aria.collapseFinance"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a23" href="a23_payment_gateways.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><line x1="2.5" y1="8.5" x2="17.5" y2="8.5"/><circle cx="13.5" cy="12" r="1.2"/></svg><span class="navtext" data-i18n="nav.a23">收款與發票</span></a><a data-nav="a24" href="a24_partner_settlement.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><line x1="6" y1="8" x2="14" y2="8"/><line x1="6" y1="11" x2="11" y2="11"/><path d="M12.5 13.5l1.2 1.2 2.3-2.4"/></svg><span class="navtext" data-i18n="nav.a24">結算與對帳</span></a><a data-nav="a07" href="a07_reports.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span class="navtext" data-i18n="nav.a07">營運報表</span></a></div></div><div class="navgroup" data-group="system"><div class="sec-label" onclick="toggleNavGroup(event,'system')"><span class="navtext" data-i18n="nav.group.system">系統</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'system')" aria-label="收合系統" data-i18n-aria-label="aria.collapseSystem"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a17" href="a17_master_data.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="5" x2="16" y2="5"/><circle cx="8" cy="5" r="1.6"/><line x1="4" y1="10" x2="16" y2="10"/><circle cx="13" cy="10" r="1.6"/><line x1="4" y1="15" x2="16" y2="15"/><circle cx="10" cy="15" r="1.6"/></svg><span class="navtext" data-i18n="nav.a17">基礎資料設定</span></a><a data-nav="a09" href="a09_permissions_notify.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l6.5 2.5v5C16.5 14 13.8 17 10 18c-3.8-1-6.5-4-6.5-8.5v-5L10 2z"/></svg><span class="navtext" data-i18n="nav.a09">權限管理</span></a><a data-nav="a15" href="a15_notifications.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="navtext" data-i18n="nav.a15">通知管理</span></a><a data-nav="a08" href="a08_content_cms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="15" height="14" rx="1.5"/><line x1="8" y1="3" x2="8" y2="17"/></svg><span class="navtext" data-i18n="nav.a08">內容管理</span></a></div></div></nav><div class="sidebar-user" id="sidebarUser"><div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar" id="suAvatar">王</span><span class="navtext su-info"><span class="su-name" id="suName">王大明</span><span class="su-roletag" id="suRoleTag" data-i18n="role.hqAdmin">總公司管理者</span></span><svg class="navtext su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div><div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="../顧問工作台/c01_today.html" data-i18n="nav_ext.consultantWorkbench">前往顧問工作台</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="main"><div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="common.openMenu"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title" data-i18n="nav.a18">資源庫</div><div class="tb-actions"><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋" data-i18n-placeholder="search.genericPlaceholder"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知" data-i18n-aria-label="common.notifications"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="common.userMenu">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1>資源庫</h1><div class="desc">圖片、影片、音頻、教材、題目共五個資源庫，供課程引用。</div></div>
+<div><h1 data-i18n="nav.a18">資源庫</h1><div class="desc" data-i18n="page.desc.resourceLibrary">圖片、影片、音頻、教材、題目共五個資源庫，供課程引用。</div></div>
 <div style="display:flex;align-items:center;gap:10px">
 <div class="toolbtns" id="pageheadActions"></div>
 </div>
@@ -315,10 +315,10 @@ cursor:pointer;font-family:inherit;}
 <div class="tabs" id="libTabs"></div>
 
 <div class="tabpanel active" id="panel-images"><div class="listpanel" id="images_card"></div></div>
-<div class="tabpanel" id="panel-videos"><div class="hint" style="margin-bottom:8px">影片存於外部串流平台，僅登記連結</div><div class="listpanel" id="videos_card"></div></div>
+<div class="tabpanel" id="panel-videos"><div class="hint" style="margin-bottom:8px" data-i18n="hint.videoExternalStream">影片存於外部串流平台，僅登記連結</div><div class="listpanel" id="videos_card"></div></div>
 <div class="tabpanel" id="panel-audio"><div class="listpanel" id="audio_card"></div></div>
 <div class="tabpanel" id="panel-materials"><div class="listpanel" id="materials_card"></div></div>
-<div class="tabpanel" id="panel-questions"><div class="hint" style="margin-bottom:8px">要用這些題目組成測驗，請到<a class="manage-link" style="margin-left:0" href="a22_quizzes.html">測驗管理 →</a></div><div class="listpanel" id="questions_card"></div></div>
+<div class="tabpanel" id="panel-questions"><div class="hint" style="margin-bottom:8px"><span data-i18n="hint.questionsToQuiz">要用這些題目組成測驗，請到</span><a class="manage-link" style="margin-left:0" href="a22_quizzes.html"><span data-i18n="nav.a22">測驗管理</span> →</a></div><div class="listpanel" id="questions_card"></div></div>
 
 </div>
 </div>
@@ -327,7 +327,7 @@ cursor:pointer;font-family:inherit;}
 <div class="drawer-mask" id="drawerMask" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
 <div class="drawer-head">
-<div><h2 id="drw_title">詳情</h2><div class="small" id="drw_sub"></div></div>
+<div><h2 id="drw_title" data-i18n="common.details">詳情</h2><div class="small" id="drw_sub"></div></div>
 <button class="drawer-close" onclick="closeDrawer()"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4.5" y1="4.5" x2="15.5" y2="15.5"/><line x1="15.5" y1="4.5" x2="4.5" y2="15.5"/></svg></button>
 </div>
 <div class="drawer-body" id="drw_body"></div>
@@ -335,7 +335,7 @@ cursor:pointer;font-family:inherit;}
 
 <!-- 上傳資源精靈 -->
 <div class="modal-mask" id="uploadModal" onclick="if(event.target===this) closeUploadWizard()"><div class="modal wide">
-<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3>上傳資源</h3><button class="drawer-close" onclick="closeUploadWizard()" aria-label="關閉"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="modal.uploadResource">上傳資源</h3><button class="drawer-close" onclick="closeUploadWizard()" aria-label="關閉" data-i18n-aria-label="common.close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <div class="wizsteps" id="uwSteps"></div>
 <div id="uwBody"></div>
 </div></div>
@@ -476,6 +476,44 @@ var SELF_PACED_UNITS_REF = [
  {courseId:'skuC05', lessonNo:8, title:'期中口說總複習', videoId:'vid7'}
 ];
 function escHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* 20260929 i18n：欄位／篩選標籤與狀態值多由陣列動態產生，用單一對照表 A18_EN + TT() 小工具，
+   查不到對照就照原文顯示（示範資料/未收錄詞彙安全退回原文，不開天窗）。 */
+var A18_EN = {
+  '名稱':'Name','格式與尺寸':'Format & Dimensions','格式與長度':'Format & Duration',
+  '大小':'Size','標籤':'Tags','狀態':'Status','更新日':'Updated','平台／時長':'Platform / Duration',
+  '教材名稱':'Material Name','版本':'Version','能力類型':'Ability Type','程度':'Level',
+  '題目摘要':'Question Summary','題型':'Question Type','對應課程 Lesson':'Linked Course Lesson','使用次數':'Use Count',
+  '平台':'Platform','等級':'Level',
+  '已上架':'Published','審核中':'Under Review','停用':'Disabled','啟用':'Enabled',
+  '圖片庫':'Image Library','影片庫':'Video Library','音頻庫':'Audio Library','教材庫':'Material Library','題目庫':'Question Bank',
+  '清除全部篩選':'Clear All Filters','設為停用':'Disable',
+  '使用情形':'Usage','尚未被任何課程單元使用。':'Not yet used by any course unit.',
+  '影片要放進課程，請到該課程的「課程內容」編排單元。':'To add this video to a course, arrange it under that course\'s "Course Content" tab.',
+  '串流資訊':'Streaming Info','串流平台':'Streaming Platform','影片 ID 或 URL':'Video ID or URL',
+  '縮圖網址':'Thumbnail URL','時長（分:秒）':'Duration (min:sec)','來源：':'Source: ','儲存串流設定':'Save Streaming Settings',
+  '最後修改人':'Last Modified By','最後修改時間':'Last Modified At','預覽佔位':'Preview Placeholder',
+  '影片一律放在外部串流服務，這裡只登記連結；不提供本機檔案上傳。':'Videos are always hosted on an external streaming service; only the link is registered here — no local file upload.',
+  '使用中的課程（系統）':'Courses in Use (System)','被哪些產品使用（系統）':'Used by Which Products (System)',
+  '間接出現在哪些方案（系統）':'Indirectly Included in Which Sales Plans (System)',
+  '目前尚無課程引用此教材。':'No course currently references this material.',
+  '尚未被任何產品使用；資源不單獨販售，需先加入產品管理才能銷售。':'Not used by any product yet; resources are not sold individually — add it to Product Management first.',
+  '目前無銷售方案間接包含此教材。':'No sales plan currently includes this material indirectly.',
+  '使用中的課程（':'Courses in Use (','）：':'): ',
+  '編輯':'Edit','維護者（系統）':'Maintainer (System)','繁／簡版本':'Traditional/Simplified Version',
+  '繁':'Traditional','簡':'Simplified','TOCFL／HSK／TLI-CPT 對照':'TOCFL/HSK/TLI-CPT Mapping',
+  '詞彙量':'Vocabulary Count','取消':'Cancel','儲存':'Save',
+  '題幹':'Question Stem','解析':'Explanation','綁定 Lesson':'Linked Lesson','聽力題附音頻':'Audio for Listening Question',
+  '選項與正解':'Options & Correct Answer','正解':'Correct Answer',
+  '編輯題目':'Edit Question','新增題目':'Add Question',
+  '填寫題目內容後儲存，將加入題目庫':'Fill in the question content and save; it will be added to the question bank',
+  '選類型':'Select Type','貼上串流連結':'Paste Streaming Link','拖放上傳':'Drag & Drop Upload',
+  '填寫 Metadata':'Fill in Metadata','完成':'Done',
+  '圖片':'Image','影片':'Video','音頻':'Audio','教材':'Material',
+  '標籤（逗號分隔）':'Tags (comma-separated)','成功上傳':'Successfully Uploaded','資源類型':'Resource Type',
+  '上一步':'Previous','下一步':'Next','完成上傳':'Finish Upload'
+};
+function TT(zh){ return (window.TLI_I18N ? TLI_I18N.t(zh, (A18_EN[zh]!==undefined?A18_EN[zh]:zh)) : zh); }
 /* 圖片／影片／音頻詳情抽屜共用：唯讀「使用情形」，只有影片會被自學課程 Lesson 綁定（一個 Lesson 對應一支影片） */
 function renderMediaUsage(type, r){
   var matches = type==='videos' ? SELF_PACED_UNITS_REF.filter(function(u){return u.videoId===r.id;}) : [];
@@ -485,9 +523,9 @@ function renderMediaUsage(type, r){
       return '<div style="margin-bottom:4px"><a href="a03_product_detail.html?id='+u.courseId+'&tab=content">'+escHtml(selfPacedCourseName(u.courseId))+'／Lesson '+u.lessonNo+' '+escHtml(u.title)+'</a></div>';
     }).join('');
   } else {
-    html = '<div class="small">尚未被任何課程單元使用。</div>';
+    html = '<div class="small">'+TT('尚未被任何課程單元使用。')+'</div>';
   }
-  html += '<div class="hint" style="margin-top:6px">影片要放進課程，請到該課程的「課程內容」編排單元。</div>';
+  html += '<div class="hint" style="margin-top:6px">'+TT('影片要放進課程，請到該課程的「課程內容」編排單元。')+'</div>';
   return html;
 }
 
@@ -567,10 +605,10 @@ var QUESTIONS = []; for (var qi=0; qi<14; qi++) QUESTIONS.push(makeQuestion(qi))
 
 /* ================= 徽章 ================= */
 function statusBadge(s){
-  if (s==='已上架' || s==='啟用') return '<span class="badge green">'+s+'</span>';
-  if (s==='停用') return '<span class="badge grey">'+s+'</span>';
-  if (s==='審核中') return '<span class="badge orange">'+s+'</span>';
-  return '<span class="badge grey">'+s+'</span>';
+  if (s==='已上架' || s==='啟用') return '<span class="badge green">'+TT(s)+'</span>';
+  if (s==='停用') return '<span class="badge grey">'+TT(s)+'</span>';
+  if (s==='審核中') return '<span class="badge orange">'+TT(s)+'</span>';
+  return '<span class="badge grey">'+TT(s)+'</span>';
 }
 /* ================= 通用清單引擎 ================= */
 var LIST_STATE = {};
@@ -585,8 +623,8 @@ function renderChipGroups(prefix){
     var wrap = document.getElementById(prefix+'_chip_'+g.key);
     if (!wrap) return;
     var arr = st.filters[g.key] || [];
-    wrap.innerHTML = '<span class="glabel">'+g.label+'：</span>' + g.options.map(function(o){
-      return '<button type="button" class="fchip'+(arr.indexOf(o)>-1?' active':'')+'" onclick="toggleListFilter(\''+prefix+'\',\''+g.key+'\',\''+o+'\')">'+o+'</button>';
+    wrap.innerHTML = '<span class="glabel">'+TT(g.label)+'：</span>' + g.options.map(function(o){
+      return '<button type="button" class="fchip'+(arr.indexOf(o)>-1?' active':'')+'" onclick="toggleListFilter(\''+prefix+'\',\''+g.key+'\',\''+o+'\')">'+TT(o)+'</button>';
     }).join('');
   });
 }
@@ -655,7 +693,7 @@ function renderListBatchBar(prefix){
   var bar = document.getElementById(prefix+'_batchBar');
   var n = listSelectedCount(prefix);
   bar.classList.toggle('show', n>0);
-  document.getElementById(prefix+'_batchCount').textContent = '已選 '+n+' 筆';
+  document.getElementById(prefix+'_batchCount').textContent = TLI_I18N.t('已選 '+n+' 筆', n+' selected');
 }
 function onListRowCheck(prefix, el){
   var id = el.dataset.id, st = LIST_STATE[prefix];
@@ -674,7 +712,7 @@ function onListSelectAll(prefix, el){
   });
   renderListBatchBar(prefix);
 }
-function listExport(prefix){ toast('已產生匯出檔案，共 '+listSelectedCount(prefix)+' 筆，請至下載中心取得'); }
+function listExport(prefix){ var n=listSelectedCount(prefix); toast(TLI_I18N.t('已產生匯出檔案，共 '+n+' 筆，請至下載中心取得', 'Export file generated ('+n+' records); retrieve it from the Download Center')); }
 function listBatchDisable(prefix){
   var st = LIST_STATE[prefix], cfg = LIST_CFG[prefix];
   var n = listSelectedCount(prefix);
@@ -683,7 +721,7 @@ function listBatchDisable(prefix){
     if (row) row.status = '停用';
   });
   renderList(prefix);
-  toast('已將 '+n+' 筆資源設為停用');
+  toast(TLI_I18N.t('已將 '+n+' 筆資源設為停用', 'Disabled '+n+' resource(s)'));
 }
 function renderList(prefix){
   var cfg = LIST_CFG[prefix], st = LIST_STATE[prefix];
@@ -700,9 +738,9 @@ function renderList(prefix){
   var t = document.getElementById(prefix+'_table');
   var headCells = '<th style="width:34px"><input type="checkbox" id="'+prefix+'_selectAllChk" onchange="onListSelectAll(\''+prefix+'\',this)"></th>' +
     visCols.map(function(c){
-      if (!c.sortable) return '<th>'+c.label+'</th>';
+      if (!c.sortable) return '<th>'+TT(c.label)+'</th>';
       var arrow = st.sortKey===c.key ? (st.sortDir==='asc'?'▲':'▼') : '↕';
-      return '<th class="sortable'+(st.sortKey===c.key?' sorted':'')+'" onclick="onSortClickList(\''+prefix+'\',\''+c.key+'\')">'+c.label+' <span class="sarrow">'+arrow+'</span></th>';
+      return '<th class="sortable'+(st.sortKey===c.key?' sorted':'')+'" onclick="onSortClickList(\''+prefix+'\',\''+c.key+'\')">'+TT(c.label)+' <span class="sarrow">'+arrow+'</span></th>';
     }).join('');
   t.innerHTML = '<tr>'+headCells+'</tr>';
 
@@ -722,8 +760,8 @@ function renderList(prefix){
 
   var startLabel = total===0 ? 0 : startIdx+1;
   var endLabel = Math.min(startIdx+st.pageSize, total);
-  document.getElementById(prefix+'_pagerLabel').textContent = '第 '+startLabel+'–'+endLabel+' 筆／共 '+total+' 筆';
-  document.getElementById(prefix+'_pageIndicator').textContent = '第 '+st.page+' / '+maxPage+' 頁';
+  document.getElementById(prefix+'_pagerLabel').textContent = TLI_I18N.t('第 '+startLabel+'–'+endLabel+' 筆／共 '+total+' 筆', startLabel+'\u2013'+endLabel+' of '+total);
+  document.getElementById(prefix+'_pageIndicator').textContent = TLI_I18N.t('第 '+st.page+' / '+maxPage+' 頁', 'Page '+st.page+' / '+maxPage);
   document.getElementById(prefix+'_btnFirst').disabled = st.page<=1;
   document.getElementById(prefix+'_btnPrev').disabled = st.page<=1;
   document.getElementById(prefix+'_btnNext').disabled = st.page>=maxPage;
@@ -738,23 +776,23 @@ function cardShellHtml(prefix, filterGroupDefs){
     return '<div class="chipgroup" id="'+prefix+'_chip_'+g.key+'"></div>';
   }).join('');
   return '<div class="toolrow">' +
-    '<div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="'+prefix+'_search" placeholder="搜尋名稱／標籤" oninput="onListSearch(\''+prefix+'\',this.value)"></div>' +
-    '<button class="btn ghost" onclick="listExport(\''+prefix+'\')">匯出</button>' +
+    '<div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="'+prefix+'_search" placeholder="'+TLI_I18N.t('搜尋名稱／標籤','Search name / tags')+'" oninput="onListSearch(\''+prefix+'\',this.value)"></div>' +
+    '<button class="btn ghost" onclick="listExport(\''+prefix+'\')">'+TLI_I18N.t('匯出','Export')+'</button>' +
     '</div>' +
-    '<div class="chipbar">' + chipsHtml + '<button class="clearlink" onclick="clearListFilters(\''+prefix+'\')">清除全部篩選</button></div>' +
+    '<div class="chipbar">' + chipsHtml + '<button class="clearlink" onclick="clearListFilters(\''+prefix+'\')">'+TT('清除全部篩選')+'</button></div>' +
     '<div class="batchbar" id="'+prefix+'_batchBar">' +
-    '<span class="bcount" id="'+prefix+'_batchCount">已選 0 筆</span>' +
-    '<button class="btn ghost" onclick="listExport(\''+prefix+'\')">匯出</button>' +
-    '<button class="btn ghost" onclick="listBatchDisable(\''+prefix+'\')">設為停用</button>' +
+    '<span class="bcount" id="'+prefix+'_batchCount">'+TLI_I18N.t('已選 0 筆','0 selected')+'</span>' +
+    '<button class="btn ghost" onclick="listExport(\''+prefix+'\')">'+TLI_I18N.t('匯出','Export')+'</button>' +
+    '<button class="btn ghost" onclick="listBatchDisable(\''+prefix+'\')">'+TT('設為停用')+'</button>' +
     '</div>' +
     '<div class="tablewrap"><table id="'+prefix+'_table"></table></div>' +
     '<div class="pagerbar"><span id="'+prefix+'_pagerLabel"></span><div class="pagerbtns">' +
-    '<span class="small">每頁</span><select id="'+prefix+'_pageSizeSel" onchange="onListPageSizeChange(\''+prefix+'\',this)"><option value="10">10</option><option value="20">20</option></select><span class="small">筆</span>' +
-    '<button id="'+prefix+'_btnFirst" onclick="listGotoPage(\''+prefix+'\',1)">« 第一頁</button>' +
-    '<button id="'+prefix+'_btnPrev" onclick="listGotoPageRel(\''+prefix+'\',-1)">‹ 上一頁</button>' +
+    '<span class="small">'+TLI_I18N.t('每頁','Show')+'</span><select id="'+prefix+'_pageSizeSel" onchange="onListPageSizeChange(\''+prefix+'\',this)"><option value="10">10</option><option value="20">20</option></select><span class="small">'+TLI_I18N.t('筆','/ page')+'</span>' +
+    '<button id="'+prefix+'_btnFirst" onclick="listGotoPage(\''+prefix+'\',1)">'+TLI_I18N.t('« 第一頁','« First')+'</button>' +
+    '<button id="'+prefix+'_btnPrev" onclick="listGotoPageRel(\''+prefix+'\',-1)">'+TLI_I18N.t('‹ 上一頁','‹ Prev')+'</button>' +
     '<span id="'+prefix+'_pageIndicator" class="small"></span>' +
-    '<button id="'+prefix+'_btnNext" onclick="listGotoPageRel(\''+prefix+'\',1)">下一頁 ›</button>' +
-    '<button id="'+prefix+'_btnLast" onclick="listGotoPage(\''+prefix+'\',9999)">最後一頁 »</button>' +
+    '<button id="'+prefix+'_btnNext" onclick="listGotoPageRel(\''+prefix+'\',1)">'+TLI_I18N.t('下一頁 ›','Next ›')+'</button>' +
+    '<button id="'+prefix+'_btnLast" onclick="listGotoPage(\''+prefix+'\',9999)">'+TLI_I18N.t('最後一頁 »','Last »')+'</button>' +
     '</div></div>';
 }
 
@@ -841,7 +879,7 @@ var LIB_TABS = [
 var currentLibTab = 'images';
 function renderLibTabs(){
   document.getElementById('libTabs').innerHTML = LIB_TABS.map(function(t){
-    return '<button class="'+(t.key===currentLibTab?'active':'')+'" onclick="switchLibTab(\''+t.key+'\')">'+t.label+'</button>';
+    return '<button class="'+(t.key===currentLibTab?'active':'')+'" onclick="switchLibTab(\''+t.key+'\')">'+TT(t.label)+'</button>';
   }).join('');
 }
 function switchLibTab(key){
@@ -855,15 +893,15 @@ function switchLibTab(key){
 function renderPageheadActions(){
   var el = document.getElementById('pageheadActions');
   if (currentLibTab === 'questions'){
-    el.innerHTML = '<button class="btn" onclick="openQuestionDrawer(null)">＋ 新增題目</button>';
+    el.innerHTML = '<button class="btn" onclick="openQuestionDrawer(null)">'+TLI_I18N.t('＋ 新增題目','＋ Add Question')+'</button>';
   } else {
-    el.innerHTML = '<button class="btn" onclick="openUploadWizard(\''+currentLibTab+'\')">＋ 上傳資源</button>';
+    el.innerHTML = '<button class="btn" onclick="openUploadWizard(\''+currentLibTab+'\')">'+TLI_I18N.t('＋ 上傳資源','＋ Upload Resource')+'</button>';
   }
 }
 
 /* ================= 媒體（圖片／影片／音頻）詳情抽屜 ================= */
 var currentMediaType = null, currentMediaId = null;
-function mediaLibLabel(t){ return t==='images'?'圖片庫':(t==='videos'?'影片庫':'音頻庫'); }
+function mediaLibLabel(t){ return t==='images'?TT('圖片庫'):(t==='videos'?TT('影片庫'):TT('音頻庫')); }
 function playIconSvg(){
   return '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><polygon points="8,6.3 8,13.7 14.2,10" fill="currentColor" stroke="none"/></svg>';
 }
@@ -882,7 +920,7 @@ function openMediaDrawer(type, id){
   document.getElementById('drawerMask').classList.add('open');
   document.getElementById('drawer').classList.add('open');
 }
-function statusBadgeText(s){ return s; }
+function statusBadgeText(s){ return TT(s); }
 function isValidStreamRef(platform, ref){
   ref = (ref||'').trim();
   if (!ref) return false;
@@ -892,43 +930,43 @@ function isValidStreamRef(platform, ref){
 }
 function renderVideoDrawerBody(r){
   var body =
-    '<div class="previewbox"><span class="pv-icon">'+playIconSvg()+'</span><span class="small">外部串流｜'+r.platform+'｜'+r.duration+' 預覽佔位</span></div>' +
-    '<div class="note" style="margin-bottom:14px">影片一律放在外部串流服務，這裡只登記連結；不提供本機檔案上傳。</div>' +
-    '<div class="sectiontitle">串流資訊</div>' +
-    '<div class="formrow"><label>串流平台</label><select id="drw_vidPlatform">' +
+    '<div class="previewbox"><span class="pv-icon">'+playIconSvg()+'</span><span class="small">'+TLI_I18N.t('外部串流｜'+r.platform+'｜'+r.duration+' 預覽佔位', 'External Stream | '+r.platform+' | '+r.duration+' Preview Placeholder')+'</span></div>' +
+    '<div class="note" style="margin-bottom:14px">'+TT('影片一律放在外部串流服務，這裡只登記連結；不提供本機檔案上傳。')+'</div>' +
+    '<div class="sectiontitle">'+TT('串流資訊')+'</div>' +
+    '<div class="formrow"><label>'+TT('串流平台')+'</label><select id="drw_vidPlatform">' +
       VIDEO_PLATFORMS.map(function(p){ return '<option'+(r.platform===p?' selected':'')+'>'+p+'</option>'; }).join('') +
     '</select></div>' +
-    '<div class="formrow"><label>影片 ID 或 URL</label><input type="text" id="drw_vidRef" value="'+r.videoRef+'"></div>' +
-    '<div class="formrow"><label>縮圖網址</label><input type="text" id="drw_vidThumb" value="'+r.thumbnailUrl+'"></div>' +
-    '<div class="formrow"><label>時長（分:秒）</label><input type="text" id="drw_vidDuration" value="'+r.duration+'"></div>' +
-    '<div class="hint" style="margin-bottom:10px">來源：'+r.sourceNote+'</div>' +
-    '<button class="btn ghost" onclick="saveVideoStream(\''+r.id+'\')">儲存串流設定</button>' +
-    '<div class="kv"><span>最後修改人</span><span>'+r.modifiedBy+'</span></div>' +
-    '<div class="kv"><span>最後修改時間</span><span>'+r.updated+'</span></div>' +
-    '<div class="sectiontitle">使用情形</div>' + renderMediaUsage('videos', r);
+    '<div class="formrow"><label>'+TT('影片 ID 或 URL')+'</label><input type="text" id="drw_vidRef" value="'+r.videoRef+'"></div>' +
+    '<div class="formrow"><label>'+TT('縮圖網址')+'</label><input type="text" id="drw_vidThumb" value="'+r.thumbnailUrl+'"></div>' +
+    '<div class="formrow"><label>'+TT('時長（分:秒）')+'</label><input type="text" id="drw_vidDuration" value="'+r.duration+'"></div>' +
+    '<div class="hint" style="margin-bottom:10px">'+TT('來源：')+r.sourceNote+'</div>' +
+    '<button class="btn ghost" onclick="saveVideoStream(\''+r.id+'\')">'+TT('儲存串流設定')+'</button>' +
+    '<div class="kv"><span>'+TT('最後修改人')+'</span><span>'+r.modifiedBy+'</span></div>' +
+    '<div class="kv"><span>'+TT('最後修改時間')+'</span><span>'+r.updated+'</span></div>' +
+    '<div class="sectiontitle">'+TT('使用情形')+'</div>' + renderMediaUsage('videos', r);
   document.getElementById('drw_body').innerHTML = body;
 }
 function saveVideoStream(id){
   var r = VIDEOS.find(function(x){return x.id===id;});
   var platform = document.getElementById('drw_vidPlatform').value;
   var ref = document.getElementById('drw_vidRef').value.trim();
-  if (!isValidStreamRef(platform, ref)){ toast('請輸入正確格式的串流平台影片 ID 或 URL'); return; }
+  if (!isValidStreamRef(platform, ref)){ toast(TLI_I18N.t('請輸入正確格式的串流平台影片 ID 或 URL','Please enter a correctly formatted streaming platform video ID or URL')); return; }
   r.platform = platform;
   r.videoRef = ref;
   r.thumbnailUrl = document.getElementById('drw_vidThumb').value.trim();
   r.duration = document.getElementById('drw_vidDuration').value.trim() || r.duration;
   r.updated = new Date().toISOString().slice(0,10);
   renderList('videos');
-  toast('已儲存串流設定');
+  toast(TT('已儲存串流設定'));
 }
 function renderMediaDrawerBody(type, r){
   if (type==='videos'){ renderVideoDrawerBody(r); return; }
   var icon = type==='images' ? imageIconSvg() : playIconSvg();
   var body =
-    '<div class="previewbox"><span class="pv-icon">'+icon+'</span><span class="small">'+(type==='images' ? r.dim : r.duration+'／'+r.format)+' 預覽佔位</span></div>' +
-    '<div class="kv"><span>最後修改人</span><span>'+r.modifiedBy+'</span></div>' +
-    '<div class="kv"><span>最後修改時間</span><span>'+r.updated+'</span></div>' +
-    '<div class="sectiontitle">使用情形</div>' + renderMediaUsage(type, r);
+    '<div class="previewbox"><span class="pv-icon">'+icon+'</span><span class="small">'+(type==='images' ? r.dim : r.duration+'／'+r.format)+' '+TT('預覽佔位')+'</span></div>' +
+    '<div class="kv"><span>'+TT('最後修改人')+'</span><span>'+r.modifiedBy+'</span></div>' +
+    '<div class="kv"><span>'+TT('最後修改時間')+'</span><span>'+r.updated+'</span></div>' +
+    '<div class="sectiontitle">'+TT('使用情形')+'</div>' + renderMediaUsage(type, r);
   document.getElementById('drw_body').innerHTML = body;
 }
 
@@ -936,13 +974,13 @@ function renderMediaDrawerBody(type, r){
 function renderMaterialUsage(r){
   var courses = (r.boundCourseIds||[]).map(function(cid){return courseName(cid);}).filter(function(n){return n;});
   return courses.length
-    ? '<div class="small" style="margin-bottom:4px">使用中的課程（'+courses.length+'）：</div><div>'+courses.map(function(c){return '<span class="tagchip">'+c+'</span>';}).join('')+'</div>'
-    : '<div class="small">目前尚無課程引用此教材。</div>';
+    ? '<div class="small" style="margin-bottom:4px">'+TLI_I18N.t('使用中的課程（'+courses.length+'）：', 'Courses in Use ('+courses.length+'): ')+'</div><div>'+courses.map(function(c){return '<span class="tagchip">'+c+'</span>';}).join('')+'</div>'
+    : '<div class="small">'+TT('目前尚無課程引用此教材。')+'</div>';
 }
 /* 資源不單獨販售：以下兩區塊唯讀，定價與加購改在產品／銷售方案設定，這裡只回溯顯示被誰使用 */
 function renderMaterialProductUsage(r){
   if (!r.usedByProducts || !r.usedByProducts.length){
-    return '<div class="small">尚未被任何產品使用；資源不單獨販售，需先加入產品管理才能銷售。</div>';
+    return '<div class="small">'+TT('尚未被任何產品使用；資源不單獨販售，需先加入產品管理才能銷售。')+'</div>';
   }
   return '<div>' + r.usedByProducts.map(function(p){
     return '<span class="tagchip"><a href="a02_products.html" style="color:inherit;text-decoration:none">'+p+'</a></span>';
@@ -950,7 +988,7 @@ function renderMaterialProductUsage(r){
 }
 function renderMaterialPlanUsage(r){
   if (!r.usedInPlans || !r.usedInPlans.length){
-    return '<div class="small">目前無銷售方案間接包含此教材。</div>';
+    return '<div class="small">'+TT('目前無銷售方案間接包含此教材。')+'</div>';
   }
   return '<div>' + r.usedInPlans.map(function(p){
     return '<span class="tagchip"><a href="a04_packages.html" style="color:inherit;text-decoration:none">'+p+'</a></span>';
@@ -971,37 +1009,37 @@ function renderMaterialDrawer(id){
   var r = MATERIALS.find(function(x){return x.id===id;});
   var editing = matDrawerEditing;
   document.getElementById('drw_title').textContent = r.name;
-  document.getElementById('drw_sub').textContent = '教材庫｜'+r.level+'｜'+r.status;
+  document.getElementById('drw_sub').textContent = TT('教材庫')+'｜'+TT(r.level)+'｜'+TT(r.status);
   var body =
     '<div style="text-align:right;margin-bottom:6px">' +
-    (editing ? '' : '<button class="btn ghost sm" onclick="toggleMaterialEdit(\''+r.id+'\',true)">編輯</button>') +
+    (editing ? '' : '<button class="btn ghost sm" onclick="toggleMaterialEdit(\''+r.id+'\',true)">'+TT('編輯')+'</button>') +
     '</div>' +
-    '<div class="kv"><span>維護者（系統）</span><span>'+r.maintainer+'</span></div>' +
-    '<div class="kv"><span>最後修改人</span><span>'+r.modifiedBy+'</span></div>' +
-    '<div class="kv"><span>最後修改時間</span><span>'+r.updated+'</span></div>' +
-    '<div class="kv"><span>繁／簡版本</span><span>'+(editing
-      ? '<label class="small" style="margin-right:10px"><input type="checkbox" id="mat_ver_zh" '+(r.versions.indexOf('繁')>-1?'checked':'')+'> 繁</label><label class="small"><input type="checkbox" id="mat_ver_ss" '+(r.versions.indexOf('簡')>-1?'checked':'')+'> 簡</label>'
-      : r.versions.join('、'))+'</span></div>' +
-    '<div class="kv"><span>能力類型</span><span>'+(editing
+    '<div class="kv"><span>'+TT('維護者（系統）')+'</span><span>'+r.maintainer+'</span></div>' +
+    '<div class="kv"><span>'+TT('最後修改人')+'</span><span>'+r.modifiedBy+'</span></div>' +
+    '<div class="kv"><span>'+TT('最後修改時間')+'</span><span>'+r.updated+'</span></div>' +
+    '<div class="kv"><span>'+TT('繁／簡版本')+'</span><span>'+(editing
+      ? '<label class="small" style="margin-right:10px"><input type="checkbox" id="mat_ver_zh" '+(r.versions.indexOf('繁')>-1?'checked':'')+'> '+TT('繁')+'</label><label class="small"><input type="checkbox" id="mat_ver_ss" '+(r.versions.indexOf('簡')>-1?'checked':'')+'> '+TT('簡')+'</label>'
+      : r.versions.map(function(v){return TT(v);}).join(TLI_I18N.t('、', ', ')))+'</span></div>' +
+    '<div class="kv"><span>'+TT('能力類型')+'</span><span>'+(editing
       ? '<select id="mat_ability">'+ABILITY_TYPES.map(function(a){ return '<option'+(r.abilityType===a?' selected':'')+'>'+a+'</option>'; }).join('')+'</select>'
       : r.abilityType)+'</span></div>' +
-    '<div class="kv"><span>程度</span><span>'+(editing
+    '<div class="kv"><span>'+TT('程度')+'</span><span>'+(editing
       ? '<select id="mat_level">'+MAT_LEVELS.map(function(l){ return '<option'+(r.level===l?' selected':'')+'>'+l+'</option>'; }).join('')+'</select>'
       : r.level)+'</span></div>' +
-    '<div class="kv"><span>TOCFL／HSK／TLI-CPT 對照</span><span>'+(editing
+    '<div class="kv"><span>'+TT('TOCFL／HSK／TLI-CPT 對照')+'</span><span>'+(editing
       ? '<input type="text" id="mat_exammap" value="'+r.examMapping+'">'
       : r.examMapping)+'</span></div>' +
-    '<div class="kv"><span>詞彙量</span><span>'+(editing
+    '<div class="kv"><span>'+TT('詞彙量')+'</span><span>'+(editing
       ? '<input type="number" id="mat_vocab" value="'+r.vocabCount+'">'
       : r.vocabCount.toLocaleString())+'</span></div>' +
-    '<div class="kv"><span>狀態</span><span>'+(editing
-      ? '<select id="mat_status"><option'+(r.status==='已上架'?' selected':'')+'>已上架</option><option'+(r.status==='停用'?' selected':'')+'>停用</option></select>'
+    '<div class="kv"><span>'+TT('狀態')+'</span><span>'+(editing
+      ? '<select id="mat_status"><option value="已上架"'+(r.status==='已上架'?' selected':'')+'>'+TT('已上架')+'</option><option value="停用"'+(r.status==='停用'?' selected':'')+'>'+TT('停用')+'</option></select>'
       : statusBadge(r.status))+'</span></div>' +
-    '<div class="sectiontitle">使用中的課程（系統）</div>' + renderMaterialUsage(r) +
-    '<div class="sectiontitle">被哪些產品使用（系統）</div>' + renderMaterialProductUsage(r) +
-    '<div class="sectiontitle">間接出現在哪些方案（系統）</div>' + renderMaterialPlanUsage(r) +
+    '<div class="sectiontitle">'+TT('使用中的課程（系統）')+'</div>' + renderMaterialUsage(r) +
+    '<div class="sectiontitle">'+TT('被哪些產品使用（系統）')+'</div>' + renderMaterialProductUsage(r) +
+    '<div class="sectiontitle">'+TT('間接出現在哪些方案（系統）')+'</div>' + renderMaterialPlanUsage(r) +
     (editing
-      ? '<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="toggleMaterialEdit(\''+r.id+'\',false)">取消</button> <button class="btn" onclick="saveMaterial(\''+r.id+'\')">儲存</button></div>'
+      ? '<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="toggleMaterialEdit(\''+r.id+'\',false)">'+TT('取消')+'</button> <button class="btn" onclick="saveMaterial(\''+r.id+'\')">'+TT('儲存')+'</button></div>'
       : '');
   document.getElementById('drw_body').innerHTML = body;
 }
@@ -1020,15 +1058,15 @@ function saveMaterial(id){
   matDrawerEditing = false;
   renderMaterialDrawer(id);
   renderList('materials');
-  toast('已儲存教材資料');
+  toast(TLI_I18N.t('已儲存教材資料','Material data saved'));
 }
 
 /* ================= 題目庫：新增／編輯抽屜 ================= */
 var qFormOptions = [];
 function openQuestionDrawer(id){
   var r = id ? QUESTIONS.find(function(x){return x.id===id;}) : null;
-  document.getElementById('drw_title').textContent = r ? '編輯題目' : '新增題目';
-  document.getElementById('drw_sub').textContent = r ? r.id : '填寫題目內容後儲存，將加入題目庫';
+  document.getElementById('drw_title').textContent = r ? TT('編輯題目') : TT('新增題目');
+  document.getElementById('drw_sub').textContent = r ? r.id : TT('填寫題目內容後儲存，將加入題目庫');
   qFormOptions = r ? r.options.slice() : ['選項 A 內容','選項 B 內容'];
   renderQuestionForm(r);
   document.getElementById('drawerMask').classList.add('open');
@@ -1039,15 +1077,15 @@ function renderQuestionForm(r){
   var lessonOpts = LESSONS.map(function(l){ return '<option value="'+l.id+'"'+(r && r.lessonId===l.id?' selected':'')+'>'+l.label+'</option>'; }).join('');
   var audioOpts = AUDIOS.map(function(a){ return '<option value="'+a.id+'"'+(r && r.audioId===a.id?' selected':'')+'>'+a.name+'</option>'; }).join('');
   var body =
-    '<div class="formrow"><label>題型</label><select id="q_type" onchange="onQTypeChange(this)">' +
-    QTYPES.map(function(t){ return '<option'+(t===qtype?' selected':'')+'>'+t+'</option>'; }).join('') + '</select></div>' +
-    '<div class="formrow"><label>題幹</label><textarea id="q_stem">'+(r?r.stem:'')+'</textarea></div>' +
+    '<div class="formrow"><label>'+TT('題型')+'</label><select id="q_type" onchange="onQTypeChange(this)">' +
+    QTYPES.map(function(t){ return '<option value="'+t+'"'+(t===qtype?' selected':'')+'>'+TT(t)+'</option>'; }).join('') + '</select></div>' +
+    '<div class="formrow"><label>'+TT('題幹')+'</label><textarea id="q_stem">'+(r?r.stem:'')+'</textarea></div>' +
     '<div id="q_optionsWrap"></div>' +
-    '<div class="formrow"><label>解析</label><textarea id="q_explanation">'+(r?r.explanation:'')+'</textarea></div>' +
-    '<div class="formrow"><label>等級 '+TLI_MASTERS.manageLink('levelSystems')+'</label><select id="q_level">' + Q_LEVELS.map(function(l){ return '<option'+(r && r.level===l?' selected':'')+'>'+l+'</option>'; }).join('') + '</select></div>' +
-    '<div class="formrow"><label>綁定 Lesson</label><select id="q_lesson">'+lessonOpts+'</select></div>' +
-    '<div class="formrow" id="q_audioRow" style="display:none"><label>聽力題附音頻</label><select id="q_audio">'+audioOpts+'</select></div>' +
-    '<button class="btn" style="margin-top:6px" onclick="saveQuestion(\''+(r?r.id:'')+'\')">儲存</button>';
+    '<div class="formrow"><label>'+TT('解析')+'</label><textarea id="q_explanation">'+(r?r.explanation:'')+'</textarea></div>' +
+    '<div class="formrow"><label>'+TT('等級')+' '+TLI_MASTERS.manageLink('levelSystems')+'</label><select id="q_level">' + Q_LEVELS.map(function(l){ return '<option'+(r && r.level===l?' selected':'')+'>'+l+'</option>'; }).join('') + '</select></div>' +
+    '<div class="formrow"><label>'+TT('綁定 Lesson')+'</label><select id="q_lesson">'+lessonOpts+'</select></div>' +
+    '<div class="formrow" id="q_audioRow" style="display:none"><label>'+TT('聽力題附音頻')+'</label><select id="q_audio">'+audioOpts+'</select></div>' +
+    '<button class="btn" style="margin-top:6px" onclick="saveQuestion(\''+(r?r.id:'')+'\')">'+TT('儲存')+'</button>';
   document.getElementById('drw_body').innerHTML = body;
   renderQOptions(qtype, r);
   onQTypeChange(document.getElementById('q_type'));
@@ -1055,19 +1093,19 @@ function renderQuestionForm(r){
 function renderQOptions(qtype, r){
   var wrap = document.getElementById('q_optionsWrap');
   if (qtype==='填空'){
-    wrap.innerHTML = '<div class="formrow"><label>正解</label><input type="text" id="q_fillAnswer" value="'+(r&&r.qtype==='填空'?r.correctAnswer:'')+'"></div>';
+    wrap.innerHTML = '<div class="formrow"><label>'+TT('正解')+'</label><input type="text" id="q_fillAnswer" value="'+(r&&r.qtype==='填空'?r.correctAnswer:'')+'"></div>';
     return;
   }
   var correctArr = (r && r.qtype!=='填空') ? (Array.isArray(r.correctAnswer)?r.correctAnswer:[r.correctAnswer]) : [0];
-  var html = '<label style="display:block;font-size:12.5px;color:var(--g500);margin-bottom:6px">選項與正解</label>';
+  var html = '<label style="display:block;font-size:12.5px;color:var(--g500);margin-bottom:6px">'+TT('選項與正解')+'</label>';
   html += qFormOptions.map(function(opt, i){
     var inputType = qtype==='多選' ? 'checkbox' : 'radio';
     var checked = correctArr.indexOf(i)>-1 ? 'checked' : '';
     return '<div class="optrow"><input type="'+inputType+'" name="q_correct" value="'+i+'" '+checked+'>' +
       '<input type="text" class="qOptInput" data-idx="'+i+'" value="'+opt+'">' +
-      '<button type="button" onclick="removeQOption(this,'+i+')" aria-label="移除選項">×</button></div>';
+      '<button type="button" onclick="removeQOption(this,'+i+')" aria-label="'+TLI_I18N.t('移除選項','Remove Option')+'">×</button></div>';
   }).join('');
-  html += '<button type="button" class="btn ghost" style="margin-top:4px" onclick="addQOption()">＋ 新增選項</button>';
+  html += '<button type="button" class="btn ghost" style="margin-top:4px" onclick="addQOption()">'+TLI_I18N.t('＋ 新增選項','＋ Add Option')+'</button>';
   wrap.innerHTML = html;
 }
 function addQOption(){
@@ -1086,7 +1124,7 @@ function onQTypeChange(el){
 function saveQuestion(id){
   var qtype = document.getElementById('q_type').value;
   var stem = document.getElementById('q_stem').value.trim();
-  if (!stem){ toast('請輸入題幹'); return; }
+  if (!stem){ toast(TLI_I18N.t('請輸入題幹','Please enter the question stem')); return; }
   var level = document.getElementById('q_level').value;
   var lessonId = document.getElementById('q_lesson').value;
   var explanation = document.getElementById('q_explanation').value;
@@ -1113,7 +1151,7 @@ function saveQuestion(id){
   closeDrawer();
   LIST_STATE.questions.page = 1;
   renderList('questions');
-  toast(id ? '已儲存題目' : '已新增題目');
+  toast(id ? TLI_I18N.t('已儲存題目','Question saved') : TLI_I18N.t('已新增題目','Question added'));
 }
 
 /* ================= 上傳資源精靈 ================= */
@@ -1135,14 +1173,14 @@ function onUwVidRefInput(el){
   uwVidRef = el.value;
   var hint = document.getElementById('uw_vidRefHint');
   if (!hint) return;
-  if (!uwVidRef.trim()){ hint.textContent = '請貼上串流連結或影片 ID'; hint.style.color=''; return; }
+  if (!uwVidRef.trim()){ hint.textContent = TLI_I18N.t('請貼上串流連結或影片 ID','Please paste the streaming link or video ID'); hint.style.color=''; return; }
   var ok = isValidStreamRef(uwVidPlatform, uwVidRef);
-  hint.textContent = ok ? '格式正確' : '格式不符，請確認後再繼續';
+  hint.textContent = ok ? TLI_I18N.t('格式正確','Format valid') : TLI_I18N.t('格式不符，請確認後再繼續','Invalid format; please check and try again');
   hint.style.color = ok ? 'var(--teal)' : '#C0392B';
 }
 function closeUploadWizard(){ document.getElementById('uploadModal').classList.remove('open'); }
 function renderUWSteps(){
-  var labels = ['選類型', (uwType==='videos' ? '貼上串流連結' : '拖放上傳'), '填寫 Metadata','完成'];
+  var labels = [TT('選類型'), (uwType==='videos' ? TT('貼上串流連結') : TT('拖放上傳')), TT('填寫 Metadata'),TT('完成')];
   document.getElementById('uwSteps').innerHTML = labels.map(function(l,i){
     var n=i+1;
     var cls = n===uwStep ? 'active' : (n<uwStep ? 'done' : '');
@@ -1154,60 +1192,60 @@ function renderUploadWizard(){
   var body = document.getElementById('uwBody');
   if (uwStep===1){
     body.innerHTML = '<div class="typegrid">' + Object.keys(UW_TYPE_LABELS).map(function(k){
-      return '<div class="typecard'+(k===uwType?' active':'')+'" onclick="onUwTypeSelect(\''+k+'\')">'+UW_TYPE_LABELS[k]+'</div>';
+      return '<div class="typecard'+(k===uwType?' active':'')+'" onclick="onUwTypeSelect(\''+k+'\')">'+TT(UW_TYPE_LABELS[k])+'</div>';
     }).join('') + '</div>' + uwFoot(false,true);
   } else if (uwStep===2){
     if (uwType==='videos'){
       body.innerHTML =
-        '<div class="note" style="margin-bottom:12px">影片一律放在外部串流服務，這裡只登記連結；不提供本機檔案上傳。</div>' +
-        '<div class="formrow"><label>串流平台</label><select id="uw_vidPlatform" onchange="onUwVidPlatformChange(this)">' +
+        '<div class="note" style="margin-bottom:12px">'+TT('影片一律放在外部串流服務，這裡只登記連結；不提供本機檔案上傳。')+'</div>' +
+        '<div class="formrow"><label>'+TT('串流平台')+'</label><select id="uw_vidPlatform" onchange="onUwVidPlatformChange(this)">' +
           VIDEO_PLATFORMS.map(function(p){ return '<option'+(p===uwVidPlatform?' selected':'')+'>'+p+'</option>'; }).join('') +
         '</select></div>' +
-        '<div class="formrow"><label>影片 ID 或 URL</label><input type="text" id="uw_vidRef" value="'+uwVidRef+'" oninput="onUwVidRefInput(this)" placeholder="'+vidRefPlaceholder(uwVidPlatform)+'"></div>' +
-        '<div class="hint" id="uw_vidRefHint">'+(uwVidRef.trim() ? (isValidStreamRef(uwVidPlatform,uwVidRef)?'格式正確':'格式不符，請確認後再繼續') : '請貼上串流連結或影片 ID')+'</div>' +
+        '<div class="formrow"><label>'+TT('影片 ID 或 URL')+'</label><input type="text" id="uw_vidRef" value="'+uwVidRef+'" oninput="onUwVidRefInput(this)" placeholder="'+vidRefPlaceholder(uwVidPlatform)+'"></div>' +
+        '<div class="hint" id="uw_vidRefHint">'+(uwVidRef.trim() ? (isValidStreamRef(uwVidPlatform,uwVidRef)?TLI_I18N.t('格式正確','Format valid'):TLI_I18N.t('格式不符，請確認後再繼續','Invalid format; please check and try again')) : TLI_I18N.t('請貼上串流連結或影片 ID','Please paste the streaming link or video ID'))+'</div>' +
         uwFoot(true,true);
     } else {
       body.innerHTML = '<div class="dropzone'+(uwFile?' filled':'')+'" onclick="document.getElementById(\'uwFileInput\').click()">' +
-        (uwFile ? '已選擇檔案：'+uwFile+'（點擊可重新選擇）' : '點擊選擇檔案，或將檔案拖放至此') + '</div>' +
+        (uwFile ? TLI_I18N.t('已選擇檔案：'+uwFile+'（點擊可重新選擇）','Selected file: '+uwFile+' (click to reselect)') : TLI_I18N.t('點擊選擇檔案，或將檔案拖放至此','Click to choose a file, or drag and drop here')) + '</div>' +
         '<input type="file" id="uwFileInput" style="display:none" onchange="onUwFileChosen(this)">' +
         uwFoot(true,true);
     }
   } else if (uwStep===3){
     body.innerHTML =
-      '<div class="formrow"><label>名稱</label><input type="text" id="uw_name" value="'+(uwFile||'新資源')+'"></div>' +
-      '<div class="formrow"><label>標籤（逗號分隔）</label><input type="text" id="uw_tags" placeholder="例：情境圖,初級"></div>' +
+      '<div class="formrow"><label>'+TT('名稱')+'</label><input type="text" id="uw_name" value="'+(uwFile||TLI_I18N.t('新資源','New Resource'))+'"></div>' +
+      '<div class="formrow"><label>'+TT('標籤（逗號分隔）')+'</label><input type="text" id="uw_tags" placeholder="例：情境圖,初級"></div>' +
       uwFoot(true,false,true);
   } else if (uwStep===4){
     body.innerHTML =
-      '<div class="statgrid"><div class="statbox"><div class="num" style="color:var(--teal)">1</div><div class="lbl">成功上傳</div></div>' +
-      '<div class="statbox"><div class="num">'+UW_TYPE_LABELS[uwType]+'</div><div class="lbl">資源類型</div></div>' +
-      '<div class="statbox"><div class="num">審核中</div><div class="lbl">狀態</div></div></div>' +
-      '<div class="hint">已加入'+UW_TYPE_LABELS[uwType]+'庫最前面'+(uwType==='videos'?'；影片要放進課程，請到該課程的「課程內容」編排單元。':'。')+'</div>' +
-      '<div style="text-align:right;margin-top:16px"><button class="btn" onclick="finishUploadWizard()">完成</button></div>';
+      '<div class="statgrid"><div class="statbox"><div class="num" style="color:var(--teal)">1</div><div class="lbl">'+TT('成功上傳')+'</div></div>' +
+      '<div class="statbox"><div class="num">'+TT(UW_TYPE_LABELS[uwType])+'</div><div class="lbl">'+TT('資源類型')+'</div></div>' +
+      '<div class="statbox"><div class="num">'+TT('審核中')+'</div><div class="lbl">'+TT('狀態')+'</div></div></div>' +
+      '<div class="hint">'+TLI_I18N.t('已加入'+UW_TYPE_LABELS[uwType]+'庫最前面'+(uwType==='videos'?'；影片要放進課程，請到該課程的「課程內容」編排單元。':'。'), 'Added to the top of the '+TT(UW_TYPE_LABELS[uwType])+' library'+(uwType==='videos'?'; to add this video to a course, arrange it under that course\'s "Course Content" tab.':'.'))+'</div>' +
+      '<div style="text-align:right;margin-top:16px"><button class="btn" onclick="finishUploadWizard()">'+TT('完成')+'</button></div>';
   }
 }
 function uwFoot(showPrev, showNext, showFinish){
   // 左側固定放「取消」，有上一步時併排顯示；右側維持下一步／完成上傳
   var html = '<div class="wizfoot">';
   html += '<div style="display:flex;gap:8px">';
-  html += '<button class="btn ghost" onclick="closeUploadWizard()">取消</button>';
-  if (showPrev) html += '<button class="btn ghost" onclick="uwPrev()">上一步</button>';
+  html += '<button class="btn ghost" onclick="closeUploadWizard()">'+TT('取消')+'</button>';
+  if (showPrev) html += '<button class="btn ghost" onclick="uwPrev()">'+TT('上一步')+'</button>';
   html += '</div>';
   html += '<div>';
-  if (showFinish) html += '<button class="btn orange" onclick="uwDoUpload()">完成上傳</button>';
-  else if (showNext) html += '<button class="btn" onclick="uwNext()">下一步</button>';
+  if (showFinish) html += '<button class="btn orange" onclick="uwDoUpload()">'+TT('完成上傳')+'</button>';
+  else if (showNext) html += '<button class="btn" onclick="uwNext()">'+TT('下一步')+'</button>';
   html += '</div>';
   html += '</div>';
   return html;
 }
 function onUwTypeSelect(k){ uwType = k; uwFile = null; uwVidPlatform = 'Vimeo'; uwVidRef = ''; renderUploadWizard(); }
-function onUwFileChosen(el){ uwFile = el.files && el.files[0] ? el.files[0].name : (UW_TYPE_LABELS[uwType]+'_upload'); renderUploadWizard(); }
+function onUwFileChosen(el){ uwFile = el.files && el.files[0] ? el.files[0].name : (TT(UW_TYPE_LABELS[uwType])+'_upload'); renderUploadWizard(); }
 function uwNext(){
   if (uwStep===2){
     if (uwType==='videos'){
-      if (!isValidStreamRef(uwVidPlatform, uwVidRef)){ toast('請輸入正確格式的串流連結或影片 ID'); return; }
+      if (!isValidStreamRef(uwVidPlatform, uwVidRef)){ toast(TLI_I18N.t('請輸入正確格式的串流連結或影片 ID','Please enter a correctly formatted streaming link or video ID')); return; }
     } else if (!uwFile){
-      uwFile = UW_TYPE_LABELS[uwType]+'_upload';
+      uwFile = TT(UW_TYPE_LABELS[uwType])+'_upload';
     }
   }
   uwStep++; renderUploadWizard();
@@ -1231,7 +1269,7 @@ function finishUploadWizard(){
   closeUploadWizard();
   LIST_STATE[uwType].page = 1;
   renderList(uwType);
-  toast('已上傳「'+name+'」至'+UW_TYPE_LABELS[uwType]+'庫');
+  toast(TLI_I18N.t('已上傳「'+name+'」至'+UW_TYPE_LABELS[uwType]+'庫', 'Uploaded \u201c'+name+'\u201d to the '+TT(UW_TYPE_LABELS[uwType])+' library'));
 }
 
 function closeDrawer(){
@@ -1258,10 +1296,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'教材「HSK 標準教程 三級」授權即將於 45 天後到期', time:'20 分鐘前', unread:true},
-  {t:'圖片庫有 3 筆資源待審核', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'教材「HSK 標準教程 三級」授權即將於 45 天後到期', en:'Material license \u201cHSK 標準教程 三級\u201d will expire in 45 days', time:'20 分鐘前', timeEn:'20 minutes ago', unread:true},
+  {t:'圖片庫有 3 筆資源待審核', en:'Image library has 3 resources pending review', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -1269,8 +1307,8 @@ function renderNotifPanel(){
   var unread = NOTIFS.filter(function(n){return n.unread;}).length;
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
-  panel.innerHTML = '<div class="tn-head"><span>通知（'+unread+' 則未讀）</span><a href="javascript:void(0)" onclick="markAllRead(event)">全部標為已讀</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+  panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -1320,6 +1358,18 @@ renderNotifPanel();
 })();
 switchLibTab(currentLibTab);
 initAllLists();
+
+/* 20260929 i18n：語言切換時重繪 tab／篩選 chip／清單，但不重置使用者已選的搜尋與篩選狀態 */
+function i18nRefreshLibrary(){
+  renderLibTabs();
+  renderPageheadActions();
+  ['images','videos','audio','materials','questions'].forEach(function(prefix){
+    document.getElementById(prefix+'_card').innerHTML = cardShellHtml(prefix, LIST_CFG[prefix].filterGroups);
+    renderChipGroups(prefix);
+    renderList(prefix);
+  });
+}
+if (window.TLI_I18N) { TLI_I18N.onRefresh(i18nRefreshLibrary); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
 
 </script>
 <script>

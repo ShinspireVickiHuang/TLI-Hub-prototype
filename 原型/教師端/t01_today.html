@@ -135,7 +135,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="app has-side">
   <nav class="side-nav" aria-label="主導覽">
     <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="回官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-role"><strong>林老師</strong><span><span data-i18n="today.profile.role">TLI 中心教師</span> · 台北</span></div>
+    <div class="side-role"><strong>林老師</strong><span><span data-i18n="today.profile.role">TLI 中心教師</span> · <span data-i18n="today.profile.city">台北</span></span></div>
     <a class="side-link active" href="t01_today.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="nav_t.today">今天</span></a>
     <a class="side-link" href="t02_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="nav_t.schedule">課表</span></a>
     <a class="side-link" href="t03_lesson_record.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="nav_t.lessonRecord">課後紀錄與回饋</span></a>
@@ -153,9 +153,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </button>
       <div class="bell-panel" id="bellPanel">
         <h4 data-i18n="common.notifications">通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p>顧問黃小姐已核准你上週三的代課申請</p><span>10 分鐘前</span></div></div>
-        <div class="bell-item"><span class="b-dot"></span><div><p>陳雅婷（10:30 小組班）已確認出席</p><span>1 小時前</span></div></div>
-        <div class="bell-item"><span class="b-dot"></span><div><p>本月時數表已產生，可至「時數與薪資」查看</p><span>昨天</span></div></div>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="t01.notif1.text">顧問黃小姐已核准你上週三的代課申請</p><span data-i18n="t01.notif1.time">10 分鐘前</span></div></div>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="t01.notif2.text">陳雅婷（10:30 小組班）已確認出席</p><span data-i18n="t01.notif2.time">1 小時前</span></div></div>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="t01.notif3.text">本月時數表已產生，可至「時數與薪資」查看</p><span data-i18n="t01.notif3.time">昨天</span></div></div>
       </div>
     </div>
   </header>
@@ -315,7 +315,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     </div>
     <div class="sheet-sec">
       <div class="lbl" data-i18n="label.level2">程度</div>
-      <div class="sheet-note">聽 4／說 4／讀 4／寫 3（1–5 分，上次課後評分）</div>
+      <div class="sheet-note"><span data-i18n="today.rubric.listen">聽</span> 4／<span data-i18n="today.rubric.speak">說</span> 4／<span data-i18n="today.rubric.read">讀</span> 4／<span data-i18n="today.rubric.write">寫</span> 3<span data-i18n="today.rubric.scoreNote">（1–5 分，上次課後評分）</span></div>
     </div>
     <div class="sheet-sec" style="margin-bottom:0;">
       <div class="lbl" data-i18n="label.remarks">備註</div>

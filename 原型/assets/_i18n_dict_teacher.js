@@ -315,7 +315,57 @@ Object.assign(TLI_I18N_DICT.en, {
 "today.rule.seniorTeacherFirst":"First class taught by a senior teacher (rule: teacher must have accumulated 600+ hours).",
 "today.note.seeNextClassAbove":"See \"Next Class\" above",
 "today.value.duration50":"50 minutes",
-"today.unit.count":" item(s)"
+"today.unit.count":" item(s)",
+
+/* 20260930 頂欄鈴鐺通知 en 補完（t01/t02/t03/t04/t05/t06/t07） */
+"t01.notif1.text":"Consultant Ms. Huang has approved your substitute request for last Wednesday",
+"t01.notif1.time":"10 minutes ago",
+"t01.notif2.text":"Chen Yating (10:30 group class) has confirmed attendance",
+"t01.notif2.time":"1 hour ago",
+"t01.notif3.text":"This month's hours report is ready — check it under “Hours & Pay”",
+"t01.notif3.time":"Yesterday",
+"t02.notif.text":"Today 15:00 — first session of semester class Lv.5–8, please note the rules",
+"t02.notif.time":"Today 08:00",
+"t03.notif.text":"1 more lesson awaiting your feedback",
+"t04.notif.text":"Student Wang has booked the Thursday 09:00 slot",
+"t05.notif.text":"Leave request for 08/18 has been approved",
+"t05.notif.time":"3 days ago",
+"t06.notif.text":"This month's hours report is ready — check the details",
+"t07.notif.text":"You have lessons awaiting feedback — students will see your feedback in the member area",
+"teacher.notif.today":"Today",
+"teacher.notif.yesterday":"Yesterday",
+
+/* 20260930en 教師端英文複驗補完：側欄身分列（台北／加盟機構在地教師）共用（t01–t10） */
+"today.profile.city":"Taipei",
+"profile.role.franchiseLocal":"Franchise Local Teacher",
+
+/* 20260930en t01：學生筆記彈窗聽說讀寫評分列 */
+"today.rubric.listen":"Listening",
+"today.rubric.speak":"Speaking",
+"today.rubric.read":"Reading",
+"today.rubric.write":"Writing",
+"today.rubric.scoreNote":"（1–5 分，上次課後評分）",
+
+/* 20260930en t02：本週課表靜態格與跨週資料共用（團體聊天室場次／企業學員時區／教材進度／班級人數） */
+"sched.audience.institutionStudents":"Institution Students",
+"sched.audience.allPlatformWide":"All (Platform-wide)",
+"sched.badge.registered":"Registered",
+"sched.badge.capacityTbd":"Capacity TBD",
+"sched.duration.90min":"90 minutes",
+"sched.tz.factorySitePrevDay":"Factory-site local time (previous day) ",
+"sched.tz.factorySite":"Factory-site local time",
+"sched.badge.firstClassAbbr":"First Class · Senior Teacher",
+"sched.tz.crossDaySuffix":" (cross-day)",
+"sched.material.progressNormal":"Progress: Normal",
+"sched.material.progressAlert12":"Progress Alert: 12 lessons completed so far — recommend monitoring learning pace",
+"sched.history.completed":"Completed: ",
+"sched.history.thisTime":"; This time: ",
+"sched.history.nextExpected":"; Next expected: ",
+"sched.history.renewalNote":"; 12 lessons completed so far — recommend confirming renewal plan with advisor.",
+"sched.flex.rosterList":"Class Roster: ",
+"sched.flex.thisTermLesson":" students · This term Lesson ",
+"sched.flex.materialUnit":"/12 · Material Unit: ",
+"sched.attend.enteredAttended":" Entered · Attended"
 });
 Object.assign(TLI_I18N_DICT.zhTWtoCN, {
 });

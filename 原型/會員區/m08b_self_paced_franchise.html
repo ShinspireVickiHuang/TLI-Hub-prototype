@@ -140,9 +140,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <body>
 <div class="app has-side">
   <!-- ===== 側欄：加盟學生固定五項，不連向自費學員（Emma）頁 ===== -->
-  <nav class="side-nav" aria-label="主導覽">
-    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-identity">王小明｜範例大學語言中心學生</div>
+  <nav class="side-nav" aria-label="主導覽" data-i18n-aria-label="fr.common.mainNav">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="fr.common.officialSite"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity" data-i18n="fr.common.sideIdentityFranchise">王小明｜範例大學語言中心學生</div>
     <a class="side-link" href="m01b_home_franchise.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="fr.nav.home">首頁</span></a>
     <a class="side-link" href="m04b_course_detail_franchise.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="fr.nav.plan">我的方案</span></a>
     <a class="side-link active" href="m08b_self_paced_franchise.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="fr.nav.learn">線上學習</span></a>
@@ -150,7 +150,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 
   <header class="topbar">
     <div class="topbar-left">
-      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a>
+      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="fr.common.officialSite"><img src="../assets/tli-logo.svg" alt="TLI"></a>
       <div class="topbar-title" data-i18n="fr.nav.learn">線上學習</div>
     </div>
     <div class="topbar-actions">
@@ -287,14 +287,14 @@ var ICON_CHEVRON='<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="c
 
 /* 教材單元示範資料（8 個單元，每單元含教學影音／電子書／單元測驗三種資源；resourcesDone 決定進度徽章與按鈕文字） */
 var UNITS = [
-  {id:'u1', title:'第 1 單元：機場入境與問候', dur:'6:20', pages:'共 8 頁', resourcesDone:3},
-  {id:'u2', title:'第 2 單元：校園生活會話', dur:'7:05', pages:'共 10 頁', resourcesDone:3},
-  {id:'u3', title:'第 3 單元：商務會議開場', dur:'6:45', pages:'共 9 頁', resourcesDone:2},
-  {id:'u4', title:'第 4 單元：電話聯繫用語', dur:'5:50', pages:'共 7 頁', resourcesDone:1},
-  {id:'u5', title:'第 5 單元：Email 商務書信', dur:'6:10', pages:'共 8 頁', resourcesDone:0},
-  {id:'u6', title:'第 6 單元：產品簡報練習', dur:'7:30', pages:'共 11 頁', resourcesDone:0},
-  {id:'u7', title:'第 7 單元：價格協商情境', dur:'6:55', pages:'共 9 頁', resourcesDone:0},
-  {id:'u8', title:'第 8 單元：期中口說總複習', dur:'8:10', pages:'共 12 頁', resourcesDone:0}
+  {id:'u1', title:'第 1 單元：機場入境與問候', dur:'6:20', pagesNum:8, resourcesDone:3},
+  {id:'u2', title:'第 2 單元：校園生活會話', dur:'7:05', pagesNum:10, resourcesDone:3},
+  {id:'u3', title:'第 3 單元：商務會議開場', dur:'6:45', pagesNum:9, resourcesDone:2},
+  {id:'u4', title:'第 4 單元：電話聯繫用語', dur:'5:50', pagesNum:7, resourcesDone:1},
+  {id:'u5', title:'第 5 單元：Email 商務書信', dur:'6:10', pagesNum:8, resourcesDone:0},
+  {id:'u6', title:'第 6 單元：產品簡報練習', dur:'7:30', pagesNum:11, resourcesDone:0},
+  {id:'u7', title:'第 7 單元：價格協商情境', dur:'6:55', pagesNum:9, resourcesDone:0},
+  {id:'u8', title:'第 8 單元：期中口說總複習', dur:'8:10', pagesNum:12, resourcesDone:0}
 ];
 var UNIT_MAP = {};
 UNITS.forEach(function(u){ UNIT_MAP[u.id] = u; });
@@ -327,7 +327,7 @@ function renderUnits(){
         '<div class="unit-progress"><div class="progress"><div style="width:'+pct+'%;"></div></div></div>' +
         '<div class="unit-body hidden" id="unitBody-'+u.id+'">' +
           '<div class="resource-row"><div class="icon-box">'+ICON_PLAY+'</div><div class="body"><h4>'+T('教學影音','Instructional Video')+'</h4><p>'+u.dur+'</p></div><div class="trail"><button class="btn btn-outline btn-sm" onclick="event.stopPropagation();playResource(\''+u.id+'\',\'video\')">'+resourceActionLabel(u.resourcesDone,0)+'</button></div></div>' +
-          '<div class="resource-row"><div class="icon-box">'+ICON_PDF+'</div><div class="body"><h4>'+T('電子書','E-Book')+'</h4><p>'+u.pages+'</p></div><div class="trail"><button class="btn btn-outline btn-sm" onclick="event.stopPropagation();playResource(\''+u.id+'\',\'ebook\')">'+resourceActionLabel(u.resourcesDone,1)+'</button></div></div>' +
+          '<div class="resource-row"><div class="icon-box">'+ICON_PDF+'</div><div class="body"><h4>'+T('電子書','E-Book')+'</h4><p>'+T('共 '+u.pagesNum+' 頁', u.pagesNum+' pages')+'</p></div><div class="trail"><button class="btn btn-outline btn-sm" onclick="event.stopPropagation();playResource(\''+u.id+'\',\'ebook\')">'+resourceActionLabel(u.resourcesDone,1)+'</button></div></div>' +
           '<div class="resource-row"><div class="icon-box">'+ICON_QUIZ+'</div><div class="body"><h4>'+T('單元測驗','Unit Quiz')+'</h4><p>'+T('3 題・約 3 分鐘','3 questions · about 3 minutes')+'</p></div><div class="trail"><button class="btn btn-outline btn-sm" onclick="event.stopPropagation();openQuiz(\''+u.id+'\')">'+resourceActionLabel(u.resourcesDone,2)+'</button></div></div>' +
         '</div>' +
       '</div>';
@@ -388,7 +388,7 @@ function openEbookViewer(unitId){
 function renderEbookPage(){
   var u = UNIT_MAP[quizCurrentViewerUnit];
   document.getElementById('ebookPageTitle').textContent = T('第 ','Page ')+(ebookPageIdx+1)+T(' 頁','');
-  document.getElementById('ebookPageBody').textContent = u.title+T('　教材內文示範內容（','  Sample material content (')+u.pages+T('）',')');
+  document.getElementById('ebookPageBody').textContent = u.title+T('　教材內文示範內容（共 '+u.pagesNum+' 頁）','  Sample material content ('+u.pagesNum+' pages)');
   document.getElementById('ebookPageLabel').textContent = T('第 ','Page ')+(ebookPageIdx+1)+'／'+EBOOK_PAGE_COUNT+T(' 頁','');
   document.getElementById('ebookPrevBtn').disabled = ebookPageIdx===0;
   document.getElementById('ebookNextBtn').disabled = ebookPageIdx===EBOOK_PAGE_COUNT-1;
@@ -428,7 +428,7 @@ var quizCurrentUnit = null;
 function openQuiz(unitId){
   var u = UNIT_MAP[unitId];
   quizCurrentUnit = unitId;
-  document.getElementById('quizModalTitle').textContent = u.title+'・單元測驗';
+  document.getElementById('quizModalTitle').textContent = u.title+T('・單元測驗','・Unit Quiz');
   var body = document.getElementById('quizModalBody');
   body.innerHTML = QUIZ_DEMO.map(function(item,qi){
     return '' +
@@ -460,7 +460,7 @@ function submitQuiz(){
     var body = document.getElementById('unitBody-'+unitId);
     if(head && body){ body.classList.remove('hidden'); head.classList.add('open'); }
   }
-  showToast('測驗完成，答對 '+correctCount+'／'+QUIZ_DEMO.length+' 題，單元已標記完成');
+  showToast(T('測驗完成，答對 ','Quiz complete — you got ')+correctCount+'／'+QUIZ_DEMO.length+T(' 題，單元已標記完成',' correct. Unit marked as complete.'));
 }
 
 /* 由「首頁」的繼續學習帶入 ?unit=<id>，自動展開並捲到該單元；查無此單元代碼則忽略 */
@@ -477,6 +477,7 @@ function applyUnitFromQuery(){
 
 renderUnits();
 applyUnitFromQuery();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderUnits);
 
 // 全域 ESC 關閉：關閉目前開啟中的 modal-overlay
 document.addEventListener('keydown', function(e){

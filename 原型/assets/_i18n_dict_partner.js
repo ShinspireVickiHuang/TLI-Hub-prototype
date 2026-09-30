@@ -171,6 +171,8 @@ Object.assign(TLI_I18N_DICT.en, {
 "btn.exportCsv":"Export CSV",
 "opt.thisMonth09":"This Month (2026-09)",
 "opt.lastMonth08":"Last Month (2026-08)",
+/* 20260930 新增：f_type 篩選正確 key（原誤用 label.productCategory，該 key 保留給下方「依產品分類」標題語意使用） */
+"label.orderType":"Order Type",
 "label.productCategory":"Product Category",
 "h2.periodOverview":"This Period's Overview",
 "h2.byProductCategory":"By Product Category",

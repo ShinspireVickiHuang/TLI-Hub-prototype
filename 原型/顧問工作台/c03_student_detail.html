@@ -599,8 +599,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c03.aiIntro">我可以幫你查這位學生的課時、效期、訂單與聯絡紀錄。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo()">這位學生剩幾堂課、什麼時候到期？</button>
-      <button onclick="tliAskDemo2()">這位學生的訂單付款狀況如何？</button>
+      <button onclick="tliAskDemo()" data-i18n="c03.aiQ1">這位學生剩幾堂課、什麼時候到期？</button>
+      <button onclick="tliAskDemo2()" data-i18n="c03.aiQ2">這位學生的訂單付款狀況如何？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題" data-i18n-placeholder="ai.inputPlaceholder" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -781,14 +781,21 @@ function classBadge(c){return 'badge '+c.toLowerCase();}
 document.getElementById('bcName').textContent=S.name;
 document.getElementById('pName').textContent=S.name;
 var cb=document.getElementById('pClassBadge');cb.textContent=S.cls;cb.className=classBadge(S.cls);
-var sb=document.getElementById('pStatusBadge');
-sb.textContent=S.status;
-sb.className='badge '+(S.status==='學習中'?'ok':(S.status==='停止中'?'muted':'danger'));
+var STU_STATUS_EN={'學習中':'Active','停止中':'Paused','已流失':'Churned'};
+var CAMPUS_EN_C03={'羅斯福':'Roosevelt','士林':'Shilin','台中':'Taichung','高雄':'Kaohsiung'};
+var ORDER_STATUS_EN={'分期進行中（第 3 期逾期）':'Installment in Progress (Period 3 Overdue)','分期進行中（第 2 期逾期）':'Installment in Progress (Period 2 Overdue)','待開票':'Pending Invoice','已結清':'Settled','發票開立失敗':'Invoice Failed','3 天內到期':'Due Within 3 Days'};
+var PAY_MODE_EN={'課前頭款加自訂分期':'Deposit Before Class + Custom Installments','全額付清':'Paid in Full','先上課後月結固定金額':'Class First, Fixed Monthly Billing','訂金加尾款':'Deposit + Balance','暫收款後開發票':'Provisional Payment, Invoice Later','先上課後月結實支實付':'Class First, Monthly Billing by Actual Usage','開課後自訂分期':'Custom Installments After Class Starts'};
+function renderStatusBadge(S){
+  var sb=document.getElementById('pStatusBadge');
+  sb.textContent=T(S.status,STU_STATUS_EN[S.status]||S.status);
+  sb.className='badge '+(S.status==='學習中'?'ok':(S.status==='停止中'?'muted':'danger'));
+}
+renderStatusBadge(S);
 document.getElementById('iExpire').textContent=S.expire;
 document.getElementById('iJoin').textContent=S.join;
 document.getElementById('iContact').textContent=S.contact;
 function renderProfileHead(S){
-  document.getElementById('pCampusBadge').textContent=S.campus+T('校區','Campus');
+  document.getElementById('pCampusBadge').textContent=T(S.campus+'校區',(CAMPUS_EN_C03[S.campus]||S.campus)+' Campus');
   document.getElementById('pSub').textContent=(S.company?S.company+'　｜　':'')+T('加入日期','Joined')+' '+S.join;
   document.getElementById('iHours').textContent=S.hours+' '+T('堂','sessions');
 }
@@ -796,27 +803,36 @@ renderProfileHead(S);
 renderAcct(S);
 if(S.id==='li01'||curId==='li01'){
   document.getElementById('bNote').style.display='block';
-  document.getElementById('bNote').textContent='提醒：此學生效期已過但仍有剩餘課時，屬待確認情境，請於「續約與到期提醒」頁確認處理方式。';
+  document.getElementById('bNote').textContent=T('提醒：此學生效期已過但仍有剩餘課時，屬待確認情境，請於「續約與到期提醒」頁確認處理方式。','Reminder: this student\'s validity has expired but hours remain — a situation pending confirmation. Please confirm how to handle it on the "Renewal & Expiry Reminders" page.');
 }
 function renderOrders(S){
   document.getElementById('ordersBody').innerHTML=S.orders.map(function(o){
     var st=o.status.indexOf('逾期')>-1||o.status.indexOf('失敗')>-1?'danger':(o.status.indexOf('待')>-1?'warn':'ok');
-    return '<tr class="clickable" onclick="location.href=\'c05_order_detail.html?order='+o.no+'\'"><td>TLI-2026-'+o.no+'</td><td>'+o.item+'</td><td>'+o.amount+'</td><td>'+o.mode+'</td><td><span class="badge '+st+'">'+o.status+'</span></td><td><a class="btn sm" href="c05_order_detail.html?order='+o.no+'">'+T('查看','View')+'</a></td></tr>';
+    return '<tr class="clickable" onclick="location.href=\'c05_order_detail.html?order='+o.no+'\'"><td>TLI-2026-'+o.no+'</td><td>'+o.item+'</td><td>'+o.amount+'</td><td>'+T(o.mode,PAY_MODE_EN[o.mode]||o.mode)+'</td><td><span class="badge '+st+'">'+T(o.status,ORDER_STATUS_EN[o.status]||o.status)+'</span></td><td><a class="btn sm" href="c05_order_detail.html?order='+o.no+'">'+T('查看','View')+'</a></td></tr>';
   }).join('')||'<tr><td colspan="6" style="text-align:center;color:#667085;">'+T('尚無訂單','No orders yet')+'</td></tr>';
 }
 renderOrders(S);
 document.getElementById('coursesBody').innerHTML=S.courses.map(function(c){
   return '<tr><td>'+c.plan+'</td><td>'+c.total+'</td><td>'+c.used+'</td><td>'+c.left+'</td><td>'+c.expire+'</td></tr>';
 }).join('');
-document.getElementById('lessonsBody').innerHTML=S.lessons.map(function(l){
-  return '<tr><td>'+l.date+'</td><td>'+l.course+'</td><td>'+l.teacher+'</td><td>'+l.progress+'</td><td>'+l.att+'</td></tr>';
-}).join('');
-document.getElementById('contactsBody').innerHTML=S.contacts.map(function(c){
-  return '<tr><td>'+c.date+'</td><td>'+c.advisor+'</td><td>'+c.way+'</td><td>'+c.note+'</td></tr>';
-}).join('');
+var ATT_EN_C03={'出席':'Present','缺席':'Absent','請假':'Leave'};
+var WAY_EN_C03={'電話':'Phone','電話來電':'Phone Call','官網表單':'Website Form'};
+var CONTRACT_STATE_EN_C03={'已簽署':'Signed'};
+function renderLessons(S){
+  document.getElementById('lessonsBody').innerHTML=S.lessons.map(function(l){
+    return '<tr><td>'+l.date+'</td><td>'+l.course+'</td><td>'+l.teacher+'</td><td>'+l.progress+'</td><td>'+T(l.att,ATT_EN_C03[l.att]||l.att)+'</td></tr>';
+  }).join('');
+}
+renderLessons(S);
+function renderContactsInit(S){
+  document.getElementById('contactsBody').innerHTML=S.contacts.map(function(c){
+    return '<tr><td>'+c.date+'</td><td>'+c.advisor+'</td><td>'+T(c.way,WAY_EN_C03[c.way]||c.way)+'</td><td>'+c.note+'</td></tr>';
+  }).join('');
+}
+renderContactsInit(S);
 function renderContracts(S){
   document.getElementById('contractsBody').innerHTML=S.contracts.map(function(c){
-    return '<tr><td>'+c.no+'</td><td>'+c.type+'</td><td><span class="badge ok">'+c.state+'</span></td><td>'+c.expire+'</td><td><button class="btn sm" onclick="tliToast(\''+T('開啟合約檢視，正式版將顯示線上簽署與時間戳','Opening contract view — production version will show online signature and timestamp')+'\')">'+T('檢視','View')+'</button></td></tr>';
+    return '<tr><td>'+c.no+'</td><td>'+c.type+'</td><td><span class="badge ok">'+T(c.state,CONTRACT_STATE_EN_C03[c.state]||c.state)+'</span></td><td>'+c.expire+'</td><td><button class="btn sm" onclick="tliToast(\''+T('開啟合約檢視，正式版將顯示線上簽署與時間戳','Opening contract view — production version will show online signature and timestamp')+'\')">'+T('檢視','View')+'</button></td></tr>';
   }).join('');
 }
 renderContracts(S);
@@ -866,12 +882,14 @@ function renderEnterprise(S){
 renderEnterprise(S);
 
 /* ================= C11 測驗結果 / C13 回饋彙整（20260909 新增） ================= */
-var RECOMMEND_PLANS=[
-  {id:'p_flex',name:'彈性方案 10 堂'},
-  {id:'p_spring',name:'春季學期班'},
-  {id:'p_1v1_30',name:'中文一對一 30 堂'},
-  {id:'p_enterprise',name:'企業團體班（20 人）'}
-];
+// 20260930 修正：改讀主檔 TLI_MASTERS.packages（a04 銷售方案主檔），只列上架中、非專案型方案，與 c04 開單頁一致
+var RECOMMEND_PLANS=TLI_MASTERS.packages.filter(function(pkg){
+  return pkg.status==='上架'&&pkg.planType!=='project';
+}).map(function(pkg){
+  return {id:pkg.id,name:pkg.name};
+});
+var LEVEL_EN_C03={'Lv.4 初中級，穩定':'Lv.4 Elementary-Intermediate, Stable','Lv.5 中級前段，維持':'Lv.5 Early Intermediate, Maintained','Lv.6 中級，晉級':'Lv.6 Intermediate, Promoted','Lv.6 中級，維持':'Lv.6 Intermediate, Maintained','Lv.7 中高級，穩定':'Lv.7 Upper Intermediate, Stable','N4 合格邊緣':'N4 Borderline Pass'};
+function tliLevelEn(lv){return LEVEL_EN_C03[lv]||lv;}
 function renderTestResults(S){
   var tests=(S.tests||[]).slice().sort(function(a,b){return new Date(b.date)-new Date(a.date);});
   var sumWrap=document.getElementById('testSummaryWrap');
@@ -884,7 +902,7 @@ function renderTestResults(S){
   var latest=tests[0];
   sumWrap.innerHTML='<div class="test-summary-card">'
     +'<div><div class="l">'+T('最新測驗結果','Latest Test Result')+'（'+latest.date+'　'+latest.type+'）</div>'
-    +'<div class="lv">'+latest.level+'</div>'
+    +'<div class="lv">'+T(latest.level,tliLevelEn(latest.level))+'</div>'
     +(latest.suggestion?'<div class="suggest">'+T('建議：','Suggestion: ')+latest.suggestion+'</div>':'')
     +'<div class="skill4-row">'
       +'<span class="s4">'+T('聽','Listening')+'<b>'+latest.listening+'</b></span>'
@@ -895,7 +913,7 @@ function renderTestResults(S){
     +'<button class="btn primary sm" onclick="tliOpenRecommendModal()">'+T('依結果推薦方案','Recommend Plan by Result')+'</button>'
     +'</div>';
   body.innerHTML=tests.map(function(t){
-    return '<tr><td>'+t.type+'</td><td>'+t.date+'</td><td>'+t.listening+'</td><td>'+t.speaking+'</td><td>'+t.reading+'</td><td>'+t.writing+'</td><td>'+t.level+'</td><td>'+(t.suggestion||'—')+'</td></tr>';
+    return '<tr><td>'+t.type+'</td><td>'+t.date+'</td><td>'+t.listening+'</td><td>'+t.speaking+'</td><td>'+t.reading+'</td><td>'+t.writing+'</td><td>'+T(t.level,tliLevelEn(t.level))+'</td><td>'+(t.suggestion||'—')+'</td></tr>';
   }).join('');
 }
 renderTestResults(S);
@@ -904,7 +922,7 @@ function tliOpenRecommendModal(){
   var tests=(S.tests||[]).slice().sort(function(a,b){return new Date(b.date)-new Date(a.date);});
   var latest=tests[0];
   document.getElementById('recStudentName').textContent=S.name;
-  document.getElementById('recStudentLevel').textContent=latest?latest.level:'—';
+  document.getElementById('recStudentLevel').textContent=latest?T(latest.level,tliLevelEn(latest.level)):'—';
   document.getElementById('recPlanList').innerHTML=RECOMMEND_PLANS.map(function(p,i){
     return '<label class="plan-opt"><input type="radio" name="recPlan" value="'+p.id+'"'+(i===0?' checked':'')+'>'+p.name+'</label>';
   }).join('');
@@ -1254,13 +1272,13 @@ function tliAppendMsg(role,html){
   body.scrollTop=body.scrollHeight;
 }
 function tliAskDemo(){
-  tliAppendMsg('user','這位學生剩幾堂課、什麼時候到期？');
-  tliAppendMsg('bot',S.name+'目前剩餘 '+S.hours+' 堂課，效期 '+S.expire+'。<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">資料來源：3.0 中台（課時）＋ Park（上課紀錄）</div>');
+  tliAppendMsg('user',T('這位學生剩幾堂課、什麼時候到期？','How many lessons does this student have left, and when do they expire?'));
+  tliAppendMsg('bot',S.name+T('目前剩餘 '+S.hours+' 堂課，效期 '+S.expire+'。',' currently has '+S.hours+' lessons remaining, expiring '+S.expire+'.')+'<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">'+T('資料來源：3.0 中台（課時）＋ Park（上課紀錄）','Source: 3.0 Platform (Hours) + Park (Lesson Records)')+'</div>');
 }
 function tliAskDemo2(){
-  tliAppendMsg('user','這位學生的訂單付款狀況如何？');
-  var lines=S.orders.map(function(o){return 'TLI-2026-'+o.no+'　'+o.item+'　'+o.amount+'　狀態：'+o.status;}).join('<br>');
-  tliAppendMsg('bot',(lines||'目前無訂單紀錄')+'<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">資料來源：3.0 中台／訂單模組</div>');
+  tliAppendMsg('user',T('這位學生的訂單付款狀況如何？','What is the payment status of this student\'s orders?'));
+  var lines=S.orders.map(function(o){return 'TLI-2026-'+o.no+'　'+o.item+'　'+o.amount+'　'+T('狀態：','Status: ')+T(o.status,ORDER_STATUS_EN[o.status]||o.status);}).join('<br>');
+  tliAppendMsg('bot',(lines||T('目前無訂單紀錄','No orders on record'))+'<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">'+T('資料來源：3.0 中台／訂單模組','Source: 3.0 Platform / Order Module')+'</div>');
 }
 function tliAskFree(){
   var input=document.getElementById('aiInput');
@@ -1291,10 +1309,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -1303,7 +1321,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -1352,6 +1370,9 @@ document.addEventListener('keydown', function(e){
 /* 20260929 i18n：所有用到 T() 的渲染函式先在上面定義完成，這裡統一註冊 onRefresh 後才呼叫 init()，
    確保「已存語言、重新整理」與「頁面內即時切換」兩種情境都會重跑這些函式套用當下語言 */
 if (window.TLI_I18N) {
+  TLI_I18N.onRefresh(function(){renderStatusBadge(S);});
+  TLI_I18N.onRefresh(function(){renderLessons(S);});
+  TLI_I18N.onRefresh(function(){renderContactsInit(S);});
   TLI_I18N.onRefresh(function(){renderProfileHead(S);});
   TLI_I18N.onRefresh(function(){renderAcct(S);});
   TLI_I18N.onRefresh(function(){renderOrders(S);});
@@ -1360,6 +1381,7 @@ if (window.TLI_I18N) {
   TLI_I18N.onRefresh(function(){renderTestResults(S);});
   TLI_I18N.onRefresh(function(){renderFeedback(S);});
   TLI_I18N.onRefresh(tlRender);
+  TLI_I18N.onRefresh(renderNotifPanel);
   TLI_I18N.init();
 }
 </script>

@@ -358,9 +358,9 @@ html,body{overflow-x:hidden;}
           <thead><tr><th data-i18n="col.student">學生</th><th data-i18n="c06.colCampus">校區</th><th data-i18n="c06.colRemainingHours">剩餘課時</th><th data-i18n="c06.colExpiry">效期</th><th data-i18n="c06.colSituation">情形</th><th data-i18n="col.suggestedAction">建議動作</th><th></th></tr></thead>
           <tbody>
             <tr class="clickable" onclick="location.href='c03_student_detail.html?id=chen01'">
-              <td>陳美惠</td><td>士林校區</td><td>0 堂</td><td>2026-11-01</td>
-              <td><span class="badge warn">剩餘課時為零，效期未到</span></td>
-              <td class="suggest">建議確認方案是否已用罄，提前發起續約，避免效期到了才臨時處理</td>
+              <td>陳美惠</td><td data-i18n="c06.campusShilin">士林校區</td><td data-i18n="c06.qty0Classes">0 堂</td><td>2026-11-01</td>
+              <td><span class="badge warn" data-i18n="c06.badgeZeroHoursNotExpired">剩餘課時為零，效期未到</span></td>
+              <td class="suggest" data-i18n="c06.suggestConfirmPlanExhausted">建議確認方案是否已用罄，提前發起續約，避免效期到了才臨時處理</td>
               <td><a class="btn sm primary" href="c04_new_order.html?student=chen01&plan=p_spring" data-i18n="btn.createRenewalOrder">開續約單</a>
                 <div class="row-actions">
                   <button class="btn sm" onclick="event.stopPropagation();tliRemind(this,'陳美惠')"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M3 10v4a1 1 0 0 0 1 1h2l7 3.5V5.5L6 9H4a1 1 0 0 0-1 1z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M20 6a7.5 7.5 0 0 1 0 12"/></svg> <span data-i18n="c06.btnSendReminder">發送提醒</span></button>
@@ -369,9 +369,9 @@ html,body{overflow-x:hidden;}
               </td>
             </tr>
             <tr class="clickable" onclick="location.href='c03_student_detail.html?id=li01'">
-              <td>李文彬</td><td>羅斯福校區</td><td>5 堂</td><td>2026-08-01（已過）</td>
-              <td><span class="badge danger">效期已過，仍有剩餘課時</span></td>
-              <td class="suggest">建議確認是否核准展延或補簽；展延功能於二階段上線，本階段以人工註記處理</td>
+              <td>李文彬</td><td data-i18n="c06.campusRoosevelt">羅斯福校區</td><td data-i18n="c06.qty5Classes">5 堂</td><td data-i18n="c06.dateExpiredLi">2026-08-01（已過）</td>
+              <td><span class="badge danger" data-i18n="c06.badgeExpiredWithHours">效期已過，仍有剩餘課時</span></td>
+              <td class="suggest" data-i18n="c06.suggestConfirmExtendOrResign">建議確認是否核准展延或補簽；展延功能於二階段上線，本階段以人工註記處理</td>
               <td><a class="btn sm" href="c03_student_detail.html?id=li01" data-i18n="btn.viewStudent">查看學生</a>
                 <div class="row-actions">
                   <button class="btn sm" onclick="event.stopPropagation();tliRemind(this,'李文彬')"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M3 10v4a1 1 0 0 0 1 1h2l7 3.5V5.5L6 9H4a1 1 0 0 0-1 1z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M20 6a7.5 7.5 0 0 1 0 12"/></svg> <span data-i18n="c06.btnSendReminder">發送提醒</span></button>
@@ -389,8 +389,8 @@ html,body{overflow-x:hidden;}
           <thead><tr><th data-i18n="col.student">學生</th><th data-i18n="c06.colCampus">校區</th><th data-i18n="c06.colPlan">方案</th><th data-i18n="c06.colContractExpiry">合約效期</th><th data-i18n="col.suggestedAction">建議動作</th><th></th></tr></thead>
           <tbody>
             <tr class="clickable" onclick="location.href='c03_student_detail.html?id=zhang01'">
-              <td>張雅婷</td><td>高雄校區</td><td>團體班（英文）</td><td>2026-12-10（30 天內到期）</td>
-              <td class="suggest">合約一年一約，建議於效期前 30 天內完成續約與再簽署</td>
+              <td>張雅婷</td><td data-i18n="c06.campusKaohsiung">高雄校區</td><td>團體班（英文）</td><td data-i18n="c06.dateDueZhang">2026-12-10（30 天內到期）</td>
+              <td class="suggest" data-i18n="c06.suggestAnnualContractRenew">合約一年一約，建議於效期前 30 天內完成續約與再簽署</td>
               <td><a class="btn sm primary" href="c04_new_order.html?student=zhang01&plan=p_spring" data-i18n="btn.createRenewalOrder">開續約單</a>
                 <div class="row-actions">
                   <button class="btn sm" onclick="event.stopPropagation();tliRemind(this,'張雅婷')"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M3 10v4a1 1 0 0 0 1 1h2l7 3.5V5.5L6 9H4a1 1 0 0 0-1 1z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M20 6a7.5 7.5 0 0 1 0 12"/></svg> <span data-i18n="c06.btnSendReminder">發送提醒</span></button>
@@ -408,15 +408,15 @@ html,body{overflow-x:hidden;}
           <thead><tr><th data-i18n="col.orderNo">訂單編號</th><th data-i18n="col.student">學生</th><th data-i18n="c06.colInstallment">期別</th><th data-i18n="c06.colOverdueDays">逾期天數</th><th data-i18n="col.amount">金額</th><th data-i18n="col.suggestedAction">建議動作</th><th></th></tr></thead>
           <tbody>
             <tr class="clickable" onclick="location.href='c05_order_detail.html?order=0841#payment'">
-              <td>TLI-2026-0841</td><td>王大同</td><td>第 3 期</td>
-              <td><span class="badge danger">逾期 5 天</span></td><td>NT$15,000</td>
-              <td class="suggest">建議顧問主動聯繫確認繳費時間，逾期超過門檻需上報催收</td>
+              <td>TLI-2026-0841</td><td>王大同</td><td data-i18n="c06.term3">第 3 期</td>
+              <td><span class="badge danger" data-i18n="c06.overdue5d">逾期 5 天</span></td><td>NT$15,000</td>
+              <td class="suggest" data-i18n="c06.suggestCollectionContact1">建議顧問主動聯繫確認繳費時間，逾期超過門檻需上報催收</td>
               <td><button class="btn sm primary" onclick="event.stopPropagation();tliToast(T('已建立催收提醒','Collection reminder created'))" data-i18n="c06.btnCollect">催收</button> <a class="btn sm" href="c05_order_detail.html?order=0841#payment" data-i18n="btn.viewOrder">查看訂單</a></td>
             </tr>
             <tr class="clickable" onclick="location.href='c05_order_detail.html?order=0872#payment'">
-              <td>TLI-2026-0872</td><td>張雅婷</td><td>第 2 期</td>
-              <td><span class="badge danger">逾期 3 天</span></td><td>NT$9,000</td>
-              <td class="suggest">今日已來電詢問繳款方式，建議先致電確認後再發正式催收通知</td>
+              <td>TLI-2026-0872</td><td>張雅婷</td><td data-i18n="c06.term2">第 2 期</td>
+              <td><span class="badge danger" data-i18n="c06.overdue3d">逾期 3 天</span></td><td>NT$9,000</td>
+              <td class="suggest" data-i18n="c06.suggestCollectionContact2">今日已來電詢問繳款方式，建議先致電確認後再發正式催收通知</td>
               <td><button class="btn sm primary" onclick="event.stopPropagation();tliToast(T('已建立催收提醒','Collection reminder created'))" data-i18n="c06.btnCollect">催收</button> <a class="btn sm" href="c05_order_detail.html?order=0872#payment" data-i18n="btn.viewOrder">查看訂單</a></td>
             </tr>
           </tbody>
@@ -464,8 +464,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c06.aiIntro">我可以幫你排出優先跟進順序，或直接開一張續約單草稿。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo()">這些逾期名單裡，哪個最急？</button>
-      <button onclick="tliAskDemo2()">有哪些學生課時效期將到但還沒續約？</button>
+      <button onclick="tliAskDemo()" data-i18n="c06.aiQ1">這些逾期名單裡，哪個最急？</button>
+      <button onclick="tliAskDemo2()" data-i18n="c06.aiQ2">有哪些學生課時效期將到但還沒續約？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題" data-i18n-placeholder="ai.inputPlaceholder" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -527,12 +527,12 @@ function tliAppendMsg(role,html){
   body.scrollTop=body.scrollHeight;
 }
 function tliAskDemo(){
-  tliAppendMsg('user','這些逾期名單裡，哪個最急？');
-  tliAppendMsg('bot','王大同的第 3 期已逾期 5 天，天數最長，建議優先處理。<div class="act"><a class="btn sm primary" href="c05_order_detail.html?order=0841#payment">查看訂單</a></div>');
+  tliAppendMsg('user',T('這些逾期名單裡，哪個最急？','Which of these overdue cases is most urgent?'));
+  tliAppendMsg('bot',T('王大同的第 3 期已逾期 5 天，天數最長，建議優先處理。','Wang Da-tong’s Installment 3 is 5 days overdue — the longest so far; recommend handling this first.')+'<div class="act"><a class="btn sm primary" href="c05_order_detail.html?order=0841#payment">'+T('查看訂單','View Order')+'</a></div>');
 }
 function tliAskDemo2(){
-  tliAppendMsg('user','有哪些學生課時效期將到但還沒續約？');
-  tliAppendMsg('bot','陳美惠（士林校區，剩餘課時 0，效期 2026-11-01）、李文彬（羅斯福校區，效期已過但仍有 5 堂課時）：兩位皆尚未續約，建議優先發送提醒。<div class="act"><a class="btn sm primary" href="c04_new_order.html?student=chen01&plan=p_spring">開續約單</a></div>');
+  tliAppendMsg('user',T('有哪些學生課時效期將到但還沒續約？','Which students have class hours about to expire but haven’t renewed yet?'));
+  tliAppendMsg('bot',T('陳美惠（士林校區，剩餘課時 0，效期 2026-11-01）、李文彬（羅斯福校區，效期已過但仍有 5 堂課時）：兩位皆尚未續約，建議優先發送提醒。','Chen Mei-hui (Shilin Campus, 0 hours remaining, expires 2026-11-01) and Li Wen-bin (Roosevelt Campus, already expired but still has 5 classes remaining): neither has renewed yet — recommend sending reminders first.')+'<div class="act"><a class="btn sm primary" href="c04_new_order.html?student=chen01&plan=p_spring">'+T('開續約單','Create Renewal Order')+'</a></div>');
 }
 function tliAskFree(){
   var input=document.getElementById('aiInput');
@@ -540,7 +540,7 @@ function tliAskFree(){
   if(!v)return;
   tliAppendMsg('user',v);
   input.value='';
-  setTimeout(function(){tliAppendMsg('bot','此問題會依實際到期與逾期資料排序後回覆。');},300);
+  setTimeout(function(){tliAppendMsg('bot',T('此問題會依實際到期與逾期資料排序後回覆。','This question will be answered after sorting by actual expiry and overdue data.'));},300);
 }
 
 /* ================= v2 新增：續約分頁切換（個人續約／企業申請） ================= */
@@ -552,12 +552,12 @@ function tliSwitchRenewalTab(tab){
 
 /* ================= v2 新增：企業續約／加購／展延申請承接（來自企業端 h05） ================= */
 var ENT_APPLICATIONS=[
-  {id:'EAP-2026-01',company:'範例半導體股份有限公司',type:'renewal',typeLabel:'續約',detail:'原合約續約 1 年，時數池沿用現行設定',submittedAt:'2026-09-05 10:20',hrContact:'王小姐（wang.hr@example-semi.example）',status:'新進'},
-  {id:'EAP-2026-02',company:'北辰精密工業股份有限公司',type:'addon',typeLabel:'加購時數',detail:'加購時數池 100 小時',submittedAt:'2026-09-04 15:40',hrContact:'佐藤先生（sato.hr@example-tech.example）',status:'處理中'},
-  {id:'EAP-2026-03',company:'假設國際貿易股份有限公司',type:'extend',typeLabel:'展延',detail:'合約展延至 2027-03',submittedAt:'2026-09-02 09:15',hrContact:'陳先生（chen.hr@example-trade.example）',status:'新進'},
-  {id:'EAP-2026-04',company:'範例生醫股份有限公司',type:'renewal',typeLabel:'續約',detail:'原合約續約 1 年，擬加購時數池 50 小時',submittedAt:'2026-08-28 11:00',hrContact:'田中小姐（tanaka.hr@example-bio.example）',status:'已建訂單',orderNo:'TLI-2026-B214'},
-  {id:'EAP-2026-05',company:'安泰保經股份有限公司',type:'addon',typeLabel:'加購時數',detail:'加購時數池 200 小時',submittedAt:'2026-08-20 14:30',hrContact:'李小姐（li.hr@example-fin.example）',status:'已完成',orderNo:'TLI-2026-B198'},
-  {id:'EAP-2026-06',company:'假設物流股份有限公司',type:'extend',typeLabel:'展延',detail:'合約展延至 2026-12',submittedAt:'2026-08-15 09:50',hrContact:'鈴木先生（suzuki.hr@example-logi.example）',status:'已婉拒',declineReason:'企業已決定終止合作'}
+  {id:'EAP-2026-01',company:'範例半導體股份有限公司',type:'renewal',typeLabel:'續約',detail:'原合約續約 1 年，時數池沿用現行設定',detailEn:'Renewing original contract for 1 year; hour pool carries over current settings',submittedAt:'2026-09-05 10:20',hrContact:'王小姐（wang.hr@example-semi.example）',status:'新進'},
+  {id:'EAP-2026-02',company:'北辰精密工業股份有限公司',type:'addon',typeLabel:'加購時數',detail:'加購時數池 100 小時',detailEn:'Add-on 100 hours to the hour pool',submittedAt:'2026-09-04 15:40',hrContact:'佐藤先生（sato.hr@example-tech.example）',status:'處理中'},
+  {id:'EAP-2026-03',company:'假設國際貿易股份有限公司',type:'extend',typeLabel:'展延',detail:'合約展延至 2027-03',detailEn:'Contract extended to 2027-03',submittedAt:'2026-09-02 09:15',hrContact:'陳先生（chen.hr@example-trade.example）',status:'新進'},
+  {id:'EAP-2026-04',company:'範例生醫股份有限公司',type:'renewal',typeLabel:'續約',detail:'原合約續約 1 年，擬加購時數池 50 小時',detailEn:'Renewing original contract for 1 year; plans to add on 50 hours to the hour pool',submittedAt:'2026-08-28 11:00',hrContact:'田中小姐（tanaka.hr@example-bio.example）',status:'已建訂單',orderNo:'TLI-2026-B214'},
+  {id:'EAP-2026-05',company:'安泰保經股份有限公司',type:'addon',typeLabel:'加購時數',detail:'加購時數池 200 小時',detailEn:'Add-on 200 hours to the hour pool',submittedAt:'2026-08-20 14:30',hrContact:'李小姐（li.hr@example-fin.example）',status:'已完成',orderNo:'TLI-2026-B198'},
+  {id:'EAP-2026-06',company:'假設物流股份有限公司',type:'extend',typeLabel:'展延',detail:'合約展延至 2026-12',detailEn:'Contract extended to 2026-12',submittedAt:'2026-08-15 09:50',hrContact:'鈴木先生（suzuki.hr@example-logi.example）',status:'已婉拒',declineReason:'企業已決定終止合作',declineReasonEn:'The company has decided to end the partnership'}
 ];
 // 20260928 修正：企業客戶改讀主檔 orgCustomers，不再另造虛構企業名；比對不到就退而用主檔既有、尚未被比對到的一般企業
 (function(){
@@ -576,9 +576,10 @@ var ENT_APPLICATIONS=[
 var ENT_TYPE_LABEL_EN={renewal:'Renewal',addon:'Add-on Hours',extend:'Extension'};
 function entTypeLabel(o){return T(o.typeLabel,ENT_TYPE_LABEL_EN[o.type]);}
 function entApById(id){return ENT_APPLICATIONS.find(function(o){return o.id===id;});}
+var ENT_STATUS_EN={'新進':'New','處理中':'In Progress','已建訂單':'Order Created','已完成':'Completed','已婉拒':'Declined'};
 function entStatusBadge(s){
   var cls=(s==='新進')?'muted':(s==='處理中')?'warn':(s==='已建訂單')?'info':(s==='已完成')?'ok':'danger';
-  return '<span class="badge '+cls+'">'+s+'</span>';
+  return '<span class="badge '+cls+'">'+T(s,ENT_STATUS_EN[s]||s)+'</span>';
 }
 function entOpen(o){return o.status!=='已完成'&&o.status!=='已婉拒';}
 var entApFilter='open';
@@ -612,8 +613,8 @@ function renderEntApplications(){
     if(entOpen(o)){
       actions+='<button class="btn sm" style="color:var(--danger);border-color:var(--danger);" onclick="tliOpenDeclineModal(\''+o.id+'\')">'+T('婉拒','Decline')+'</button>';
     }
-    var statusExtra=o.status==='已建訂單'&&o.orderNo?'<div class="suggest">'+T('訂單編號：','Order No.: ')+o.orderNo+'</div>':(o.status==='已婉拒'&&o.declineReason?'<div class="suggest">'+T('婉拒原因：','Decline Reason: ')+o.declineReason+'</div>':'');
-    return '<tr><td>'+o.company+'</td><td>'+entTypeLabel(o)+'</td><td>'+o.detail+'</td><td>'+o.submittedAt+'</td><td>'+o.hrContact+'</td>'+
+    var statusExtra=o.status==='已建訂單'&&o.orderNo?'<div class="suggest">'+T('訂單編號：','Order No.: ')+o.orderNo+'</div>':(o.status==='已婉拒'&&o.declineReason?'<div class="suggest">'+T('婉拒原因：','Decline Reason: ')+T(o.declineReason,o.declineReasonEn||o.declineReason)+'</div>':'');
+    return '<tr><td>'+o.company+'</td><td>'+entTypeLabel(o)+'</td><td>'+T(o.detail,o.detailEn||o.detail)+'</td><td>'+o.submittedAt+'</td><td>'+o.hrContact+'</td>'+
       '<td>'+entStatusBadge(o.status)+statusExtra+'</td>'+
       '<td><div class="row-actions">'+actions+'</div></td></tr>';
   }).join('');
@@ -629,7 +630,7 @@ function tliApplyExtend(id){
   var o=entApById(id);
   if(!o)return;
   o.status='已完成';
-  tliToast(T('已套用展延：「'+o.company+'」'+o.detail+'，合約參數已同步更新於 a19 企業合約參數分頁（未實際回寫）','Extension applied: “'+o.company+'” '+o.detail+' — contract parameters synced to the a19 Enterprise Contract Parameters tab (not actually written back)'));
+  tliToast(T('已套用展延：「'+o.company+'」'+o.detail+'，合約參數已同步更新於 a19 企業合約參數分頁（未實際回寫）','Extension applied: “'+o.company+'” '+(o.detailEn||o.detail)+' — contract parameters synced to the a19 Enterprise Contract Parameters tab (not actually written back)'));
   renderEntApplications();
 }
 var __declineTargetId=null;
@@ -684,10 +685,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -696,7 +697,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -747,6 +748,7 @@ document.addEventListener('keydown', function(e){
 if (window.TLI_I18N) {
   TLI_I18N.onRefresh(renderEntApplications);
   TLI_I18N.onRefresh(tliLocalizeStaticCounts);
+  TLI_I18N.onRefresh(renderNotifPanel);
   TLI_I18N.init();
 }
 </script>

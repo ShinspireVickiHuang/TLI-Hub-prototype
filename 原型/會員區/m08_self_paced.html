@@ -208,127 +208,126 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 </head>
 <body>
 <div class="app has-side">
-  <nav class="side-nav" aria-label="主導覽">
-    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-identity">Emma Johnson｜學員</div>
-    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a class="side-link active" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>我的方案</a>
-    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
-    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>回官網</a>
+  <nav class="side-nav" aria-label="主導覽" data-i18n-aria-label="member.nav.aria">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity">Emma Johnson｜<span data-i18n="member.role.student">學員</span></div>
+    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a class="side-link active" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
+    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
+    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
   </nav>
 
   <header class="topbar">
     <div class="topbar-left">
-      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-      <div class="topbar-title" data-i18n-zh="自學課程" data-i18n-en="Self-paced Courses">自學課程</div>
+      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a>
+      <div class="topbar-title" data-i18n="m08.title">自學課程</div>
     </div>
     <div class="topbar-actions">
-      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程">
+      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程" data-i18n-aria-label="member.explore" data-i18n-title="member.explore">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        <span class="explore-link-text">探索課程</span>
+        <span class="explore-link-text" data-i18n="member.explore">探索課程</span>
       </a>
-      <select class="mini-select" id="langSelect" aria-label="語言與幣別" onchange="handleLangCurrency(this)"><option value="zh-TW">繁體中文・TWD</option><option value="zh-CN">简体中文・CNY</option><option value="en">English・USD</option></select>
-      <button class="bell-btn" onclick="toggleBell()" aria-label="通知">
+      <button class="bell-btn" onclick="toggleBell()" aria-label="通知" data-i18n-aria-label="member.notifications">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
         <span class="dot"></span>
       </button>
       <div class="bell-panel" id="bellPanel">
-        <h4>通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p>你的方案將於 14 天後到期</p><span>今天 09:20</span></div></div>
+        <h4 data-i18n="member.notifications">通知</h4>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="m08.notif.expiring">你的方案將於 14 天後到期</p><span><span data-i18n="member.today">今天</span> 09:20</span></div></div>
       </div>
     </div>
   </header>
 
   <main class="content">
-    <nav class="nav-segment" aria-label="次選單">
-      <a class="nav-segment-link active" href="m08_self_paced.html">自學課程</a>
-      <a class="nav-segment-link" href="m11_quiz.html">線上測驗</a>
-      <a class="nav-segment-link" href="m17_feedback.html">課堂回饋</a>
+    <nav class="nav-segment" aria-label="次選單" data-i18n-aria-label="m08.nav.segmentAria">
+      <a class="nav-segment-link active" href="m08_self_paced.html" data-i18n="m08.title">自學課程</a>
+      <a class="nav-segment-link" href="m11_quiz.html" data-i18n="m08.nav.quiz">線上測驗</a>
+      <a class="nav-segment-link" href="m17_feedback.html" data-i18n="m08.nav.feedback">課堂回饋</a>
     </nav>
 
 
     <!-- ===== 列表視圖 ===== -->
     <div id="view-list">
-      <p class="page-h">自學課程</p>
-      <p class="page-sub" data-i18n-zh="依自己的步調觀看章節影音、下載教材、追蹤完成進度。" data-i18n-en="Watch at your own pace, download materials, and track progress.">依自己的步調觀看章節影音、下載教材、追蹤完成進度。</p>
+      <p class="page-h" data-i18n="m08.title">自學課程</p>
+      <p class="page-sub" data-i18n="m08.sub">依自己的步調觀看章節影音、下載教材、追蹤完成進度。</p>
 
-      <div class="section-title first">我的自學課程</div>
-      <p class="small muted" style="margin:-6px 0 14px;">自學課程隨方案提供，由顧問依你的目標組合。</p>
+      <div class="section-title first" data-i18n="m08.myCourses">我的自學課程</div>
+      <p class="small muted" style="margin:-6px 0 14px;" data-i18n="m08.providedByPlan">自學課程隨方案提供，由顧問依你的目標組合。</p>
       <div class="course-toolbar">
         <div class="course-search-box">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="search" id="courseSearchInput" placeholder="搜尋課程名稱" aria-label="搜尋自學課程名稱" oninput="onCourseSearchInput(this.value)">
+          <input type="search" id="courseSearchInput" placeholder="搜尋課程名稱" aria-label="搜尋自學課程名稱" oninput="onCourseSearchInput(this.value)" data-i18n-placeholder="m08.search.placeholder" data-i18n-aria-label="m08.search.aria">
         </div>
-        <select class="mini-select course-sort-select" id="courseSortSelect" aria-label="排序方式" onchange="onCourseSortChange(this.value)">
-          <option value="recent">最近觀看</option>
-          <option value="progress">進度</option>
-          <option value="name">課名</option>
-          <option value="plan">依方案</option>
-          <option value="purchased">購買日</option>
+        <select class="mini-select course-sort-select" id="courseSortSelect" aria-label="排序方式" onchange="onCourseSortChange(this.value)" data-i18n-aria-label="m08.sort.aria">
+          <option value="recent" data-i18n="m08.sort.recent">最近觀看</option>
+          <option value="progress" data-i18n="m08.sort.progress">進度</option>
+          <option value="name" data-i18n="m08.sort.name">課名</option>
+          <option value="plan" data-i18n="m08.sort.byPlan">依方案</option>
+          <option value="purchased" data-i18n="m08.sort.purchased">購買日</option>
         </select>
-        <select class="mini-select" id="coursePlanSelect" aria-label="依方案篩選" style="max-width:160px;"></select>
+        <select class="mini-select" id="coursePlanSelect" aria-label="依方案篩選" data-i18n-aria-label="m08.filterByPlan.aria" style="max-width:160px;"></select>
       </div>
-      <div class="chip-row" id="courseFilterChips" aria-label="依狀態篩選">
-        <button class="chip selected" onclick="setCourseFilter('all',this)">全部</button>
-        <button class="chip" onclick="setCourseFilter('ongoing',this)">進行中</button>
-        <button class="chip" onclick="setCourseFilter('notstarted',this)">尚未開始</button>
-        <button class="chip" onclick="setCourseFilter('done',this)">已完成</button>
+      <div class="chip-row" id="courseFilterChips" aria-label="依狀態篩選" data-i18n-aria-label="m08.filterStatus.aria">
+        <button class="chip selected" onclick="setCourseFilter('all',this)" data-i18n="m08.filter.all">全部</button>
+        <button class="chip" onclick="setCourseFilter('ongoing',this)" data-i18n="m08.filter.ongoing">進行中</button>
+        <button class="chip" onclick="setCourseFilter('notstarted',this)" data-i18n="m08.filter.notstarted">尚未開始</button>
+        <button class="chip" onclick="setCourseFilter('done',this)" data-i18n="m08.filter.done">已完成</button>
       </div>
       <div class="course-list-wrap" id="courseListWrap">
         <div id="courseList"></div>
       </div>
       <div class="empty-state hidden" id="courseEmpty">
-        <h4>找不到符合條件的課程</h4>
-        <p>試試更換搜尋字詞、篩選或排序條件。</p>
+        <h4 data-i18n="m08.empty.title">找不到符合條件的課程</h4>
+        <p data-i18n="m08.empty.desc">試試更換搜尋字詞、篩選或排序條件。</p>
       </div>
       <div class="hidden" id="courseMoreWrap" style="text-align:center;margin-top:10px;">
-        <button class="btn btn-outline btn-sm" onclick="showMoreCourses()">載入更多（還有 <span id="courseMoreCount">0</span> 門）</button>
+        <button class="btn btn-outline btn-sm" id="courseMoreBtn" onclick="showMoreCourses()"></button>
       </div>
 
       <div class="hidden" id="newMemberBlock">
         <div class="card" style="text-align:center;padding:26px 16px;">
           <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-          <h3 style="margin:0 0 4px;font-size:15.5px;">你的方案尚未包含自學課程，可請顧問為你加入</h3>
-          <p class="small muted" style="margin:0 0 14px;">自學課程隨方案提供，由顧問依你的目標組合。</p>
-          <button class="btn btn-primary btn-sm" onclick="openAdvisorForm()">請顧問為我加入自學課程</button>
+          <h3 style="margin:0 0 4px;font-size:15.5px;" data-i18n="m08.newMember.title">你的方案尚未包含自學課程，可請顧問為你加入</h3>
+          <p class="small muted" style="margin:0 0 14px;" data-i18n="m08.providedByPlan">自學課程隨方案提供，由顧問依你的目標組合。</p>
+          <button class="btn btn-primary btn-sm" onclick="openAdvisorForm()" data-i18n="m08.btn.requestAddCourse">請顧問為我加入自學課程</button>
         </div>
         <div class="card" style="margin-top:12px;">
-          <div class="section-title first" style="margin-top:0;">先免費試看</div>
+          <div class="section-title first" style="margin-top:0;" data-i18n="m08.freeTrial">先免費試看</div>
           <div id="previewList"></div>
         </div>
-        <p class="small demo-note" style="margin:8px 2px 0;">示範影片，非完整課程內容</p>
+        <p class="small demo-note" style="margin:8px 2px 0;" data-i18n="m08.demoNote">示範影片，非完整課程內容</p>
       </div>
 
-      <div class="section-title">想增加自學課程？</div>
+      <div class="section-title" data-i18n="m08.wantMore">想增加自學課程？</div>
       <div class="card plan-cta-card">
-        <a class="btn btn-outline btn-block" href="../公開網站/p02_courses.html?category=self-paced">查看含自學課程的方案</a>
-        <button class="btn btn-primary btn-block" onclick="openAdvisorForm()">請顧問為我調整方案</button>
+        <a class="btn btn-outline btn-block" href="../公開網站/p02_courses.html?category=self-paced" data-i18n="m08.btn.viewPlans">查看含自學課程的方案</a>
+        <button class="btn btn-primary btn-block" onclick="openAdvisorForm()" data-i18n="m08.btn.requestAdjust">請顧問為我調整方案</button>
       </div>
     </div>
 
     <!-- ===== 課程內容視圖 ===== -->
     <div id="view-detail" class="hidden">
-      <button class="btn btn-outline btn-sm" onclick="backToList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>回課程列表</button>
+      <button class="btn btn-outline btn-sm" onclick="backToList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="m08.backToList">回課程列表</span></button>
       <p class="page-h" id="detailTitle" style="margin-top:12px;"></p>
       <p class="page-sub" id="detailSub"></p>
 
       <div class="card player-wrap">
         <div class="player-box">
           <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="player-title" id="playerTitle">第 1 講</div>
+          <div class="player-title" id="playerTitle"></div>
         </div>
         <div class="player-controls flex-between">
-          <button class="btn btn-outline btn-sm" id="prevBtn" onclick="stepChapter(-1)">‹ 上一章</button>
-          <span class="small muted" id="chapterCount">第 1／1 講</span>
-          <button class="btn btn-outline btn-sm" id="nextBtn" onclick="stepChapter(1)">下一章 ›</button>
+          <button class="btn btn-outline btn-sm" id="prevBtn" onclick="stepChapter(-1)" data-i18n="m08.prevChapter">‹ 上一章</button>
+          <span class="small muted" id="chapterCount"></span>
+          <button class="btn btn-outline btn-sm" id="nextBtn" onclick="stepChapter(1)" data-i18n="m08.nextChapter">下一章 ›</button>
         </div>
       </div>
 
       <button class="chapter-toggle" id="chapterToggleBtn" onclick="toggleChapters()">
-        <span>章節清單</span>
+        <span data-i18n="m08.chapterList">章節清單</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="card" id="chapterListCard">
@@ -336,9 +335,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </div>
 
       <div class="tabs">
-        <button class="tab-btn active" onclick="setTab('files',this)">教材下載</button>
-        <button class="tab-btn" onclick="setTab('log',this)">完成紀錄</button>
-        <button class="tab-btn" onclick="setTab('notes',this)">筆記</button>
+        <button class="tab-btn active" onclick="setTab('files',this)" data-i18n="m08.tab.materials">教材下載</button>
+        <button class="tab-btn" onclick="setTab('log',this)" data-i18n="m08.tab.log">完成紀錄</button>
+        <button class="tab-btn" onclick="setTab('notes',this)" data-i18n="m08.tab.notes">筆記</button>
       </div>
 
       <div class="tab-panel active" id="tab-files">
@@ -350,14 +349,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <div class="tab-panel" id="tab-notes">
         <div class="card">
           <div class="field">
-            <label for="noteInput">新增筆記</label>
-            <textarea id="noteInput" rows="3" placeholder="記下這一講的重點或問題…"></textarea>
+            <label for="noteInput" data-i18n="m08.addNote.label">新增筆記</label>
+            <textarea id="noteInput" rows="3" placeholder="記下這一講的重點或問題…" data-i18n-placeholder="m08.addNote.placeholder"></textarea>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="addNote()">儲存筆記</button>
+          <button class="btn btn-primary btn-sm" onclick="addNote()" data-i18n="m08.btn.saveNote">儲存筆記</button>
           <div class="divider"></div>
           <div id="noteList"></div>
           <div class="hidden" id="noteMoreWrap" style="text-align:center;margin-top:10px;">
-            <button class="btn btn-outline btn-sm" onclick="showMoreNotes()">載入更多（還有 <span id="noteMoreCount">0</span> 則）</button>
+            <button class="btn btn-outline btn-sm" id="noteMoreBtn" onclick="showMoreNotes()"></button>
           </div>
         </div>
       </div>
@@ -366,11 +365,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </main>
 
   <nav class="bottom-nav">
-    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a href="m08_self_paced.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a href="m08_self_paced.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
   </nav>
 </div>
 
@@ -378,43 +377,36 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="modal-overlay" id="advisorModalOverlay" onclick="if(event.target===this) closeAdvisorForm()">
   <div class="modal-box">
     <div class="modal-head">
-      <h3>請顧問為我調整方案</h3>
-      <button class="modal-close-btn" onclick="closeAdvisorForm()" aria-label="關閉"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <h3 data-i18n="m08.btn.requestAdjust">請顧問為我調整方案</h3>
+      <button class="modal-close-btn" onclick="closeAdvisorForm()" aria-label="關閉" data-i18n-aria-label="member.close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body">
-      <p class="small muted" style="margin:0 0 14px;">告訴顧問你想加強的方向，顧問會依你的方案內容評估調整。</p>
+      <p class="small muted" style="margin:0 0 14px;" data-i18n="m08.advisor.desc">告訴顧問你想加強的方向，顧問會依你的方案內容評估調整。</p>
       <div class="field">
-        <label for="advisorTopicSelect">想增加或加強的主題</label>
-        <select id="advisorTopicSelect">
-          <option value="發音">發音</option>
-          <option value="商務">商務</option>
-          <option value="生活">生活</option>
-          <option value="文化">文化</option>
-          <option value="寫作">寫作</option>
-          <option value="聽力">聽力</option>
-          <option value="其他">其他（於備註說明）</option>
-        </select>
+        <label for="advisorTopicSelect" data-i18n="m08.advisor.topicLabel">想增加或加強的主題</label>
+        <!-- 20260930：主題選項改由 JS 讀共用主檔 TLI_MASTERS.learningTopics.selfPacedFocus 產生，沿用既有 i18n key -->
+        <select id="advisorTopicSelect"></select>
       </div>
       <div class="field">
-        <label for="advisorNoteInput">備註</label>
-        <textarea id="advisorNoteInput" rows="3" placeholder="想加強的情境、目標或其他說明…"></textarea>
+        <label for="advisorNoteInput" data-i18n="m08.remarks">備註</label>
+        <textarea id="advisorNoteInput" rows="3" placeholder="想加強的情境、目標或其他說明…" data-i18n-placeholder="m08.advisor.notePlaceholder"></textarea>
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-primary" onclick="submitAdvisorForm()">送出給顧問</button>
+      <button class="btn btn-primary" onclick="submitAdvisorForm()" data-i18n="m08.btn.submitToAdvisor">送出給顧問</button>
     </div>
   </div>
 </div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_member.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
 
-var TLI_RATES={TWD:{rate:1,symbol:'NT$'},USD:{rate:31.5,symbol:'US$'},JPY:{rate:0.211,symbol:'¥'}};
-function tliFmt(amountTWD,cur){
-  var r=TLI_RATES[cur]||TLI_RATES.TWD;
-  var v=amountTWD/r.rate;
-  var decimals=cur==='TWD'?0:(cur==='JPY'?0:2);
-  return r.symbol+v.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
-}
 function showToast(msg){
   var t=document.getElementById('toast');
   if(!t)return;
@@ -422,26 +414,6 @@ function showToast(msg){
   t.classList.remove('hidden');
   clearTimeout(window._toastTimer);
   window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
-}
-function handleLangCurrency(sel){
-  var lang=sel.value||'zh-TW';
-  var curMap={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
-  var cur=curMap[lang]||'TWD';
-  var langText=sel.options[sel.selectedIndex].text;
-  if(typeof tliFmt==='function'){
-    document.querySelectorAll('[data-money]').forEach(function(el){
-      el.textContent=tliFmt(parseFloat(el.getAttribute('data-money')),cur);
-    });
-  }
-  document.querySelectorAll('[data-i18n-zh]').forEach(function(el){
-    el.textContent = (lang==='zh-TW') ? el.getAttribute('data-i18n-zh') : el.getAttribute('data-i18n-en');
-  });
-  if(lang==='zh-CN'||lang==='de'){
-    var names={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+names[lang]);
-  } else {
-    showToast('顯示語言／幣別已切換為 '+langText);
-  }
 }
 function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
 document.addEventListener('click',function(e){
@@ -463,16 +435,27 @@ var TOPIC_CHAPTER_BANK = {
   '寫作':['正式信件格式','詢價與報價','合作邀約','段落結構','論說文寫作','摘要寫作','應用文寫作','書信禮貌用語','範例分析','修辭技巧'],
   '聽力':['社會新聞','財經新聞','國際新聞','聽力關鍵字','摘要練習','情境聽寫','語速適應','對話理解','細節聽取','推論理解']
 };
+/* 主題類型標籤（骨架用語，非示範資料，需五語） */
+var TOPIC_LABELS = {
+  '發音':{en:'Pronunciation',ja:'発音',de:'Aussprache'},
+  '商務':{en:'Business',ja:'ビジネス',de:'Geschäftlich'},
+  '生活':{en:'Everyday Life',ja:'日常',de:'Alltag'},
+  '文化':{en:'Culture',ja:'カルチャー',de:'Kultur'},
+  '寫作':{en:'Writing',ja:'ライティング',de:'Schreiben'},
+  '聽力':{en:'Listening',ja:'リスニング',de:'Hören'}
+};
+function tTopic(topic){ return TLI_I18N.t(topic, TOPIC_LABELS[topic]||{}); }
 /* 依主題與總講數自動產生章節（確保「總講數＝標題講數」，避免手動維護時數字對不上） */
 function buildChapters(topic,total){
   var bank = TOPIC_CHAPTER_BANK[topic] || TOPIC_CHAPTER_BANK['生活'];
   var chapters = [];
+  var lessonTpl = TLI_I18N.t('第 {n} 講：',{en:'Lesson {n}: ',ja:'第{n}講：',de:'Lektion {n}: '});
   for(var i=0;i<total;i++){
     var isLast = i===total-1;
     var label = isLast ? '期末情境測驗' : bank[i % bank.length];
     var sec = 280 + ((i*23)%220); // 4:40～8:20 之間變化，示範用秒數
     var mm = Math.floor(sec/60), ss = sec%60;
-    chapters.push({title:'第 '+(i+1)+' 講：'+label, dur:mm+':'+String(ss).padStart(2,'0')});
+    chapters.push({title:lessonTpl.replace('{n}',i+1)+label, dur:mm+':'+String(ss).padStart(2,'0')});
   }
   return chapters;
 }
@@ -493,13 +476,14 @@ function makeCourse(id,name,topic,completed,lastWatched,purchasedAt,planId){
     id:id, name:name, topic:topic, chapters:chapters, planId:planId,
     completed:completed, current:current, lastWatched:lastWatched, purchasedAt:purchasedAt,
     materials:[
-      {type:'pdf', name:name.replace(/\s*[0-9]+\s*講$/,'')+' 講義.pdf', meta:'共 '+total+' 頁・已更新 '+(purchasedAt||'2025-01-10')}
+      {type:'pdf', baseName:name.replace(/\s*[0-9]+\s*講$/,''), pages:total, updated:(purchasedAt||'2025-01-10')}
     ]
   };
 }
 /* 我已擁有的自學課程（示範資料，25 門，各自對應一個方案；涵蓋進行中／尚未開始／已完成三種狀態） */
+/* 章節標題含「第 N 講」骨架字樣，語言切換時要重新產生，所以包成 buildCourses() 供 onRefresh 呼叫 */
 var COURSES = {};
-[
+var COURSE_DATA_ROWS = [
   ['c1','發音基礎 20 講','發音',12,'2026-08-23','2026-05-01','plan-e'],
   ['c2','商務華語情境 16 講','商務',0,null,'2026-08-01','plan-d'],
   ['c3','旅遊華語會話 12 講','生活',12,'2026-02-01','2025-11-01','plan-e'],
@@ -525,9 +509,14 @@ var COURSES = {};
   ['c23','華語寫作基礎 6 講','寫作',0,null,'2024-10-01','plan-culture'],
   ['c24','文化與藝術賞析 10 講','文化',10,'2024-07-11','2024-06-01','plan-culture'],
   ['c25','職場溝通與應對 8 講','商務',3,'2024-03-19','2024-02-01','plan-adv']
-].forEach(function(row){
-  COURSES[row[0]] = makeCourse(row[0],row[1],row[2],row[3],row[4],row[5],row[6]);
-});
+];
+function buildCourses(){
+  COURSES = {};
+  COURSE_DATA_ROWS.forEach(function(row){
+    COURSES[row[0]] = makeCourse(row[0],row[1],row[2],row[3],row[4],row[5],row[6]);
+  });
+}
+buildCourses();
 
 /* 新學員空狀態的免費試看影片（示範資料） */
 var PREVIEW_VIDEOS = [
@@ -539,13 +528,13 @@ var state = { courseId:null, idx:0, notes:{}, deepLink:false };
 
 /* 付費方徽章：自費／學校提供（企業合約方案暫不在自學課程示範資料內，如需再補 plan-c 對應樣式） */
 function payerBadgeHtml(plan){
-  if(plan.payer==='school') return '<span class="badge badge-payer badge-payer-school">學校提供</span>';
-  return '<span class="badge badge-payer badge-payer-self">自費</span>';
+  if(plan.payer==='school') return '<span class="badge badge-payer badge-payer-school">'+TLI_I18N.t('學校提供',{en:'Provided by school',ja:'学校提供',de:'Von der Schule bereitgestellt'})+'</span>';
+  return '<span class="badge badge-payer badge-payer-self">'+TLI_I18N.t('自費',{en:'Self-paid',ja:'自己負担',de:'Selbst bezahlt'})+'</span>';
 }
 function renderPlanChips(){
   var sel = document.getElementById('coursePlanSelect');
   var ids = Object.keys(PLANS);
-  var html = '<option value="all">依方案：全部</option>';
+  var html = '<option value="all">'+TLI_I18N.t('依方案：全部',{en:'By plan: All',ja:'方案別：すべて',de:'Nach Paket: Alle'})+'</option>';
   html += ids.map(function(pid){
     return '<option value="'+pid+'">'+PLANS[pid].name+'</option>';
   }).join('');
@@ -568,18 +557,19 @@ function applyPlanFromQuery(){
 
 function renderPreviewList(){
   var wrap = document.getElementById('previewList');
+  var freeTrialLabel = TLI_I18N.t('免費試看',{en:'Free preview',ja:'無料試聴',de:'Kostenlose Vorschau'});
   wrap.innerHTML = PREVIEW_VIDEOS.map(function(v){
     return '' +
       '<div class="list-row">' +
         '<div class="icon-box">'+ICON_PLAY+'</div>' +
-        '<div class="body"><h4>'+v.name+'</h4><p>'+v.dur+'・免費試看</p></div>' +
-        '<div class="trail"><button class="btn btn-outline btn-sm" onclick="playPreview(\''+v.name+'\')">免費試看</button></div>' +
+        '<div class="body"><h4>'+v.name+'</h4><p>'+v.dur+'・'+freeTrialLabel+'</p></div>' +
+        '<div class="trail"><button class="btn btn-outline btn-sm" onclick="playPreview(\''+v.name+'\')">'+freeTrialLabel+'</button></div>' +
       '</div>';
   }).join('');
 }
 
 function playPreview(name){
-  showToast('正在播放試看：'+name+'（示範影片）');
+  showToast(TLI_I18N.t('正在播放試看：',{en:'Now playing preview: ',ja:'試聴を再生中：',de:'Vorschau wird abgespielt: '})+name+TLI_I18N.t('（示範影片）',{en:' (demo video)',ja:'（デモ動画）',de:' (Demovideo)'}));
 }
 
 /* 頁面狀態切換（示範用）：依網址參數決定顯示「有課程學員／新學員」畫面 */
@@ -675,28 +665,31 @@ function renderCourseList(){
   listWrap.classList.remove('hidden');
   empty.classList.add('hidden');
   var shown = list.slice(0,courseShown);
+  var completedTpl = TLI_I18N.t('已完成 {c}／{t} 講',{en:'{c} of {t} completed',ja:'{c}／{t}講完了',de:'{c}/{t} abgeschlossen'});
+  var lastWatchedTpl = TLI_I18N.t('上次觀看 {d}',{en:'Watched {d}',ja:'前回視聴 {d}',de:'Gesehen {d}'});
+  var notWatched = TLI_I18N.t('尚未觀看',{en:'Not watched',ja:'未視聴',de:'Nicht gesehen'});
   wrap.innerHTML = shown.map(function(c){
     var total = c.chapters.length;
     var pct = Math.round(c.completed/total*100);
     var status = courseStatusOf(c);
-    var statusBadge = status==='done' ? '<span class="badge badge-ok cr-status-badge">已完成</span>'
-      : (status==='ongoing' ? '<span class="badge badge-info cr-status-badge">進行中</span>'
-      : '<span class="badge badge-muted cr-status-badge">尚未開始</span>');
-    var actionLabel = status==='done' ? '複習' : (status==='ongoing' ? '繼續' : '開始');
+    var statusBadge = status==='done' ? '<span class="badge badge-ok cr-status-badge">'+TLI_I18N.t('已完成',{en:'Completed',ja:'完了',de:'Abgeschlossen'})+'</span>'
+      : (status==='ongoing' ? '<span class="badge badge-info cr-status-badge">'+TLI_I18N.t('進行中',{en:'In progress',ja:'受講中',de:'In Bearbeitung'})+'</span>'
+      : '<span class="badge badge-muted cr-status-badge">'+TLI_I18N.t('尚未開始',{en:'Not started',ja:'未開始',de:'Nicht begonnen'})+'</span>');
+    var actionLabel = status==='done' ? TLI_I18N.t('複習',{en:'Review',ja:'復習',de:'Erneut'}) : (status==='ongoing' ? TLI_I18N.t('繼續',{en:'Resume',ja:'続ける',de:'Weiter'}) : TLI_I18N.t('開始',{en:'Start',ja:'スタート',de:'Start'}));
     var actionClass = status==='done' ? 'btn-outline' : 'btn-primary';
-    var dateLine = c.lastWatched ? ('上次觀看 '+c.lastWatched) : '尚未觀看';
+    var dateLine = c.lastWatched ? lastWatchedTpl.replace('{d}',c.lastWatched) : notWatched;
     var plan = PLANS[c.planId];
     var planLine = '<p class="cr-plan-line">'+payerBadgeHtml(plan)+'<span class="cr-plan-name">'+plan.name+'</span></p>';
     return '' +
       '<div class="course-row" onclick="openCourse(\''+c.id+'\')">' +
         '<div class="cr-top">' +
-          '<span class="badge badge-topic">'+c.topic+'</span>' +
+          '<span class="badge badge-topic">'+tTopic(c.topic)+'</span>' +
           '<div class="cr-title"><h4>'+c.name+'</h4>'+planLine+'</div>' +
           statusBadge +
         '</div>' +
         '<div class="cr-bottom">' +
           '<div class="cr-progress"><div class="progress"><div style="width:'+pct+'%;"></div></div></div>' +
-          '<span class="cr-progress-label">已完成 '+c.completed+'／'+total+' 講</span>' +
+          '<span class="cr-progress-label">'+completedTpl.replace('{c}',c.completed).replace('{t}',total)+'</span>' +
           '<span class="cr-date">'+dateLine+'</span>' +
           '<button class="btn btn-sm '+actionClass+' cr-action" onclick="event.stopPropagation();openCourse(\''+c.id+'\')">'+actionLabel+'</button>' +
         '</div>' +
@@ -705,7 +698,7 @@ function renderCourseList(){
   var remain = list.length - shown.length;
   if(remain>0){
     moreWrap.classList.remove('hidden');
-    document.getElementById('courseMoreCount').textContent = remain;
+    document.getElementById('courseMoreBtn').textContent = TLI_I18N.t('載入更多（還有 {n} 門）',{en:'Load more ({n} more)',ja:'もっと見る（あと{n}件）',de:'Mehr laden (noch {n})'}).replace('{n}',remain);
   } else {
     moreWrap.classList.add('hidden');
   }
@@ -734,13 +727,7 @@ function openCourse(id,opts){
     document.getElementById('chapterListCard').classList.add('collapsed');
     document.getElementById('chapterToggleBtn').classList.remove('open');
   }
-  document.getElementById('detailTitle').textContent = c.name;
-  document.getElementById('detailSub').textContent = c.topic+'・共 '+c.chapters.length+' 講・已完成 '+c.completed+' 講';
-  renderChapterList();
-  renderMaterials();
-  renderLog();
-  renderNotes();
-  updatePlayer();
+  refreshDetailView();
   window.scrollTo(0,0);
   if(state.deepLink){
     setTimeout(function(){
@@ -756,6 +743,20 @@ function backToList(){
   renderCourseList();
 }
 
+/* 課程內容視圖的全部動態文字：語言切換時要重新產生，統一收在這裡供 onRefresh 呼叫 */
+function refreshDetailView(){
+  if(!state.courseId) return;
+  var c = COURSES[state.courseId];
+  document.getElementById('detailTitle').textContent = c.name;
+  var detailSubTpl = TLI_I18N.t('・共 {t} 講・已完成 {c} 講',{en:' · {t} lessons total · {c} completed',ja:'・全{t}講・{c}講完了',de:' · {t} Lektionen insgesamt · {c} abgeschlossen'});
+  document.getElementById('detailSub').textContent = tTopic(c.topic)+detailSubTpl.replace('{t}',c.chapters.length).replace('{c}',c.completed);
+  renderChapterList();
+  renderMaterials();
+  renderLog();
+  renderNotes();
+  updatePlayer();
+}
+
 function renderChapterList(){
   var c = COURSES[state.courseId];
   var wrap = document.getElementById('chapterList');
@@ -764,10 +765,14 @@ function renderChapterList(){
     var isCurrent = i === state.idx;
     var isDeepTarget = state.deepLink && isCurrent;
     var icon = done ? ICON_CHECK : (isCurrent ? ICON_PLAY : ICON_CIRCLE);
-    var statusText = isDeepTarget ? '上次看到這裡' : (done ? '已完成' : (isCurrent ? '正在看' : '尚未觀看'));
+    var lastSeenLabel = TLI_I18N.t('上次看到這裡',{en:'You left off here',ja:'前回はここまで',de:'Hier zuletzt gesehen'});
+    var doneLabel = TLI_I18N.t('已完成',{en:'Completed',ja:'完了',de:'Abgeschlossen'});
+    var watchingLabel = TLI_I18N.t('正在看',{en:'Watching',ja:'視聴中',de:'Wird angesehen'});
+    var notWatchedLabel = TLI_I18N.t('尚未觀看',{en:'Not watched yet',ja:'未視聴',de:'Noch nicht angesehen'});
+    var statusText = isDeepTarget ? lastSeenLabel : (done ? doneLabel : (isCurrent ? watchingLabel : notWatchedLabel));
     var cls = 'list-row chapter-row'+(done?' done':'')+(isCurrent?' current':'');
-    var trail = isDeepTarget ? '<div class="trail"><span class="badge badge-info">上次看到這裡</span></div>'
-      : (isCurrent ? '<div class="trail"><span class="badge badge-info">正在看</span></div>' : '');
+    var trail = isDeepTarget ? '<div class="trail"><span class="badge badge-info">'+lastSeenLabel+'</span></div>'
+      : (isCurrent ? '<div class="trail"><span class="badge badge-info">'+watchingLabel+'</span></div>' : '');
     return '' +
       '<div class="'+cls+'" id="chapter-row-'+i+'" onclick="selectChapter('+i+')">' +
         '<div class="icon-box">'+icon+'</div>' +
@@ -798,7 +803,8 @@ function updatePlayer(){
   var c = COURSES[state.courseId];
   var ch = c.chapters[state.idx];
   document.getElementById('playerTitle').textContent = ch.title;
-  document.getElementById('chapterCount').textContent = '第 '+(state.idx+1)+'／'+c.chapters.length+' 講';
+  var chapterCountTpl = TLI_I18N.t('第 {i}／{n} 講',{en:'Lesson {i} of {n}',ja:'第{i}／{n}講',de:'Lektion {i} von {n}'});
+  document.getElementById('chapterCount').textContent = chapterCountTpl.replace('{i}',state.idx+1).replace('{n}',c.chapters.length);
   document.getElementById('prevBtn').disabled = state.idx===0;
   document.getElementById('nextBtn').disabled = state.idx===c.chapters.length-1;
 }
@@ -811,13 +817,20 @@ function toggleChapters(){
 function renderMaterials(){
   var c = COURSES[state.courseId];
   var wrap = document.getElementById('materialList');
+  var handoutSuffix = TLI_I18N.t(' 講義.pdf',{en:' Handout.pdf',ja:' 教材.pdf',de:' Skript.pdf'});
+  var metaTpl = TLI_I18N.t('共 {n} 頁・已更新 {d}',{en:'{n} pages · Updated {d}',ja:'全{n}ページ・更新日 {d}',de:'{n} Seiten · Aktualisiert {d}'});
+  var downloadLabel = TLI_I18N.t('下載',{en:'Download',ja:'ダウンロード',de:'Herunterladen'});
+  var addedTpl = TLI_I18N.t('〈{n}〉已加入下載',{en:'"{n}" added to downloads',ja:'「{n}」をダウンロードに追加しました',de:'„{n}“ zu Downloads hinzugefügt'});
   wrap.innerHTML = c.materials.map(function(m){
     var icon = m.type==='pdf' ? ICON_PDF : ICON_AUDIO;
+    var fname = m.baseName + handoutSuffix;
+    var meta = metaTpl.replace('{n}',m.pages).replace('{d}',m.updated);
+    var toastMsg = addedTpl.replace('{n}',fname);
     return '' +
       '<div class="list-row material-row">' +
         '<div class="icon-box">'+icon+'</div>' +
-        '<div class="body"><h4>'+m.name+'</h4><p>'+m.meta+'</p></div>' +
-        '<div class="trail"><button class="btn btn-outline btn-sm" onclick="showToast(\'〈'+m.name+'〉已加入下載\')">下載</button></div>' +
+        '<div class="body"><h4>'+fname+'</h4><p>'+meta+'</p></div>' +
+        '<div class="trail"><button class="btn btn-outline btn-sm" onclick="showToast(\''+toastMsg.replace(/'/g,"\\'")+'\')">'+downloadLabel+'</button></div>' +
       '</div>';
   }).join('');
 }
@@ -826,11 +839,12 @@ function renderLog(){
   var c = COURSES[state.courseId];
   var wrap = document.getElementById('logList');
   if(c.completed===0){
-    wrap.innerHTML = '<p class="small muted" style="margin:0;">尚未有完成紀錄，開始觀看第 1 講後會出現在這裡。</p>';
+    wrap.innerHTML = '<p class="small muted" style="margin:0;">'+TLI_I18N.t('尚未有完成紀錄，開始觀看第 1 講後會出現在這裡。',{en:'No completion records yet. They will appear here once you start Lesson 1.',ja:'まだ完了記録がありません。第1講の視聴を始めるとここに表示されます。',de:'Noch keine Abschlussdatensätze. Sie erscheinen hier, sobald Sie mit Lektion 1 beginnen.'})+'</p>';
     return;
   }
   var base = new Date(2026,7,23);
   var rows = [];
+  var completedOnTpl = TLI_I18N.t('完成日 {d}',{en:'Completed on {d}',ja:'完了日 {d}',de:'Abgeschlossen am {d}'});
   for(var i=c.completed-1;i>=0;i--){
     var d = new Date(base.getTime() - (c.completed-1-i)*86400000);
     var mm = String(d.getMonth()+1).padStart(2,'0');
@@ -838,7 +852,7 @@ function renderLog(){
     rows.push('' +
       '<div class="list-row">' +
         '<div class="icon-box">'+ICON_CHECK+'</div>' +
-        '<div class="body"><h4>'+c.chapters[i].title+'</h4><p>完成日 '+mm+'/'+dd+'</p></div>' +
+        '<div class="body"><h4>'+c.chapters[i].title+'</h4><p>'+completedOnTpl.replace('{d}',mm+'/'+dd)+'</p></div>' +
       '</div>');
   }
   wrap.innerHTML = rows.join('');
@@ -851,7 +865,7 @@ function renderNotes(){
   var moreWrap = document.getElementById('noteMoreWrap');
   var list = state.notes[state.courseId] || [];
   if(list.length===0){
-    wrap.innerHTML = '<p class="small muted" style="margin:0;">還沒有筆記。</p>';
+    wrap.innerHTML = '<p class="small muted" style="margin:0;">'+TLI_I18N.t('還沒有筆記。',{en:'No notes yet.',ja:'まだメモがありません。',de:'Noch keine Notizen.'})+'</p>';
     moreWrap.classList.add('hidden');
     return;
   }
@@ -863,7 +877,7 @@ function renderNotes(){
   var remain = list.length - shown.length;
   if(remain>0){
     moreWrap.classList.remove('hidden');
-    document.getElementById('noteMoreCount').textContent = remain;
+    document.getElementById('noteMoreBtn').textContent = TLI_I18N.t('載入更多（還有 {n} 則）',{en:'Load more ({n} more)',ja:'もっと見る（あと{n}件）',de:'Mehr laden (noch {n})'}).replace('{n}',remain);
   } else {
     moreWrap.classList.add('hidden');
   }
@@ -879,7 +893,7 @@ function addNote(){
   if(!text) return;
   if(!state.notes[state.courseId]) state.notes[state.courseId] = [];
   var c = COURSES[state.courseId];
-  state.notes[state.courseId].unshift({text:text, time:c.chapters[state.idx].title+' 筆記'});
+  state.notes[state.courseId].unshift({text:text, time:c.chapters[state.idx].title+TLI_I18N.t(' 筆記',{en:' note',ja:' メモ',de:' Notiz'})});
   input.value='';
   renderNotes();
 }
@@ -898,6 +912,21 @@ renderMemberState(getMemberState());
 applyPlanFromQuery();
 
 /* 請顧問調整方案：小表單，送出後僅顯示已受理，不落地任何加購／結帳流程 */
+/* 20260930：想加強的主題選項改讀共用主檔 TLI_MASTERS.learningTopics.selfPacedFocus（原本頁面自己寫死 6 個），
+   i18n key 沿用既有詞典（m08.topic.*），「其他」為頁面自有選項保留不動 */
+var M08_TOPIC_I18N_KEY = {'發音':'m08.topic.pronun','商務':'m08.topic.business','生活':'m08.topic.life','文化':'m08.topic.culture','寫作':'m08.topic.writing','聽力':'m08.topic.listening'};
+function renderAdvisorTopicOptions(){
+  var sel = document.getElementById('advisorTopicSelect');
+  if (!sel) return;
+  var cur = sel.value;
+  sel.innerHTML = TLI_MASTERS.learningTopics.selfPacedFocus.map(function(t){
+    var key = M08_TOPIC_I18N_KEY[t.id];
+    return '<option value="'+t.id+'"'+(key?' data-i18n="'+key+'"':'')+'>'+t.name+'</option>';
+  }).join('') + '<option value="其他" data-i18n="m08.topic.other">其他（於備註說明）</option>';
+  if (cur) sel.value = cur;
+  if (window.TLI_I18N) TLI_I18N.refresh();
+}
+renderAdvisorTopicOptions();
 function openAdvisorForm(){
   document.getElementById('advisorModalOverlay').classList.add('show');
 }
@@ -907,7 +936,7 @@ function closeAdvisorForm(){
 function submitAdvisorForm(){
   document.getElementById('advisorNoteInput').value='';
   closeAdvisorForm();
-  showToast('已送出給你的顧問');
+  showToast(TLI_I18N.t('已送出給你的顧問',{en:'Sent to your advisor',ja:'コンサルタントに送信しました',de:'An Ihren Berater gesendet'}));
 }
 
 // ===== 深連結：?course=<id>&lesson=<n> 直達該課程該講 =====
@@ -921,6 +950,15 @@ function locateCourseFromQuery(){
 }
 locateCourseFromQuery();
 
+TLI_I18N.onRefresh(function(){
+  buildCourses();
+  renderPlanChips();
+  renderCourseList();
+  renderPreviewList();
+  refreshDetailView();
+});
+TLI_I18N.init();
+
 // 全域 ESC 關閉：關閉目前開啟中的 modal-overlay
 document.addEventListener('keydown', function(e){
   if(e.key !== 'Escape') return;
@@ -929,6 +967,6 @@ document.addEventListener('keydown', function(e){
   });
 });
 </script>
-<div class="toast hidden" id="toast">已完成</div>
+<div class="toast hidden" id="toast"></div>
 </body>
 </html>

@@ -407,8 +407,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c05.aiIntro">可以問我這張訂單的收款、發票或異動狀況。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo()">這張訂單目前卡在哪個環節？</button>
-      <button onclick="tliAskDemo2()">這張訂單的發票開了嗎？</button>
+      <button onclick="tliAskDemo()" data-i18n="c05.aiQ1">這張訂單目前卡在哪個環節？</button>
+      <button onclick="tliAskDemo2()" data-i18n="c05.aiQ2">這張訂單的發票開了嗎？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題" data-i18n-placeholder="ai.inputPlaceholder" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -493,43 +493,92 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_i18n.js"></script>
 <script>
 function T(zh,en){return window.TLI_I18N?TLI_I18N.t(zh,en):zh;}
+/* 20260930 英文化：訂單資料為中文原始碼，狀態／期別／稅別／單位等顯示字詞另建對照表，透過 TX() 顯示時查表翻譯；
+   找不到對照的字串（如方案名稱、課程名稱、發票號碼、金額）直接原樣通過，不影響既有資料邏輯判斷 */
+var C05_LABELS={
+  '分期進行中（第 3 期逾期）':'Installments in Progress (Installment 3 Overdue)',
+  '分期進行中（第 2 期逾期）':'Installments in Progress (Installment 2 Overdue)',
+  '待開票':'Pending Invoice',
+  '發票開立失敗':'Invoice Issuance Failed',
+  '3 天內到期':'Due Within 3 Days',
+  '退費處理中':'Refund Processing',
+  '已收款':'Paid',
+  '逾期 5 天':'Overdue 5 Days',
+  '逾期 3 天':'Overdue 3 Days',
+  '未到期':'Not Yet Due',
+  '未到期（3 天內）':'Not Yet Due (Within 3 Days)',
+  '已作廢':'Voided',
+  '第 1 期（頭款）':'Installment 1 (Down Payment)',
+  '第 1 期':'Installment 1',
+  '第 2 期':'Installment 2',
+  '第 3 期':'Installment 3',
+  '訂金':'Deposit',
+  '尾款':'Final Payment',
+  '暫收款':'Provisional Payment',
+  '學費免稅／教材應稅（已分張）':'Tuition Tax-exempt / Materials Taxable (Split)',
+  '學費・免稅':'Tuition · Tax-exempt',
+  '教材・應稅':'Materials · Taxable',
+  '學費免稅／教材應稅（待分張）':'Tuition Tax-exempt / Materials Taxable (Split Pending)',
+  '已開立':'Issued',
+  '待開立':'Pending',
+  '開立失敗：統一編號格式錯誤':'Issuance Failed: Invalid Tax ID Format',
+  '待收款後開立':'Pending Payment Before Issuance',
+  '已折讓':'Credited',
+  '（尚未開立）':'(Not Yet Issued)',
+  '（開立失敗）':'(Issuance Failed)',
+  '（已作廢）':'(Voided)',
+  '匯款':'Wire Transfer','信用卡':'Credit Card','現金':'Cash','LinePay':'LinePay',
+  '藍新付款連結':'NewebPay Payment Link','Stripe（海外學生）':'Stripe (Overseas Students)',
+  '現場刷卡機':'On-site Card Terminal','匯款／現金':'Wire Transfer / Cash',
+  '24 堂':'24 Classes','30 堂':'30 Classes','40 堂／班':'40 Classes/Class','16 堂':'16 Classes',
+  '10 堂':'10 Classes','12 堂':'12 Classes','20 堂':'20 Classes','8 堂':'8 Classes','0 堂':'0 Classes',
+  '1 份':'1 Copy',
+  '教材費':'Material Fee','教材授權':'Material License',
+  '課前頭款加自訂分期':'Down Payment Before Class + Custom Installments',
+  '訂金加尾款':'Deposit + Final Payment',
+  '暫收款後開發票':'Provisional Payment, Invoice After',
+  '開課後自訂分期':'Custom Installments After Class Starts',
+  '全額付清':'Paid in Full',
+  'NT$7,500／人':'NT$7,500/Person','NT$500／人':'NT$500/Person'
+};
+function TX(zh){ return T(zh, C05_LABELS[zh]||zh); }
 var ORDERS={
   '0841':{student:'王大同',studentId:'wang01',plan:'春季學期班',amount:'NT$45,000',mode:'課前頭款加自訂分期',status:'分期進行中（第 3 期逾期）',statusType:'danger',
     detail:[{item:'春季學期班・學費（B 類）',qty:1,price:'NT$42,000',disc:'—',sub:'NT$42,000'},{item:'教材費',qty:1,price:'NT$3,000',disc:'—',sub:'NT$3,000'}],
     payment:[{term:'第 1 期（頭款）',due:'2026-06-01',amount:'NT$15,000',status:'已收款',channel:'藍新付款連結'},{term:'第 2 期',due:'2026-07-20',amount:'NT$15,000',status:'已收款',channel:'現場刷卡機'},{term:'第 3 期',due:'2026-08-20',amount:'NT$15,000',status:'逾期 5 天'}],
-    invoiceType:'single',invoice:{no:'INV-2026-08841',amount:'NT$45,000',tax:'學費免稅／教材應稅（已分張）',status:'已開立',entity:'中華語文股份有限公司（統編70560259）',log:[{t:'2026-06-01',d:'發票開立：INV-2026-08841'}]},
+    invoiceType:'single',invoice:{no:'INV-2026-08841',amount:'NT$45,000',tax:'學費免稅／教材應稅（已分張）',status:'已開立',entity:'中華語文股份有限公司（統編70560259）',log:[{t:'2026-06-01',d:'發票開立：INV-2026-08841',en:'Invoice issued: INV-2026-08841'}]},
     benefit:[{item:'學期班課時',qty:'24 堂',used:'12 堂',time:'2026-06-02 10:00'}],
-    history:[{t:'2026-08-20',d:'第 3 期到期未收款，系統標記逾期'},{t:'2026-07-20',d:'第 2 期收款完成'},{t:'2026-06-02',d:'訂單成立，課時與權益入帳 24 堂課時'},{t:'2026-06-01',d:'訂單建立，收款頭款 NT$15,000'}]},
+    history:[{t:'2026-08-20',d:'第 3 期到期未收款，系統標記逾期',en:'Installment 3 due date passed without payment; system flagged as overdue'},{t:'2026-07-20',d:'第 2 期收款完成',en:'Installment 2 payment completed'},{t:'2026-06-02',d:'訂單成立，課時與權益入帳 24 堂課時',en:'Order created; 24 class hours credited'},{t:'2026-06-01',d:'訂單建立，收款頭款 NT$15,000',en:'Order created; down payment of NT$15,000 received'}]},
   '0855':{student:'Emma Chen',studentId:'emma01',plan:'中文一對一 30 堂',amount:'NT$65,000',mode:'訂金加尾款',status:'待開票',statusType:'warn',
     detail:[{item:'中文一對一 30 堂・學費（C 類）',qty:1,price:'NT$60,000',disc:'—',sub:'NT$60,000'},{item:'教材費',qty:1,price:'NT$5,000',disc:'—',sub:'NT$5,000'}],
     payment:[{term:'訂金',due:'2026-05-20',amount:'NT$20,000',status:'已收款',channel:'Stripe（海外學生）'},{term:'尾款',due:'2026-06-01',amount:'NT$45,000',status:'已收款',channel:'Stripe（海外學生）'}],
     invoiceType:'split',invoices:[{no:'（尚未開立）',amount:'NT$60,000',tax:'學費・免稅',status:'待開立',entity:'中華語文股份有限公司（統編70560259）',log:[]},{no:'（尚未開立）',amount:'NT$5,000',tax:'教材・應稅',status:'待開立',entity:'中華語文股份有限公司（統編70560259）',log:[]}],
     benefit:[{item:'中文一對一課時',qty:'30 堂',used:'30 堂',time:'2026-06-02 09:00'}],
-    history:[{t:'2026-06-01',d:'尾款收款完成，觸發開票流程'},{t:'2026-05-20',d:'訂金收款完成'},{t:'2026-05-18',d:'訂單建立'}]},
+    history:[{t:'2026-06-01',d:'尾款收款完成，觸發開票流程',en:'Final payment completed; triggered invoicing process'},{t:'2026-05-20',d:'訂金收款完成',en:'Deposit payment completed'},{t:'2026-05-18',d:'訂單建立',en:'Order created'}]},
   '0860':{student:'山田太郎',studentId:'yamada01',plan:'企業團體班（20 人）',amount:'NT$155,000',mode:'暫收款後開發票',status:'發票開立失敗',statusType:'danger',
     detail:[{item:'企業團體班・學費（BIP 類）',qty:20,price:'NT$7,500／人',disc:'團體 3%',sub:'NT$145,500'},{item:'教材費',qty:20,price:'NT$500／人',disc:'—',sub:'NT$10,000'}],
     payment:[{term:'暫收款',due:'2026-08-15',amount:'NT$155,000',status:'已收款',channel:'匯款／現金'}],
-    invoiceType:'single',invoice:{no:'（開立失敗）',amount:'NT$155,000',tax:'學費免稅／教材應稅（待分張）',status:'開立失敗：統一編號格式錯誤',entity:'中華語文股份有限公司（統編70560259）',log:[{t:'2026-08-22',d:'發票送出失敗：統一編號格式錯誤'}]},
+    invoiceType:'single',invoice:{no:'（開立失敗）',amount:'NT$155,000',tax:'學費免稅／教材應稅（待分張）',status:'開立失敗：統一編號格式錯誤',entity:'中華語文股份有限公司（統編70560259）',log:[{t:'2026-08-22',d:'發票送出失敗：統一編號格式錯誤',en:'Invoice submission failed: invalid Tax ID format'}]},
     benefit:[{item:'企業團體班課時',qty:'40 堂／班',used:'20 堂',time:'2026-08-16 14:00'}],
-    history:[{t:'2026-08-22',d:'發票送出失敗：統一編號格式錯誤，已通知顧問處理'},{t:'2026-08-15',d:'暫收款收款完成'},{t:'2026-08-10',d:'訂單建立'}]},
+    history:[{t:'2026-08-22',d:'發票送出失敗：統一編號格式錯誤，已通知顧問處理',en:'Invoice submission failed: invalid Tax ID format; advisor notified to handle'},{t:'2026-08-15',d:'暫收款收款完成',en:'Provisional payment completed'},{t:'2026-08-10',d:'訂單建立',en:'Order created'}]},
   '0872':{student:'張雅婷',studentId:'zhang01',plan:'團體班續約',amount:'NT$27,000',mode:'課前頭款加自訂分期',status:'分期進行中（第 2 期逾期）',statusType:'danger',
     detail:[{item:'團體班續約・學費（G 類）',qty:1,price:'NT$25,000',disc:'—',sub:'NT$25,000'},{item:'教材費',qty:1,price:'NT$2,000',disc:'—',sub:'NT$2,000'}],
     payment:[{term:'第 1 期（頭款）',due:'2026-07-10',amount:'NT$9,000',status:'已收款',channel:'現場刷卡機'},{term:'第 2 期',due:'2026-08-22',amount:'NT$9,000',status:'逾期 3 天'},{term:'第 3 期',due:'2026-09-22',amount:'NT$9,000',status:'未到期'}],
-    invoiceType:'single',invoice:{no:'INV-2026-08720',amount:'NT$27,000',tax:'學費免稅／教材應稅（已分張）',status:'已開立',entity:'中華語文股份有限公司（統編70560259）',log:[{t:'2026-07-10',d:'發票開立：INV-2026-08720'}]},
+    invoiceType:'single',invoice:{no:'INV-2026-08720',amount:'NT$27,000',tax:'學費免稅／教材應稅（已分張）',status:'已開立',entity:'中華語文股份有限公司（統編70560259）',log:[{t:'2026-07-10',d:'發票開立：INV-2026-08720',en:'Invoice issued: INV-2026-08720'}]},
     benefit:[{item:'團體班課時',qty:'16 堂',used:'8 堂',time:'2026-07-11 10:00'}],
-    history:[{t:'2026-08-22',d:'第 2 期到期未收款，系統標記逾期'},{t:'2026-07-10',d:'訂單建立，收款頭款 NT$9,000'}]},
+    history:[{t:'2026-08-22',d:'第 2 期到期未收款，系統標記逾期',en:'Installment 2 due date passed without payment; system flagged as overdue'},{t:'2026-07-10',d:'訂單建立，收款頭款 NT$9,000',en:'Order created; down payment of NT$9,000 received'}]},
   '0888':{student:'陳建宏',studentId:'chenjh01',plan:'彈性方案 10 堂',amount:'NT$6,000',mode:'開課後自訂分期',status:'3 天內到期',statusType:'warn',
     detail:[{item:'彈性方案・學費（C 類）',qty:1,price:'NT$6,000',disc:'—',sub:'NT$6,000'}],
     payment:[{term:'第 1 期',due:'2026-08-27',amount:'NT$6,000',status:'未到期（3 天內）'}],
     invoiceType:'single',invoice:{no:'（尚未開立）',amount:'NT$6,000',tax:'學費・免稅',status:'待收款後開立',entity:'中華語文股份有限公司（統編70560259）',log:[]},
     benefit:[{item:'彈性方案課時',qty:'10 堂',used:'0 堂',time:'—（待收款後發放）'}],
-    history:[{t:'2026-08-24',d:'訂單建立，等待收款'}]},
+    history:[{t:'2026-08-24',d:'訂單建立，等待收款',en:'Order created; awaiting payment'}]},
   '0891':{student:'王大同',studentId:'wang01',plan:'教材加購',amount:'NT$1,800',mode:'全額付清',status:'待開票',statusType:'warn',
     detail:[{item:'教材加購（NPC 教材）',qty:1,price:'NT$1,800',disc:'—',sub:'NT$1,800'}],
     payment:[{term:'第 1 期',due:'2026-08-18',amount:'NT$1,800',status:'已收款',channel:'藍新付款連結'}],
     invoiceType:'single',invoice:{no:'（尚未開立）',amount:'NT$1,800',tax:'教材・應稅',status:'待開立',entity:'中華語文股份有限公司（統編70560259）',log:[]},
     benefit:[{item:'教材授權',qty:'1 份',used:'—',time:'2026-08-18 16:00'}],
-    history:[{t:'2026-08-18',d:'收款完成，等待開立發票'}]}
+    history:[{t:'2026-08-18',d:'收款完成，等待開立發票',en:'Payment completed; awaiting invoice issuance'}]}
 };
 function qs(k){return new URLSearchParams(location.search).get(k);}
 var curNo=qs('order')||'0841';
@@ -537,23 +586,29 @@ var O=ORDERS[curNo]||ORDERS['0841'];
 
 document.getElementById('oNo').textContent='TLI-2026-'+curNo;
 var sBadge=document.getElementById('oStatus');
-sBadge.textContent=O.status;
-sBadge.className='badge '+O.statusType;
+function renderStatusBadge(){
+  sBadge.textContent=TX(O.status);
+  sBadge.className='badge '+O.statusType;
+}
+renderStatusBadge();
 function renderHeaderTexts(){
-  document.getElementById('oSub').textContent=T('方案：','Plan: ')+O.plan+T('　｜　付款模式：','   |   Payment Mode: ')+O.mode;
+  document.getElementById('oSub').textContent=T('方案：','Plan: ')+O.plan+T('　｜　付款模式：','   |   Payment Mode: ')+TX(O.mode);
   document.getElementById('bcOrder').textContent=T('訂單','Order')+' TLI-2026-'+curNo;
+  document.getElementById('iMode').textContent=TX(O.mode);
 }
 renderHeaderTexts();
 document.getElementById('iStudent').textContent=O.student;
 document.getElementById('iPlan').textContent=O.plan;
 document.getElementById('iAmount').textContent=O.amount;
-document.getElementById('iMode').textContent=O.mode;
 document.getElementById('bcStudent').textContent=O.student;
 document.getElementById('bcStudent').href='c03_student_detail.html?id='+O.studentId;
 
-document.getElementById('detailBody').innerHTML=O.detail.map(function(d){
-  return '<tr><td>'+d.item+'</td><td>'+d.qty+'</td><td>'+d.price+'</td><td>'+d.disc+'</td><td>'+d.sub+'</td></tr>';
-}).join('');
+function renderDetail(){
+  document.getElementById('detailBody').innerHTML=O.detail.map(function(d){
+    return '<tr><td>'+TX(d.item)+'</td><td>'+d.qty+'</td><td>'+TX(d.price)+'</td><td>'+d.disc+'</td><td>'+d.sub+'</td></tr>';
+  }).join('');
+}
+renderDetail();
 
 function parseMoney(s){ return Number(String(s||'').replace(/[^0-9.-]/g,''))||0; }
 function fmtMoney(n){ return 'NT$'+Math.round(n).toLocaleString('en-US'); }
@@ -567,12 +622,12 @@ function renderPayment(){
   document.getElementById('paymentBody').innerHTML=O.payment.map(function(p,i){
     var cls=p.status.indexOf('作廢')>-1?'muted':p.status.indexOf('逾期')>-1?'danger':(p.status.indexOf('未到期')>-1?'muted':'ok');
     if(p.status==='已作廢'){
-      return '<tr><td>'+p.term+'</td><td>'+p.due+'</td><td>'+p.amount+'</td><td><span class="badge '+cls+'">'+p.status+'</span></td><td style="color:#98a2b3;">'+T('已作廢，原因：','Voided, reason: ')+(p.voidReason||'—')+'</td></tr>';
+      return '<tr><td>'+TX(p.term)+'</td><td>'+p.due+'</td><td>'+p.amount+'</td><td><span class="badge '+cls+'">'+TX(p.status)+'</span></td><td style="color:#98a2b3;">'+T('已作廢，原因：','Voided, reason: ')+(p.voidReason||'—')+'</td></tr>';
     }
     var action=(p.status==='已收款'?'':'<button class="btn sm primary" onclick="tliOpenPayModal('+i+')">'+T('登記收款','Register Payment')+'</button> ')+
       '<button class="btn sm" onclick="tliOpenPayEditModal('+i+')">'+T('編輯','Edit')+'</button> '+
       '<button class="btn sm" onclick="tliOpenVoidPayModal('+i+')">'+T('刪除','Delete')+'</button>';
-    return '<tr><td>'+p.term+'</td><td>'+p.due+'</td><td>'+p.amount+'</td><td><span class="badge '+cls+'">'+p.status+'</span></td><td>'+action+'</td></tr>';
+    return '<tr><td>'+TX(p.term)+'</td><td>'+p.due+'</td><td>'+p.amount+'</td><td><span class="badge '+cls+'">'+TX(p.status)+'</span></td><td>'+action+'</td></tr>';
   }).join('');
 }
 renderPayment();
@@ -592,7 +647,7 @@ function invoiceActionsHtml(iv,kind,idx){
 function invoiceLogHtml(iv,kind,idx){
   var logId='invLog_'+kind+'_'+idx;
   var log=iv.log||[];
-  var items=log.map(function(l){return '<li><div class="t">'+l.t+'</div>'+l.d+'</li>';}).join('') || '<li style="color:var(--gray-400);border:none;padding-left:0;">'+T('尚無操作紀錄','No operation records yet')+'</li>';
+  var items=log.map(function(l){return '<li><div class="t">'+l.t+'</div>'+T(l.d,l.en||l.d)+'</li>';}).join('') || '<li style="color:var(--gray-400);border:none;padding-left:0;">'+T('尚無操作紀錄','No operation records yet')+'</li>';
   return '<div style="margin-top:8px;"><a href="javascript:void(0)" id="'+logId+'_link" style="font-size:11.5px;color:var(--gray-500);" onclick="tliToggleInvLog(\''+logId+'\',this)">'+T('操作紀錄','Log')+'（'+log.length+'）▾</a>'+
     '<ul id="'+logId+'" class="timeline" style="display:none;margin-top:6px;">'+items+'</ul></div>';
 }
@@ -608,8 +663,8 @@ function renderInvoice(){
     panel.innerHTML='<div class="note">'+T('此訂單同時含免稅（學費）與應稅（教材）項目，依規則自動分張為兩張發票。','This order includes both tax-exempt (tuition) and taxable (materials) items, so two invoices are issued automatically per policy.')+'</div>'+
       O.invoices.map(function(iv,i){
         var stCls=iv.status.indexOf('失敗')>-1?'danger':(iv.status==='已折讓'?'warn':iv.status.indexOf('待')>-1?'warn':iv.status==='已作廢'?'muted':'ok');
-        return '<div class="invoice-card"><div class="row"><span>'+T('發票','Invoice')+' '+(i+1)+'：'+iv.tax+'</span><span class="badge '+stCls+'">'+iv.status+'</span></div>'+
-          '<div class="row"><span>'+T('發票號碼','Invoice No.')+'</span><b>'+iv.no+'</b></div><div class="row"><span>'+T('金額','Amount')+'</span><b>'+iv.amount+'</b></div>'+
+        return '<div class="invoice-card"><div class="row"><span>'+T('發票','Invoice')+' '+(i+1)+'：'+TX(iv.tax)+'</span><span class="badge '+stCls+'">'+TX(iv.status)+'</span></div>'+
+          '<div class="row"><span>'+T('發票號碼','Invoice No.')+'</span><b>'+TX(iv.no)+'</b></div><div class="row"><span>'+T('金額','Amount')+'</span><b>'+iv.amount+'</b></div>'+
           '<div class="row"><span>'+T('開票抬頭統編','Billing Entity / Tax ID')+'</span><b>'+(iv.entity||'—')+'</b></div>'+
           '<div style="margin-top:8px;">'+invoiceActionsHtml(iv,'split',i)+'</div>'+
           invoiceLogHtml(iv,'split',i)+'</div>';
@@ -617,8 +672,8 @@ function renderInvoice(){
   }else{
     var iv=O.invoice;
     var stCls=iv.status.indexOf('失敗')>-1?'danger':(iv.status==='已折讓'?'warn':iv.status.indexOf('待')>-1?'warn':iv.status==='已作廢'?'muted':'ok');
-    panel.innerHTML='<div class="invoice-card"><div class="row"><span>'+T('發票','Invoice')+'（'+iv.tax+'）</span><span class="badge '+stCls+'">'+iv.status+'</span></div>'+
-      '<div class="row"><span>'+T('發票號碼','Invoice No.')+'</span><b>'+iv.no+'</b></div><div class="row"><span>'+T('金額','Amount')+'</span><b>'+iv.amount+'</b></div>'+
+    panel.innerHTML='<div class="invoice-card"><div class="row"><span>'+T('發票','Invoice')+'（'+TX(iv.tax)+'）</span><span class="badge '+stCls+'">'+TX(iv.status)+'</span></div>'+
+      '<div class="row"><span>'+T('發票號碼','Invoice No.')+'</span><b>'+TX(iv.no)+'</b></div><div class="row"><span>'+T('金額','Amount')+'</span><b>'+iv.amount+'</b></div>'+
       '<div class="row"><span>'+T('開票抬頭統編','Billing Entity / Tax ID')+'</span><b>'+(iv.entity||'—')+'</b></div>'+
       (iv.status.indexOf('失敗')>-1?'<div class="note" style="color:#93440f;background:#fdf0e6;">'+T('錯誤訊息：統一編號格式錯誤，請至學生 360 檢視確認正確統編後重新送出。','Error: Invalid Tax ID format. Please check the correct Tax ID in Student 360 and resend.')+'</div>':'')+
       '<div style="margin-top:8px;">'+invoiceActionsHtml(iv,'single',0)+'</div>'+
@@ -629,14 +684,16 @@ renderInvoice();
 
 function renderHistory(){
   document.getElementById('historyList').innerHTML=O.history.map(function(h){
-    return '<li><div class="t">'+h.t+'</div>'+h.d+'</li>';
+    return '<li><div class="t">'+h.t+'</div>'+T(h.d,h.en||h.d)+'</li>';
   }).join('');
 }
 
 var __curPayIdx=null,__curInvKind=null,__curInvIdx=null,__curInvAction=null;
-var PAY_WAYS=['匯款','信用卡','現金','LinePay','藍新付款連結','Stripe（海外學生）','現場刷卡機'];
-var PAY_WAY_EN={'匯款':'Wire Transfer','信用卡':'Credit Card','現金':'Cash','LinePay':'LinePay','藍新付款連結':'NewebPay Payment Link','Stripe（海外學生）':'Stripe (Overseas Students)','現場刷卡機':'On-site Card Terminal'};
-var PAY_WAYS_NEW=['匯款','信用卡','現金','LinePay'];
+// 20260930 修正：收款方式改讀主檔 paymentMethods，不再各頁各寫一套
+var PAY_WAYS=TLI_MASTERS.paymentMethods.filter(function(w){return w.enabled;}).map(function(w){return w.name;});
+var PAY_WAY_EN={};
+TLI_MASTERS.paymentMethods.forEach(function(w){ PAY_WAY_EN[w.name]=w.en; });
+var PAY_WAYS_NEW=TLI_MASTERS.paymentMethods.filter(function(w){return w.enabled&&w.availableForNew;}).map(function(w){return w.name;});
 function renderPayModalWayOptions(){
   var sel=document.getElementById('payModalWay');
   if(!sel)return;
@@ -647,7 +704,7 @@ function tliCloseModal(id){document.getElementById(id).classList.remove('open');
 function tliOpenPayEditModal(i){
   __curPayIdx=i;
   var p=O.payment[i];
-  document.getElementById('payEditModalTerm').textContent=p.term;
+  document.getElementById('payEditModalTerm').textContent=TX(p.term);
   document.getElementById('payEditAmount').value=parseMoney(p.amount);
   document.getElementById('payEditDate').value=p.due;
   var wayOptions=PAY_WAYS.slice();
@@ -663,7 +720,7 @@ function tliConfirmPayEdit(){
   p.due=document.getElementById('payEditDate').value;
   p.channel=document.getElementById('payEditWay').value;
   p.proof=document.getElementById('payEditProof').value.trim();
-  O.history.unshift({t:'2026-08-26',d:'收款紀錄「'+p.term+'」已修改為'+p.amount+'（'+p.channel+'／憑證：'+(p.proof||'—')+'），操作人：陳建豪'});
+  O.history.unshift({t:'2026-08-26',d:'收款紀錄「'+p.term+'」已修改為'+p.amount+'（'+p.channel+'／憑證：'+(p.proof||'—')+'），操作人：陳建豪',en:'Payment record "'+TX(p.term)+'" updated to '+p.amount+' ('+TX(p.channel)+' / Proof: '+(p.proof||'—')+'), by 陳建豪'});
   renderPayment();
   renderHistory();
   tliCloseModal('payEditModal');
@@ -672,7 +729,7 @@ function tliConfirmPayEdit(){
 function tliOpenVoidPayModal(i){
   __curPayIdx=i;
   var p=O.payment[i];
-  document.getElementById('voidPayModalTerm').textContent=p.term;
+  document.getElementById('voidPayModalTerm').textContent=TX(p.term);
   document.getElementById('voidPayReason').value='';
   document.getElementById('voidPayModal').classList.add('open');
 }
@@ -682,7 +739,7 @@ function tliConfirmVoidPay(){
   var p=O.payment[__curPayIdx];
   p.status='已作廢';
   p.voidReason=reason;
-  O.history.unshift({t:'2026-08-26',d:'收款紀錄「'+p.term+'」（'+p.amount+'）已作廢，原因：'+reason+'，操作人：陳建豪'});
+  O.history.unshift({t:'2026-08-26',d:'收款紀錄「'+p.term+'」（'+p.amount+'）已作廢，原因：'+reason+'，操作人：陳建豪',en:'Payment record "'+TX(p.term)+'" ('+p.amount+') voided, reason: '+reason+', by 陳建豪'});
   renderPayment();
   renderHistory();
   tliCloseModal('voidPayModal');
@@ -691,7 +748,7 @@ function tliConfirmVoidPay(){
 function tliOpenPayModal(i){
   __curPayIdx=i;
   var p=O.payment[i];
-  document.getElementById('payModalTerm').textContent=p.term;
+  document.getElementById('payModalTerm').textContent=TX(p.term);
   document.getElementById('payModalAmount').textContent=p.amount;
   document.getElementById('payModal').classList.add('open');
 }
@@ -700,7 +757,7 @@ function tliConfirmPay(){
   p.status='已收款';
   var way=document.getElementById('payModalWay').value;
   var date=document.getElementById('payModalDate').value;
-  O.history.unshift({t:date,d:p.term+'收款完成（'+way+'，登記人：陳建豪），已通知學生並更新收據'});
+  O.history.unshift({t:date,d:p.term+'收款完成（'+way+'，登記人：陳建豪），已通知學生並更新收據',en:TX(p.term)+' payment completed ('+TX(way)+', registered by 陳建豪); student notified and receipt updated'});
   renderPayment();
   renderHistory();
   tliCloseModal('payModal');
@@ -714,10 +771,13 @@ function tliOpenRefundModal(){
 }
 function tliConfirmRefund(){
   var amt=document.getElementById('refundAmount').value||'0';
-  var reason=document.getElementById('refundReason').value||'（未填寫原因）';
-  sBadge.textContent='退費處理中';
-  sBadge.className='badge danger';
-  O.history.unshift({t:'2026-08-25',d:'退費申請已送出：NT$'+amt+'，原因：'+reason+'，已通知財務並回收未使用課時權益'});
+  var reasonRaw=document.getElementById('refundReason').value.trim();
+  var reason=reasonRaw||'（未填寫原因）';
+  var reasonEn=reasonRaw||'(No reason provided)';
+  O.status='退費處理中';
+  O.statusType='danger';
+  renderStatusBadge();
+  O.history.unshift({t:'2026-08-25',d:'退費申請已送出：NT$'+amt+'，原因：'+reason+'，已通知財務並回收未使用課時權益',en:'Refund request submitted: NT$'+amt+', reason: '+reasonEn+'; finance notified and unused class-hour benefits reclaimed'});
   renderHistory();
   tliCloseModal('refundModal');
   tliToast(T('退費已送出，訂單狀態更新為「退費處理中」','Refund submitted; order status updated to "Refund Processing"'));
@@ -730,19 +790,19 @@ function tliOpenInvoiceModal(kind,idx,action){
   var body='';
   if(action==='issue'||action==='resend'||action==='void'){
     var notes={issue:T('送出後將呼叫財政部電子發票平台開立，並自動寄送電子發票通知給學生。','Submitting will call the Ministry of Finance e-invoice platform to issue the invoice and automatically notify the student.'),resend:T('將以更正後的統一編號重新送出開立申請。','Will resend the issuance request with the corrected Tax ID.'),void:T('作廢後原發票號碼失效，需重新開立才可再次提供給學生。','After voiding, the original invoice number becomes invalid; a new one must be issued before it can be provided to the student again.')};
-    body='<div class="formrow"><label>'+T('項目','Item')+'</label><div class="static">'+iv.tax+'</div></div>'+
+    body='<div class="formrow"><label>'+T('項目','Item')+'</label><div class="static">'+TX(iv.tax)+'</div></div>'+
       '<div class="formrow"><label>'+T('金額','Amount')+'</label><div class="static">'+iv.amount+'</div></div>'+
       '<div class="note">'+notes[action]+'</div>';
   } else if(action==='editEntity'){
-    body='<div class="formrow"><label>'+T('發票號碼','Invoice No.')+'</label><div class="static">'+iv.no+'</div></div>'+
+    body='<div class="formrow"><label>'+T('發票號碼','Invoice No.')+'</label><div class="static">'+TX(iv.no)+'</div></div>'+
       '<div class="formrow"><label>'+T('抬頭統編','Entity / Tax ID')+'</label><input type="text" id="invModalEntity" value="'+(iv.entity||'').replace(/"/g,'&quot;')+'"></div>'+
       '<div class="note">'+T('修改抬頭統編需在稅局規範時限內辦理，系統將記錄本次異動。','Editing the entity/Tax ID must be done within the tax authority\'s deadline; the system will log this change.')+'</div>';
   } else if(action==='credit'){
-    body='<div class="formrow"><label>'+T('發票號碼','Invoice No.')+'</label><div class="static">'+iv.no+'</div></div>'+
+    body='<div class="formrow"><label>'+T('發票號碼','Invoice No.')+'</label><div class="static">'+TX(iv.no)+'</div></div>'+
       '<div class="formrow"><label>'+T('折讓金額','Credit Amount')+'</label><input type="number" id="invModalCreditAmt" value="'+parseMoney(iv.amount)+'"></div>'+
       '<div class="formrow"><label>'+T('折讓原因','Credit Reason')+'</label><input type="text" id="invModalCreditReason" placeholder="'+T('例：課程異動退部分金額','e.g. Partial refund due to course change')+'"></div>';
   } else if(action==='reissue'){
-    body='<div class="formrow"><label>'+T('原發票號碼','Original Invoice No.')+'</label><div class="static">'+iv.no+'</div></div>'+
+    body='<div class="formrow"><label>'+T('原發票號碼','Original Invoice No.')+'</label><div class="static">'+TX(iv.no)+'</div></div>'+
       '<div class="formrow"><label>'+T('金額','Amount')+'</label><div class="static">'+iv.amount+'</div></div>'+
       '<div class="note">'+T('將以同品項、同金額補開一張新發票。','A new invoice will be reissued with the same item and amount.')+'</div>';
   }
@@ -755,46 +815,51 @@ function tliConfirmInvoice(){
   if(__curInvAction==='void'){
     iv.status='已作廢';
     iv.no='（已作廢）';
-    iv.log.unshift({t:'2026-08-26',d:'發票已作廢'});
-    O.history.unshift({t:'2026-08-26',d:'發票已作廢：'+iv.tax});
+    iv.log.unshift({t:'2026-08-26',d:'發票已作廢',en:'Invoice voided'});
+    O.history.unshift({t:'2026-08-26',d:'發票已作廢：'+iv.tax,en:'Invoice voided: '+TX(iv.tax)});
     renderInvoice(); renderHistory(); tliCloseModal('invModal');
     tliToast(T('發票已作廢','Invoice voided'));
   } else if(__curInvAction==='editEntity'){
     var newEntity=document.getElementById('invModalEntity').value.trim();
     iv.entity=newEntity;
-    iv.log.unshift({t:'2026-08-26',d:'抬頭統編已修改為「'+newEntity+'」'});
-    O.history.unshift({t:'2026-08-26',d:'發票 '+iv.no+' 抬頭統編已修改為「'+newEntity+'」'});
+    iv.log.unshift({t:'2026-08-26',d:'抬頭統編已修改為「'+newEntity+'」',en:'Billing entity/Tax ID updated to "'+newEntity+'"'});
+    O.history.unshift({t:'2026-08-26',d:'發票 '+iv.no+' 抬頭統編已修改為「'+newEntity+'」',en:'Invoice '+iv.no+' billing entity/Tax ID updated to "'+newEntity+'"'});
     renderInvoice(); renderHistory(); tliCloseModal('invModal');
     tliToast(T('已修改抬頭統編','Entity/Tax ID updated'));
   } else if(__curInvAction==='credit'){
     var amt=Number(document.getElementById('invModalCreditAmt').value)||0;
-    var reason=document.getElementById('invModalCreditReason').value.trim()||'（未填原因）';
+    var reasonRaw=document.getElementById('invModalCreditReason').value.trim();
+    var reason=reasonRaw||'（未填原因）';
+    var reasonEn=reasonRaw||'(No reason provided)';
     iv.status='已折讓';
-    iv.log.unshift({t:'2026-08-26',d:'開立折讓 '+fmtMoney(amt)+'，原因：'+reason});
-    O.history.unshift({t:'2026-08-26',d:'發票 '+iv.no+' 開立折讓 '+fmtMoney(amt)+'，原因：'+reason});
+    iv.log.unshift({t:'2026-08-26',d:'開立折讓 '+fmtMoney(amt)+'，原因：'+reason,en:'Credit note issued for '+fmtMoney(amt)+', reason: '+reasonEn});
+    O.history.unshift({t:'2026-08-26',d:'發票 '+iv.no+' 開立折讓 '+fmtMoney(amt)+'，原因：'+reason,en:'Invoice '+iv.no+' credit note issued for '+fmtMoney(amt)+', reason: '+reasonEn});
     renderInvoice(); renderHistory(); tliCloseModal('invModal');
     tliToast(T('已開立折讓','Credit note issued'));
   } else if(__curInvAction==='reissue'){
     var oldNo=iv.no;
     iv.no='INV-2026-0'+(9000+Math.floor(Math.random()*900));
     iv.status='已開立';
-    iv.log.unshift({t:'2026-08-26',d:'補開發票 '+iv.no+'（原發票 '+oldNo+'）'});
-    O.history.unshift({t:'2026-08-26',d:'補開發票 '+iv.no+'（原發票 '+oldNo+'）'});
+    iv.log.unshift({t:'2026-08-26',d:'補開發票 '+iv.no+'（原發票 '+oldNo+'）',en:'Invoice reissued: '+iv.no+' (original invoice '+oldNo+')'});
+    O.history.unshift({t:'2026-08-26',d:'補開發票 '+iv.no+'（原發票 '+oldNo+'）',en:'Invoice reissued: '+iv.no+' (original invoice '+oldNo+')'});
     renderInvoice(); renderHistory(); tliCloseModal('invModal');
     tliToast(T('已補開發票','Invoice reissued'));
   } else {
     iv.no='INV-2026-0'+(9000+Math.floor(Math.random()*900));
     iv.status='已開立';
-    iv.log.unshift({t:'2026-08-26',d:'發票已開立：'+iv.no+'，已同步寄送電子發票通知給學生'});
-    O.history.unshift({t:'2026-08-26',d:'發票已開立：'+iv.no+'，已同步寄送電子發票通知給學生'});
+    iv.log.unshift({t:'2026-08-26',d:'發票已開立：'+iv.no+'，已同步寄送電子發票通知給學生',en:'Invoice issued: '+iv.no+'; e-invoice notification sent to student'});
+    O.history.unshift({t:'2026-08-26',d:'發票已開立：'+iv.no+'，已同步寄送電子發票通知給學生',en:'Invoice issued: '+iv.no+'; e-invoice notification sent to student'});
     renderInvoice(); renderHistory(); tliCloseModal('invModal');
     tliToast(T('發票已開立並寄送給學生','Invoice issued and sent to the student'));
   }
 }
 
-document.getElementById('benefitBody').innerHTML=O.benefit.map(function(b){
-  return '<tr><td>'+b.item+'</td><td>'+b.qty+'</td><td>'+b.used+'</td><td>'+b.time+'</td></tr>';
-}).join('');
+function renderBenefit(){
+  document.getElementById('benefitBody').innerHTML=O.benefit.map(function(b){
+    return '<tr><td>'+TX(b.item)+'</td><td>'+TX(b.qty)+'</td><td>'+TX(b.used)+'</td><td>'+b.time+'</td></tr>';
+  }).join('');
+}
+renderBenefit();
 
 renderHistory();
 
@@ -830,15 +895,15 @@ function tliAppendMsg(role,html){
   body.scrollTop=body.scrollHeight;
 }
 function tliAskDemo(){
-  tliAppendMsg('user','這張訂單目前卡在哪個環節？');
-  tliAppendMsg('bot','訂單 TLI-2026-'+curNo+' 目前狀態：'+O.status+'。<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">資料來源：3.0 中台／訂單工具</div>');
+  tliAppendMsg('user',T('這張訂單目前卡在哪個環節？','Which step is this order currently stuck at?'));
+  tliAppendMsg('bot',T('訂單 ','Order ')+'TLI-2026-'+curNo+T(' 目前狀態：','’s current status: ')+TX(O.status)+T('。','.')+'<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">'+T('資料來源：3.0 中台／訂單工具','Source: 3.0 Platform / Order Tool')+'</div>');
 }
 function tliAskDemo2(){
-  tliAppendMsg('user','這張訂單的發票開了嗎？');
+  tliAppendMsg('user',T('這張訂單的發票開了嗎？','Has the invoice been issued for this order?'));
   var msg=O.invoiceType==='split'
-    ? O.invoices.map(function(iv,i){return '發票 '+(i+1)+'（'+iv.tax+'）：'+iv.status+'　'+iv.no;}).join('<br>')
-    : '發票（'+O.invoice.tax+'）：'+O.invoice.status+'　'+O.invoice.no;
-  tliAppendMsg('bot',msg+'<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">資料來源：3.0 中台／發票模組</div>');
+    ? O.invoices.map(function(iv,i){return T('發票 ','Invoice ')+(i+1)+'（'+TX(iv.tax)+'）：'+TX(iv.status)+'　'+TX(iv.no);}).join('<br>')
+    : T('發票','Invoice')+'（'+TX(O.invoice.tax)+'）：'+TX(O.invoice.status)+'　'+TX(O.invoice.no);
+  tliAppendMsg('bot',msg+'<div style="margin-top:6px;font-size:11px;color:#667085;border-top:1px dashed #D0D5DD;padding-top:6px;">'+T('資料來源：3.0 中台／發票模組','Source: 3.0 Platform / Invoice Module')+'</div>');
 }
 function tliAskFree(){
   var input=document.getElementById('aiInput');
@@ -846,7 +911,7 @@ function tliAskFree(){
   if(!v)return;
   tliAppendMsg('user',v);
   input.value='';
-  setTimeout(function(){tliAppendMsg('bot','此問題會查詢 3.0 中台訂單資料後回覆。');},300);
+  setTimeout(function(){tliAppendMsg('bot',T('此問題會查詢 3.0 中台訂單資料後回覆。','This question will be answered after querying the 3.0 Platform order data.'));},300);
 }
 
 function tliToggleDropdown(e,id){
@@ -869,10 +934,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -881,7 +946,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -927,7 +992,7 @@ document.addEventListener('keydown', function(e){
     el.classList.remove('open');
   });
 });
-if (window.TLI_I18N) { TLI_I18N.onRefresh(renderHeaderTexts); TLI_I18N.onRefresh(renderPayment); TLI_I18N.onRefresh(renderInvoice); TLI_I18N.onRefresh(renderPayModalWayOptions); TLI_I18N.init(); }
+if (window.TLI_I18N) { TLI_I18N.onRefresh(renderStatusBadge); TLI_I18N.onRefresh(renderHeaderTexts); TLI_I18N.onRefresh(renderDetail); TLI_I18N.onRefresh(renderPayment); TLI_I18N.onRefresh(renderInvoice); TLI_I18N.onRefresh(renderBenefit); TLI_I18N.onRefresh(renderHistory); TLI_I18N.onRefresh(renderPayModalWayOptions); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
 </script>
 <script>
 function toggleNavGroup(ev, gid){

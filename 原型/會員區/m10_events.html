@@ -185,49 +185,48 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 </head>
 <body>
 <div class="app has-side">
-  <nav class="side-nav" aria-label="主導覽">
-    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-identity">Emma Johnson｜學員</div>
-    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a class="side-link active" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>我的方案</a>
-    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
-    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>回官網</a>
+  <nav class="side-nav" aria-label="主導覽" data-i18n-aria-label="member.nav.aria">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity">Emma Johnson｜<span data-i18n="member.role.student">學員</span></div>
+    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a class="side-link active" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
+    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
+    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
   </nav>
 
   <header class="topbar">
     <div class="topbar-left">
-      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-      <div class="topbar-title" data-i18n-zh="我的活動" data-i18n-en="My Events">我的活動</div>
+      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a>
+      <div class="topbar-title" data-i18n="m10.title">我的活動</div>
     </div>
     <div class="topbar-actions">
-      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程">
+      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程" data-i18n-aria-label="member.explore" data-i18n-title="member.explore">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        <span class="explore-link-text">探索課程</span>
+        <span class="explore-link-text" data-i18n="member.explore">探索課程</span>
       </a>
-      <select class="mini-select" id="langSelect" aria-label="語言與幣別" onchange="handleLangCurrency(this)"><option value="zh-TW">繁體中文・TWD</option><option value="zh-CN">简体中文・CNY</option><option value="en">English・USD</option></select>
-      <button class="bell-btn" onclick="toggleBell()" aria-label="通知">
+      <button class="bell-btn" onclick="toggleBell()" aria-label="通知" data-i18n-aria-label="member.notifications">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
         <span class="dot"></span>
       </button>
       <div class="bell-panel" id="bellPanel">
-        <h4>通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p>你報名的活動即將開始</p><span>今天 09:20</span></div></div>
+        <h4 data-i18n="member.notifications">通知</h4>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="m10.notif.upcoming">你報名的活動即將開始</p><span><span data-i18n="member.today">今天</span> 09:20</span></div></div>
       </div>
     </div>
   </header>
 
   <main class="content">
-    <nav class="nav-segment" aria-label="次選單">
-      <a class="nav-segment-link" href="m02_booking.html">團體與活動報名</a>
-      <a class="nav-segment-link" href="m14_chat_booking.html">聊天室場次</a>
-      <a class="nav-segment-link active" href="m10_events.html">活動</a>
+    <nav class="nav-segment" aria-label="次選單" data-i18n-aria-label="m10.nav.segmentAria">
+      <a class="nav-segment-link" href="m02_booking.html" data-i18n="m10.nav.groupBooking">團體與活動報名</a>
+      <a class="nav-segment-link" href="m14_chat_booking.html" data-i18n="m10.nav.chatBooking">聊天室場次</a>
+      <a class="nav-segment-link active" href="m10_events.html" data-i18n="m10.nav.events">活動</a>
     </nav>
 
-    <p class="page-h">我的活動</p>
-    <p class="page-sub">依時間排序掌握已報名與可報名的線上活動，開課前 15 分鐘可進入線上教室。</p>
+    <p class="page-h" data-i18n="m10.title">我的活動</p>
+    <p class="page-sub" data-i18n="m10.sub">依時間排序掌握已報名與可報名的線上活動，開課前 15 分鐘可進入線上教室。</p>
 
     <!-- 最近一場（我已報名且最接近現在的一場，開課中優先） -->
     <div class="card event-reg-card hero-card hidden" id="heroCard"></div>
@@ -235,31 +234,31 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <!-- 工具列：狀態 / 類型 / 費用 / 搜尋 / 排序 -->
     <div class="toolbar">
       <div class="toolbar-row2">
-        <input class="search-input" id="searchInput" type="search" placeholder="搜尋活動名稱" aria-label="搜尋活動名稱" oninput="onFiltersChanged()">
-        <select class="tool-select" id="statusFilter" aria-label="狀態" onchange="onFiltersChanged()">
-          <option value="all">全部狀態</option>
-          <option value="registered">已報名</option>
-          <option value="available">可報名</option>
-          <option value="waitlisted">候補中</option>
-          <option value="ended">已結束</option>
+        <input class="search-input" id="searchInput" type="search" placeholder="搜尋活動名稱" aria-label="搜尋活動名稱" oninput="onFiltersChanged()" data-i18n-placeholder="m10.search.placeholder" data-i18n-aria-label="m10.search.placeholder">
+        <select class="tool-select" id="statusFilter" aria-label="狀態" onchange="onFiltersChanged()" data-i18n-aria-label="m10.filter.statusAria">
+          <option value="all" data-i18n="m10.filter.statusAll">全部狀態</option>
+          <option value="registered" data-i18n="m10.status.registered">已報名</option>
+          <option value="available" data-i18n="m10.status.available">可報名</option>
+          <option value="waitlisted" data-i18n="m10.status.waitlisted">候補中</option>
+          <option value="ended" data-i18n="m10.status.ended">已結束</option>
         </select>
-        <select class="tool-select" id="typeFilter" aria-label="活動類型" onchange="onFiltersChanged()">
-          <option value="all">全部類型</option>
-          <option value="講座">講座</option>
-          <option value="直播工作坊">直播工作坊</option>
-          <option value="體驗場">體驗場</option>
-          <option value="說明會">說明會</option>
+        <select class="tool-select" id="typeFilter" aria-label="活動類型" onchange="onFiltersChanged()" data-i18n-aria-label="m10.filter.typeAria">
+          <option value="all" data-i18n="m10.filter.typeAll">全部類型</option>
+          <option value="講座" data-i18n="m10.type.lecture">講座</option>
+          <option value="直播工作坊" data-i18n="m10.type.workshop">直播工作坊</option>
+          <option value="體驗場" data-i18n="m10.type.trial">體驗場</option>
+          <option value="說明會" data-i18n="m10.type.infoSession">說明會</option>
         </select>
-        <button type="button" class="more-filter-toggle" id="moreFilterBtn" onclick="toggleMoreFilter()" aria-expanded="false">更多篩選 ▾</button>
+        <button type="button" class="more-filter-toggle" id="moreFilterBtn" onclick="toggleMoreFilter()" aria-expanded="false" data-i18n="m10.moreFilter">更多篩選 ▾</button>
         <div class="more-filter-panel" id="moreFilterPanel">
-          <select class="tool-select" id="feeFilter" aria-label="費用" onchange="onFiltersChanged()">
-            <option value="all">全部費用</option>
-            <option value="free">免費</option>
-            <option value="paid">付費</option>
+          <select class="tool-select" id="feeFilter" aria-label="費用" onchange="onFiltersChanged()" data-i18n-aria-label="m10.filter.feeAria">
+            <option value="all" data-i18n="m10.filter.feeAll">全部費用</option>
+            <option value="free" data-i18n="m10.free">免費</option>
+            <option value="paid" data-i18n="m10.paid">付費</option>
           </select>
-          <select class="tool-select" id="sortSelect" aria-label="排序" onchange="onFiltersChanged()">
-            <option value="asc">時間近→遠</option>
-            <option value="desc">時間遠→近</option>
+          <select class="tool-select" id="sortSelect" aria-label="排序" onchange="onFiltersChanged()" data-i18n-aria-label="m10.filter.sortAria">
+            <option value="asc" data-i18n="m10.sort.soonest">時間近→遠</option>
+            <option value="desc" data-i18n="m10.sort.latest">時間遠→近</option>
           </select>
         </div>
       </div>
@@ -269,26 +268,26 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div class="event-list" id="eventList"></div>
     <div class="empty-state hidden" id="listEmpty">
       <div class="e-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></div>
-      <h4>沒有符合條件的活動</h4>
-      <p>試試調整篩選條件，或清空搜尋關鍵字</p>
+      <h4 data-i18n="m10.empty.title">沒有符合條件的活動</h4>
+      <p data-i18n="m10.empty.desc">試試調整篩選條件，或清空搜尋關鍵字</p>
     </div>
-    <button type="button" class="btn btn-outline btn-block load-more-btn hidden" id="loadMoreBtn" onclick="loadMore()">載入更多</button>
+    <button type="button" class="btn btn-outline btn-block load-more-btn hidden" id="loadMoreBtn" onclick="loadMore()" data-i18n="m10.loadMore">載入更多</button>
 
     <div class="footer-line">
-      <span class="small muted">找不到想要的場次？</span>
+      <span class="small muted" data-i18n="m10.footer.notFound">找不到想要的場次？</span>
       <a class="explore-link" href="../公開網站/p09_events.html">
-        探索更多活動
+        <span data-i18n="m10.footer.exploreMore">探索更多活動</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </main>
 
   <nav class="bottom-nav">
-    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a href="m02_booking.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a href="m02_booking.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
   </nav>
 </div>
 
@@ -297,22 +296,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   <div class="sheet">
     <div class="sheet-handle"></div>
     <div style="text-align:center;padding:6px 0 4px;">
-      <h3 id="zoomTitle">進入線上教室</h3>
+      <h3 id="zoomTitle" data-i18n="m10.enterClassroom">進入線上教室</h3>
       <p class="muted small" id="zoomDetail">－</p>
     </div>
     <div class="divider"></div>
     <div id="crVerifying" style="text-align:center;padding:6px 0 10px;">
       <div class="cr-spinner"></div>
-      <p style="margin:0;font-size:13.5px;font-weight:700;">身分驗證中…</p>
+      <p style="margin:0;font-size:13.5px;font-weight:700;" data-i18n="m10.verifying">身分驗證中…</p>
     </div>
     <div id="crReady" class="hidden" style="text-align:center;padding:2px 0 10px;">
       <svg class="cr-ready-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-      <p style="margin:0;font-size:13.5px;font-weight:700;">已為您開啟專屬活動教室（每場唯一會議，需老師放行）</p>
-      <p class="cr-note">教室連結不可轉傳，僅本人登入後可進入</p>
+      <p style="margin:0;font-size:13.5px;font-weight:700;" data-i18n="m10.classroomReady">已為您開啟專屬活動教室（每場唯一會議，需老師放行）</p>
+      <p class="cr-note" data-i18n="m10.classroomNote">教室連結不可轉傳，僅本人登入後可進入</p>
     </div>
     <div class="stack">
-      <button class="btn btn-primary btn-block hidden" id="crEnterBtn" onclick="confirmEnterClassroom()">前往教室</button>
-      <button class="btn btn-outline btn-block" onclick="closeZoomModal()">關閉</button>
+      <button class="btn btn-primary btn-block hidden" id="crEnterBtn" onclick="confirmEnterClassroom()" data-i18n="m10.goToClassroom">前往教室</button>
+      <button class="btn btn-outline btn-block" onclick="closeZoomModal()" data-i18n="member.close">關閉</button>
     </div>
   </div>
 </div>
@@ -321,11 +320,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="sheet-overlay hidden" id="cancelOverlay" onclick="if(event.target===this) this.classList.add('hidden')">
   <div class="sheet">
     <div class="sheet-handle"></div>
-    <h3>確定要取消報名嗎？</h3>
-    <p class="muted small" id="cancelDetail">取消後名額將釋出給候補學員。</p>
+    <h3 data-i18n="m10.cancelConfirmTitle">確定要取消報名嗎？</h3>
+    <p class="muted small" id="cancelDetail" data-i18n="m10.cancelConfirmDesc">取消後名額將釋出給候補學員。</p>
     <div class="stack" style="margin-top:14px;">
-      <button class="btn btn-danger-outline btn-block" onclick="confirmCancelRegistration()">確認取消報名</button>
-      <button class="btn btn-outline btn-block" onclick="document.getElementById('cancelOverlay').classList.add('hidden')">再想想</button>
+      <button class="btn btn-danger-outline btn-block" onclick="confirmCancelRegistration()" data-i18n="m10.confirmCancel">確認取消報名</button>
+      <button class="btn btn-outline btn-block" onclick="document.getElementById('cancelOverlay').classList.add('hidden')" data-i18n="m10.keepIt">再想想</button>
     </div>
   </div>
 </div>
@@ -338,16 +337,25 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 </div>
 
-<div class="toast hidden" id="toast">已完成</div>
+<div class="toast hidden" id="toast"></div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_member.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
-var TLI_RATES={TWD:{rate:1,symbol:'NT$'},USD:{rate:31.5,symbol:'US$'},JPY:{rate:0.211,symbol:'¥'}};
+var TLI_RATES={TWD:{rate:1,symbol:'NT$'},USD:{rate:31.5,symbol:'US$'},JPY:{rate:0.211,symbol:'¥'},CNY:{rate:4.4,symbol:'CN¥'},EUR:{rate:35.5,symbol:'€'}};
 function tliFmt(amountTWD,cur){
   var r=TLI_RATES[cur]||TLI_RATES.TWD;
   var v=amountTWD/r.rate;
   var decimals=cur==='TWD'?0:(cur==='JPY'?0:2);
   return r.symbol+v.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
 }
+/* 五語共用模組：幣別跟著介面語言連動（沿用舊 handleLangChange 的幣別對照表） */
+var LANG_TO_CURRENCY={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
+function currentCurrency(){ return LANG_TO_CURRENCY[TLI_I18N.currentLang()] || 'TWD'; }
 function showToast(msg){
   var t=document.getElementById('toast');
   if(!t)return;
@@ -356,30 +364,17 @@ function showToast(msg){
   clearTimeout(window._toastTimer);
   window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
 }
-function handleLangCurrency(sel){
-  var lang=sel.value||'zh-TW';
-  var curMap={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
-  var cur=curMap[lang]||'TWD';
-  var langText=sel.options[sel.selectedIndex].text;
-  if(typeof tliFmt==='function'){
-    document.querySelectorAll('[data-money]').forEach(function(el){
-      el.textContent=tliFmt(parseFloat(el.getAttribute('data-money')),cur);
-    });
-  }
-  document.querySelectorAll('[data-i18n-zh]').forEach(function(el){
-    el.textContent = (lang==='zh-TW') ? el.getAttribute('data-i18n-zh') : el.getAttribute('data-i18n-en');
-  });
-  if(lang==='zh-CN'||lang==='de'){
-    var names={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+names[lang]);
-  } else {
-    showToast('顯示語言／幣別已切換為 '+langText);
-  }
-}
 function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
 document.addEventListener('click',function(e){
   if(!e.target.closest('.bell-btn')&&!e.target.closest('.bell-panel'))document.getElementById('bellPanel').classList.remove('open');
 });
+
+/* ================= 五語：星期（括號內單字）翻譯 ================= */
+var WD_SHORT={'一':{en:'Mon',ja:'月',de:'Mo'},'二':{en:'Tue',ja:'火',de:'Di'},'三':{en:'Wed',ja:'水',de:'Mi'},'四':{en:'Thu',ja:'木',de:'Do'},'五':{en:'Fri',ja:'金',de:'Fr'},'六':{en:'Sat',ja:'土',de:'Sa'},'日':{en:'Sun',ja:'日',de:'So'}};
+function xlateDateStr(s){
+  if(!s) return s;
+  return s.replace(/（([一二三四五六日])）/g, function(m,d){ var w=WD_SHORT[d]; return w?TLI_I18N.t(m,{en:'('+w.en+')',ja:'（'+w.ja+'）',de:'('+w.de+')'}):m; });
+}
 
 /* ===== 全站活動資料（與公開網站 p09 同一批活動延伸，情境示範用）=====
    type 活動類型（講座／直播工作坊／體驗場／說明會）、capacity 名額、totalRegistered 目前已報名（全站，非本人）、
@@ -473,16 +468,16 @@ function countdownInfo(start){
   var enterOk = diffMs <= 15*60000 && diffMs >= -50*60000;
   var ended = diffMs < -50*60000;
   var text;
-  if(ended) text = '已結束';
-  else if(enterOk) text = '開課中，可進入教室';
+  if(ended) text = TLI_I18N.t('已結束',{en:'Ended',ja:'終了',de:'Beendet'});
+  else if(enterOk) text = TLI_I18N.t('開課中，可進入教室',{en:'Live now, you can enter',ja:'開催中、教室に入れます',de:'Läuft, Sie können beitreten'});
   else{
     var days = Math.floor(diffMs/86400000);
     if(days >= 1){
-      text = days+' 天後開始';
+      text = TLI_I18N.t('{n} 天後開始',{en:'Starts in {n} days',ja:'{n}日後に開始',de:'Beginnt in {n} Tagen'}).replace('{n}',days);
     } else {
       var hrs = Math.floor(diffMs/3600000);
       var mins = Math.floor((diffMs%3600000)/60000);
-      text = hrs+' 小時 '+mins+' 分後開始';
+      text = TLI_I18N.t('{h} 小時 {m} 分後開始',{en:'Starts in {h}h {m}m',ja:'{h}時間{m}分後に開始',de:'Beginnt in {h} Std. {m} Min.'}).replace('{h}',hrs).replace('{m}',mins);
     }
   }
   return {enterOk:enterOk, ended:ended, text:text};
@@ -558,29 +553,29 @@ function renderHero(){
   var cInfo = cancelInfo(ev);
   var cancelBlock;
   if(cInfo.canCancel){
-    cancelBlock = '<button class="btn btn-danger-outline" onclick="openCancelSheet(\''+r.regId+'\')">取消報名</button>'+
-      '<p class="muted small" style="margin:6px 0 0;">可取消至 '+fmtDT(cInfo.cutoff)+'</p>';
+    cancelBlock = '<button class="btn btn-danger-outline" onclick="openCancelSheet(\''+r.regId+'\')">'+TLI_I18N.t('取消報名',{en:'Cancel registration',ja:'予約をキャンセル',de:'Anmeldung stornieren'})+'</button>'+
+      '<p class="muted small" style="margin:6px 0 0;">'+TLI_I18N.t('可取消至 {d}',{en:'Cancellable until {d}',ja:'{d} までキャンセル可能',de:'Stornierbar bis {d}'}).replace('{d}',fmtDT(cInfo.cutoff))+'</p>';
   } else {
-    var reason = cInfo.cutoff ? '已過取消時限（開始前 '+ev.cancelCloseHours+' 小時）' : '已過取消時限';
-    cancelBlock = '<p class="muted small" style="margin:0;">'+reason+(ev.noShowTrack?'，未出席將記錄':'')+'</p>';
+    var reason = cInfo.cutoff ? TLI_I18N.t('已過取消時限（開始前 {h} 小時）',{en:'Cancellation deadline passed ({h}h before start)',ja:'キャンセル期限を過ぎました（開始{h}時間前まで）',de:'Stornofrist abgelaufen ({h} Std. vor Beginn)'}).replace('{h}',ev.cancelCloseHours) : TLI_I18N.t('已過取消時限',{en:'Cancellation deadline passed',ja:'キャンセル期限を過ぎました',de:'Stornofrist abgelaufen'});
+    cancelBlock = '<p class="muted small" style="margin:0;">'+reason+(ev.noShowTrack?TLI_I18N.t('，未出席將記錄',{en:', no-show will be recorded',ja:'、無断欠席として記録されます',de:', Nichterscheinen wird vermerkt'}):'')+'</p>';
   }
   var enterBlock = ci.enterOk
-    ? '<a class="btn btn-primary btn-block" href="m16_classroom.html?lesson='+r.regId+'&type=event&state=open">進入線上教室</a>'
-    : '<p class="muted small" style="margin:0;">開始前 15 分鐘開放進入</p>';
+    ? '<a class="btn btn-primary btn-block" href="m16_classroom.html?lesson='+r.regId+'&type=event&state=open">'+TLI_I18N.t('進入線上教室',{en:'Enter online classroom',ja:'オンライン教室に入る',de:'Zum Online-Klassenzimmer'})+'</a>'
+    : '<p class="muted small" style="margin:0;">'+TLI_I18N.t('開始前 15 分鐘開放進入',{en:'Opens 15 minutes before start',ja:'開始15分前から入室できます',de:'Öffnet 15 Minuten vor Beginn'})+'</p>';
   wrap.classList.remove('hidden');
   wrap.setAttribute('data-regevent', heroId);
   wrap.innerHTML =
     '<div class="er-top">'+
       '<div>'+
-        '<span class="small muted" style="font-weight:700;">最近一場</span>'+
-        (ev.feeType==='paid' ? '<span class="badge badge-info" style="margin-left:6px;">已付款</span>' : '<span class="badge badge-ok" style="margin-left:6px;">已報名</span>')+
+        '<span class="small muted" style="font-weight:700;">'+TLI_I18N.t('最近一場',{en:'Next up',ja:'直近の予約',de:'Nächster Termin'})+'</span>'+
+        (ev.feeType==='paid' ? '<span class="badge badge-info" style="margin-left:6px;">'+TLI_I18N.t('已付款',{en:'Paid',ja:'支払い済み',de:'Bezahlt'})+'</span>' : '<span class="badge badge-ok" style="margin-left:6px;">'+TLI_I18N.t('已報名',{en:'Registered',ja:'予約済み',de:'Angemeldet'})+'</span>')+
         '<h3 style="margin:8px 0 2px;font-size:15.5px;">'+ev.title+'</h3>'+
       '</div>'+
       '<span class="countdown'+(ci.enterOk?' ok':'')+'">'+ci.text+'</span>'+
     '</div>'+
     '<div class="er-meta">'+
-      '<span><strong>時間：</strong>'+ev.timeLabel+'</span>'+
-      '<span><strong>上課方式：</strong>線上教室（開課前 15 分鐘開放進入）</span>'+
+      '<span><strong>'+TLI_I18N.t('時間：',{en:'Time: ',ja:'日時：',de:'Zeit: '})+'</strong>'+xlateDateStr(ev.timeLabel)+'</span>'+
+      '<span><strong>'+TLI_I18N.t('上課方式：',{en:'Format: ',ja:'受講方法：',de:'Format: '})+'</strong>'+TLI_I18N.t('線上教室（開課前 15 分鐘開放進入）',{en:'Online classroom (opens 15 min before start)',ja:'オンライン教室（開始15分前から入室可）',de:'Online-Klassenzimmer (öffnet 15 Min. vor Beginn)'})+'</span>'+
     '</div>'+
     '<div class="stack" style="gap:8px;margin-top:2px;">'+
       '<div>'+enterBlock+'</div>'+
@@ -616,48 +611,57 @@ function getFilteredSortedIds(){
   return ids;
 }
 
+/* 活動類型標籤（骨架用語，非示範資料，需五語） */
+var EVENT_TYPE_LABELS = {
+  '講座':{en:'Lecture',ja:'講演',de:'Vortrag'},
+  '直播工作坊':{en:'Live Workshop',ja:'ライブワークショップ',de:'Live-Workshop'},
+  '體驗場':{en:'Trial Session',ja:'体験会',de:'Schnuppertermin'},
+  '說明會':{en:'Info Session',ja:'説明会',de:'Infoveranstaltung'}
+};
+function tEventType(type){ return TLI_I18N.t(type, EVENT_TYPE_LABELS[type]||{}); }
+
 function renderRow(id){
   var ev = EVENTS_M10[id];
   var st = myStatus(id);
-  var feeLabel = ev.feeType === 'free' ? '免費' : tliFmt(ev.feeAmount, 'TWD');
+  var feeLabel = ev.feeType === 'free' ? TLI_I18N.t('免費',{en:'Free',ja:'無料',de:'Kostenlos'}) : tliFmt(ev.feeAmount, currentCurrency());
   var statusBadge, actionHtml;
   if(st === 'registered'){
     var r = REGISTERED.filter(function(x){ return x.eventId===id; })[0];
     var ci = countdownInfo(ev.start);
-    statusBadge = ev.feeType==='paid' ? '<span class="badge badge-info">已付款</span>' : '<span class="badge badge-ok">已報名</span>';
+    statusBadge = ev.feeType==='paid' ? '<span class="badge badge-info">'+TLI_I18N.t('已付款',{en:'Paid',ja:'支払い済み',de:'Bezahlt'})+'</span>' : '<span class="badge badge-ok">'+TLI_I18N.t('已報名',{en:'Registered',ja:'予約済み',de:'Angemeldet'})+'</span>';
     if(ci.enterOk){
-      actionHtml = '<button class="btn btn-primary btn-sm" onclick="enterClassroom(\''+r.regId+'\')">進入教室</button>';
+      actionHtml = '<button class="btn btn-primary btn-sm" onclick="enterClassroom(\''+r.regId+'\')">'+TLI_I18N.t('進入教室',{en:'Enter classroom',ja:'教室に入る',de:'Klassenzimmer betreten'})+'</button>';
     } else {
       var cInfo = cancelInfo(ev);
       actionHtml = cInfo.canCancel
-        ? '<button class="btn btn-outline btn-sm" onclick="openCancelSheet(\''+r.regId+'\')">取消報名</button>'
-        : '<span class="muted small">已過取消時限</span>';
+        ? '<button class="btn btn-outline btn-sm" onclick="openCancelSheet(\''+r.regId+'\')">'+TLI_I18N.t('取消報名',{en:'Cancel registration',ja:'予約をキャンセル',de:'Anmeldung stornieren'})+'</button>'
+        : '<span class="muted small">'+TLI_I18N.t('已過取消時限',{en:'Cancellation deadline passed',ja:'キャンセル期限を過ぎました',de:'Stornofrist abgelaufen'})+'</span>';
     }
   } else if(st === 'ended'){
-    statusBadge = '<span class="badge badge-muted">已結束</span>';
+    statusBadge = '<span class="badge badge-muted">'+TLI_I18N.t('已結束',{en:'Ended',ja:'終了',de:'Beendet'})+'</span>';
     actionHtml = ev.recordingUrl
-      ? '<button class="btn btn-outline btn-sm" onclick="viewRecording(\''+id+'\')">觀看回放</button>'
-      : '<span class="muted small">本場無回放紀錄</span>';
+      ? '<button class="btn btn-outline btn-sm" onclick="viewRecording(\''+id+'\')">'+TLI_I18N.t('觀看回放',{en:'Watch recording',ja:'録画を見る',de:'Aufzeichnung ansehen'})+'</button>'
+      : '<span class="muted small">'+TLI_I18N.t('本場無回放紀錄',{en:'No recording available',ja:'録画はありません',de:'Keine Aufzeichnung verfügbar'})+'</span>';
   } else if(st === 'waitlisted'){
-    statusBadge = '<span class="badge badge-warn">候補中</span>';
-    actionHtml = '<span class="muted small">已候補登記</span>';
+    statusBadge = '<span class="badge badge-warn">'+TLI_I18N.t('候補中',{en:'Waitlisted',ja:'キャンセル待ち',de:'Warteliste'})+'</span>';
+    actionHtml = '<span class="muted small">'+TLI_I18N.t('已候補登記',{en:'On waitlist',ja:'キャンセル待ち登録済み',de:'Auf Warteliste'})+'</span>';
   } else {
-    statusBadge = '<span class="badge badge-info">可報名</span>';
+    statusBadge = '<span class="badge badge-info">'+TLI_I18N.t('可報名',{en:'Open',ja:'受付中',de:'Verfügbar'})+'</span>';
     if(isRegClosed(ev)){
-      actionHtml = '<span class="muted small">報名已截止</span>';
+      actionHtml = '<span class="muted small">'+TLI_I18N.t('報名已截止',{en:'Registration closed',ja:'受付終了',de:'Anmeldung geschlossen'})+'</span>';
     } else if(isFull(ev)){
       actionHtml = ev.waitlistEnabled
-        ? '<button class="btn btn-outline btn-sm" onclick="openWaitlistSheet(\''+id+'\')">候補</button>'
-        : '<span class="muted small">名額已滿</span>';
+        ? '<button class="btn btn-outline btn-sm" onclick="openWaitlistSheet(\''+id+'\')">'+TLI_I18N.t('候補',{en:'Waitlist',ja:'キャンセル待ち',de:'Warteliste'})+'</button>'
+        : '<span class="muted small">'+TLI_I18N.t('名額已滿',{en:'Full',ja:'満員',de:'Ausgebucht'})+'</span>';
     } else {
-      actionHtml = '<button class="btn btn-primary btn-sm" onclick="openRegisterSheet(\''+id+'\')">報名</button>';
+      actionHtml = '<button class="btn btn-primary btn-sm" onclick="openRegisterSheet(\''+id+'\')">'+TLI_I18N.t('報名',{en:'Register',ja:'申し込む',de:'Anmelden'})+'</button>';
     }
   }
   return '<div class="list-row" data-regevent="'+id+'">'+
     '<div class="icon-box">'+EVENT_ICON_SVG+'</div>'+
     '<div class="body">'+
       '<h4>'+ev.title+'</h4>'+
-      '<p>'+ev.timeLabel+'・'+ev.type+'・'+feeLabel+'</p>'+
+      '<p>'+xlateDateStr(ev.timeLabel)+'・'+tEventType(ev.type)+'・'+feeLabel+'</p>'+
     '</div>'+
     '<div class="trail erow-trail">'+statusBadge+actionHtml+'</div>'+
   '</div>';
@@ -704,28 +708,28 @@ function loadMore(){
 }
 
 function viewRecording(eventId){
-  showToast('正在為您開啟活動回放');
+  showToast(TLI_I18N.t('正在為您開啟活動回放',{en:'Opening the event recording',ja:'録画を開いています',de:'Aufzeichnung wird geöffnet'}));
 }
 
 function openWaitlistSheet(eventId){
   var ev = EVENTS_M10[eventId];
   if(!ev) return;
   document.getElementById('registerBody').innerHTML =
-    '<h3>候補登記</h3>'+
+    '<h3>'+TLI_I18N.t('候補登記',{en:'Waitlist registration',ja:'キャンセル待ち登録',de:'Wartelisten-Anmeldung'})+'</h3>'+
     '<p class="muted small" style="margin:0 0 12px;">'+ev.title+'</p>'+
     '<div class="card" style="margin-bottom:14px;">'+
-      '<div class="flex-between"><span class="small muted">時間</span><strong class="small">'+ev.timeLabel+'</strong></div>'+
-      '<div class="flex-between" style="margin-top:6px;"><span class="small muted">名額狀態</span><strong class="small">已滿，可登記候補</strong></div>'+
+      '<div class="flex-between"><span class="small muted">'+TLI_I18N.t('時間',{en:'Time',ja:'日時',de:'Zeit'})+'</span><strong class="small">'+xlateDateStr(ev.timeLabel)+'</strong></div>'+
+      '<div class="flex-between" style="margin-top:6px;"><span class="small muted">'+TLI_I18N.t('名額狀態',{en:'Capacity status',ja:'定員状況',de:'Platzstatus'})+'</span><strong class="small">'+TLI_I18N.t('已滿，可登記候補',{en:'Full, waitlist available',ja:'満員、キャンセル待ち登録可',de:'Ausgebucht, Warteliste möglich'})+'</strong></div>'+
     '</div>'+
-    '<p class="small muted" style="margin:0 0 14px;">登記候補後，若有名額釋出將另行通知，不代表已完成報名。</p>'+
-    '<div class="stack"><button class="btn btn-accent btn-block" onclick="confirmWaitlist(\''+eventId+'\')">確認候補登記</button><button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">取消</button></div>';
+    '<p class="small muted" style="margin:0 0 14px;">'+TLI_I18N.t('登記候補後，若有名額釋出將另行通知，不代表已完成報名。',{en:'After registering, we will notify you if a spot opens up. This does not confirm your registration.',ja:'登録後、空きが出た場合は別途ご連絡します。予約完了ではありません。',de:'Nach der Anmeldung benachrichtigen wir Sie bei einem freien Platz. Dies ist keine Bestätigung der Anmeldung.'})+'</p>'+
+    '<div class="stack"><button class="btn btn-accent btn-block" onclick="confirmWaitlist(\''+eventId+'\')">'+TLI_I18N.t('確認候補登記',{en:'Confirm waitlist',ja:'キャンセル待ちを確定',de:'Warteliste bestätigen'})+'</button><button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">'+TLI_I18N.t('取消',{en:'Cancel',ja:'キャンセル',de:'Abbrechen'})+'</button></div>';
   document.getElementById('registerOverlay').classList.remove('hidden');
 }
 function confirmWaitlist(eventId){
   WAITLIST.push({wId:'w'+(_waitCounter++), eventId:eventId, time:new Date()});
   closeRegisterOverlay();
   renderAll();
-  showToast('已登記候補，有名額釋出將另行通知');
+  showToast(TLI_I18N.t('已登記候補，有名額釋出將另行通知',{en:'Added to waitlist. We will notify you if a spot opens up.',ja:'キャンセル待ちに登録しました。空きが出た場合はご連絡します。',de:'Auf Warteliste gesetzt. Wir benachrichtigen Sie bei einem freien Platz.'}));
 }
 
 function renderAll(revealId){
@@ -737,8 +741,7 @@ function enterClassroom(regId){
   var r = REGISTERED.filter(function(x){return x.regId===regId;})[0];
   if(!r) return;
   var ev = EVENTS_M10[r.eventId];
-  document.getElementById('zoomTitle').textContent = '進入線上教室';
-  document.getElementById('zoomDetail').textContent = ev.title+'・'+ev.timeLabel;
+  document.getElementById('zoomDetail').textContent = ev.title+'・'+xlateDateStr(ev.timeLabel);
   document.getElementById('crVerifying').classList.remove('hidden');
   document.getElementById('crReady').classList.add('hidden');
   document.getElementById('crEnterBtn').classList.add('hidden');
@@ -751,7 +754,7 @@ function enterClassroom(regId){
   },900);
 }
 function confirmEnterClassroom(){
-  showToast('身分驗證通過，正在為您導向專屬線上教室…');
+  showToast(TLI_I18N.t('身分驗證通過，正在為您導向專屬線上教室…',{en:'Identity verified, redirecting to your classroom…',ja:'本人確認が完了しました。専用教室へ移動します…',de:'Identität bestätigt, Weiterleitung zum Klassenzimmer…'}));
   closeZoomModal();
 }
 function closeZoomModal(){document.getElementById('zoomOverlay').classList.add('hidden');}
@@ -767,7 +770,7 @@ function confirmCancelRegistration(){
   REGISTERED = REGISTERED.filter(function(r){ return r.regId !== _pendingCancelId; });
   document.getElementById('cancelOverlay').classList.add('hidden');
   renderAll();
-  showToast('已取消報名，系統已記錄本次操作');
+  showToast(TLI_I18N.t('已取消報名，系統已記錄本次操作',{en:'Registration cancelled, this action has been recorded',ja:'予約をキャンセルしました。操作を記録しました',de:'Anmeldung storniert, dieser Vorgang wurde protokolliert'}));
 }
 
 /* ===== 報名流程 sheet ===== */
@@ -788,35 +791,35 @@ function closeRegisterOverlay(){
 function renderRegisterStep1(){
   var ev = EVENTS_M10[regState.eventId];
   var alreadyIn = REGISTERED.some(function(r){ return r.eventId===regState.eventId; });
-  var summary = '<h3>報名確認</h3>'+
+  var summary = '<h3>'+TLI_I18N.t('報名確認',{en:'Confirm registration',ja:'予約確認',de:'Anmeldung bestätigen'})+'</h3>'+
     '<p class="muted small" style="margin:0 0 12px;">'+ev.title+'</p>'+
     '<div class="card" style="margin-bottom:14px;">'+
-      '<div class="flex-between"><span class="small muted">時間</span><strong class="small">'+ev.timeLabel+'</strong></div>'+
-      '<div class="flex-between" style="margin-top:6px;"><span class="small muted">費用</span><strong class="small">'+(ev.feeType==='free'?'免費':tliFmt(ev.feeAmount,'TWD'))+'</strong></div>'+
+      '<div class="flex-between"><span class="small muted">'+TLI_I18N.t('時間',{en:'Time',ja:'日時',de:'Zeit'})+'</span><strong class="small">'+xlateDateStr(ev.timeLabel)+'</strong></div>'+
+      '<div class="flex-between" style="margin-top:6px;"><span class="small muted">'+TLI_I18N.t('費用',{en:'Fee',ja:'料金',de:'Gebühr'})+'</span><strong class="small">'+(ev.feeType==='free'?TLI_I18N.t('免費',{en:'Free',ja:'無料',de:'Kostenlos'}):tliFmt(ev.feeAmount,currentCurrency()))+'</strong></div>'+
     '</div>';
   if(alreadyIn){
     document.getElementById('registerBody').innerHTML = summary+
-      '<div class="banner-info" style="background:#E6EEF8;border:1px solid #C7DAF0;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--c-primary-dark);margin-bottom:14px;">您已報名本場活動，可在「我的活動」查看詳情。</div>'+
-      '<button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">關閉</button>';
+      '<div class="banner-info" style="background:#E6EEF8;border:1px solid #C7DAF0;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--c-primary-dark);margin-bottom:14px;">'+TLI_I18N.t('您已報名本場活動，可在「我的活動」查看詳情。',{en:'You are already registered for this event. See details under "My Events".',ja:'このイベントはすでに予約済みです。「マイイベント」で詳細を確認できます。',de:'Sie sind für diese Veranstaltung bereits angemeldet. Details unter „Meine Veranstaltungen“.'})+'</div>'+
+      '<button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">'+TLI_I18N.t('關閉',{en:'Close',ja:'閉じる',de:'Schließen'})+'</button>';
     return;
   }
   var actionHtml;
   if(ev.feeType === 'free'){
-    actionHtml = '<div class="stack"><button class="btn btn-accent btn-block" onclick="confirmFreeRegister()">確認免費報名</button><button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">取消</button></div>';
+    actionHtml = '<div class="stack"><button class="btn btn-accent btn-block" onclick="confirmFreeRegister()">'+TLI_I18N.t('確認免費報名',{en:'Confirm free registration',ja:'無料予約を確定',de:'Kostenlose Anmeldung bestätigen'})+'</button><button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">'+TLI_I18N.t('取消',{en:'Cancel',ja:'キャンセル',de:'Abbrechen'})+'</button></div>';
   } else {
     actionHtml =
-      '<div class="section-title" style="margin:16px 0 6px;">支付渠道</div>'+
+      '<div class="section-title" style="margin:16px 0 6px;">'+TLI_I18N.t('支付渠道',{en:'Payment channel',ja:'決済方法',de:'Zahlungskanal'})+'</div>'+
       '<div class="channel-card selected" data-channel="newebpay" onclick="selectChannelEvt(\'newebpay\')" id="channelNewebpay">'+
-        '<h4>藍新金流 NewebPay</h4><p>信用卡／ATM 虛擬帳號／超商代碼・新台幣（TWD）</p>'+
+        '<h4>藍新金流 NewebPay</h4><p>'+TLI_I18N.t('信用卡／ATM 虛擬帳號／超商代碼・新台幣（TWD）',{en:'Credit card / ATM virtual account / convenience store code · TWD',ja:'クレジットカード／ATM仮想口座／コンビニ払い・台湾ドル（TWD）',de:'Kreditkarte / ATM-Konto / Convenience-Store-Code · TWD'})+'</p>'+
         '<div class="channel-sub" id="newebpaySub">'+
-          '<label class="radio-line" style="padding:8px 0;"><input type="radio" name="npMethod" value="credit" checked onchange="selectSubMethodEvt(\'credit\')"><div class="rl-body">信用卡</div></label>'+
-          '<label class="radio-line" style="padding:8px 0;"><input type="radio" name="npMethod" value="atm" onchange="selectSubMethodEvt(\'atm\')"><div class="rl-body">ATM 虛擬帳號</div></label>'+
+          '<label class="radio-line" style="padding:8px 0;"><input type="radio" name="npMethod" value="credit" checked onchange="selectSubMethodEvt(\'credit\')"><div class="rl-body">'+TLI_I18N.t('信用卡',{en:'Credit card',ja:'クレジットカード',de:'Kreditkarte'})+'</div></label>'+
+          '<label class="radio-line" style="padding:8px 0;"><input type="radio" name="npMethod" value="atm" onchange="selectSubMethodEvt(\'atm\')"><div class="rl-body">'+TLI_I18N.t('ATM 虛擬帳號',{en:'ATM virtual account',ja:'ATM仮想口座',de:'ATM-Konto'})+'</div></label>'+
         '</div>'+
       '</div>'+
       '<div class="channel-card" data-channel="stripe" onclick="selectChannelEvt(\'stripe\')" id="channelStripe">'+
-        '<h4>Stripe</h4><p>海外信用卡，支援多幣別（USD／JPY）</p>'+
+        '<h4>Stripe</h4><p>'+TLI_I18N.t('海外信用卡，支援多幣別（USD／JPY）',{en:'International credit card, multi-currency (USD/JPY)',ja:'海外クレジットカード、複数通貨対応（USD／JPY）',de:'Ausländische Kreditkarte, mehrere Währungen (USD/JPY)'})+'</p>'+
       '</div>'+
-      '<div class="stack" style="margin-top:16px;"><button class="btn btn-primary btn-block" onclick="goToGatewayEvent()">前往付款</button><button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">取消</button></div>';
+      '<div class="stack" style="margin-top:16px;"><button class="btn btn-primary btn-block" onclick="goToGatewayEvent()">'+TLI_I18N.t('前往付款',{en:'Proceed to payment',ja:'支払いへ進む',de:'Zur Zahlung'})+'</button><button class="btn btn-outline btn-block" onclick="closeRegisterOverlay()">'+TLI_I18N.t('取消',{en:'Cancel',ja:'キャンセル',de:'Abbrechen'})+'</button></div>';
   }
   document.getElementById('registerBody').innerHTML = summary + actionHtml;
 }
@@ -838,10 +841,10 @@ function confirmFreeRegister(){
   document.getElementById('registerBody').innerHTML =
     '<div style="text-align:center;padding:6px 0 4px;">'+
       '<svg viewBox="0 0 24 24" fill="none" stroke="#0F9B79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px;margin:0 auto 10px;"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg>'+
-      '<h3>報名完成</h3><p class="muted small">'+ev.title+'</p>'+
+      '<h3>'+TLI_I18N.t('報名完成',{en:'Registration complete',ja:'予約完了',de:'Anmeldung abgeschlossen'})+'</h3><p class="muted small">'+ev.title+'</p>'+
     '</div>'+
-    '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="closeRegisterOverlay()">查看我的活動</button>';
-  showToast('已完成報名');
+    '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="closeRegisterOverlay()">'+TLI_I18N.t('查看我的活動',{en:'View my events',ja:'マイイベントを見る',de:'Meine Veranstaltungen ansehen'})+'</button>';
+  showToast(TLI_I18N.t('已完成報名',{en:'Registration complete',ja:'予約が完了しました',de:'Anmeldung abgeschlossen'}));
 }
 function genOrderNo(){
   var d=new Date();
@@ -852,33 +855,33 @@ function goToGatewayEvent(){
   var orderNo = genOrderNo();
   if(regState.channel === 'newebpay'){
     document.getElementById('registerBody').innerHTML =
-      '<button class="btn btn-outline btn-sm" onclick="renderRegisterStep1()" style="margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>返回</button>'+
+      '<button class="btn btn-outline btn-sm" onclick="renderRegisterStep1()" style="margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>'+TLI_I18N.t('返回',{en:'Back',ja:'戻る',de:'Zurück'})+'</button>'+
       '<div class="gw-header-newebpay">藍新金流 NewebPay</div>'+
       '<div class="gw-body">'+
-        '<div class="gw-row"><span class="muted">商店名稱</span><strong>TLI 士林校區</strong></div>'+
-        '<div class="gw-row"><span class="muted">訂單編號</span><strong>'+orderNo+'</strong></div>'+
-        '<div class="gw-row"><span class="muted">應付金額</span><strong>'+tliFmt(ev.feeAmount,'TWD')+'</strong></div>'+
+        '<div class="gw-row"><span class="muted">'+TLI_I18N.t('商店名稱',{en:'Merchant',ja:'店舗名',de:'Händler'})+'</span><strong>TLI 士林校區</strong></div>'+
+        '<div class="gw-row"><span class="muted">'+TLI_I18N.t('訂單編號',{en:'Order No.',ja:'注文番号',de:'Bestellnummer'})+'</span><strong>'+orderNo+'</strong></div>'+
+        '<div class="gw-row"><span class="muted">'+TLI_I18N.t('應付金額',{en:'Amount due',ja:'お支払い金額',de:'Fälliger Betrag'})+'</span><strong>'+tliFmt(ev.feeAmount,'TWD')+'</strong></div>'+
         (regState.subMethod==='credit' ?
-          ('<div class="field"><label>信用卡卡號</label><input type="text" placeholder="4000 1234 5678 9010"></div>'+
-           '<div class="flex-between" style="gap:10px;"><div class="field" style="flex:1;"><label>有效期限</label><input type="text" placeholder="MM/YY"></div><div class="field" style="flex:1;"><label>安全碼</label><input type="text" placeholder="CVC"></div></div>'+
-           '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="confirmGatewayEvent(\''+orderNo+'\')">確認付款</button>'+
-           '<button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="closeRegisterOverlay()">取消</button>')
+          ('<div class="field"><label>'+TLI_I18N.t('信用卡卡號',{en:'Card number',ja:'カード番号',de:'Kartennummer'})+'</label><input type="text" placeholder="4000 1234 5678 9010"></div>'+
+           '<div class="flex-between" style="gap:10px;"><div class="field" style="flex:1;"><label>'+TLI_I18N.t('有效期限',{en:'Expiry',ja:'有効期限',de:'Ablaufdatum'})+'</label><input type="text" placeholder="MM/YY"></div><div class="field" style="flex:1;"><label>'+TLI_I18N.t('安全碼',{en:'CVC',ja:'セキュリティコード',de:'CVC'})+'</label><input type="text" placeholder="CVC"></div></div>'+
+           '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="confirmGatewayEvent(\''+orderNo+'\')">'+TLI_I18N.t('確認付款',{en:'Confirm payment',ja:'支払いを確定',de:'Zahlung bestätigen'})+'</button>'+
+           '<button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="closeRegisterOverlay()">'+TLI_I18N.t('取消',{en:'Cancel',ja:'キャンセル',de:'Abbrechen'})+'</button>')
           :
-          ('<div style="background:var(--c-bg);border-radius:8px;padding:14px;text-align:center;margin-top:12px;"><div class="small muted">ATM 虛擬帳號</div><div style="font-size:18px;font-weight:800;color:var(--c-primary);margin:6px 0;">998-1234-5678-9012</div><div class="small muted">繳費期限 2026-08-28 23:59</div></div>'+
-           '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="confirmGatewayEvent(\''+orderNo+'\')">確認付款</button>'+
-           '<button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="closeRegisterOverlay()">取消</button>'))+
+          ('<div style="background:var(--c-bg);border-radius:8px;padding:14px;text-align:center;margin-top:12px;"><div class="small muted">'+TLI_I18N.t('ATM 虛擬帳號',{en:'ATM virtual account',ja:'ATM仮想口座',de:'ATM-Konto'})+'</div><div style="font-size:18px;font-weight:800;color:var(--c-primary);margin:6px 0;">998-1234-5678-9012</div><div class="small muted">'+TLI_I18N.t('繳費期限 {d}',{en:'Payment due {d}',ja:'お支払い期限 {d}',de:'Zahlungsfrist {d}'}).replace('{d}','2026-08-28 23:59')+'</div></div>'+
+           '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="confirmGatewayEvent(\''+orderNo+'\')">'+TLI_I18N.t('確認付款',{en:'Confirm payment',ja:'支払いを確定',de:'Zahlung bestätigen'})+'</button>'+
+           '<button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="closeRegisterOverlay()">'+TLI_I18N.t('取消',{en:'Cancel',ja:'キャンセル',de:'Abbrechen'})+'</button>'))+
       '</div>';
   } else {
     document.getElementById('registerBody').innerHTML =
-      '<button class="btn btn-outline btn-sm" onclick="renderRegisterStep1()" style="margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>返回</button>'+
+      '<button class="btn btn-outline btn-sm" onclick="renderRegisterStep1()" style="margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>'+TLI_I18N.t('返回',{en:'Back',ja:'戻る',de:'Zurück'})+'</button>'+
       '<div class="gw-header-stripe">Stripe</div>'+
       '<div class="gw-body">'+
         '<div class="gw-row"><span class="muted">Order No.</span><strong>'+orderNo+'</strong></div>'+
         '<div class="gw-row"><span class="muted">Amount</span><strong>US$'+(ev.feeAmount/31.5).toFixed(2)+'</strong></div>'+
         '<div class="field"><label>Card number</label><input type="text" placeholder="4242 4242 4242 4242"></div>'+
         '<div class="flex-between" style="gap:10px;"><div class="field" style="flex:1;"><label>Expiry</label><input type="text" placeholder="MM/YY"></div><div class="field" style="flex:1;"><label>CVC</label><input type="text" placeholder="CVC"></div></div>'+
-        '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="confirmGatewayEvent(\''+orderNo+'\')">確認付款</button>'+
-        '<button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="closeRegisterOverlay()">取消</button>'+
+        '<button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="confirmGatewayEvent(\''+orderNo+'\')">'+TLI_I18N.t('確認付款',{en:'Confirm payment',ja:'支払いを確定',de:'Zahlung bestätigen'})+'</button>'+
+        '<button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="closeRegisterOverlay()">'+TLI_I18N.t('取消',{en:'Cancel',ja:'キャンセル',de:'Abbrechen'})+'</button>'+
       '</div>';
   }
 }
@@ -886,16 +889,16 @@ function confirmGatewayEvent(orderNo){
   REGISTERED.push({regId:'r'+(_regCounter++), eventId:regState.eventId});
   renderAll();
   var ev = EVENTS_M10[regState.eventId];
-  var channelLabel = regState.channel==='newebpay' ? '藍新金流・'+(regState.subMethod==='credit'?'信用卡':'ATM 虛擬帳號') : 'Stripe';
+  var channelLabel = regState.channel==='newebpay' ? '藍新金流・'+TLI_I18N.t(regState.subMethod==='credit'?'信用卡':'ATM 虛擬帳號',regState.subMethod==='credit'?{en:'Credit card',ja:'クレジットカード',de:'Kreditkarte'}:{en:'ATM virtual account',ja:'ATM仮想口座',de:'ATM-Konto'}) : 'Stripe';
   document.getElementById('registerBody').innerHTML =
     '<div style="text-align:center;padding:6px 0 4px;">'+
       '<svg viewBox="0 0 24 24" fill="none" stroke="#0F9B79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px;margin:0 auto 10px;"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg>'+
-      '<h3>付款完成，報名成功</h3><p class="muted small">'+ev.title+'</p>'+
-      '<p class="small muted" style="margin:4px 0 0;">訂單編號：'+orderNo+'・付款渠道：'+channelLabel+'</p>'+
+      '<h3>'+TLI_I18N.t('付款完成，報名成功',{en:'Payment complete, registration successful',ja:'お支払い完了、予約成立',de:'Zahlung abgeschlossen, Anmeldung erfolgreich'})+'</h3><p class="muted small">'+ev.title+'</p>'+
+      '<p class="small muted" style="margin:4px 0 0;">'+TLI_I18N.t('訂單編號：',{en:'Order No.: ',ja:'注文番号：',de:'Bestellnummer: '})+orderNo+'・'+TLI_I18N.t('付款渠道：',{en:'Payment channel: ',ja:'決済方法：',de:'Zahlungskanal: '})+channelLabel+'</p>'+
     '</div>'+
-    '<div class="banner-info" style="background:#E6EEF8;border:1px solid #C7DAF0;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--c-primary-dark);margin:12px 0;">電子發票已開立，可於「我的」訂單與付款查看。</div>'+
-    '<button class="btn btn-primary btn-block" onclick="closeRegisterOverlay()">查看我的活動</button>';
-  showToast('付款完成，報名成功');
+    '<div class="banner-info" style="background:#E6EEF8;border:1px solid #C7DAF0;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--c-primary-dark);margin:12px 0;">'+TLI_I18N.t('電子發票已開立，可於「我的」訂單與付款查看。',{en:'The e-invoice has been issued and can be viewed under "Me > Orders & Payments".',ja:'電子領収書を発行しました。「マイページ」の注文と支払いからご確認いただけます。',de:'Die E-Rechnung wurde ausgestellt und ist unter „Profil > Bestellungen & Zahlungen“ einsehbar.'})+'</div>'+
+    '<button class="btn btn-primary btn-block" onclick="closeRegisterOverlay()">'+TLI_I18N.t('查看我的活動',{en:'View my events',ja:'マイイベントを見る',de:'Meine Veranstaltungen ansehen'})+'</button>';
+  showToast(TLI_I18N.t('付款完成，報名成功',{en:'Payment complete, registration successful',ja:'お支払い完了、予約成立',de:'Zahlung abgeschlossen, Anmeldung erfolgreich'}));
 }
 
 renderAll();
@@ -913,8 +916,8 @@ renderAll();
   if(!id) return;
   if(!EVENTS_M10[id]){
     EVENTS_M10[id] = {
-      title:'已完成報名活動', type:'說明會', feeType:'free', feeAmount:0,
-      start:new Date(NOW.getTime()+3*86400000), timeLabel:'活動時間請至活動詳情查看',
+      title:TLI_I18N.t('已完成報名活動',{en:'Registered event',ja:'予約済みイベント',de:'Angemeldete Veranstaltung'}), type:'說明會', feeType:'free', feeAmount:0,
+      start:new Date(NOW.getTime()+3*86400000), timeLabel:TLI_I18N.t('活動時間請至活動詳情查看',{en:'See event details for schedule',ja:'開催日時はイベント詳細をご確認ください',de:'Termin siehe Veranstaltungsdetails'}),
       capacity:50, totalRegistered:1, waitlistEnabled:false, regCloseHours:'', cancelCloseHours:24, noShowTrack:true
     };
   }
@@ -922,7 +925,7 @@ renderAll();
     REGISTERED.push({regId:'r'+(_regCounter++), eventId:id});
   }
   renderAll(id);
-  showToast('已完成報名');
+  showToast(TLI_I18N.t('已完成報名',{en:'Registration complete',ja:'予約が完了しました',de:'Anmeldung abgeschlossen'}));
   setTimeout(function(){
     var card = document.querySelector('[data-regevent="'+id+'"]');
     if(!card) return;
@@ -938,6 +941,18 @@ document.addEventListener('keydown', function(e){
   document.querySelectorAll('.sheet-overlay:not(.hidden)').forEach(function(el){
     el.classList.add('hidden');
   });
+});
+
+TLI_I18N.onRefresh(renderAll);
+TLI_I18N.init();
+document.addEventListener('DOMContentLoaded', function(){
+  var opts=document.querySelectorAll('.tli-i18n-opt');
+  for(var i=0;i<opts.length;i++){
+    opts[i].addEventListener('click', function(){
+      var name=this.textContent.trim();
+      showToast(TLI_I18N.t('顯示語言／幣別已切換為',{en:'Display language/currency switched to',ja:'表示言語と通貨を切り替えました：',de:'Sprache und Währung umgestellt auf'})+' '+name);
+    });
+  }
 });
 </script>
 </body>

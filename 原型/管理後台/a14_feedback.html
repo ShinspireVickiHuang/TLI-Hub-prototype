@@ -148,7 +148,7 @@ border-radius:6px;font-size:13px;box-sizing:border-box;font-family:inherit;}
 .kv span:first-child{color:var(--g500);}
 .small{font-size:12px;color:var(--g500);}
 .hint{font-size:11.5px;color:var(--g500);margin-top:3px;}
-.statcard{background:#fff;border:1px solid var(--g200);border-radius:8px;padding:16px 18px;}
+.statcard{background:#fff;border:1px solid var(--g200);border-radius:8px;padding:16px 18px;min-width:0;}
 .statcard .lbl{font-size:12px;color:var(--g500);margin-bottom:6px;}
 .statcard .val{font-size:23px;font-weight:700;}
 .statcard .val.warn{color:#C0392B;}
@@ -403,65 +403,73 @@ html,body{overflow-x:hidden;}
 .phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 .manage-link{font-size:11.5px;color:var(--navy);margin-left:8px;white-space:nowrap;text-decoration:none;}
 .manage-link:hover{text-decoration:underline;}
+/* 20260929i18n：修正 .grid4 稍早的無條件宣告（見上方較早的規則）覆寫掉行動斷點的 2 欄設定，
+   導致英文較長標籤（如 stat.monthlyFeedback／avgTeacherStars）在窄螢幕被裁切；這裡放在最後確保生效 */
+@media (max-width:1023px){
+.grid4{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:430px){
+.grid4{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="sidebar" id="sidebar"><a class="brand" href="../顧問工作台/c01_today.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small class="navtext" data-i18n="brand.adminPortal">管理後台</small></a><nav><div class="navgroup" data-group="sales"><div class="sec-label" onclick="toggleNavGroup(event,'sales')"><span class="navtext" data-i18n="nav.group.sales">銷售</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'sales')" aria-label="收合銷售"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a21" href="a21_projects.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="14.6" x2="11" y2="14.6"/></svg><span class="navtext" data-i18n="nav.a21">專案設定</span></a><a data-nav="a04" href="a04_packages.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="10" rx="1"/><path d="M3 7l7-4 7 4"/><line x1="10" y1="7" x2="10" y2="17"/></svg><span class="navtext" data-i18n="nav.a04">銷售方案</span></a><a data-nav="a05" href="a05_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10v16l-2-1.3L11 18l-2-1.3L7 18l-2-1.3V2z"/><line x1="7.5" y1="6" x2="12.5" y2="6"/><line x1="7.5" y1="9" x2="12.5" y2="9"/></svg><span class="navtext" data-i18n="nav.a05">訂單</span></a><a data-nav="a20" href="a20_agents.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6" r="2.3"/><path d="M2.5 16c0-2.6 1.8-4.3 4-4.3s4 1.7 4 4.3"/><circle cx="14.5" cy="8.5" r="1.8"/><path d="M17.3 16c0-1.9-1.3-3.4-2.8-3.4"/><path d="M9 6l3-1.5"/></svg><span class="navtext" data-i18n="nav.a20">合作夥伴</span></a></div></div><div class="navgroup" data-group="customer"><div class="sec-label" onclick="toggleNavGroup(event,'customer')"><span class="navtext" data-i18n="nav.group.customer">客戶</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'customer')" aria-label="收合客戶"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a01" href="a01_member_rules.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg><span class="navtext" data-i18n="nav.a01">會員管理</span></a><a data-nav="a19" href="a19_b2b_enterprise.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="7" height="14" rx="1"/><rect x="10.5" y="7.5" width="6" height="9.5" rx="1"/><line x1="5.5" y1="6" x2="7.5" y2="6"/><line x1="5.5" y1="9" x2="7.5" y2="9"/><line x1="5.5" y1="12" x2="7.5" y2="12"/><line x1="12.5" y1="10.5" x2="14.5" y2="10.5"/><line x1="12.5" y1="13.5" x2="14.5" y2="13.5"/></svg><span class="navtext" data-i18n="nav.a19">組織客戶</span></a><a data-nav="a14" class="active" href="a14_feedback.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8l-4 3v-3H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg><span class="navtext" data-i18n="nav.a14">學員回饋</span></a></div></div><div class="navgroup" data-group="teaching"><div class="sec-label" onclick="toggleNavGroup(event,'teaching')"><span class="navtext" data-i18n="nav.group.teaching">教學</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'teaching')" aria-label="收合教學"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a02" href="a02_products.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l7-3.5L17 6v8l-7 3.5L3 14V6z"/><path d="M3 6l7 3.5L17 6"/><line x1="10" y1="9.5" x2="10" y2="17.5"/></svg><span class="navtext" data-i18n="nav.a02">產品管理</span></a><a data-nav="a10" href="a10_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="15" height="9.5" rx="1.5"/><path d="M7 6.5V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="2.5" y1="10.5" x2="17.5" y2="10.5"/></svg><span class="navtext" data-i18n="nav.a10">老師管理</span></a><a data-nav="a18" href="a18_resource_library.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="10" cy="4.5" rx="7" ry="2.5"/><path d="M3 4.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/><path d="M3 9.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/></svg><span class="navtext" data-i18n="nav.a18">資源庫</span></a><a data-nav="a16" href="a16_events.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="6.5" y1="2" x2="6.5" y2="5.5"/><line x1="13.5" y1="2" x2="13.5" y2="5.5"/><circle cx="10" cy="12.3" r="2"/></svg><span class="navtext" data-i18n="nav.a16">活動管理</span></a><a data-nav="a22" href="a22_quizzes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="12" height="15" rx="1.5"/><path d="M7 7l1.5 1.5L11 6"/><line x1="12.5" y1="7.5" x2="14" y2="7.5"/><path d="M7 12l1.5 1.5L11 11"/><line x1="12.5" y1="12.5" x2="14" y2="12.5"/></svg><span class="navtext" data-i18n="nav.a22">測驗管理</span></a></div></div><div class="navgroup" data-group="finance"><div class="sec-label" onclick="toggleNavGroup(event,'finance')"><span class="navtext" data-i18n="nav.group.finance">財務</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'finance')" aria-label="收合財務"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a23" href="a23_payment_gateways.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><line x1="2.5" y1="8.5" x2="17.5" y2="8.5"/><circle cx="13.5" cy="12" r="1.2"/></svg><span class="navtext" data-i18n="nav.a23">收款與發票</span></a><a data-nav="a24" href="a24_partner_settlement.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><line x1="6" y1="8" x2="14" y2="8"/><line x1="6" y1="11" x2="11" y2="11"/><path d="M12.5 13.5l1.2 1.2 2.3-2.4"/></svg><span class="navtext" data-i18n="nav.a24">結算與對帳</span></a><a data-nav="a07" href="a07_reports.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span class="navtext" data-i18n="nav.a07">營運報表</span></a></div></div><div class="navgroup" data-group="system"><div class="sec-label" onclick="toggleNavGroup(event,'system')"><span class="navtext" data-i18n="nav.group.system">系統</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'system')" aria-label="收合系統"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a17" href="a17_master_data.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="5" x2="16" y2="5"/><circle cx="8" cy="5" r="1.6"/><line x1="4" y1="10" x2="16" y2="10"/><circle cx="13" cy="10" r="1.6"/><line x1="4" y1="15" x2="16" y2="15"/><circle cx="10" cy="15" r="1.6"/></svg><span class="navtext" data-i18n="nav.a17">基礎資料設定</span></a><a data-nav="a09" href="a09_permissions_notify.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l6.5 2.5v5C16.5 14 13.8 17 10 18c-3.8-1-6.5-4-6.5-8.5v-5L10 2z"/></svg><span class="navtext" data-i18n="nav.a09">權限管理</span></a><a data-nav="a15" href="a15_notifications.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="navtext" data-i18n="nav.a15">通知管理</span></a><a data-nav="a08" href="a08_content_cms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="15" height="14" rx="1.5"/><line x1="8" y1="3" x2="8" y2="17"/></svg><span class="navtext" data-i18n="nav.a08">內容管理</span></a></div></div></nav><div class="sidebar-user" id="sidebarUser"><div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar" id="suAvatar">王</span><span class="navtext su-info"><span class="su-name" id="suName">王大明</span><span class="su-roletag" id="suRoleTag" data-i18n="role.hqAdmin">總公司管理者</span></span><svg class="navtext su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div><div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="../顧問工作台/c01_today.html" data-i18n="nav_ext.consultantWorkbench">前往顧問工作台</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="main"><div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title" data-i18n="nav.a14">學員回饋</div><div class="tb-actions"><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar"><a class="brand" href="../顧問工作台/c01_today.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small class="navtext" data-i18n="brand.adminPortal">管理後台</small></a><nav><div class="navgroup" data-group="sales"><div class="sec-label" onclick="toggleNavGroup(event,'sales')"><span class="navtext" data-i18n="nav.group.sales">銷售</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'sales')" aria-label="收合銷售" data-i18n-aria-label="aria.collapseSales"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a21" href="a21_projects.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="14.6" x2="11" y2="14.6"/></svg><span class="navtext" data-i18n="nav.a21">專案設定</span></a><a data-nav="a04" href="a04_packages.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="10" rx="1"/><path d="M3 7l7-4 7 4"/><line x1="10" y1="7" x2="10" y2="17"/></svg><span class="navtext" data-i18n="nav.a04">銷售方案</span></a><a data-nav="a05" href="a05_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10v16l-2-1.3L11 18l-2-1.3L7 18l-2-1.3V2z"/><line x1="7.5" y1="6" x2="12.5" y2="6"/><line x1="7.5" y1="9" x2="12.5" y2="9"/></svg><span class="navtext" data-i18n="nav.a05">訂單</span></a><a data-nav="a20" href="a20_agents.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6" r="2.3"/><path d="M2.5 16c0-2.6 1.8-4.3 4-4.3s4 1.7 4 4.3"/><circle cx="14.5" cy="8.5" r="1.8"/><path d="M17.3 16c0-1.9-1.3-3.4-2.8-3.4"/><path d="M9 6l3-1.5"/></svg><span class="navtext" data-i18n="nav.a20">合作夥伴</span></a></div></div><div class="navgroup" data-group="customer"><div class="sec-label" onclick="toggleNavGroup(event,'customer')"><span class="navtext" data-i18n="nav.group.customer">客戶</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'customer')" aria-label="收合客戶" data-i18n-aria-label="aria.collapseCustomer"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a01" href="a01_member_rules.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg><span class="navtext" data-i18n="nav.a01">會員管理</span></a><a data-nav="a19" href="a19_b2b_enterprise.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="7" height="14" rx="1"/><rect x="10.5" y="7.5" width="6" height="9.5" rx="1"/><line x1="5.5" y1="6" x2="7.5" y2="6"/><line x1="5.5" y1="9" x2="7.5" y2="9"/><line x1="5.5" y1="12" x2="7.5" y2="12"/><line x1="12.5" y1="10.5" x2="14.5" y2="10.5"/><line x1="12.5" y1="13.5" x2="14.5" y2="13.5"/></svg><span class="navtext" data-i18n="nav.a19">組織客戶</span></a><a data-nav="a14" class="active" href="a14_feedback.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8l-4 3v-3H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg><span class="navtext" data-i18n="nav.a14">學員回饋</span></a></div></div><div class="navgroup" data-group="teaching"><div class="sec-label" onclick="toggleNavGroup(event,'teaching')"><span class="navtext" data-i18n="nav.group.teaching">教學</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'teaching')" aria-label="收合教學" data-i18n-aria-label="aria.collapseTeaching"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a02" href="a02_products.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l7-3.5L17 6v8l-7 3.5L3 14V6z"/><path d="M3 6l7 3.5L17 6"/><line x1="10" y1="9.5" x2="10" y2="17.5"/></svg><span class="navtext" data-i18n="nav.a02">產品管理</span></a><a data-nav="a10" href="a10_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="15" height="9.5" rx="1.5"/><path d="M7 6.5V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="2.5" y1="10.5" x2="17.5" y2="10.5"/></svg><span class="navtext" data-i18n="nav.a10">老師管理</span></a><a data-nav="a18" href="a18_resource_library.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="10" cy="4.5" rx="7" ry="2.5"/><path d="M3 4.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/><path d="M3 9.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/></svg><span class="navtext" data-i18n="nav.a18">資源庫</span></a><a data-nav="a16" href="a16_events.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="6.5" y1="2" x2="6.5" y2="5.5"/><line x1="13.5" y1="2" x2="13.5" y2="5.5"/><circle cx="10" cy="12.3" r="2"/></svg><span class="navtext" data-i18n="nav.a16">活動管理</span></a><a data-nav="a22" href="a22_quizzes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="12" height="15" rx="1.5"/><path d="M7 7l1.5 1.5L11 6"/><line x1="12.5" y1="7.5" x2="14" y2="7.5"/><path d="M7 12l1.5 1.5L11 11"/><line x1="12.5" y1="12.5" x2="14" y2="12.5"/></svg><span class="navtext" data-i18n="nav.a22">測驗管理</span></a></div></div><div class="navgroup" data-group="finance"><div class="sec-label" onclick="toggleNavGroup(event,'finance')"><span class="navtext" data-i18n="nav.group.finance">財務</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'finance')" aria-label="收合財務" data-i18n-aria-label="aria.collapseFinance"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a23" href="a23_payment_gateways.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><line x1="2.5" y1="8.5" x2="17.5" y2="8.5"/><circle cx="13.5" cy="12" r="1.2"/></svg><span class="navtext" data-i18n="nav.a23">收款與發票</span></a><a data-nav="a24" href="a24_partner_settlement.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><line x1="6" y1="8" x2="14" y2="8"/><line x1="6" y1="11" x2="11" y2="11"/><path d="M12.5 13.5l1.2 1.2 2.3-2.4"/></svg><span class="navtext" data-i18n="nav.a24">結算與對帳</span></a><a data-nav="a07" href="a07_reports.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span class="navtext" data-i18n="nav.a07">營運報表</span></a></div></div><div class="navgroup" data-group="system"><div class="sec-label" onclick="toggleNavGroup(event,'system')"><span class="navtext" data-i18n="nav.group.system">系統</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'system')" aria-label="收合系統" data-i18n-aria-label="aria.collapseSystem"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a17" href="a17_master_data.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="5" x2="16" y2="5"/><circle cx="8" cy="5" r="1.6"/><line x1="4" y1="10" x2="16" y2="10"/><circle cx="13" cy="10" r="1.6"/><line x1="4" y1="15" x2="16" y2="15"/><circle cx="10" cy="15" r="1.6"/></svg><span class="navtext" data-i18n="nav.a17">基礎資料設定</span></a><a data-nav="a09" href="a09_permissions_notify.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l6.5 2.5v5C16.5 14 13.8 17 10 18c-3.8-1-6.5-4-6.5-8.5v-5L10 2z"/></svg><span class="navtext" data-i18n="nav.a09">權限管理</span></a><a data-nav="a15" href="a15_notifications.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="navtext" data-i18n="nav.a15">通知管理</span></a><a data-nav="a08" href="a08_content_cms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="15" height="14" rx="1.5"/><line x1="8" y1="3" x2="8" y2="17"/></svg><span class="navtext" data-i18n="nav.a08">內容管理</span></a></div></div></nav><div class="sidebar-user" id="sidebarUser"><div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar" id="suAvatar">王</span><span class="navtext su-info"><span class="su-name" id="suName">王大明</span><span class="su-roletag" id="suRoleTag" data-i18n="role.hqAdmin">總公司管理者</span></span><svg class="navtext su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div><div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="../顧問工作台/c01_today.html" data-i18n="nav_ext.consultantWorkbench">前往顧問工作台</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="main"><div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="common.openMenu"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title" data-i18n="nav.a14">學員回饋</div><div class="tb-actions"><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋" data-i18n-placeholder="search.genericPlaceholder"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知" data-i18n-aria-label="common.notifications"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="common.userMenu">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1>學員回饋<span class="phase2-pill">二階段</span></h1><div class="desc">學生每堂課後回饋彙整；低分回饋（課程或老師 ≤2 星）自動標記待處理，需指派顧問跟進。</div></div>
+<div><h1 data-i18n="nav.a14">學員回饋<span class="phase2-pill" data-i18n="badge.phase2">二階段</span></h1><div class="desc" data-i18n="page.desc.feedback">學生每堂課後回饋彙整；低分回饋（課程或老師 ≤2 星）自動標記待處理，需指派顧問跟進。</div></div>
 <div style="position:relative">
-<button class="btn ghost sm" onclick="toggleFbSettings(event)">⚙ 設定</button>
+<button class="btn ghost sm" onclick="toggleFbSettings(event)" data-i18n="btn.settingsGear">⚙ 設定</button>
 <div class="tb-panel settingsmenu" id="fbSettingsMenu">
-<a href="a17_master_data.html#master-campus">校區清單管理 →</a>
+<a href="a17_master_data.html#master-campus" data-i18n="gear.campusListMgmt">校區清單管理 →</a>
 </div>
 </div>
 </div>
 
 <div class="grid4">
-<div class="statcard"><div class="lbl">本月回饋數</div><div class="val" id="kpi_count"></div></div>
-<div class="statcard"><div class="lbl">課程平均星</div><div class="val" id="kpi_course"></div></div>
-<div class="statcard"><div class="lbl">老師平均星</div><div class="val" id="kpi_teacher"></div></div>
-<div class="statcard"><div class="lbl">低分待處理</div><div class="val warn" id="kpi_low"></div></div>
+<div class="statcard"><div class="lbl" data-i18n="stat.monthlyFeedback">本月回饋數</div><div class="val" id="kpi_count"></div></div>
+<div class="statcard"><div class="lbl" data-i18n="stat.avgCourseStars">課程平均星</div><div class="val" id="kpi_course"></div></div>
+<div class="statcard"><div class="lbl" data-i18n="stat.avgTeacherStars">老師平均星</div><div class="val" id="kpi_teacher"></div></div>
+<div class="statcard"><div class="lbl" data-i18n="stat.lowScorePending">低分待處理</div><div class="val warn" id="kpi_low"></div></div>
 </div>
 
 <div class="tabs">
-<button class="active" onclick="fbTopTab(this,'list')">回饋列表</button>
-<button onclick="fbTopTab(this,'teacher')">老師評分總覽</button>
+<button class="active" onclick="fbTopTab(this,'list')" data-i18n="tab.feedbackList">回饋列表</button>
+<button onclick="fbTopTab(this,'teacher')" data-i18n="tab.teacherOverview">老師評分總覽</button>
 </div>
 
 <div class="tabpanel active" id="fbtoppanel-list">
 <div class="listpanel">
 <div class="filterbar">
-<input type="text" id="f_kw" placeholder="搜尋學生／課程" style="width:180px">
-<select id="f_status"><option value="">全部狀態</option><option>待處理</option><option>處理中</option><option>已結案</option></select>
-<select id="f_star"><option value="">全部星等</option><option value="low">低分（≤2 星）</option><option value="3">3 星</option><option value="45">4–5 星</option></select>
-<select id="f_campus"><option value="">全部校區</option></select>
-<button type="button" class="btn ghost sm" onclick="toggleMoreFiltersFb()" id="fbMoreBtn">更多篩選 ▾</button>
-<button class="btn ghost" onclick="applyFilterFb()">查詢</button>
+<input type="text" id="f_kw" placeholder="搜尋學生／課程" data-i18n-placeholder="ph.searchStudentCourse" style="width:180px">
+<select id="f_status"><option value="" data-i18n="opt.allStatus">全部狀態</option><option data-i18n="status.fbPending">待處理</option><option data-i18n="status.fbInProgress">處理中</option><option data-i18n="status.fbClosed">已結案</option></select>
+<select id="f_star"><option value="" data-i18n="opt.allStarRating">全部星等</option><option value="low" data-i18n="opt.lowStarRating">低分（≤2 星）</option><option value="3" data-i18n="opt.star3">3 星</option><option value="45" data-i18n="opt.star45">4–5 星</option></select>
+<select id="f_campus"><option value="" data-i18n="opt.allCampuses">全部校區</option></select>
+<button type="button" class="btn ghost sm" onclick="toggleMoreFiltersFb()" id="fbMoreBtn"><span data-i18n="common.moreFilters">更多篩選</span> ▾</button>
+<button class="btn ghost" onclick="applyFilterFb()" data-i18n="btn.query">查詢</button>
 </div>
 <div class="morefilters" id="fbMoreFilters">
-<select id="f_teacher"><option value="">全部老師</option></select>
+<select id="f_teacher"><option value="" data-i18n="opt.allTeachers">全部老師</option></select>
 <input type="date" id="f_from"><span class="small">～</span><input type="date" id="f_to">
-<select id="f_sort"><option value="date_desc">最新回饋在前</option><option value="course_asc">課程星最低在前</option><option value="teacher_asc">老師星最低在前</option></select>
+<select id="f_sort"><option value="date_desc" data-i18n="sort.dateDesc">最新回饋在前</option><option value="course_asc" data-i18n="sort.courseAsc">課程星最低在前</option><option value="teacher_asc" data-i18n="sort.teacherAsc">老師星最低在前</option></select>
 </div>
 <div class="chiprow">
-<button class="chip-fq active" onclick="quickFb(this,'')">全部</button>
-<button class="chip-fq" onclick="quickFb(this,'待處理')">待處理</button>
-<button class="chip-fq" onclick="quickFb(this,'low')">低分回饋</button>
+<button class="chip-fq active" onclick="quickFb(this,'')" data-i18n="common.all">全部</button>
+<button class="chip-fq" onclick="quickFb(this,'待處理')" data-i18n="status.fbPending">待處理</button>
+<button class="chip-fq" onclick="quickFb(this,'low')" data-i18n="chip.lowScoreFeedback">低分回饋</button>
 </div>
 <div class="tablewrap"><table id="fbTable"></table></div>
-<p class="small" id="fbEmpty" style="display:none;text-align:center;padding:16px 0;">找不到符合條件的回饋紀錄。</p>
+<p class="small" id="fbEmpty" style="display:none;text-align:center;padding:16px 0;" data-i18n="empty.noMatchingFeedback">找不到符合條件的回饋紀錄。</p>
 <div class="pager" id="fbPager"></div>
 </div>
 </div>
 
 <div class="tabpanel" id="fbtoppanel-teacher">
 <div class="card">
-<h2>老師評分總覽</h2>
+<h2 data-i18n="tab.teacherOverview">老師評分總覽</h2>
 <div class="tablewrap"><table id="teacherOverviewTable"></table></div>
-<div class="hint">點列可前往「老師管理」查看該老師詳情。</div>
+<div class="hint" data-i18n="hint.teacherOverviewRowlink">點列可前往「老師管理」查看該老師詳情。</div>
 </div>
 </div>
 
@@ -474,58 +482,59 @@ html,body{overflow-x:hidden;}
 <div id="fb_statusrow" style="margin-bottom:14px"></div>
 
 <div class="card">
-<h2>回饋內容與課後紀錄對照</h2>
+<h2 data-i18n="h2.feedbackVsRecord">回饋內容與課後紀錄對照</h2>
 <div class="comparebox">
-<div class="col"><h3>學生回饋（<span id="fb_stars"></span>）</h3><div id="fb_content"></div></div>
-<div class="col"><h3>老師課後紀錄</h3><div id="fb_teachernote"></div></div>
+<div class="col"><h3><span data-i18n="h3.studentFeedback">學生回饋</span>（<span id="fb_stars"></span>）</h3><div id="fb_content"></div></div>
+<div class="col"><h3 data-i18n="h3.teacherPostClassNote">老師課後紀錄</h3><div id="fb_teachernote"></div></div>
 </div>
 </div>
 
 <div class="card">
-<h2>處理紀錄</h2>
+<h2 data-i18n="h2.processingHistory">處理紀錄</h2>
 <ul class="timeline" id="fb_timeline"></ul>
 </div>
 
 <div class="card">
-<h2>處理操作</h2>
+<h2 data-i18n="h2.processingActions">處理操作</h2>
 <div style="display:flex;gap:10px;flex-wrap:wrap">
-<button class="btn ghost sm" onclick="openAssign()">指派顧問跟進</button>
-<button class="btn ghost sm" onclick="openContact()">聯繫學生</button>
-<button class="btn ghost sm" onclick="openCoach()">標記老師輔導</button>
-<button class="btn sm" id="fb_closeBtn" onclick="closeCase()">結案</button>
+<button class="btn ghost sm" onclick="openAssign()" data-i18n="btn.assignAdvisorFollowup">指派顧問跟進</button>
+<button class="btn ghost sm" onclick="openContact()" data-i18n="btn.contactStudent">聯繫學生</button>
+<button class="btn ghost sm" onclick="openCoach()" data-i18n="btn.markTeacherCoaching">標記老師輔導</button>
+<button class="btn sm" id="fb_closeBtn" onclick="closeCase()" data-i18n="btn.closeCase">結案</button>
 </div>
 </div>
 
 </div></div>
 
 <div class="modal-mask" id="assignModal" onclick="if(event.target===this) closeModal('assignModal')"><div class="modal">
-<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3>指派顧問跟進</h3><button class="dclose" onclick="closeModal('assignModal')" aria-label="關閉"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-<div class="formrow"><label>選擇顧問</label><select id="asg_advisor"><option>顧問 A</option><option>顧問 B</option><option>顧問 C</option><option>顧問 D</option><option>顧問 E</option><option>顧問 F</option></select></div>
-<div class="hint" style="margin-bottom:10px">指派後將加入該顧問「今日待辦」清單，並將狀態轉為處理中。</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="btn.assignAdvisorFollowup">指派顧問跟進</h3><button class="dclose" onclick="closeModal('assignModal')" aria-label="關閉" data-i18n-aria-label="common.close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<!-- 20260930：選項改由 JS 讀共用主檔 TLI_MASTERS.advisors 產生（不再寫死「顧問 A～F」佔位資料） -->
+<div class="formrow"><label data-i18n="label.selectAdvisor">選擇顧問</label><select id="asg_advisor"></select></div>
+<div class="hint" style="margin-bottom:10px" data-i18n="hint.assignAddsToToday">指派後將加入該顧問「今日待辦」清單，並將狀態轉為處理中。</div>
 <div style="text-align:right">
-<button class="btn ghost" onclick="closeModal('assignModal')">取消</button>
-<button class="btn" onclick="confirmAssign()">確認指派</button>
+<button class="btn ghost" onclick="closeModal('assignModal')" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="confirmAssign()" data-i18n="btn.confirmAssign">確認指派</button>
 </div>
 </div></div>
 
 <div class="modal-mask" id="contactModal" onclick="if(event.target===this) closeModal('contactModal')"><div class="modal">
-<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3>聯繫學生</h3><button class="dclose" onclick="closeModal('contactModal')" aria-label="關閉"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-<div class="formrow"><label>聯繫管道</label><select id="ct_channel" onchange="fillContactTpl()"><option>Email</option><option>LINE</option></select></div>
-<div class="formrow"><label>訊息內容</label><textarea id="ct_body" rows="5"></textarea></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="btn.contactStudent">聯繫學生</h3><button class="dclose" onclick="closeModal('contactModal')" aria-label="關閉" data-i18n-aria-label="common.close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div class="formrow"><label data-i18n="label.contactChannel">聯繫管道</label><select id="ct_channel" onchange="fillContactTpl()"><option>Email</option><option>LINE</option></select></div>
+<div class="formrow"><label data-i18n="label.messageContent">訊息內容</label><textarea id="ct_body" rows="5"></textarea></div>
 <div style="text-align:right">
-<button class="btn ghost" onclick="closeModal('contactModal')">取消</button>
-<button class="btn" onclick="confirmContact()">傳送</button>
+<button class="btn ghost" onclick="closeModal('contactModal')" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="confirmContact()" data-i18n="btn.send">傳送</button>
 </div>
 </div></div>
 
 <div class="modal-mask" id="coachModal" onclick="if(event.target===this) closeModal('coachModal')"><div class="modal">
-<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3>標記老師輔導</h3><button class="dclose" onclick="closeModal('coachModal')" aria-label="關閉"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-<div class="hint" style="margin-bottom:10px"><span class="req">*</span> 為必填</div>
-<div class="formrow"><label>輔導對象</label><div class="small" id="coach_teacher"></div></div>
-<div class="formrow"><label>輔導事項說明<span class="req">*</span></label><textarea id="coach_note" rows="4" placeholder="將寫入老師管理（a10）該老師的紀錄"></textarea></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="btn.markTeacherCoaching">標記老師輔導</h3><button class="dclose" onclick="closeModal('coachModal')" aria-label="關閉" data-i18n-aria-label="common.close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div class="hint" style="margin-bottom:10px"><span class="req">*</span> <span data-i18n="common.required">為必填</span></div>
+<div class="formrow"><label data-i18n="label.coachingTarget">輔導對象</label><div class="small" id="coach_teacher"></div></div>
+<div class="formrow"><label data-i18n="label.coachingNote">輔導事項說明</label><span class="req">*</span><textarea id="coach_note" rows="4" placeholder="將寫入老師管理（a10）該老師的紀錄" data-i18n-placeholder="ph.willWriteToTeacherMgmt"></textarea></div>
 <div style="text-align:right">
-<button class="btn ghost" onclick="closeModal('coachModal')">取消</button>
-<button class="btn" onclick="confirmCoach()">確認寫入</button>
+<button class="btn ghost" onclick="closeModal('coachModal')" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="confirmCoach()" data-i18n="btn.confirmWrite">確認寫入</button>
 </div>
 </div></div>
 
@@ -544,10 +553,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -555,8 +564,8 @@ function renderNotifPanel(){
   var unread = NOTIFS.filter(function(n){return n.unread;}).length;
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
-  panel.innerHTML = '<div class="tn-head"><span>通知（'+unread+' 則未讀）</span><a href="javascript:void(0)" onclick="markAllRead(event)">全部標為已讀</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+  panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -698,23 +707,24 @@ function starHtml(n, low){
   for (var i=1;i<=5;i++) s += (i<=n ? STAR_FILLED : STAR_EMPTY);
   return '<span class="stars'+(low?' low':'')+'" style="display:inline-flex;align-items:center;gap:1px">'+s+' <b style="margin-left:3px">('+n+')</b></span>';
 }
+function ownerLabel(o){ return TLI_I18N.t(o, o==='（未指派）'?'(Unassigned)':o); }
 function statusBadgeFb(f){
-  if (f.status==='已結案') return '<span class="badge green">已結案</span>';
-  if (f.status==='處理中') return '<span class="badge blue">處理中</span>';
-  return '<span class="badge red">'+(f.low?'<span class="reddot"></span>':'')+'待處理</span>';
+  if (f.status==='已結案') return '<span class="badge green" data-i18n="status.fbClosed">已結案</span>';
+  if (f.status==='處理中') return '<span class="badge blue" data-i18n="status.fbInProgress">處理中</span>';
+  return '<span class="badge red">'+(f.low?'<span class="reddot"></span>':'')+'<span data-i18n="status.fbPending">待處理</span></span>';
 }
 
 function fillTeacherFilter(){
   var teachers = [];
   FEEDBACK.forEach(function(f){ if (teachers.indexOf(f.teacher)===-1) teachers.push(f.teacher); });
-  document.getElementById('f_teacher').innerHTML = '<option value="">全部老師</option>' + teachers.map(function(t){return '<option>'+t+'</option>';}).join('');
+  document.getElementById('f_teacher').innerHTML = '<option value="" data-i18n="opt.allTeachers">全部老師</option>' + teachers.map(function(t){return '<option>'+t+'</option>';}).join('');
 }
 fillTeacherFilter();
 
 // 校區篩選改讀共用主檔 TLI_MASTERS.campuses（來源 a17「校區與線上據點」），排除「線上」（回饋固定發生在課程所屬校區，本頁原本只列 4 個實體校區）
 function fillCampusFilter(){
   var campusNames = TLI_MASTERS.campuses.filter(function(c){ return c.id !== 'online'; }).map(function(c){ return c.name; });
-  document.getElementById('f_campus').innerHTML = '<option value="">全部校區</option>' + campusNames.map(function(c){return '<option>'+c+'</option>';}).join('');
+  document.getElementById('f_campus').innerHTML = '<option value="" data-i18n="opt.allCampuses">全部校區</option>' + campusNames.map(function(c){return '<option>'+c+'</option>';}).join('');
 }
 fillCampusFilter();
 
@@ -724,9 +734,9 @@ function renderKpiFb(){
   var avgTeacher = (thisMonth.reduce(function(s,f){return s+f.teacherStar;},0) / thisMonth.length) || 0;
   var lowPending = FEEDBACK.filter(function(f){ return f.low && f.status!=='已結案'; }).length;
   document.getElementById('kpi_count').textContent = thisMonth.length;
-  document.getElementById('kpi_course').textContent = avgCourse.toFixed(1) + ' 星';
-  document.getElementById('kpi_teacher').textContent = avgTeacher.toFixed(1) + ' 星';
-  document.getElementById('kpi_low').textContent = lowPending + ' 筆';
+  document.getElementById('kpi_course').textContent = avgCourse.toFixed(1) + TLI_I18N.t(' 星','');
+  document.getElementById('kpi_teacher').textContent = avgTeacher.toFixed(1) + TLI_I18N.t(' 星','');
+  document.getElementById('kpi_low').textContent = lowPending + TLI_I18N.t(' 筆','');
 }
 
 function filteredFb(){
@@ -770,8 +780,8 @@ function renderFb(){
   renderKpiFb();
   var list = filteredFb();
   var t = document.getElementById('fbTable');
-  var head = '<tr><th class="checkbox-cell"><input type="checkbox" onclick="toggleAllFb(this)"></th><th>日期</th><th>學生</th><th>課程／主題</th><th>老師</th>' +
-    '<th>星等</th><th>狀態</th><th>負責人</th></tr>';
+  var head = '<tr><th class="checkbox-cell"><input type="checkbox" onclick="toggleAllFb(this)"></th><th data-i18n="col.date">日期</th><th data-i18n="label.student">學生</th><th data-i18n="col.courseTopic">課程／主題</th><th data-i18n="col.teacherName">老師</th>' +
+    '<th data-i18n="col.starRating">星等</th><th data-i18n="common.status">狀態</th><th data-i18n="col.owner">負責人</th></tr>';
   t.innerHTML = head;
   list.forEach(function(f){
     var tr = document.createElement('tr');
@@ -779,28 +789,36 @@ function renderFb(){
     tr.onclick = function(e){ if(e.target.type!=='checkbox') openFbDrawer(f.id); };
     var row = '<td class="checkbox-cell" onclick="event.stopPropagation()"><input type="checkbox" class="fb-chk"></td>' +
       '<td>'+f.date+'</td><td>'+(f.low&&f.status!=='已結案'?'<span class="reddot"></span>':'')+f.student+'</td><td>'+f.course+'</td><td>'+f.teacher+'</td>';
-    row += '<td>課 '+starHtml(f.courseStar, f.courseStar<=2)+'<br>師 '+starHtml(f.teacherStar, f.teacherStar<=2)+'</td>' +
-      '<td>'+statusBadgeFb(f)+'</td><td>'+f.owner+'</td>';
+    row += '<td>'+TLI_I18N.t('課','Course')+' '+starHtml(f.courseStar, f.courseStar<=2)+'<br>'+TLI_I18N.t('師','Teacher')+' '+starHtml(f.teacherStar, f.teacherStar<=2)+'</td>' +
+      '<td>'+statusBadgeFb(f)+'</td><td>'+ownerLabel(f.owner)+'</td>';
     tr.innerHTML = row;
     t.appendChild(tr);
   });
   document.getElementById('fbEmpty').style.display = list.length ? 'none' : '';
   var start = (fbPage-1)*fbPageSize+1, end = Math.min(fbPage*fbPageSize, FAKE_TOTAL_FB);
   document.getElementById('fbPager').innerHTML =
-    '<div>顯示第 '+start+'–'+end+' 筆／共 '+FAKE_TOTAL_FB.toLocaleString()+' 筆</div>' +
-    '<div class="pages"><button '+(fbPage===1?'disabled':'')+' onclick="gotoFbPage(fbPage-1)">‹ 上一頁</button>' +
+    '<div>'+TLI_I18N.t('顯示第 '+start.toLocaleString()+'–'+end.toLocaleString()+' 筆／共 '+FAKE_TOTAL_FB.toLocaleString()+' 筆', 'Showing '+start.toLocaleString()+'–'+end.toLocaleString()+' of '+FAKE_TOTAL_FB.toLocaleString())+'</div>' +
+    '<div class="pages"><button '+(fbPage===1?'disabled':'')+' onclick="gotoFbPage(fbPage-1)" data-i18n="pager.prev">‹ 上一頁</button>' +
     '<button class="active">'+fbPage+'</button>' +
-    '<button onclick="gotoFbPage(fbPage+1)">下一頁 ›</button>' +
-    '<button class="btn ghost sm" onclick="batchAssign()" style="margin-left:8px">指派顧問</button>' +
-    '<button class="btn ghost sm" onclick="showToast(\'已匯出目前篩選結果，共 '+list.length+' 筆\')">匯出</button></div>';
+    '<button onclick="gotoFbPage(fbPage+1)" data-i18n="pager.next">下一頁 ›</button>' +
+    '<button class="btn ghost sm" onclick="batchAssign()" style="margin-left:8px" data-i18n="btn.assignAdvisor">指派顧問</button>' +
+    '<button class="btn ghost sm" onclick="doExportFb('+list.length+')" data-i18n="btn.export">匯出</button></div>';
+  if (window.TLI_I18N) TLI_I18N.refresh();
 }
 function toggleAllFb(el){ document.querySelectorAll('.fb-chk').forEach(function(c){c.checked = el.checked;}); }
 function gotoFbPage(p){ if(p<1) return; fbPage = p; renderFb(); }
+function doExportFb(n){ showToast(TLI_I18N.t('已匯出目前篩選結果，共 '+n+' 筆','Exported '+n+' matching records')); }
 function batchAssign(){
   var n = document.querySelectorAll('.fb-chk:checked').length;
-  if (!n){ showToast('請先勾選要指派的回饋'); return; }
-  showToast('已將 '+n+' 筆回饋指派給顧問 A，加入其今日待辦');
+  if (!n){ showToast(TLI_I18N.t('請先勾選要指派的回饋','Please select feedback records to assign first')); return; }
+  var a0 = TLI_MASTERS.advisors[0];
+  showToast(TLI_I18N.t('已將 '+n+' 筆回饋指派給'+a0.name+'，加入其今日待辦','Assigned '+n+' feedback records to '+a0.en+', added to their today\'s to-do'));
 }
+/* 20260930：「選擇顧問」選項改讀共用主檔 TLI_MASTERS.advisors（原本寫死顧問 A～F 佔位資料） */
+(function populateAdvisorSelect(){
+  var sel = document.getElementById('asg_advisor');
+  if (sel) sel.innerHTML = TLI_MASTERS.advisors.map(function(a){ return '<option value="'+a.name+'">'+a.name+'</option>'; }).join('');
+})();
 renderFb();
 
 function byIdFb(id){ return FEEDBACK.find(function(f){return f.id===id;}); }
@@ -810,10 +828,10 @@ function openFbDrawer(id){
   curFbId = id;
   var f = byIdFb(id);
   document.getElementById('fb_title').textContent = f.student + '　' + f.course;
-  document.getElementById('fb_sub').textContent = f.date + '｜' + f.campus + '校｜授課老師：' + f.teacher;
-  document.getElementById('fb_statusrow').innerHTML = statusBadgeFb(f) + ' <span class="small">負責人：'+f.owner+'</span>';
-  document.getElementById('fb_stars').innerHTML = '課程 '+starHtml(f.courseStar,f.courseStar<=2)+'　老師 '+starHtml(f.teacherStar,f.teacherStar<=2);
-  document.getElementById('fb_content').innerHTML = '<div class="hint" style="margin-bottom:6px">摘要：'+f.summary+'</div>' +
+  document.getElementById('fb_sub').textContent = f.date + '｜' + f.campus + TLI_I18N.t('校｜授課老師：',' Campus | Teacher: ') + f.teacher;
+  document.getElementById('fb_statusrow').innerHTML = statusBadgeFb(f) + ' <span class="small">'+TLI_I18N.t('負責人：','Owner: ')+ownerLabel(f.owner)+'</span>';
+  document.getElementById('fb_stars').innerHTML = TLI_I18N.t('課程','Course')+' '+starHtml(f.courseStar,f.courseStar<=2)+'　'+TLI_I18N.t('老師','Teacher')+' '+starHtml(f.teacherStar,f.teacherStar<=2);
+  document.getElementById('fb_content').innerHTML = '<div class="hint" style="margin-bottom:6px">'+TLI_I18N.t('摘要：','Summary: ')+f.summary+'</div>' +
     '<div style="margin-bottom:6px">'+f.tags.map(function(tg){return '<span class="tagpill">'+tg+'</span>';}).join('')+'</div>' +
     '<div>'+f.content+'</div>';
   document.getElementById('fb_teachernote').textContent = f.teacherNote;
@@ -836,7 +854,7 @@ function confirmAssign(){
   closeModal('assignModal');
   openFbDrawer(curFbId);
   renderFb();
-  showToast('已指派給「'+advisor+'」，將出現在其今日待辦');
+  showToast(TLI_I18N.t('已指派給「'+advisor+'」，將出現在其今日待辦','Assigned to “'+advisor+'”, it will appear in their today\'s to-do'));
 }
 
 function openContact(){
@@ -858,7 +876,7 @@ function confirmContact(){
   f.timeline.push({t:nowStrFb(), who:'顧問（目前登入者）', what:'已透過 '+ch+' 聯繫學生'});
   closeModal('contactModal');
   openFbDrawer(curFbId);
-  showToast('已透過 '+ch+' 聯繫「'+f.student+'」');
+  showToast(TLI_I18N.t('已透過 '+ch+' 聯繫「'+f.student+'」','Contacted “'+f.student+'” via '+ch));
 }
 
 function openCoach(){
@@ -870,11 +888,11 @@ function openCoach(){
 function confirmCoach(){
   var f = byIdFb(curFbId);
   var note = document.getElementById('coach_note').value.trim();
-  if (!note){ showToast('請填寫輔導事項說明'); return; }
+  if (!note){ showToast(TLI_I18N.t('請填寫輔導事項說明','Please fill in the coaching notes')); return; }
   f.timeline.push({t:nowStrFb(), who:'顧問（目前登入者）', what:'已標記老師輔導並寫入「'+f.teacher+'」老師管理紀錄：'+note});
   closeModal('coachModal');
   openFbDrawer(curFbId);
-  showToast('已寫入「'+f.teacher+'」老師管理（a10）紀錄');
+  showToast(TLI_I18N.t('已寫入「'+f.teacher+'」老師管理（a10）紀錄','Saved to “'+f.teacher+'”’s record in Teacher Management (a10)'));
 }
 
 function closeCase(){
@@ -883,7 +901,7 @@ function closeCase(){
   f.timeline.push({t:nowStrFb(), who:'顧問（目前登入者）', what:'已結案'});
   openFbDrawer(curFbId);
   renderFb();
-  showToast('已結案');
+  showToast(TLI_I18N.t('已結案','Case closed'));
 }
 function nowStrFb(){
   var d = new Date();
@@ -901,7 +919,7 @@ function renderTeacherOverview(){
     g.trend.push(f.teacherStar);
   });
   var t = document.getElementById('teacherOverviewTable');
-  t.innerHTML = '<tr><th>老師</th><th>平均星</th><th>回饋數</th><th>低分數</th><th>近期趨勢</th></tr>';
+  t.innerHTML = '<tr><th data-i18n="col.teacherName">老師</th><th data-i18n="col.avgStars">平均星</th><th data-i18n="col.feedbackCount">回饋數</th><th data-i18n="col.lowScoreCount">低分數</th><th data-i18n="col.recentTrend">近期趨勢</th></tr>';
   Object.keys(byTeacher).forEach(function(name){
     var g = byTeacher[name];
     var avg = (g.teacherSum / g.count).toFixed(1);
@@ -909,12 +927,16 @@ function renderTeacherOverview(){
     var tr = document.createElement('tr');
     tr.className = 'rowlink';
     tr.onclick = function(){ location.href = 'a10_teachers.html'; };
-    tr.innerHTML = '<td>'+name+'</td><td><span class="stars'+(avg<=2?' low':'')+'" style="display:inline-flex;align-items:center;gap:2px">'+STAR_FILLED+' '+avg+'</span></td><td>'+g.count+' 筆</td>' +
+    tr.innerHTML = '<td>'+name+'</td><td><span class="stars'+(avg<=2?' low':'')+'" style="display:inline-flex;align-items:center;gap:2px">'+STAR_FILLED+' '+avg+'</span></td><td>'+g.count+TLI_I18N.t(' 筆',' records')+'</td>' +
       '<td>'+(g.low>0?('<span class="badge red">'+g.low+'</span>'):'0')+'</td><td><div class="sparkline">'+bars+'</div></td>';
     t.appendChild(tr);
   });
+  if (window.TLI_I18N) TLI_I18N.refresh();
 }
 renderTeacherOverview();
+
+function refreshFbDrawerIfOpen(){ if (curFbId) openFbDrawer(curFbId); }
+if (window.TLI_I18N) { TLI_I18N.onRefresh(renderFb); TLI_I18N.onRefresh(renderTeacherOverview); TLI_I18N.onRefresh(refreshFbDrawerIfOpen); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
 
 </script>
 <script>

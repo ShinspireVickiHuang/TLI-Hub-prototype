@@ -571,8 +571,8 @@ table.cal td{height:32px;}
       <div class="ai-msg bot" data-i18n="c07.aiIntro">可以問我某位學生哪些時段可排，或目前還有幾筆待排。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo(1)">Emma Chen 下週有哪些時段可以排？</button>
-      <button onclick="tliAskDemo(2)">目前還有幾筆待排？</button>
+      <button id="aiQuick1" onclick="tliAskDemo(1)">Emma Chen 下週有哪些時段可以排？</button>
+      <button id="aiQuick2" onclick="tliAskDemo(2)">目前還有幾筆待排？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題，例如：王大同哪些時段可改期？" data-i18n-placeholder="ai.inputPlaceholder.c07" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -663,10 +663,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -675,7 +675,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -760,12 +760,20 @@ function T(zh,en){return window.TLI_I18N?TLI_I18N.t(zh,en):zh;}
 
 /* ---------- 週與時段 ---------- */
 var DAY_CH=['一','二','三','四','五','六','日'];
+/* 20260930en2：以下皆為「顯示用」中英對照表，只用來轉換畫面呈現文字，
+   不影響任何資料值或 === 比對邏輯（原始中文值一律保留，見各自呼叫處註解）。 */
+var DAY_EN=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function dayLabel(d){return T('週'+DAY_CH[d],DAY_EN[d]);} // 週曆標題、課表文字用的「週X」顯示
+var SRC_EN={'新訂單':'New Order','老師請假':'Teacher Leave','學生請假':'Student Leave'}; // 對應 q.src（比對邏輯仍用原始中文值）
+var BUSY_EN={'既有課程':'Existing lesson','本次已排':'Already booked this session','其他學生已排':'Already booked by another student'}; // 對應 teacherBusy() 回傳字串
+var CAMPUS_EN_C07={'羅斯福':'Roosevelt','士林':'Shilin','台中':'Taichung','高雄':'Kaohsiung'};
+var LEVEL_EN_C07={'資深':'Senior','中階':'Mid-level','初階':'Junior','高階':'Advanced'};
 var HOURS=[9,10,11,12,13,14,15,16,17,18,19,20];
 var BASE_MONDAY=new Date(2026,7,31); // 第 0 週＝下週 08/31（一）
 var weekOffset=0;
 function dateOf(w,d){var x=new Date(BASE_MONDAY);x.setDate(x.getDate()+w*7+d);return x;}
 function md(dt){return String(dt.getMonth()+1).padStart(2,'0')+'/'+String(dt.getDate()).padStart(2,'0');}
-function slotText(w,d,h,dur){var s=md(dateOf(w,d))+'（'+DAY_CH[d]+'）'+pad(h)+':00–';var endMin=h*60+(dur||50);return s+pad(Math.floor(endMin/60))+':'+pad(endMin%60);}
+function slotText(w,d,h,dur){var s=md(dateOf(w,d))+'（'+T(DAY_CH[d],DAY_EN[d])+'）'+pad(h)+':00–';var endMin=h*60+(dur||50);return s+pad(Math.floor(endMin/60))+':'+pad(endMin%60);}
 function pad(n){return String(n).padStart(2,'0');}
 function parseRanges(obj){ // {'一':['19:00–21:00']} → [{day,hour}]
   var map={'一':0,'二':1,'三':2,'四':3,'五':4,'六':5,'日':6},out=[];
@@ -773,7 +781,7 @@ function parseRanges(obj){ // {'一':['19:00–21:00']} → [{day,hour}]
   return out;
 }
 function hasSlot(list,d,h){return list.some(function(s){return s.day===d&&s.hour===h;});}
-function rangesText(obj){var parts=[];DAY_CH.forEach(function(ch){(obj[ch]||[]).forEach(function(r){parts.push('週'+ch+' '+r);});});return parts.join('、');}
+function rangesText(obj){var parts=[];DAY_CH.forEach(function(ch,i){(obj[ch]||[]).forEach(function(r){parts.push(dayLabel(i)+' '+r);});});return parts.join(T('、',', '));}
 
 /* ---------- 老師：主檔中心教師、已認證、在職 ---------- */
 var LEVEL_RANK={'高階':4,'資深':3,'中階':2,'初階':1};
@@ -856,7 +864,7 @@ function renderQueue(){
   if(!list.length){box.innerHTML='<div class="q-empty">'+T('沒有符合條件的待排項目','No items match the current filters')+'<br><button type="button" class="btn sm" onclick="resetFilters()">'+T('清除篩選','Clear Filters')+'</button></div>';return;}
   box.innerHTML=list.map(function(q){
     var p=planOf(q);
-    var badge=q.status==='done'?'<span class="badge ok">'+T('已發布','Published')+'</span>':(q.type==='leave'?'<span class="badge danger">'+esc(q.src)+T('・待改期','・Reschedule')+'</span>':'<span class="badge warn">'+T('新訂單','New Order')+'</span>');
+    var badge=q.status==='done'?'<span class="badge ok">'+T('已發布','Published')+'</span>':(q.type==='leave'?'<span class="badge danger">'+esc(T(q.src,SRC_EN[q.src]||q.src))+T('・待改期','・Reschedule')+'</span>':'<span class="badge warn">'+T('新訂單','New Order')+'</span>');
     var left=q.status==='done'?T('已完成排課','Scheduling complete'):(q.type==='leave'?T('需改期 ','Reschedule ')+'<b>1</b>'+T(' 堂',' lesson'):T('剩 ','')+'<b>'+unscheduled(q)+'</b>'+T(' 堂待排',' lessons remaining'));
     return '<button type="button" class="q-item'+(q.id===selId?' sel':'')+'" data-qid="'+q.id+'" onclick="selectItem(\''+q.id+'\')"'+(q.status==='done'?' style="opacity:.6"':'')+'>'+
       '<div class="qi-top"><span class="qi-name">'+esc(q.name)+'</span>'+badge+'</div>'+
@@ -875,7 +883,7 @@ var CLOCK_SVG='<svg viewBox="0 0 20 20" width="13" height="13" fill="none" strok
 /* ---------- 選一筆 ---------- */
 function selectItem(id){
   var q=qById(id);if(!q)return;
-  if(selId===id){toast('目前正在排 '+q.name+'，請在右側週曆點綠色時段');return;}
+  if(selId===id){toast(T('目前正在排 ','Currently scheduling ')+q.name+T('，請在右側週曆點綠色時段',', please click a green cell on the calendar on the right'));return;}
   selId=id;
   if(!q.picked){ // 預設勾選：與學生重疊時數最高的前 3 位
     q.picked=candidates(q).filter(function(c){return c.overlap>0;}).slice(0,3).map(function(c){return c.t.id;});
@@ -889,7 +897,7 @@ function renderStudent(){
   sp.style.display='';
   var p=planOf(q);
   document.getElementById('stuTitle').innerHTML=esc(q.name)+' <span style="font-weight:400;color:var(--gray-500);font-size:12px;">'+esc(q.email)+'</span>';
-  document.getElementById('stuBadge').innerHTML=q.status==='done'?'<span class="badge ok">'+T('已發布','Published')+'</span>':(q.type==='leave'?'<span class="badge danger">'+esc(q.src)+T('・待改期','・Reschedule')+'</span>':'<span class="badge warn">'+T('新訂單待排','New Order Pending')+'</span>');
+  document.getElementById('stuBadge').innerHTML=q.status==='done'?'<span class="badge ok">'+T('已發布','Published')+'</span>':(q.type==='leave'?'<span class="badge danger">'+esc(T(q.src,SRC_EN[q.src]||q.src))+T('・待改期','・Reschedule')+'</span>':'<span class="badge warn">'+T('新訂單待排','New Order Pending')+'</span>');
   var cells=[
     [T('方案','Plan'),p.name],[T('訂單','Order'),q.order+(q.paid?T('（已付款）','（Paid）'):T('（未付款）','（Unpaid）'))],
     [T('上課方式','Class Mode'),T('線上一對一','Online 1-on-1')],[q.type==='leave'?T('需改期','Reschedule'):T('待排','Pending'),q.type==='leave'?T('1 堂','1 lesson'):(unscheduled(q)+' / '+q.remaining+T(' 堂',' lessons'))]
@@ -914,7 +922,8 @@ function renderTeachers(){
   box.style.display='';document.getElementById('tchHint').style.display='';
   box.innerHTML=cs.map(function(c){
     var on=q.picked.indexOf(c.t.id)>=0;
-    var meta=T('所屬','')+c.t.campus.replace('校區',T('校區',' Campus'))+'・'+c.t.level;
+    var campusShort=c.t.campus.replace('校區','');
+    var meta=T('所屬','')+T(c.t.campus,(CAMPUS_EN_C07[campusShort]||campusShort)+' Campus')+'・'+T(c.t.level,LEVEL_EN_C07[c.t.level]||c.t.level);
     var ov=c.overlap?(T('重疊 ','Overlap ')+c.overlap+T(' 小時',' hrs')):T('時間無重疊','No overlap');
     return '<label class="tch'+(on?' on':'')+'"><input type="checkbox" '+(on?'checked':'')+' onchange="toggleTeacher(\''+c.t.id+'\',this)">'+
       '<div><div class="tn">'+(on?'<span class="sw" style="background:'+tColor(q,c.t.id)+'"></span>':'')+esc(c.t.name)+'</div>'+
@@ -923,7 +932,7 @@ function renderTeachers(){
 }
 function toggleTeacher(tid,cb){
   var q=qById(selId);var i=q.picked.indexOf(tid);
-  if(cb.checked&&i<0){if(q.picked.length>=3){cb.checked=false;toast('最多勾選 3 位老師，請先取消其中一位');return;}q.picked.push(tid);}
+  if(cb.checked&&i<0){if(q.picked.length>=3){cb.checked=false;toast(T('最多勾選 3 位老師，請先取消其中一位','Up to 3 teachers can be selected; please uncheck one first'));return;}q.picked.push(tid);}
   if(!cb.checked&&i>=0)q.picked.splice(i,1);
   renderTeachers();renderCal();
 }
@@ -954,15 +963,15 @@ function renderCal(){
   }
   var okCount=0;
   var html='<div class="cal-wrap"><table class="cal"><thead><tr><th class="tcol"></th>';
-  for(var d=0;d<7;d++)html+='<th>'+T('週','')+DAY_CH[d]+'<br>'+md(dateOf(weekOffset,d))+'</th>';
+  for(var d=0;d<7;d++)html+='<th>'+dayLabel(d)+'<br>'+md(dateOf(weekOffset,d))+'</th>';
   html+='</tr></thead><tbody>';
   HOURS.forEach(function(h){
     html+='<tr><td class="time">'+pad(h)+':00</td>';
     for(var d=0;d<7;d++){
       var st=cellState(q,weekOffset,d,h);
       if(st.cls==='ok')okCount++;
-      var tags=(st.tags||[]).map(function(tid){var t=tById(tid);return '<span class="tg" style="background:'+tColor(q,tid)+(st.dim?';opacity:.35':'')+'" title="'+esc(t.name)+' 有空">'+esc(t.name.charAt(0))+'</span>';}).join('');
-      var title=st.cls==='ok'?'點一下安排課程':(st.label||'');
+      var tags=(st.tags||[]).map(function(tid){var t=tById(tid);return '<span class="tg" style="background:'+tColor(q,tid)+(st.dim?';opacity:.35':'')+'" title="'+esc(t.name)+T(' 有空',' available')+'">'+esc(t.name.charAt(0))+'</span>';}).join('');
+      var title=st.cls==='ok'?T('點一下安排課程','Click to arrange a lesson'):(st.label||'');
       html+='<td><button type="button" class="cell '+st.cls+'" data-d="'+d+'" data-h="'+h+'" onclick="clickCell('+d+','+h+')" title="'+esc(title)+'"><span class="cl">'+esc(st.label)+'</span><span class="dots">'+tags+'</span></button></td>';
     }
     html+='</tr>';
@@ -1007,7 +1016,7 @@ function openSlotModal(){
   document.getElementById('slotTitle').textContent=T('安排課程：','Arrange Lesson: ')+q.name;
   document.getElementById('fTeacher').innerHTML=curSlot.tags.map(function(tid){return '<option value="'+tid+'">'+esc(tById(tid).name)+'</option>';}).join('');
   document.getElementById('fDur').value='50';
-  var mats=(p.sku&&p.sku.materials||[]).concat(['自選教材','尚未決定']);
+  var mats=(p.sku&&p.sku.materials||[]).concat([T('自選教材','Custom-selected material'),T('尚未決定','Not yet decided')]);
   document.getElementById('fMat').innerHTML=mats.map(function(m){return '<option>'+esc(m)+'</option>';}).join('');
   document.getElementById('fRepWrap').style.display=q.type==='new'?'':'none';
   refreshSlotForm();
@@ -1034,7 +1043,7 @@ function refreshSlotForm(){
     hs.forEach(function(h){
       if(err)return;
       if(!hasSlot(tById(tid).open,s.d,h))err=tById(tid).name+T(' 老師 ',' teacher ')+pad(h)+T(':00 沒有開放，無法連上 100 分鐘',':00 is not open; cannot combine into a 100-minute lesson');
-      else{var b=teacherBusy(tid,s.w+i,s.d,h);if(b)err=tById(tid).name+T(' 老師 ',' teacher ')+md(dateOf(s.w+i,s.d))+' '+pad(h)+T(':00 已有課（',':00 already has a class (')+b+T('），不能重複排',')，cannot double-book');}
+      else{var b=teacherBusy(tid,s.w+i,s.d,h);if(b)err=tById(tid).name+T(' 老師 ',' teacher ')+md(dateOf(s.w+i,s.d))+' '+pad(h)+T(':00 已有課（',':00 already has a class (')+T(b,BUSY_EN[b]||b)+T('），不能重複排',')，cannot double-book');}
       if(!err&&h!==s.h&&!hasSlot(q.freeSlots,s.d,h))err=T('學生 ','Student ')+pad(h)+T(':00 之後沒有空，無法連上 100 分鐘',':00 is not free; cannot combine into a 100-minute lesson');
       if(!err&&h!==s.h&&PRE.concat(PUB).some(function(e){return e.qid===q.id&&occHits(e,s.w+i,s.d,h);}))err=T('學生 ','Student ')+pad(h)+T(':00 已有預排，無法連上 100 分鐘',':00 already has a pre-booking; cannot combine into a 100-minute lesson');
     });
@@ -1062,9 +1071,9 @@ function renderPre(){
   var total=mine.reduce(function(s,e){return s+lessonsOf(e);},0);
   document.getElementById('preCount').textContent=total+T(' 堂',' lesson(s)');
   document.getElementById('preList').innerHTML=mine.map(function(e){
-    var t=tById(e.teacher), room='線上視訊教室';
-    var repTxt=e.rep>1?(T('每週','Weekly ')+DAY_CH[e.day]+T('，','，')+md(dateOf(e.week,e.day))+T(' 起共 ',' for ')+e.rep+T(' 週',' weeks')):T('單堂','Single lesson');
-    return '<div class="pre-row"><span class="sw" style="background:'+tColor(q,e.teacher)+'"></span><div class="pr-main"><b>'+(e.rep>1?('週'+DAY_CH[e.day]+' '+pad(e.hour)+':00–'+slotText(0,0,e.hour,e.dur).slice(-5)):slotText(e.week,e.day,e.hour,e.dur))+'</b>\u3000'+esc(t.name)+T(' 老師',' Teacher')+
+    var t=tById(e.teacher), room=T('線上視訊教室','Online video classroom');
+    var repTxt=e.rep>1?(T('每週','Weekly ')+dayLabel(e.day)+T('，',', ')+md(dateOf(e.week,e.day))+T(' 起共 ',' for ')+e.rep+T(' 週',' weeks')):T('單堂','Single lesson');
+    return '<div class="pre-row"><span class="sw" style="background:'+tColor(q,e.teacher)+'"></span><div class="pr-main"><b>'+(e.rep>1?(dayLabel(e.day)+' '+pad(e.hour)+':00–'+slotText(0,0,e.hour,e.dur).slice(-5)):slotText(e.week,e.day,e.hour,e.dur))+'</b>\u3000'+esc(t.name)+T(' 老師',' Teacher')+
       '<div class="pr-sub">'+esc(repTxt)+'・'+esc(room)+'・'+T('教材：','Material: ')+esc(e.material)+'・'+lessonsOf(e)+T(' 堂',' lesson(s)')+'</div></div>'+
       '<button type="button" class="btn sm" onclick="gotoPre(\''+e.id+'\')">'+T('在週曆看','View in Calendar')+'</button><button type="button" class="btn sm ghost-danger" onclick="askRemovePre(\''+e.id+'\')">'+T('移除','Remove')+'</button></div>';
   }).join('');
@@ -1132,16 +1141,20 @@ function confirmBox(title,html,okText,fn,disableOk){
 function tliAskDemo(n){
   if(n===1){
     var q=qById('q1');
-    tliAppendMsg('user','Emma Chen 下週有哪些時段可以排？');
+    tliAppendMsg('user',T('Emma Chen 下週有哪些時段可以排？','Which time slots is Emma Chen available next week?'));
     var saved=selId;selId='q1';if(!q.picked)q.picked=candidates(q).filter(function(c){return c.overlap>0;}).slice(0,3).map(function(c){return c.t.id;});
-    var hits=[];for(var d=0;d<7;d++)HOURS.forEach(function(h){var st=cellState(q,0,d,h);if(st.cls==='ok')hits.push('週'+DAY_CH[d]+' '+pad(h)+':00（'+st.tags.map(function(t){return tById(t).name;}).join('、')+'）');});
+    var hits=[];for(var d=0;d<7;d++)HOURS.forEach(function(h){var st=cellState(q,0,d,h);if(st.cls==='ok')hits.push(dayLabel(d)+' '+pad(h)+':00（'+st.tags.map(function(t){return tById(t).name;}).join(T('、',', '))+'）');});
     selId=saved;
-    tliAppendMsg('bot','Emma Chen 下週（'+md(dateOf(0,0))+' 起）學生與老師都有空的時段：'+(hits.length?hits.join('；'):'沒有')+'。<div class="src">依學生提出的有空時間與老師開放時段比對</div><div class="act"><button class="btn sm primary" onclick="selectItem(\'q1\')">帶入 Emma Chen</button></div>');
+    tliAppendMsg('bot',T('Emma Chen 下週（','Emma Chen next week (')+md(dateOf(0,0))+T(' 起）學生與老師都有空的時段：',') \u2014 times when both student and teacher are free: ')+(hits.length?hits.join(T('；','; ')):T('沒有','None'))+T('。','.')+'<div class="src">'+T('依學生提出的有空時間與老師開放時段比對','Based on the student\u2019s stated availability matched against the teacher\u2019s open hours')+'</div><div class="act"><button class="btn sm primary" onclick="selectItem(\'q1\')">'+T('帶入 Emma Chen','Select Emma Chen')+'</button></div>');
   }else{
     var pend=QUEUE.filter(function(q){return q.status!=='done';});
-    tliAppendMsg('user','目前還有幾筆待排？');
-    tliAppendMsg('bot','待排 '+pend.length+' 筆：新訂單 '+pend.filter(function(q){return q.type==='new';}).length+' 筆、請假待改期 '+pend.filter(function(q){return q.type==='leave';}).length+' 筆。請假改期建議優先處理。<div class="act"><button class="btn sm" onclick="document.getElementById(\'qType\').value=\'leave\';renderQueue();">只看請假待改期</button></div>');
+    tliAppendMsg('user',T('目前還有幾筆待排？','How many items are currently pending?'));
+    tliAppendMsg('bot',T('待排 ','')+pend.length+T(' 筆：新訂單 ',' item(s) pending: ')+pend.filter(function(q){return q.type==='new';}).length+T(' 筆、請假待改期 ',' new order, ')+pend.filter(function(q){return q.type==='leave';}).length+T(' 筆。請假改期建議優先處理。',' leave reschedule. Handle leave reschedules first.')+'<div class="act"><button class="btn sm" onclick="document.getElementById(\'qType\').value=\'leave\';renderQueue();">'+T('只看請假待改期','Only show leave reschedules')+'</button></div>');
   }
+}
+function renderAiQuick(){
+  var b1=document.getElementById('aiQuick1');if(b1)b1.textContent=T('Emma Chen 下週有哪些時段可以排？','Which time slots is Emma Chen available next week?');
+  var b2=document.getElementById('aiQuick2');if(b2)b2.textContent=T('目前還有幾筆待排？','How many items are currently pending?');
 }
 function tliAskFree(){
   var input=document.getElementById('aiInput');var v=input.value.trim();if(!v){toast(T('請先輸入問題','Please enter a question first'));input.focus();return;}
@@ -1165,7 +1178,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal(
     target=QUEUE.find(function(q){return q.src==='老師請假';});
   }
   if(target)selectItem(target.id);else renderAll();
-  if (window.TLI_I18N) { TLI_I18N.onRefresh(renderAll); TLI_I18N.init(); }
+  if (window.TLI_I18N) { TLI_I18N.onRefresh(renderAll); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.onRefresh(renderAiQuick); TLI_I18N.init(); }
 })();
 </script>
 

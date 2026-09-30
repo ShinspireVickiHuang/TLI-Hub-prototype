@@ -214,7 +214,9 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <option value="custom" data-i18n="opt.customRange">自訂區間</option>
 </select>
 </div>
-<div class="ff"><label for="f_type" data-i18n="label.productCategory">產品分類</label>
+<!-- 20260930 修正：本篩選是訂單型態（b2c/b2b/edu），原誤用「label.productCategory」（產品分類，與下方
+     「依產品分類」圖表標題重複但語意不同），改用新增的 label.orderType -->
+<div class="ff"><label for="f_type" data-i18n="label.orderType">訂單型態</label>
 <select id="f_type" onchange="setTypeFilter(this.value)">
 <option value="all" data-i18n="common.all">全部</option>
 <option value="b2c" data-i18n="type.b2c">B2C 訂單</option>

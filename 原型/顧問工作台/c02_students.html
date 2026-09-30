@@ -335,7 +335,6 @@ html,body{overflow-x:hidden;}
         <input id="q" placeholder="搜尋姓名／手機／Email" data-i18n-placeholder="c02.searchPlaceholder" oninput="tliFilter()">
         <select id="fClass" onchange="tliFilter()">
           <option value="" data-i18n="c02.filterClassAll">會員分類：全部</option>
-          <option value="B">B</option><option value="G">G</option><option value="C">C</option><option value="BIP">BIP</option>
         </select>
         <select id="fCampus" onchange="tliFilter()">
           <option value="" data-i18n="c02.filterCampusAll">校區：全部</option>
@@ -374,8 +373,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c02.aiIntro">可以直接問我學生資料，例如剩餘課時、效期或最近的聯絡紀錄。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo()">哪些學生課時效期 30 天內到期？</button>
-      <button onclick="tliAskDemo2()">哪些學生剩餘課時是 0？</button>
+      <button onclick="tliAskDemo()" data-i18n="c02.aiQ1">哪些學生課時效期 30 天內到期？</button>
+      <button onclick="tliAskDemo2()" data-i18n="c02.aiQ2">哪些學生剩餘課時是 0？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題" data-i18n-placeholder="ai.inputPlaceholder" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -402,25 +401,27 @@ var STUDENTS=[
   {id:'zhang01',name:'張雅婷',cls:'G',campus:'高雄',hours:8,expire:'2026-12-10',status:'學習中',testLevel:'Lv.4',activation:'已開通'},
   {id:'chenjh01',name:'陳建宏',cls:'C',campus:'羅斯福',hours:0,expire:'2026-09-15',status:'學習中',testLevel:'未測驗',activation:'未開通'}
 ];
+var CAMPUS_EN_C02={'羅斯福':'Roosevelt','士林':'Shilin','台中':'Taichung','高雄':'Kaohsiung'};
+function T02(zh,en){return window.TLI_I18N?TLI_I18N.t(zh,en):zh;}
 function statusBadge(s){
-  if(s==='學習中')return '<span class="badge ok">學習中</span>';
-  if(s==='停止中')return '<span class="badge muted">停止中</span>';
-  return '<span class="badge danger">已流失</span>';
+  if(s==='學習中')return '<span class="badge ok">'+T02('學習中','Active')+'</span>';
+  if(s==='停止中')return '<span class="badge muted">'+T02('停止中','Paused')+'</span>';
+  return '<span class="badge danger">'+T02('已流失','Churned')+'</span>';
 }
 function classBadge(c){return '<span class="badge '+c.toLowerCase()+'">'+c+'</span>';}
 function activationBadge(a){
-  if(a==='未開通') return '<span class="badge warn">未開通</span>';
-  return '<span class="badge muted">已開通</span>';
+  if(a==='未開通') return '<span class="badge warn">'+T02('未開通','Not Activated')+'</span>';
+  return '<span class="badge muted">'+T02('已開通','Activated')+'</span>';
 }
 function renderStudents(list){
   var body=document.getElementById('stuBody');
   body.innerHTML=list.map(function(s){
     return '<tr class="clickable" onclick="location.href=\'c03_student_detail.html?id='+s.id+'\'">'+
-      '<td>'+s.name+'</td><td>'+classBadge(s.cls)+'</td><td>'+s.campus+'校區</td>'+
-      '<td>'+s.hours+' 堂</td><td>'+s.expire+(s.expire<'2026-08-25'?' <span class="badge warn" style="background:#fff4e5;color:#b54708;">已過期</span>':'')+'</td>'+
+      '<td>'+s.name+'</td><td>'+classBadge(s.cls)+'</td><td>'+T02(s.campus+'校區',(CAMPUS_EN_C02[s.campus]||s.campus)+' Campus')+'</td>'+
+      '<td>'+s.hours+T02(' 堂',' lessons')+'</td><td>'+s.expire+(s.expire<'2026-08-25'?' <span class="badge warn" style="background:#fff4e5;color:#b54708;">'+T02('已過期','Expired')+'</span>':'')+'</td>'+
       '<td>'+statusBadge(s.status)+'</td>'+
       '<td>'+activationBadge(s.activation)+'</td>'+
-      '<td>'+(s.testLevel||'未測驗')+'</td></tr>';
+      '<td>'+((!s.testLevel||s.testLevel==='未測驗')?T02('未測驗','Not Tested'):s.testLevel)+'</td></tr>';
   }).join('');
   document.getElementById('emptyRow').style.display=list.length?'none':'block';
 }
@@ -456,6 +457,8 @@ document.getElementById('fCampus').innerHTML+=TLI_MASTERS.campuses.filter(functi
   var short=c.name.replace('校區','');
   return '<option value="'+short+'">'+short+'</option>';
 }).join('');
+// 會員分類下拉改讀主檔 memberTiers（與學生 cls 欄位代碼一致）
+document.getElementById('fClass').innerHTML+=TLI_MASTERS.memberTiers.map(function(t){return '<option value="'+t.code+'">'+t.code+'</option>';}).join('');
 renderStudents(STUDENTS);
 
 function tliToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(function(){t.classList.remove('show');},2600);}
@@ -479,14 +482,14 @@ function tliAppendMsg(role,html){
   body.scrollTop=body.scrollHeight;
 }
 function tliAskDemo(){
-  tliAppendMsg('user','哪些學生課時效期 30 天內到期？');
-  tliAppendMsg('bot','陳美惠（士林校區，效期 2026-11-01，剩餘課時 0）建議提前發起續約。<div class="act"><a class="btn sm primary" href="c06_renewal.html">前往續約清單</a></div>');
+  tliAppendMsg('user',T02('哪些學生課時效期 30 天內到期？','Which students have hours expiring within 30 days?'));
+  tliAppendMsg('bot',T02('陳美惠（士林校區，效期 2026-11-01，剩餘課時 0）建議提前發起續約。','Chen Mei-hui (Shilin Campus, expires 2026-11-01, 0 hours remaining) — suggest starting renewal early.')+'<div class="act"><a class="btn sm primary" href="c06_renewal.html">'+T02('前往續約清單','Go to Renewal List')+'</a></div>');
 }
 function tliAskDemo2(){
-  tliAppendMsg('user','哪些學生剩餘課時是 0？');
+  tliAppendMsg('user',T02('哪些學生剩餘課時是 0？','Which students have 0 hours remaining?'));
   var zero=STUDENTS.filter(function(s){return s.hours===0;});
-  var list=zero.map(function(s){return s.name+'（'+s.campus+'校區）';}).join('、');
-  tliAppendMsg('bot','目前剩餘課時為 0 的學生：'+list+'。建議確認是否需要提前發起續約。<div class="act"><a class="btn sm primary" href="c06_renewal.html">前往續約清單</a></div>');
+  var list=zero.map(function(s){return s.name+T02('（'+s.campus+'校區）','('+(CAMPUS_EN_C02[s.campus]||s.campus)+' Campus)');}).join(T02('、',', '));
+  tliAppendMsg('bot',T02('目前剩餘課時為 0 的學生：','Students currently with 0 hours remaining: ')+list+T02('。建議確認是否需要提前發起續約。','. Suggest checking whether to start renewal early.')+'<div class="act"><a class="btn sm primary" href="c06_renewal.html">'+T02('前往續約清單','Go to Renewal List')+'</a></div>');
 }
 function tliAskFree(){
   var input=document.getElementById('aiInput');
@@ -517,10 +520,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -529,7 +532,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -575,7 +578,7 @@ document.addEventListener('keydown', function(e){
     el.classList.remove('open');
   });
 });
-if (window.TLI_I18N) { TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
+if (window.TLI_I18N) { TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.onRefresh(tliFilter); TLI_I18N.init(); }
 </script>
 <script>
 function toggleNavGroup(ev, gid){

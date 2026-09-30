@@ -12,6 +12,7 @@ Object.assign(TLI_I18N_DICT.en, {
 
 /* ---- 共用：側欄／底部導覽／頁首（f01-f03、m01b/c、m03c、m04b、m08b/c、m14b 共用） ---- */
 "fr.nav.home":"Home",
+"fr.common.brandAriaLabel":"Sample University Chinese Language Center × TLI Home",
 "fr.nav.plan":"My Plan",
 "fr.nav.schedule":"Schedule",
 "fr.nav.learn":"Online Learning",
@@ -20,6 +21,9 @@ Object.assign(TLI_I18N_DICT.en, {
 "fr.common.notifTitle":"Notifications",
 "fr.common.close":"Close",
 "fr.common.openMenu":"Open Menu",
+"fr.common.officialSite":"TLI Official Website",
+"fr.common.sideIdentityFranchise":"Wang Xiao-Ming｜Sample University Chinese Language Center Student",
+"fr.common.sideIdentityReseller":"Li Mei-Ling｜Global Study Consultants Student",
 "fr.nav.courses":"Courses & Consultation",
 "fr.nav.about":"About TLI",
 "fr.nav.login":"Student Login",
@@ -148,6 +152,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "fr.f03.activateLink":"Activate your account",
 
 /* ---- p13 帳號開通 ---- */
+"fr.p13.ccAriaLabel":"Country Code",
 "fr.p13.topmark":"Account Activation",
 "fr.p13.introLine":"Welcome to TLI Connect! Please complete the steps below to activate your account.",
 "fr.p13.step1Title":"Step 1/3　Set Your Password",
@@ -290,7 +295,46 @@ Object.assign(TLI_I18N_DICT.en, {
 
 /* ---- m03c 課表（經銷） ---- */
 "fr.m03c.pageSub":"Beginner Chinese Class A・2026/10/05–2026/10/19, full schedule for the Taipei study tour.",
-"fr.m03c.note":"Class times are set uniformly by TLI; contact your study-abroad consultant for any changes."
+"fr.m03c.note":"Class times are set uniformly by TLI; contact your study-abroad consultant for any changes.",
+
+/* ---- m08b/m08c 共用：線上學習 modal／單元手風琴 ---- */
+"fr.common.quizModalTitle":"Unit Quiz",
+"fr.common.submitAnswers":"Submit Answers",
+"fr.common.notStartedPlaying":"Not started yet",
+"fr.common.markDone":"Mark as Complete",
+"fr.common.prevPage":"‹ Previous",
+"fr.common.nextPage":"Next ›",
+
+/* ---- m08b 線上學習（加盟） ---- */
+"fr.m08b.pageSub":"Below are the units licensed for you under the Sample University Chinese Language Center Business Chinese semester course — learn at your own pace.",
+"fr.m08b.hint":"Tap a unit title to expand its video, e-book and quiz",
+"fr.m08b.unitsTitle":"Course Units",
+
+/* ---- m08c 線上學習（經銷） ---- */
+"fr.m08c.pageSub":"Below are the units paired with your Taipei study tour course progress — learn at your own pace.",
+
+/* ---- m14b 聊天室與會話預約（加盟，第二階段示意頁） ---- */
+"fr.m14b.notif1":"Tomorrow’s session is starting soon — remember to be online on time",
+"fr.m14b.notif1Sub":"Reminder",
+"fr.m14b.pageSub":"Group chatroom: 30 minutes, teacher-led, capacity per settings; unlike the flexible group livestream course, these sessions do not count toward class hours.",
+"fr.m14b.legendAssigned":"Assigned = arranged for you by your company or school",
+"fr.m14b.legendInvited":"Invited = a teacher or coordinator invited you — you may accept or decline",
+"fr.m14b.legendOpen":"Open = free registration within capacity",
+"fr.m14b.viewWeek":"Week",
+"fr.m14b.viewMonth":"Month",
+"fr.m14b.filterAll":"All Open Sessions",
+"fr.m14b.filterMine":"My Sessions Only",
+"fr.m14b.wdMon":"Mon","fr.m14b.wdTue":"Tue","fr.m14b.wdWed":"Wed","fr.m14b.wdThu":"Thu","fr.m14b.wdFri":"Fri","fr.m14b.wdSat":"Sat","fr.m14b.wdSun":"Sun",
+"fr.m14b.expandRecord":"Expand My Records (Completed/Cancelled)",
+"fr.common.loadMore":"Load More",
+"fr.common.brandSub":"Sample University Chinese Language Center・TLI-Licensed Teaching Center",
+"fr.m14b.secNext":"Next Up",
+"fr.m14b.secMyRecord":"My Records",
+"fr.m14b.prevPeriod":"Previous period",
+"fr.m14b.nextPeriod":"Next period",
+"fr.m14b.topicFilterAria":"Filter by topic type",
+"fr.common.mainNav":"Main Navigation",
+"fr.common.classesUnit":"classes"
 
 });
 

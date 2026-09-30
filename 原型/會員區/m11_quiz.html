@@ -195,78 +195,77 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 </head>
 <body>
 <div class="app has-side">
-  <nav class="side-nav" aria-label="主導覽">
-    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-identity">Emma Johnson｜學員</div>
-    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a class="side-link active" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>我的方案</a>
-    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
-    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>回官網</a>
+  <nav class="side-nav" data-i18n-aria-label="member.nav.aria" aria-label="主導覽">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" data-i18n-aria-label="member.logoAria" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity">Emma Johnson｜<span data-i18n="member.role.student">學員</span></div>
+    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a class="side-link active" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
+    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
+    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
   </nav>
 
   <header class="topbar">
     <div class="topbar-left">
-      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-      <button class="back-btn" onclick="if(history.length>1){history.back();}else{location.href='m08_self_paced.html';}" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <div class="topbar-title" data-i18n-zh="線上測驗" data-i18n-en="Online Quiz">線上測驗</div>
+      <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" data-i18n-aria-label="member.logoAria" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a>
+      <button class="back-btn" onclick="if(history.length>1){history.back();}else{location.href='m08_self_paced.html';}" data-i18n-aria-label="member.back" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="topbar-title" data-i18n="m11.title">線上測驗</div>
     </div>
     <div class="topbar-actions">
-      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程">
+      <a class="explore-link" href="../公開網站/p02_courses.html" data-i18n-aria-label="member.explore" aria-label="探索課程" data-i18n-title="member.explore" title="探索課程">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        <span class="explore-link-text">探索課程</span>
+        <span class="explore-link-text" data-i18n="member.explore">探索課程</span>
       </a>
-      <select class="mini-select" id="langSelect" aria-label="語言與幣別" onchange="handleLangCurrency(this)"><option value="zh-TW">繁體中文・TWD</option><option value="zh-CN">简体中文・CNY</option><option value="en">English・USD</option></select>
-      <button class="bell-btn" onclick="toggleBell()" aria-label="通知">
+      <button class="bell-btn" onclick="toggleBell()" data-i18n-aria-label="member.notifications" aria-label="通知">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
         <span class="dot"></span>
       </button>
       <div class="bell-panel" id="bellPanel">
-        <h4>通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p>你有 6 份課程評量尚未完成</p><span>今天 09:20</span></div></div>
+        <h4 data-i18n="member.notifications">通知</h4>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="m11.notif.pendingCount">你有 6 份課程評量尚未完成</p><span><span data-i18n="member.today">今天</span> 09:20</span></div></div>
       </div>
     </div>
   </header>
 
   <main class="content">
-    <nav class="nav-segment" aria-label="次選單">
-      <a class="nav-segment-link" href="m08_self_paced.html">自學課程</a>
-      <a class="nav-segment-link active" href="m11_quiz.html">線上測驗</a>
-      <a class="nav-segment-link" href="m17_feedback.html">課堂回饋</a>
+    <nav class="nav-segment" data-i18n-aria-label="m11.subnavAria" aria-label="次選單">
+      <a class="nav-segment-link" href="m08_self_paced.html" data-i18n="m11.seg.selfpaced">自學課程</a>
+      <a class="nav-segment-link active" href="m11_quiz.html" data-i18n="m11.title">線上測驗</a>
+      <a class="nav-segment-link" href="m17_feedback.html" data-i18n="m11.seg.feedback">課堂回饋</a>
     </nav>
 
 
     <!-- ===== 狀態 A：測驗列表（課程評量） ===== -->
     <div id="view-list">
-      <p class="page-h">線上測驗</p>
-      <p class="page-sub" data-i18n-zh="完成課程指定的評量，分數會同步到學習紀錄。" data-i18n-en="Complete course-assigned assessments. Scores sync to your learning record.">完成課程指定的評量，分數會同步到學習紀錄。</p>
+      <p class="page-h" data-i18n="m11.title">線上測驗</p>
+      <p class="page-sub" data-i18n="m11.subtitle">完成課程指定的評量，分數會同步到學習紀錄。</p>
 
       <!-- ---- 課程評量 ---- -->
       <div class="tab-panel active" id="pagepanel-course">
         <div class="tabs" id="courseSubTabs">
-          <button class="tab-btn active" onclick="setListTab('pending',this)">待完成</button>
-          <button class="tab-btn" onclick="setListTab('done',this)">已完成</button>
+          <button class="tab-btn active" onclick="setListTab('pending',this)" data-i18n="m11.tab.pending">待完成</button>
+          <button class="tab-btn" onclick="setListTab('done',this)" data-i18n="m11.tab.done">已完成</button>
         </div>
         <div class="tab-panel active" id="tabpanel-pending">
           <div class="stack" id="pendingList"></div>
           <div class="empty-state hidden" id="pendingEmpty">
-            <h4>目前沒有待完成的課程評量</h4>
-            <p>有新的課程評量指派時會出現在這裡。</p>
+            <h4 data-i18n="m11.emptyPending.title">目前沒有待完成的課程評量</h4>
+            <p data-i18n="m11.emptyPending.desc">有新的課程評量指派時會出現在這裡。</p>
           </div>
           <div class="hidden" id="pendingMoreWrap" style="text-align:center;margin-top:10px;">
-            <button class="btn btn-outline btn-sm" onclick="showMorePending()">載入更多（還有 <span id="pendingMoreCount">0</span> 份）</button>
+            <button class="btn btn-outline btn-sm" id="pendingMoreBtn" onclick="showMorePending()"></button>
           </div>
         </div>
         <div class="tab-panel" id="tabpanel-done">
           <div class="stack" id="doneList"></div>
           <div class="empty-state hidden" id="doneEmpty">
-            <h4>目前還沒有已完成的課程評量</h4>
-            <p>完成評量後會出現在這裡。</p>
+            <h4 data-i18n="m11.emptyDone.title">目前還沒有已完成的課程評量</h4>
+            <p data-i18n="m11.emptyDone.desc">完成評量後會出現在這裡。</p>
           </div>
           <div class="hidden" id="doneMoreWrap" style="text-align:center;margin-top:10px;">
-            <button class="btn btn-outline btn-sm" onclick="showMoreDone()">載入更多（還有 <span id="doneMoreCount">0</span> 份）</button>
+            <button class="btn btn-outline btn-sm" id="doneMoreBtn" onclick="showMoreDone()"></button>
           </div>
         </div>
       </div>
@@ -274,7 +273,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
     <!-- ===== 狀態 B：作答頁 ===== -->
     <div id="view-answer" class="hidden">
-      <button class="btn btn-outline btn-sm back-list-btn" onclick="backToQuizList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>回測驗列表</button>
+      <button class="btn btn-outline btn-sm back-list-btn" onclick="backToQuizList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="m11.backToList">回測驗列表</span></button>
       <p class="page-h" id="answerTitle" style="margin-top:4px;"></p>
 
       <div class="q-topbar">
@@ -286,78 +285,87 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </div>
 
       <div class="card">
-        <span class="badge badge-info q-type-badge" id="qTypeBadge">單選題</span>
+        <span class="badge badge-info q-type-badge" id="qTypeBadge"></span>
         <p class="q-text" id="qText"></p>
         <div id="qBody"></div>
         <div class="q-actions">
           <button class="flag-btn" id="qFlagBtn" onclick="toggleFlag()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>
-            標記稍後
+            <span data-i18n="m11.flagLater">標記稍後</span>
           </button>
           <div style="display:flex;gap:8px;">
-            <button class="btn btn-outline btn-sm" id="qPrevBtn" onclick="stepQuestion(-1)">‹ 上一題</button>
-            <button class="btn btn-outline btn-sm" id="qNextBtn" onclick="stepQuestion(1)">下一題 ›</button>
+            <button class="btn btn-outline btn-sm" id="qPrevBtn" onclick="stepQuestion(-1)" data-i18n="m11.prevQ">‹ 上一題</button>
+            <button class="btn btn-outline btn-sm" id="qNextBtn" onclick="stepQuestion(1)" data-i18n="m11.nextQ">下一題 ›</button>
           </div>
         </div>
       </div>
-      <button class="btn btn-accent btn-block" style="margin-top:16px;" onclick="openSubmitConfirm()">交卷</button>
+      <button class="btn btn-accent btn-block" style="margin-top:16px;" onclick="openSubmitConfirm()" data-i18n="m11.submitQuiz">交卷</button>
     </div>
 
     <!-- ===== 狀態 C：結果頁 ===== -->
     <div id="view-result" class="hidden">
-      <p class="page-h" id="resultTitle">測驗結果</p>
+      <p class="page-h" id="resultTitle"></p>
       <div class="card">
         <div class="result-score-wrap">
-          <div class="result-score" id="resultScore">0<span>／100</span></div>
-          <p class="muted small" style="margin-top:6px;" id="resultRate">正確率 0%</p>
-          <span class="badge badge-ok" id="resultLevel">通過</span>
+          <div class="result-score" id="resultScore"></div>
+          <p class="muted small" style="margin-top:6px;" id="resultRate"></p>
+          <span class="badge badge-ok" id="resultLevel"></span>
         </div>
         <div class="divider"></div>
-        <div class="small muted" style="font-weight:700;">四技能小結</div>
+        <div class="small muted" style="font-weight:700;" data-i18n="m11.skillSummary">四技能小結</div>
         <div id="resultSkills"></div>
       </div>
 
       <div class="banner banner-success" id="resultBanner" style="margin-top:14px;"></div>
 
-      <div class="section-title">逐題詳解</div>
+      <div class="section-title" data-i18n="m11.review.title">逐題詳解</div>
       <div class="card"><div id="reviewList"></div></div>
 
-      <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="retakeQuiz()">再測一次</button>
-      <button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="backToQuizList()">回列表</button>
+      <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="retakeQuiz()" data-i18n="m11.retake">再測一次</button>
+      <button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="backToQuizList()" data-i18n="m11.backToListShort">回列表</button>
     </div>
 
     <!-- ===== 狀態 D：課程評量（Wordwall 練習嵌入） ===== -->
     <div id="view-practice" class="hidden">
-      <button class="btn btn-outline btn-sm back-list-btn" onclick="backToQuizList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg>回列表</button>
+      <button class="btn btn-outline btn-sm back-list-btn" onclick="backToQuizList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="m11.backToListShort">回列表</span></button>
       <p class="page-h" id="practiceTitle" style="margin-top:4px;"></p>
       <p class="page-sub" id="practiceSub"></p>
       <div class="card">
         <span class="badge badge-ww">Wordwall</span>
         <div class="ww-embed-wrap" id="practiceEmbedWrap" style="margin-top:10px;"></div>
-        <p class="small muted" style="margin-top:10px;">此練習在 Wordwall 完成，平台只記錄是否開啟過；個別作答與分數不會回寫學習紀錄，正式成績請以自建測驗為準。</p>
+        <p class="small muted" style="margin-top:10px;" data-i18n="m11.practice.note">此練習在 Wordwall 完成，平台只記錄是否開啟過；個別作答與分數不會回寫學習紀錄，正式成績請以自建測驗為準。</p>
       </div>
-      <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="backToQuizList()">返回課程評量列表</button>
+      <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="backToQuizList()" data-i18n="m11.practice.backAll">返回課程評量列表</button>
     </div>
 
   </main>
 
   <nav class="bottom-nav">
-    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a href="m08_self_paced.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a href="m08_self_paced.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
   </nav>
 </div>
+
+<div class="toast hidden" id="toast" data-i18n="m11.toastDefault">已完成</div>
+
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_member.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 
 <div class="sheet-overlay hidden" id="submitConfirmOverlay" onclick="if(event.target===this) closeSubmitConfirm()">
   <div class="sheet">
     <div class="sheet-handle"></div>
-    <h3>確定要交卷嗎？</h3>
+    <h3 data-i18n="m11.submitConfirm.title">確定要交卷嗎？</h3>
     <p class="muted small" id="submitConfirmMeta">－</p>
     <div class="stack" style="margin-top:14px;">
-      <button class="btn btn-accent btn-block" onclick="confirmSubmit()">確認交卷</button>
-      <button class="btn btn-outline btn-block" onclick="closeSubmitConfirm()">取消，繼續作答</button>
+      <button class="btn btn-accent btn-block" onclick="confirmSubmit()" data-i18n="m11.confirmSubmitBtn">確認交卷</button>
+      <button class="btn btn-outline btn-block" onclick="closeSubmitConfirm()" data-i18n="m11.cancelContinue">取消，繼續作答</button>
     </div>
   </div>
 </div>
@@ -370,26 +378,6 @@ function showToast(msg){
   t.classList.remove('hidden');
   clearTimeout(window._toastTimer);
   window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
-}
-function handleLangCurrency(sel){
-  var lang=sel.value||'zh-TW';
-  var curMap={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
-  var cur=curMap[lang]||'TWD';
-  var langText=sel.options[sel.selectedIndex].text;
-  if(typeof tliFmt==='function'){
-    document.querySelectorAll('[data-money]').forEach(function(el){
-      el.textContent=tliFmt(parseFloat(el.getAttribute('data-money')),cur);
-    });
-  }
-  document.querySelectorAll('[data-i18n-zh]').forEach(function(el){
-    el.textContent = (lang==='zh-TW') ? el.getAttribute('data-i18n-zh') : el.getAttribute('data-i18n-en');
-  });
-  if(lang==='zh-CN'||lang==='de'){
-    var names={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+names[lang]);
-  } else {
-    showToast('顯示語言／幣別已切換為 '+langText);
-  }
 }
 function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
 document.addEventListener('click',function(e){
@@ -467,7 +455,7 @@ function renderCourseList(){
     var pendShownList=pend.slice(0,pendingShown);
     document.getElementById('pendingList').innerHTML = pendShownList.map(pendingCardHtml).join('');
     var pendRemain=pend.length-pendShownList.length;
-    if(pendRemain>0){ pendMoreWrap.classList.remove('hidden'); document.getElementById('pendingMoreCount').textContent=pendRemain; }
+    if(pendRemain>0){ pendMoreWrap.classList.remove('hidden'); document.getElementById('pendingMoreBtn').textContent=moreLoadLabel(pendRemain); }
     else{ pendMoreWrap.classList.add('hidden'); }
   }
 
@@ -481,36 +469,55 @@ function renderCourseList(){
     var doneShownList=done.slice(0,doneShown);
     document.getElementById('doneList').innerHTML = doneShownList.map(doneCardHtml).join('');
     var doneRemain=done.length-doneShownList.length;
-    if(doneRemain>0){ doneMoreWrap.classList.remove('hidden'); document.getElementById('doneMoreCount').textContent=doneRemain; }
+    if(doneRemain>0){ doneMoreWrap.classList.remove('hidden'); document.getElementById('doneMoreBtn').textContent=moreLoadLabel(doneRemain); }
     else{ doneMoreWrap.classList.add('hidden'); }
   }
 }
 function showMorePending(){ pendingShown+=QUIZ_PAGE_SIZE; renderCourseList(); }
 function showMoreDone(){ doneShown+=QUIZ_PAGE_SIZE; renderCourseList(); }
-function reqBadge(a){ return '<span class="badge '+(a.required?'badge-warn':'badge-muted')+'">'+(a.required?'必要':'選做')+'</span>'; }
+function moreLoadLabel(remain){
+  return TLI_I18N.t('載入更多（還有 ',{en:'Load more (',ja:'さらに読み込む（残り ',de:'Mehr laden (noch '}) +
+    remain + TLI_I18N.t(' 份）',{en:' left)',ja:' 件）',de:' )'});
+}
+function reqBadge(a){
+  return '<span class="badge '+(a.required?'badge-warn':'badge-muted')+'">'+
+    (a.required?TLI_I18N.t('必要',{en:'Required',ja:'必須',de:'Erforderlich'}):TLI_I18N.t('選做',{en:'Optional',ja:'任意',de:'Optional'}))+
+    '</span>';
+}
 function srcBadge(a){ return a.source==='wordwall' ? ' <span class="badge badge-ww">Wordwall</span>' : ''; }
 function pendingCardHtml(a){
   var isRetake = a.status==='failed';
+  var descText = a.source==='wordwall' ? TLI_I18N.t('Wordwall 互動練習',{en:'Wordwall Interactive Practice',ja:'Wordwall インタラクティブ練習',de:'Wordwall interaktive Übung'})
+    : TLI_I18N.t('題數・時間・及格門檻依設定',{en:'Question count, time limit and passing score follow settings',ja:'問題数・時間・合格基準は設定に準じます',de:'Fragenanzahl, Zeitlimit und Bestehensgrenze gemäß Einstellungen'});
+  var dueText = a.due ? (TLI_I18N.t('・期限 ',{en:' · Due ',ja:'・期限 ',de:' · Frist '})+a.due) : '';
+  var statusText = isRetake ? TLI_I18N.t('未及格待補考',{en:'Failed, retake needed',ja:'不合格・再受験が必要',de:'Nicht bestanden, Wiederholung erforderlich'})
+    : TLI_I18N.t('尚未作答',{en:'Not answered yet',ja:'未回答',de:'Noch nicht beantwortet'});
+  var actionText = a.source==='wordwall' ? TLI_I18N.t('開始練習',{en:'Start Practice',ja:'練習を始める',de:'Übung starten'})
+    : (isRetake ? TLI_I18N.t('補考',{en:'Retake',ja:'再受験',de:'Wiederholen'}) : TLI_I18N.t('開始作答',{en:'Start',ja:'開始する',de:'Beginnen'}));
   return '' +
     '<div class="card quiz-card">' +
       '<span class="badge badge-info">'+a.course+'・'+a.level+'</span> '+reqBadge(a)+srcBadge(a)+
       '<h3 style="margin:8px 0 4px;font-size:15.5px;">'+a.title+'</h3>' +
-      '<p class="small muted" style="margin:0;">'+(a.source==='wordwall'?'Wordwall 互動練習':'題數・時間・及格門檻依設定')+(a.due?('・期限 '+a.due):'')+'</p>' +
+      '<p class="small muted" style="margin:0;">'+descText+dueText+'</p>' +
       '<div class="flex-between" style="margin-top:12px;">' +
-        '<span class="small muted">'+(isRetake?'未及格待補考':'尚未作答')+'</span>' +
-        '<button class="btn btn-accent btn-sm" onclick="startAssessment(\''+a.id+'\')">'+(a.source==='wordwall'?'開始練習':(isRetake?'補考':'開始作答'))+'</button>' +
+        '<span class="small muted">'+statusText+'</span>' +
+        '<button class="btn btn-accent btn-sm" onclick="startAssessment(\''+a.id+'\')">'+actionText+'</button>' +
       '</div>' +
     '</div>';
 }
 function doneCardHtml(a){
+  var scoreText = a.source==='wordwall' ? TLI_I18N.t('已開啟',{en:'Opened',ja:'開封済み',de:'Geöffnet'})
+    : (a.score+TLI_I18N.t(' 分',{en:' pts',ja:'点',de:' Punkte'}));
+  var actionText = a.source==='wordwall' ? TLI_I18N.t('再次開啟',{en:'Reopen',ja:'もう一度開く',de:'Erneut öffnen'})
+    : TLI_I18N.t('查看結果',{en:'View Result',ja:'結果を見る',de:'Ergebnis ansehen'});
   return '' +
     '<div class="card quiz-card">' +
       '<span class="badge badge-info">'+a.course+'・'+a.level+'</span> '+reqBadge(a)+srcBadge(a)+
       '<h3 style="margin:8px 0 4px;font-size:15.5px;">'+a.title+'</h3>' +
-      '<p class="small muted" style="margin:0;">完成日 '+a.doneDate+'</p>' +
+      '<p class="small muted" style="margin:0;">'+TLI_I18N.t('完成日 ',{en:'Completed on ',ja:'完了日 ',de:'Abgeschlossen am '})+a.doneDate+'</p>' +
       '<div class="flex-between" style="margin-top:12px;">' +
-        '<span class="badge badge-ok">'+(a.source==='wordwall'?'已開啟':(a.score+' 分'))+'</span>' +
-        '<button class="btn btn-outline btn-sm" onclick="startAssessment(\''+a.id+'\')">'+(a.source==='wordwall'?'再次開啟':'查看結果')+'</button>' +
+        '<span class="badge badge-ok">'+scoreText+'</span>' +
+        '<button class="btn btn-outline btn-sm" onclick="startAssessment(\''+a.id+'\')">'+actionText+'</button>' +
       '</div>' +
     '</div>';
 }
@@ -546,6 +553,7 @@ function startAssessment(id){
 function wwEscHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function wwEscAttr(s){ return wwEscHtml(s).replace(/"/g,'&quot;'); }
 function showPracticeEmbed(a){
+  window._lastPracticeAssessment = a;
   document.getElementById('view-list').classList.add('hidden');
   document.getElementById('view-answer').classList.add('hidden');
   document.getElementById('view-result').classList.add('hidden');
@@ -555,15 +563,23 @@ function showPracticeEmbed(a){
   var wrap = document.getElementById('practiceEmbedWrap');
   var url = a.wordwallUrl || '';
   if (!url){
-    wrap.innerHTML = '<div class="small muted" style="padding:16px;">尚未設定 Wordwall 連結</div>';
+    wrap.innerHTML = '<div class="small muted" style="padding:16px;">'+TLI_I18N.t('尚未設定 Wordwall 連結',{en:'Wordwall link not set yet',ja:'Wordwall リンクが未設定です',de:'Wordwall-Link noch nicht festgelegt'})+'</div>';
   } else {
     /* 預覽用 srcdoc 顯示佔位示意，不對外發出真實連線（原型示範用） */
+    var practiceLabel = TLI_I18N.t('Wordwall 練習（示意）',{en:'Wordwall Practice (Preview)',ja:'Wordwall 練習（プレビュー）',de:'Wordwall-Übung (Vorschau)'});
     var doc = '<html><body style="margin:0;height:100vh;display:flex;align-items:center;justify-content:center;' +
       'font-family:system-ui,-apple-system,sans-serif;color:#667085;font-size:13px;text-align:center;' +
-      'padding:12px;box-sizing:border-box;background:#F5F7FA"><div>Wordwall 練習（示意）<br>'+wwEscHtml(url)+'</div></body></html>';
-    wrap.innerHTML = '<iframe srcdoc="'+wwEscAttr(doc)+'" title="Wordwall 練習"></iframe>';
+      'padding:12px;box-sizing:border-box;background:#F5F7FA"><div>'+practiceLabel+'<br>'+wwEscHtml(url)+'</div></body></html>';
+    wrap.innerHTML = '<iframe srcdoc="'+wwEscAttr(doc)+'" title="'+practiceLabel+'"></iframe>';
   }
   window.scrollTo(0,0);
+}
+function refreshPracticeTexts(){
+  var a = window._lastPracticeAssessment;
+  if(!a) return;
+  if(document.getElementById('view-practice').classList.contains('hidden')) return;
+  document.getElementById('practiceTitle').textContent = a.title;
+  document.getElementById('practiceSub').textContent = a.course+'・'+a.level;
 }
 function backToQuizList(){
   stopTimer();
@@ -615,10 +631,15 @@ function toggleFlag(){
   document.getElementById('qFlagBtn').classList.toggle('on', !!aState.flags[aState.idx]);
   renderQNav();
 }
-var TYPE_LABEL = {single:'單選題',multi:'多選題',fill:'填空題',listening:'聽力題'};
+var TYPE_LABEL = {
+  single: function(){ return TLI_I18N.t('單選題',{en:'Single Choice',ja:'単一選択問題',de:'Einfachauswahl'}); },
+  multi: function(){ return TLI_I18N.t('多選題',{en:'Multiple Choice',ja:'複数選択問題',de:'Mehrfachauswahl'}); },
+  fill: function(){ return TLI_I18N.t('填空題',{en:'Fill in the Blank',ja:'穴埋め問題',de:'Lückentext'}); },
+  listening: function(){ return TLI_I18N.t('聽力題',{en:'Listening',ja:'リスニング問題',de:'Hörverständnis'}); }
+};
 function renderQuestion(){
   var q = QUESTIONS[aState.idx];
-  document.getElementById('qTypeBadge').textContent = TYPE_LABEL[q.type] + (q.type==='multi'?'（可複選）':'');
+  document.getElementById('qTypeBadge').textContent = TYPE_LABEL[q.type]() + (q.type==='multi'?TLI_I18N.t('（可複選）',{en:' (multi-select)',ja:'（複数選択可）',de:' (Mehrfachauswahl möglich)'}):'');
   document.getElementById('qText').textContent = (aState.idx+1)+'. '+q.text;
   document.getElementById('qFlagBtn').classList.toggle('on', !!aState.flags[aState.idx]);
   document.getElementById('qPrevBtn').disabled = aState.idx===0;
@@ -630,7 +651,7 @@ function renderQuestion(){
     html += '' +
       '<div class="listen-box" id="listenBox">' +
         '<button class="listen-play" id="listenPlayBtn" onclick="toggleListen()">'+ICON_PLAY_SM+'</button>' +
-        '<div class="listen-meta"><div class="lm-title">對話音檔・約 45 秒</div><div class="listen-track"><div id="listenTrackBar"></div></div></div>' +
+        '<div class="listen-meta"><div class="lm-title">'+TLI_I18N.t('對話音檔・約 45 秒',{en:'Audio dialogue · about 45 seconds',ja:'会話音声・約45秒',de:'Audio-Dialog · ca. 45 Sekunden'})+'</div><div class="listen-track"><div id="listenTrackBar"></div></div></div>' +
       '</div>';
   }
   if(q.type==='single' || q.type==='listening'){
@@ -646,7 +667,7 @@ function renderQuestion(){
     }).join('');
   } else if(q.type==='fill'){
     var val = aState.answers[aState.idx] || '';
-    html += '<input class="fill-input" type="text" placeholder="請輸入答案" value="'+val.replace(/"/g,'&quot;')+'" oninput="answerFill(this.value)">';
+    html += '<input class="fill-input" type="text" placeholder="'+TLI_I18N.t('請輸入答案',{en:'Enter your answer',ja:'回答を入力してください',de:'Antwort eingeben'})+'" value="'+val.replace(/"/g,'&quot;')+'" oninput="answerFill(this.value)">';
   }
   body.innerHTML = html;
 }
@@ -686,7 +707,12 @@ function toggleListen(){
 function openSubmitConfirm(){
   var answered = Object.keys(aState.answers).length;
   var unanswered = QUESTIONS.length - answered;
-  document.getElementById('submitConfirmMeta').textContent = '已作答 '+answered+'／'+QUESTIONS.length+' 題' + (unanswered>0 ? '，尚有 '+unanswered+' 題未作答。' : '，已全部作答完成。');
+  var meta = TLI_I18N.t('已作答 ',{en:'Answered ',ja:'解答済み ',de:'Beantwortet '})+answered+
+    TLI_I18N.t('／',{en:'/',ja:'／',de:'/'})+QUESTIONS.length+TLI_I18N.t(' 題',{en:' questions',ja:'問',de:' Fragen'}) +
+    (unanswered>0
+      ? (TLI_I18N.t('，尚有 ',{en:', ',ja:'、残り',de:', noch '})+unanswered+TLI_I18N.t(' 題未作答。',{en:' unanswered.',ja:'問未回答です。',de:' unbeantwortet.'}))
+      : TLI_I18N.t('，已全部作答完成。',{en:'. All questions answered.',ja:'。すべて解答済みです。',de:'. Alle Fragen beantwortet.'}));
+  document.getElementById('submitConfirmMeta').textContent = meta;
   document.getElementById('submitConfirmOverlay').classList.remove('hidden');
 }
 function closeSubmitConfirm(){ document.getElementById('submitConfirmOverlay').classList.add('hidden'); }
@@ -718,25 +744,38 @@ function scoreQuiz(){
   var score = Math.round(correctCount/QUESTIONS.length*100);
   return {score:score, correctCount:correctCount, total:QUESTIONS.length, skillTotal:skillTotal, skillCorrect:skillCorrect, reviews:reviews};
 }
+function resultOf100(){ return TLI_I18N.t('／100',{en:'/100',ja:'／100',de:'/100'}); }
+function resultSuffix(){ return TLI_I18N.t('・結果',{en:' Result',ja:'・結果',de:' – Ergebnis'}); }
+function renderResultHeader(a, score, pass, mode, result){
+  document.getElementById('resultTitle').textContent = a.title + resultSuffix();
+  document.getElementById('resultScore').innerHTML = score + '<span>'+resultOf100()+'</span>';
+  if(mode==='direct'){
+    document.getElementById('resultRate').textContent = TLI_I18N.t('完成日 ',{en:'Completed on ',ja:'完了日 ',de:'Abgeschlossen am '})+a.doneDate;
+  } else {
+    document.getElementById('resultRate').textContent = TLI_I18N.t('答對 ',{en:'Correct: ',ja:'正解数：',de:'Richtig: '})+result.correctCount+
+      TLI_I18N.t('／',{en:'/',ja:'／',de:'/'})+result.total+TLI_I18N.t(' 題',{en:' questions',ja:'問',de:' Fragen'});
+  }
+  var levelBadge=document.getElementById('resultLevel');
+  levelBadge.textContent = pass ? TLI_I18N.t('及格',{en:'Pass',ja:'合格',de:'Bestanden'}) : TLI_I18N.t('未及格',{en:'Fail',ja:'不合格',de:'Nicht bestanden'});
+  levelBadge.className = 'badge '+(pass?'badge-ok':'badge-full');
+  var banner=document.getElementById('resultBanner');
+  banner.className = pass ? 'banner banner-success' : 'banner banner-warn';
+  var bannerText = TLI_I18N.t('本次評量成績已寫入你的學習評量紀錄。',{en:'Your score for this assessment has been recorded in your learning record.',ja:'今回の評価結果は学習記録に登録されました。',de:'Ihr Ergebnis für diese Bewertung wurde in Ihrem Lernprotokoll gespeichert.'}) +
+    (pass?'':TLI_I18N.t('未達及格門檻，可依設定補考。',{en:'Below the passing threshold. You may retake it according to the settings.',ja:'合格基準に達していません。設定に応じて再受験できます。',de:'Bestehensgrenze nicht erreicht. Eine Wiederholung ist gemäß den Einstellungen möglich.'}));
+  banner.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex:none;"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg><div>'+bannerText+'</div>';
+}
 function showCourseResult(result, a){
   document.getElementById('view-answer').classList.add('hidden');
   document.getElementById('view-list').classList.add('hidden');
   document.getElementById('view-result').classList.remove('hidden');
   var pass = result.score>=60;
-  document.getElementById('resultTitle').textContent = a.title + '・結果';
-  document.getElementById('resultScore').innerHTML = result.score + '<span>／100</span>';
-  document.getElementById('resultRate').textContent = '答對 '+result.correctCount+'／'+result.total+' 題';
-  var levelBadge=document.getElementById('resultLevel');
-  levelBadge.textContent = pass ? '及格' : '未及格';
-  levelBadge.className = 'badge '+(pass?'badge-ok':'badge-full');
+  window._lastResultView = {mode:'normal', a:a, result:result, pass:pass};
+  renderResultHeader(a, result.score, pass, 'normal', result);
   renderResultSkills(result);
   renderReview(result);
   a.status = pass ? 'passed' : 'failed';
   a.score = result.score;
   a.doneDate = a.doneDate || new Date().toISOString().slice(0,10);
-  var banner=document.getElementById('resultBanner');
-  banner.className = pass ? 'banner banner-success' : 'banner banner-warn';
-  banner.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex:none;"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg><div>本次評量成績已寫入你的學習評量紀錄。'+(pass?'':'未達及格門檻，可依設定補考。')+'</div>';
   window.scrollTo(0,0);
 }
 function showResultDirect(a){
@@ -744,12 +783,6 @@ function showResultDirect(a){
   document.getElementById('view-list').classList.add('hidden');
   document.getElementById('view-answer').classList.add('hidden');
   document.getElementById('view-result').classList.remove('hidden');
-  document.getElementById('resultTitle').textContent = a.title + '・結果';
-  document.getElementById('resultScore').innerHTML = a.score + '<span>／100</span>';
-  document.getElementById('resultRate').textContent = '完成日 '+a.doneDate;
-  var levelBadge=document.getElementById('resultLevel');
-  levelBadge.textContent = '及格';
-  levelBadge.className = 'badge badge-ok';
   aState = {mode:'course', refId:a.id, idx:0, answers:{}, flags:{}};
   QUESTIONS.forEach(function(qq,i){
     if(qq.type==='multi') aState.answers[i]=qq.answer.slice();
@@ -757,13 +790,26 @@ function showResultDirect(a){
     else aState.answers[i]=qq.answer;
   });
   var demoResult = scoreQuiz();
+  window._lastResultView = {mode:'direct', a:a, result:demoResult, pass:true};
+  renderResultHeader(a, a.score, true, 'direct', demoResult);
   renderResultSkills(demoResult);
   renderReview(demoResult);
-  var banner=document.getElementById('resultBanner');
-  banner.className='banner banner-success';
-  banner.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex:none;"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg><div>本次評量成績已寫入你的學習評量紀錄。</div>';
   window.scrollTo(0,0);
 }
+function refreshResultView(){
+  var st = window._lastResultView;
+  if(!st) return;
+  if(document.getElementById('view-result').classList.contains('hidden')) return;
+  renderResultHeader(st.a, st.mode==='direct'?st.a.score:st.result.score, st.pass, st.mode, st.result);
+  renderResultSkills(st.result);
+  renderReview(st.result);
+}
+var SKILL_LABEL = {
+  '聽': function(){ return TLI_I18N.t('聽',{en:'Li',ja:'聴',de:'Hö'}); },
+  '說': function(){ return TLI_I18N.t('說',{en:'Sp',ja:'話',de:'Sp'}); },
+  '讀': function(){ return TLI_I18N.t('讀',{en:'Re',ja:'読',de:'Le'}); },
+  '寫': function(){ return TLI_I18N.t('寫',{en:'Wr',ja:'書',de:'Sc'}); }
+};
 function renderResultSkills(result){
   var order=['聽','說','讀','寫'];
   document.getElementById('resultSkills').innerHTML = order.map(function(s){
@@ -771,9 +817,9 @@ function renderResultSkills(result){
     var pct = t>0 ? Math.round(c/t*100) : 0;
     return '' +
       '<div class="skill-row">' +
-        '<span class="skill-label">'+s+'</span>' +
+        '<span class="skill-label">'+SKILL_LABEL[s]()+'</span>' +
         '<div class="progress'+(pct<60?' warn':'')+'"><div style="width:'+pct+'%;"></div></div>' +
-        '<span class="skill-score">'+c+'／'+t+' 題</span>' +
+        '<span class="skill-score">'+c+TLI_I18N.t('／',{en:'/',ja:'／',de:'/'})+t+TLI_I18N.t(' 題',{en:' Q',ja:'問',de:' Fr.'})+'</span>' +
       '</div>';
   }).join('');
 }
@@ -789,17 +835,18 @@ function renderReview(result){
           '<p>'+(i+1)+'. '+q.text+'</p>' +
         '</div>' +
         '<div class="review-detail" id="reviewDetail'+i+'">' +
-          '<p><strong>你的答案：</strong>'+yourAns+'</p>' +
-          '<p><strong>正確答案：</strong>'+correctAns+'</p>' +
-          '<p><strong>解析：</strong>'+q.explain+'</p>' +
+          '<p><strong>'+TLI_I18N.t('你的答案：',{en:'Your answer: ',ja:'あなたの解答：',de:'Ihre Antwort: '})+'</strong>'+yourAns+'</p>' +
+          '<p><strong>'+TLI_I18N.t('正確答案：',{en:'Correct answer: ',ja:'正解：',de:'Richtige Antwort: '})+'</strong>'+correctAns+'</p>' +
+          '<p><strong>'+TLI_I18N.t('解析：',{en:'Explanation: ',ja:'解説：',de:'Erklärung: '})+'</strong>'+q.explain+'</p>' +
         '</div>' +
       '</div>';
   }).join('');
 }
 function formatAnswer(q, val){
-  if(val===undefined||val===null||val==='') return '（未作答）';
+  var notAnswered = TLI_I18N.t('（未作答）',{en:'(Not answered)',ja:'（未回答）',de:'(Nicht beantwortet)'});
+  if(val===undefined||val===null||val==='') return notAnswered;
   if(q.type==='single'||q.type==='listening'){ return q.options[val]; }
-  if(q.type==='multi'){ return (val||[]).map(function(i){return q.options[i];}).join('、') || '（未作答）'; }
+  if(q.type==='multi'){ return (val||[]).map(function(i){return q.options[i];}).join('、') || notAnswered; }
   return String(val);
 }
 function toggleReview(i){ document.getElementById('reviewDetail'+i).classList.toggle('open'); }
@@ -832,7 +879,19 @@ document.addEventListener('keydown', function(e){
     el.classList.add('hidden');
   });
 });
+
+/* ================= 五語切換：動態渲染內容登記重繪 ================= */
+function refreshAllDynamic(){
+  renderCourseList();
+  if(aState && !document.getElementById('view-answer').classList.contains('hidden')){
+    renderQNav();
+    renderQuestion();
+  }
+  refreshResultView();
+  refreshPracticeTexts();
+}
+TLI_I18N.onRefresh(refreshAllDynamic);
+TLI_I18N.init();
 </script>
-<div class="toast hidden" id="toast">已完成</div>
 </body>
 </html>

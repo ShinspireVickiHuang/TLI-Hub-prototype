@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="meta_title">TLI Connect｜登入／註冊</title>
-<meta name="description" content="TLI 會員登入與註冊：支援 Email／Google／LINE 登入，註冊填寫基本資料與學習目標。" data-i18n="meta_description" data-i18n-attr="content">
+<meta name="description" content="TLI 會員登入與註冊：支援 Email／Google／LINE 登入，註冊填寫基本資料與學習目標。">
 <style>
 :root{
   --c-primary:#1B4E8C;--c-primary-dark:#123A66;--c-accent:#E8792B;--c-accent-dark:#CF691F;
@@ -218,23 +218,16 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
 
 <header class="site-header">
   <a class="brand" href="p01_home.html"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n="menu_toggle_aria" data-i18n-attr="aria-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n-aria-label="menu_toggle_aria"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <nav class="site-nav">
     <a href="p02_courses.html" data-i18n="nav_courses">課程</a>
-    <a href="p10_enterprise.html">企業培訓</a>
+    <a href="p10_enterprise.html" data-i18n="nav_enterprise">企業培訓</a>
     <a href="p09_events.html" data-i18n="nav_events">活動</a>
     <a href="p04_teachers.html" data-i18n="nav_teachers">師資</a>
     <a href="p05_about_locations.html" data-i18n="nav_about">品牌與校區</a>
     <a href="p08_faq.html" data-i18n="nav_faq">常見問題</a>
   </nav>
-  <div class="header-right">
-    <select class="lang-select" onchange="setLang(this.value)" aria-label="語言切換" data-i18n="lang_select_aria" data-i18n-attr="aria-label">
-      <option value="zh-TW">繁體中文</option>
-      <option value="zh-CN">简体中文</option>
-      <option value="en">English</option>
-      <option value="ja">日本語</option>
-      <option value="de">Deutsch</option>
-    </select>
+  <div class="header-right tb-actions">
     <a class="btn btn-primary btn-sm" data-i18n="btn_consult" href="p06_trial.html?type=consult">預約諮詢</a>
     <a class="btn btn-accent btn-sm" data-i18n="btn_trial" href="p06_trial.html?type=trial">預約試聽</a>
     <a class="btn btn-outline btn-sm" data-i18n="btn_login" href="p07_login_register.html">登入</a>
@@ -263,19 +256,19 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
         <form onsubmit="return fakeLogin(event)">
           <div class="field">
             <label data-i18n="p07_label_email">Email</label>
-            <input type="email" placeholder="請輸入 Email" required data-i18n-ph="p07_ph_email">
+            <input type="email" placeholder="請輸入 Email" required data-i18n-placeholder="p07_ph_email">
           </div>
           <div class="field">
             <label data-i18n="p07_label_password">密碼</label>
-            <input type="password" placeholder="請輸入密碼" required data-i18n-ph="p07_ph_password">
+            <input type="password" placeholder="請輸入密碼" required data-i18n-placeholder="p07_ph_password">
           </div>
           <div class="helper-link"><a href="#" onclick="showToast(tliDict().p07_toast_forgot_password); return false;" data-i18n="p07_forgot_password">忘記密碼？</a></div>
           <button type="submit" class="btn btn-primary btn-block"><span class="social-badge badge-mail" style="margin-right:4px;">@</span><span data-i18n="p07_btn_submit_login">登入</span></button>
         </form>
         <div class="switch-note"><span data-i18n="p07_switch_to_register_text">還沒有帳號？</span><a href="#" onclick="switchTab('register');return false;" data-i18n="p07_switch_to_register_link">立即註冊</a></div>
         <!-- 機構／經銷、加盟建立的會員不必自行註冊，導引至開通頁 -->
-        <div class="switch-note" style="margin-top:6px;"><a href="p14_partner_login.html">機構學員登入</a>／<a href="p13_activate.html">前往帳號開通</a></div>
-        <div class="switch-note" style="margin-top:6px;">加盟機構學員請由機構專屬入口登入</div>
+        <div class="switch-note" style="margin-top:6px;"><a href="p14_partner_login.html" data-i18n="p07_partner_student_login">機構學員登入</a>／<a href="p13_activate.html" data-i18n="p07_partner_activate_link">前往帳號開通</a></div>
+        <div class="switch-note" style="margin-top:6px;" data-i18n="p07_franchise_student_note">加盟機構學員請由機構專屬入口登入</div>
       </div>
 
       <div class="panel" id="panelRegister">
@@ -288,12 +281,12 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
         <form id="registerForm" onsubmit="return submitRegister(event)" novalidate>
           <div class="field">
             <label><span data-i18n="p07_label_name">姓名</span><span class="req-mark">*</span></label>
-            <input type="text" id="regName" placeholder="請輸入姓名" data-i18n-ph="p07_ph_name" onblur="validateName()">
+            <input type="text" id="regName" placeholder="請輸入姓名" data-i18n-placeholder="p07_ph_name" onblur="validateName()">
             <div class="field-error" id="err_regName"></div>
           </div>
           <div class="field">
             <label><span data-i18n="p07_label_email">Email</span><span class="req-mark">*</span></label>
-            <input type="email" id="regEmail" placeholder="請輸入 Email" data-i18n-ph="p07_ph_email" onblur="validateEmail()">
+            <input type="email" id="regEmail" placeholder="請輸入 Email" data-i18n-placeholder="p07_ph_email" onblur="validateEmail()">
             <div class="field-error" id="err_regEmail"></div>
             <div class="email-dup-note" id="regEmailDupNote">
               <div data-i18n="p07_email_dup_msg">此 Email 已有帳號，請直接登入</div>
@@ -304,15 +297,15 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
           <div class="field">
             <label><span data-i18n="p07_label_phone">手機</span><span class="opt-mark" data-i18n="p07_phone_optional">（選填）</span></label>
             <div class="phone-row">
-              <select id="regPhoneCc" aria-label="國碼" data-i18n="p07_phone_cc_aria" data-i18n-attr="aria-label"></select>
-              <input type="tel" id="regPhone" placeholder="請輸入手機號碼" data-i18n-ph="p07_ph_phone" onblur="validatePhone()">
+              <select id="regPhoneCc" aria-label="國碼" data-i18n-aria-label="p07_phone_cc_aria"></select>
+              <input type="tel" id="regPhone" placeholder="請輸入手機號碼" data-i18n-placeholder="p07_ph_phone" onblur="validatePhone()">
             </div>
             <div class="field-hint" data-i18n="p07_phone_hint">填了我們才能在課前臨時異動時用 WhatsApp／LINE 通知你；不填不影響上課。</div>
             <div class="field-error" id="err_regPhone"></div>
           </div>
           <div class="field">
             <label><span data-i18n="p07_label_password">密碼</span><span class="req-mark">*</span></label>
-            <input type="password" id="regPassword" placeholder="請設定密碼" data-i18n-ph="p07_ph_password_set" onblur="validatePassword()">
+            <input type="password" id="regPassword" placeholder="請設定密碼" data-i18n-placeholder="p07_ph_password_set" onblur="validatePassword()">
             <div class="field-error" id="err_regPassword"></div>
             <div class="refcode-note" data-i18n="p07_password_hint">至少 8 碼，需包含英文字母與數字</div>
           </div>
@@ -346,7 +339,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
             <div id="refCodeManualWrap">
               <a href="#" class="refcode-toggle" onclick="toggleRefCodeInput('reg');return false;" data-i18n="p07_refcode_have">有推薦代碼？</a>
               <div class="refcode-row" id="refCodeManualRow" style="display:none;margin-top:6px">
-                <input type="text" id="refCodeInput" class="refcode-input" placeholder="如：REF-SEA07" data-i18n-ph="p07_refcode_ph" autocomplete="off">
+                <input type="text" id="refCodeInput" class="refcode-input" placeholder="如：REF-SEA07" data-i18n-placeholder="p07_refcode_ph" autocomplete="off">
                 <button type="button" class="btn btn-outline btn-sm" onclick="applyRefCodeManual('reg')" data-i18n="p07_refcode_apply">套用</button>
               </div>
               <div class="refcode-note" id="refCodeMsg"></div>
@@ -366,7 +359,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
           <div class="field field-checkbox">
             <label class="checkbox-label">
               <input type="checkbox" id="regMarketingConsent">
-              <span class="checkbox-label-text">我同意 TLI 使用我的學習資料進行課程推薦與行銷（可隨時取消）</span>
+              <span class="checkbox-label-text" data-i18n="p07_marketing_consent">我同意 TLI 使用我的學習資料進行課程推薦與行銷（可隨時取消）</span>
             </label>
           </div>
           <button type="submit" class="btn btn-accent btn-block" data-i18n="p07_btn_submit_register">完成註冊</button>
@@ -389,8 +382,8 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
           <div class="field">
             <label><span data-i18n="p07_label_phone">手機</span><span class="opt-mark" data-i18n="p07_phone_optional">（選填）</span></label>
             <div class="phone-row">
-              <select id="regPhoneCcSocial" aria-label="國碼" data-i18n="p07_phone_cc_aria" data-i18n-attr="aria-label"></select>
-              <input type="tel" id="regPhoneSocial" placeholder="請輸入手機號碼" data-i18n-ph="p07_ph_phone" onblur="validatePhoneSocial()">
+              <select id="regPhoneCcSocial" aria-label="國碼" data-i18n-aria-label="p07_phone_cc_aria"></select>
+              <input type="tel" id="regPhoneSocial" placeholder="請輸入手機號碼" data-i18n-placeholder="p07_ph_phone" onblur="validatePhoneSocial()">
             </div>
             <div class="field-hint" data-i18n="p07_phone_hint">填了我們才能在課前臨時異動時用 WhatsApp／LINE 通知你；不填不影響上課。</div>
             <div class="field-error" id="err_regPhoneSocial"></div>
@@ -421,7 +414,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
             <div id="refCodeManualWrapSocial">
               <a href="#" class="refcode-toggle" onclick="toggleRefCodeInput('social');return false;" data-i18n="p07_refcode_have">有推薦代碼？</a>
               <div class="refcode-row" id="refCodeManualRowSocial" style="display:none;margin-top:6px">
-                <input type="text" id="refCodeInputSocial" class="refcode-input" placeholder="如：REF-SEA07" data-i18n-ph="p07_refcode_ph" autocomplete="off">
+                <input type="text" id="refCodeInputSocial" class="refcode-input" placeholder="如：REF-SEA07" data-i18n-placeholder="p07_refcode_ph" autocomplete="off">
                 <button type="button" class="btn btn-outline btn-sm" onclick="applyRefCodeManual('social')" data-i18n="p07_refcode_apply">套用</button>
               </div>
               <div class="refcode-note" id="refCodeMsgSocial"></div>
@@ -441,7 +434,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
           <div class="field field-checkbox">
             <label class="checkbox-label">
               <input type="checkbox" id="regMarketingConsentSocial">
-              <span class="checkbox-label-text">我同意 TLI 使用我的學習資料進行課程推薦與行銷（可隨時取消）</span>
+              <span class="checkbox-label-text" data-i18n="p07_marketing_consent">我同意 TLI 使用我的學習資料進行課程推薦與行銷（可隨時取消）</span>
             </label>
           </div>
           <button type="submit" class="btn btn-accent btn-block" data-i18n="p07_btn_submit_register">完成註冊</button>
@@ -470,7 +463,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
   <div class="modal-box">
     <div class="modal-head">
       <h3 data-i18n="p07_terms_modal_title">服務條款與個資蒐集告知</h3>
-      <button class="modal-close-btn" onclick="closeTermsModal()" aria-label="關閉" data-i18n="p07_close_aria" data-i18n-attr="aria-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="modal-close-btn" onclick="closeTermsModal()" aria-label="關閉" data-i18n-aria-label="p07_close_aria"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body" id="termsModalBody"></div>
     <div class="modal-foot">
@@ -635,14 +628,14 @@ function isSafeNextUrl(url){
 }
 /* 活動標題對照（僅供 next 提示文字顯示用，與 p09_events.html 的示範活動資料同步） */
 var TLI_NEXT_EVENT_TITLES = {
-  'cert-info': {'zh-TW':'2026 TLI 國際華語教師認證線上說明會', en:'2026 TLI International Chinese Teacher Certification Online Info Session', ja:'2026年 TLI国際中国語教師認定 オンライン説明会'},
-  'flex-open-house': {'zh-TW':'彈性團體直播 公開體驗場－日文情境會話', en:'Flexible Group Livestream Open House — Japanese Situational Conversation', ja:'グループライブ配信 体験会－日本語会話（シチュエーション別）'},
-  'culture-midautumn': {'zh-TW':'中文文化直播－中秋節茶道與詩詞賞析', en:'Chinese Culture Livestream — Mid-Autumn Tea Ceremony & Poetry Appreciation', ja:'中国語文化ライブ配信－中秋節の茶道と詩歌鑑賞'},
-  'culture-calligraphy': {'zh-TW':'中文文化線上課－毛筆書法入門體驗', en:'Chinese Culture Online Class — Introduction to Brush Calligraphy', ja:'中国語文化オンライン講座－毛筆書道入門体験'},
-  'biz-webinar': {'zh-TW':'企業線上培訓說明會－員工華語計畫怎麼規劃', en:'Corporate Online Training Info Session — Planning an Employee Chinese Program', ja:'企業向けオンライン研修説明会－社員向け中国語プランの立て方'},
-  'flex-mock-exam': {'zh-TW':'TLI-CPT 模擬檢定線上診斷會', en:'TLI-CPT Mock Test Online Diagnostic Session', ja:'TLI-CPT模擬検定 オンライン診断会'},
-  'physical-open-day': {'zh-TW':'士林校區體驗營（實體開放日）', en:'Shilin Campus Experience Day (On-site Open House)', ja:'士林キャンパス体験デー（対面オープンデー）'},
-  'physical-taichung-fair': {'zh-TW':'台中校區語言學習博覽會（實體）', en:'Taichung Campus Language Learning Fair (In-Person)', ja:'台中キャンパス語学学習フェア（対面）'}
+  'cert-info': {'zh-TW':'2026 TLI 國際華語教師認證線上說明會', en:'2026 TLI International Chinese Teacher Certification Online Info Session', ja:'2026年 TLI国際中国語教師認定 オンライン説明会', de:'2026 TLI Internationale Chinesischlehrer-Zertifizierung – Online-Infoveranstaltung'},
+  'flex-open-house': {'zh-TW':'彈性團體直播 公開體驗場－日文情境會話', en:'Flexible Group Livestream Open House — Japanese Situational Conversation', ja:'グループライブ配信 体験会－日本語会話（シチュエーション別）', de:'Flexibler Gruppen-Livestream Tag der offenen Tür – Japanische Situationsgespräche'},
+  'culture-midautumn': {'zh-TW':'中文文化直播－中秋節茶道與詩詞賞析', en:'Chinese Culture Livestream — Mid-Autumn Tea Ceremony & Poetry Appreciation', ja:'中国語文化ライブ配信－中秋節の茶道と詩歌鑑賞', de:'Chinesische Kultur Livestream – Mittherbstfest Teezeremonie und Gedichtbetrachtung'},
+  'culture-calligraphy': {'zh-TW':'中文文化線上課－毛筆書法入門體驗', en:'Chinese Culture Online Class — Introduction to Brush Calligraphy', ja:'中国語文化オンライン講座－毛筆書道入門体験', de:'Chinesische Kultur Online-Kurs – Einführung in die Pinselkalligrafie'},
+  'biz-webinar': {'zh-TW':'企業線上培訓說明會－員工華語計畫怎麼規劃', en:'Corporate Online Training Info Session — Planning an Employee Chinese Program', ja:'企業向けオンライン研修説明会－社員向け中国語プランの立て方', de:'Firmen-Online-Schulung Infoveranstaltung – Planung eines Chinesischkurses für Mitarbeitende'},
+  'flex-mock-exam': {'zh-TW':'TLI-CPT 模擬檢定線上診斷會', en:'TLI-CPT Mock Test Online Diagnostic Session', ja:'TLI-CPT模擬検定 オンライン診断会', de:'TLI-CPT Simulationstest Online-Diagnosetreffen'},
+  'physical-open-day': {'zh-TW':'士林校區體驗營（實體開放日）', en:'Shilin Campus Experience Day (On-site Open House)', ja:'士林キャンパス体験デー（対面オープンデー）', de:'Shilin-Campus Erlebnistag (Tag der offenen Tür vor Ort)'},
+  'physical-taichung-fair': {'zh-TW':'台中校區語言學習博覽會（實體）', en:'Taichung Campus Language Learning Fair (In-Person)', ja:'台中キャンパス語学学習フェア（対面）', de:'Taichung-Campus Sprachlern-Messe (vor Ort)'}
 };
 /* 依 next 目標網址推導一個易讀的顯示名稱：活動報名頁優先顯示活動名稱，其餘給頁面層級的通用說明 */
 function getNextTargetLabel(url){
@@ -658,8 +651,8 @@ function getNextTargetLabel(url){
   });
   if(path.indexOf('p09_events.html') > -1 && params.event){
     var titles = TLI_NEXT_EVENT_TITLES[params.event];
-    var lang = window.TLI_CURRENT_LANG;
-    if(titles) return titles[lang] || titles['zh-TW'];
+    var lang = TLI_I18N.currentLang();
+    if(titles) return titles[lang] || titles.en || titles['zh-TW'];
   }
   if(path.indexOf('m13_checkout.html') > -1) return dict.p07_next_target_checkout;
   if(path.indexOf('m10_events.html') > -1) return dict.p07_next_target_myevents;
@@ -747,7 +740,7 @@ function showAuthSuccess(e, isRegisterFlow){
   document.getElementById('successCardBtnText').textContent = isTeacher ? dict.p07_success_btn_teacher : dict.p07_success_btn_student;
   return false;
 }
-function onLangApplied(lang){
+function onLangApplied(){
   var successCard = document.getElementById('successCard');
   if(successCard && successCard.classList.contains('show')){
     var dict = tliDict();
@@ -765,17 +758,20 @@ function onLangApplied(lang){
 var TLI_COUNTRY_CODES = {
 'zh-TW':[['+886','台灣 +886'],['+86','中國 +86'],['+852','香港 +852'],['+853','澳門 +853'],['+81','日本 +81'],['+82','韓國 +82'],['+65','新加坡 +65'],['+60','馬來西亞 +60'],['+66','泰國 +66'],['+84','越南 +84'],['+62','印尼 +62'],['+63','菲律賓 +63'],['+1','美國／加拿大 +1'],['+44','英國 +44'],['+61','澳洲 +61'],['+49','德國 +49']],
 en:[['+886','Taiwan +886'],['+86','China +86'],['+852','Hong Kong +852'],['+853','Macau +853'],['+81','Japan +81'],['+82','South Korea +82'],['+65','Singapore +65'],['+60','Malaysia +60'],['+66','Thailand +66'],['+84','Vietnam +84'],['+62','Indonesia +62'],['+63','Philippines +63'],['+1','US / Canada +1'],['+44','UK +44'],['+61','Australia +61'],['+49','Germany +49']],
-ja:[['+886','台湾 +886'],['+86','中国 +86'],['+852','香港 +852'],['+853','マカオ +853'],['+81','日本 +81'],['+82','韓国 +82'],['+65','シンガポール +65'],['+60','マレーシア +60'],['+66','タイ +66'],['+84','ベトナム +84'],['+62','インドネシア +62'],['+63','フィリピン +63'],['+1','米国／カナダ +1'],['+44','英国 +44'],['+61','オーストラリア +61'],['+49','ドイツ +49']]
+ja:[['+886','台湾 +886'],['+86','中国 +86'],['+852','香港 +852'],['+853','マカオ +853'],['+81','日本 +81'],['+82','韓国 +82'],['+65','シンガポール +65'],['+60','マレーシア +60'],['+66','タイ +66'],['+84','ベトナム +84'],['+62','インドネシア +62'],['+63','フィリピン +63'],['+1','米国／カナダ +1'],['+44','英国 +44'],['+61','オーストラリア +61'],['+49','ドイツ +49']],
+de:[['+886','Taiwan +886'],['+86','China +86'],['+852','Hongkong +852'],['+853','Macau +853'],['+81','Japan +81'],['+82','Südkorea +82'],['+65','Singapur +65'],['+60','Malaysia +60'],['+66','Thailand +66'],['+84','Vietnam +84'],['+62','Indonesien +62'],['+63','Philippinen +63'],['+1','USA / Kanada +1'],['+44','Vereinigtes Königreich +44'],['+61','Australien +61'],['+49','Deutschland +49']]
 };
 var TLI_TIMEZONES = {
 'zh-TW':[['Asia/Taipei','台北（UTC+8）'],['Asia/Shanghai','上海（UTC+8）'],['Asia/Hong_Kong','香港（UTC+8）'],['Asia/Tokyo','東京（UTC+9）'],['Asia/Seoul','首爾（UTC+9）'],['Asia/Singapore','新加坡（UTC+8）'],['Asia/Kuala_Lumpur','吉隆坡（UTC+8）'],['Asia/Bangkok','曼谷（UTC+7）'],['Asia/Jakarta','雅加達（UTC+7）'],['Asia/Ho_Chi_Minh','胡志明市（UTC+7）'],['Asia/Manila','馬尼拉（UTC+8）'],['America/Los_Angeles','美國西岸（UTC-8）'],['America/New_York','美國東岸（UTC-5）'],['Europe/London','倫敦（UTC+0）'],['Europe/Berlin','柏林（UTC+1）'],['Australia/Sydney','雪梨（UTC+10）']],
 en:[['Asia/Taipei','Taipei (UTC+8)'],['Asia/Shanghai','Shanghai (UTC+8)'],['Asia/Hong_Kong','Hong Kong (UTC+8)'],['Asia/Tokyo','Tokyo (UTC+9)'],['Asia/Seoul','Seoul (UTC+9)'],['Asia/Singapore','Singapore (UTC+8)'],['Asia/Kuala_Lumpur','Kuala Lumpur (UTC+8)'],['Asia/Bangkok','Bangkok (UTC+7)'],['Asia/Jakarta','Jakarta (UTC+7)'],['Asia/Ho_Chi_Minh','Ho Chi Minh City (UTC+7)'],['Asia/Manila','Manila (UTC+8)'],['America/Los_Angeles','US Pacific (UTC-8)'],['America/New_York','US Eastern (UTC-5)'],['Europe/London','London (UTC+0)'],['Europe/Berlin','Berlin (UTC+1)'],['Australia/Sydney','Sydney (UTC+10)']],
-ja:[['Asia/Taipei','台北（UTC+8）'],['Asia/Shanghai','上海（UTC+8）'],['Asia/Hong_Kong','香港（UTC+8）'],['Asia/Tokyo','東京（UTC+9）'],['Asia/Seoul','ソウル（UTC+9）'],['Asia/Singapore','シンガポール（UTC+8）'],['Asia/Kuala_Lumpur','クアラルンプール（UTC+8）'],['Asia/Bangkok','バンコク（UTC+7）'],['Asia/Jakarta','ジャカルタ（UTC+7）'],['Asia/Ho_Chi_Minh','ホーチミン（UTC+7）'],['Asia/Manila','マニラ（UTC+8）'],['America/Los_Angeles','米国西海岸（UTC-8）'],['America/New_York','米国東海岸（UTC-5）'],['Europe/London','ロンドン（UTC+0）'],['Europe/Berlin','ベルリン（UTC+1）'],['Australia/Sydney','シドニー（UTC+10）']]
+ja:[['Asia/Taipei','台北（UTC+8）'],['Asia/Shanghai','上海（UTC+8）'],['Asia/Hong_Kong','香港（UTC+8）'],['Asia/Tokyo','東京（UTC+9）'],['Asia/Seoul','ソウル（UTC+9）'],['Asia/Singapore','シンガポール（UTC+8）'],['Asia/Kuala_Lumpur','クアラルンプール（UTC+8）'],['Asia/Bangkok','バンコク（UTC+7）'],['Asia/Jakarta','ジャカルタ（UTC+7）'],['Asia/Ho_Chi_Minh','ホーチミン（UTC+7）'],['Asia/Manila','マニラ（UTC+8）'],['America/Los_Angeles','米国西海岸（UTC-8）'],['America/New_York','米国東海岸（UTC-5）'],['Europe/London','ロンドン（UTC+0）'],['Europe/Berlin','ベルリン（UTC+1）'],['Australia/Sydney','シドニー（UTC+10）']],
+de:[['Asia/Taipei','Taipeh (UTC+8)'],['Asia/Shanghai','Shanghai (UTC+8)'],['Asia/Hong_Kong','Hongkong (UTC+8)'],['Asia/Tokyo','Tokio (UTC+9)'],['Asia/Seoul','Seoul (UTC+9)'],['Asia/Singapore','Singapur (UTC+8)'],['Asia/Kuala_Lumpur','Kuala Lumpur (UTC+8)'],['Asia/Bangkok','Bangkok (UTC+7)'],['Asia/Jakarta','Jakarta (UTC+7)'],['Asia/Ho_Chi_Minh','Ho-Chi-Minh-Stadt (UTC+7)'],['Asia/Manila','Manila (UTC+8)'],['America/Los_Angeles','US-Westküste (UTC-8)'],['America/New_York','US-Ostküste (UTC-5)'],['Europe/London','London (UTC+0)'],['Europe/Berlin','Berlin (UTC+1)'],['Australia/Sydney','Sydney (UTC+10)']]
 };
 var TLI_NATIVE_LANGS = {
 'zh-TW':[['','請選擇（選填）'],['zh','中文'],['en','英文'],['ja','日文'],['ko','韓文'],['vi','越南文'],['th','泰文'],['id','印尼文'],['de','德文'],['other','其他']],
 en:[['','Select (optional)'],['zh','Chinese'],['en','English'],['ja','Japanese'],['ko','Korean'],['vi','Vietnamese'],['th','Thai'],['id','Indonesian'],['de','German'],['other','Other']],
-ja:[['','選択してください（任意）'],['zh','中国語'],['en','英語'],['ja','日本語'],['ko','韓国語'],['vi','ベトナム語'],['th','タイ語'],['id','インドネシア語'],['de','ドイツ語'],['other','その他']]
+ja:[['','選択してください（任意）'],['zh','中国語'],['en','英語'],['ja','日本語'],['ko','韓国語'],['vi','ベトナム語'],['th','タイ語'],['id','インドネシア語'],['de','ドイツ語'],['other','その他']],
+de:[['','Bitte auswählen (optional)'],['zh','Chinesisch'],['en','Englisch'],['ja','Japanisch'],['ko','Koreanisch'],['vi','Vietnamesisch'],['th','Thailändisch'],['id','Indonesisch'],['de','Deutsch'],['other','Andere']]
 };
 function buildSelectOptions(selectEl, list, fallbackValue){
   if(!selectEl) return;
@@ -797,7 +793,7 @@ function detectTimezoneValue(){
   return 'Asia/Taipei';
 }
 function rebuildRegisterDynamicSelects(){
-  var lang = window.TLI_CURRENT_LANG;
+  var lang = TLI_I18N.currentLang();
   var ccList = TLI_COUNTRY_CODES[lang] || TLI_COUNTRY_CODES['zh-TW'];
   var tzList = TLI_TIMEZONES[lang] || TLI_TIMEZONES['zh-TW'];
   var nlList = TLI_NATIVE_LANGS[lang] || TLI_NATIVE_LANGS['zh-TW'];
@@ -1044,7 +1040,7 @@ document.querySelectorAll('#registerForm input, #registerForm select, #socialCom
 });
 </script>
 
-<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n="ai_fab_aria" data-i18n-attr="aria-label"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n-aria-label="ai_fab_aria"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
 <div class="ai-fab-label" data-i18n="ai_fab_label">線上諮詢</div>
 
 <div class="ai-overlay" id="aiOverlay-fab" onclick="if(event.target===this) aiClose('fab')">
@@ -1058,419 +1054,108 @@ document.querySelectorAll('#registerForm input, #registerForm select, #socialCom
         </div>
       </div>
       <div class="ai-head-actions">
-        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n="ai_minimize_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n="ai_close_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n-aria-label="ai_minimize_aria" data-i18n-title="ai_minimize_aria"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n-aria-label="ai_close_aria" data-i18n-title="ai_close_aria"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
     </div>
     <div class="ai-body" id="aiBody-fab"></div>
     <div class="ai-chips" id="aiChips-fab"></div>
     <form class="ai-inputrow" onsubmit="return aiSubmitInput(event,'fab')">
-      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-ph="ai_input_placeholder" data-i18n="ai_input_aria" data-i18n-attr="aria-label">
+      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-placeholder="ai_input_placeholder" data-i18n-aria-label="ai_input_aria">
       <button type="submit" id="aiSend-fab" disabled data-i18n="ai_send">送出</button>
     </form>
     <div class="ai-disclaimer" data-i18n="ai_disclaimer">回覆由 AI 產生，重要事項請以顧問確認為準</div>
   </div>
 </div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n_dict_public.js"></script>
+<script src="../assets/_i18n_dict_public_ja.js"></script>
+<script src="../assets/_i18n_dict_public_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
+function T(zh,obj){ return TLI_I18N.t(zh,obj); }
+
 
 var TLI_AVATAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg>';
 
-/* ===================== i18n：共用引擎（見 tli_i18n_shared.js 段落 A） ===================== */
-var TLI_LANG_KEY = 'tli_lang';
-window.TLI_CURRENT_LANG = 'zh-TW';
 function tliFmt(str, obj){
   if(!str) return str;
   return str.replace(/\{(\w+)\}/g, function(_, k){ return (obj && obj[k] !== undefined) ? obj[k] : ''; });
 }
+/* ===================== i18n：本頁動態字典（AI 小幫手＋登入／註冊頁專屬文案，五語） ===================== */
 function tliDict(){
-  var lang = window.TLI_CURRENT_LANG;
-  return Object.assign({}, I18N_COMMON[lang] || I18N_COMMON['zh-TW'] || {}, I18N_PAGE[lang] || I18N_PAGE['zh-TW'] || {});
+  return {
+    ai_chip_trial: T('試聽怎麼預約',{en:'How to book a trial',ja:'体験レッスンの予約方法',de:'Wie bucht man eine Probestunde'}),
+    ai_greeting_default: T('您好，我是 TLI 小幫手，歡迎詢問退費、請假改期、簽證、發票、付款、上課方式或老師配對等問題，也可以直接輸入您的問題。',{en:'Hi, I’m the TLI Assistant. Ask me about refunds, rescheduling, visas, invoices, payment, class formats, or teacher matching — or type your own question.',ja:'こんにちは、TLIアシスタントです。返金、振替・キャンセル、ビザ、領収書、お支払い、受講形式、講師のマッチングなどについてお気軽にご質問ください。',de:'Hallo, ich bin der TLI-Assistent. Fragen Sie mich zu Rückerstattung, Terminverschiebung, Visum, Rechnung, Zahlung, Unterrichtsform oder Lehrer-Zuordnung – oder stellen Sie einfach Ihre eigene Frage.'}),
+    ai_thumbs_prompt: T('這有幫助嗎？',{en:'Was this helpful?',ja:'役に立ちましたか？',de:'War das hilfreich?'}),
+    ai_thumbs_thanks: T('感謝回饋',{en:'Thanks for your feedback',ja:'フィードバックありがとうございます',de:'Danke für Ihr Feedback'}),
+    ai_action_trial: T('預約試聽',{en:'Book a Trial',ja:'体験レッスン予約',de:'Probestunde buchen'}),
+    ai_action_contact: T('聯繫顧問',{en:'Contact an Advisor',ja:'アドバイザーに連絡',de:'Berater kontaktieren'}),
+    ai_repeat: T('剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？',{en:'As mentioned about “{chip}”: {short} Is there anything else you’d like to know?',ja:'先ほどの「{chip}」についてですが：{short}他にご質問はございますか？',de:'Wie bereits zu „{chip}“ erwähnt: {short} Gibt es noch etwas, das Sie wissen möchten?'}),
+    ai_fallback: T('這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。',{en:'Let me have an advisor follow up on this one — please leave your contact info and we’ll reach out within 1 business day.',ja:'こちらはアドバイザーより回答させていただきます。ご連絡先をご記入いただければ１営業日以内にご連絡いたします。',de:'Dazu lasse ich Sie am besten von einem Berater kontaktieren – bitte hinterlassen Sie Ihre Kontaktdaten, wir melden uns innerhalb eines Werktags.'}),
+    ai_escalate_user_msg: T('我想直接聯繫顧問',{en:'I’d like to speak with an advisor',ja:'アドバイザーと直接話したいです',de:'Ich möchte direkt mit einem Berater sprechen'}),
+    ai_form_name_ph: T('姓名',{en:'Name',ja:'お名前',de:'Name'}),
+    ai_form_contact_ph: T('Email 或 LINE ID',{en:'Email or LINE ID',ja:'メールアドレスまたはLINE ID',de:'E-Mail oder LINE-ID'}),
+    ai_form_submit: T('送出，請顧問聯繫我',{en:'Submit — have an advisor contact me',ja:'送信して連絡してもらう',de:'Absenden – Berater soll mich kontaktieren'}),
+    ai_live_btn: T('轉真人客服',{en:'Talk to a live agent',ja:'有人対応に切り替える',de:'Mit einem Mitarbeiter sprechen'}),
+    ai_live_queued: T('已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。',{en:'You’re in the queue — 1 person ahead of you. An agent will assist you as soon as they’re online.',ja:'ただいま順番待ちです（前に1名）。担当者がオンラインになり次第、すぐに対応いたします。',de:'Sie befinden sich in der Warteschlange – 1 Person vor Ihnen. Ein Mitarbeiter betreut Sie, sobald er online ist.'}),
+    ai_toast_fill_required: T('請填寫姓名與聯絡方式',{en:'Please fill in your name and contact info',ja:'お名前とご連絡先をご入力ください',de:'Bitte Name und Kontaktdaten angeben'}),
+    ai_ticket_created: T('已建立諮詢工單 #{ticket}',{en:'Consultation ticket #{ticket} has been created',ja:'お問い合わせチケット #{ticket} を作成しました',de:'Beratungsticket #{ticket} wurde erstellt'}),
+    ai_tl_assigned: T('已指派專責顧問（{advisor}）',{en:'Assigned to advisor: {advisor}',ja:'担当アドバイザー：{advisor}',de:'Zugewiesener Berater: {advisor}'}),
+    ai_tl_followup: T('顧問 1 個工作日內聯繫（{contact}）',{en:'Advisor will contact you within 1 business day via {contact}',ja:'1営業日以内に{contact}宛にご連絡いたします',de:'Der Berater meldet sich innerhalb eines Werktags über {contact}'}),
+    p07_toast_forgot_password: T('已送出，請至信箱查收密碼重設信',{en:'Sent — please check your inbox for the password reset email',ja:'送信しました。メールでパスワード再設定のご案内をご確認ください',de:'Gesendet — bitte prüfen Sie Ihren Posteingang für die E-Mail zum Zurücksetzen des Passworts'}),
+    p07_next_banner: T('登入後將回到：{target}',{en:'After signing in, you’ll return to: {target}',ja:'ログイン後は次のページに戻ります：{target}',de:'Nach der Anmeldung kehren Sie zurück zu: {target}'}),
+    p07_next_target_checkout: T('結帳頁',{en:'Checkout',ja:'決済ページ',de:'Kasse'}),
+    p07_next_target_myevents: T('我的活動',{en:'My Events',ja:'マイイベント',de:'Meine Veranstaltungen'}),
+    p07_next_target_generic: T('您稍早瀏覽的頁面',{en:'the page you were on',ja:'以前ご覧になっていたページ',de:'die Seite, die Sie zuvor angesehen haben'}),
+    p07_success_text_student: T('即將帶您前往會員區首頁，開始瀏覽課表與方案。',{en:'Taking you to your member home page, where you can browse your schedule and plans.',ja:'まもなく会員エリアのホームへ移動します。時間割やプランをご覧いただけます。',de:'Sie werden zu Ihrer Mitgliederstartseite weitergeleitet, wo Sie Ihren Stundenplan und Ihre Kurspläne einsehen können.'}),
+    p07_success_text_teacher: T('即將帶您前往教師端首頁，開始查看今日課表。',{en:'Taking you to your teacher dashboard, where you can view today’s schedule.',ja:'まもなく講師専用ページのホームへ移動します。本日の授業を確認できます。',de:'Sie werden zu Ihrem Lehrer-Dashboard weitergeleitet, wo Sie den heutigen Stundenplan einsehen können.'}),
+    p07_success_btn_student: T('進入會員區',{en:'Go to Member Area',ja:'会員エリアへ進む',de:'Zum Mitgliederbereich'}),
+    p07_success_btn_teacher: T('進入教師端',{en:'Go to Teacher Dashboard',ja:'講師専用ページへ進む',de:'Zum Lehrer-Dashboard'}),
+    p07_err_required: T('此欄位為必填',{en:'This field is required',ja:'この項目は必須です',de:'Dieses Feld ist erforderlich'}),
+    p07_err_email_format: T('請輸入正確的 Email 格式',{en:'Please enter a valid email address',ja:'正しいメールアドレスの形式で入力してください',de:'Bitte geben Sie eine gültige E-Mail-Adresse ein'}),
+    p07_err_phone: T('請輸入有效的手機號碼',{en:'Please enter a valid phone number',ja:'有効な電話番号を入力してください',de:'Bitte geben Sie eine gültige Telefonnummer ein'}),
+    p07_err_password_weak: T('密碼至少 8 碼，需包含英文字母與數字',{en:'Password must be at least 8 characters, including letters and numbers',ja:'パスワードは英数字を含む8文字以上で設定してください',de:'Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben sowie Zahlen enthalten'}),
+    p07_err_terms: T('請詳閱並勾選同意服務條款與個資告知',{en:'Please read and agree to the Terms of Service and Privacy Notice',ja:'利用規約とプライバシー告知に同意してください',de:'Bitte lesen Sie die Nutzungsbedingungen und den Datenschutzhinweis und stimmen Sie zu'})
+  };
 }
-function applyLang(lang){
-  window.TLI_CURRENT_LANG = lang;
-  document.documentElement.lang = ({'zh-TW':'zh-Hant','zh-CN':'zh-Hans','en':'en','ja':'ja','de':'de'})[lang] || 'zh-Hant';
-  var dict = tliDict();
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var key = el.getAttribute('data-i18n');
-    var v = dict[key];
-    if(v === undefined) return;
-    var attr = el.getAttribute('data-i18n-attr');
-    if(attr){
-      attr.split(',').forEach(function(a){ el.setAttribute(a.trim(), v); });
-    } else {
-      el.textContent = v;
-    }
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
-    var key = el.getAttribute('data-i18n-ph');
-    var v = dict[key];
-    if(v !== undefined) el.setAttribute('placeholder', v);
-  });
-  if(dict.meta_title) document.title = dict.meta_title;
-  if(dict.meta_description){
-    var m = document.querySelector('meta[name="description"]');
-    if(m) m.setAttribute('content', dict.meta_description);
-  }
-  var sel = document.querySelector('.lang-select');
-  if(sel) sel.value = lang;
-  if(lang!=='zh-TW' && lang!=='en' && lang!=='ja' && typeof showToast==='function'){
-    var __langNames={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+(__langNames[lang]||lang));
-  }
-  if(typeof onLangApplied === 'function') onLangApplied(lang);
-}
-function setLang(lang){
-  try{ localStorage.setItem(TLI_LANG_KEY, lang); }catch(e){}
-  applyLang(lang);
-}
-function initLang(){
-  var lang = 'zh-TW';
-  try{ lang = localStorage.getItem(TLI_LANG_KEY) || 'zh-TW'; }catch(e){}
-  applyLang(lang);
+function applyMetaDesc(){
+  /* <title> 在 <head> 裡，共用模組的 data-i18n 掃描只作用在 document.body，不會處理 <title>，需自行設定 */
+  document.title = T('TLI Connect｜登入／註冊', {en:'TLI Connect | Log In / Sign Up', ja:'TLI Connect｜ログイン／登録', de:'TLI Connect | Anmelden / Registrieren'});
+  var m = document.querySelector('meta[name="description"]');
+  if(m) m.setAttribute('content', T('TLI 會員登入與註冊：支援 Email／Google／LINE 登入，註冊填寫基本資料與學習目標。', {en:'TLI member login and registration: sign in with Email, Google, or LINE, and register with your basic details and learning goals.', ja:'TLI会員のログインと登録。Email／Google／LINEでのログインに対応、登録時は基本情報と学習目標をご入力いただけます。', de:'TLI Mitgliederanmeldung und -registrierung: Anmeldung per E-Mail, Google oder LINE; bei der Registrierung geben Sie Ihre Grunddaten und Lernziele an.'}));
 }
 
-/* ===================== i18n：共用字典 I18N_COMMON ===================== */
-var I18N_COMMON = {
-'zh-TW': {
-  nav_courses: '課程', nav_events: '活動', nav_teachers: '師資', nav_about: '品牌與校區', nav_faq: '常見問題',
-  btn_consult: '預約諮詢', btn_trial: '預約試聽', btn_login: '登入',
-  menu_toggle_aria: '開啟選單', lang_select_aria: '語言切換',
-  footer_brand_name: 'TLI 中華語文研習所',
-  footer_brand_line1: '1956 年創立於美國紐澤西，同年於台北建校',
-  footer_brand_line2: '1976 年教育部核定校名為「中華語文研習所」',
-  footer_col_courses: '課程', footer_link_chinese: '中文課程', footer_link_foreign: '外語課程',
-  footer_link_events: '線上活動', footer_link_teachers: '師資介紹',
-  footer_col_about: '關於 TLI', footer_link_history: '品牌沿革', footer_link_locations: '四校地址', footer_link_faq: '常見問題',
-  footer_col_start: '開始學習', footer_link_trial: '免費試聽', footer_link_login: '會員登入／註冊',
-  footer_copyright: '© 2026 TLI 中華語文研習所．保留所有權利。',
-  ai_fab_label: '線上諮詢', ai_fab_aria: '開啟線上諮詢',
-  ai_title: 'TLI 小幫手', ai_status: '線上・通常 1 分鐘內回覆',
-  ai_minimize_aria: '最小化', ai_close_aria: '關閉',
-  ai_input_placeholder: '輸入您的問題…', ai_input_aria: '輸入問題', ai_send: '送出',
-  ai_disclaimer: '回覆由 AI 產生，重要事項請以顧問確認為準',
-  ai_chip_trial: '試聽怎麼預約',
-  ai_greeting_default: '您好，我是 TLI 小幫手，歡迎詢問退費、請假改期、簽證、發票、付款、上課方式或老師配對等問題，也可以直接輸入您的問題。',
-  ai_thumbs_prompt: '這有幫助嗎？', ai_thumbs_thanks: '感謝回饋',
-  ai_action_trial: '預約試聽', ai_action_contact: '聯繫顧問',
-  ai_repeat: '剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？',
-  ai_fallback: '這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。',
-  ai_escalate_user_msg: '我想直接聯繫顧問',
-  ai_form_name_ph: '姓名', ai_form_contact_ph: 'Email 或 LINE ID',
-  ai_form_submit: '送出，請顧問聯繫我', ai_live_btn: '轉真人客服',
-  ai_live_queued: '已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。',
-  ai_toast_fill_required: '請填寫姓名與聯絡方式',
-  ai_ticket_created: '已建立諮詢工單 #{ticket}',
-  ai_tl_assigned: '已指派專責顧問（{advisor}）',
-  ai_tl_followup: '顧問 1 個工作日內聯繫（{contact}）'
-},
-en: {
-  nav_courses: 'Courses', nav_events: 'Events', nav_teachers: 'Teachers', nav_about: 'About & Locations', nav_faq: 'FAQ',
-  btn_consult: 'Book Consultation', btn_trial: 'Free Trial', btn_login: 'Log in',
-  menu_toggle_aria: 'Open menu', lang_select_aria: 'Language',
-  footer_brand_name: 'TLI - Taipei Language Institute',
-  footer_brand_line1: 'Founded in New Jersey, USA in 1956; the Taipei campus opened the same year',
-  footer_brand_line2: 'Renamed "Taipei Language Institute" by Taiwan’s Ministry of Education in 1976',
-  footer_col_courses: 'Courses', footer_link_chinese: 'Chinese Courses', footer_link_foreign: 'Foreign Language Courses',
-  footer_link_events: 'Online Events', footer_link_teachers: 'Our Teachers',
-  footer_col_about: 'About TLI', footer_link_history: 'Our History', footer_link_locations: 'Campus Locations', footer_link_faq: 'FAQ',
-  footer_col_start: 'Get Started', footer_link_trial: 'Free Trial', footer_link_login: 'Member Login / Sign Up',
-  footer_copyright: '© 2026 TLI - Taipei Language Institute. All rights reserved.',
-  ai_fab_label: 'Chat with us', ai_fab_aria: 'Open live chat',
-  ai_title: 'TLI Assistant', ai_status: 'Online · Usually replies within 1 min',
-  ai_minimize_aria: 'Minimize', ai_close_aria: 'Close',
-  ai_input_placeholder: 'Type your question…', ai_input_aria: 'Type a question', ai_send: 'Send',
-  ai_disclaimer: 'Replies are AI-generated; please confirm important details with an advisor',
-  ai_chip_trial: 'How to book a trial',
-  ai_greeting_default: 'Hi, I’m the TLI Assistant. Ask me about refunds, rescheduling, visas, invoices, payment, class formats, or teacher matching — or type your own question.',
-  ai_thumbs_prompt: 'Was this helpful?', ai_thumbs_thanks: 'Thanks for your feedback',
-  ai_action_trial: 'Book a Trial', ai_action_contact: 'Contact an Advisor',
-  ai_repeat: 'As mentioned about “{chip}”: {short} Is there anything else you’d like to know?',
-  ai_fallback: 'Let me have an advisor follow up on this one — please leave your contact info and we’ll reach out within 1 business day.',
-  ai_escalate_user_msg: 'I’d like to speak with an advisor',
-  ai_form_name_ph: 'Name', ai_form_contact_ph: 'Email or LINE ID',
-  ai_form_submit: 'Submit — have an advisor contact me', ai_live_btn: 'Talk to a live agent',
-  ai_live_queued: 'You’re in the queue — 1 person ahead of you. An agent will assist you as soon as they’re online.',
-  ai_toast_fill_required: 'Please fill in your name and contact info',
-  ai_ticket_created: 'Consultation ticket #{ticket} has been created',
-  ai_tl_assigned: 'Assigned to advisor: {advisor}',
-  ai_tl_followup: 'Advisor will contact you within 1 business day via {contact}'
-},
-ja: {
-  nav_courses: 'コース', nav_events: 'イベント', nav_teachers: '講師陣', nav_about: '沿革と校舎', nav_faq: 'よくある質問',
-  btn_consult: '相談予約', btn_trial: '無料体験', btn_login: 'ログイン',
-  menu_toggle_aria: 'メニューを開く', lang_select_aria: '言語切替',
-  footer_brand_name: 'TLI（台北語文学院）',
-  footer_brand_line1: '1956年に米国ニュージャージーで創立、同年台北校を開校',
-  footer_brand_line2: '1976年、台湾教育部により「中華語文研習所」に改称認可',
-  footer_col_courses: 'コース', footer_link_chinese: '中国語コース', footer_link_foreign: '外国語コース',
-  footer_link_events: 'オンラインイベント', footer_link_teachers: '講師紹介',
-  footer_col_about: 'TLIについて', footer_link_history: '沿革', footer_link_locations: '校舎所在地', footer_link_faq: 'よくある質問',
-  footer_col_start: '学習を始める', footer_link_trial: '無料体験', footer_link_login: '会員ログイン／登録',
-  footer_copyright: '© 2026 TLI（台北語文学院） All rights reserved.',
-  ai_fab_label: 'オンライン相談', ai_fab_aria: 'オンライン相談を開く',
-  ai_title: 'TLIアシスタント', ai_status: 'オンライン・通常1分以内に返信',
-  ai_minimize_aria: '最小化', ai_close_aria: '閉じる',
-  ai_input_placeholder: 'ご質問を入力してください…', ai_input_aria: '質問を入力', ai_send: '送信',
-  ai_disclaimer: '回答はAIによる自動生成です。重要事項は必ずアドバイザーにご確認ください',
-  ai_chip_trial: '体験レッスンの予約方法',
-  ai_greeting_default: 'こんにちは、TLIアシスタントです。返金、振替・キャンセル、ビザ、領収書、お支払い、受講形式、講師のマッチングなどについてお気軽にご質問ください。',
-  ai_thumbs_prompt: '役に立ちましたか？', ai_thumbs_thanks: 'フィードバックありがとうございます',
-  ai_action_trial: '体験レッスン予約', ai_action_contact: 'アドバイザーに連絡',
-  ai_repeat: '先ほどの「{chip}」についてですが：{short}他にご質問はございますか？',
-  ai_fallback: 'こちらはアドバイザーより回答させていただきます。ご連絡先をご記入いただければ1営業日以内にご連絡いたします。',
-  ai_escalate_user_msg: 'アドバイザーと直接話したいです',
-  ai_form_name_ph: 'お名前', ai_form_contact_ph: 'メールアドレスまたはLINE ID',
-  ai_form_submit: '送信して連絡してもらう', ai_live_btn: '有人対応に切り替える',
-  ai_live_queued: 'ただいま順番待ちです（前に1名）。担当者がオンラインになり次第、すぐに対応いたします。',
-  ai_toast_fill_required: 'お名前とご連絡先をご入力ください',
-  ai_ticket_created: 'お問い合わせチケット #{ticket} を作成しました',
-  ai_tl_assigned: '担当アドバイザー：{advisor}',
-  ai_tl_followup: '1営業日以内に{contact}宛にご連絡いたします'
+/* ===================== i18n：AI 問答庫（五語，函式化以支援語言切換即時重算；內容與 p01_home.html 共用同一份 FAQ） ===================== */
+function getKB(){
+  return [
+    {id:'refund', chip:T('退費',{en:'Refunds',ja:'返金',de:'Rückerstattung'}), q:T('如何申請退費？',{en:'How do I request a refund?',ja:'返金の申請方法は？',de:'Wie beantrage ich eine Rückerstattung?'}), a:T('課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。',{en:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.',ja:'開謖14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。',de:'Bei Antrag mindestens 14 Tage vor Kursbeginn erhalten Sie eine vollständige Rückerstattung. Nach Kursbeginn wird der erstattungsfähige Betrag anhand der bereits absolvierten Unterrichtseinheiten und der Vertragsbedingungen berechnet — bitte wenden Sie sich dazu an Ihren zuständigen Berater.'}), short:T('開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。',{en:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.',ja:'開謖14日前までなら全額返金、開講後は受講済み回数に応じて算出します。',de:'Vollständige Rückerstattung bei Antrag 14+ Tage vor Kursbeginn; danach richtet sich der Betrag nach den bereits absolvierten Einheiten.'})},
+    {id:'reschedule', chip:T('請假改期',{en:'Rescheduling',ja:'振替・キャンセル',de:'Terminverschiebung'}), q:T('臨時無法上課，可以退堂或改期嗎？',{en:'Can I cancel or reschedule a class on short notice?',ja:'急に受講できなくなった場合、キャンセルや振替はできますか？',de:'Kann ich eine Unterrichtsstunde kurzfristig absagen oder verschieben?'}), a:T('請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。',{en:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.',ja:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。',de:'Bitte sagen Sie mindestens 12 Stunden vor dem geplanten Unterricht ab oder verschieben Sie ihn. Anfragen nach Ablauf dieser Frist gelten als abgehaltene Stunde, ohne Nachholtermin oder Rückerstattung.'}), short:T('上課前 12 小時可申請改期或退堂，逾時視同已上課。',{en:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.',ja:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。',de:'Absage oder Verschiebung bis 12 Stunden vor Unterrichtsbeginn möglich; danach gilt die Stunde als abgehalten.'})},
+    {id:'visa', chip:T('簽證',{en:'Student Visa',ja:'学生ビザ',de:'Studentenvisum'}), q:T('上課時數與簽證申請有什麼關係？',{en:'How do class hours relate to visa applications?',ja:'授業時間数はビザ申請にどう関係しますか？',de:'Welchen Einfluss haben die Unterrichtsstunden auf die Visumbeantragung?'}), a:T('台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。',{en:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.',ja:'台湾キャンパスの学期制コースで週１５時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。',de:'Semesterkurse an unseren Taiwan-Standorten mit mindestens 15 Unterrichtsstunden pro Woche erfüllen die Anwesenheitsvoraussetzung für die Beantragung eines Studentenvisums. Den genauen Ablauf und die erforderlichen Unterlagen bestätigt Ihnen bitte Ihr Campus-Berater.'}), short:T('週時數達 15 小時的學期班即符合學生簽證申請條件。',{en:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.',ja:'週１５時間以上の学期制コースは学生ビザの出席条件を満たします。',de:'Semesterkurse mit mindestens 15 Wochenstunden erfüllen die Anwesenheitsvoraussetzung für das Studentenvisum.'})},
+    {id:'invoice', chip:T('發票',{en:'Invoices',ja:'領収書',de:'Rechnungen'}), q:T('會開立發票嗎？',{en:'Will I receive an invoice or receipt?',ja:'領収書は発行されますか？',de:'Erhalte ich eine Rechnung oder Quittung?'}), a:T('是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。',{en:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.',ja:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。',de:'Ja — nach vollständiger Zahlung wird eine offizielle Rechnung ausgestellt. Firmenkunden mit Gruppenkursen können eine monatliche Sammelrechnung beantragen; Einzelkurse werden nach Abschluss der Bestellung in Rechnung gestellt.'}), short:T('付款完成後會開立發票，企業包班可申請月結。',{en:'An invoice is issued after payment; corporate clients can request monthly billing.',ja:'お支払い後に領収書を発行、法人は月締め請求も可能です。',de:'Die Rechnung wird nach der Zahlung ausgestellt; Firmenkunden können eine monatliche Sammelrechnung beantragen.'})},
+    {id:'payment', chip:T('付款方式',{en:'Payment Options',ja:'お支払い方法',de:'Zahlungsmöglichkeiten'}), q:T('有哪些付款方式？',{en:'What payment methods are available?',ja:'どのようなお支払い方法がありますか？',de:'Welche Zahlungsmöglichkeiten gibt es?'}), a:T('提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。',{en:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.',ja:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。',de:'Wir bieten Zahlung in voller Höhe, Anzahlung + Restbetrag oder Ratenzahlung an. Die genauen Optionen richten sich nach Ihrem Kursplan und den mit Ihrem Berater bestätigten Bestellbedingungen.'}), short:T('可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。',{en:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.',ja:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。',de:'Wahlweise volle Zahlung, Anzahlung + Restbetrag oder Ratenzahlung, gemäß dem mit dem Berater bestätigten Plan.'})},
+    {id:'format', chip:T('上課方式',{en:'Class Formats',ja:'受講形式',de:'Unterrichtsformen'}), q:T('一對一與彈性團體直播差在哪？',{en:'What’s the difference between 1-on-1 and flexible group livestream classes?',ja:'一対一とグループライブ配信の違いは何ですか？',de:'Was ist der Unterschied zwischen 1:1-Unterricht und flexiblem Gruppen-Livestream?'}), a:T('一對一線上課是預約制，你提出方便的時段，由顧問安排老師；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。',{en:'1-on-1 online classes are booking-based — you submit your available times and our advisor arranges a teacher for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.',ja:'一対一のオンライン授業は予約制で、ご都合の良い時間帯をお伝えいただければ、アドバイザーが講師を手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。',de:'Der 1:1-Online-Unterricht basiert auf Terminvereinbarung — Sie teilen uns Ihre verfügbaren Zeiten mit, und unser Berater stellt Ihnen eine Lehrkraft zusammen. Der flexible Gruppen-Livestream findet zu festen Zeiten statt; Sie melden sich einfach an und nehmen teil. Er ist in der Regel günstiger, und falls in diesem Zeitraum eine Aufzeichnung angeboten wird, können Sie eine verpasste Live-Sitzung nachholen.'}), short:T('一對一是預約制、由顧問安排老師與時段；團體直播是固定時段、費用較划算。',{en:'1-on-1 is booking-based — our advisor arranges the teacher and time based on your availability; group livestream runs on a fixed schedule and costs less.',ja:'一対一は予約制でアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。',de:'1:1 basiert auf Terminvereinbarung — unser Berater stellt Lehrkraft und Zeit nach Ihrer Verfügbarkeit zusammen; der Gruppen-Livestream läuft nach festem Zeitplan und kostet weniger.'})},
+    {id:'classroom', chip:T('線上教室',{en:'Online Classroom',ja:'オンライン教室',de:'Online-Klassenzimmer'}), q:T('線上教室怎麼進入？連結會不會外流？',{en:'How do I join the online classroom? Could the link leak to others?',ja:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？',de:'Wie betrete ich das Online-Klassenzimmer? Könnte der Link an andere weitergegeben werden?'}), a:T('上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。',{en:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.',ja:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。',de:'Loggen Sie sich vor dem Unterricht im Mitgliederbereich ein — nach der Identitätsprüfung schaltet die Schaltfläche „Klassenzimmer betreten“ einen Link mit einem Klick zu Ihrer persönlichen Zoom-Sitzung frei. Jede Stunde nutzt ein eigenes Meeting, und Ihre Lehrkraft lässt Sie aus dem Warteraum herein — es gibt also keinen weiterleitbaren Link, der durchsickern könnte.'}), short:T('登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。',{en:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.',ja:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。',de:'Nach dem Login erhalten Sie einen Link zu Ihrer persönlichen Zoom-Sitzung; Ihre Lehrkraft lässt Sie aus dem Warteraum herein.'})},
+    {id:'pricing', chip:T('價格與報價',{en:'Pricing',ja:'料金・見積り',de:'Preise & Angebote'}), q:T('課程費用怎麼估算？',{en:'How is the course fee calculated?',ja:'コース料金はどのように算出されますか？',de:'Wie wird die Kursgebühr berechnet?'}), a:T('費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。',{en:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.',ja:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。',de:'Der Preis richtet sich nach der Sprache, der Unterrichtsform (1:1 oder Gruppe) und der Anzahl der Unterrichtseinheiten. Teilen Sie uns Ihre Lernziele und Ihren Zeitrahmen mit, und ein Berater erstellt Ihnen ein Angebot — oder Sie klären den Preis direkt bei der Buchung einer Probestunde.'}), short:T('費用依語言、上課方式與堂數而定，可請顧問提供試算報價。',{en:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.',ja:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。',de:'Der Preis hängt von Sprache, Unterrichtsform und Stundenzahl ab — fragen Sie Ihren Berater nach einem Angebot.'})},
+    {id:'trial', chip:T('試聽',{en:'Trial Class',ja:'体験レッスン',de:'Probestunde'}), q:T('可以先試聽嗎？',{en:'Can I try a class before signing up?',ja:'事前に体験レッスンを受けられますか？',de:'Kann ich vor der Anmeldung eine Probestunde nehmen?'}), a:T('可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。',{en:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.',ja:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。',de:'Ja — wir bieten eine kostenlose Probestunde an. Ihr Berater ordnet Ihnen passend zu Niveau und Zielen eine geeignete Lehrkraft und einen Termin zu, sodass Sie sich nach dem Ausprobieren entscheiden können.'}), short:T('提供免費試聽，顧問會依程度與目標安排合適老師與時段。',{en:'A free trial is available, matched to your level and goals before you commit.',ja:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。',de:'Eine kostenlose Probestunde wird passend zu Niveau und Zielen angeboten, bevor Sie sich festlegen.'})},
+    {id:'teacher', chip:T('老師配對',{en:'Teacher Matching',ja:'講師のマッチング',de:'Lehrer-Zuordnung'}), q:T('老師怎麼配對？',{en:'How are teachers matched to students?',ja:'講師はどのようにマッチングされますか？',de:'Wie werden Lehrkräfte den Lernenden zugeordnet?'}), a:T('顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。',{en:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.',ja:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。',de:'Ihr Berater ordnet Ihnen anhand von Sprache, Niveau und Zielen eine zertifizierte Lehrkraft zu. Falls es nach Unterrichtsbeginn nicht passt, können Sie einen Wechsel beantragen.'}), short:T('依語言、程度與目標配對合適老師，開課後不合適可申請更換。',{en:'Matched to a certified teacher by language, level, and goals; you can request a change later.',ja:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。',de:'Zuordnung zu einer zertifizierten Lehrkraft nach Sprache, Niveau und Zielen; ein Wechsel kann später beantragt werden.'})}
+  ];
 }
-};
-
-/* ===================== i18n：本頁專屬字典 I18N_PAGE（p07 登入／註冊） ===================== */
-var I18N_PAGE = {
-'zh-TW': {
-  meta_title: 'TLI Connect｜登入／註冊',
-  meta_description: 'TLI 會員登入與註冊：支援 Email／Google／LINE 登入，註冊填寫基本資料與學習目標。',
-  p07_role_student: '我是學生', p07_role_teacher: '我是老師',
-  p07_tab_login: '登入', p07_tab_register: '註冊',
-  p07_social_google_login: '使用 Google 繼續', p07_social_line_login: '使用 LINE 繼續',
-  p07_divider_email_login: '或使用 Email 登入',
-  p07_social_google_register: '使用 Google 註冊', p07_social_line_register: '使用 LINE 註冊',
-  p07_divider_email_register: '或使用 Email 註冊',
-  p07_label_email: 'Email', p07_ph_email: '請輸入 Email',
-  p07_label_password: '密碼', p07_ph_password: '請輸入密碼', p07_ph_password_set: '請設定密碼',
-  p07_label_name: '姓名', p07_ph_name: '請輸入姓名',
-  p07_label_phone: '手機', p07_ph_phone: '請輸入手機號碼', p07_phone_optional: '（選填）',
-  p07_phone_hint: '填了我們才能在課前臨時異動時用 WhatsApp／LINE 通知你；不填不影響上課。',
-  p07_refcode_have: '有推薦代碼？', p07_refcode_ph: '如：REF-SEA07', p07_refcode_apply: '套用',
-  p07_label_goal: '學習目標',
-  p07_goal_placeholder: '請選擇主要學習目標',
-  p07_goal_daily: '生活會話', p07_goal_business: '商用／職場溝通',
-  p07_goal_exam: '檢定考試準備（如 TOCFL／HSK／TOEIC）',
-  p07_goal_visa: '簽證所需上課證明', p07_goal_other: '其他',
-  p07_label_refcode: '推薦代碼', p07_refcode_clear: '清除', p07_refcode_note: '',
-  p07_forgot_password: '忘記密碼？',
-  p07_toast_forgot_password: '已送出，請至信箱查收密碼重設信',
-  p07_btn_submit_login: '登入', p07_btn_submit_register: '完成註冊',
-  p07_switch_to_register_text: '還沒有帳號？', p07_switch_to_register_link: '立即註冊',
-  p07_switch_to_login_text: '已經有帳號？', p07_switch_to_login_link: '前往登入',
-  p07_teacher_note: '老師帳號由 TLI 後台統一建立，如需申請請洽管理單位，暫不開放老師自行註冊。',
-  p07_success_title: '登入成功',
-  p07_success_text_student: '即將帶您前往會員區首頁，開始瀏覽課表與方案。',
-  p07_success_text_teacher: '即將帶您前往教師端首頁，開始查看今日課表。',
-  p07_success_btn_student: '進入會員區', p07_success_btn_teacher: '進入教師端',
-  p07_staff_login_link: '後台人員登入',
-  p07_required_note: '為必填欄位',
-  p07_err_required: '此欄位為必填',
-  p07_err_email_format: '請輸入正確的 Email 格式',
-  p07_err_phone: '請輸入有效的手機號碼',
-  p07_err_password_weak: '密碼至少 8 碼，需包含英文字母與數字',
-  p07_err_terms: '請詳閱並勾選同意服務條款與個資告知',
-  p07_email_dup_msg: '此 Email 已有帳號，請直接登入',
-  p07_email_dup_gotologin: '前往登入',
-  p07_email_helper: 'Email 是你的帳號，之後登入與通知都用它',
-  p07_password_hint: '至少 8 碼，需包含英文字母與數字',
-  p07_label_timezone: '所在時區',
-  p07_label_nativelang: '母語／介面語言',
-  p07_phone_cc_aria: '國碼',
-  p07_close_aria: '關閉',
-  p07_terms_pre: '我已閱讀並同意',
-  p07_terms_link: '服務條款與個資蒐集告知',
-  p07_terms_modal_title: '服務條款與個資蒐集告知',
-  p07_terms_h1: '服務條款',
-  p07_terms_p1: '本平台提供語言課程預約、學習紀錄與繳費服務，會員應提供正確且最新的個人資料，並妥善保管帳號密碼。',
-  p07_terms_h2: '個人資料蒐集與利用告知',
-  p07_terms_p2: '我們蒐集之姓名、Email、時區等資料，僅用於課程安排、帳號驗證與必要通知；手機為選填，若您提供，僅用於課前異動的即時聯繫。以上資料不會提供第三方行銷使用。',
-  p07_terms_p3: '正式條款以 TLI 官方公告版本為準。',
-  p07_terms_close_btn: '我已閱讀',
-  p07_social_step_title: '補齊必要資訊',
-  p07_social_step_sub: '已從社群帳號取得姓名與 Email，請完成以下必填資訊即可完成註冊。',
-  p07_social_back_link: '返回，改用 Email 註冊',
-  p07_next_banner: '登入後將回到：{target}',
-  p07_next_target_checkout: '結帳頁',
-  p07_next_target_myevents: '我的活動',
-  p07_next_target_generic: '您稍早瀏覽的頁面'
-},
-en: {
-  meta_title: 'TLI Connect | Log In / Sign Up',
-  meta_description: 'TLI member login and registration: sign in with Email, Google, or LINE, and register with your basic details and learning goals.',
-  p07_role_student: 'I’m a Student', p07_role_teacher: 'I’m a Teacher',
-  p07_tab_login: 'Log In', p07_tab_register: 'Sign Up',
-  p07_social_google_login: 'Continue with Google', p07_social_line_login: 'Continue with LINE',
-  p07_divider_email_login: 'or log in with Email',
-  p07_social_google_register: 'Sign up with Google', p07_social_line_register: 'Sign up with LINE',
-  p07_divider_email_register: 'or sign up with Email',
-  p07_label_email: 'Email', p07_ph_email: 'Enter your email',
-  p07_label_password: 'Password', p07_ph_password: 'Enter your password', p07_ph_password_set: 'Set a password',
-  p07_label_name: 'Name', p07_ph_name: 'Enter your name',
-  p07_label_phone: 'Phone', p07_ph_phone: 'Enter your phone number', p07_phone_optional: '(optional)',
-  p07_phone_hint: 'Optional — we use it only to reach you on WhatsApp/LINE about last-minute class changes.',
-  p07_refcode_have: 'Have a referral code?', p07_refcode_ph: 'e.g. REF-SEA07', p07_refcode_apply: 'Apply',
-  p07_label_goal: 'Learning Goal',
-  p07_goal_placeholder: 'Select your main learning goal',
-  p07_goal_daily: 'Everyday Conversation', p07_goal_business: 'Business / Workplace Communication',
-  p07_goal_exam: 'Test Prep (e.g. TOCFL / HSK / TOEIC)',
-  p07_goal_visa: 'Attendance Proof for Visa', p07_goal_other: 'Other',
-  p07_label_refcode: 'Referral Code', p07_refcode_clear: 'Clear', p07_refcode_note: '',
-  p07_forgot_password: 'Forgot your password?',
-  p07_toast_forgot_password: 'Sent — please check your inbox for the password reset email',
-  p07_btn_submit_login: 'Log In', p07_btn_submit_register: 'Complete Sign Up',
-  p07_switch_to_register_text: 'Don’t have an account? ', p07_switch_to_register_link: 'Sign up now',
-  p07_switch_to_login_text: 'Already have an account? ', p07_switch_to_login_link: 'Log in',
-  p07_teacher_note: 'Teacher accounts are created by TLI staff. If you need one, please contact the administration — self-registration for teachers isn’t available yet.',
-  p07_success_title: 'Login Successful',
-  p07_success_text_student: 'Taking you to your member home page, where you can browse your schedule and plans.',
-  p07_success_text_teacher: 'Taking you to your teacher dashboard, where you can view today’s schedule.',
-  p07_success_btn_student: 'Go to Member Area', p07_success_btn_teacher: 'Go to Teacher Dashboard',
-  p07_staff_login_link: 'Staff login',
-  p07_required_note: 'Required field',
-  p07_err_required: 'This field is required',
-  p07_err_email_format: 'Please enter a valid email address',
-  p07_err_phone: 'Please enter a valid phone number',
-  p07_err_password_weak: 'Password must be at least 8 characters, including letters and numbers',
-  p07_err_terms: 'Please read and agree to the Terms of Service and Privacy Notice',
-  p07_email_dup_msg: 'This email already has an account — please log in instead',
-  p07_email_dup_gotologin: 'Go to Log In',
-  p07_email_helper: 'Your email is your account — you’ll use it to log in and receive notifications',
-  p07_password_hint: 'At least 8 characters, including letters and numbers',
-  p07_label_timezone: 'Time Zone',
-  p07_label_nativelang: 'Native Language / Interface Language',
-  p07_phone_cc_aria: 'Country code',
-  p07_close_aria: 'Close',
-  p07_terms_pre: 'I have read and agree to the',
-  p07_terms_link: 'Terms of Service and Privacy Notice',
-  p07_terms_modal_title: 'Terms of Service and Privacy Notice',
-  p07_terms_h1: 'Terms of Service',
-  p07_terms_p1: 'This platform provides course booking, learning records, and payment services. Members must provide accurate, up-to-date personal information and keep their account credentials secure.',
-  p07_terms_h2: 'Personal Data Collection and Use Notice',
-  p07_terms_p2: 'The name, email, and time zone we collect are used only for course scheduling, account verification, and essential notifications. A phone number is optional; if you provide one, it is used only to reach you about last-minute class changes. None of this is shared for third-party marketing.',
-  p07_terms_p3: 'The official terms are those published by TLI.',
-  p07_terms_close_btn: 'Got it',
-  p07_social_step_title: 'Complete Your Information',
-  p07_social_step_sub: 'We’ve pulled your name and email from your social account. Complete the required fields below to finish signing up.',
-  p07_social_back_link: 'Back — sign up with email instead',
-  p07_next_banner: 'After signing in, you’ll return to: {target}',
-  p07_next_target_checkout: 'Checkout',
-  p07_next_target_myevents: 'My Events',
-  p07_next_target_generic: 'the page you were on'
-},
-ja: {
-  meta_title: 'TLI Connect｜ログイン／登録',
-  meta_description: 'TLI会員のログインと登録。Email／Google／LINEでのログインに対応、登録時は基本情報と学習目標をご入力いただけます。',
-  p07_role_student: '学生です', p07_role_teacher: '講師です',
-  p07_tab_login: 'ログイン', p07_tab_register: '登録',
-  p07_social_google_login: 'Googleで続ける', p07_social_line_login: 'LINEで続ける',
-  p07_divider_email_login: 'またはEmailでログイン',
-  p07_social_google_register: 'Googleで登録', p07_social_line_register: 'LINEで登録',
-  p07_divider_email_register: 'またはEmailで登録',
-  p07_label_email: 'Email', p07_ph_email: 'Emailを入力してください',
-  p07_label_password: 'パスワード', p07_ph_password: 'パスワードを入力してください', p07_ph_password_set: 'パスワードを設定してください',
-  p07_label_name: 'お名前', p07_ph_name: 'お名前を入力してください',
-  p07_label_phone: '電話番号', p07_ph_phone: '電話番号を入力してください', p07_phone_optional: '（任意）',
-  p07_phone_hint: '直前の授業変更をWhatsApp／LINEでお知らせする場合にのみ使用します。',
-  p07_refcode_have: '紹介コードをお持ちですか？', p07_refcode_ph: '例：REF-SEA07', p07_refcode_apply: '適用',
-  p07_label_goal: '学習目標',
-  p07_goal_placeholder: '主な学習目標を選択してください',
-  p07_goal_daily: '日常会話', p07_goal_business: 'ビジネス／職場でのコミュニケーション',
-  p07_goal_exam: '検定試験対策（TOCFL／HSK／TOEICなど）',
-  p07_goal_visa: 'ビザ申請に必要な出席証明', p07_goal_other: 'その他',
-  p07_label_refcode: '紹介コード', p07_refcode_clear: 'クリア', p07_refcode_note: '',
-  p07_forgot_password: 'パスワードをお忘れですか？',
-  p07_toast_forgot_password: '送信しました。メールでパスワード再設定のご案内をご確認ください',
-  p07_btn_submit_login: 'ログイン', p07_btn_submit_register: '登録を完了する',
-  p07_switch_to_register_text: 'アカウントをお持ちでない方は', p07_switch_to_register_link: '今すぐ登録',
-  p07_switch_to_login_text: 'すでにアカウントをお持ちの方は', p07_switch_to_login_link: 'ログインへ',
-  p07_teacher_note: '講師アカウントはTLI事務局が一括で作成いたします。ご希望の方は管理部門までお問い合わせください。現在、講師の自己登録は受け付けておりません。',
-  p07_success_title: 'ログインに成功しました',
-  p07_success_text_student: 'まもなく会員エリアのホームへ移動します。時間割やプランをご覧いただけます。',
-  p07_success_text_teacher: 'まもなく講師専用ページのホームへ移動します。本日の授業を確認できます。',
-  p07_success_btn_student: '会員エリアへ進む', p07_success_btn_teacher: '講師専用ページへ進む',
-  p07_staff_login_link: 'スタッフログイン',
-  p07_required_note: '必須項目です',
-  p07_err_required: 'この項目は必須です',
-  p07_err_email_format: '正しいメールアドレスの形式で入力してください',
-  p07_err_phone: '有効な電話番号を入力してください',
-  p07_err_password_weak: 'パスワードは英数字を含む8文字以上で設定してください',
-  p07_err_terms: '利用規約とプライバシー告知に同意してください',
-  p07_email_dup_msg: 'このメールアドレスは登録済みです。ログインしてください',
-  p07_email_dup_gotologin: 'ログインへ',
-  p07_email_helper: 'メールアドレスはアカウントIDです。ログインや通知に使用します',
-  p07_password_hint: '英数字を含む8文字以上',
-  p07_label_timezone: 'タイムゾーン',
-  p07_label_nativelang: '母語／表示言語',
-  p07_phone_cc_aria: '国番号',
-  p07_close_aria: '閉じる',
-  p07_terms_pre: '以下の内容を読み、同意します：',
-  p07_terms_link: '利用規約とプライバシー告知',
-  p07_terms_modal_title: '利用規約とプライバシー告知',
-  p07_terms_h1: '利用規約',
-  p07_terms_p1: '本プラットフォームは語学コースの予約、学習記録、お支払いサービスを提供します。会員は正確かつ最新の個人情報をご提供いただき、アカウント情報を適切に管理してください。',
-  p07_terms_h2: '個人情報の収集・利用に関する告知',
-  p07_terms_p2: '収集した氏名・メール・電話番号・タイムゾーンなどの情報は、授業手配、本人確認、必要な通知にのみ使用し、第三者のマーケティングには使用しません。',
-  p07_terms_p3: '正式な規約はTLI公式発表版をご確認ください。',
-  p07_terms_close_btn: '確認しました',
-  p07_social_step_title: '必須情報を入力してください',
-  p07_social_step_sub: 'ソーシャルアカウントから氏名とメールアドレスを取得しました。以下の必須項目を入力すると登録が完了します。',
-  p07_social_back_link: '戻ってメールで登録する',
-  p07_next_banner: 'ログイン後は次のページに戻ります：{target}',
-  p07_next_target_checkout: '決済ページ',
-  p07_next_target_myevents: 'マイイベント',
-  p07_next_target_generic: '以前ご覧になっていたページ'
-}
-};
-
-/* ===================== i18n：AI 問答庫（三語，段落 C） ===================== */
-var TLI_KB_I18N = {
-'zh-TW': [
-  {id:'refund', chip:'退費', q:'如何申請退費？', a:'課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。', short:'開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。'},
-  {id:'reschedule', chip:'請假改期', q:'臨時無法上課，可以退堂或改期嗎？', a:'請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。', short:'上課前 12 小時可申請改期或退堂，逾時視同已上課。'},
-  {id:'visa', chip:'簽證', q:'上課時數與簽證申請有什麼關係？', a:'台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。', short:'週時數達 15 小時的學期班即符合學生簽證申請條件。'},
-  {id:'invoice', chip:'發票', q:'會開立發票嗎？', a:'是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。', short:'付款完成後會開立發票，企業包班可申請月結。'},
-  {id:'payment', chip:'付款方式', q:'有哪些付款方式？', a:'提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。', short:'可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。'},
-  {id:'format', chip:'上課方式', q:'一對一與彈性團體直播差在哪？', a:'一對一線上課是預約制，你提出方便的時段，由顧問安排老師；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。', short:'一對一是預約制、由顧問安排老師與時段；團體直播是固定時段、費用較划算。'},
-  {id:'classroom', chip:'線上教室', q:'線上教室怎麼進入？連結會不會外流？', a:'上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。', short:'登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。'},
-  {id:'pricing', chip:'價格與報價', q:'課程費用怎麼估算？', a:'費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。', short:'費用依語言、上課方式與堂數而定，可請顧問提供試算報價。'},
-  {id:'trial', chip:'試聽', q:'可以先試聽嗎？', a:'可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。', short:'提供免費試聽，顧問會依程度與目標安排合適老師與時段。'},
-  {id:'teacher', chip:'老師配對', q:'老師怎麼配對？', a:'顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。', short:'依語言、程度與目標配對合適老師，開課後不合適可申請更換。'}
-],
-en: [
-  {id:'refund', chip:'Refunds', q:'How do I request a refund?', a:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.', short:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.'},
-  {id:'reschedule', chip:'Rescheduling', q:'Can I cancel or reschedule a class on short notice?', a:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.', short:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.'},
-  {id:'visa', chip:'Student Visa', q:'How do class hours relate to visa applications?', a:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.', short:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.'},
-  {id:'invoice', chip:'Invoices', q:'Will I receive an invoice or receipt?', a:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.', short:'An invoice is issued after payment; corporate clients can request monthly billing.'},
-  {id:'payment', chip:'Payment Options', q:'What payment methods are available?', a:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.', short:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.'},
-  {id:'format', chip:'Class Formats', q:'What’s the difference between 1-on-1 and flexible group livestream classes?', a:'1-on-1 online classes are booking-based — you submit your available times and our advisor arranges a teacher for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.', short:'1-on-1 is booking-based — our advisor arranges the teacher and time based on your availability; group livestream runs on a fixed schedule and costs less.'},
-  {id:'classroom', chip:'Online Classroom', q:'How do I join the online classroom? Could the link leak to others?', a:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.', short:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.'},
-  {id:'pricing', chip:'Pricing', q:'How is the course fee calculated?', a:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.', short:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.'},
-  {id:'trial', chip:'Trial Class', q:'Can I try a class before signing up?', a:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.', short:'A free trial is available, matched to your level and goals before you commit.'},
-  {id:'teacher', chip:'Teacher Matching', q:'How are teachers matched to students?', a:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.', short:'Matched to a certified teacher by language, level, and goals; you can request a change later.'}
-],
-ja: [
-  {id:'refund', chip:'返金', q:'返金の申請方法は？', a:'開講14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。', short:'開講14日前までなら全額返金、開講後は受講済み回数に応じて算出します。'},
-  {id:'reschedule', chip:'振替・キャンセル', q:'急に受講できなくなった場合、キャンセルや振替はできますか？', a:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。', short:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。'},
-  {id:'visa', chip:'学生ビザ', q:'授業時間数はビザ申請にどう関係しますか？', a:'台湾キャンパスの学期制コースで週15時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。', short:'週15時間以上の学期制コースは学生ビザの出席条件を満たします。'},
-  {id:'invoice', chip:'領収書', q:'領収書は発行されますか？', a:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。', short:'お支払い後に領収書を発行、法人は月締め請求も可能です。'},
-  {id:'payment', chip:'お支払い方法', q:'どのようなお支払い方法がありますか？', a:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。', short:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。'},
-  {id:'format', chip:'受講形式', q:'一対一とグループライブ配信の違いは何ですか？', a:'一対一のオンライン授業は予約制で、ご都合の良い時間帯をお伝えいただければ、アドバイザーが講師を手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。', short:'一対一は予約制でアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。'},
-  {id:'classroom', chip:'オンライン教室', q:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？', a:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。', short:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。'},
-  {id:'pricing', chip:'料金・見積り', q:'コース料金はどのように算出されますか？', a:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。', short:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。'},
-  {id:'trial', chip:'体験レッスン', q:'事前に体験レッスンを受けられますか？', a:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。', short:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。'},
-  {id:'teacher', chip:'講師のマッチング', q:'講師はどのようにマッチングされますか？', a:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。', short:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。'}
-]
-};
 
 /* ===================== i18n：顧問姓名（段落 D） ===================== */
 var TLI_ADVISORS_I18N = {
   'zh-TW': ['王顧問','李顧問','陳顧問','張顧問','林顧問'],
   en: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin'],
-  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー']
+  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー'],
+  de: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin']
 };
 function aiPickAdvisor(){
-  var list = TLI_ADVISORS_I18N[window.TLI_CURRENT_LANG] || TLI_ADVISORS_I18N['zh-TW'];
+  var lang = TLI_I18N.currentLang();
+  var list = TLI_ADVISORS_I18N[lang] || TLI_ADVISORS_I18N['zh-TW'];
   return list[Math.floor(Math.random() * list.length)];
 }
 
@@ -1494,7 +1179,7 @@ function aiRenderChips(target){
   var wrap = document.getElementById('aiChips-'+target);
   if(!wrap) return;
   var dict = tliDict();
-  var kb = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  var kb = getKB();
   wrap.innerHTML = '';
   wrap.appendChild(aiMakeChipBtn(dict.ai_chip_trial, function(){ aiAsk(dict.ai_chip_trial, target); }));
   kb.forEach(function(item){
@@ -1569,24 +1254,24 @@ function aiHideTyping(target){
   var row = document.getElementById('aiTypingRow-'+target);
   if(row) row.remove();
 }
+var TLI_AI_KEYWORDS = {
+  refund:['退費','退款','退學費','可以退','取消課程','退錢','refund','返金'],
+  reschedule:['請假','改期','退堂','取消上課','調課','reschedule','cancel class','振替','キャンセル'],
+  visa:['簽證','visa','學生簽證','居留','ビザ'],
+  invoice:['發票','收據','電子發票','invoice','receipt','領収書'],
+  payment:['付款','付費','分期','刷卡','轉帳','怎麼付錢','payment','pay','installment','支払い'],
+  format:['上課方式','預約制','直播制','怎麼上課','一對一','團體班','class format','1-on-1','group','受講形式'],
+  classroom:['線上教室','怎麼進入','連結','教室連結','外流','Zoom','classroom','教室'],
+  pricing:['價格','報價','費用','學費多少','多少錢','price','pricing','cost','料金'],
+  trial:['試聽','免費體驗','體驗課','試聽怎麼預約','trial','free class','体験'],
+  teacher:['老師','配對','老師怎麼選','指定老師','換老師','teacher','matching','講師']
+};
 function aiMatch(text){
   var t = text.trim();
-  var kbTc = TLI_KB_I18N['zh-TW'], kbCur = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
-  var KEYWORDS = {
-    refund:['退費','退款','退學費','可以退','取消課程','退錢','refund','返金'],
-    reschedule:['請假','改期','退堂','取消上課','調課','reschedule','cancel class','振替','キャンセル'],
-    visa:['簽證','visa','學生簽證','居留','ビザ'],
-    invoice:['發票','收據','電子發票','invoice','receipt','領収書'],
-    payment:['付款','付費','分期','刷卡','轉帳','怎麼付錢','payment','pay','installment','支払い'],
-    format:['上課方式','預約制','直播制','怎麼上課','一對一','團體班','class format','1-on-1','group','受講形式'],
-    classroom:['線上教室','怎麼進入','連結','教室連結','外流','Zoom','classroom','教室'],
-    pricing:['價格','報價','費用','學費多少','多少錢','price','pricing','cost','料金'],
-    trial:['試聽','免費體驗','體驗課','試聽怎麼預約','trial','free class','体験'],
-    teacher:['老師','配對','老師怎麼選','指定老師','換老師','teacher','matching','講師']
-  };
+  var kbTc = getKB(), kbCur = kbTc;
   for(var i=0;i<kbTc.length;i++){
     var id = kbTc[i].id;
-    var kws = KEYWORDS[id] || [];
+    var kws = TLI_AI_KEYWORDS[id] || [];
     for(var j=0;j<kws.length;j++){
       if(t.toLowerCase().indexOf(String(kws[j]).toLowerCase()) !== -1){
         for(var k=0;k<kbCur.length;k++){ if(kbCur[k].id === id) return kbCur[k]; }
@@ -1739,7 +1424,11 @@ function aiRestoreState(target){
   }catch(e){ return false; }
 }
 
-initLang();
+TLI_I18N.onRefresh(applyMetaDesc);
+applyMetaDesc();
+TLI_I18N.onRefresh(onLangApplied);
+onLangApplied();
+TLI_I18N.init();
 </script>
 </body>
 </html>

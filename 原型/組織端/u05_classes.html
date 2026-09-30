@@ -283,7 +283,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <div><label data-i18n="u05.lblEndTime">結束時間</label><input type="time" id="slotEnd" value="12:00"></div>
 <div><label data-i18n="u05.lblRoom">教室（本校自訂）</label><input type="text" id="slotRoom" placeholder="例：語言中心 302 教室" data-i18n-placeholder="u05.roomPlaceholder"></div>
 <div><label data-i18n="u04.thTeacher">授課老師</label><select id="slotTeacher" title="選項由 TLI 總部維護" data-i18n-title="u05.optionsByTli"></select></div>
-<div><label data-i18n="u05.lblClassMode">上課方式</label><select id="slotMode" onchange="renderSlotVideoHint()"><option value="onsite" data-i18n="u05.modeOnsite">實體</option><option value="online:zoom" data-i18n="u05.modeZoom">線上－Zoom</option><option value="online:teams" data-i18n="u05.modeTeams">線上－Teams</option></select></div>
+<div><label data-i18n="u05.lblClassMode">上課方式</label><select id="slotMode" onchange="renderSlotVideoHint()"></select></div>
 </div>
 <div class="slot-video-hint" id="slotVideoHint"></div>
 <button class="btn ghost btn-sm" onclick="addSlot()" data-i18n="u05.btnAddSlot">＋ 加入時段</button>
@@ -495,6 +495,7 @@ function openDetailModal(idx){
   renderMemberTable();
   switchDetailTab('members');
   populateSlotTeacherSelect();
+  populateSlotModeSelect();
   document.getElementById('slotMode').value = 'onsite';
   renderSlotList();
   renderSlotVideoHint();
@@ -573,6 +574,15 @@ function populateSlotTeacherSelect(){
   sel.innerHTML = locals.map(function(t){
     return '<option value="'+t.name+'"'+(t.certified?'':' disabled')+'>'+t.name+(t.certified?'':T('（待總部認證）',' (Pending HQ certification)'))+'</option>';
   }).join('');
+}
+/* 上課方式選項：實體＋一律讀 TLI_MASTERS.videoTools 動態產生視訊工具選項，不寫死 Zoom／Teams */
+function populateSlotModeSelect(){
+  var sel = document.getElementById('slotMode');
+  var opts = '<option value="onsite">'+T('實體','In-Person')+'</option>' +
+    (TLI_MASTERS.videoTools||[]).map(function(v){
+      return '<option value="online:'+v.id+'">'+T('線上－','Online - ')+v.name+'</option>';
+    }).join('');
+  sel.innerHTML = opts;
 }
 function renderSlotList(){
   var c = CLASSES[currentClassIdx];

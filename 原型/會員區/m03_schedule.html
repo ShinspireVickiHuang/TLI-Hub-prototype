@@ -276,135 +276,134 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 </head>
 <body>
 <div class="app has-side">
-  <nav class="side-nav" aria-label="主導覽">
-    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-identity">Emma Johnson｜學員</div>
-    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a class="side-link active" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>我的方案</a>
-    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
-    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>回官網</a>
+  <nav class="side-nav" aria-label="主導覽" data-i18n-aria-label="member.nav.aria">
+    <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
+    <div class="side-identity">Emma Johnson｜<span data-i18n="member.role.student">學員</span></div>
+    <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a class="side-link active" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
+    <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
+    <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
   </nav>
 
   <header class="topbar">
-    <div class="topbar-left"><a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網"><img src="../assets/tli-logo.svg" alt="TLI"></a><div class="topbar-title" data-i18n-zh="課表" data-i18n-en="Schedule">課表</div></div>
+    <div class="topbar-left"><a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a><div class="topbar-title" data-i18n="m03.title">課表</div></div>
     <div class="topbar-actions">
-      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程">
+      <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程" data-i18n-aria-label="member.explore" data-i18n-title="member.explore">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        <span class="explore-link-text">探索課程</span>
+        <span class="explore-link-text" data-i18n="member.explore">探索課程</span>
       </a>
-      <select class="mini-select" id="langSelect" aria-label="語言與幣別" onchange="handleLangCurrency(this)"><option value="zh-TW">繁體中文・TWD</option><option value="zh-CN">简体中文・CNY</option><option value="en">English・USD</option></select>
-      <button class="bell-btn" onclick="toggleBell()" aria-label="通知">
+      <button class="bell-btn" onclick="toggleBell()" aria-label="通知" data-i18n-aria-label="member.notifications">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
         <span class="dot"></span>
       </button>
       <div class="bell-panel" id="bellPanel">
-        <h4>通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p>今晚 18:00 有課，記得準時上線</p><span>今天 09:00</span></div></div>
+        <h4 data-i18n="member.notifications">通知</h4>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="m03.notifTonight">今晚 18:00 有課，記得準時上線</p><span><span data-i18n="member.today">今天</span> 09:00</span></div></div>
       </div>
     </div>
   </header>
 
   <main class="content">
-    <nav class="nav-segment" aria-label="次選單">
-      <a class="nav-segment-link active" href="m03_schedule.html">課表</a>
-      <a class="nav-segment-link" href="m05_leave.html">請假與改期</a>
+    <nav class="nav-segment" aria-label="次選單" data-i18n-aria-label="m03.subNavAria">
+      <a class="nav-segment-link active" href="m03_schedule.html" data-i18n="m03.navSchedule">課表</a>
+      <a class="nav-segment-link" href="m05_leave.html" data-i18n="m03.navLeave">請假與改期</a>
     </nav>
 
   <div id="viewDefault">
     <div class="card" id="request" style="margin-bottom:16px;">
       <button type="button" class="req-toggle-btn" onclick="toggleRequestSection()">
         <div class="flex-between">
-          <h3 style="margin:0;font-size:15px;">一對一排課</h3>
+          <h3 style="margin:0;font-size:15px;" data-i18n="m03.reqSectionTitle">一對一排課</h3>
           <svg class="req-toggle-icon open" id="reqToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </button>
       <div id="requestSectionBody">
-        <p class="small muted" style="margin:10px 0 14px;">一對一課由顧問依你提出的時段安排老師與時間，無法直接指定老師。</p>
+        <p class="small muted" style="margin:10px 0 14px;" data-i18n="m03.reqIntro">一對一課由顧問依你提出的時段安排老師與時間，無法直接指定老師。</p>
 
-        <div class="section-title first" style="margin-top:0;">選擇用哪個方案</div>
+        <div class="section-title first" style="margin-top:0;" data-i18n="m03.choosePlanTitle">選擇用哪個方案</div>
         <div id="reqPlanPicker" class="stack" style="margin-bottom:16px;"></div>
 
         <div id="reqFormArea" class="hidden">
-          <div class="section-title" style="margin-top:0;">每週固定有空時段</div>
-          <p class="small muted" style="margin:0 0 10px;">可複選多個星期與時段，供顧問排課時參考。</p>
+          <div class="section-title" style="margin-top:0;" data-i18n="m03.weeklyTitle">每週固定有空時段</div>
+          <p class="small muted" style="margin:0 0 10px;" data-i18n="m03.weeklyDesc">可複選多個星期與時段，供顧問排課時參考。</p>
           <div class="weekly-grid" id="weeklyGrid"></div>
 
-          <div class="section-title">特定日期時段</div>
-          <p class="small muted" style="margin:0 0 10px;">在月曆點選日期，勾選偏好時段後按「加入」，可加入多筆。</p>
+          <div class="section-title" data-i18n="m03.specificTitle">特定日期時段</div>
+          <p class="small muted" style="margin:0 0 10px;" data-i18n="m03.specificDesc">在月曆點選日期，勾選偏好時段後按「加入」，可加入多筆。</p>
           <div class="slot-calendar" id="prefCalendar">
             <div class="cal-header">
-              <button type="button" class="cal-nav-btn" aria-label="上一月" onclick="prefCalChangeMonth(-1)">
+              <button type="button" class="cal-nav-btn" aria-label="上一月" onclick="prefCalChangeMonth(-1)" data-i18n-aria-label="m03.prevMonth">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
               </button>
               <div class="cal-title" id="prefCalTitle"></div>
-              <button type="button" class="cal-nav-btn" aria-label="下一月" onclick="prefCalChangeMonth(1)">
+              <button type="button" class="cal-nav-btn" aria-label="下一月" onclick="prefCalChangeMonth(1)" data-i18n-aria-label="m03.nextMonth">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </button>
             </div>
             <div class="cal-weekday-row" id="prefCalWeekdayRow"></div>
             <div class="cal-grid" id="prefCalGrid"></div>
-            <p class="small muted" style="margin:8px 0 0;">已加入的日期會標記提示點</p>
+            <p class="small muted" style="margin:8px 0 0;" data-i18n="m03.addedDateHint">已加入的日期會標記提示點</p>
           </div>
           <p class="small muted" id="prefTimeHint" style="margin:10px 0 8px;">請先在月曆選擇日期</p>
           <div class="slot-times" id="prefTimeChips"></div>
-          <button type="button" class="btn btn-outline btn-sm" onclick="addSpecificPref()" style="margin-top:2px;">加入此日期時段</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="addSpecificPref()" style="margin-top:2px;" data-i18n="m03.addPrefBtn">加入此日期時段</button>
           <div class="pref-chip-row" id="specificPrefList"></div>
 
           <div class="field" style="margin-top:14px;margin-bottom:6px;">
-            <label for="reqNote">備註（選填）</label>
-            <textarea id="reqNote" rows="3" placeholder="想加強的主題、偏好老師性別或口音可選填（無法指定老師）"></textarea>
+            <label for="reqNote" data-i18n="m03.noteLabel">備註（選填）</label>
+            <textarea id="reqNote" rows="3" placeholder="想加強的主題、偏好老師性別或口音可選填（無法指定老師）" data-i18n-placeholder="m03.notePlaceholder"></textarea>
           </div>
-          <p class="small muted hidden" id="hrSyncNote" style="margin:0 0 12px;">此排課需求會同步給貴公司 HR（依合約審核模式）。</p>
+          <p class="small muted hidden" id="hrSyncNote" style="margin:0 0 12px;" data-i18n="m03.hrSyncNote">此排課需求會同步給貴公司 HR（依合約審核模式）。</p>
 
-          <button type="button" class="btn btn-primary btn-block" onclick="submitSchedulingRequest()">送出排課需求</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="submitSchedulingRequest()" data-i18n="m03.submitReqBtn">送出排課需求</button>
         </div>
 
         <div class="banner banner-success hidden" id="requestSentBanner" style="margin-top:14px;"></div>
 
-        <div class="section-title">排課需求</div>
+        <div class="section-title" data-i18n="m03.reqListTitle">排課需求</div>
         <div id="requestsList"></div>
       </div>
     </div>
 
     <div class="banner banner-info hidden" id="locateBanner">
       <span id="locateBannerText"></span>
-      <button class="btn btn-ghost btn-sm" style="padding:4px 10px;min-height:28px;" onclick="location.href='m03_schedule.html'">顯示全部</button>
+      <button class="btn btn-ghost btn-sm" style="padding:4px 10px;min-height:28px;" onclick="location.href='m03_schedule.html'" data-i18n="m03.showAll">顯示全部</button>
     </div>
     <div class="flex-between">
-      <p class="page-sub" style="margin:0;" data-i18n-zh="切換月／週／列表檢視，篩選類型與狀態，點課堂看詳情。" data-i18n-en="Switch month, week or list view, filter by type or status, tap a class to see details.">切換月／週／列表檢視，篩選類型與狀態，點課堂看詳情。</p>
+      <p class="page-sub" style="margin:0;" data-i18n="m03.pageSub">切換月／週／列表檢視，篩選類型與狀態，點課堂看詳情。</p>
       <div class="seg" id="viewSeg">
-        <button data-view="month" onclick="setView('month')">月</button>
-        <button data-view="week" onclick="setView('week')">週</button>
-        <button data-view="list" onclick="setView('list')">列表</button>
+        <button data-view="month" onclick="setView('month')" data-i18n="m03.viewMonth">月</button>
+        <button data-view="week" onclick="setView('week')" data-i18n="m03.viewWeek">週</button>
+        <button data-view="list" onclick="setView('list')" data-i18n="m03.viewList">列表</button>
       </div>
     </div>
 
     <div class="filter-row">
-      <select class="tool-select" id="typeFilterSel" aria-label="課程類型" onchange="setTypeFilter(this.value)">
-        <option value="all">全部類型</option>
-        <option value="individual">一對一</option>
-        <option value="live">團體直播</option>
-        <option value="chat">聊天室</option>
-        <option value="event">活動</option>
+      <select class="tool-select" id="typeFilterSel" aria-label="課程類型" onchange="setTypeFilter(this.value)" data-i18n-aria-label="m03.filterTypeAria">
+        <option value="all" data-i18n="m03.filterAll">全部類型</option>
+        <option value="individual" data-i18n="m03.typeIndividual">一對一</option>
+        <option value="live" data-i18n="m03.typeLive">團體直播</option>
+        <option value="chat" data-i18n="m03.typeChat">聊天室</option>
+        <option value="event" data-i18n="m03.typeEvent">活動</option>
       </select>
-      <select class="tool-select" id="statusFilterSel" aria-label="狀態" onchange="setStatusFilter(this.value)">
-        <option value="all">全部狀態</option>
-        <option value="upcoming">即將上課</option>
-        <option value="done">已完成</option>
-        <option value="canceled">已取消或請假</option>
-        <option value="pending_schedule">待顧問安排</option>
+      <select class="tool-select" id="statusFilterSel" aria-label="狀態" onchange="setStatusFilter(this.value)" data-i18n-aria-label="m03.statusAria">
+        <option value="all" data-i18n="m03.statusAllOpt">全部狀態</option>
+        <option value="upcoming" data-i18n="m03.statusUpcomingOpt">即將上課</option>
+        <option value="done" data-i18n="m03.statusDoneOpt">已完成</option>
+        <option value="canceled" data-i18n="m03.statusCanceledOpt">已取消或請假</option>
+        <option value="pending_schedule" data-i18n="m03.statusPendingOpt">待顧問安排</option>
       </select>
-      <button type="button" class="more-filter-toggle" id="moreFilterBtn" onclick="toggleMoreFilter()" aria-expanded="false">更多篩選 ▾</button>
+      <button type="button" class="more-filter-toggle" id="moreFilterBtn" onclick="toggleMoreFilter()" aria-expanded="false" data-i18n="m03.moreFilter">更多篩選 ▾</button>
       <div class="more-filter-panel" id="moreFilterPanel">
-        <select class="tool-select" id="planFilterSel" aria-label="依方案" onchange="setPlanFilter(this.value)">
-          <option value="all">依方案：全部</option>
-          <option value="plan-a">自費一對一</option>
-          <option value="plan-b">自費團體直播</option>
-          <option value="plan-c">企業合約</option>
-          <option value="plan-d">機構授權</option>
+        <select class="tool-select" id="planFilterSel" aria-label="依方案" onchange="setPlanFilter(this.value)" data-i18n-aria-label="m03.planFilterAria">
+          <option value="all" data-i18n="m03.planFilterAllOpt">依方案：全部</option>
+          <option value="plan-a" data-i18n="m03.planA">自費一對一</option>
+          <option value="plan-b" data-i18n="m03.planB">自費團體直播</option>
+          <option value="plan-c" data-i18n="m03.planC">企業合約</option>
+          <option value="plan-d" data-i18n="m03.planD">機構授權</option>
         </select>
       </div>
     </div>
@@ -412,34 +411,34 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div id="pendingScheduleWrap" class="hidden" style="margin-bottom:14px;"></div>
 
     <div class="period-nav" id="periodNav">
-      <button type="button" class="period-nav-btn" onclick="shiftPeriod(-1)" aria-label="上一個期間">‹</button>
+      <button type="button" class="period-nav-btn" onclick="shiftPeriod(-1)" aria-label="上一個期間" data-i18n-aria-label="m03.prevPeriod">‹</button>
       <div class="period-mid">
         <strong id="periodLabel">－</strong>
-        <button type="button" class="btn btn-outline btn-sm" onclick="goToday()">今天</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="goToday()" data-i18n="member.today">今天</button>
       </div>
-      <button type="button" class="period-nav-btn" onclick="shiftPeriod(1)" aria-label="下一個期間">›</button>
+      <button type="button" class="period-nav-btn" onclick="shiftPeriod(1)" aria-label="下一個期間" data-i18n-aria-label="m03.nextPeriod">›</button>
     </div>
 
     <div id="monthView">
-      <div class="month-weekday-row" id="monthWeekdayRow"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+      <div class="month-weekday-row" id="monthWeekdayRow"><span data-i18n="m03.wdMon">一</span><span data-i18n="m03.wdTue">二</span><span data-i18n="m03.wdWed">三</span><span data-i18n="m03.wdThu">四</span><span data-i18n="m03.wdFri">五</span><span data-i18n="m03.wdSat">六</span><span data-i18n="m03.wdSun">日</span></div>
       <div class="month-grid" id="monthGrid"></div>
-      <p class="list-empty hidden" id="monthEmptyMsg">這段期間沒有符合的課程</p>
+      <p class="list-empty hidden" id="monthEmptyMsg" data-i18n="m03.emptyPeriod">這段期間沒有符合的課程</p>
     </div>
 
     <div id="weekView" class="hidden">
       <div class="week-grid" id="weekGrid"></div>
-      <p class="list-empty hidden" id="weekEmptyMsg">這段期間沒有符合的課程</p>
+      <p class="list-empty hidden" id="weekEmptyMsg" data-i18n="m03.emptyPeriod">這段期間沒有符合的課程</p>
     </div>
 
     <div id="listView" class="hidden">
       <div class="list-toolbar">
-        <span class="small muted">預設顯示近 30 天課程</span>
+        <span class="small muted" data-i18n="m03.listDefaultNote">預設顯示近 30 天課程</span>
       </div>
       <div class="card">
         <div id="listWrap"></div>
       </div>
       <div class="load-more-wrap hidden" id="loadMoreWrap">
-        <button type="button" class="btn btn-outline btn-sm" onclick="loadEarlier()">顯示更早的課程</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="loadEarlier()" data-i18n="m03.loadEarlier">顯示更早的課程</button>
       </div>
     </div>
   </div>
@@ -449,37 +448,37 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div class="card" style="text-align:center;">
       <div class="empty-state" style="padding:28px 16px 8px;">
         <svg class="e-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <h4>你還沒有任何課程</h4>
-        <p>預約一堂免費試聽，或先看看適合你的課程方案</p>
+        <h4 data-i18n="m03.newEmptyTitle">你還沒有任何課程</h4>
+        <p data-i18n="m03.newEmptyDesc">預約一堂免費試聽，或先看看適合你的課程方案</p>
       </div>
       <div class="flex-between" style="gap:10px;padding:0 4px 20px;">
-        <button class="btn btn-primary btn-block" onclick="location.href='../公開網站/p06_trial.html'">預約免費試聽</button>
-        <button class="btn btn-outline btn-block" onclick="location.href='../公開網站/p03_course_detail.html'">看看課程方案</button>
+        <button class="btn btn-primary btn-block" onclick="location.href='../公開網站/p06_trial.html'" data-i18n="m03.newBtnTrial">預約免費試聽</button>
+        <button class="btn btn-outline btn-block" onclick="location.href='../公開網站/p03_course_detail.html'" data-i18n="m03.newBtnPlans">看看課程方案</button>
       </div>
     </div>
 
-    <div class="section-title">你可以先做的事</div>
+    <div class="section-title" data-i18n="m03.newTodoTitle">你可以先做的事</div>
     <div class="card">
       <div class="list-row">
         <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 4H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-3"/><path d="M9 14l2 2 4-4"/></svg></div>
-        <div class="body"><h4>完成個人資料</h4><p>填寫聯絡方式與學習需求，方便顧問安排適合的課程</p></div>
-        <div class="trail"><button class="btn btn-outline btn-sm" onclick="location.href='m07_profile.html'">前往填寫</button></div>
+        <div class="body"><h4 data-i18n="m03.newTodo1Title">完成個人資料</h4><p data-i18n="m03.newTodo1Desc">填寫聯絡方式與學習需求，方便顧問安排適合的課程</p></div>
+        <div class="trail"><button class="btn btn-outline btn-sm" onclick="location.href='m07_profile.html'" data-i18n="m03.newTodo1Btn">前往填寫</button></div>
       </div>
       <div class="list-row">
         <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></div>
-        <div class="body"><h4>先看免費試看影音</h4><p>了解上課節奏與教材風格</p></div>
-        <div class="trail"><button class="btn btn-outline btn-sm" onclick="location.href='m08_self_paced.html'">前往觀看</button></div>
+        <div class="body"><h4 data-i18n="m03.newTodo2Title">先看免費試看影音</h4><p data-i18n="m03.newTodo2Desc">了解上課節奏與教材風格</p></div>
+        <div class="trail"><button class="btn btn-outline btn-sm" onclick="location.href='m08_self_paced.html'" data-i18n="m03.newTodo2Btn">前往觀看</button></div>
       </div>
     </div>
   </div>
   </main>
 
   <nav class="bottom-nav">
-    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>首頁</a>
-    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg>預約與報名</a>
-    <a href="m03_schedule.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>課表</a>
-    <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>學習</a>
-    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>我的</a>
+    <a href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
+    <a href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
+    <a href="m03_schedule.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
+    <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
   </nav>
 </div>
 
@@ -489,7 +488,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <h3 id="daySheetTitle">－</h3>
     <div class="divider"></div>
     <div id="daySheetList" class="stack" style="gap:0;"></div>
-    <button class="btn btn-ghost btn-block" style="margin-top:12px;" onclick="closeDaySheet()">關閉</button>
+    <button class="btn btn-ghost btn-block" style="margin-top:12px;" onclick="closeDaySheet()" data-i18n="member.close">關閉</button>
   </div>
 </div>
 
@@ -502,29 +501,30 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <span class="payer-badge" id="dPayerBadge" style="margin-top:6px;margin-left:6px;display:none;">－</span>
     <div class="divider"></div>
     <div class="stack" style="gap:6px;margin-bottom:12px;">
-      <div class="small" id="dPlanLine" style="display:none;"><strong>所屬方案：</strong><span id="dPlanName">－</span></div>
-      <div class="small"><strong>老師：</strong><span id="dTeacher">－</span></div>
-      <div class="small"><strong>上課方式：</strong><span id="dMode">－</span></div>
-      <div class="small"><strong>教材：</strong><a href="#" id="dMaterial" style="text-decoration:underline;cursor:pointer;" onclick="event.preventDefault();downloadMaterial();">－</a></div>
+      <div class="small" id="dPlanLine" style="display:none;"><strong data-i18n="m03.planLabel">所屬方案：</strong><span id="dPlanName">－</span></div>
+      <div class="small"><strong data-i18n="m03.teacherLabel">老師：</strong><span id="dTeacher">－</span></div>
+      <div class="small"><strong data-i18n="m03.modeLabel">上課方式：</strong><span id="dMode">－</span></div>
+      <div class="small"><strong data-i18n="m03.materialLabel">教材：</strong><a href="#" id="dMaterial" style="text-decoration:underline;cursor:pointer;" onclick="event.preventDefault();downloadMaterial();">－</a></div>
     </div>
     <div class="banner banner-warn hidden" id="dRuleBanner"></div>
     <div id="dEnterWrap" style="margin-bottom:10px;"></div>
     <div class="stack">
       <div id="dActionArea"></div>
-      <button class="btn btn-ghost btn-block" onclick="closeSheet()">關閉</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSheet()" data-i18n="member.close">關閉</button>
     </div>
   </div>
 </div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_member.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
 
-var TLI_RATES={TWD:{rate:1,symbol:'NT$'},USD:{rate:31.5,symbol:'US$'},JPY:{rate:0.211,symbol:'¥'}};
-function tliFmt(amountTWD,cur){
-  var r=TLI_RATES[cur]||TLI_RATES.TWD;
-  var v=amountTWD/r.rate;
-  var decimals=cur==='TWD'?0:(cur==='JPY'?0:2);
-  return r.symbol+v.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
-}
+function T(zh,obj){ return TLI_I18N.t(zh,obj); }
+
 function showToast(msg){
   var t=document.getElementById('toast');
   if(!t)return;
@@ -533,28 +533,7 @@ function showToast(msg){
   clearTimeout(window._toastTimer);
   window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
 }
-function handleLangCurrency(sel){
-  var lang=sel.value||'zh-TW';
-  var curMap={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
-  var cur=curMap[lang]||'TWD';
-  var langText=sel.options[sel.selectedIndex].text;
-  if(typeof tliFmt==='function'){
-    document.querySelectorAll('[data-money]').forEach(function(el){
-      el.textContent=tliFmt(parseFloat(el.getAttribute('data-money')),cur);
-    });
-  }
-  document.querySelectorAll('[data-i18n-zh]').forEach(function(el){
-    el.textContent = (lang==='zh-TW') ? el.getAttribute('data-i18n-zh') : el.getAttribute('data-i18n-en');
-  });
-  if(lang==='zh-CN'||lang==='de'){
-    var names={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+names[lang]);
-  } else {
-    showToast('顯示語言／幣別已切換為 '+langText);
-  }
-}
-
-function downloadMaterial(){showToast('教材已加入下載');}
+function downloadMaterial(){showToast(T('教材已加入下載',{en:'Material added to downloads',ja:'教材をダウンロードに追加しました',de:'Material zum Download hinzugefügt'}));}
 function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
 document.addEventListener('click',function(e){
   if(!e.target.closest('.bell-btn')&&!e.target.closest('.bell-panel'))document.getElementById('bellPanel').classList.remove('open');
@@ -563,6 +542,51 @@ document.addEventListener('click',function(e){
 /* ================= 基準時間（對齊全站示範用「今天」＝2026-08-25） ================= */
 var NOW = new Date(2026,7,25,10,0,0);
 var WEEKDAY_ZH=['日','一','二','三','四','五','六']; /* 依 Date.getDay()（0＝日）索引 */
+
+/* ================= 五語：星期／時段／月份 小型翻譯表（僅供 JS 組字串用，不進詞典） ================= */
+var WD_SHORT={'日':{en:'Sun',ja:'日曜',de:'So'},'一':{en:'Mon',ja:'月曜',de:'Mo'},'二':{en:'Tue',ja:'火曜',de:'Di'},'三':{en:'Wed',ja:'水曜',de:'Mi'},'四':{en:'Thu',ja:'木曜',de:'Do'},'五':{en:'Fri',ja:'金曜',de:'Fr'},'六':{en:'Sat',ja:'土曜',de:'Sa'}};
+function wdShort(zh){ var d=WD_SHORT[zh]; return d?T(zh,d):zh; }
+function wdParen(zh){ var d=WD_SHORT[zh]; if(!d) return '（'+zh+'）'; return T('（'+zh+'）',{en:'('+d.en+')',ja:'('+d.ja+')',de:'('+d.de+')'}); }
+function wdHead(zh){ var d=WD_SHORT[zh]; if(!d) return '週'+zh; return T('週'+zh,{en:d.en,ja:d.ja,de:d.de}); }
+var PERIOD_DICT={'早':{en:'Morning',ja:'午前',de:'Vormittags'},'午':{en:'Afternoon',ja:'午後',de:'Nachmittags'},'晚':{en:'Evening',ja:'夜',de:'Abends'}};
+function perT(zh){ var d=PERIOD_DICT[zh]; return d?T(zh,d):zh; }
+function wdPeriodAriaLabel(dayZh,periodZh){
+  var wd=WD_SHORT[dayZh], pd=PERIOD_DICT[periodZh];
+  var zh='週'+dayZh+' '+periodZh;
+  if(!wd||!pd) return zh;
+  return T(zh,{en:wd.en+' '+pd.en, ja:wd.ja+'の'+pd.ja, de:wd.de+' '+pd.de});
+}
+function todayTag(){ return T('今天',{en:'Today',ja:'今日',de:'Heute'}); }
+function tomorrowTag(){ return T('明天',{en:'Tomorrow',ja:'明日',de:'Morgen'}); }
+var MONTH_EN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var MONTH_DE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+function calTitleText(y,m,spaced){
+  var zh = spaced ? (y+' 年 '+m+' 月') : (y+'年'+m+'月');
+  return T(zh,{en:MONTH_EN[m-1]+' '+y, ja:y+'年'+m+'月', de:MONTH_DE[m-1]+' '+y});
+}
+var TYPE_LABEL_DICT={individual:{en:'One-on-One',ja:'一対一',de:'Einzelunterricht'},live:{en:'Group Livestream',ja:'グループライブ配信',de:'Gruppen-Live-Unterricht'},chat:{en:'Chat Room',ja:'チャットルーム',de:'Chatroom'},event:{en:'Event',ja:'イベント',de:'Veranstaltung'}};
+function typeLabelT(type){ return T(TYPE_META[type].label, TYPE_LABEL_DICT[type]); }
+var TYPE_ABBR_DICT={individual:{en:'1:1',ja:'1',de:'1:1'},live:{en:'Grp',ja:'配',de:'Grp'},chat:{en:'Chat',ja:'談',de:'Chat'},event:{en:'Evt',ja:'会',de:'Evt'}};
+function typeAbbrT(type){ return T(TYPE_META[type].abbr, TYPE_ABBR_DICT[type]); }
+var STATUS_LABEL_DICT={upcoming:{en:'Upcoming',ja:'開催予定',de:'Bevorstehend'},done:{en:'Completed',ja:'完了',de:'Abgeschlossen'},canceled:{en:'Canceled / On Leave',ja:'キャンセル・欠席',de:'Storniert / Abwesend'}};
+function statusLabelT(status){ return T(STATUS_META[status].label, STATUS_LABEL_DICT[status]); }
+var PAYER_LABEL_DICT={self:{zh:'自費',en:'Self-paid',ja:'自己負担',de:'Selbstzahler'},company:{zh:'公司提供',en:'Company-provided',ja:'企業提供',de:'Vom Unternehmen bereitgestellt'},institution:{zh:'學校提供',en:'School-provided',ja:'学校提供',de:'Von der Schule bereitgestellt'}};
+function payerLabelT(payer){ var d=PAYER_LABEL_DICT[payer]||PAYER_LABEL_DICT.self; return T(d.zh,{en:d.en,ja:d.ja,de:d.de}); }
+var MODE_DICT={'線上教室':{en:'Online Classroom',ja:'オンライン教室',de:'Onlinekurs'},'線上聊天室':{en:'Online Chat Room',ja:'オンラインチャットルーム',de:'Online-Chat'},'線上直播':{en:'Online Livestream',ja:'オンラインライブ配信',de:'Livestream'}};
+function modeT(zh){ var d=MODE_DICT[zh]; return d?T(zh,d):zh; }
+function liveNowTagParen(){ return T('（進行中）',{en:' (Live)',ja:'（配信中）',de:' (Live)'}); }
+function liveNowTagPlain(){ return T('進行中',{en:'Live',ja:'配信中',de:'Live'}); }
+/* 排課需求示範資料（3 筆種子資料）用的固定片語翻譯：非使用者當場輸入的內容才走這裡，即時送出的需求維持原字串 */
+var SEED_NOTE_DICT={
+  'want-improve-listening':{zh:'想加強聽力',en:'Would like more listening practice',ja:'リスニングを強化したい',de:'Möchte das Hörverständnis verbessern'},
+  'prefer-female-teacher':{zh:'偏好女老師',en:'Prefers a female teacher',ja:'女性講師を希望',de:'Bevorzugt eine Lehrerin'},
+  'slot-full-advisor-note':{zh:'該時段老師名額已滿，請再提供一個備選時段',en:'The teacher is fully booked for that slot — please provide an alternative time.',ja:'その時間帯は講師の予約が埋まっています。別の候補時間をご提示ください。',de:'Für diesen Termin ist die Lehrkraft ausgebucht — bitte geben Sie eine alternative Zeit an.'}
+};
+function seedT(id){ var d=SEED_NOTE_DICT[id]; return d?T(d.zh,{en:d.en,ja:d.ja,de:d.de}):id; }
+var SEED_WEEKLY_DICT={'週三午':{en:'Wed Afternoon',ja:'水 午後',de:'Mi Nachmittags'},'週四晚':{en:'Thu Evening',ja:'木 夜',de:'Do Abends'},'週二晚':{en:'Tue Evening',ja:'火 夜',de:'Di Abends'}};
+function seedWdT(sVal){ var d=SEED_WEEKLY_DICT[sVal]; return d?T(sVal,d):sVal; }
+var SEED_DATE_DICT={'8/20（四）':{en:'8/20 (Thu)',ja:'8/20（木）',de:'20.08. (Do)'},'8/21（五）14:00':{en:'8/21 (Fri) 14:00',ja:'8/21（金）14:00',de:'21.08. (Fr) 14:00'}};
+function seedDateT(sVal){ var d=SEED_DATE_DICT[sVal]; return d?T(sVal,d):sVal; }
 
 /* ================= 身分（示範用）：一般 b2c／企業 b2b／機構 inst，可用 ?role= 帶入 =================
    企業學員依所屬廠區顯示雙時區對照，數字為模擬示範，與 m02/m05 廠區設定一致 */
@@ -585,15 +609,15 @@ function addDays(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n
 function mondayOf(d){var dow=(d.getDay()+6)%7;return addDays(d,-dow);}
 function fmtMD(d){return pad2(d.getMonth()+1)+'/'+pad2(d.getDate());}
 function fmtSessionTime(s){
-  var dayTag = sameDate(s.start,NOW)?'今天 ':(sameDate(s.start,addDays(NOW,1))?'明天 ':'');
-  return fmtMD(s.start)+'（'+WEEKDAY_ZH[s.start.getDay()]+'）'+dayTag+pad2(s.start.getHours())+':'+pad2(s.start.getMinutes())+'–'+pad2(s.end.getHours())+':'+pad2(s.end.getMinutes());
+  var dayTag = sameDate(s.start,NOW)?(todayTag()+' '):(sameDate(s.start,addDays(NOW,1))?(tomorrowTag()+' '):'');
+  return fmtMD(s.start)+wdParen(WEEKDAY_ZH[s.start.getDay()])+dayTag+pad2(s.start.getHours())+':'+pad2(s.start.getMinutes())+'–'+pad2(s.end.getHours())+':'+pad2(s.end.getMinutes());
 }
 function fmtDateHeading(d){
-  var dayTag = sameDate(d,NOW)?'・今天':(sameDate(d,addDays(NOW,1))?'・明天':'');
-  return fmtMD(d)+'（'+WEEKDAY_ZH[d.getDay()]+'）'+dayTag;
+  var dayTag = sameDate(d,NOW)?('・'+todayTag()):(sameDate(d,addDays(NOW,1))?('・'+tomorrowTag()):'');
+  return fmtMD(d)+wdParen(WEEKDAY_ZH[d.getDay()])+dayTag;
 }
 function fmtOnePoint(d){
-  return fmtMD(d)+'（'+WEEKDAY_ZH[d.getDay()]+'）'+pad2(d.getHours())+':'+pad2(d.getMinutes());
+  return fmtMD(d)+wdParen(WEEKDAY_ZH[d.getDay()])+pad2(d.getHours())+':'+pad2(d.getMinutes());
 }
 
 /* ================= 課堂資料（類型：individual 一對一／live 團體直播／chat 聊天室／event 活動） ================= */
@@ -635,10 +659,10 @@ var CLASS_GROUPS = {
 
 /* ================= 方案中繼資料（規則跟方案走，不跟會員身分走；供付費方徽章與「依方案」篩選使用） ================= */
 var PLAN_META = {
-  'plan-a':{name:'中文一對一 20 堂課程包', payer:'self', payerLabel:'自費'},
-  'plan-b':{name:'彈性團體直播班・中級會話 B1 班', payer:'self', payerLabel:'自費'},
-  'plan-c':{name:'商務華語企業培訓（公司提供）', payer:'company', payerLabel:'公司提供'},
-  'plan-d':{name:'華語會話學期方案（學校提供）', payer:'institution', payerLabel:'學校提供'}
+  'plan-a':{name:'中文一對一 20 堂課程包', payer:'self'},
+  'plan-b':{name:'彈性團體直播班・中級會話 B1 班', payer:'self'},
+  'plan-c':{name:'商務華語企業培訓（公司提供）', payer:'company'},
+  'plan-d':{name:'華語會話學期方案（學校提供）', payer:'institution'}
 };
 
 /* ================= 類型中繼資料 ================= */
@@ -719,12 +743,12 @@ function renderReqPlanPicker(){
   wrap.innerHTML=
     '<div class="pick-card'+(selectedReqPlanId==='plan-a'?' selected':'')+'" onclick="selectReqPlan(\'plan-a\')">'+
       '<div class="avatar">A</div>'+
-      '<div class="body"><h4>'+planA.name+'</h4><p class="small muted">自費</p></div>'+
+      '<div class="body"><h4>'+planA.name+'</h4><p class="small muted">'+payerLabelT('self')+'</p></div>'+
       '<div class="radio-dot"></div>'+
     '</div>'+
     '<div class="pick-card'+(selectedReqPlanId==='plan-c'?' selected':'')+'" onclick="selectReqPlan(\'plan-c\')">'+
       '<div class="avatar">C</div>'+
-      '<div class="body"><h4>'+planC.name+'</h4><p class="small muted">企業合約・公司提供</p></div>'+
+      '<div class="body"><h4>'+planC.name+'</h4><p class="small muted">'+T('企業合約・公司提供',{en:'Corporate Contract · Company-provided',ja:'企業契約・企業提供',de:'Firmenvertrag · vom Unternehmen bereitgestellt'})+'</p></div>'+
       '<div class="radio-dot"></div>'+
     '</div>';
 }
@@ -748,13 +772,13 @@ function renderWeeklyGrid(){
   var wrap=document.getElementById('weeklyGrid');
   if(!wrap) return;
   var html='<span class="wg-head"></span>';
-  WEEKLY_DAYS.forEach(function(d){ html+='<span class="wg-head">週'+d.label+'</span>'; });
+  WEEKLY_DAYS.forEach(function(d){ html+='<span class="wg-head">'+wdHead(d.label)+'</span>'; });
   WEEKLY_PERIODS.forEach(function(p){
-    html+='<span class="wg-period-label">'+p.label+'</span>';
+    html+='<span class="wg-period-label">'+perT(p.label)+'</span>';
     WEEKLY_DAYS.forEach(function(d){
       var key=d.id+'_'+p.id;
       var sel=!!weeklySelected[key];
-      html+='<button type="button" class="wg-cell'+(sel?' selected':'')+'" onclick="toggleWeeklyCell(\''+key+'\')" aria-pressed="'+sel+'" aria-label="週'+d.label+' '+p.label+'"></button>';
+      html+='<button type="button" class="wg-cell'+(sel?' selected':'')+'" onclick="toggleWeeklyCell(\''+key+'\')" aria-pressed="'+sel+'" aria-label="'+wdPeriodAriaLabel(d.label,p.label)+'"></button>';
     });
   });
   wrap.innerHTML=html;
@@ -762,7 +786,7 @@ function renderWeeklyGrid(){
 function weeklySelectedList(){
   var out=[];
   WEEKLY_PERIODS.forEach(function(p){
-    WEEKLY_DAYS.forEach(function(d){ if(weeklySelected[d.id+'_'+p.id]) out.push('週'+d.label+p.label); });
+    WEEKLY_DAYS.forEach(function(d){ if(weeklySelected[d.id+'_'+p.id]) out.push(wdHead(d.label)+' '+perT(p.label)); });
   });
   return out;
 }
@@ -773,7 +797,7 @@ var CAL_WEEKDAYS_REQ=['一','二','三','四','五','六','日'];
 function calToday(){ return new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()); }
 function fmtSlotDayLabel(d){
   var wd='日一二三四五六';
-  return (d.getMonth()+1)+'/'+String(d.getDate()).padStart(2,'0')+'（'+wd.charAt(d.getDay())+'）';
+  return (d.getMonth()+1)+'/'+String(d.getDate()).padStart(2,'0')+wdParen(wd.charAt(d.getDay()));
 }
 var prefCalViewYear=NOW.getFullYear(), prefCalViewMonth=NOW.getMonth(), prefCalSelectedDate=null;
 var prefSelectedTimes=[];
@@ -781,9 +805,9 @@ var specificPrefs=[];
 function renderPrefCalendarGrid(){
   var titleEl=document.getElementById('prefCalTitle');
   if(!titleEl) return;
-  titleEl.textContent=prefCalViewYear+' 年 '+(prefCalViewMonth+1)+' 月';
+  titleEl.textContent=calTitleText(prefCalViewYear,prefCalViewMonth+1,true);
   var weekRow=document.getElementById('prefCalWeekdayRow');
-  weekRow.innerHTML=CAL_WEEKDAYS_REQ.map(function(w){return '<span>'+w+'</span>';}).join('');
+  weekRow.innerHTML=CAL_WEEKDAYS_REQ.map(function(w){return '<span>'+wdShort(w)+'</span>';}).join('');
   var grid=document.getElementById('prefCalGrid');
   grid.innerHTML='';
   var firstDay=new Date(prefCalViewYear,prefCalViewMonth,1);
@@ -829,7 +853,7 @@ function renderPrefTimeChips(){
   if(!wrap) return;
   wrap.innerHTML='';
   if(!prefCalSelectedDate){
-    hintEl.textContent='請先在月曆選擇日期';
+    hintEl.textContent=T('請先在月曆選擇日期',{en:'Please select a date on the calendar first',ja:'まずカレンダーで日付を選択してください',de:'Bitte wählen Sie zuerst ein Datum im Kalender'});
     hintEl.style.display='block';
     return;
   }
@@ -849,7 +873,7 @@ function togglePrefTime(t){
   renderPrefTimeChips();
 }
 function addSpecificPref(){
-  if(!prefCalSelectedDate || prefSelectedTimes.length===0){ showToast('請先選擇日期與至少一個時段'); return; }
+  if(!prefCalSelectedDate || prefSelectedTimes.length===0){ showToast(T('請先選擇日期與至少一個時段',{en:'Please select a date and at least one time slot first',ja:'日付と時間帯を少なくとも1つ選択してください',de:'Bitte wählen Sie zuerst ein Datum und mindestens ein Zeitfenster'})); return; }
   specificPrefs.push({dateIso:prefCalSelectedDate.toISOString(), label:fmtSlotDayLabel(prefCalSelectedDate), times:prefSelectedTimes.slice().sort()});
   prefCalSelectedDate=null; prefSelectedTimes=[];
   renderPrefCalendarGrid();
@@ -864,44 +888,45 @@ function removeSpecificPref(idx){
 function renderSpecificPrefList(){
   var wrap=document.getElementById('specificPrefList');
   if(!wrap) return;
+  var removeLabel=T('移除',{en:'Remove',ja:'削除する',de:'Entfernen'});
   wrap.innerHTML=specificPrefs.map(function(p,idx){
-    return '<span class="pref-chip">'+p.label+'　'+p.times.join('、')+'<button type="button" onclick="removeSpecificPref('+idx+')" aria-label="移除">×</button></span>';
+    return '<span class="pref-chip">'+p.label+'　'+p.times.join('、')+'<button type="button" onclick="removeSpecificPref('+idx+')" aria-label="'+removeLabel+'">×</button></span>';
   }).join('');
 }
 
 /* ================= 排課需求（示範資料：待顧問安排／已安排／需調整） ================= */
 var SCHEDULING_REQUESTS=[
   {id:'req-seed-1', planId:'plan-a', weekly:['週三午','週四晚'], specific:[], note:'', status:'pending', submittedAt:new Date(2026,7,23,10,0)},
-  {id:'req-seed-2', planId:'plan-a', weekly:[], specific:[{label:'8/20（四）',times:['14:00']}], note:'想加強聽力', status:'arranged', submittedAt:new Date(2026,7,18,9,0), arrangedTeacher:'陳美惠老師', arrangedTime:'8/21（五）14:00'},
-  {id:'req-seed-3', planId:'plan-c', weekly:['週二晚'], specific:[], note:'偏好女老師', status:'needs_adjust', submittedAt:new Date(2026,7,15,11,0), advisorNote:'該時段老師名額已滿，請再提供一個備選時段'}
+  {id:'req-seed-2', planId:'plan-a', weekly:[], specific:[{label:'8/20（四）',times:['14:00']}], note:'want-improve-listening', status:'arranged', submittedAt:new Date(2026,7,18,9,0), arrangedTeacher:'陳美惠老師', arrangedTime:'8/21（五）14:00'},
+  {id:'req-seed-3', planId:'plan-c', weekly:['週二晚'], specific:[], note:'prefer-female-teacher', status:'needs_adjust', submittedAt:new Date(2026,7,15,11,0), advisorNote:'slot-full-advisor-note'}
 ];
 function reqPrefText(r){
   var parts=[];
-  if(r.weekly && r.weekly.length) parts.push('每週：'+r.weekly.join('、'));
-  if(r.specific && r.specific.length) parts.push('特定日期：'+r.specific.map(function(p){return p.label+' '+p.times.join('、');}).join('；'));
-  return parts.length ? parts.join('　') : '未提供偏好時段';
+  if(r.weekly && r.weekly.length) parts.push(T('每週：',{en:'Weekly: ',ja:'毎週：',de:'Wöchentlich: '})+r.weekly.map(seedWdT).join('、'));
+  if(r.specific && r.specific.length) parts.push(T('特定日期：',{en:'Specific dates: ',ja:'特定日：',de:'Bestimmte Termine: '})+r.specific.map(function(p){return seedDateT(p.label)+' '+p.times.join('、');}).join('；'));
+  return parts.length ? parts.join('　') : T('未提供偏好時段',{en:'No preferred time provided',ja:'希望時間帯の登録なし',de:'Keine bevorzugte Zeit angegeben'});
 }
 function reqStatusBadge(r){
-  if(r.status==='arranged') return '<span class="badge badge-ok">已安排</span>';
-  if(r.status==='needs_adjust') return '<span class="badge badge-danger">需調整</span>';
-  return '<span class="badge badge-warn">待顧問安排</span>';
+  if(r.status==='arranged') return '<span class="badge badge-ok">'+T('已安排',{en:'Arranged',ja:'手配済み',de:'Geplant'})+'</span>';
+  if(r.status==='needs_adjust') return '<span class="badge badge-danger">'+T('需調整',{en:'Needs Adjustment',ja:'要調整',de:'Anpassung nötig'})+'</span>';
+  return '<span class="badge badge-warn">'+T('待顧問安排',{en:'Awaiting Advisor Scheduling',ja:'アドバイザーの調整待ち',de:'Warten auf Terminplanung durch Berater'})+'</span>';
 }
 function renderRequestsList(){
   var wrap=document.getElementById('requestsList');
-  if(SCHEDULING_REQUESTS.length===0){ wrap.innerHTML='<p class="small muted">目前沒有排課需求。</p>'; return; }
+  if(SCHEDULING_REQUESTS.length===0){ wrap.innerHTML='<p class="small muted">'+T('目前沒有排課需求。',{en:'No scheduling requests yet.',ja:'予定調整の依頼はまだありません。',de:'Noch keine Terminanfragen.'})+'</p>'; return; }
   var sorted=SCHEDULING_REQUESTS.slice().sort(function(a,b){return b.submittedAt-a.submittedAt;});
   wrap.innerHTML=sorted.map(function(r){
-    var plan=PLAN_META[r.planId]||{name:'－',payer:'self',payerLabel:'自費'};
+    var plan=PLAN_META[r.planId]||{name:'－',payer:'self'};
     var extra='';
     if(r.status==='arranged'){
-      extra='<div class="req-meta">已安排：<strong>'+r.arrangedTeacher+'</strong>・'+r.arrangedTime+'（由顧問安排老師）</div>';
+      extra='<div class="req-meta">'+T('已安排：',{en:'Arranged: ',ja:'手配済み：',de:'Geplant: '})+'<strong>'+r.arrangedTeacher+'</strong>・'+seedDateT(r.arrangedTime)+T('（由顧問安排老師）',{en:' (teacher arranged by advisor)',ja:'（アドバイザーが講師を手配）',de:' (Lehrkraft vom Berater vermittelt)'})+'</div>';
     }else if(r.status==='needs_adjust'){
-      extra='<div class="req-meta" style="color:#912018;">顧問留言：'+r.advisorNote+'</div>';
+      extra='<div class="req-meta" style="color:#912018;">'+T('顧問留言：',{en:'Advisor\'s note: ',ja:'アドバイザーからの連絡：',de:'Hinweis des Beraters: '})+seedT(r.advisorNote)+'</div>';
     }
     return '<div class="req-row" data-id="'+r.id+'">'+
-      '<div class="req-top"><span class="payer-badge payer-'+plan.payer+'">'+plan.payerLabel+'</span>'+reqStatusBadge(r)+'</div>'+
-      '<div class="req-meta">你提出的時段：'+reqPrefText(r)+'</div>'+
-      (r.note?'<div class="req-note">備註：'+r.note+'</div>':'')+
+      '<div class="req-top"><span class="payer-badge payer-'+plan.payer+'">'+payerLabelT(plan.payer)+'</span>'+reqStatusBadge(r)+'</div>'+
+      '<div class="req-meta">'+T('你提出的時段：',{en:'Your submitted availability: ',ja:'提出済みの希望時間：',de:'Von Ihnen angegebene Verfügbarkeit: '})+reqPrefText(r)+'</div>'+
+      (r.note?'<div class="req-note">'+T('備註：',{en:'Notes: ',ja:'備考：',de:'Notiz: '})+seedT(r.note)+'</div>':'')+
       extra+
     '</div>';
   }).join('');
@@ -909,7 +934,7 @@ function renderRequestsList(){
 function submitSchedulingRequest(){
   if(!selectedReqPlanId) return;
   if(weeklySelectedList().length===0 && specificPrefs.length===0){
-    showToast('請至少提出一個有空時段（每週固定或特定日期）');
+    showToast(T('請至少提出一個有空時段（每週固定或特定日期）',{en:'Please provide at least one available time (weekly recurring or a specific date)',ja:'毎週固定または特定の日付で、少なくとも1つの空き時間を提出してください',de:'Bitte geben Sie mindestens eine Verfügbarkeit an (wöchentlich oder ein bestimmter Termin)'}));
     return;
   }
   var note=document.getElementById('reqNote').value.trim();
@@ -935,11 +960,11 @@ function submitSchedulingRequest(){
   renderPendingSchedule();
   updatePendingScheduleVisibility();
   var banner=document.getElementById('requestSentBanner');
-  var text='已送出排課需求，顧問會在（依設定）工作天內為你安排並通知。';
-  if(selectedReqPlanId==='plan-c') text+='此需求已同步通知 HR（依合約審核模式）。';
+  var text=T('已送出排課需求，顧問會在（依設定）工作天內為你安排並通知。',{en:'Request submitted. Your advisor will schedule it and notify you within the configured number of business days.',ja:'送信しました。アドバイザーが設定された営業日数以内に調整のうえご連絡します。',de:'Anfrage gesendet. Ihr Berater plant den Termin und benachrichtigt Sie innerhalb der festgelegten Anzahl an Werktagen.'});
+  if(selectedReqPlanId==='plan-c') text+=T('此需求已同步通知 HR（依合約審核模式）。',{en:' This request has also been sent to HR (per contract approval workflow).',ja:'この依頼は契約の承認フローに従い HR にも通知済みです。',de:' Diese Anfrage wurde gemäß dem vertraglichen Freigabeprozess auch an die Personalabteilung gesendet.'});
   banner.textContent=text;
   banner.classList.remove('hidden');
-  showToast('已送出排課需求');
+  showToast(T('已送出排課需求',{en:'Request submitted',ja:'送信しました',de:'Anfrage gesendet'}));
 }
 
 /* ================= 一對一排課區塊：收合切換 ================= */
@@ -965,10 +990,10 @@ function renderPendingSchedule(){
   if(!wrap) return;
   var items=pendingScheduleItems();
   if(items.length===0){ wrap.innerHTML=''; return; }
-  wrap.innerHTML='<div class="section-title first" style="margin-top:0;">待顧問安排</div>'+
+  wrap.innerHTML='<div class="section-title first" style="margin-top:0;">'+T('待顧問安排',{en:'Awaiting Advisor Scheduling',ja:'アドバイザーの調整待ち',de:'Warten auf Terminplanung durch Berater'})+'</div>'+
     items.map(function(r){
       var plan=PLAN_META[r.planId]||{name:'－'};
-      return '<div class="pending-card"><h4>待安排・你提出的時段：'+reqPrefText(r)+'</h4><p>方案：'+plan.name+(r.note?('・備註：'+r.note):'')+'</p></div>';
+      return '<div class="pending-card"><h4>'+T('待安排・你提出的時段：',{en:'Pending \u00b7 your submitted availability: ',ja:'手配待ち・提出済みの希望時間：',de:'Ausstehend \u00b7 Ihre angegebene Verfügbarkeit: '})+reqPrefText(r)+'</h4><p>'+T('方案：',{en:'Plan: ',ja:'プラン：',de:'Paket: '})+plan.name+(r.note?(T('・備註：',{en:' \u00b7 Notes: ',ja:'・備考：',de:' \u00b7 Notiz: '})+seedT(r.note)):'')+'</p></div>';
     }).join('');
 }
 function updatePendingScheduleVisibility(){
@@ -1002,7 +1027,7 @@ function goToday(){
 
 /* ================= 月視圖 ================= */
 function renderMonth(){
-  document.getElementById('periodLabel').textContent=monthAnchor.getFullYear()+'年'+(monthAnchor.getMonth()+1)+'月';
+  document.getElementById('periodLabel').textContent=calTitleText(monthAnchor.getFullYear(),monthAnchor.getMonth()+1,false);
   var grid=document.getElementById('monthGrid');
   grid.innerHTML='';
   var year=monthAnchor.getFullYear(), month=monthAnchor.getMonth();
@@ -1027,14 +1052,14 @@ function renderMonth(){
     items.slice(0,3).forEach(function(it){
       var meta=TYPE_META[it.type];
       var live=isLiveNow(it);
-      dotsHtml+='<span class="type-dot tc-'+it.type+(it.status!=='upcoming'?' faded':'')+(live?' dot-live':'')+'" title="'+fmtSessionTime(it)+' '+it.title+(live?'（進行中）':'')+'">'+meta.abbr+'</span>';
-      classlistHtml+='<span class="md-class-line'+(it.status!=='upcoming'?' faded':'')+'" title="'+fmtSessionTime(it)+' '+it.title+(live?'（進行中）':'')+'">'+
+      dotsHtml+='<span class="type-dot tc-'+it.type+(it.status!=='upcoming'?' faded':'')+(live?' dot-live':'')+'" title="'+fmtSessionTime(it)+' '+it.title+(live?liveNowTagParen():'')+'">'+typeAbbrT(it.type)+'</span>';
+      classlistHtml+='<span class="md-class-line'+(it.status!=='upcoming'?' faded':'')+'" title="'+fmtSessionTime(it)+' '+it.title+(live?liveNowTagParen():'')+'">'+
         '<span class="md-class-dot tc-'+it.type+(live?' dot-live':'')+'"></span>'+
-        '<span class="md-class-text">'+monthClassLineLabel(it)+(live?'　<span class="live-now-tag">進行中</span>':'')+'</span></span>';
+        '<span class="md-class-text">'+monthClassLineLabel(it)+(live?('　<span class="live-now-tag">'+liveNowTagPlain()+'</span>'):'')+'</span></span>';
     });
     if(items.length>3){
       dotsHtml+='<span class="month-more">+'+(items.length-3)+'</span>';
-      classlistHtml+='<span class="md-more-line">還有 '+(items.length-3)+' 堂</span>';
+      classlistHtml+='<span class="md-more-line">'+T('還有 '+(items.length-3)+' 堂',{en:'+'+(items.length-3)+' more',ja:'他 '+(items.length-3)+' 件',de:'+'+(items.length-3)+' weitere'})+'</span>';
     }
     cell.innerHTML='<span class="md-num">'+day+'</span>'+
       '<span class="md-classlist">'+classlistHtml+'</span>'+
@@ -1047,26 +1072,27 @@ function renderMonth(){
 }
 /* 月檢視名稱條文字：時間＋類型＋簡稱（一對一／聊天室／活動用老師，團體直播用班級簡稱） */
 function monthClassLineLabel(it){
-  var meta=TYPE_META[it.type];
   var suffix = it.shortLabel || it.teacher || '';
-  return pad2(it.start.getHours())+':'+pad2(it.start.getMinutes())+' '+meta.label+(suffix?(' '+suffix):'');
+  return pad2(it.start.getHours())+':'+pad2(it.start.getMinutes())+' '+typeLabelT(it.type)+(suffix?(' '+suffix):'');
 }
+var _lastDaySheetDate=null;
 function openDaySheet(d,items){
+  _lastDaySheetDate=d;
   document.getElementById('daySheetTitle').textContent=fmtDateHeading(d);
   var wrap=document.getElementById('daySheetList');
   if(items.length===0){
-    wrap.innerHTML='<p class="list-empty">這段期間沒有符合的課程</p>';
+    wrap.innerHTML='<p class="list-empty">'+T('這段期間沒有符合的課程',{en:'No classes match this period',ja:'この期間に該当するクラスはありません',de:'In diesem Zeitraum gibt es keine passenden Kurse'})+'</p>';
   }else{
     wrap.innerHTML=items.map(function(it){ return renderListRowHtml(it,'day-'); }).join('');
   }
   document.getElementById('daySheetOverlay').classList.remove('hidden');
 }
-function closeDaySheet(){ document.getElementById('daySheetOverlay').classList.add('hidden'); }
+function closeDaySheet(){ _lastDaySheetDate=null; document.getElementById('daySheetOverlay').classList.add('hidden'); }
 
 /* ================= 週視圖 ================= */
 function renderWeek(){
   var sunday=addDays(weekAnchor,6);
-  document.getElementById('periodLabel').textContent=fmtMD(weekAnchor)+'（一）－'+fmtMD(sunday)+'（日）';
+  document.getElementById('periodLabel').textContent=fmtMD(weekAnchor)+wdParen('一')+'－'+fmtMD(sunday)+wdParen('日');
   var grid=document.getElementById('weekGrid');
   grid.innerHTML='';
   var wdLabel=['一','二','三','四','五','六','日'];
@@ -1077,12 +1103,12 @@ function renderWeek(){
     total+=items.length;
     var col=document.createElement('div');
     col.className='week-day'+(sameDate(d,NOW)?' today':'');
-    var label=wdLabel[i]+(sameDate(d,NOW)?'・今天':'');
+    var label=wdShort(wdLabel[i])+(sameDate(d,NOW)?('・'+todayTag()):'');
     var pillsHtml=items.map(function(it){
       var meta=TYPE_META[it.type];
       var live=isLiveNow(it);
       var cls='class-pill '+meta.pillClass+(it.status!=='upcoming'?' faded':'')+(live?' pill-live':'');
-      return '<button type="button" class="'+cls+'" id="pill-'+it.id+'" onclick="openSheet(\''+it.id+'\')">'+pad2(it.start.getHours())+':'+pad2(it.start.getMinutes())+' '+it.title+(live?'　<span class="live-now-tag">進行中</span>':'')+'</button>';
+      return '<button type="button" class="'+cls+'" id="pill-'+it.id+'" onclick="openSheet(\''+it.id+'\')">'+pad2(it.start.getHours())+':'+pad2(it.start.getMinutes())+' '+it.title+(live?('　<span class="live-now-tag">'+liveNowTagPlain()+'</span>'):'')+'</button>';
     }).join('');
     col.innerHTML='<span class="wd-label">'+label+'</span><span class="wd-date">'+d.getDate()+'</span>'+pillsHtml;
     grid.appendChild(col);
@@ -1097,7 +1123,7 @@ function renderList(){
   var filtered=SESSIONS.filter(matchesFilter).filter(function(s){ return listShowAll || s.start>=cutoff; }).sort(function(a,b){ return a.start-b.start; });
   var wrap=document.getElementById('listWrap');
   if(filtered.length===0){
-    wrap.innerHTML='<p class="list-empty">這段期間沒有符合的課程</p>';
+    wrap.innerHTML='<p class="list-empty">'+T('這段期間沒有符合的課程',{en:'No classes match this period',ja:'この期間に該当するクラスはありません',de:'In diesem Zeitraum gibt es keine passenden Kurse'})+'</p>';
   }else{
     var html='', lastKey=null;
     filtered.forEach(function(s){
@@ -1113,17 +1139,17 @@ function renderList(){
 function loadEarlier(){ listShowAll=true; renderList(); }
 
 function actionCellHtml(s){
-  if(s.status==='canceled'){ return '<span class="badge badge-muted">已取消</span>'; }
+  if(s.status==='canceled'){ return '<span class="badge badge-muted">'+T('已取消',{en:'Canceled',ja:'キャンセル済み',de:'Storniert'})+'</span>'; }
   if(s.status==='done'){
     return s.replay
-      ? '<button type="button" class="btn btn-outline btn-sm" onclick="event.stopPropagation();showToast(\'回放播放中\')">查看回放</button>'
-      : '<span class="badge badge-ok">已完成</span>';
+      ? '<button type="button" class="btn btn-outline btn-sm" onclick="event.stopPropagation();showToast(\''+T('回放播放中',{en:'Replay is now playing',ja:'録画を再生中です',de:'Aufzeichnung wird abgespielt'})+'\')">'+T('查看回放',{en:'Watch Replay',ja:'録画を見る',de:'Aufzeichnung ansehen'})+'</button>'
+      : '<span class="badge badge-ok">'+statusLabelT('done')+'</span>';
   }
   var hoursUntil=(s.start-NOW)/3600000;
   var canEnter = s.mode.indexOf('線上')===0 && NOW>=new Date(s.start.getTime()-15*60000) && NOW<=s.end;
-  if(canEnter){ return '<button type="button" class="btn btn-primary btn-sm" onclick="event.stopPropagation();openSheet(\''+s.id+'\')">進入教室</button>'; }
-  if(s.type!=='live' && hoursUntil>=12){ return '<button type="button" class="btn btn-outline btn-sm" onclick="event.stopPropagation();location.href=\'m05_leave.html?class='+s.id+'\'">請假／改期</button>'; }
-  return '<span class="status-text">'+STATUS_META[s.status].label+'</span>';
+  if(canEnter){ return '<button type="button" class="btn btn-primary btn-sm" onclick="event.stopPropagation();openSheet(\''+s.id+'\')">'+T('進入教室',{en:'Enter Classroom',ja:'教室に入室',de:'Klassenzimmer betreten'})+'</button>'; }
+  if(s.type!=='live' && hoursUntil>=12){ return '<button type="button" class="btn btn-outline btn-sm" onclick="event.stopPropagation();location.href=\'m05_leave.html?class='+s.id+'\'">'+T('請假／改期',{en:'Leave / Reschedule',ja:'欠席連絡・振替',de:'Abwesenheit / Verschieben'})+'</button>'; }
+  return '<span class="status-text">'+statusLabelT(s.status)+'</span>';
 }
 function renderListRowHtml(s,idPrefix){
   idPrefix=idPrefix||'row-';
@@ -1132,32 +1158,34 @@ function renderListRowHtml(s,idPrefix){
   return '<div class="list-row" id="'+idPrefix+s.id+'" style="cursor:pointer;" onclick="openSheet(\''+s.id+'\')">'+
     '<div class="icon-box '+meta.iconClass+'">'+meta.icon+'</div>'+
     '<div class="body"><h4>'+timeStr+' '+s.title+'</h4>'+
-    '<p>'+s.teacher+'・'+s.mode+dualTimeSuffix(s.start)+'</p></div>'+
+    '<p>'+s.teacher+'・'+modeT(s.mode)+dualTimeSuffix(s.start)+'</p></div>'+
     '<div class="trail">'+actionCellHtml(s)+'</div>'+
   '</div>';
 }
 
 /* ================= 課堂詳情 sheet ================= */
+var _lastSheetId=null;
 function openSheet(id){
   closeDaySheet();
   var c=SESSIONS_BY_ID[id];
   if(!c) return;
+  _lastSheetId=id;
   document.getElementById('dTitle').textContent=c.title;
   document.getElementById('dTime').textContent=fmtSessionTime(c)+dualTimeSuffix(c.start);
-  document.getElementById('dTeacher').textContent=c.teacher+(c.type==='individual'?'（由顧問安排）':'');
-  document.getElementById('dMode').textContent=c.mode;
+  document.getElementById('dTeacher').textContent=c.teacher+(c.type==='individual'?T('（由顧問安排）',{en:' (Arranged by advisor)',ja:'（アドバイザーが手配）',de:' (vom Berater vermittelt)'}):'');
+  document.getElementById('dMode').textContent=modeT(c.mode);
   document.getElementById('dMaterial').textContent=c.material;
   var modeBadge=document.getElementById('dBookingModeBadge');
   var meta=TYPE_META[c.type];
   modeBadge.className='badge '+meta.badgeClass;
-  modeBadge.textContent=meta.label;
+  modeBadge.textContent=typeLabelT(c.type);
 
   var payerBadge=document.getElementById('dPayerBadge');
   var planLine=document.getElementById('dPlanLine');
   var plan=PLAN_META[c.planId];
   if(plan){
     payerBadge.className='payer-badge payer-'+plan.payer;
-    payerBadge.textContent=plan.payerLabel;
+    payerBadge.textContent=payerLabelT(plan.payer);
     payerBadge.style.display='inline-block';
     document.getElementById('dPlanName').textContent=plan.name;
     planLine.style.display='block';
@@ -1178,21 +1206,23 @@ function renderActions(c,id){
   var area=document.getElementById('dActionArea');
   banner.classList.add('hidden'); banner.textContent='';
 
+  var leaveBtnLabel=T('請假',{en:'Request Leave',ja:'欠席連絡',de:'Abwesenheit melden'});
+  var rescheduleBtnLabel=T('改期',{en:'Reschedule',ja:'振替',de:'Verschieben'});
   if(c.status==='canceled'){
-    area.innerHTML='<p class="status-text">'+(c.type==='live'?'此堂課已取消（整班停課）。':'此堂課已取消／請假。')+'</p>';
+    area.innerHTML='<p class="status-text">'+(c.type==='live'?T('此堂課已取消（整班停課）。',{en:'This class has been canceled (entire class canceled).',ja:'本クラスはキャンセルされました（クラス全体休講）。',de:'Dieser Kurs wurde storniert (gesamte Klasse abgesagt).'}):T('此堂課已取消／請假。',{en:'This class has been canceled or you are on leave for it.',ja:'本レッスンはキャンセルまたは欠席済みです。',de:'Dieser Termin wurde storniert oder Sie sind dafür abwesend gemeldet.'}))+'</p>';
     return;
   }
   if(c.status==='done'){
     area.innerHTML = c.replay
-      ? '<button class="btn btn-outline btn-block" onclick="showToast(\'回放播放中\')">查看回放</button>'
-      : '<p class="status-text">已完成，本堂無回放紀錄。</p>';
+      ? '<button class="btn btn-outline btn-block" onclick="showToast(\''+T('回放播放中',{en:'Replay is now playing',ja:'録画を再生中です',de:'Aufzeichnung wird abgespielt'})+'\')">'+T('查看回放',{en:'Watch Replay',ja:'録画を見る',de:'Aufzeichnung ansehen'})+'</button>'
+      : '<p class="status-text">'+T('已完成，本堂無回放紀錄。',{en:'Completed \u2014 no replay is available for this class.',ja:'完了しました。このレッスンの録画はありません。',de:'Abgeschlossen \u2014 für diesen Termin ist keine Aufzeichnung verfügbar.'})+'</p>';
     return;
   }
   if(c.type==='live'){
     banner.classList.remove('hidden');
-    banner.textContent='直播班為固定班表整班上課，單堂可線上請假；如需調整整班課表（如補課、退班）請洽顧問協助處理。';
-    area.innerHTML='<p class="small muted" style="margin:0 0 10px;">請假時限：開課前（依設定）小時內可請假，逾時記缺席；回放僅開放給請假已核准者，核准後（依設定）天內可看。</p>'+
-      '<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'\'">請假</button>';
+    banner.textContent=T('直播班為固定班表整班上課，單堂可線上請假；如需調整整班課表（如補課、退班）請洽顧問協助處理。',{en:'Livestream classes follow a fixed group schedule; you can request leave online for a single session. For changes to the whole class schedule (make-up classes, withdrawal), please contact your advisor.',ja:'ライブ配信クラスは固定のクラス予定で運営されており、1回ごとにオンラインで欠席連絡が可能です。クラス全体の予定変更（補講・退会など）はアドバイザーにご相談ください。',de:'Live-Klassen folgen einem festen Gruppenstundenplan; für eine einzelne Einheit können Sie online eine Abwesenheit melden. Für Änderungen am gesamten Klassenplan (Nachholtermine, Abmeldung) wenden Sie sich bitte an Ihren Berater.'});
+    area.innerHTML='<p class="small muted" style="margin:0 0 10px;">'+T('請假時限：開課前（依設定）小時內可請假，逾時記缺席；回放僅開放給請假已核准者，核准後（依設定）天內可看。',{en:'Leave deadline: you may request leave up to a configured number of hours before class starts; after that it is recorded as an absence. Replay is only available to approved leave requests, for a configured number of days after approval.',ja:'欠席連絡の期限：開講前の設定時間内であれば欠席連絡が可能です。期限を過ぎると欠席として記録されます。録画は欠席連絡が承認された方のみ、承認後の設定日数以内でご覧いただけます。',de:'Frist für Abwesenheitsmeldung: Sie können bis zu einer festgelegten Anzahl von Stunden vor Kursbeginn eine Abwesenheit melden; danach wird sie als Fehlzeit erfasst. Die Aufzeichnung steht nur bei genehmigter Abwesenheit zur Verfügung, für eine festgelegte Anzahl von Tagen nach der Genehmigung.'})+'</p>'+
+      '<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'\'">'+leaveBtnLabel+'</button>';
     return;
   }
   var isEnterprise=c.planId==='plan-c';
@@ -1201,14 +1231,14 @@ function renderActions(c,id){
   if(hoursUntil<deadline){
     banner.classList.remove('hidden');
     banner.textContent = isEnterprise
-      ? ('已進入開課前 '+deadline+' 小時內；依企業合約，逾時將視免扣次數決定是否從公司時數池扣除並記入出勤，送出請假需經 HR 核准。')
-      : '已進入開課前 12 小時內，取消或改期恕不退還堂數。';
-    area.innerHTML='<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'\'">請假</button>';
+      ? T('已進入開課前 '+deadline+' 小時內；依企業合約，逾時將視免扣次數決定是否從公司時數池扣除並記入出勤，送出請假需經 HR 核准。',{en:'Within '+deadline+' hours before class; under your corporate contract, whether this is deducted from the company\'s hour pool depends on the no-deduction allowance, and it is recorded for attendance. Submitting a leave request requires HR approval.',ja:'開講前'+deadline+'時間以内です。企業契約に基づき、免除枠の範囲かどうかにより会社の時間数プールから控除するかを判断し、出席記録にも反映されます。欠席連絡の送信には人事部の承認が必要です。',de:'Sie befinden sich innerhalb von '+deadline+' Stunden vor Kursbeginn; gemäß Ihrem Firmenvertrag wird je nach verbleibendem Freikontingent entschieden, ob dies vom Stundenkontingent des Unternehmens abgezogen wird, und es wird als Anwesenheit erfasst. Das Absenden einer Abwesenheitsmeldung erfordert die Genehmigung der Personalabteilung.'})
+      : T('已進入開課前 12 小時內，取消或改期恕不退還堂數。',{en:'You are within 12 hours of class start; canceling or rescheduling will not refund the session.',ja:'開講12時間前を過ぎています。キャンセルまたは振替をされても回数分の返金はできません。',de:'Sie befinden sich innerhalb von 12 Stunden vor Kursbeginn; eine Stornierung oder Verschiebung wird nicht erstattet.'});
+    area.innerHTML='<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'\'">'+leaveBtnLabel+'</button>';
     return;
   }
   area.innerHTML='<div class="flex-between" style="gap:8px;">'+
-    '<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'\'">請假</button>'+
-    '<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'&mode=reschedule\'">改期</button></div>';
+    '<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'\'">'+leaveBtnLabel+'</button>'+
+    '<button class="btn btn-outline btn-block" onclick="location.href=\'m05_leave.html?class='+id+'&mode=reschedule\'">'+rescheduleBtnLabel+'</button></div>';
 }
 
 /* 進入線上教室／課後回饋入口：可進教室才渲染按鈕（連到 m16 線上教室頁，由另一路建置）；未到時間僅留提示文字；已完成則導向課後回饋 */
@@ -1224,7 +1254,7 @@ function isLiveNow(s){
 function renderEnterWrap(c,id){
   var enterWrap=document.getElementById('dEnterWrap');
   if(c.status==='done'){
-    enterWrap.innerHTML='<a class="btn btn-outline btn-block" href="m17_feedback.html?lesson='+id+'">填寫課後回饋</a>';
+    enterWrap.innerHTML='<a class="btn btn-outline btn-block" href="m17_feedback.html?lesson='+id+'">'+T('填寫課後回饋',{en:'Submit Lesson Feedback',ja:'授業フィードバックを記入',de:'Unterrichtsfeedback abgeben'})+'</a>';
     return;
   }
   if(c.status==='canceled'){
@@ -1232,17 +1262,18 @@ function renderEnterWrap(c,id){
     return;
   }
   if(c.mode.indexOf('線上')!==0){
-    enterWrap.innerHTML='<div class="banner banner-info" style="margin:0;">上課地點：'+c.mode+'（請於上課時間前到達）</div>';
+    enterWrap.innerHTML='<div class="banner banner-info" style="margin:0;">'+T('上課地點：',{en:'Location: ',ja:'受講場所：',de:'Unterrichtsort: '})+c.mode+T('（請於上課時間前到達）',{en:' (please arrive before class starts)',ja:'（開始時間までにお越しください）',de:' (bitte vor Kursbeginn eintreffen)'})+'</div>';
     return;
   }
   var canEnter=(NOW>=new Date(c.start.getTime()-15*60000))&&(NOW<=c.end);
   if(canEnter){
-    enterWrap.innerHTML='<a class="btn btn-primary btn-block" href="m16_classroom.html?lesson='+id+'&type='+classroomTypeParam(c.type)+'">進入線上教室</a>';
+    enterWrap.innerHTML='<a class="btn btn-primary btn-block" href="m16_classroom.html?lesson='+id+'&type='+classroomTypeParam(c.type)+'">'+T('進入線上教室',{en:'Enter Online Classroom',ja:'オンライン教室に入室',de:'Zum Online-Klassenzimmer'})+'</a>';
   }else{
-    enterWrap.innerHTML='<p class="small muted" style="margin:0;">開課前 15 分鐘開放進入教室</p>';
+    enterWrap.innerHTML='<p class="small muted" style="margin:0;">'+T('開課前 15 分鐘開放進入教室',{en:'The classroom opens 15 minutes before class starts',ja:'開講15分前から入室できます',de:'Der Klassenraum öffnet 15 Minuten vor Kursbeginn'})+'</p>';
   }
 }
 function closeSheet(){
+  _lastSheetId=null;
   document.getElementById('detailOverlay').classList.add('hidden');
 }
 
@@ -1277,10 +1308,12 @@ function highlightListRow(sessionId){
   row.classList.add('locate-highlight');
   setTimeout(function(){ row.classList.remove('locate-highlight'); },2000);
 }
+var _lastLocate=null;
 function showLocateBanner(name,startDate){
+  _lastLocate={name:name,startDate:startDate};
   var wrap=document.getElementById('locateBanner');
   if(!wrap) return;
-  document.getElementById('locateBannerText').textContent='已定位：'+name+'，下次上課 '+fmtOnePoint(startDate);
+  document.getElementById('locateBannerText').textContent=T('已定位：',{en:'Located: ',ja:'該当を表示：',de:'Gefunden: '})+name+T('，下次上課 ',{en:' \u2014 next class ',ja:'、次回の授業 ',de:', nächster Termin '})+fmtOnePoint(startDate);
   wrap.classList.remove('hidden');
 }
 function locateClassFromQuery(){
@@ -1317,7 +1350,28 @@ document.addEventListener('keydown', function(e){
     el.classList.add('hidden');
   });
 });
+
+/* ================= 五語：動態內容重新渲染登記（切換語言／非預設語言重新載入時重跑） ================= */
+function refreshOpenOverlays(){
+  if(_lastDaySheetDate && !document.getElementById('daySheetOverlay').classList.contains('hidden')){
+    var items=SESSIONS.filter(function(s){ return matchesFilter(s)&&sameDate(s.start,_lastDaySheetDate); }).sort(function(a,b){ return a.start-b.start; });
+    openDaySheet(_lastDaySheetDate,items);
+  }
+  if(_lastSheetId && !document.getElementById('detailOverlay').classList.contains('hidden')){
+    openSheet(_lastSheetId);
+  }
+  if(_lastLocate){ showLocateBanner(_lastLocate.name,_lastLocate.startDate); }
+}
+TLI_I18N.onRefresh(renderWeeklyGrid);
+TLI_I18N.onRefresh(renderPrefCalendarGrid);
+TLI_I18N.onRefresh(renderPrefTimeChips);
+TLI_I18N.onRefresh(renderSpecificPrefList);
+TLI_I18N.onRefresh(renderReqPlanPicker);
+TLI_I18N.onRefresh(renderRequestsList);
+TLI_I18N.onRefresh(renderAll);
+TLI_I18N.onRefresh(refreshOpenOverlays);
+TLI_I18N.init();
 </script>
-<div class="toast hidden" id="toast">已完成</div>
+<div class="toast hidden" id="toast"></div>
 </body>
 </html>

@@ -24,14 +24,16 @@ var deliveryModes = [
  {id:'ondemand', name:'隨選', desc:'預錄課程內容，學生自行安排學習進度', needsVideoRoom:false, allowSelfSchedule:true, enabled:true}
 ];
 
-/* ---- 3. 教學語言（來源 a17，原本叫「語言」；產品用哪種語言教學，與介面語系是兩回事） ---- */
+/* ---- 3. 教學語言（來源 a17，原本叫「語言」；產品用哪種語言教學，與介面語系是兩回事）
+   20260930 新增 legacyNames：部分頁面／教師示範資料仍用舊版「語」尾命名（如「英語」「日語」），
+   為避免逐一改寫既有示範資料造成選中值消失，新頁改讀本主檔時可用 legacyNames 做相容比對 ---- */
 var teachLangs = [
  {id:'zh', name:'中文', nameMulti:'Chinese／中文（繁體）', enabled:true},
- {id:'en', name:'英文', nameMulti:'English', enabled:true},
- {id:'ja', name:'日文', nameMulti:'Japanese／日本語', enabled:true},
- {id:'ko', name:'韓文', nameMulti:'Korean／한국어', enabled:true},
- {id:'de', name:'德文', nameMulti:'German／Deutsch', enabled:true},
- {id:'fr', name:'法文', nameMulti:'French／Français', enabled:true},
+ {id:'en', name:'英文', nameMulti:'English', enabled:true, legacyNames:['英語']},
+ {id:'ja', name:'日文', nameMulti:'Japanese／日本語', enabled:true, legacyNames:['日語']},
+ {id:'ko', name:'韓文', nameMulti:'Korean／한국어', enabled:true, legacyNames:['韓語']},
+ {id:'de', name:'德文', nameMulti:'German／Deutsch', enabled:true, legacyNames:['德語']},
+ {id:'fr', name:'法文', nameMulti:'French／Français', enabled:true, legacyNames:['法語']},
  {id:'tw', name:'台語', nameMulti:'Taiwanese／臺語', enabled:true},
  {id:'wu', name:'上海話', nameMulti:'Shanghainese／上海話', enabled:true},
  {id:'yue', name:'廣東話', nameMulti:'Cantonese／廣東話', enabled:true}
@@ -443,6 +445,90 @@ var projects = [
   brandExposure:'完全不露出', domain:'（由經銷商自有通路銷售，無獨立網域）', sender:'（由經銷商自有品牌發送）'}
 ];
 
+/* ---- 15. 教學影片庫（20260930 新增，來源 a03「產品詳情」CONTENT_VIDEOS；供自學課程單元挑選教學影片用。
+   欄位刻意精簡，只留單元挑選需要的部分；a18「資源庫」影片庫本身有更完整的管理欄位（狀態／標籤／來源等），
+   兩邊示範資料的影片主題彼此對應但非同一份，正式串接時建議合併為一份 ---- */
+var videoLibrary = [
+ {id:'cv1', name:'機場入境情境示範', en:'Airport Arrival Scenario Demo', platform:'Vimeo', duration:'6:20'},
+ {id:'cv2', name:'校園生活會話示範', en:'Campus Life Conversation Demo', platform:'CloudFront', duration:'7:05'},
+ {id:'cv3', name:'商務會議開場示範', en:'Business Meeting Opening Demo', platform:'Vimeo', duration:'6:45'},
+ {id:'cv4', name:'電話聯繫用語示範', en:'Phone Contact Phrases Demo', platform:'Vimeo', duration:'5:50'},
+ {id:'cv5', name:'Email 商務書信示範', en:'Business Email Writing Demo', platform:'Vimeo', duration:'6:10'},
+ {id:'cv6', name:'產品簡報練習示範', en:'Product Presentation Practice Demo', platform:'CloudFront', duration:'7:30'},
+ {id:'cv7', name:'價格協商情境示範', en:'Price Negotiation Scenario Demo', platform:'Vimeo', duration:'6:55'},
+ {id:'cv8', name:'期中口說總複習示範', en:'Midterm Speaking Review Demo', platform:'Vimeo', duration:'8:10'}
+];
+
+/* ---- 16. 測驗庫（20260930 新增，來源 a03「產品詳情」CONTENT_QUIZZES；供自學課程單元挑選單元測驗用，
+   source：'self' 平台自建／'wordwall' 外部 Wordwall 資源 ---- */
+var quizzes = [
+ {id:'qz_u1', name:'第 1 單元：機場入境與問候・單元測驗', en:'Unit 1: Airport Arrival & Greetings · Unit Quiz', source:'self'},
+ {id:'qz_u2', name:'第 2 單元：校園生活會話・單元測驗', en:'Unit 2: Campus Life Conversation · Unit Quiz', source:'self'},
+ {id:'qz_u3', name:'第 3 單元：商務會議開場・單元測驗', en:'Unit 3: Business Meeting Opening · Unit Quiz', source:'self'},
+ {id:'qz_u4', name:'第 4 單元：電話聯繫用語・單元測驗', en:'Unit 4: Phone Contact Phrases · Unit Quiz', source:'self'},
+ {id:'qz_u5', name:'第 5 單元：Email 商務書信・單元測驗', en:'Unit 5: Business Email Writing · Unit Quiz', source:'self'},
+ {id:'qz_u6', name:'第 6 單元：產品簡報練習・單元測驗', en:'Unit 6: Product Presentation Practice · Unit Quiz', source:'self'},
+ {id:'qz_u7', name:'第 7 單元：價格協商情境・單元測驗', en:'Unit 7: Price Negotiation Scenario · Unit Quiz', source:'self'},
+ {id:'qz_u8', name:'第 8 單元：期中口說總複習・單元測驗', en:'Unit 8: Midterm Speaking Review · Unit Quiz', source:'self'},
+ {id:'qz_ww01', name:'機場情境互動練習（Wordwall・配對遊戲）', en:'Airport Scenario Interactive Practice (Wordwall · Matching Game)', source:'wordwall'},
+ {id:'qz_ww02', name:'商務會話綜合練習（Wordwall・隨機轉盤）', en:'Business Conversation Practice (Wordwall · Random Wheel)', source:'wordwall'}
+];
+
+/* ---- 17. 組合包（20260930 新增，來源 a04「銷售方案設定」BUNDLES；供 a04／a08 對應組合包促銷下拉共用） ---- */
+var bundles = [
+ {id:'bd1', name:'新生開學組合', en:'New Student Back-to-School Bundle', type:'bundle', salesMode:'direct', packages:['pk1','pk2'], discountPct:10, channel:['公開網站'], periodStart:'2026-09-01', periodEnd:'2027-02-28', status:'上架'},
+ {id:'bd2', name:'企業培訓組合（不顯示於前台）', en:'Corporate Training Bundle (Not Shown on Storefront)', type:'bundle', salesMode:'advisor', packages:['pk4','pk2'], discountPct:15, channel:['企業專案'], periodStart:'', periodEnd:'', status:'上架'}
+];
+
+/* ---- 18. 顧問／業務人員（20260930 新增，來源顧問工作台 c08「詢問管理」示範資料；
+   20260930 c05／c08 已改讀本集合：fAdvisor／batchAdvisor／reassignSel（c08）與
+   payModalWay／payEditWay（c05，見下方 19. 收款方式集合，非本集合） ---- */
+var advisors = [
+ {id:'adv1', name:'王大明', en:'Wang Da-Ming', campus:'羅斯福校區'},
+ {id:'adv2', name:'林顧問', en:'Advisor Lin', campus:'士林校區'},
+ {id:'adv3', name:'陳顧問', en:'Advisor Chen', campus:'台中校區'}
+];
+
+/* ---- 19. 收款方式（20260930 新增，來源顧問工作台 c05「訂單詳情」示範資料；
+   管理後台 a23「金流／收單設定」目前只有 POS 收單機清單，沒有獨立的收款方式集合，
+   故本集合以 c05 既有 PAY_WAYS／PAY_WAY_EN 為準整理。availableForNew：登記新收款
+   （payModalWay）只開放常用方式；既有收款紀錄（payEditWay）可選到全部方式 ---- */
+var paymentMethods = [
+ {id:'wire', name:'匯款', en:'Wire Transfer', availableForNew:true, enabled:true},
+ {id:'card', name:'信用卡', en:'Credit Card', availableForNew:true, enabled:true},
+ {id:'cash', name:'現金', en:'Cash', availableForNew:true, enabled:true},
+ {id:'linepay', name:'LinePay', en:'LinePay', availableForNew:true, enabled:true},
+ {id:'newebpay', name:'藍新付款連結', en:'NewebPay Payment Link', availableForNew:false, enabled:true},
+ {id:'stripe', name:'Stripe（海外學生）', en:'Stripe (Overseas Students)', availableForNew:false, enabled:true},
+ {id:'posterm', name:'現場刷卡機', en:'On-site Card Terminal', availableForNew:false, enabled:true}
+];
+
+/* ---- 19. 會員學習主題（20260930 新增；三個會員頁情境各自的挑選清單彼此獨立，用子物件分組。
+   chatTopics 僅提供 m14／m14b 下拉選項與翻譯，主題詳細教材（等級／簡介／討論題綱／帶領老師）
+   仍在各頁本地 TOPIC_INFO 維護，正式串接時建議與本集合合併 ---- */
+var learningTopics = {
+  requestCourses: [
+   {id:'individual-conversation', name:'中文一對一－會話進階', en:'1-on-1 Mandarin — Advanced Conversation'},
+   {id:'individual-listening', name:'中文一對一－聽力加強', en:'1-on-1 Mandarin — Listening Practice'}
+  ],
+  selfPacedFocus: [
+   {id:'發音', name:'發音', en:'Pronunciation'},
+   {id:'商務', name:'商務', en:'Business'},
+   {id:'生活', name:'生活', en:'Daily Life'},
+   {id:'文化', name:'文化', en:'Culture'},
+   {id:'寫作', name:'寫作', en:'Writing'},
+   {id:'聽力', name:'聽力', en:'Listening'}
+  ],
+  chatTopics: [
+   {id:'日常對話練習', name:'日常對話練習', en:'Everyday Conversation Practice'},
+   {id:'時事話題討論', name:'時事話題討論', en:'Current Events Discussion'},
+   {id:'商務情境會話', name:'商務情境會話', en:'Business Scenario Conversation'},
+   {id:'旅遊實用會話', name:'旅遊實用會話', en:'Practical Travel Conversation'},
+   {id:'影視片段討論', name:'影視片段討論', en:'Film Clip Discussion'},
+   {id:'文化觀察分享', name:'文化觀察分享', en:'Cultural Observation Sharing'}
+  ]
+};
+
 /* ================= 工具函式 ================= */
 function options(listName, opts){
   opts = opts || {};
@@ -472,7 +558,12 @@ var MANAGE_LINKS = {
   orgCustomers:'a19_b2b_enterprise.html',
   partners:'a20_agents.html',
   packages:'a04_packages.html',
-  projects:'a21_projects.html'
+  projects:'a21_projects.html',
+  videoLibrary:'a18_resource_library.html',
+  quizzes:'a22_quizzes.html',
+  bundles:'a04_packages.html',
+  advisors:'a14_feedback.html',
+  paymentMethods:'a23_payment_gateways.html'
 };
 function manageLink(listName){
   var href = MANAGE_LINKS[listName] || 'a17_master_data.html';
@@ -501,6 +592,12 @@ global.TLI_MASTERS = {
   orgCustomers: orgCustomers,
   packages: packages,
   projects: projects,
+  videoLibrary: videoLibrary,
+  quizzes: quizzes,
+  bundles: bundles,
+  advisors: advisors,
+  paymentMethods: paymentMethods,
+  learningTopics: learningTopics,
   guessLevelId: guessLevelId,
   options: options,
   byId: byId,

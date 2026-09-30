@@ -380,8 +380,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c08.aiIntro">可以直接問我諮詢或試聽單的狀況，例如哪些已逾期未聯繫、哪些今天要跟進。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo(1)">今天有哪些單已逾期未聯繫？</button>
-      <button onclick="tliAskDemo(2)">本週轉訂單數是多少？</button>
+      <button onclick="tliAskDemo(1)" data-i18n="c08.aiQ1">今天有哪些單已逾期未聯繫？</button>
+      <button onclick="tliAskDemo(2)" data-i18n="c08.aiQ2">本週轉訂單數是多少？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題" data-i18n-placeholder="ai.inputPlaceholder" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -422,17 +422,21 @@ function fmtDate(d){return d.getFullYear()+'-'+pad(d.getMonth()+1,2)+'-'+pad(d.g
 function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
 
 var SOURCES=['官網表單','AI 諮詢助手','線上諮詢面板','活動報名','LINE'];
-var LANGS=['中文','日文','英文','韓文'];
+var SOURCES_EN_C08={'官網表單':'Website Form','AI 諮詢助手':'AI Inquiry Assistant','線上諮詢面板':'Online Consultation Panel','活動報名':'Event Registration','LINE':'LINE'};
+// 20260930 修正：語言篩選改讀主檔 teachLangs（教學語言主檔），不再各頁各寫一套
+var LANGS=TLI_MASTERS.teachLangs.filter(function(l){return l.enabled;}).map(function(l){return l.name;});
 var LEVELS=['入門','初級','中級','中高級','進階'];
 // 20260928 修正：校區改讀主檔 campuses（含線上），短名去掉「校區」二字與既有欄位一致
 var CAMPUSES=TLI_MASTERS.campuses.map(function(c){return c.name.replace('校區','');});
-var ADVISORS=['王大明','林顧問','陳顧問'];
+// 20260930 修正：負責顧問改讀主檔 advisors，不再各頁各寫一套
+var ADVISORS=TLI_MASTERS.advisors.map(function(a){return a.name;});
 var SLOT_TEXTS=['週二三晚上 19:00–21:00','週一四下午 14:00–16:00','週三五晚上 18:00–20:00','週六上午 10:00–12:00','週五晚上 20:00–21:00','週間中午 12:00–13:00'];
 var NOTES=['想了解職場中文班的收費與時段','小孩暑假想加強日文會話','出差前想快速加強商用英文','考慮中的方案想先試聽再決定','朋友推薦，想了解師資背景','公司內訓需求，想了解團體班報價'];
 var EVENT_NAMES=['線上日文期間限定體驗營','台北國際教育展攤位','企業華語工作坊','LINE 好友限定試聽週'];
 var CLOSE_REASONS=['已在其他機構報名','預算不符','時段無法配合','僅為詢價，暫無學習計畫','聯繫多次無回應'];
 var CLOSE_REASONS_EN={'已在其他機構報名':'Already enrolled elsewhere','預算不符':'Budget mismatch','時段無法配合':'Schedule conflict','僅為詢價，暫無學習計畫':'Price inquiry only, no learning plan yet','聯繫多次無回應':'No response after multiple contacts'};
-var TRIAL_TEACHERS=['李老師','林俊傑老師','黃老師','Kelly 老師','陳美惠老師','許老師'];
+// 20260930 修正：安排試聽老師改讀主檔 teachers（中心教師、已認證、在職），不再各頁各寫一套
+var TRIAL_TEACHERS=TLI_MASTERS.teachers.filter(function(t){return t.type==='center'&&t.certified&&t.active;}).map(function(t){return t.name;});
 var NAME_POOL=['林思妤','黃冠霖','張雅婷','陳建宏','王大同','Emma Chen','Kevin Wu','山田太郎','李文彬','陳美惠','Sophie Lin','吳建霖','林佳穎','張小華','林小雅','許雅筑','蔡承翰','周于庭','謝孟哲','曾雅雯','Rachel Wu','Daniel Lin','高子晴','游承恩','邱思穎'];
 
 var SLA_ACTIVE=['新進','已聯繫'];
@@ -442,6 +446,8 @@ function isSlaActive(o){return SLA_ACTIVE.indexOf(o.status)>-1;}
 var SOURCE_SELF='自助預約（網站）';
 var ORIGIN_ALL=['自助預約（網站）','顧問安排','活動報名','轉介','企業諮詢'];
 var ORIGIN_BADGE_CLASS={'自助預約（網站）':'origin-self','顧問安排':'origin-advisor','活動報名':'origin-event','轉介':'origin-referral','企業諮詢':'b2b'};
+var ORIGIN_EN_C08={'自助預約（網站）':'Self-Booked (Website)','企業諮詢':'Corporate Inquiry','活動報名':'Event Registration','轉介':'Referral','顧問安排':'Advisor Arranged'};
+var CONTACT_METHOD_EN_C08={'電話':'Phone','Email':'Email','LINE':'LINE','企業窗口聯繫':'Enterprise Contact Channel','其他':'Other'};
 function mapOriginCat(o){
   if(o.isSelfBooked)return '自助預約（網站）';
   if(o.isEnterprise)return '企業諮詢';
@@ -450,7 +456,7 @@ function mapOriginCat(o){
   return '顧問安排'; // 官網表單／AI 諮詢助手／線上諮詢面板：皆需顧問主動聯繫並安排試聽
 }
 function originBadge(o){
-  return '<span class="badge '+(ORIGIN_BADGE_CLASS[o.originCat]||'muted')+'">'+o.originCat+'</span>';
+  return '<span class="badge '+(ORIGIN_BADGE_CLASS[o.originCat]||'muted')+'">'+T(o.originCat,ORIGIN_EN_C08[o.originCat]||o.originCat)+'</span>';
 }
 
 var STATUS_GROUPS=[
@@ -477,32 +483,32 @@ function buildTrialFeedback(o){
 function buildTimeline(o){
   var tl=[];
   if(o.isSelfBooked){
-    tl.push({t:o.submittedAt,label:'學員於官網自助選擇老師與時段並完成付款（試聽費 NT$390，同官網 p06 頁）'});
-    tl.push({t:o.submittedAt,label:'系統自動指派顧問（用於試聽後跟進）：'+(o.advisor||'待指派')});
-    tl.push({t:o.submittedAt,label:'已加入顧問「試聽後跟進」待辦清單'});
+    tl.push({t:o.submittedAt,label:T('學員於官網自助選擇老師與時段並完成付款（試聽費 NT$390，同官網 p06 頁）','Student self-selected a teacher and time slot on the website and completed payment (trial fee NT$390, same as website p06)')});
+    tl.push({t:o.submittedAt,label:T('系統自動指派顧問（用於試聽後跟進）：','System auto-assigned advisor (for post-trial follow-up): ')+(o.advisor||T('待指派','Unassigned'))});
+    tl.push({t:o.submittedAt,label:T('已加入顧問「試聽後跟進」待辦清單','Added to advisor\'s "Post-Trial Follow-up" to-do list')});
     if(['已上試聽','已購買','未購買待跟進'].indexOf(o.status)>-1){
-      tl.push({t:'',label:'已完成試聽課程：'+(o.trialTeacher||'系統配對')+'・'+(o.slotText||'')});
+      tl.push({t:'',label:T('已完成試聽課程：','Trial lesson completed: ')+(o.trialTeacher||T('系統配對','System-Matched'))+'・'+(o.slotText||'')});
     }
-    if(o.status==='已購買'){ tl.push({t:'',label:'顧問跟進後已購買：'+o.purchasedPlan}); }
-    if(o.status==='未購買待跟進'){ tl.push({t:'',label:'顧問已跟進，暫未購買：'+o.followupReason}); }
+    if(o.status==='已購買'){ tl.push({t:'',label:T('顧問跟進後已購買：','Purchased after advisor follow-up: ')+o.purchasedPlan}); }
+    if(o.status==='未購買待跟進'){ tl.push({t:'',label:T('顧問已跟進，暫未購買：','Advisor followed up, not yet purchased: ')+T(o.followupReason,SELF_FOLLOWUP_REASONS_EN[o.followupReason]||o.followupReason)}); }
     return tl;
   }
-  tl.push({t:o.submittedAt,label:'前台送出（'+o.source+(o.eventName?'・'+o.eventName:'')+'）'});
-  tl.push({t:o.submittedAt,label:'N8N 自動建單，寫入 3.0 中台'});
-  tl.push({t:o.submittedAt,label:'系統自動指派顧問：'+(o.advisor||'待指派')});
-  tl.push({t:o.submittedAt,label:'通知已送達顧問（Email／App 通知）'});
-  if(o.status!=='新進'){ tl.push({t:'',label:'顧問標記已聯繫'+(o.contactMethod?'（'+o.contactMethod+'）':'')}); }
+  tl.push({t:o.submittedAt,label:T('前台送出（','Submitted from front-end (')+T(o.source,SOURCES_EN_C08[o.source]||o.source)+(o.eventName?'・'+o.eventName:'')+T('）',')')});
+  tl.push({t:o.submittedAt,label:T('N8N 自動建單，寫入 3.0 中台','N8N auto-created the record, written into the 3.0 middle platform')});
+  tl.push({t:o.submittedAt,label:T('系統自動指派顧問：','System auto-assigned advisor: ')+(o.advisor||T('待指派','Unassigned'))});
+  tl.push({t:o.submittedAt,label:T('通知已送達顧問（Email／App 通知）','Notification delivered to advisor (Email/App notification)')});
+  if(o.status!=='新進'){ tl.push({t:'',label:T('顧問標記已聯繫','Advisor marked as contacted')+(o.contactMethod?T('（','(')+T(o.contactMethod,CONTACT_METHOD_EN_C08[o.contactMethod]||o.contactMethod)+T('）',')'):'')}); }
   if((o.status==='已安排試聽'||o.status==='已轉訂單')&&o.trialTeacher){
-    tl.push({t:'',label:'已安排試聽：'+o.trialTeacher+'・'+(o.trialSlot||'')+'，已建立唯一 Zoom 會議並通知學生'});
+    tl.push({t:'',label:T('已安排試聽：','Trial arranged: ')+o.trialTeacher+'・'+(o.trialSlot||'')+T('，已建立唯一 Zoom 會議並通知學生','; a unique Zoom meeting has been created and the student notified')});
   }
-  if(o.status==='已轉訂單'){ tl.push({t:o.convertedAt?fmtDate(o.convertedAt):'',label:'已轉建訂單 '+(o.orderId||'')}); }
-  if(o.status==='結案'||o.status==='無效'){ tl.push({t:'',label:(o.status==='無效'?'標記為無效':'結案')+'：'+(o.closeReason||'')}); }
+  if(o.status==='已轉訂單'){ tl.push({t:o.convertedAt?fmtDate(o.convertedAt):'',label:T('已轉建訂單 ','Converted to order ')+(o.orderId||'')}); }
+  if(o.status==='結案'||o.status==='無效'){ tl.push({t:'',label:(o.status==='無效'?T('標記為無效','Marked as invalid'):T('結案','Closed'))+'：'+T(o.closeReason,CLOSE_REASONS_EN[o.closeReason]||o.closeReason)}); }
   if(o.isEnterprise){
     if(['報價中','已成交','未成交'].indexOf(o.status)>-1){
-      tl.push({t:'',label:'已進入報價階段'});
+      tl.push({t:'',label:T('已進入報價階段','Entered quoting stage')});
     }
-    if(o.status==='已成交'){ tl.push({t:'',label:'已成交，轉建訂單至企業訂單分支'}); }
-    if(o.status==='未成交'){ tl.push({t:'',label:'標記未成交：'+(o.lostReason||'')}); }
+    if(o.status==='已成交'){ tl.push({t:'',label:T('已成交，轉建訂單至企業訂單分支','Deal closed; converted to order in the enterprise order track')}); }
+    if(o.status==='未成交'){ tl.push({t:'',label:T('標記未成交：','Marked as lost: ')+T(o.lostReason,CLOSE_REASONS_EN[o.lostReason]||o.lostReason)}); }
   }
   return tl;
 }
@@ -562,6 +568,8 @@ function recordById(id){return RECORDS.find(function(r){return r.id===id;});}
 var ENTERPRISE_SOURCE='企業諮詢';
 var TYPES_ALL=['諮詢','試聽','企業諮詢'];
 var STATUSES_ALL=['新進','已聯繫','已安排試聽','已轉訂單','結案','無效','報價中','已成交','未成交','已預約試聽','已上試聽','已購買','未購買待跟進'];
+var TYPE_EN_C08={'諮詢':'Inquiry','試聽':'Trial Lesson','企業諮詢':'Corporate Inquiry'};
+var STATUS_EN_C08={'新進':'New','已聯繫':'Contacted','已安排試聽':'Trial Scheduled','已轉訂單':'Converted to Order','結案':'Closed','無效':'Invalid','報價中':'Quoting','已成交':'Deal Closed','未成交':'Not Closed','已預約試聽':'Trial Booked','已上試聽':'Trial Completed','已購買':'Purchased','未購買待跟進':'Not Purchased - Follow Up'};
 var ENT_LANGS=['英文','日文'];
 var ENTERPRISE_SEED_DATA=[
   {id:'INQ-2026-B01',daysAgo:2,status:'新進',company:'範例半導體股份有限公司',industry:'半導體',location:'美國廠區',tz:'美國西部時間（UTC-7）',headcount:'12',nativeLang:'英文',contactName:'王小姐',contactInfo:'wang.hr@example-semi.example',note:'廠區工程師需加強跨部門會議英文，想了解課程規劃與報價',advisor:null},
@@ -753,6 +761,7 @@ function initSelects(){
   document.getElementById('batchAdvisor').innerHTML+='<option value="">指派給…</option>'+ADVISORS.map(function(a){return '<option value="'+a+'">'+a+'</option>';}).join('');
   document.getElementById('fOrigin').innerHTML+=ORIGIN_ALL.map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join('');
   refreshAdvisorPlaceholders();
+  refreshOriginOptionsI18n();
 }
 function refreshAdvisorPlaceholders(){
   var el=document.querySelector('#fAdvisor option[value="未指派"]');
@@ -760,12 +769,17 @@ function refreshAdvisorPlaceholders(){
   var el2=document.querySelector('#batchAdvisor option[value=""]');
   if(el2) el2.textContent=T('指派給…','Assign to…');
 }
+function refreshOriginOptionsI18n(){
+  document.querySelectorAll('#fOrigin option[value]').forEach(function(opt){
+    if(opt.value&&ORIGIN_EN_C08[opt.value]) opt.textContent=T(opt.value,ORIGIN_EN_C08[opt.value]);
+  });
+}
 function initChips(){
   document.getElementById('typeChips').innerHTML='<span class="glabel">'+T('類型','Type')+'</span>'+TYPES_ALL.map(function(t){
-    return '<button type="button" class="fchip'+(FILTER.types.indexOf(t)>-1?' active':'')+'" data-v="'+t+'" onclick="tliToggleChip(\'types\',\''+t+'\',this)">'+t+'</button>';
+    return '<button type="button" class="fchip'+(FILTER.types.indexOf(t)>-1?' active':'')+'" data-v="'+t+'" onclick="tliToggleChip(\'types\',\''+t+'\',this)">'+T(t,TYPE_EN_C08[t]||t)+'</button>';
   }).join('');
   document.getElementById('statusChips').innerHTML='<span class="glabel">'+T('狀態','Status')+'</span>'+STATUSES_ALL.map(function(s){
-    return '<button type="button" class="fchip'+(FILTER.statuses.indexOf(s)>-1?' active':'')+'" data-v="'+s+'" onclick="tliToggleChip(\'statuses\',\''+s+'\',this)">'+s+'</button>';
+    return '<button type="button" class="fchip'+(FILTER.statuses.indexOf(s)>-1?' active':'')+'" data-v="'+s+'" onclick="tliToggleChip(\'statuses\',\''+s+'\',this)">'+T(s,STATUS_EN_C08[s]||s)+'</button>';
   }).join('');
 }
 function tliToggleChip(group,val,btn){
@@ -830,15 +844,15 @@ function filteredSorted(){
   return list;
 }
 function typeBadge(t){
-  if(t==='試聽')return '<span class="badge c">試聽</span>';
-  if(t==='企業諮詢')return '<span class="badge b2b">企業諮詢</span>';
-  return '<span class="badge b">諮詢</span>';
+  if(t==='試聽')return '<span class="badge c">'+T('試聽',TYPE_EN_C08['試聽'])+'</span>';
+  if(t==='企業諮詢')return '<span class="badge b2b">'+T('企業諮詢',TYPE_EN_C08['企業諮詢'])+'</span>';
+  return '<span class="badge b">'+T('諮詢',TYPE_EN_C08['諮詢'])+'</span>';
 }
 function statusBadge(s){
   var map={'新進':'b','已聯繫':'muted','已安排試聽':'warn','已轉訂單':'ok','結案':'muted','無效':'danger',
     '報價中':'warn','已成交':'ok','未成交':'danger',
     '已預約試聽':'warn','已上試聽':'b','已購買':'ok','未購買待跟進':'danger'};
-  return '<span class="badge '+(map[s]||'muted')+'">'+s+'</span>';
+  return '<span class="badge '+(map[s]||'muted')+'">'+T(s,STATUS_EN_C08[s]||s)+'</span>';
 }
 function slaCellHtml(o){
   if(!isSlaActive(o))return '<td class="sla-ok">－</td>';
@@ -846,18 +860,21 @@ function slaCellHtml(o){
   var overdue=diff<0;
   var abs=Math.abs(diff);
   var h=Math.floor(abs/3600000), m=Math.floor((abs%3600000)/60000);
-  var txt=(overdue?'已逾期 ':'剩 ')+h+' 時 '+m+' 分';
+  var txt=overdue?(T('已逾期 ','Overdue by ')+h+T(' 時 ',' h ')+m+T(' 分','m')):(T('剩 ','Due in ')+h+T(' 時 ',' h ')+m+T(' 分','m'));
   return '<td class="'+(overdue?'sla-overdue':'sla-ok')+'">'+txt+'</td>';
 }
 function renderActiveFilters(){
   var tags=[];
   [['fCampus',T('校區或線上','Campus/Online')],['fAdvisor',T('負責顧問','Advisor')],['fLang',T('語言','Language')],['fOrigin',T('來源','Source')]].forEach(function(m){
     var el=document.getElementById(m[0]);
-    if(el.value) tags.push('<span class="badge b" style="display:inline-flex;align-items:center;gap:6px">'+m[1]+'：'+el.value+
-      '<a href="javascript:void(0)" style="color:inherit" onclick="document.getElementById(\''+m[0]+'\').value=\'\';renderTable()">×</a></span>');
+    if(el.value){
+      var dv=(m[0]==='fOrigin')?T(el.value,ORIGIN_EN_C08[el.value]||el.value):el.value;
+      tags.push('<span class="badge b" style="display:inline-flex;align-items:center;gap:6px">'+m[1]+'：'+dv+
+        '<a href="javascript:void(0)" style="color:inherit" onclick="document.getElementById(\''+m[0]+'\').value=\'\';renderTable()">×</a></span>');
+    }
   });
-  if(FILTER.types.length) tags.push('<span class="badge b">'+T('類型','Type')+'：'+FILTER.types.join('、')+'</span>');
-  if(FILTER.statuses.length) tags.push('<span class="badge b">'+T('狀態','Status')+'：'+FILTER.statuses.join('、')+'</span>');
+  if(FILTER.types.length) tags.push('<span class="badge b">'+T('類型','Type')+'：'+FILTER.types.map(function(t){return T(t,TYPE_EN_C08[t]||t);}).join('、')+'</span>');
+  if(FILTER.statuses.length) tags.push('<span class="badge b">'+T('狀態','Status')+'：'+FILTER.statuses.map(function(s){return T(s,STATUS_EN_C08[s]||s);}).join('、')+'</span>');
   document.getElementById('activeFilters').innerHTML=tags.join('');
 }
 function renderTable(){
@@ -877,7 +894,7 @@ function renderTable(){
       '<td onclick="tliOpenDrawer(\''+o.id+'\')">'+o.name+(o.justSubmitted?' <span class="badge new">'+T('剛送出','Just Submitted')+'</span>':'')+'<br><span style="color:var(--gray-500);font-size:11px;">'+o.phone+'・'+o.email+'</span></td>'+
       '<td onclick="tliOpenDrawer(\''+o.id+'\')">'+typeBadge(o.type)+'<br><span style="color:var(--gray-500);font-size:11px;">'+o.lang+'・'+o.level+'</span></td>'+
       '<td onclick="tliOpenDrawer(\''+o.id+'\')">'+(o.trialSlot||o.slotText)+'</td>'+
-      '<td onclick="tliOpenDrawer(\''+o.id+'\')">'+originBadge(o)+((o.source&&o.source!==o.originCat)?'<br><span class="src-sub">'+o.source+'</span>':'')+(o.eventName?'<br><span style="color:var(--gray-500);font-size:11px;">'+o.eventName+'</span>':'')+'<br>'+statusBadge(o.status)+'</td>'+
+      '<td onclick="tliOpenDrawer(\''+o.id+'\')">'+originBadge(o)+((o.source&&o.source!==o.originCat)?'<br><span class="src-sub">'+T(o.source,SOURCES_EN_C08[o.source]||o.source)+'</span>':'')+(o.eventName?'<br><span style="color:var(--gray-500);font-size:11px;">'+o.eventName+'</span>':'')+'<br>'+statusBadge(o.status)+'</td>'+
       '<td onclick="tliOpenDrawer(\''+o.id+'\')">'+(o.advisor||'<span style="color:var(--gray-400);">'+T('未指派','Unassigned')+'</span>')+'</td>'+
       slaCellHtml(o).replace('<td','<td onclick="tliOpenDrawer(\''+o.id+'\')"')+
     '</tr>';
@@ -941,7 +958,7 @@ function tliOpenDrawer(id){
   currentDrawerId=id;
   var o=recordById(id);
   if(!o)return;
-  document.getElementById('dTitle').textContent=o.name+'（'+o.id+'）';
+  document.getElementById('dTitle').textContent=o.name+T('（','(')+o.id+T('）',')');
   document.getElementById('dBadges').innerHTML=typeBadge(o.type)+' '+statusBadge(o.status)+' '+originBadge(o);
   var html='';
   if(o.isEnterprise){
@@ -968,7 +985,7 @@ function tliOpenDrawer(id){
       '<div class="dfield"><span class="dl">'+T('語言／程度','Language / Level')+'</span><span class="dv">'+o.lang+'・'+o.level+'</span></div>'+
       '<div class="dfield"><span class="dl">'+T('校區或線上','Campus/Online')+'</span><span class="dv">'+o.campus+'</span></div>'+
       '<div class="dfield"><span class="dl">'+T('偏好或已選時段','Preferred/Selected Slot')+'</span><span class="dv">'+(o.trialSlot||o.slotText)+'</span></div>'+
-      '<div class="dfield"><span class="dl">'+T('來源','Source')+'</span><span class="dv">'+o.originCat+(o.source!==o.originCat?'（'+o.source+'）':'')+'</span></div>'+
+      '<div class="dfield"><span class="dl">'+T('來源','Source')+'</span><span class="dv">'+T(o.originCat,ORIGIN_EN_C08[o.originCat]||o.originCat)+(o.source!==o.originCat?'（'+T(o.source,SOURCES_EN_C08[o.source]||o.source)+'）':'')+'</span></div>'+
       (o.eventName?'<div class="dfield"><span class="dl">'+T('活動名稱','Event Name')+'</span><span class="dv">'+o.eventName+'</span></div>':'')+
       '<div class="dfield"><span class="dl">'+T('備註','Notes')+'</span><span class="dv">'+o.note+'</span></div>'+
       '<div class="dfield"><span class="dl">'+T('負責顧問','Advisor')+'</span><span class="dv">'+(o.advisor||T('未指派','Unassigned'))+'</span></div>'+
@@ -986,6 +1003,7 @@ function tliOpenDrawer(id){
       (o.status==='未購買待跟進'?'<div class="dfield"><span class="dl">'+T('未購買原因','Reason Not Purchased')+'</span><span class="dv">'+o.followupReason+'</span></div>':'')+
     '</div>';
   }
+  o.timeline=buildTimeline(o); /* 20260930 修正：每次開抽屜都重算，避免語言切換後仍讀到頁面載入當下（curLang 尚未套用已存語言）快取的舊語言字串 */
   html+='<div class="dsection" id="dTimelineSection"><h3>'+T('時間軸','Timeline')+'</h3><ul class="timeline">'+o.timeline.map(function(t){
     return '<li>'+(t.t?'<div class="tl-time">'+t.t+'</div>':'')+'<div>'+t.label+'</div></li>';
   }).join('')+'</ul></div>';
@@ -1226,13 +1244,13 @@ function tliAppendMsg(role,html){
 function tliAskDemo(n){
   if(n===1){
     var overdue=RECORDS.filter(function(o){return isSlaActive(o)&&o.sla.getTime()<NOW.getTime();});
-    tliAppendMsg('user','今天有哪些單已逾期未聯繫？');
-    tliAppendMsg('bot','目前有 <b>'+overdue.length+'</b> 筆已逾期未聯繫：'+overdue.slice(0,5).map(function(o){return o.name;}).join('、')+(overdue.length>5?' 等':'')+'。<div class="src">資料來源：3.0 中台／諮詢與試聽模組</div><div class="act"><button class="btn sm primary" onclick="document.getElementById(\'statusChips\').querySelector(\'[data-v=新進]\').click();document.getElementById(\'statusChips\').querySelector(\'[data-v=已聯繫]\').click();tliToast(\'已套用篩選：新進／已聯繫\')">套用篩選</button></div>');
+    tliAppendMsg('user',T('今天有哪些單已逾期未聯繫？','Which requests are overdue for contact today?'));
+    tliAppendMsg('bot',T('目前有 ','There are currently ')+'<b>'+overdue.length+'</b>'+T(' 筆已逾期未聯繫：',' overdue, not yet contacted: ')+overdue.slice(0,5).map(function(o){return o.name;}).join('、')+(overdue.length>5?T(' 等',' etc.'):'')+T('。','.')+'<div class="src">'+T('資料來源：3.0 中台／諮詢與試聽模組','Data source: 3.0 Middle Platform / Inquiries & Trial Booking Module')+'</div><div class="act"><button class="btn sm primary" onclick="document.getElementById(\'statusChips\').querySelector(\'[data-v=新進]\').click();document.getElementById(\'statusChips\').querySelector(\'[data-v=已聯繫]\').click();tliToast(T(\'已套用篩選：新進／已聯繫\',\'Filter applied: New/Contacted\'))">'+T('套用篩選','Apply Filter')+'</button></div>');
   }else{
     var weekAgo=new Date(NOW.getTime());weekAgo.setDate(weekAgo.getDate()-7);
     var cnt=RECORDS.filter(function(o){return o.status==='已轉訂單'&&o.convertedAt&&o.convertedAt.getTime()>=weekAgo.getTime();}).length;
-    tliAppendMsg('user','本週轉訂單數是多少？');
-    tliAppendMsg('bot','近 7 天由諮詢／試聽轉為正式訂單共 <b>'+cnt+'</b> 筆。<div class="src">資料來源：3.0 中台／諮詢與試聽模組</div>');
+    tliAppendMsg('user',T('本週轉訂單數是多少？','How many were converted to orders this week?'));
+    tliAppendMsg('bot',T('近 7 天由諮詢／試聽轉為正式訂單共 ','In the past 7 days, ')+'<b>'+cnt+'</b>'+T(' 筆。',' inquiries/trials were converted to formal orders.')+'<div class="src">'+T('資料來源：3.0 中台／諮詢與試聽模組','Data source: 3.0 Middle Platform / Inquiries & Trial Booking Module')+'</div>');
   }
 }
 function tliAskFree(){
@@ -1241,7 +1259,7 @@ function tliAskFree(){
   if(!v)return;
   tliAppendMsg('user',v);
   input.value='';
-  setTimeout(function(){ tliAppendMsg('bot','此問題會查詢 3.0 中台資料後回覆，可先試試左側常用問題。'); },300);
+  setTimeout(function(){ tliAppendMsg('bot',T('此問題會查詢 3.0 中台資料後回覆，可先試試左側常用問題。','This question will be answered after querying 3.0 middle platform data — feel free to try one of the quick questions on the left in the meantime.')); },300);
 }
 
 function tliToggleDropdown(e,id){
@@ -1262,10 +1280,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -1274,7 +1292,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -1344,7 +1362,7 @@ document.addEventListener('keydown', function(e){
     el.classList.remove('open');
   });
 });
-if (window.TLI_I18N) { TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.onRefresh(refreshAdvisorPlaceholders); TLI_I18N.onRefresh(initChips); TLI_I18N.onRefresh(renderTable); TLI_I18N.init(); }
+if (window.TLI_I18N) { TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.onRefresh(refreshAdvisorPlaceholders); TLI_I18N.onRefresh(refreshOriginOptionsI18n); TLI_I18N.onRefresh(initChips); TLI_I18N.onRefresh(renderTable); TLI_I18N.init(); }
 </script>
 <script>
 function toggleNavGroup(ev, gid){

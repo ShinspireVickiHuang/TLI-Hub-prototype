@@ -469,7 +469,7 @@ html,body{overflow-x:hidden;}
   <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
   <div class="main-col">
-    <div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="common.openMenu"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title">建訂單</div><div class="tb-actions"><div class="dropdown-wrap"><button class="ai-fab-btn" onclick="tliToggleAI()" title="AI 助手" data-i18n-title="ai.assistant"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/><path d="M5 15l.6 1.7L7.3 17l-1.7.6L5 19.3l-.6-1.7L2.7 17l1.7-.6z"/></svg><span class="ai-fab-dot"></span></button></div><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋" data-i18n-placeholder="common.search"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知" data-i18n-aria-label="common.notifications"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="common.userMenu">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast(window.TLI_I18N?TLI_I18N.t('功能建置中，敬請期待','Feature under construction, stay tuned'):'功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div>
+    <div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="common.openMenu"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title" data-i18n="c04.pageTitle">建訂單</div><div class="tb-actions"><div class="dropdown-wrap"><button class="ai-fab-btn" onclick="tliToggleAI()" title="AI 助手" data-i18n-title="ai.assistant"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/><path d="M5 15l.6 1.7L7.3 17l-1.7.6L5 19.3l-.6-1.7L2.7 17l1.7-.6z"/></svg><span class="ai-fab-dot"></span></button></div><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋" data-i18n-placeholder="common.search"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知" data-i18n-aria-label="common.notifications"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="common.userMenu">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast(window.TLI_I18N?TLI_I18N.t('功能建置中，敬請期待','Feature under construction, stay tuned'):'功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div>
     <main>
       <div class="kicker"><span data-i18n="brand.consultantPortal">顧問工作台</span>・<span data-i18n="nav.group.advisor">顧問作業</span></div>
       <div class="page-head-row">
@@ -869,8 +869,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c04.aiIntro">可以直接用一句話告訴我要建什麼單，我會幫你先把表單帶好，最後仍由你確認送出。</div>
     </div>
     <div class="ai-quick">
-      <button class="demo" onclick="tliAiDemoOrder()">試試：幫 Emma 建 30 堂中文一對一，士林校區</button>
-      <button onclick="tliAiDemoOrder2()">試試：幫王大同開彈性方案 10 堂續約單</button>
+      <button class="demo" onclick="tliAiDemoOrder()" data-i18n="c04.aiQuick.demo1">試試：幫 Emma 建 30 堂中文一對一，士林校區</button>
+      <button onclick="tliAiDemoOrder2()" data-i18n="c04.aiQuick.demo2">試試：幫王大同開彈性方案 10 堂續約單</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入指令，例如：幫王大同開續約單" data-i18n-placeholder="ai.inputPlaceholder.c04" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -1003,6 +1003,8 @@ PROJECT_PRODUCTS.forEach(function(pr){__projectQty[pr.key]=0;});
 function qs(k){return new URLSearchParams(location.search).get(k);}
 function fmt(n){return 'NT$'+n.toLocaleString();}
 function T(zh,en){return window.TLI_I18N?TLI_I18N.t(zh,en):zh;}
+// 校區中英對照（同 c02／c03 既有作法）：避免英文模式下出現「士林 Campus」半中半英
+var CAMPUS_EN_C04={'羅斯福':'Roosevelt','士林':'Shilin','台中':'Taichung','高雄':'Kaohsiung'};
 
 /* ================= v2 新增：企業訂單分支（不影響下方既有個人訂單流程） ================= */
 // 20260928 修正：企業客戶改讀主檔 orgCustomers（a19 組織客戶主檔），不再各頁另造一套虛構企業名單；
@@ -1055,7 +1057,9 @@ if(ORG_BIO)PROJECT_PLANS[ORG_BIO.id]=[
 })();
 function initEntClientSelect(){
   var sel=document.getElementById('entClientSelect');
-  sel.innerHTML='<option value="">請選擇企業客戶</option>'+ENTERPRISE_CLIENTS.map(function(c){return '<option value="'+c.id+'">'+c.name+'</option>';}).join('');
+  var keep=sel.value;
+  sel.innerHTML='<option value="">'+T('請選擇企業客戶','Please select an enterprise client')+'</option>'+ENTERPRISE_CLIENTS.map(function(c){return '<option value="'+c.id+'">'+c.name+'</option>';}).join('');
+  sel.value=keep;
 }
 function currentEntClient(){
   var id=document.getElementById('entClientSelect').value;
@@ -1211,10 +1215,16 @@ function tliSwitchOrderType(type){
   if(type==='enterprise')tliRecalcEnt();
 }
 // 快速建檔的校區下拉改讀主檔 campuses（實體校區，短名與既有會員 campus 欄位一致）
-document.getElementById('qmCampus').innerHTML=TLI_MASTERS.campuses.filter(function(c){return c.id!=='online';}).map(function(c){
-  var short=c.name.replace('校區','');
-  return '<option value="'+short+'">'+short+'</option>';
-}).join('');
+// 包成函式＋掛 onRefresh：value 維持中文短名（其他流程比對 campus 用），顯示文字用 T() 對照校區中英名
+function renderQmCampusOptions(){
+  var campusSel=document.getElementById('qmCampus'), curCampus=campusSel.value;
+  campusSel.innerHTML=TLI_MASTERS.campuses.filter(function(c){return c.id!=='online';}).map(function(c){
+    var short=c.name.replace('校區','');
+    return '<option value="'+short+'">'+T(short,CAMPUS_EN_C04[short]||short)+'</option>';
+  }).join('');
+  if(curCampus)campusSel.value=curCampus;
+}
+renderQmCampusOptions();
 // 20260929 修正：會員分類改讀主檔 memberTiers（客戶 2024-08 原文定義），陣列順序 C 排第一個即為預設值
 // 包成函式＋掛 onRefresh：選項文字用 T() 組，語言切換時要重繪才會換成英文，且要保留使用者當下已選的值
 function renderQmClsOptions(){
@@ -1293,7 +1303,7 @@ function renderMemberAcList(){
   }
   list.innerHTML=__memberAcResults.map(function(s,i){
     return '<div class="ac-item'+(i===__memberAcActiveIndex?' active':'')+'" onmousedown="event.preventDefault();selectMemberAc('+i+')">'+
-      '<div class="l1">'+s.name+' <span class="'+classBadge(s.cls)+'">'+s.cls+T(' 類',' Class')+'</span><span class="badge muted">'+s.campus+T('校區',' Campus')+'</span></div>'+
+      '<div class="l1">'+s.name+' <span class="'+classBadge(s.cls)+'">'+s.cls+T(' 類',' Class')+'</span><span class="badge muted">'+T(s.campus+'校區',(CAMPUS_EN_C04[s.campus]||s.campus)+' Campus')+'</span></div>'+
       '<div class="l2">'+s.email+'　'+T('手機末三碼 ','Phone last 3 digits ')+(s.phone?s.phone.slice(-3):'—')+'</div>'+
     '</div>';
   }).join('');
@@ -1416,11 +1426,11 @@ function renderStudentChips(){
   if(!s){box.innerHTML='';return;}
   box.innerHTML=
     '<span class="'+classBadge(s.cls)+'">'+s.cls+T(' 類',' Class')+'</span>'+
-    '<span class="badge muted">'+s.campus+T('校區',' Campus')+'</span>'+
+    '<span class="badge muted">'+T(s.campus+'校區',(CAMPUS_EN_C04[s.campus]||s.campus)+' Campus')+'</span>'+
     (s.enterprise?'<span class="badge muted">'+s.enterprise+'</span>':'')+
     '<span class="badge muted">'+T('剩餘課時 ','Remaining Lessons ')+s.hours+T(' 堂','')+'</span>'+
     '<span class="badge muted">'+T('既有方案 ','Existing Plans ')+(s.planCount||0)+T(' 筆','')+'</span>'+
-    '<span class="badge muted">'+T('顧問：','Advisor: ')+(s.advisor||T('未指派','Unassigned'))+'</span>'+
+    '<span class="badge muted">'+T('顧問：','Advisor: ')+(s.advisor?T(s.advisor,s.advisor.replace('顧問','Advisor')):T('未指派','Unassigned'))+'</span>'+
     (s.activated===false?'<span class="badge unactivated">'+T('未開通','Not Activated')+'</span><span class="resend-link" onclick="resendActivationEmail()">'+T('重寄開通信','Resend Activation Email')+'</span>':'');
 }
 function currentStudent(){return STUDENTS.find(function(s){return s.id===sel.value;});}
@@ -1792,12 +1802,12 @@ function tliOnChannelChange(){
     var def=NEWEBPAY_DEFAULT[s.campus]||NEWEBPAY_STORES[0];
     box.innerHTML=
       '<div class="field"><label>'+T('藍新商店','NewebPay Store')+'</label><select id="newebpayStore">'+NEWEBPAY_STORES.map(function(st){return '<option'+(st===def?' selected':'')+'>'+st+'</option>';}).join('')+'</select>'+
-      '<div class="hint">'+T('預設依會員所屬校區（'+s.campus+'）自動對應，可視需要改選其他商店。','Defaults to match the member’s campus ('+s.campus+'); change the store if needed.')+'</div></div>'+
+      '<div class="hint">'+T('預設依會員所屬校區（'+s.campus+'）自動對應，可視需要改選其他商店。','Defaults to match the member’s campus ('+(CAMPUS_EN_C04[s.campus]||s.campus)+'); change the store if needed.')+'</div></div>'+
       '<button class="btn primary sm" onclick="tliChannelAction()"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="21" y1="3" x2="10" y2="14"/><polygon points="21 3 14.5 21 10 14 3 9.5 21 3"/></svg> '+T('產生付款連結並發送','Generate and Send Payment Link')+'</button>';
   }else if(ch==='pos'){
     var terms=POS_TERMINALS[s.campus]||[];
     box.innerHTML=
-      '<div class="field"><label>'+T('刷卡機台（'+s.campus+'校區）','Card Terminal ('+s.campus+' Campus)')+'</label><select id="posTerminal">'+terms.map(function(t){return '<option>'+t+'</option>';}).join('')+'</select></div>'+
+      '<div class="field"><label>'+T('刷卡機台（'+s.campus+'校區）','Card Terminal ('+(CAMPUS_EN_C04[s.campus]||s.campus)+' Campus)')+'</label><select id="posTerminal">'+terms.map(function(t){return '<option>'+t+'</option>';}).join('')+'</select></div>'+
       '<div class="grid2"><div class="field"><label>'+T('卡號末四碼','Card Last 4 Digits')+'</label><input id="posLast4" maxlength="4" placeholder="'+T('例如 4821','e.g. 4821')+'"></div>'+
       '<div class="field"><label>'+T('授權碼','Authorization Code')+'</label><input id="posAuthCode" placeholder="'+T('刷卡機列印授權碼','Auth code printed by the terminal')+'"></div></div>'+
       '<button class="btn primary sm" onclick="tliChannelAction()"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><line x1="2.5" y1="10" x2="21.5" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg> '+T('登記刷卡收款','Register Card Payment')+'</button>';
@@ -1916,7 +1926,7 @@ function tliOpenContractModal(){
   document.getElementById('contractDoc').innerHTML=
     '<h4>'+T('TLI Hub 課程合約（草稿）','TLI Hub Course Contract (Draft)')+'</h4>'+
     '<div>'+T('合約範本：','Contract Template: ')+currentContractTemplateName()+'　｜　'+T('簽署方式：','Signing Method: ')+currentSignMethodText()+'</div>'+
-    '<div>'+T('會員：','Member: ')+s.name+'（'+s.cls+T(' 類／',' Class / ')+s.campus+T('校區',' Campus')+'）</div>'+
+    '<div>'+T('會員：','Member: ')+s.name+'（'+s.cls+T(' 類／',' Class / ')+T(s.campus+'校區',(CAMPUS_EN_C04[s.campus]||s.campus)+' Campus')+'）</div>'+
     '<div>'+T('項目：','Items: ')+__orderLines.map(function(l){return l.name+' × '+(l.qty||1);}).join('、')+'</div>'+
     '<div>'+T('組成課程：','Included Courses: ')+rows.map(function(r){return r.name+' × '+r.qty;}).join('、')+'</div>'+
     '<div>'+T('付款方式：','Payment Method: ')+modeText+'</div>'+
@@ -1964,7 +1974,7 @@ function tliRecalc(){
 }
 function updateSummary(){
   var s=currentStudent();
-  document.getElementById('sumMember').textContent=s?(s.name+'（'+s.cls+T(' 類／',' Class / ')+s.campus+T('校區',' Campus')+'）'):'—';
+  document.getElementById('sumMember').textContent=s?(s.name+'（'+s.cls+T(' 類／',' Class / ')+T(s.campus+'校區',(CAMPUS_EN_C04[s.campus]||s.campus)+' Campus')+'）'):'—';
   document.getElementById('sumPlan').textContent=__orderLines.length?(__orderLines.length+T(' 筆項目',' item(s)')):'—';
   document.getElementById('sumCourseList').innerHTML=__orderLines.map(function(l){return '<li>'+l.name+' × '+(l.qty||1)+'</li>';}).join('');
   document.getElementById('sumChannel').textContent=__channelState?(T(__channelState.channel,__channelState.channelEn)+'（'+__channelState.label+'）'):T('尚未完成收款操作','Payment operation not completed yet');
@@ -2093,20 +2103,20 @@ function tliAppendMsg(role,html){
   body.scrollTop=body.scrollHeight;
 }
 function tliAiDemoOrder(){
-  tliAppendMsg('user','幫 Emma 建 30 堂中文一對一，士林校區');
+  tliAppendMsg('user',T('幫 Emma 建 30 堂中文一對一，士林校區','Book Emma a 30-lesson Chinese 1-on-1, Shilin Campus'));
   sel.value='emma01';
   tliOnStudentChange();
   addPlanToOrder('p_flex30_on');
-  tliAppendMsg('bot','已代入：會員 Emma Chen（C 類／士林校區）、方案「中文一對一 30 堂（線上）」、開票主體「世華」（士林校區固定）。付款方式先預設「一次付清」，請於「收款渠道」與「合約」完成剩餘步驟後送出。<div class="src">資料來源：3.0 中台／會員查詢工具＋產品與定價工具</div>');
-  tliToast('AI 已代入①②③區塊，請顧問確認後完成剩餘步驟並送出');
+  tliAppendMsg('bot',T('已代入：會員 Emma Chen（C 類／士林校區）、方案「中文一對一 30 堂（線上）」、開票主體「世華」（士林校區固定）。付款方式先預設「一次付清」，請於「收款渠道」與「合約」完成剩餘步驟後送出。','Pre-filled: member Emma Chen (Class C / Shilin Campus), plan “中文一對一 30 堂（線上）”, invoice entity “Shihua” (fixed for Shilin Campus). Payment method defaults to “Pay in Full”; please complete the remaining steps under “Payment Channel” and “Contract” before submitting.')+'<div class="src">'+T('資料來源：3.0 中台／會員查詢工具＋產品與定價工具','Source: 3.0 Middle Platform / Member Lookup Tool + Product & Pricing Tool')+'</div>');
+  tliToast(T('AI 已代入①②③區塊，請顧問確認後完成剩餘步驟並送出','AI has pre-filled sections ①②③; please confirm and complete the remaining steps before submitting'));
 }
 function tliAiDemoOrder2(){
-  tliAppendMsg('user','幫王大同開彈性方案 10 堂續約單');
+  tliAppendMsg('user',T('幫王大同開彈性方案 10 堂續約單','Create a 10-lesson Flexible Plan renewal order for 王大同'));
   sel.value='wang01';
   tliOnStudentChange();
   addPlanToOrder('p_flex10_on');
-  tliAppendMsg('bot','已代入：會員 王大同（B 類／羅斯福校區）、方案「中文彈性方案 10 堂（線上）」、開票主體需於羅斯福校區 4 選項中擇一。付款方式先預設「一次付清」，請於「收款渠道」與「合約」完成剩餘步驟後送出。<div class="src">資料來源：3.0 中台／會員查詢工具＋產品與定價工具</div>');
-  tliToast('AI 已代入①②③區塊，請顧問確認後完成剩餘步驟並送出');
+  tliAppendMsg('bot',T('已代入：會員 王大同（B 類／羅斯福校區）、方案「中文彈性方案 10 堂（線上）」、開票主體需於羅斯福校區 4 選項中擇一。付款方式先預設「一次付清」，請於「收款渠道」與「合約」完成剩餘步驟後送出。','Pre-filled: member 王大同 (Class B / Roosevelt Campus), plan “中文彈性方案 10 堂（線上）”; invoice entity needs to be chosen from the 4 Roosevelt Campus options. Payment method defaults to “Pay in Full”; please complete the remaining steps under “Payment Channel” and “Contract” before submitting.')+'<div class="src">'+T('資料來源：3.0 中台／會員查詢工具＋產品與定價工具','Source: 3.0 Middle Platform / Member Lookup Tool + Product & Pricing Tool')+'</div>');
+  tliToast(T('AI 已代入①②③區塊，請顧問確認後完成剩餘步驟並送出','AI has pre-filled sections ①②③; please confirm and complete the remaining steps before submitting'));
 }
 function tliAskFree(){
   var input=document.getElementById('aiInput');
@@ -2115,7 +2125,7 @@ function tliAskFree(){
   tliAppendMsg('user',v);
   input.value='';
   setTimeout(function(){
-    tliAppendMsg('bot','此指令會解析自然語言後代入左側①②③區塊，可先點上方按鈕看範例。');
+    tliAppendMsg('bot',T('此指令會解析自然語言後代入左側①②③區塊，可先點上方按鈕看範例。','This command will be parsed and used to pre-fill sections ①②③ on the left; try the buttons above first to see examples.'));
   },300);
 }
 
@@ -2139,10 +2149,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -2151,7 +2161,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();
@@ -2211,6 +2221,7 @@ if (window.TLI_I18N) {
   TLI_I18N.onRefresh(renderBundleList);
   TLI_I18N.onRefresh(renderProjectProductInputs);
   TLI_I18N.onRefresh(renderInvoiceEntity);
+  TLI_I18N.onRefresh(initEntClientSelect);
   TLI_I18N.onRefresh(tliRefreshContractStatusNote);
   TLI_I18N.onRefresh(tliRecalcEnt);
   TLI_I18N.onRefresh(tliRecalcLadder);
@@ -2218,6 +2229,7 @@ if (window.TLI_I18N) {
   TLI_I18N.onRefresh(tliI18nRefreshChannelExtra);
   TLI_I18N.onRefresh(renderNotifPanel);
   TLI_I18N.onRefresh(renderQmClsOptions);
+  TLI_I18N.onRefresh(renderQmCampusOptions);
   TLI_I18N.onRefresh(initContractTemplates);
   TLI_I18N.onRefresh(updateSubmitGate);
   TLI_I18N.init();

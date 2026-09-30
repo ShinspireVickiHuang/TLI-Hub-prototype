@@ -233,7 +233,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </header>
 
   <main class="content">
-    <nav class="nav-segment" aria-label="次選單">
+    <nav class="nav-segment" aria-label="次選單" data-i18n-aria-label="m05.subNavAria">
       <a class="nav-segment-link" href="m03_schedule.html" data-i18n="member.nav.schedule">課表</a>
       <a class="nav-segment-link active" href="m05_leave.html" data-i18n="m05.tab.leaveReschedule">請假與改期</a>
     </nav>
@@ -359,7 +359,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div class="sheet-handle"></div>
     <h3 style="margin:0 0 4px;" data-i18n="m05.sheet.reschedule.title">改期</h3>
     <p class="muted small" id="rescheduleSheetMeta" style="margin:0 0 8px;">－</p>
-    <p class="reschedule-current-line" id="rescheduleCurrentLine">目前：－</p>
+    <p class="reschedule-current-line" id="rescheduleCurrentLine">－</p>
     <p class="small muted hidden" id="rescheduleLimitLine" style="margin:0 0 10px;"></p>
     <div class="divider"></div>
     <div class="slot-calendar" id="slotCalendar">
@@ -391,7 +391,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div class="sheet-handle"></div>
     <h3 style="margin:0 0 4px;" data-i18n="m05.sheet.avail.title">改期：提出有空時間</h3>
     <p class="muted small" id="availabilitySheetMeta" style="margin:0 0 8px;">－</p>
-    <p class="reschedule-current-line" id="availabilityCurrentLine">目前：－</p>
+    <p class="reschedule-current-line" id="availabilityCurrentLine">－</p>
     <p class="small muted" style="margin:0 0 12px;" data-i18n="m05.avail.note1">一對一課由顧問依你提出的時段安排新時間，無法直接指定老師或時段。</p>
     <div class="divider"></div>
 
@@ -456,6 +456,46 @@ function actionLabel(action){
   if(action==='請假') return TLI_I18N.t('請假',{en:'Leave',ja:'欠席連絡',de:'Abwesenheit'});
   if(action==='改期') return TLI_I18N.t('改期',{en:'Reschedule',ja:'振替',de:'Umbuchung'});
   return action;
+}
+/* ================= 示範資料裡寫死的日期／星期／今天明天字串，統一在顯示時翻譯（不改資料本身） ================= */
+function xlateClassTime(s){
+  if(!s) return s;
+  var out = s.replace(/（([一二三四五六日])）/g, function(m,d){
+    var dow='日一二三四五六'.indexOf(d);
+    var lang=TLI_I18N.currentLang();
+    var wd=weekdayShort(dow);
+    if(lang==='en'||lang==='de') return '('+wd+')';
+    if(lang==='zh-CN') return m; // 由 walk() 的機械繁簡轉換另行處理，這裡不重複轉換
+    return '（'+wd+'）'; // zh-TW／ja
+  });
+  out = out.replace(/今天/g, function(){ return TLI_I18N.t('今天',{en:'Today',ja:'今日',de:'heute'}); });
+  out = out.replace(/明天/g, function(){ return TLI_I18N.t('明天',{en:'Tomorrow',ja:'明日',de:'morgen'}); });
+  return out;
+}
+var RESULT_PHRASE_MAP={
+  '退回堂數':{en:'Hours refunded',ja:'コマ数を返却',de:'Stunden erstattet'},
+  '不退堂數，已通知老師':{en:'Hours not refunded — teacher notified',ja:'コマ数は返却されません・講師に通知済み',de:'Stunden nicht erstattet — Lehrkraft benachrichtigt'},
+  '不影響本週次數':{en:"Doesn't affect this week's quota",ja:'今週の回数に影響なし',de:'Beeinflusst das Wochenkontingent nicht'},
+  '已通知老師，逾提前時限記缺席':{en:'Teacher notified — past the deadline, marked absent',ja:'講師に通知済み・事前連絡期限超過のため欠席として記録',de:'Lehrkraft benachrichtigt — Frist überschritten, als abwesend markiert'},
+  '已通知老師，未逾時限，不記缺席':{en:'Teacher notified — within the deadline, not marked absent',ja:'講師に通知済み・期限内のため欠席として記録されません',de:'Lehrkraft benachrichtigt — innerhalb der Frist, nicht als abwesend markiert'},
+  '已核准，不扣時數':{en:'Approved — no hours deducted',ja:'承認済み・時間数は差し引かれません',de:'Genehmigt — keine Stunden abgezogen'},
+  '已核准，不扣時數，免扣次數扣 1 次':{en:'Approved — no hours deducted, 1 free-cancellation credit used',ja:'承認済み・時間数は差し引かれず、免除回数を1回消費',de:'Genehmigt — keine Stunden abgezogen, 1 kostenlose Stornierung verbraucht'},
+  '已核准，記缺席，扣 1 堂時數，已記入出勤':{en:'Approved — marked absent, 1 hour deducted and logged as attendance',ja:'承認済み・欠席として記録され、1コマ分の時間数が差し引かれ、出席記録に反映',de:'Genehmigt — als Fehlzeit markiert, 1 Stunde abgezogen und als Anwesenheit erfasst'},
+  '等待 HR 核准':{en:'Awaiting HR approval',ja:'HR承認待ち',de:'Wartet auf HR-Genehmigung'}
+};
+function resultDisplayText(text){
+  if(!text) return text;
+  var m1=/^已核准，已改期至 (.+)$/.exec(text);
+  if(m1) return TLI_I18N.t('已核准，已改期至 ',{en:'Approved — rescheduled to ',ja:'承認済み・変更後：',de:'Genehmigt — verschoben auf '})+xlateClassTime(m1[1]);
+  var m2=/^已改期至 (.+)$/.exec(text);
+  if(m2) return TLI_I18N.t('已改期至 ',{en:'Rescheduled to ',ja:'変更後：',de:'Verschoben auf '})+xlateClassTime(m2[1]);
+  return RESULT_PHRASE_MAP[text] ? TLI_I18N.t(text,RESULT_PHRASE_MAP[text]) : text;
+}
+function noteDisplayText(text){
+  if(!text) return text;
+  var m=/^原時段：(.+)$/.exec(text);
+  if(m) return TLI_I18N.t('原時段：',{en:'Original time: ',ja:'変更前：',de:'Ursprüngliche Zeit: '})+xlateClassTime(m[1]);
+  return text; // 其餘為學員自行填寫的請假原因（示範資料），維持原文
 }
 
 function showToast(msg){
@@ -620,8 +660,8 @@ function renderRecords(){
     return '<div class="leave-record-row" id="lr-'+r.id+'">'+
       '<div class="lr-line1"><span class="lr-date">'+fmtRecDate(r.date)+'</span>'+
         '<span style="display:flex;gap:6px;align-items:center;"><span class="payer-badge payer-'+plan.payer+'">'+payerLabelText(plan.payer)+'</span><span class="lr-badge '+classifyBadge(r)+'">'+actionLabel(r.action)+'</span></span></div>'+
-      '<div class="lr-line2"><strong>'+r.title+'</strong>－'+r.result+'</div>'+
-      (r.note?'<div class="lr-note">'+r.note+'</div>':'')+
+      '<div class="lr-line2"><strong>'+r.title+'</strong>－'+resultDisplayText(r.result)+'</div>'+
+      (r.note?'<div class="lr-note">'+noteDisplayText(r.note)+'</div>':'')+
     '</div>';
   }).join('');
   moreBtn.classList.toggle('hidden', filtered.length<=shown.length);
@@ -738,7 +778,9 @@ function buildGeneralActions(cls){
 function resultTextFor(text){
   var map={
     '不扣時數':{en:'No hours deducted',ja:'時間数は差し引かれません',de:'Keine Stunden abgezogen'},
-    '記缺席，扣 1 堂時數，已記入出勤':{en:'Marked absent — 1 hour deducted and logged as attendance',ja:'欠席として記録され、1コマ分の時間数が差し引かれ、出席記録に反映されました',de:'Als Fehlzeit markiert — 1 Stunde abgezogen und als Anwesenheit erfasst'}
+    '記缺席，扣 1 堂時數，已記入出勤':{en:'Marked absent — 1 hour deducted and logged as attendance',ja:'欠席として記録され、1コマ分の時間数が差し引かれ、出席記録に反映されました',de:'Als Fehlzeit markiert — 1 Stunde abgezogen und als Anwesenheit erfasst'},
+    '申訴審核中':{en:'Appeal under review',ja:'異議申し立てを審査中',de:'Einspruch wird geprüft'},
+    '等待 HR 核准':{en:'Awaiting HR approval',ja:'HR承認待ち',de:'Wartet auf HR-Genehmigung'}
   };
   return map[text] ? TLI_I18N.t(text,map[text]) : text;
 }
@@ -790,15 +832,16 @@ function buildEnterpriseActions(cls){
 }
 
 function buildInstActions(cls){
-  if(cls.cancelled) return '<p class="cc-done" style="color:#0B6B52;">已取消場次報名，不影響本週次數。</p>';
+  var t=TLI_I18N.t;
+  if(cls.cancelled) return '<p class="cc-done" style="color:#0B6B52;">'+t('已取消場次報名，不影響本週次數。',{en:'Registration cancelled — this does not affect your weekly quota.',ja:'申込をキャンセルしました。今週の回数には影響しません。',de:'Anmeldung storniert — beeinflusst das Wochenkontingent nicht.'})+'</p>';
   var hoursUntil=(cls.start-NOW)/3600000;
   if(hoursUntil>=12){
     return '<div class="cc-actions">'+
-      '<button class="btn btn-danger-outline btn-block" onclick="requestInstCancel(\''+cls.id+'\')">取消場次報名</button>'+
-      '<button class="btn btn-outline btn-block" onclick="openRescheduleSheet(\''+cls.id+'\')">改報名其他場次</button>'+
-    '</div><p class="cc-positive small">距開課還有約 '+fmtHours(hoursUntil)+' 小時，可取消或改報名其他場次。</p>';
+      '<button class="btn btn-danger-outline btn-block" onclick="requestInstCancel(\''+cls.id+'\')">'+t('取消場次報名',{en:'Cancel Registration',ja:'申込をキャンセル',de:'Anmeldung stornieren'})+'</button>'+
+      '<button class="btn btn-outline btn-block" onclick="openRescheduleSheet(\''+cls.id+'\')">'+t('改報名其他場次',{en:'Switch to Another Session',ja:'他の回に変更',de:'Zu anderem Termin wechseln'})+'</button>'+
+    '</div><p class="cc-positive small">'+t('距開課還有約 '+fmtHours(hoursUntil)+' 小時，可取消或改報名其他場次。',{en:'About '+fmtHours(hoursUntil)+' hours until the session — you can cancel or switch to another session.',ja:'開始まで約'+fmtHours(hoursUntil)+'時間です。キャンセルまたは他の回への変更が可能です。',de:'Noch etwa '+fmtHours(hoursUntil)+' Stunden bis zum Termin — Stornierung oder Wechsel zu einem anderen Termin möglich.'})+'</p>';
   }
-  return '<p class="cc-reason small">距開課不到 12 小時，無法取消或改報名，未到場將記為 no-show。</p>';
+  return '<p class="cc-reason small">'+t('距開課不到 12 小時，無法取消或改報名，未到場將記為 no-show。',{en:'Less than 12 hours until the session — cancellation or switching is unavailable; not attending is recorded as a no-show.',ja:'開始まで12時間を切っているため、キャンセルや変更はできません。欠席の場合は no-show として記録されます。',de:'Weniger als 12 Stunden bis zum Termin — Stornierung oder Wechsel nicht mehr möglich; Nichterscheinen gilt als No-Show.'})+'</p>';
 }
 
 function buildClassActions(cls){
@@ -809,21 +852,22 @@ function buildClassActions(cls){
 }
 
 function renderClassCard(cls){
+  var t=TLI_I18N.t;
   var wrap=document.getElementById('classCards');
   if(!cls){ wrap.innerHTML=''; wrap.classList.add('hidden'); return; }
   wrap.classList.remove('hidden');
   var plan=PLAN_META[cls.planId];
   var isGroupLive=plan.ruleGroup==='group-live';
-  var defaultBadgeLabel=plan.ruleGroup==='institution' ? '團體聊天室' : '一對一';
-  var badgeLabel=isGroupLive ? '團體直播班' : defaultBadgeLabel;
-  var tzNote = plan.ruleGroup==='enterprise' ? ('<p class="small muted" style="margin:0 0 10px;">廠區當地時間（'+ENTERPRISE_CAMPUS+'）：'+enterpriseCampusLocalTime(cls.start)+'・企業合約單位：'+ENTERPRISE_COMPANY+'</p>') : '';
-  var groupNote=isGroupLive ? '<p class="small muted" style="margin:0 0 10px;">團體直播班單堂請假說明：本堂線上請假，逾提前時限記缺席；核准後可看回放，補課限同級班（依設定）。</p>' : '';
+  var defaultBadgeLabel=plan.ruleGroup==='institution' ? t('團體聊天室',{en:'Group Chat Room',ja:'グループチャットルーム',de:'Gruppenchat'}) : t('一對一',{en:'1-on-1',ja:'一対一',de:'Einzelunterricht'});
+  var badgeLabel=isGroupLive ? t('團體直播班',{en:'Live Group Class',ja:'グループライブ授業',de:'Live-Gruppenkurs'}) : defaultBadgeLabel;
+  var tzNote = plan.ruleGroup==='enterprise' ? ('<p class="small muted" style="margin:0 0 10px;">'+t('廠區當地時間（'+ENTERPRISE_CAMPUS+'）：',{en:'Local time at '+ENTERPRISE_CAMPUS+': ',ja:ENTERPRISE_CAMPUS+'現地時間：',de:'Ortszeit '+ENTERPRISE_CAMPUS+': '})+enterpriseCampusLocalTime(cls.start)+t('・企業合約單位：',{en:' · Company contract: ',ja:'・企業契約単位：',de:' · Firmenvertrag: '})+ENTERPRISE_COMPANY+'</p>') : '';
+  var groupNote=isGroupLive ? '<p class="small muted" style="margin:0 0 10px;">'+t('團體直播班單堂請假說明：本堂線上請假，逾提前時限記缺席；核准後可看回放，補課限同級班（依設定）。',{en:'Live group class leave notice: submit online; past the lead time it is marked absent. Approved leave can view the recording; make-up sessions are limited to same-level classes (as configured).',ja:'グループライブ授業の欠席連絡について：オンラインで送信してください。期限を過ぎると欠席扱いになります。承認後は録画を視聴でき、補講は同レベルのクラスに限られます（設定による）。',de:'Hinweis zu Live-Gruppenkurs-Abwesenheit: online melden; nach Ablauf der Frist gilt es als Fehlzeit. Bei Genehmigung ist die Aufzeichnung verfügbar; Nachholtermine nur in Kursen gleichen Niveaus (je nach Einstellung).'})+'</p>' : '';
   var actions=buildClassActions(cls);
   wrap.innerHTML='<div class="card class-card" data-id="'+cls.id+'">'+
-    '<div class="cc-head"><span class="badge badge-info">'+badgeLabel+'</span><span class="payer-badge payer-'+plan.payer+'">'+plan.payerLabel+'</span><span class="small muted">'+cls.time+'</span></div>'+
+    '<div class="cc-head"><span class="badge badge-info">'+badgeLabel+'</span><span class="payer-badge payer-'+plan.payer+'">'+payerLabelText(plan.payer)+'</span><span class="small muted">'+xlateClassTime(cls.time)+'</span></div>'+
     '<h4>'+cls.title+'</h4>'+
-    '<p class="small muted" style="margin:0 0 4px;">所屬方案：'+plan.name+'</p>'+
-    '<p class="small muted" style="margin:0 0 10px;">'+(cls.teacher?('老師：'+cls.teacher+'．'):'')+'上課方式：'+cls.mode+'</p>'+
+    '<p class="small muted" style="margin:0 0 4px;">'+t('所屬方案：',{en:'Plan: ',ja:'所属プラン：',de:'Paket: '})+plan.name+'</p>'+
+    '<p class="small muted" style="margin:0 0 10px;">'+(cls.teacher?(t('老師：',{en:'Teacher: ',ja:'講師：',de:'Lehrkraft: '})+cls.teacher+'．'):'')+t('上課方式：',{en:'Format: ',ja:'受講形式：',de:'Format: '})+cls.mode+'</p>'+
     tzNote+groupNote+
     '<div class="divider"></div>'+
     actions+
@@ -838,8 +882,8 @@ function renderClassPicker(){
     var plan=PLAN_META[cls.planId];
     return '<div class="pick-list-row" onclick="selectClass(\''+cls.id+'\')">'+
       '<div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>'+
-      '<div class="body"><h4>'+cls.title+'</h4><p>'+cls.time+'・'+plan.name+'</p></div>'+
-      '<div class="trail"><span class="payer-badge payer-'+plan.payer+'">'+plan.payerLabel+'</span></div>'+
+      '<div class="body"><h4>'+cls.title+'</h4><p>'+xlateClassTime(cls.time)+'・'+plan.name+'</p></div>'+
+      '<div class="trail"><span class="payer-badge payer-'+plan.payer+'">'+payerLabelText(plan.payer)+'</span></div>'+
     '</div>';
   }).join('');
 }
@@ -851,7 +895,7 @@ function selectClass(id){
   document.getElementById('classPickerCard').classList.add('hidden');
   var bar=document.getElementById('selectedClassBar');
   bar.classList.remove('hidden');
-  document.getElementById('selectedClassTitle').textContent=cls.title+'・'+cls.time;
+  document.getElementById('selectedClassTitle').textContent=cls.title+'・'+xlateClassTime(cls.time);
   document.getElementById('ruleCard').classList.remove('hidden');
   renderRuleCard(cls.planId);
   renderClassCard(cls);
@@ -871,7 +915,7 @@ function openGeneralLeaveSheet(id){
   currentGeneralLeaveId=id;
   var cls=findClass(id);
   if(!cls) return;
-  document.getElementById('leaveSheetMeta').textContent=cls.title+'・'+cls.time;
+  document.getElementById('leaveSheetMeta').textContent=cls.title+'・'+xlateClassTime(cls.time);
   document.getElementById('leaveReason').value='';
   document.getElementById('leaveOverlay').classList.remove('hidden');
 }
@@ -883,7 +927,7 @@ function submitGeneralLeave(){
   var reason=document.getElementById('leaveReason').value.trim();
   addRecord(cls,'請假','不退堂數，已通知老師','pending',reason?('原因：'+reason):'');
   closeGeneralLeaveSheet();
-  showToast('已送出請假，老師已收到通知');
+  showToast(TLI_I18N.t('已送出請假，老師已收到通知',{en:'Leave submitted — the teacher has been notified',ja:'欠席連絡を送信しました。講師に通知済みです',de:'Abwesenheit gemeldet — die Lehrkraft wurde benachrichtigt'}));
   renderClassCard(cls);
   renderRecords();
 }
@@ -894,16 +938,16 @@ function requestGeneralCancel(id){
   var cls=findClass(id);
   if(!cls) return;
   pendingCancel={id:id,kind:'general'};
-  document.getElementById('cancelConfirmMeta').textContent=cls.title+'・'+cls.time;
-  document.getElementById('cancelConfirmBody').textContent='課前 12 小時以上取消，堂數將退回，確定要取消嗎？';
+  document.getElementById('cancelConfirmMeta').textContent=cls.title+'・'+xlateClassTime(cls.time);
+  document.getElementById('cancelConfirmBody').textContent=TLI_I18N.t('課前 12 小時以上取消，堂數將退回，確定要取消嗎？',{en:'Cancelling 12+ hours before class refunds the session. Confirm cancellation?',ja:'開始12時間以上前のキャンセルはコマ数が返却されます。キャンセルしますか？',de:'Bei Stornierung 12+ Stunden vorher wird die Stunde erstattet. Wirklich stornieren?'});
   document.getElementById('cancelConfirmOverlay').classList.remove('hidden');
 }
 function requestInstCancel(id){
   var cls=findClass(id);
   if(!cls) return;
   pendingCancel={id:id,kind:'inst'};
-  document.getElementById('cancelConfirmMeta').textContent=cls.title+'・'+cls.time;
-  document.getElementById('cancelConfirmBody').textContent='取消後不影響本週次數，確定要取消場次報名嗎？';
+  document.getElementById('cancelConfirmMeta').textContent=cls.title+'・'+xlateClassTime(cls.time);
+  document.getElementById('cancelConfirmBody').textContent=TLI_I18N.t('取消後不影響本週次數，確定要取消場次報名嗎？',{en:'Cancelling does not affect your weekly quota. Confirm cancellation?',ja:'キャンセルしても今週の回数には影響しません。申込をキャンセルしますか？',de:'Eine Stornierung beeinflusst Ihr Wochenkontingent nicht. Wirklich stornieren?'});
   document.getElementById('cancelConfirmOverlay').classList.remove('hidden');
 }
 function closeCancelConfirm(){
@@ -919,10 +963,10 @@ function confirmCancelAction(){
   cls.cancelled=true;
   if(p.kind==='general'){
     addRecord(cls,'取消','退回堂數','ok');
-    showToast('已取消，堂數已退回');
+    showToast(TLI_I18N.t('已取消，堂數已退回',{en:'Cancelled — the class has been refunded',ja:'キャンセルしました。コマ数は返却されました',de:'Storniert — die Stunde wurde erstattet'}));
   }else{
     addRecord(cls,'取消','不影響本週次數','ok');
-    showToast('已取消場次報名');
+    showToast(TLI_I18N.t('已取消場次報名',{en:'Registration cancelled',ja:'申込をキャンセルしました',de:'Anmeldung storniert'}));
   }
   renderClassCard(cls);
   renderRecords();
@@ -940,16 +984,16 @@ function enterpriseApplyLeave(id){
     if(within || cls.demoFreeRemain>0){
       cls.badge='ok'; cls.resultText='不扣時數';
       addRecord(cls,'取消','不扣時數（自主取消）','ok');
-      showToast('已自主取消，不扣時數');
+      showToast(TLI_I18N.t('已自主取消，不扣時數',{en:'Cancelled — no hours deducted',ja:'キャンセルしました。時間数は差し引かれません',de:'Storniert — keine Stunden abgezogen'}));
     }else{
       cls.badge='deduct'; cls.resultText='記缺席，扣 1 堂時數，已記入出勤';
       addRecord(cls,'取消','記缺席，扣 1 堂時數，已記入出勤','deduct');
-      showToast('已取消，已扣時數並記入出勤');
+      showToast(TLI_I18N.t('已取消，已扣時數並記入出勤',{en:'Cancelled — hours deducted and logged as attendance',ja:'キャンセルしました。時間数が差し引かれ、出席記録に反映されました',de:'Storniert — Stunden abgezogen und als Anwesenheit erfasst'}));
     }
   }else{
     cls.applied=true; cls.resultText='等待 HR 核准'; cls.badge='pending';
     addRecord(cls,'請假','等待 HR 核准','pending');
-    showToast('已送出，等待 HR 核准');
+    showToast(TLI_I18N.t('已送出，等待 HR 核准',{en:'Submitted — awaiting HR approval',ja:'送信しました。HR承認待ちです',de:'Gesendet — wartet auf HR-Genehmigung'}));
   }
   renderClassCard(cls);
   renderRecords();
@@ -958,7 +1002,7 @@ function openAppealSheet(id){
   currentAppealId=id;
   var cls=findClass(id);
   if(!cls) return;
-  document.getElementById('appealSheetMeta').textContent=cls.title+'・'+cls.time;
+  document.getElementById('appealSheetMeta').textContent=cls.title+'・'+xlateClassTime(cls.time);
   document.getElementById('appealReason').selectedIndex=0;
   document.getElementById('appealNote').value='';
   document.getElementById('appealOverlay').classList.remove('hidden');
@@ -966,7 +1010,7 @@ function openAppealSheet(id){
 function closeAppealSheet(){ document.getElementById('appealOverlay').classList.add('hidden'); }
 function submitAppeal(){
   document.getElementById('appealOverlay').classList.add('hidden');
-  showToast('已送出申訴，覆核結果會通知你');
+  showToast(TLI_I18N.t('已送出申訴，覆核結果會通知你',{en:'Appeal submitted — you\'ll be notified of the review result',ja:'異議申し立てを送信しました。審査結果は通知されます',de:'Einspruch gesendet — Sie werden über das Ergebnis informiert'}));
   var cls=findClass(currentAppealId);
   if(cls){
     cls.appealState='pending';
@@ -1012,13 +1056,12 @@ function calAddMinutes(hhmm,minutes){
   return (nh<10?'0':'')+nh+':'+(nm<10?'0':'')+nm;
 }
 function fmtSlotDayLabel(d){
-  var wd='日一二三四五六';
-  return (d.getMonth()+1)+'/'+String(d.getDate()).padStart(2,'0')+'（'+wd.charAt(d.getDay())+'）';
+  return (d.getMonth()+1)+'/'+String(d.getDate()).padStart(2,'0')+'（'+weekdayShort(d.getDay())+'）';
 }
 function renderCalendar(){
-  document.getElementById('calTitle').textContent=calViewYear+' 年 '+(calViewMonth+1)+' 月';
+  document.getElementById('calTitle').textContent=fmtCalTitle(calViewYear,calViewMonth);
   var weekRow=document.getElementById('calWeekdayRow');
-  weekRow.innerHTML=CAL_WEEKDAYS.map(function(w){return '<span>'+w+'</span>';}).join('');
+  weekRow.innerHTML=[1,2,3,4,5,6,0].map(function(dow){return '<span>'+weekdayShort(dow)+'</span>';}).join('');
   var grid=document.getElementById('calGrid');
   grid.innerHTML='';
   var firstDay=new Date(calViewYear,calViewMonth,1);
@@ -1066,7 +1109,7 @@ function renderSlotTimes(){
   wrap.innerHTML='';
   document.getElementById('confirmRescheduleBtn').disabled=true;
   if(!calSelectedDate){
-    hintEl.textContent='請先在月曆選擇日期';
+    hintEl.textContent=TLI_I18N.t('請先在月曆選擇日期',{en:'Please select a date on the calendar first',ja:'まずカレンダーで日付を選択してください',de:'Bitte wählen Sie zuerst ein Datum im Kalender'});
     hintEl.style.display='block';
     document.getElementById('selectedSlotLine').style.display='none';
     return;
@@ -1085,7 +1128,7 @@ function renderSlotTimes(){
   var line=document.getElementById('selectedSlotLine');
   if(pickedSlotTime && pickedSlotEnd){
     var rcls=getRescheduleClass();
-    line.textContent='原：'+rcls.time+' → 新：'+fmtSlotDayLabel(calSelectedDate)+' '+pickedSlotTime+'–'+pickedSlotEnd;
+    line.textContent=TLI_I18N.t('原：',{en:'From: ',ja:'元：',de:'Von: '})+xlateClassTime(rcls.time)+TLI_I18N.t(' → 新：',{en:' → To: ',ja:' → 新：',de:' → Zu: '})+fmtSlotDayLabel(calSelectedDate)+' '+pickedSlotTime+'–'+pickedSlotEnd;
     line.style.display='block';
   }else{
     line.style.display='none';
@@ -1100,13 +1143,13 @@ function openRescheduleSheet(id){
   var cls=findClass(id);
   if(!cls) return;
   currentRescheduleId=id;
-  document.getElementById('rescheduleSheetMeta').textContent=cls.title+(cls.teacher?('・老師：'+cls.teacher):'');
-  document.getElementById('rescheduleCurrentLine').innerHTML='目前：<b>'+cls.time+'</b>';
+  document.getElementById('rescheduleSheetMeta').textContent=cls.title+(cls.teacher?(TLI_I18N.t('・老師：',{en:' · Teacher: ',ja:'・講師：',de:' · Lehrkraft: '})+cls.teacher):'');
+  document.getElementById('rescheduleCurrentLine').innerHTML=TLI_I18N.t('目前：',{en:'Current: ',ja:'現在：',de:'Aktuell: '})+'<b>'+xlateClassTime(cls.time)+'</b>';
   var limitLine=document.getElementById('rescheduleLimitLine');
   var group=PLAN_META[cls.planId].ruleGroup;
   if((group==='general'||group==='group-live') && typeof cls.rescheduleRemain==='number'){
     limitLine.classList.remove('hidden');
-    limitLine.textContent='本堂可改期次數剩 '+cls.rescheduleRemain+'（待定）';
+    limitLine.textContent=TLI_I18N.t('本堂可改期次數剩 '+cls.rescheduleRemain+'（待定）',{en:cls.rescheduleRemain+' reschedule(s) left for this class (subject to change)',ja:'このコマの振替可能回数は残り'+cls.rescheduleRemain+'回です（未定）',de:'Noch '+cls.rescheduleRemain+' Umbuchung(en) für diese Stunde möglich (vorläufig)'});
   }else{
     limitLine.classList.add('hidden');
   }
@@ -1128,7 +1171,7 @@ function confirmReschedule(){
   if(!currentRescheduleId || !calSelectedDate || !pickedSlotTime) return;
   var cls=getRescheduleClass();
   if(!cls) return;
-  var oldTime=cls.time;
+  var oldTime=xlateClassTime(cls.time);
   var newDateLabel=fmtSlotDayLabel(calSelectedDate);
   var hh=parseInt(pickedSlotTime.split(':')[0],10), mm=parseInt(pickedSlotTime.split(':')[1],10);
   cls.start=new Date(calSelectedDate.getFullYear(),calSelectedDate.getMonth(),calSelectedDate.getDate(),hh,mm);
@@ -1138,11 +1181,11 @@ function confirmReschedule(){
     cls.rescheduleRemain=Math.max(0,cls.rescheduleRemain-1);
   }
   addRecord(cls,'改期','已改期至 '+cls.time,'ok','原時段：'+oldTime);
-  showToast('已改期，新時段已更新');
+  showToast(TLI_I18N.t('已改期，新時段已更新',{en:'Rescheduled — the new time is now set',ja:'振替が完了しました。新しい時間が反映されました',de:'Umgebucht — der neue Termin wurde übernommen'}));
   closeRescheduleSheet();
   pickedSlotTime=null; pickedSlotEnd=null;
   if(selectedClassId===cls.id){
-    document.getElementById('selectedClassTitle').textContent=cls.title+'・'+cls.time;
+    document.getElementById('selectedClassTitle').textContent=cls.title+'・'+xlateClassTime(cls.time);
     renderClassCard(cls);
   }
   renderRecords();
@@ -1158,21 +1201,32 @@ function openRescheduleFlow(id){
   else{ openAvailabilityRequestSheet(id); }
 }
 
-var AVAIL_WEEKLY_DAYS=[{id:'mon',label:'一'},{id:'tue',label:'二'},{id:'wed',label:'三'},{id:'thu',label:'四'},{id:'fri',label:'五'},{id:'sat',label:'六'},{id:'sun',label:'日'}];
-var AVAIL_WEEKLY_PERIODS=[{id:'morning',label:'早'},{id:'afternoon',label:'午'},{id:'evening',label:'晚'}];
+var AVAIL_WEEKLY_DAYS=[{id:'mon',dow:1},{id:'tue',dow:2},{id:'wed',dow:3},{id:'thu',dow:4},{id:'fri',dow:5},{id:'sat',dow:6},{id:'sun',dow:0}];
+var AVAIL_WEEKLY_PERIODS=[{id:'morning'},{id:'afternoon'},{id:'evening'}];
+function periodLabel(pid){
+  if(pid==='morning') return TLI_I18N.t('早',{en:'Morning',ja:'朝',de:'Morgens'});
+  if(pid==='afternoon') return TLI_I18N.t('午',{en:'Afternoon',ja:'昼',de:'Nachmittags'});
+  return TLI_I18N.t('晚',{en:'Evening',ja:'夜',de:'Abends'});
+}
+function weekPrefixLabel(dow){ return TLI_I18N.t('週',{en:'',ja:'',de:''})+weekdayShort(dow); }
+function weeklySlotLabel(dow,pid){
+  var lang=TLI_I18N.currentLang();
+  var sep=(lang==='en'||lang==='de')?' ':'';
+  return weekPrefixLabel(dow)+sep+periodLabel(pid);
+}
 var availWeeklySelected={};
 var currentAvailId=null;
 function toggleAvailWeeklyCell(key){ availWeeklySelected[key]=!availWeeklySelected[key]; renderAvailWeeklyGrid(); }
 function renderAvailWeeklyGrid(){
   var wrap=document.getElementById('availWeeklyGrid');
   var html='<span class="wg-head"></span>';
-  AVAIL_WEEKLY_DAYS.forEach(function(d){ html+='<span class="wg-head">週'+d.label+'</span>'; });
+  AVAIL_WEEKLY_DAYS.forEach(function(d){ html+='<span class="wg-head">'+weekPrefixLabel(d.dow)+'</span>'; });
   AVAIL_WEEKLY_PERIODS.forEach(function(p){
-    html+='<span class="wg-period-label">'+p.label+'</span>';
+    html+='<span class="wg-period-label">'+periodLabel(p.id)+'</span>';
     AVAIL_WEEKLY_DAYS.forEach(function(d){
       var key=d.id+'_'+p.id;
       var sel=!!availWeeklySelected[key];
-      html+='<button type="button" class="wg-cell'+(sel?' selected':'')+'" onclick="toggleAvailWeeklyCell(\''+key+'\')" aria-pressed="'+sel+'" aria-label="週'+d.label+' '+p.label+'"></button>';
+      html+='<button type="button" class="wg-cell'+(sel?' selected':'')+'" onclick="toggleAvailWeeklyCell(\''+key+'\')" aria-pressed="'+sel+'" aria-label="'+weeklySlotLabel(d.dow,p.id)+'"></button>';
     });
   });
   wrap.innerHTML=html;
@@ -1180,21 +1234,20 @@ function renderAvailWeeklyGrid(){
 function availWeeklySelectedList(){
   var out=[];
   AVAIL_WEEKLY_PERIODS.forEach(function(p){
-    AVAIL_WEEKLY_DAYS.forEach(function(d){ if(availWeeklySelected[d.id+'_'+p.id]) out.push('週'+d.label+p.label); });
+    AVAIL_WEEKLY_DAYS.forEach(function(d){ if(availWeeklySelected[d.id+'_'+p.id]) out.push(weeklySlotLabel(d.dow,p.id)); });
   });
   return out;
 }
 var AVAIL_TIME_OPTIONS=['09:00','10:00','11:00','14:00','15:00','16:00','19:00','20:00'];
-var AVAIL_CAL_WEEKDAYS=['一','二','三','四','五','六','日'];
 var availCalViewYear=null, availCalViewMonth=null, availCalSelectedDate=null;
 var availSelectedTimes=[];
 var availSpecificPrefs=[];
 function availCalToday(){ return new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()); }
 function availCalSameDate(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
 function renderAvailCalendarGrid(){
-  document.getElementById('availCalTitle').textContent=availCalViewYear+' 年 '+(availCalViewMonth+1)+' 月';
+  document.getElementById('availCalTitle').textContent=fmtCalTitle(availCalViewYear,availCalViewMonth);
   var weekRow=document.getElementById('availCalWeekdayRow');
-  weekRow.innerHTML=AVAIL_CAL_WEEKDAYS.map(function(w){return '<span>'+w+'</span>';}).join('');
+  weekRow.innerHTML=[1,2,3,4,5,6,0].map(function(dow){return '<span>'+weekdayShort(dow)+'</span>';}).join('');
   var grid=document.getElementById('availCalGrid');
   grid.innerHTML='';
   var firstDay=new Date(availCalViewYear,availCalViewMonth,1);
@@ -1239,7 +1292,7 @@ function renderAvailTimeChips(){
   var hintEl=document.getElementById('availTimeHint');
   wrap.innerHTML='';
   if(!availCalSelectedDate){
-    hintEl.textContent='請先在月曆選擇日期';
+    hintEl.textContent=TLI_I18N.t('請先在月曆選擇日期',{en:'Please select a date on the calendar first',ja:'まずカレンダーで日付を選択してください',de:'Bitte wählen Sie zuerst ein Datum im Kalender'});
     hintEl.style.display='block';
     return;
   }
@@ -1259,7 +1312,7 @@ function toggleAvailTime(t){
   renderAvailTimeChips();
 }
 function addAvailSpecificPref(){
-  if(!availCalSelectedDate || availSelectedTimes.length===0){ showToast('請先選擇日期與至少一個時段'); return; }
+  if(!availCalSelectedDate || availSelectedTimes.length===0){ showToast(TLI_I18N.t('請先選擇日期與至少一個時段',{en:'Please select a date and at least one time slot',ja:'まず日付と時間帯を1つ以上選択してください',de:'Bitte wählen Sie ein Datum und mindestens ein Zeitfenster'})); return; }
   availSpecificPrefs.push({dateIso:availCalSelectedDate.toISOString(), label:fmtSlotDayLabel(availCalSelectedDate), times:availSelectedTimes.slice().sort()});
   availCalSelectedDate=null; availSelectedTimes=[];
   renderAvailCalendarGrid();
@@ -1274,15 +1327,15 @@ function removeAvailSpecificPref(idx){
 function renderAvailSpecificPrefList(){
   var wrap=document.getElementById('availSpecificPrefList');
   wrap.innerHTML=availSpecificPrefs.map(function(p,idx){
-    return '<span class="pref-chip">'+p.label+'　'+p.times.join('、')+'<button type="button" onclick="removeAvailSpecificPref('+idx+')" aria-label="移除">×</button></span>';
+    return '<span class="pref-chip">'+p.label+'　'+p.times.join('、')+'<button type="button" onclick="removeAvailSpecificPref('+idx+')" aria-label="'+TLI_I18N.t('移除',{en:'Remove',ja:'削除',de:'Entfernen'})+'">×</button></span>';
   }).join('');
 }
 function openAvailabilityRequestSheet(id){
   var cls=findClass(id);
   if(!cls) return;
   currentAvailId=id;
-  document.getElementById('availabilitySheetMeta').textContent=cls.title+(cls.teacher?('・老師：'+cls.teacher):'');
-  document.getElementById('availabilityCurrentLine').innerHTML='目前：<b>'+cls.time+'</b>';
+  document.getElementById('availabilitySheetMeta').textContent=cls.title+(cls.teacher?(TLI_I18N.t('・老師：',{en:' · Teacher: ',ja:'・講師：',de:' · Lehrkraft: '})+cls.teacher):'');
+  document.getElementById('availabilityCurrentLine').innerHTML=TLI_I18N.t('目前：',{en:'Current: ',ja:'現在：',de:'Aktuell: '})+'<b>'+xlateClassTime(cls.time)+'</b>';
   availWeeklySelected={};
   availSpecificPrefs=[];
   availCalSelectedDate=null; availSelectedTimes=[];
@@ -1303,18 +1356,18 @@ function submitAvailabilityRequest(){
   var cls=findClass(currentAvailId);
   if(!cls) return;
   if(availWeeklySelectedList().length===0 && availSpecificPrefs.length===0){
-    showToast('請至少提出一個有空時段（每週固定或特定日期）');
+    showToast(TLI_I18N.t('請至少提出一個有空時段（每週固定或特定日期）',{en:'Please provide at least one available time (weekly recurring or a specific date)',ja:'毎週固定または特定の日付で、少なくとも1つの空き時間を提出してください',de:'Bitte geben Sie mindestens eine Verfügbarkeit an (wöchentlich oder ein bestimmter Termin)'}));
     return;
   }
   var note=document.getElementById('availNote').value.trim();
   var parts=[];
-  if(availWeeklySelectedList().length) parts.push('每週：'+availWeeklySelectedList().join('、'));
-  if(availSpecificPrefs.length) parts.push('特定日期：'+availSpecificPrefs.map(function(p){return p.label+' '+p.times.join('、');}).join('；'));
+  if(availWeeklySelectedList().length) parts.push(TLI_I18N.t('每週：',{en:'Weekly: ',ja:'毎週：',de:'Wöchentlich: '})+availWeeklySelectedList().join('、'));
+  if(availSpecificPrefs.length) parts.push(TLI_I18N.t('特定日期：',{en:'Specific dates: ',ja:'特定の日付：',de:'Bestimmte Termine: '})+availSpecificPrefs.map(function(p){return p.label+' '+p.times.join('、');}).join('；'));
   var prefText=parts.join('　');
   cls.rescheduleRequested=true;
-  addRecord(cls,'改期','已送出新的有空時間，顧問確認後會通知你新時段','pending','你提出的時段：'+prefText+(note?('；備註：'+note):''));
+  addRecord(cls,'改期','已送出新的有空時間，顧問確認後會通知你新時段','pending',TLI_I18N.t('你提出的時段：',{en:'Your submitted availability: ',ja:'ご提出いただいた時間帯：',de:'Ihre angegebene Verfügbarkeit: '})+prefText+(note?(TLI_I18N.t('；備註：',{en:'; Notes: ',ja:'；備考：',de:'; Anmerkung: '})+note):''));
   closeAvailabilitySheet();
-  showToast('已送出改期需求');
+  showToast(TLI_I18N.t('已送出改期需求',{en:'Reschedule request submitted',ja:'振替希望を送信しました',de:'Umbuchungsanfrage gesendet'}));
   if(selectedClassId===cls.id){ renderClassCard(cls); }
   renderRecords();
 }
@@ -1347,6 +1400,31 @@ function render(){
   if(recId){ focusRecord(recId); }
 }
 render();
+
+/* ================= 五語切換：登記動態渲染函式，切語言／重新載入非繁中時自動重跑 ================= */
+TLI_I18N.onRefresh(renderClassPicker);
+TLI_I18N.onRefresh(renderRecords);
+TLI_I18N.onRefresh(function(){
+  if(!selectedClassId) return;
+  var cls=findClass(selectedClassId);
+  if(!cls) return;
+  document.getElementById('selectedClassTitle').textContent=cls.title+'・'+xlateClassTime(cls.time);
+  renderRuleCard(cls.planId);
+  renderClassCard(cls);
+});
+TLI_I18N.onRefresh(function(){
+  if(document.getElementById('rescheduleOverlay').classList.contains('hidden')) return;
+  renderCalendar();
+  renderSlotTimes();
+});
+TLI_I18N.onRefresh(function(){
+  if(document.getElementById('availabilityOverlay').classList.contains('hidden')) return;
+  renderAvailWeeklyGrid();
+  renderAvailCalendarGrid();
+  renderAvailTimeChips();
+  renderAvailSpecificPrefList();
+});
+TLI_I18N.init();
 
 // 全域 ESC 關閉：關閉目前開啟中的 sheet-overlay
 document.addEventListener('keydown', function(e){

@@ -133,7 +133,7 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 <div class="sidebar" id="sidebar">
 <a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small><span data-i18n="brand.franchisePortal">加盟管理後台</span><span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
 <nav>
-<div class="sec-label">加盟合作管理</div>
+<div class="sec-label" data-i18n="nav_u.groupLabel">加盟合作管理</div>
 <a data-nav="u01" class="active" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span data-i18n="nav_u.overview">概況</span></a>
 <a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span data-i18n="nav_u.classes">班級管理</span></a>
 <a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span data-i18n="nav_u.teachers">教師管理</span></a>
@@ -147,17 +147,17 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 <div class="sidebar-user" id="sidebarUser">
 <div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag" data-i18n="role.orgAdmin">機構管理者</span></span>
 <svg class="su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div>
-<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
+<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 
 <div class="main">
 <div class="topbar">
-<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
+<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="aria.openMenu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
 <div class="tb-title" data-i18n="nav_u.overview">概況</div>
 <div class="tb-actions">
-<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單">王</button>
-<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
+<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="aria.userMenu">王</button>
+<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
@@ -170,10 +170,10 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 
 <div class="card">
 <div class="enthead">
-<div><div class="entname" id="entNameEl">範例大學語言中心</div><div class="entperiod">合作方案：在學期間資源方案（教學影音／電子書／單元測驗／線下排課）</div>
+<div><div class="entname" id="entNameEl">範例大學語言中心</div><div class="entperiod"><span data-i18n="label.cooperationPlan">合作方案：</span><span data-i18n="plan.inSchoolResource">在學期間資源方案（教學影音／電子書／單元測驗／線下排課）</span></div>
 <div class="entperiod" style="margin-top:6px;display:flex;gap:18px;flex-wrap:wrap;">
 <span id="entPeriodEl">合作期間：－</span>
-<span>本學期區間：2026-09-01 ～ 2026-12-20</span>
+<span><span data-i18n="label.semesterRange">本學期區間：</span>2026-09-01 ～ 2026-12-20</span>
 <span id="entContactEl">機構窗口：－</span>
 </div>
 </div>
@@ -193,7 +193,7 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 <div class="pc-row">
 <div>
 <div class="pc-week" id="pcWeekLabel">第 2 週／共 12 週</div>
-<div class="pc-dates">3 個月期程：2026-09-01 ～ 2026-11-30</div>
+<div class="pc-dates"><span data-i18n="label.termMonths">3 個月期程：</span>2026-09-01 ～ 2026-11-30</div>
 </div>
 <a class="btn ghost" href="u04_program.html" data-i18n="link.viewFullSchedule">查看完整期程與課表</a>
 </div>
@@ -207,7 +207,7 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 
 <div class="card">
 <h2 data-i18n="h2.collegeDist">依班級分佈</h2>
-<div class="cardesc">本期各班級開通人數與出席率，可至「<a href="u02_students.html">學生名單</a>」查看個別學生明細。</div>
+<div class="cardesc" id="collegeDistDesc">本期各班級開通人數與出席率，可至「<a href="u02_students.html">學生名單</a>」查看個別學生明細。</div>
 <div class="tablewrap"><table id="collegeStatsTable"></table></div>
 </div>
 
@@ -217,7 +217,7 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 <div id="usageChart"></div>
 </div>
 <div class="card">
-<div class="charthead"><span class="ctitle">自學課程完成率（近 8 週）</span><span class="cval" id="selfPaceTrendVal"></span></div>
+<div class="charthead"><span class="ctitle" data-i18n="charttitle.selfPaceTrend">自學課程完成率（近 8 週）</span><span class="cval" id="selfPaceTrendVal"></span></div>
 <div id="selfPaceChart"></div>
 </div>
 </div>
@@ -235,10 +235,12 @@ line-height:1.6;z-index:35;text-align:left;font-weight:400;}
 
 <script src="../assets/_shared_masters.js"></script>
 <script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_org.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
 function seededRand(seed){ var x=Math.sin(seed*9301+49297)*233280; return x-Math.floor(x); }
 function fmtNum(n){ return n.toLocaleString('zh-Hant'); }
+function T(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
 
 /* ===== 20260928u 新增：你的前台入口卡——資料一律讀 TLI_MASTERS.partners，網址樣板需與 a20「合作夥伴管理」的
    詳情抽屜一致（同一 slug 與樣板），對應合作夥伴為 範例大學語言中心（partners 的 p02） ===== */
@@ -255,7 +257,11 @@ function computeContractYear(fromStr, todayStr){
   return Math.max(1, Math.floor(months/12) + 1);
 }
 var CONTRACT_YEAR = AZ_PARTNER.from ? computeContractYear(AZ_PARTNER.from, TODAY_STR) : 1;
-var CONTRACT_YEAR_LABEL = CONTRACT_YEAR <= 1 ? '第 1 年<wbr>（品牌授權費與導入費計費期）' : '第 '+CONTRACT_YEAR+' 年<wbr>（權利金計費期）';
+function contractYearLabel(){
+  return CONTRACT_YEAR <= 1
+    ? T('第 1 年<wbr>（品牌授權費與導入費計費期）', 'Year 1<wbr> (Brand License &amp; Setup Fee Period)')
+    : T('第 '+CONTRACT_YEAR+' 年<wbr>（權利金計費期）', 'Year '+CONTRACT_YEAR+'<wbr> (Royalty Billing Period)');
+}
 function ensureFrontUrls(p){
   if (!p || p.frontUrls) return p;
   var slug = p.slug || PARTNER_SLUG[p.id] || p.id;
@@ -275,42 +281,54 @@ function frontPreviewHref(p, key){
 function copyFrontUrl(encoded){
   var url = decodeURIComponent(encoded);
   if (navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(url).then(function(){ toast('已複製網址'); }).catch(function(){ toast('複製失敗，請手動複製'); });
+    navigator.clipboard.writeText(url).then(function(){ toast(T('已複製網址','URL copied')); }).catch(function(){ toast(T('複製失敗，請手動複製','Copy failed — please copy manually')); });
   } else {
-    toast('複製失敗，請手動複製');
+    toast(T('複製失敗，請手動複製','Copy failed — please copy manually'));
   }
 }
-(function renderFrontUrlCard(){
+function renderFrontUrlCard(){
   var p = TLI_MASTERS.byId('partners', 'p02');
   if (!p) return;
   ensureFrontUrls(p);
   document.getElementById('entNameEl').textContent = p.name;
-  document.getElementById('entPeriodEl').textContent = '合作期間：'+p.from+' ～ '+p.to;
+  document.getElementById('entPeriodEl').textContent = T('合作期間：','Cooperation Period: ')+p.from+' ～ '+p.to;
   document.getElementById('ctrPeriodEl').textContent = p.from+' ～ '+p.to;
-  document.getElementById('entContactEl').textContent = '機構窗口：'+p.contact+'（chen@az.example）';
-  var rows = [['home','品牌首頁'],['courses','課程頁'],['login','學員登入']];
+  document.getElementById('entContactEl').textContent = T('機構窗口：','Institution Contact: ')+p.contact+'（chen@az.example）';
+  var rows = [['home',T('品牌首頁','Homepage')],['courses',T('課程頁','Courses Page')],['login',T('學員登入','Student Login')]];
   document.getElementById('frontUrlRows').innerHTML = rows.map(function(r){
     var url = p.frontUrls[r[0]];
     return '<div style="margin-bottom:10px">' +
       '<div class="small" style="margin-bottom:3px">' + r[1] + '</div>' +
       '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
       '<code style="flex:1;min-width:180px;font-size:12.5px;background:var(--g50);padding:6px 9px;border-radius:6px;border:1px solid var(--g200);word-break:break-all">' + url + '</code>' +
-      '<button type="button" class="btn ghost" style="padding:5px 10px;font-size:12px" onclick="copyFrontUrl(\'' + encodeURIComponent(url) + '\')">複製</button>' +
-      '<a class="btn ghost" style="padding:5px 10px;font-size:12px" target="_blank" rel="noopener" href="' + frontPreviewHref(p, r[0]) + '">預覽</a>' +
+      '<button type="button" class="btn ghost" style="padding:5px 10px;font-size:12px" onclick="copyFrontUrl(\'' + encodeURIComponent(url) + '\')">' + T('複製','Copy') + '</button>' +
+      '<a class="btn ghost" style="padding:5px 10px;font-size:12px" target="_blank" rel="noopener" href="' + frontPreviewHref(p, r[0]) + '">' + T('預覽','Preview') + '</a>' +
       '</div></div>';
   }).join('');
-})();
+}
+renderFrontUrlCard();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderFrontUrlCard);
 
-document.getElementById('kpiGrid').innerHTML = [
-  {num:'186', lbl:'在學學生數'},
-  {num:'124', lbl:'本學期開通數'},
-  {num:'68%', lbl:'資源使用率（近 30 天）'},
-  {num:'54%', lbl:'自學課程完成率（近 30 天）'}
-].map(function(k){ return '<div class="statbox"><div class="num">'+k.num+'</div><div class="lbl">'+k.lbl+'</div></div>'; }).join('');
+function renderKpiGrid(){
+  document.getElementById('kpiGrid').innerHTML = [
+    {num:'186', lbl:T('在學學生數','Active Students')},
+    {num:'124', lbl:T('本學期開通數','Activations This Semester')},
+    {num:'68%', lbl:T('資源使用率（近 30 天）','Resource Usage Rate (Last 30 Days)')},
+    {num:'54%', lbl:T('自學課程完成率（近 30 天）','Self-Study Completion Rate (Last 30 Days)')}
+  ].map(function(k){ return '<div class="statbox"><div class="num">'+k.num+'</div><div class="lbl">'+k.lbl+'</div></div>'; }).join('');
+}
+renderKpiGrid();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderKpiGrid);
 
 /* 期程進度卡：第 N 週／共 12 週為示範標，不代表實際合作期程長度
    帳號啟用率為 TLI 端核對本期權利金試算之對照數據，非計費依據，與 u06 對照數據卡一致（示範值 92%） */
 document.getElementById('pcActivationRate').textContent = '92%';
+var PC_WEEK_CUR = 2, PC_WEEK_TOTAL = 12;
+function renderPeriodWeekLabel(){
+  document.getElementById('pcWeekLabel').textContent = T('第 '+PC_WEEK_CUR+' 週／共 '+PC_WEEK_TOTAL+' 週', 'Week '+PC_WEEK_CUR+' of '+PC_WEEK_TOTAL);
+}
+renderPeriodWeekLabel();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderPeriodWeekLabel);
 
 /* ===== 班級（讀取 u04「班級設定」自助維護清單，同瀏覽器換頁後同步；
    本頁僅讀取，不提供編輯，編輯請至「期程與課表」頁的「班級設定」分頁。） ===== */
@@ -346,7 +364,7 @@ function toggleInfo(ev,id){
 }
 document.addEventListener('click', function(){ document.querySelectorAll('.info-pop.open').forEach(function(p){ p.classList.remove('open'); }); });
 function infoBtnHtml(id, label, ruleText){
-  return '<button class="info-btn" onclick="toggleInfo(event,\''+id+'\')" aria-label="'+label+'說明">'+ICON_INFO+'</button>'+
+  return '<button class="info-btn" onclick="toggleInfo(event,\''+id+'\')" aria-label="'+label+T('說明',' Info')+'">'+ICON_INFO+'</button>'+
     '<div class="info-pop" id="'+id+'">'+ruleText+'</div>';
 }
 function contractBoxHtml(id, label, value, ruleText){
@@ -354,18 +372,29 @@ function contractBoxHtml(id, label, value, ruleText){
 }
 /* Royalty（權利金）制合約摘要：第 1 年品牌授權費與導入費已付清，第 2 年起依 TLI 平台紀錄
    計算之營業收入計收權利金＋教材費＋教師回訓費；已開通帳號數與帳號啟用率僅供核對權利金試算之用，非計費依據。 */
-document.getElementById('contractGrid').innerHTML =
-  contractBoxHtml('info-type','合作型態','加盟（Franchise）','品牌授權＋教學系統使用；貴校以自有教師、自有學生招生，學費不經過 TLI，詳細合約內容請至「合約與計費」頁查看。','contract.type','contract.typeVal','contract.typeRule') +
-  contractBoxHtml('info-year','目前所處年度',CONTRACT_YEAR_LABEL,'第 1 年為品牌授權費與教育系統／營運導入費計費期，已付清；第 2 年起改按 TLI 平台紀錄計算之本期營業收入計收權利金。','contract.year',null,'contract.yearRule') +
-  contractBoxHtml('info-royalty','權利金比例','營業收入的 '+AZ_PARTNER.royaltyRate+'%','依 TLI 平台紀錄（開課數、上課人次、課程收入）計算之本期營業收入固定比例計收，另計教材費與教師回訓費，詳見「合約與計費」頁。','contract.royaltyRate',null,'contract.royaltyRule') +
-  contractBoxHtml('info-cycle','結算週期','每半年結算、支付一次','與「合約與計費」頁之結算期一致，每期結束後依平台紀錄自動試算本期應付金額。','contract.cycle','contract.cycleVal','contract.cycleRule') +
-  contractBoxHtml('info-opened','已開通帳號數', CURRENT_SEMESTER_HEADCOUNT+' 人','實際已開通 TLI 帳號之學生人數，供 TLI 端核對本期權利金試算之合理性參考，非計費依據。','contract.opened',null,'contract.openedRule') +
-  contractBoxHtml('info-activation','帳號啟用率', ACTIVATION_RATE+'%','學生確實啟用帳號、實際使用線上資源的比例；啟用率偏低時，核對權利金試算的基礎會不足。','contract.activationLbl',null,'contract.activationRule') +
-  contractBoxHtml('info-payable','本期應付試算','<a href="u06_billing.html">前往查看 →</a>','依本期平台紀錄試算之權利金，加計教材費與教師回訓費，請至「合約與計費」頁查看試算明細。','contract.payable',null,'contract.payableRule') +
-  contractBoxHtml('info-declare','本期結算方式','<span class="badge blue">依平台紀錄自動計算</span>','TLI 依本期平台紀錄之開課數、上課人次與課程收入自動計算本期營業收入與應付權利金，毋須貴校申報。','contract.declare','contract.declareVal','contract.declareRule');
-if (window.TLI_I18N) TLI_I18N.refresh();
+function renderContractGrid(){
+  document.getElementById('contractGrid').innerHTML =
+    contractBoxHtml('info-type', T('合作型態','Cooperation Type'), T('加盟（Franchise）','Franchise'), T('品牌授權＋教學系統使用；貴校以自有教師、自有學生招生，學費不經過 TLI，詳細合約內容請至「合約與計費」頁查看。','Brand license plus use of the teaching system; your institution recruits with its own teachers and students, and tuition does not pass through TLI. See "Contract &amp; Billing" for full contract details.')) +
+    contractBoxHtml('info-year', T('目前所處年度','Current Contract Year'), contractYearLabel(), T('第 1 年為品牌授權費與教育系統／營運導入費計費期，已付清；第 2 年起改按 TLI 平台紀錄計算之本期營業收入計收權利金。','Year 1 is the billing period for the brand license fee and system/operations setup fee, already paid in full; from Year 2 onward, royalties are calculated from this period\'s revenue per TLI platform records.')) +
+    contractBoxHtml('info-royalty', T('權利金比例','Royalty Rate'), T('營業收入的 '+AZ_PARTNER.royaltyRate+'%', AZ_PARTNER.royaltyRate+'% of revenue'), T('依 TLI 平台紀錄（開課數、上課人次、課程收入）計算之本期營業收入固定比例計收，另計教材費與教師回訓費，詳見「合約與計費」頁。','Calculated as a fixed percentage of this period\'s revenue based on TLI platform records (classes opened, attendance count, course revenue); materials fees and teacher retraining fees are billed separately. See "Contract &amp; Billing" for details.')) +
+    contractBoxHtml('info-cycle', T('結算週期','Settlement Cycle'), T('每半年結算、支付一次','Settled and paid once every half-year'), T('與「合約與計費」頁之結算期一致，每期結束後依平台紀錄自動試算本期應付金額。','Matches the settlement period on the "Contract &amp; Billing" page; the payable amount is auto-calculated from platform records at the end of each period.')) +
+    contractBoxHtml('info-opened', T('已開通帳號數','Activated Accounts'), CURRENT_SEMESTER_HEADCOUNT+' '+T('人','people'), T('實際已開通 TLI 帳號之學生人數，供 TLI 端核對本期權利金試算之合理性參考，非計費依據。','The actual number of students who have activated a TLI account, for TLI\'s reference in validating this period\'s royalty estimate; not a billing basis.')) +
+    contractBoxHtml('info-activation', T('帳號啟用率','Account Activation Rate'), ACTIVATION_RATE+'%', T('學生確實啟用帳號、實際使用線上資源的比例；啟用率偏低時，核對權利金試算的基礎會不足。','The proportion of students who have actually activated their accounts and used online resources; a low rate weakens the basis for validating the royalty estimate.')) +
+    contractBoxHtml('info-payable', T('本期應付試算','This Period\'s Estimated Payable'), '<a href="u06_billing.html">'+T('前往查看 →','View Details →')+'</a>', T('依本期平台紀錄試算之權利金，加計教材費與教師回訓費，請至「合約與計費」頁查看試算明細。','Royalty estimated from this period\'s platform records, plus materials fees and teacher retraining fees; see "Contract &amp; Billing" for the full breakdown.')) +
+    contractBoxHtml('info-declare', T('本期結算方式','This Period\'s Settlement Method'), '<span class="badge blue">'+T('依平台紀錄自動計算','Auto-Calculated')+'</span>', T('TLI 依本期平台紀錄之開課數、上課人次與課程收入自動計算本期營業收入與應付權利金，毋須貴校申報。','TLI automatically calculates this period\'s revenue and payable royalty from platform records (classes opened, attendance, course revenue) — no declaration needed from your institution.'));
+}
+renderContractGrid();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderContractGrid);
 
 /* ===== 依班級分佈：各班級開通人數與出席率（依本期已開通帳號數比例分配的示範資料） ===== */
+function renderCollegeDistDesc(){
+  document.getElementById('collegeDistDesc').innerHTML = T(
+    '本期各班級開通人數與出席率，可至「<a href="u02_students.html">學生名單</a>」查看個別學生明細。',
+    'This period\'s activation count and attendance rate by class. See "<a href="u02_students.html">Student Roster</a>" for individual student details.'
+  );
+}
+renderCollegeDistDesc();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderCollegeDistDesc);
 function makeCollegeStats(){
   var classes = ORG_CLASSES.filter(function(c){ return c.status==='啟用'; });
   var n = classes.length;
@@ -381,10 +410,14 @@ function makeCollegeStats(){
   });
 }
 var COLLEGE_STATS = makeCollegeStats();
-document.getElementById('collegeStatsTable').innerHTML = '<tr><th data-i18n="col.college">班級</th><th data-i18n="col.openedCount">開通人數</th><th data-i18n="col.attendanceRate">出席率</th></tr>' +
-  COLLEGE_STATS.map(function(s){ return '<tr><td>'+s.name+'</td><td>'+s.count+' 人</td><td>'+s.attendance+'%</td></tr>'; }).join('') +
-  '<tr><td><b data-i18n="col.total">合計</b></td><td><b>'+COLLEGE_STATS.reduce(function(a,s){return a+s.count;},0)+' 人</b></td><td>－</td></tr>';
-if (window.TLI_I18N) TLI_I18N.refresh();
+function renderCollegeStatsTable(){
+  document.getElementById('collegeStatsTable').innerHTML = '<tr><th data-i18n="col.college">班級</th><th data-i18n="col.openedCount">開通人數</th><th data-i18n="col.attendanceRate">出席率</th></tr>' +
+    COLLEGE_STATS.map(function(s){ return '<tr><td>'+s.name+'</td><td>'+s.count+' '+T('人','people')+'</td><td>'+s.attendance+'%</td></tr>'; }).join('') +
+    '<tr><td><b data-i18n="col.total">合計</b></td><td><b>'+COLLEGE_STATS.reduce(function(a,s){return a+s.count;},0)+' '+T('人','people')+'</b></td><td>－</td></tr>';
+  if (window.TLI_I18N) TLI_I18N.refresh();
+}
+renderCollegeStatsTable();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderCollegeStatsTable);
 
 function buildLineChart(values, opts){
   var w=opts.w||480, h=opts.h||150, pad=26;
@@ -408,10 +441,14 @@ for(var w=0; w<8; w++){
   usageVals.push(50+Math.floor(seededRand(w*3+1)*35));
   selfPaceVals.push(25+Math.floor(seededRand(w*5+2)*30));
 }
-document.getElementById('usageChart').innerHTML = buildLineChart(usageVals, {color:'#1B4E8C', label:'資源使用趨勢折線圖'});
-document.getElementById('selfPaceChart').innerHTML = buildLineChart(selfPaceVals, {color:'#0F9B79', label:'自學課程完成率折線圖'});
-document.getElementById('usageTrendVal').textContent = '本週 '+usageVals[usageVals.length-1]+'%';
-document.getElementById('selfPaceTrendVal').textContent = '本週 '+selfPaceVals[selfPaceVals.length-1]+'%';
+function renderTrendCharts(){
+  document.getElementById('usageChart').innerHTML = buildLineChart(usageVals, {color:'#1B4E8C', label:T('資源使用趨勢折線圖','Resource Usage Trend Line Chart')});
+  document.getElementById('selfPaceChart').innerHTML = buildLineChart(selfPaceVals, {color:'#0F9B79', label:T('自學課程完成率折線圖','Self-Study Completion Rate Line Chart')});
+  document.getElementById('usageTrendVal').textContent = T('本週 ','This Week: ')+usageVals[usageVals.length-1]+'%';
+  document.getElementById('selfPaceTrendVal').textContent = T('本週 ','This Week: ')+selfPaceVals[selfPaceVals.length-1]+'%';
+}
+renderTrendCharts();
+if (window.TLI_I18N) TLI_I18N.onRefresh(renderTrendCharts);
 
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarBackdrop').classList.toggle('open'); }
 function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarBackdrop').classList.remove('open'); }

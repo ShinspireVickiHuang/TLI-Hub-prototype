@@ -349,8 +349,8 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c09.aiIntro">可以直接問我申訴案件的狀況，例如目前待覆核有幾筆、哪個企業申訴最多。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo(1)">目前待覆核申訴有幾筆？</button>
-      <button onclick="tliAskDemo(2)">哪個企業申訴案件最多？</button>
+      <button onclick="tliAskDemo(1)" data-i18n="c09.aiQ1">目前待覆核申訴有幾筆？</button>
+      <button onclick="tliAskDemo(2)" data-i18n="c09.aiQ2">哪個企業申訴案件最多？</button>
     </div>
     <div class="ai-input">
       <input id="aiInput" placeholder="輸入問題" data-i18n-placeholder="ai.inputPlaceholder" onkeydown="if(event.key==='Enter')tliAskFree()">
@@ -404,16 +404,32 @@ var REASON_OPTS=[
   {v:'system',label:'系統或流程認定有誤'},
   {v:'other',label:'其他'}
 ];
-function reasonLabel(v){var f=REASON_OPTS.find(function(r){return r.v===v;});return f?f.label:v;}
-function statusLabel(s){return s==='pending'?'待覆核':(s==='advisor_review'?'顧問覆核中':(s==='approved'?'已通過':'已駁回'));}
+var REASON_LABELS_EN={'產線突發狀況':'Sudden Production Line Issue','其他不可歸責事由':'Other Non-Attributable Reason','系統或流程認定有誤':'System or Process Misjudgment','其他':'Other'};
+function reasonLabel(v){var f=REASON_OPTS.find(function(r){return r.v===v;});return f?T(f.label,REASON_LABELS_EN[f.label]||f.label):v;}
+function statusLabel(s){return s==='pending'?T('待覆核','Pending Review'):(s==='advisor_review'?T('顧問覆核中','Advisor Reviewing'):(s==='approved'?T('已通過','Approved'):T('已駁回','Rejected')));}
 function statusBadge(s){
-  if(s==='pending')return '<span class="badge warn">待覆核</span>';
-  if(s==='advisor_review')return '<span class="badge b">顧問覆核中</span>';
-  if(s==='approved')return '<span class="badge ok">已通過</span>';
-  return '<span class="badge danger">已駁回</span>';
+  if(s==='pending')return '<span class="badge warn">'+T('待覆核','Pending Review')+'</span>';
+  if(s==='advisor_review')return '<span class="badge b">'+T('顧問覆核中','Advisor Reviewing')+'</span>';
+  if(s==='approved')return '<span class="badge ok">'+T('已通過','Approved')+'</span>';
+  return '<span class="badge danger">'+T('已駁回','Rejected')+'</span>';
 }
 function isOpenStatus(s){return s==='pending'||s==='advisor_review';}
-function sourceLabel(s){return s==='employee'?'員工直送':'HR 轉來';}
+function sourceLabel(s){return s==='employee'?T('員工直送','Employee Direct'):T('HR 轉來','Forwarded by HR');}
+/* 「N / N 次（本月免扣次數已用完）」是固定樣板套數字，用正則抽出數字後翻譯，不是備註類自由文字 */
+function exemptUsedDisplay(s){
+  if(!s) return s;
+  var m=s.match(/^(\d+)\s*\/\s*(\d+)\s*次（本月免扣次數已用完）$/);
+  if(m) return T(s, m[1]+' / '+m[2]+' times (this month\'s exemption limit reached)');
+  return s;
+}
+/* 課堂日期「YYYY-MM-DD（星期）HH:MM」的中文星期縮寫，同樣是固定樣板不是自由文字，需翻成英文縮寫 */
+var WEEKDAY_EN_C09={'日':'Sun','一':'Mon','二':'Tue','三':'Wed','四':'Thu','五':'Fri','六':'Sat'};
+function lessonDateDisplay(s){
+  if(!s) return s;
+  return s.replace(/（([日一二三四五六])）/, function(m0,d){
+    return T(m0,'('+(WEEKDAY_EN_C09[d]||d)+')');
+  });
+}
 
 var RAW=[
   {company:'範例半導體股份有限公司',employee:'王小明',lessonDate:'2026-09-02（二）14:00',reason:'produce',note:'當日臨時被排入產線緊急停機處理，來不及於時限內請假',source:'employee',status:'pending',exemptUsed:'3 / 3 次（本月免扣次數已用完）',daysAgo:5},
@@ -514,8 +530,8 @@ function renderTable(){
   document.getElementById('apEmpty').style.display=list.length?'none':'block';
   body.innerHTML=list.map(function(o){
     return '<tr class="clickable" onclick="tliOpenDrawer(\''+o.id+'\')">'+
-      '<td>'+o.submittedAt+'</td><td>'+o.company+'</td><td>'+o.employee+'</td><td>'+o.lessonDate+'</td>'+
-      '<td>缺席（扣 1 堂時數）</td><td>'+reasonLabel(o.reason)+'</td><td>'+sourceLabel(o.source)+'</td><td>'+statusBadge(o.status)+'</td>'+
+      '<td>'+o.submittedAt+'</td><td>'+o.company+'</td><td>'+o.employee+'</td><td>'+lessonDateDisplay(o.lessonDate)+'</td>'+
+      '<td>'+T('缺席（扣 1 堂時數）','Absence (1 lesson deducted)')+'</td><td>'+reasonLabel(o.reason)+'</td><td>'+sourceLabel(o.source)+'</td><td>'+statusBadge(o.status)+'</td>'+
     '</tr>';
   }).join('');
   document.getElementById('pagerInfo').textContent=T('共 ','')+list.length+T(' 筆',' total');
@@ -549,21 +565,21 @@ function tliOpenDrawer(id){
   currentDrawerId=id;
   var o=recordById(id);
   if(!o)return;
-  document.getElementById('dTitle').textContent=o.employee+'（'+o.id+'）';
+  document.getElementById('dTitle').textContent=o.employee+T('（','(')+o.id+T('）',')');
   document.getElementById('dBadges').innerHTML=statusBadge(o.status)+' <span class="badge muted">'+sourceLabel(o.source)+'</span>';
   var html='<div class="dsection"><h3>'+T('申訴內容','Appeal Details')+'</h3>'+
     '<div class="dfield"><span class="dl">'+T('企業','Company')+'</span><span class="dv">'+o.company+'</span></div>'+
     '<div class="dfield"><span class="dl">'+T('員工','Employee')+'</span><span class="dv">'+o.employee+'</span></div>'+
-    '<div class="dfield"><span class="dl">'+T('課堂日期','Lesson Date')+'</span><span class="dv">'+o.lessonDate+'</span></div>'+
-    '<div class="dfield"><span class="dl">'+T('原判定','Original Ruling')+'</span><span class="dv">缺席（超過本月免扣次數，系統預設扣 1 堂時數）</span></div>'+
+    '<div class="dfield"><span class="dl">'+T('課堂日期','Lesson Date')+'</span><span class="dv">'+lessonDateDisplay(o.lessonDate)+'</span></div>'+
+    '<div class="dfield"><span class="dl">'+T('原判定','Original Ruling')+'</span><span class="dv">'+T('缺席（超過本月免扣次數，系統預設扣 1 堂時數）','Absence (exceeded this month\'s exemption limit; system deducts 1 lesson by default)')+'</span></div>'+
     '<div class="dfield"><span class="dl">'+T('申訴原因','Appeal Reason')+'</span><span class="dv">'+reasonLabel(o.reason)+'</span></div>'+
     '<div class="dfield"><span class="dl">'+T('說明','Note')+'</span><span class="dv">'+o.note+'</span></div>'+
     '<div class="dfield"><span class="dl">'+T('來源','Source')+'</span><span class="dv">'+sourceLabel(o.source)+'</span></div>'+
     '<div class="dfield"><span class="dl">'+T('送出時間','Submitted')+'</span><span class="dv">'+o.submittedAt+'</span></div>'+
   '</div>';
   html+='<div class="dsection"><h3>'+T('合約依據','Contract Basis')+'</h3>'+
-    '<div class="dfield"><span class="dl">'+T('本月免扣使用','This Month\'s Exemptions Used')+'</span><span class="dv">'+o.exemptUsed+'</span></div>'+
-    '<div class="dfield"><span class="dl">'+T('合約規則','Contract Rule')+'</span><span class="dv">'+o.contractRule+'</span></div>'+
+    '<div class="dfield"><span class="dl">'+T('本月免扣使用','This Month\'s Exemptions Used')+'</span><span class="dv">'+exemptUsedDisplay(o.exemptUsed)+'</span></div>'+
+    '<div class="dfield"><span class="dl">'+T('合約規則','Contract Rule')+'</span><span class="dv">'+T(o.contractRule,'Excess-leave handling rule: enters the appeal queue; the advisor or HR decides after review (contract parameters configured in the a19 Enterprise Contract Parameters tab)')+'</span></div>'+
   '</div>';
   if(isOpenStatus(o.status)){
     html+='<div class="dsection"><h3>'+T('操作','Actions')+'</h3><div class="actionbar">'+
@@ -633,14 +649,14 @@ function tliAppendMsg(role,html){
 function tliAskDemo(n){
   if(n===1){
     var pending=RECORDS.filter(function(o){return isOpenStatus(o.status);});
-    tliAppendMsg('user','目前待覆核申訴有幾筆？');
-    tliAppendMsg('bot','目前有 <b>'+pending.length+'</b> 筆尚未覆核（含待覆核與顧問覆核中）：'+pending.map(function(o){return o.employee+'（'+statusLabel(o.status)+'）';}).join('、')+'。<div class="src">資料來源：3.0 中台／申訴覆核模組</div>');
+    tliAppendMsg('user',T('目前待覆核申訴有幾筆？','How many appeals are currently pending review?'));
+    tliAppendMsg('bot',T('目前有 ','There are currently ')+'<b>'+pending.length+'</b>'+T(' 筆尚未覆核（含待覆核與顧問覆核中）：',' cases not yet reviewed (pending review and advisor reviewing): ')+pending.map(function(o){return o.employee+T('（','(')+statusLabel(o.status)+T('）',')');}).join(T('、',', '))+T('。','.')+'<div class="src">'+T('資料來源：3.0 中台／申訴覆核模組','Data source: 3.0 Middle Platform / Appeal Review Module')+'</div>');
   }else{
     var byCompany={};
     RECORDS.forEach(function(o){byCompany[o.company]=(byCompany[o.company]||0)+1;});
     var top=Object.keys(byCompany).sort(function(a,b){return byCompany[b]-byCompany[a];})[0];
-    tliAppendMsg('user','哪個企業申訴案件最多？');
-    tliAppendMsg('bot',top+' 目前申訴案件數最多，共 <b>'+byCompany[top]+'</b> 筆。<div class="src">資料來源：3.0 中台／申訴覆核模組</div>');
+    tliAppendMsg('user',T('哪個企業申訴案件最多？','Which company has the most appeal cases?'));
+    tliAppendMsg('bot',top+T(' 目前申訴案件數最多，共 ',' currently has the most appeal cases: ')+'<b>'+byCompany[top]+'</b>'+T(' 筆。','.')+'<div class="src">'+T('資料來源：3.0 中台／申訴覆核模組','Data source: 3.0 Middle Platform / Appeal Review Module')+'</div>');
   }
 }
 function tliAskFree(){
@@ -649,7 +665,7 @@ function tliAskFree(){
   if(!v)return;
   tliAppendMsg('user',v);
   input.value='';
-  setTimeout(function(){ tliAppendMsg('bot','此問題會查詢 3.0 中台申訴資料後回覆，可先試試左側常用問題。'); },300);
+  setTimeout(function(){ tliAppendMsg('bot',T('此問題會查詢 3.0 中台申訴資料後回覆，可先試試左側常用問題。','This question will be answered after querying 3.0 middle platform appeal data — feel free to try one of the quick questions on the left in the meantime.')); },300);
 }
 
 initFilterOptions();
@@ -684,10 +700,10 @@ function closeSidebar(){
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', time:'10 分鐘前', unread:true},
-  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', time:'1 小時前', unread:true},
-  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', time:'今天 09:12', unread:false},
-  {t:'老師黃志遠已切換為留職停薪', time:'昨天', unread:false}
+  {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
+  {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
+  {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
@@ -696,7 +712,7 @@ function renderNotifPanel(){
   var dot = document.getElementById('tbDot');
   if (dot) dot.style.display = unread ? 'block' : 'none';
   panel.innerHTML = '<div class="tn-head"><span>'+(window.TLI_I18N?TLI_I18N.t('通知（'+unread+' 則未讀）','Notifications ('+unread+' unread)'):('通知（'+unread+' 則未讀）'))+'</span><a href="javascript:void(0)" onclick="markAllRead(event)">'+(window.TLI_I18N?TLI_I18N.t('全部標為已讀','Mark All as Read'):'全部標為已讀')+'</a></div>' +
-    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+n.t+'<div class="tn-t">'+n.time+'</div></div>'; }).join('');
+    NOTIFS.map(function(n){ return '<div class="tb-notifitem'+(n.unread?' unread':'')+'">'+(window.TLI_I18N?TLI_I18N.t(n.t,n.en):n.t)+'<div class="tn-t">'+(window.TLI_I18N?TLI_I18N.t(n.time,n.timeEn):n.time)+'</div></div>'; }).join('');
 }
 function markAllRead(ev){
   if (ev) ev.stopPropagation();

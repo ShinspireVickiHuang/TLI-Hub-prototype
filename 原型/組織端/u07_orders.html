@@ -169,61 +169,61 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <body>
 <div class="app">
 <div class="sidebar" id="sidebar">
-<a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small>加盟管理後台<span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
+<a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small><span data-i18n="brand.franchisePortal">加盟管理後台</span><span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
 <nav>
-<div class="sec-label">加盟合作管理</div>
-<a data-nav="u01" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span>概況</span></a>
-<a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span>班級管理</span></a>
-<a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span>教師管理</span></a>
-<a data-nav="u02" href="u02_students.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"/><path d="M2.5 16c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="14" cy="7.5" r="2"/><path d="M13 12.2c1.8.2 3.2 1.6 3.5 3.8"/></svg><span>學生名單</span></a>
-<a data-nav="u09"  href="u09_plans_terms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5h4.5a1 1 0 0 1 1 1V9a1 1 0 0 1-.3.7l-6.7 6.7a1 1 0 0 1-1.4 0L3.6 12a1 1 0 0 1 0-1.4L10.3 3.9a1 1 0 0 1 .7-.4z"/><circle cx="13.2" cy="6.8" r="1"/></svg><span>方案與期別</span></a>
-<a data-nav="u07" class="active" href="u07_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h10l-1 13H6z"/><line x1="7.5" y1="7" x2="12.5" y2="7"/><line x1="7.5" y1="10" x2="12.5" y2="10"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg><span>訂單管理</span></a>
-<a data-nav="u03" href="u03_usage.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span>使用報表</span></a>
-<a data-nav="u04" href="u04_program.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="2" x2="7" y2="5.5"/><line x1="13" y1="2" x2="13" y2="5.5"/></svg><span>期程與課表</span></a>
-<a data-nav="u06" href="u06_billing.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="13" height="13" rx="1.5"/><line x1="6.5" y1="7.2" x2="13.5" y2="7.2"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><line x1="6.5" y1="12.8" x2="10.5" y2="12.8"/></svg><span>合約與計費</span></a>
+<div class="sec-label" data-i18n="nav_u.groupLabel">加盟合作管理</div>
+<a data-nav="u01" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span data-i18n="nav_u.overview">概況</span></a>
+<a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span data-i18n="nav_u.classes">班級管理</span></a>
+<a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span data-i18n="nav_u.teachers">教師管理</span></a>
+<a data-nav="u02" href="u02_students.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"/><path d="M2.5 16c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="14" cy="7.5" r="2"/><path d="M13 12.2c1.8.2 3.2 1.6 3.5 3.8"/></svg><span data-i18n="nav_u.students">學生名單</span></a>
+<a data-nav="u09"  href="u09_plans_terms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5h4.5a1 1 0 0 1 1 1V9a1 1 0 0 1-.3.7l-6.7 6.7a1 1 0 0 1-1.4 0L3.6 12a1 1 0 0 1 0-1.4L10.3 3.9a1 1 0 0 1 .7-.4z"/><circle cx="13.2" cy="6.8" r="1"/></svg><span data-i18n="nav_u.plansTerms">方案與期別</span></a>
+<a data-nav="u07" class="active" href="u07_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h10l-1 13H6z"/><line x1="7.5" y1="7" x2="12.5" y2="7"/><line x1="7.5" y1="10" x2="12.5" y2="10"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg><span data-i18n="nav_u.orders">訂單管理</span></a>
+<a data-nav="u03" href="u03_usage.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span data-i18n="nav_u.usage">使用報表</span></a>
+<a data-nav="u04" href="u04_program.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="2" x2="7" y2="5.5"/><line x1="13" y1="2" x2="13" y2="5.5"/></svg><span data-i18n="nav_u.program">期程與課表</span></a>
+<a data-nav="u06" href="u06_billing.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="13" height="13" rx="1.5"/><line x1="6.5" y1="7.2" x2="13.5" y2="7.2"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><line x1="6.5" y1="12.8" x2="10.5" y2="12.8"/></svg><span data-i18n="nav_u.billing">合約與計費</span></a>
 </nav>
 <div class="sidebar-user" id="sidebarUser">
-<div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag">機構管理者</span></span>
+<div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag" data-i18n="role.orgAdmin">機構管理者</span></span>
 <svg class="su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div>
-<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')">個人設定</a><a href="../公開網站/p01_home.html">前往官網</a><a href="javascript:void(0)" onclick="doLogout()">登出</a></div>
+<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 
 <div class="main">
 <div class="topbar">
-<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
-<div class="tb-title">訂單管理</div>
+<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="aria.openMenu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
+<div class="tb-title" data-i18n="nav_u.orders">訂單管理</div>
 <div class="tb-actions">
-<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單">王</button>
-<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')">個人設定</a><a href="../公開網站/p01_home.html">前往官網</a><a href="javascript:void(0)" onclick="doLogout()">登出</a></div>
+<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="aria.userMenu">王</button>
+<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1>訂單管理</h1><div class="desc">建立與管理學員報名訂單，追蹤收款進度與 TLI Connect 帳號開通狀態。點列可查看詳情。</div></div>
-<button class="btn" onclick="openNewOrderModal()">＋建立訂單</button>
+<div><h1 data-i18n="nav_u.orders">訂單管理</h1><div class="desc" data-i18n="u07.pageDesc">建立與管理學員報名訂單，追蹤收款進度與 TLI Connect 帳號開通狀態。點列可查看詳情。</div></div>
+<button class="btn" onclick="openNewOrderModal()" data-i18n="u07.btnNewOrder">＋建立訂單</button>
 </div>
 
 <div class="filterband filterbar">
-<input type="text" id="fSearch" placeholder="搜尋學員姓名" oninput="renderOrders()">
+<input type="text" id="fSearch" placeholder="搜尋學員姓名" oninput="renderOrders()" data-i18n-placeholder="u07.searchStuPlaceholder">
 <select id="fPayStatus" onchange="renderOrders()">
-<option value="">全部收款狀態</option>
-<option value="未收">未收</option>
-<option value="部分">部分</option>
-<option value="已收">已收</option>
+<option value="" data-i18n="u07.optAllPayStatus">全部收款狀態</option>
+<option value="未收" data-i18n="u07.payNone">未收</option>
+<option value="部分" data-i18n="u07.payPartial">部分</option>
+<option value="已收" data-i18n="u07.payFull">已收</option>
 </select>
-<select id="fTerm" onchange="renderOrders()"><option value="">全部期別</option></select>
+<select id="fTerm" onchange="renderOrders()"><option value="" data-i18n="u07.optAllTerm">全部期別</option></select>
 </div>
 
 <div class="card">
 <div class="tablewrap">
 <table>
-<thead><tr><th>訂單編號</th><th>學員姓名</th><th>方案</th><th>期別</th><th>金額（US$）</th><th>收款</th><th>帳號狀態</th><th>建單日期</th></tr></thead>
+<thead><tr><th data-i18n="u07.thOrderNo">訂單編號</th><th data-i18n="u02.thStudentName2">學員姓名</th><th data-i18n="u05.thMaterial2">方案</th><th data-i18n="u02.thPeriod2">期別</th><th data-i18n="u07.thAmount">金額（US$）</th><th data-i18n="u07.thPayment">收款</th><th data-i18n="u05.thAccountStatus">帳號狀態</th><th data-i18n="u07.thCreatedDate">建單日期</th></tr></thead>
 <tbody id="ordersTbody"></tbody>
 </table>
 </div>
-<p class="emptylist hidden" id="ordersEmpty">找不到符合條件的訂單。</p>
+<p class="emptylist hidden" id="ordersEmpty" data-i18n="u07.noMatchOrder">找不到符合條件的訂單。</p>
 <p class="small" id="ordersCountNote" style="margin:8px 0 0"></p>
 </div>
 
@@ -233,72 +233,72 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <!-- 建立訂單 modal -->
 <div class="modal-mask" id="newOrderModal" onclick="if(event.target===this) closeNewOrderModal()">
 <div class="modal">
-<h3>建立訂單</h3>
-<div class="hint"><span class="req">*</span> 為必填</div>
+<h3 data-i18n="u07.btnNewOrder2">建立訂單</h3>
+<div class="hint"><span class="req">*</span> <span data-i18n="u07.requiredMark">為必填</span></div>
 
 <div class="modewrap">
-<label><input type="radio" name="stuMode" value="existing" checked onchange="onStuModeChange('existing')"> 既有學員</label>
-<label><input type="radio" name="stuMode" value="new" onchange="onStuModeChange('new')"> 新學員</label>
+<label><input type="radio" name="stuMode" value="existing" checked onchange="onStuModeChange('existing')"> <span data-i18n="u07.modeExisting">既有學員</span></label>
+<label><input type="radio" name="stuMode" value="new" onchange="onStuModeChange('new')"> <span data-i18n="u07.modeNew">新學員</span></label>
 </div>
 
 <div class="formrow member-ac" id="existingWrap">
-<label>搜尋學員（姓名或 Email）<span class="req">*</span></label>
+<label><span data-i18n="u07.lblSearchStu">搜尋學員（姓名或 Email）</span><span class="req">*</span></label>
 <div class="ac-input-row">
-<input type="text" id="stuSearchInput" placeholder="輸入姓名或 Email 關鍵字" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="stuAcList" oninput="onStuAcInput(this.value)" onkeydown="onStuAcKeydown(event)" onfocus="onStuAcFocus()" onclick="onStuAcFocus()">
-<button type="button" class="ac-clear" id="stuAcClear" onclick="clearStuAc()" aria-label="清除已選學員">×</button>
+<input type="text" id="stuSearchInput" placeholder="輸入姓名或 Email 關鍵字" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="stuAcList" oninput="onStuAcInput(this.value)" onkeydown="onStuAcKeydown(event)" onfocus="onStuAcFocus()" onclick="onStuAcFocus()" data-i18n-placeholder="u07.searchStuKeywordPlaceholder">
+<button type="button" class="ac-clear" id="stuAcClear" onclick="clearStuAc()" aria-label="清除已選學員" data-i18n-aria-label="u07.ariaClearStu">×</button>
 </div>
 <div class="ac-list" id="stuAcList"></div>
 <div class="member-selected-note" id="stuAcNote">開始輸入以搜尋既有學員名單。</div>
-<div class="rowerr">必填，請選擇一位既有學員</div>
+<div class="rowerr" data-i18n="u07.errSelectStu">必填，請選擇一位既有學員</div>
 </div>
 
 <div class="subblock hidden" id="newStuWrap">
-<div class="formrow" id="fr_newName"><label>姓名<span class="req">*</span></label><input type="text" id="newName" placeholder="例：Sophia Garcia"><div class="rowerr">必填，請輸入姓名</div></div>
+<div class="formrow" id="fr_newName"><label><span data-i18n="u05.lblName">姓名</span><span class="req">*</span></label><input type="text" id="newName" placeholder="例：Sophia Garcia" data-i18n-placeholder="u07.newNamePlaceholder"><div class="rowerr" data-i18n="u07.errName">必填，請輸入姓名</div></div>
 <div class="grid2">
-<div class="formrow" id="fr_newEmail"><label>Email<span class="req">*</span></label><input type="email" id="newEmail" placeholder="例：sophia.garcia@az.edu"><div class="rowerr">必填，請輸入 Email</div></div>
-<div class="formrow" id="fr_newPhone"><label>電話<span class="req">*</span></label><input type="text" id="newPhone" placeholder="例：+1 602-555-0142"><div class="rowerr">必填，請輸入電話</div></div>
+<div class="formrow" id="fr_newEmail"><label>Email<span class="req">*</span></label><input type="email" id="newEmail" placeholder="例：sophia.garcia@az.edu" data-i18n-placeholder="u07.newEmailPlaceholder"><div class="rowerr" data-i18n="u07.errEmail">必填，請輸入 Email</div></div>
+<div class="formrow" id="fr_newPhone"><label><span data-i18n="u07.lblPhone">電話</span><span class="req">*</span></label><input type="text" id="newPhone" placeholder="例：+1 602-555-0142" data-i18n-placeholder="u07.newPhonePlaceholder"><div class="rowerr" data-i18n="u07.errPhone">必填，請輸入電話</div></div>
 </div>
-<div class="formrow" id="fr_newPassport"><label>護照號<span class="req">*</span></label><input type="text" id="newPassport" placeholder="例：A12345678"><div class="rowerr">必填，請輸入護照號</div></div>
+<div class="formrow" id="fr_newPassport"><label><span data-i18n="u07.lblPassport">護照號</span><span class="req">*</span></label><input type="text" id="newPassport" placeholder="例：A12345678" data-i18n-placeholder="u07.newPassportPlaceholder"><div class="rowerr" data-i18n="u07.errPassport">必填，請輸入護照號</div></div>
 </div>
 
 <div class="subblock">
 <div class="grid2">
-<div class="formrow" id="fr_plan"><label>方案<span class="req">*</span></label>
+<div class="formrow" id="fr_plan"><label><span data-i18n="u05.thMaterial2">方案</span><span class="req">*</span></label>
 <select id="fPlan" onchange="onPlanChange()">
-<option value="">請選擇方案</option>
+<option value="" data-i18n="u07.optSelectPlan">請選擇方案</option>
 </select>
-<div class="rowerr">必填，請選擇方案</div>
-<div class="hint"><a href="u09_plans_terms.html" target="_blank" rel="noopener">方案與期別設定 →</a></div>
+<div class="rowerr" data-i18n="u07.errPlan">必填，請選擇方案</div>
+<div class="hint"><a href="u09_plans_terms.html" target="_blank" rel="noopener" data-i18n="u07.planTermSettingLink">方案與期別設定 →</a></div>
 </div>
-<div class="formrow" id="fr_term"><label>期別<span class="req">*</span></label>
+<div class="formrow" id="fr_term"><label><span data-i18n="u02.thPeriod2">期別</span><span class="req">*</span></label>
 <select id="fTermSel">
-<option value="">請選擇期別</option>
+<option value="" data-i18n="u07.optSelectTerm">請選擇期別</option>
 </select>
-<div class="rowerr">必填，請選擇期別</div>
-<div class="hint"><a href="u09_plans_terms.html" target="_blank" rel="noopener">方案與期別設定 →</a></div>
+<div class="rowerr" data-i18n="u07.errTerm">必填，請選擇期別</div>
+<div class="hint"><a href="u09_plans_terms.html" target="_blank" rel="noopener" data-i18n="u07.planTermSettingLink">方案與期別設定 →</a></div>
 </div>
 </div>
 <div class="grid2">
-<div class="formrow" id="fr_amount"><label>金額（US$，可改）<span class="req">*</span></label><input type="number" id="fAmount" min="0" step="10" oninput="updateTotalDue()"><div class="rowerr">必填，請輸入大於 0 的金額</div></div>
-<div class="formrow"><label>折扣（US$）</label><input type="number" id="fDiscount" min="0" step="10" value="0" oninput="updateTotalDue()"></div>
+<div class="formrow" id="fr_amount"><label><span data-i18n="u07.lblAmountEditable">金額（US$，可改）</span><span class="req">*</span></label><input type="number" id="fAmount" min="0" step="10" oninput="updateTotalDue()"><div class="rowerr" data-i18n="u07.errAmount">必填，請輸入大於 0 的金額</div></div>
+<div class="formrow"><label data-i18n="u07.lblDiscount">折扣（US$）</label><input type="number" id="fDiscount" min="0" step="10" value="0" oninput="updateTotalDue()"></div>
 </div>
-<div class="totalline"><span>應收合計</span><b id="fTotalDue">US$ 0</b></div>
+<div class="totalline"><span data-i18n="u07.lblTotalDue">應收合計</span><b id="fTotalDue">US$ 0</b></div>
 </div>
 
 <div class="subblock">
 <div class="grid2">
-<div class="formrow"><label>收款方式</label>
-<select id="fPayMethod"><option value="現金">現金</option><option value="轉帳">轉帳</option><option value="學校收費系統">學校收費系統</option></select>
+<div class="formrow"><label data-i18n="u07.lblPayMethod">收款方式</label>
+<select id="fPayMethod"><option value="現金" data-i18n="u07.methodCash">現金</option><option value="轉帳" data-i18n="u07.methodTransfer">轉帳</option><option value="學校收費系統" data-i18n="u07.methodSchoolSystem">學校收費系統</option></select>
 </div>
-<div class="formrow"><label>已收金額（US$）</label><input type="number" id="fCollected" min="0" step="10" value="0"></div>
+<div class="formrow"><label data-i18n="u07.lblCollected">已收金額（US$）</label><input type="number" id="fCollected" min="0" step="10" value="0"></div>
 </div>
-<div class="formrow"><label>收款日期</label><input type="date" id="fCollectDate"></div>
-<div class="formrow"><label>備註</label><textarea id="fNote" placeholder="選填"></textarea></div>
+<div class="formrow"><label data-i18n="u07.lblCollectDate">收款日期</label><input type="date" id="fCollectDate"></div>
+<div class="formrow"><label data-i18n="u07.lblNote">備註</label><textarea id="fNote" placeholder="選填" data-i18n-placeholder="u07.optionalPlaceholder"></textarea></div>
 </div>
 
 <div class="modal-actions">
-<button class="btn ghost" onclick="closeNewOrderModal()">取消</button>
-<button class="btn" onclick="submitNewOrder()">建立訂單</button>
+<button class="btn ghost" onclick="closeNewOrderModal()" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="submitNewOrder()" data-i18n="u07.btnNewOrder2">建立訂單</button>
 </div>
 </div>
 </div>
@@ -311,10 +311,14 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 </div>
 
 <script src="../assets/_shared_masters.js"></script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_org.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
 function seededRand(seed){ var x=Math.sin(seed*9301+49297)*233280; return x-Math.floor(x); }
 function addDays(baseStr, days){ var d=new Date(baseStr+'T00:00:00'); d.setDate(d.getDate()+days); return d.toISOString().slice(0,10); }
 function fmtUSD(n){ return 'US$ '+Math.round(n).toLocaleString('en-US'); }
+function T(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
 function escapeHtml(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
 /* ===== 本頁登入租戶：範例大學語言中心（對應主檔 partners.id='p02'） ===== */
@@ -369,6 +373,10 @@ function nameToEmail(name){ return name.toLowerCase().replace(/[^a-z]+/g,'.').re
 var EXISTING_STUDENTS = NAMES.map(function(n,i){ return {id:'stu'+i, name:n, email:nameToEmail(n)}; });
 
 var PAY_METHODS = ['現金','轉帳','學校收費系統'];
+var PAY_METHOD_EN = {'現金':'Cash','轉帳':'Bank Transfer','學校收費系統':'School Billing System'};
+function payMethodText(zh){ return T(zh, PAY_METHOD_EN[zh]||zh); }
+var PAY_NOTE_EN = {'首期款':'First installment','尾款':'Final installment','建單時登記':'Recorded at order creation','手動登記':'Manually recorded'};
+function payNoteText(zh){ return zh ? T(zh, PAY_NOTE_EN[zh]||zh) : zh; }
 
 /* ===== 訂單示範資料：14 筆，收款狀態／收款方式／帳號狀態各異 ===== */
 function payStatusOf(order){
@@ -410,14 +418,27 @@ var ORDERS = []; for (var i=0;i<14;i++) ORDERS.push(makeDemoOrder(i));
 var orderSeq = ORDERS.length;
 
 /* ===== 篩選下拉初始化 ===== */
-(function initFilterOptions(){
+function initFilterOptions(){
   var sel = document.getElementById('fTerm');
-  sel.innerHTML = '<option value="">全部期別</option>' + TERMS.map(function(t){ return '<option value="'+t+'">'+t+'</option>'; }).join('');
+  var keepTerm = sel.value;
+  sel.innerHTML = '<option value="" data-i18n="u07.optAllTerm">'+T('全部期別','All Terms')+'</option>' + TERMS.map(function(t){ return '<option value="'+t+'">'+t+'</option>'; }).join('');
+  sel.value = keepTerm;
   var planSel = document.getElementById('fPlan');
-  planSel.innerHTML = '<option value="">請選擇方案</option>' + PLANS.map(function(p){ return '<option value="'+p.id+'">'+escapeHtml(p.name)+'（'+p.currency+' '+p.price+'）</option>'; }).join('');
+  var keepPlan = planSel.value;
+  planSel.innerHTML = '<option value="" data-i18n="u07.optSelectPlan">'+T('請選擇方案','Select a Plan')+'</option>' + PLANS.map(function(p){ return '<option value="'+p.id+'">'+escapeHtml(p.name)+'（'+p.currency+' '+p.price+'）</option>'; }).join('');
+  planSel.value = keepPlan;
   var termSel = document.getElementById('fTermSel');
-  termSel.innerHTML = '<option value="">請選擇期別</option>' + TERMS.map(function(t){ return '<option value="'+t+'">'+t+'</option>'; }).join('');
-})();
+  var keepTermSel = termSel.value;
+  termSel.innerHTML = '<option value="" data-i18n="u07.optSelectTerm">'+T('請選擇期別','Select a Term')+'</option>' + TERMS.map(function(t){ return '<option value="'+t+'">'+t+'</option>'; }).join('');
+  termSel.value = keepTermSel;
+}
+initFilterOptions();
+
+function payStatusBadge(ps){
+  return ps==='已收' ? '<span class="badge green">'+T('已收','Received')+'</span>' : (ps==='部分' ? '<span class="badge amber">'+T('部分','Partial')+'</span>' : '<span class="badge grey">'+T('未收','Unpaid')+'</span>');
+}
+var ACCOUNT_STATUS_EN = {'已啟用':'Activated','已寄開通信':'Activation Email Sent','未開通':'Not Activated'};
+function accountStatusText(s){ return T(s, ACCOUNT_STATUS_EN[s]||s); }
 
 /* ===== 訂單列表 ===== */
 function renderOrders(){
@@ -441,14 +462,14 @@ function renderOrders(){
   document.getElementById('ordersEmpty').classList.add('hidden');
   tbody.innerHTML = rows.map(function(o){
     var ps = payStatusOf(o);
-    var psBadge = ps==='已收' ? '<span class="badge green">已收</span>' : (ps==='部分' ? '<span class="badge amber">部分</span>' : '<span class="badge grey">未收</span>');
+    var psBadge = payStatusBadge(ps);
     var accCls = o.accountStatus==='已啟用' ? 'green' : (o.accountStatus==='已寄開通信' ? 'blue' : 'grey');
     return '<tr class="rowlink" onclick="openDrawer(\''+o.id+'\')">'+
       '<td>'+o.id+'</td><td>'+escapeHtml(o.studentName)+'</td><td>'+o.planName+'</td><td>'+o.term+'</td>'+
-      '<td>'+fmtUSD(o.totalDue)+'</td><td>'+psBadge+'<div class="small" style="margin-top:2px">'+o.payMethod+'</div></td>'+
-      '<td><span class="badge '+accCls+'">'+o.accountStatus+'</span></td><td>'+o.createdAt+'</td></tr>';
+      '<td>'+fmtUSD(o.totalDue)+'</td><td>'+psBadge+'<div class="small" style="margin-top:2px">'+payMethodText(o.payMethod)+'</div></td>'+
+      '<td><span class="badge '+accCls+'">'+accountStatusText(o.accountStatus)+'</span></td><td>'+o.createdAt+'</td></tr>';
   }).join('');
-  document.getElementById('ordersCountNote').textContent = '共 '+rows.length+' 筆訂單';
+  document.getElementById('ordersCountNote').textContent = T('共 ','')+rows.length+T(' 筆訂單',' order(s)');
 }
 renderOrders();
 
@@ -464,7 +485,7 @@ function openNewOrderModal(){
   document.getElementById('newStuWrap').classList.add('hidden');
   document.getElementById('stuSearchInput').value = '';
   document.getElementById('stuAcClear').classList.remove('show');
-  document.getElementById('stuAcNote').textContent = '開始輸入以搜尋既有學員名單。';
+  document.getElementById('stuAcNote').textContent = T('開始輸入以搜尋既有學員名單。','Start typing to search existing students.');
   document.getElementById('stuAcList').classList.remove('open');
   document.getElementById('newName').value = '';
   document.getElementById('newEmail').value = '';
@@ -515,7 +536,7 @@ function renderStuAcList(){
   var list = document.getElementById('stuAcList');
   var input = document.getElementById('stuSearchInput');
   if (!stuAcResults.length){
-    list.innerHTML = '<div class="ac-empty">查無符合的學員，如為新學員請改選「新學員」</div>';
+    list.innerHTML = '<div class="ac-empty">'+T('查無符合的學員，如為新學員請改選「新學員」','No matching students found; if this is a new student, switch to “New Student”')+'</div>';
     list.classList.add('open'); input.setAttribute('aria-expanded','true');
     return;
   }
@@ -538,7 +559,7 @@ function selectStuAc(i){
   document.getElementById('stuSearchInput').value = s.name+'（'+s.email+'）';
   document.getElementById('stuAcClear').classList.add('show');
   document.getElementById('stuAcList').classList.remove('open');
-  document.getElementById('stuAcNote').textContent = '已選擇既有學員：'+s.name;
+  document.getElementById('stuAcNote').textContent = T('已選擇既有學員：','Selected existing student: ')+s.name;
 }
 function clearStuAc(){
   selectedStudent = null;
@@ -547,7 +568,7 @@ function clearStuAc(){
   document.getElementById('stuAcClear').classList.remove('show');
   document.getElementById('stuAcList').classList.remove('open');
   document.getElementById('stuAcList').innerHTML = '';
-  document.getElementById('stuAcNote').textContent = '開始輸入以搜尋既有學員名單。';
+  document.getElementById('stuAcNote').textContent = T('開始輸入以搜尋既有學員名單。','Start typing to search existing students.');
 }
 document.addEventListener('click', function(ev){
   var wrap = document.getElementById('existingWrap');
@@ -628,7 +649,7 @@ function submitNewOrder(){
   ORDERS.unshift(order);
   closeNewOrderModal();
   renderOrders();
-  toast('訂單已建立，學員繳費確認後將寄送開通信');
+  toast(T('訂單已建立，學員繳費確認後將寄送開通信','Order created; the activation email will be sent after payment is confirmed'));
 }
 
 /* ===== 訂單詳情抽屜 ===== */
@@ -652,48 +673,48 @@ function renderDrawer(){
   document.getElementById('drTitle').textContent = o.studentName;
   document.getElementById('drSub').textContent = o.id+'｜'+o.studentEmail;
 
-  var psBadge = ps==='已收' ? '<span class="badge green">已收</span>' : (ps==='部分' ? '<span class="badge amber">部分</span>' : '<span class="badge grey">未收</span>');
+  var psBadge = payStatusBadge(ps);
   var accCls = o.accountStatus==='已啟用' ? 'green' : (o.accountStatus==='已寄開通信' ? 'blue' : 'grey');
 
   var body = ''+
-    '<div class="sectiontitle">訂單資訊</div>'+
-    '<div class="kv"><span>方案</span><span>'+o.planName+'</span></div>'+
-    '<div class="kv"><span>期別</span><span>'+o.term+'</span></div>'+
-    '<div class="kv"><span>金額</span><span>'+fmtUSD(o.amount)+'</span></div>'+
-    '<div class="kv"><span>折扣</span><span>'+(o.discount>0?('－'+fmtUSD(o.discount)):'無')+'</span></div>'+
-    '<div class="kv"><span>應收合計</span><span><b>'+fmtUSD(o.totalDue)+'</b></span></div>'+
-    '<div class="kv"><span>收款狀態</span><span>'+psBadge+'</span></div>'+
-    '<div class="kv"><span>已收金額</span><span>'+fmtUSD(o.collected)+'</span></div>'+
-    '<div class="kv"><span>帳號狀態</span><span><span class="badge '+accCls+'">'+o.accountStatus+'</span></span></div>'+
-    '<div class="kv"><span>建單日期</span><span>'+o.createdAt+'</span></div>'+
-    (o.note ? '<div class="kv"><span>備註</span><span>'+escapeHtml(o.note)+'</span></div>' : '')+
+    '<div class="sectiontitle">'+T('訂單資訊','Order Information')+'</div>'+
+    '<div class="kv"><span>'+T('方案','Plan')+'</span><span>'+o.planName+'</span></div>'+
+    '<div class="kv"><span>'+T('期別','Term')+'</span><span>'+o.term+'</span></div>'+
+    '<div class="kv"><span>'+T('金額','Amount')+'</span><span>'+fmtUSD(o.amount)+'</span></div>'+
+    '<div class="kv"><span>'+T('折扣','Discount')+'</span><span>'+(o.discount>0?('－'+fmtUSD(o.discount)):T('無','None'))+'</span></div>'+
+    '<div class="kv"><span>'+T('應收合計','Total Due')+'</span><span><b>'+fmtUSD(o.totalDue)+'</b></span></div>'+
+    '<div class="kv"><span>'+T('收款狀態','Payment Status')+'</span><span>'+psBadge+'</span></div>'+
+    '<div class="kv"><span>'+T('已收金額','Amount Collected')+'</span><span>'+fmtUSD(o.collected)+'</span></div>'+
+    '<div class="kv"><span>'+T('帳號狀態','Account Status')+'</span><span><span class="badge '+accCls+'">'+accountStatusText(o.accountStatus)+'</span></span></div>'+
+    '<div class="kv"><span>'+T('建單日期','Order Date')+'</span><span>'+o.createdAt+'</span></div>'+
+    (o.note ? '<div class="kv"><span>'+T('備註','Note')+'</span><span>'+escapeHtml(o.note)+'</span></div>' : '')+
 
-    '<div class="sectiontitle">收款紀錄</div>'+
+    '<div class="sectiontitle">'+T('收款紀錄','Payment Records')+'</div>'+
     '<div class="paylist">'+
     (o.payments.length ? o.payments.map(function(p){
-      return '<div class="payrow"><span>'+p.date+'　'+escapeHtml(p.note||'')+'</span><span class="pm">'+p.method+'　'+fmtUSD(p.amount)+'</span></div>';
-    }).join('') : '<div class="payrow"><span class="small">尚無收款紀錄</span></div>')+
+      return '<div class="payrow"><span>'+p.date+'　'+escapeHtml(payNoteText(p.note)||'')+'</span><span class="pm">'+payMethodText(p.method)+'　'+fmtUSD(p.amount)+'</span></div>';
+    }).join('') : '<div class="payrow"><span class="small">'+T('尚無收款紀錄','No payment records yet')+'</span></div>')+
     '</div>'+
     '<div class="addpay">'+
     '<div class="grid3">'+
-    '<input type="number" id="apAmount" min="0" step="10" placeholder="金額">'+
-    '<select id="apMethod"><option value="現金">現金</option><option value="轉帳">轉帳</option><option value="學校收費系統">學校收費系統</option></select>'+
+    '<input type="number" id="apAmount" min="0" step="10" placeholder="'+T('金額','Amount')+'">'+
+    '<select id="apMethod"><option value="現金">'+T('現金','Cash')+'</option><option value="轉帳">'+T('轉帳','Bank Transfer')+'</option><option value="學校收費系統">'+T('學校收費系統','School Billing System')+'</option></select>'+
     '<input type="date" id="apDate" value="'+addDays('2026-09-27',0)+'">'+
     '</div>'+
-    '<button type="button" class="btn ghost" onclick="addPayment(\''+o.id+'\')">新增收款紀錄</button>'+
+    '<button type="button" class="btn ghost" onclick="addPayment(\''+o.id+'\')">'+T('新增收款紀錄','Add Payment Record')+'</button>'+
     '</div>';
 
   var actions = '<div class="drawer-actions">';
   if (ps==='已收' && o.accountStatus==='未開通'){
-    actions += '<button class="btn" onclick="sendActivation(\''+o.id+'\')">寄送帳號開通信</button>';
+    actions += '<button class="btn" onclick="sendActivation(\''+o.id+'\')">'+T('寄送帳號開通信','Send Activation Email')+'</button>';
   } else if (o.accountStatus!=='未開通'){
-    actions += '<button class="btn ghost" disabled>'+(o.accountStatus==='已啟用'?'帳號已啟用':'已寄送開通信')+'</button>';
+    actions += '<button class="btn ghost" disabled>'+(o.accountStatus==='已啟用'?T('帳號已啟用','Account Activated'):T('已寄送開通信','Activation Email Sent'))+'</button>';
   } else {
-    actions += '<button class="btn ghost" disabled>寄送帳號開通信</button>';
+    actions += '<button class="btn ghost" disabled>'+T('寄送帳號開通信','Send Activation Email')+'</button>';
   }
-  actions += '<a class="btn ghost" href="u05_classes.html">分派班級</a>';
+  actions += '<a class="btn ghost" href="u05_classes.html">'+T('分派班級','Assign Class')+'</a>';
   actions += '</div>';
-  if (ps!=='已收' && o.accountStatus==='未開通') actions += '<div class="actionnote">尚未收款完成，收款完成後才能寄送開通信。</div>';
+  if (ps!=='已收' && o.accountStatus==='未開通') actions += '<div class="actionnote">'+T('尚未收款完成，收款完成後才能寄送開通信。','Payment is not yet complete; the activation email can be sent once payment is complete.')+'</div>';
 
   document.getElementById('drawerBody').innerHTML = body + actions;
 }
@@ -701,7 +722,7 @@ function renderDrawer(){
 function addPayment(id){
   var o = findOrder(id); if (!o) return;
   var amt = parseFloat(document.getElementById('apAmount').value);
-  if (!amt || amt<=0){ toast('請輸入大於 0 的收款金額'); return; }
+  if (!amt || amt<=0){ toast(T('請輸入大於 0 的收款金額','Please enter a payment amount greater than 0')); return; }
   var method = document.getElementById('apMethod').value;
   var date = document.getElementById('apDate').value || addDays('2026-09-27',0);
   var remain = o.totalDue - o.collected;
@@ -711,16 +732,16 @@ function addPayment(id){
   o.payMethod = method;
   renderDrawer();
   renderOrders();
-  toast('已登記一筆收款 '+fmtUSD(amt));
+  toast(T('已登記一筆收款 ','Recorded a payment of ')+fmtUSD(amt));
 }
 
 function sendActivation(id){
   var o = findOrder(id); if (!o) return;
-  if (payStatusOf(o)!=='已收'){ toast('尚未收款完成，無法寄送開通信'); return; }
+  if (payStatusOf(o)!=='已收'){ toast(T('尚未收款完成，無法寄送開通信','Payment is not yet complete; the activation email cannot be sent')); return; }
   o.accountStatus = '已寄開通信';
   renderDrawer();
   renderOrders();
-  toast('已寄送 TLI Connect 帳號開通信給 '+o.studentName);
+  toast(T('已寄送 TLI Connect 帳號開通信給 ','TLI Connect activation email sent to ')+o.studentName);
 }
 
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarBackdrop').classList.toggle('open'); }
@@ -736,6 +757,11 @@ function toast(msg){
   el.textContent = msg; el.classList.add('show');
   clearTimeout(window._toastTimer);
   window._toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2400);
+}
+if (window.TLI_I18N){
+  TLI_I18N.onRefresh(initFilterOptions);
+  TLI_I18N.onRefresh(renderOrders);
+  TLI_I18N.init();
 }
 </script>
 </body>

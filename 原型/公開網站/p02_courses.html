@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="meta_title">TLI Connect｜線上課程</title>
-<meta name="description" content="TLI 線上課程總覽：一對一線上課、彈性團體直播、自學影音、文化線上課、企業線上培訓、師資認證，依語言、上課方式與程度篩選。" data-i18n="meta_description" data-i18n-attr="content">
+<meta name="description" content="TLI 銷售方案與組合包總覽：一對一、彈性團體直播、自學影音、文化活動、企業培訓、師資認證等方案，依分類、上課方式、制度與型態篩選。">
 <style>
 :root{
   --c-primary:#1B4E8C;
@@ -295,23 +295,16 @@ main{max-width:1160px;margin:0 auto;padding:0 24px;}
 
 <header class="site-header">
   <a class="brand" href="p01_home.html"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n="menu_toggle_aria" data-i18n-attr="aria-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n-aria-label="menu_toggle_aria"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <nav class="site-nav">
     <a href="p02_courses.html" data-i18n="nav_courses">課程</a>
-    <a href="p10_enterprise.html">企業培訓</a>
+    <a href="p10_enterprise.html" data-i18n="nav_enterprise">企業培訓</a>
     <a href="p09_events.html" data-i18n="nav_events">活動</a>
     <a href="p04_teachers.html" data-i18n="nav_teachers">師資</a>
     <a href="p05_about_locations.html" data-i18n="nav_about">品牌與校區</a>
     <a href="p08_faq.html" data-i18n="nav_faq">常見問題</a>
   </nav>
-  <div class="header-right">
-    <select class="lang-select" onchange="setLang(this.value)" aria-label="語言切換" data-i18n="lang_select_aria" data-i18n-attr="aria-label">
-      <option value="zh-TW">繁體中文</option>
-      <option value="zh-CN">简体中文</option>
-      <option value="en">English</option>
-      <option value="ja">日本語</option>
-      <option value="de">Deutsch</option>
-    </select>
+  <div class="header-right tb-actions">
     <a class="btn btn-primary btn-sm" data-i18n="btn_consult" href="p06_trial.html?type=consult">預約諮詢</a>
     <a class="btn btn-accent btn-sm" data-i18n="btn_trial" href="p06_trial.html?type=trial">預約試聽</a>
     <a class="btn btn-outline btn-sm" data-i18n="btn_login" href="p07_login_register.html">登入</a>
@@ -323,7 +316,7 @@ main{max-width:1160px;margin:0 auto;padding:0 24px;}
     <div>
       <h1 data-i18n="p02_hero_h1">銷售方案與組合包</h1>
       <p class="course-hero-lead" data-i18n="p02_hero_lead">依分類、上課方式、制度與型態篩選，找到最適合你的銷售方案或組合包。</p>
-      <p class="course-hero-stats" data-i18n="p02_hero_stats">20 個銷售方案・4 組組合包・7 種語言</p>
+      <p class="course-hero-stats" data-i18n="p02_hero_stats">19 個銷售方案・4 組組合包・7 種語言</p>
     </div>
     <div class="course-hero-visual" aria-hidden="true">
       <svg width="62%" height="62%" viewBox="0 0 220 140" fill="none" stroke="#1B4E8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -340,7 +333,7 @@ main{max-width:1160px;margin:0 auto;padding:0 24px;}
 
 <div class="filter-wrap">
   <div class="filter-row-sub">
-    <div class="filter-group filter-search"><input type="text" id="searchInput" data-i18n-ph="p02_filter_search_ph" placeholder="搜尋方案名稱" oninput="onSearchInput()"></div>
+    <div class="filter-group filter-search"><input type="text" id="searchInput" data-i18n-placeholder="p02_filter_search_ph" placeholder="搜尋方案名稱" oninput="onSearchInput()"></div>
     <button type="button" class="more-filter-toggle" id="moreFilterBtn" onclick="toggleMoreFilter()" aria-expanded="false" data-i18n="p02_filter_more">更多篩選 ▾</button>
     <button class="pill-clear" onclick="clearPills()" data-i18n="p02_filter_clear">清除篩選</button>
   </div>
@@ -398,11 +391,10 @@ main{max-width:1160px;margin:0 auto;padding:0 24px;}
     <div class="closer-top">
       <div class="closer-text">
         <h2 data-i18n="p02_closer_h2">不知道怎麼選？</h2>
-        <p data-i18n="p02_closer_lead">和顧問聊聊，或先測一次目前的程度</p>
+        <p data-i18n="p02_closer_lead">和顧問聊聊，找到適合自己的方案</p>
       </div>
       <div class="closer-actions">
         <a class="btn btn-primary" data-i18n="btn_consult" href="p06_trial.html?type=consult">預約諮詢</a>
-        <a class="text-link" data-i18n="p02_closer_quiz" href="p06_trial.html#quiz">2 分鐘程度快測 →</a>
       </div>
     </div>
     <div class="closer-stats">
@@ -496,19 +488,40 @@ function priceBandOf(price){
   if(price < 35000) return '15to35k';
   return 'gt35k';
 }
-/* 產品型態徽章與銷售標籤（示範版僅提供繁中內容，方案本身資料不隨語系切換） */
-var PRODUCT_TYPE_LABEL = {
-  'booking':'一對一課程', 'group-live':'團體直播課', 'chatroom':'聊天室權限',
-  'self-paced':'自學影音課程', 'activity':'活動'
+/* 產品型態徽章與銷售標籤（型態名稱與標籤為固定 UI 詞彙，隨語系切換；方案本身的名稱／賣點等示範內容不隨語系切換）
+   註：以函式包裝而非在頂層直接呼叫 T()，因為本段落執行時 T() 尚未定義（語系模組於檔案後段才載入），
+   函式內容只在實際被呼叫（渲染卡片）時才求值，屆時 T() 已可用 */
+function productTypeLabel(type){
+  var m = {
+    'booking': T('一對一課程', {en:'1-on-1 Course', ja:'一対一コース', de:'1:1-Kurs'}),
+    'group-live': T('團體直播課', {en:'Group Livestream', ja:'グループライブ配信', de:'Gruppen-Livestream'}),
+    'chatroom': T('聊天室權限', {en:'Chatroom Access', ja:'チャットルーム利用権', de:'Chatroom-Zugang'}),
+    'self-paced': T('自學影音課程', {en:'Self-Paced Video Course', ja:'自学動画コース', de:'Selbstlern-Videokurs'}),
+    'activity': T('活動', {en:'Activity', ja:'アクティビティ', de:'Veranstaltung'})
+  };
+  return m[type];
+}
+function salesTagLabel(tag){
+  var m = {
+    hot: T('熱門', {en:'Hot', ja:'人気', de:'Beliebt'}),
+    promo: T('促銷', {en:'Promo', ja:'セール', de:'Aktion'}),
+    'new': T('新上架', {en:'New', ja:'新着', de:'Neu'})
+  };
+  return m[tag];
+}
+/* 課程卡片左上角語言／型態徽章：對應到 tliDict() 裡的 p02_badge_* key，隨語系切換 */
+var PLAN_BADGE_KEY = {
+  'zh-1on1-trial':'zh','zh-1on1-standard':'zh','zh-1on1-corp':'zh','en-1on1-trial':'en','en-1on1-standard':'en',
+  'jp-1on1-standard':'ja','ko-1on1-standard':'ko','de-1on1-standard':'de','fr-1on1-standard':'fr',
+  'flex-zh-trial':'zh','flex-zh-standard':'zh','flex-en-standard':'en','self-zh-pack':'zh',
+  'culture-zh-single':'culture','culture-zh-season':'culture','corp-training-custom':'corp','cert-teacher-2026':'cert',
+  'semester-zh-campus':'zh','chatroom-pass-90':'zh'
 };
-var SALES_TAG_LABEL = { hot:'熱門', promo:'促銷', 'new':'新上架' };
-var PLAN_BADGE = {
-  'zh-1on1-trial':'中','zh-1on1-standard':'中','zh-1on1-corp':'中','en-1on1-trial':'英','en-1on1-standard':'英',
-  'jp-1on1-standard':'日','ko-1on1-standard':'韓','de-1on1-standard':'德','fr-1on1-standard':'法',
-  'flex-zh-trial':'中','flex-zh-standard':'中','flex-en-standard':'英','self-zh-pack':'中',
-  'culture-zh-single':'文','culture-zh-season':'文','corp-training-custom':'企','cert-teacher-2026':'證',
-  'semester-zh-campus':'中','chatroom-pass-90':'中'
-};
+function planBadgeLabel(id){
+  var key = PLAN_BADGE_KEY[id];
+  if(!key) return '';
+  return tliDict()['p02_badge_' + key] || '';
+}
 
 /* ===== 銷售方案資料（第一層：銷售方案／組合包；本陣列為「方案」層）
    三層結構：銷售方案／組合包 → 產品（課程／活動／預約，見 includes）→ 資源（教材、堂數、場次等以 note 呈現）
@@ -745,17 +758,146 @@ function packageOriginalTotal(pkg){
     return sum + (p && p.price ? p.price : 0);
   }, 0);
 }
+/* 銷售方案／組合包描述性文字翻譯對照表（不含方案名稱，名稱為示範資料維持不翻）
+   key 為繁體中文原文，值為 en/ja/de 譯文；供 planText() 於渲染時查詢 */
+var PLAN_TR = {
+  '依合約約定期間使用': {en:'As agreed in the contract', ja:'契約に定める期間内', de:'Gemäß vertraglich vereinbartem Zeitraum'},
+  '依報名場次當日使用': {en:'Valid on the date of the registered session', ja:'申込んだ回の当日のみ有効', de:'Gültig am Tag der gebuchten Veranstaltung'},
+  '依校區學期起訖日使用': {en:'Follows the campus semester start and end dates', ja:'キャンパスの学期の開始日・終了日に準じます', de:'Gemäß Beginn und Ende des Campus-Semesters'},
+  '依梯次開課日至結業日': {en:'From the cohort\'s start date to graduation date', ja:'開講日から修了日までの回次に準じます', de:'Vom Kursbeginn bis zum Abschlussdatum des jeweiligen Durchgangs'},
+  '依當季 3 場活動日期使用': {en:'Valid for the 3 scheduled events this season', ja:'今シーズンの3回の開催日に準じます', de:'Gültig für die 3 Termine dieser Saison'},
+  '依當期梯次開課日至結束日': {en:'From this term\'s start date to end date', ja:'今期の開講日から終了日までに準じます', de:'Vom Beginn bis zum Ende des aktuellen Kursdurchgangs'},
+  '購買後 180 天內使用完畢': {en:'Must be used within 180 days of purchase', ja:'ご購入後180日以内にご利用ください', de:'Muss innerhalb von 180 Tagen nach dem Kauf genutzt werden'},
+  '購買後 365 天內可反覆觀看': {en:'Available to rewatch for 365 days after purchase', ja:'ご購入後365日間、繰り返し視聴可能', de:'365 Tage nach dem Kauf beliebig oft ansehbar'},
+  '購買後 90 天內使用完畢': {en:'Must be used within 90 days of purchase', ja:'ご購入後90日以内にご利用ください', de:'Muss innerhalb von 90 Tagen nach dem Kauf genutzt werden'},
+  '購買後 90 天內開放使用': {en:'Available for 90 days after purchase', ja:'ご購入後90日間ご利用いただけます', de:'90 Tage nach dem Kauf nutzbar'},
+  '報名需先經顧問資格確認，退費依合約條款辦理。': {en:'Enrollment requires advisor eligibility confirmation first; refunds follow the contract terms.', ja:'お申し込みには事前にアドバイザーによる資格確認が必要です。返金は契約条件に従います。', de:'Die Anmeldung erfordert zunächst eine Eignungsprüfung durch einen Berater; Rückerstattungen richten sich nach den Vertragsbedingungen.'},
+  '數位內容依規定不適用退費，詳細條款於購買頁揭露。': {en:'Digital content is not eligible for refunds per policy; full terms are shown on the purchase page.', ja:'デジタルコンテンツは規定により返金対象外です。詳細な条件は購入ページでご確認いただけます。', de:'Digitale Inhalte sind gemäß den Richtlinien von der Rückerstattung ausgeschlossen; die vollständigen Bedingungen finden Sie auf der Kaufseite.'},
+  '請假、改期、退費依合約條款辦理，由顧問於報價時一併說明。': {en:'Leave requests, rescheduling, and refunds follow the contract terms, which your advisor will explain when providing the quote.', ja:'欠席・振替・返金は契約条件に従い、見積り時にアドバイザーが併せてご説明します。', de:'Absagen, Terminverschiebungen und Rückerstattungen richten sich nach den Vertragsbedingungen, die Ihr Berater bei der Angebotserstellung erläutert.'},
+  '請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。': {en:'Leave requests, rescheduling, and refunds follow this plan\'s rules; full terms are shown on the purchase page.', ja:'欠席・振替・返金は本プランの規定に従います。詳細な条件は購入ページでご確認いただけます。', de:'Absagen, Terminverschiebungen und Rückerstattungen richten sich nach den Regeln dieses Plans; die vollständigen Bedingungen finden Sie auf der Kaufseite.'},
+  '請假、退費依校區學則辦理，詳細條款由校區顧問說明。': {en:'Leave requests and refunds follow campus regulations; full terms are explained by your campus advisor.', ja:'欠席・返金はキャンパスの規定に従います。詳細はキャンパスのアドバイザーがご説明します。', de:'Absagen und Rückerstattungen richten sich nach den Campus-Richtlinien; die vollständigen Bedingungen erläutert Ihnen Ihr Campus-Berater.'},
+  '118 小時線上直播訓練，取得 TLI 國際華語教師認證。': {en:'118 hours of live online training leading to the TLI International Chinese Teacher Certification.', ja:'118時間のオンラインライブ研修で、TLI国際中国語教師認定を取得。', de:'118 Stunden Live-Online-Schulung für die TLI International Chinese Teacher Certification.'},
+  '12 堂一期搭配指定教材，跟隨固定同儕完成整期課程。': {en:'12 lessons per term with designated materials, completed together with the same cohort.', ja:'1期12回、指定教材を使用し、固定メンバーと一緒に修了まで進みます。', de:'12 Einheiten pro Semester mit vorgegebenen Materialien, gemeinsam mit derselben festen Gruppe.'},
+  '12 堂一期，主題式練習口說與聽力，跟同好一起學。': {en:'12 lessons per term, themed speaking and listening practice with fellow learners.', ja:'1期12回、テーマ別に会話力とリスニングを練習、同じ目標を持つ仲間と一緒に学べます。', de:'12 Einheiten pro Semester, themenbasiertes Sprech- und Hörtraining gemeinsam mit Gleichgesinnten.'},
+  '30 堂課程對應 DELF／DALF／TCF 檢定。': {en:'30 lessons aligned with the DELF/DALF/TCF exams.', ja:'DELF／DALF／TCF試験に対応した全30回のレッスン。', de:'30 Einheiten, abgestimmt auf die Prüfungen DELF/DALF/TCF.'},
+  '30 堂課程對應 JLPT，搭配自學影音加強應試能力。': {en:'30 lessons aligned with the JLPT, plus self-paced videos to boost exam performance.', ja:'JLPT対応の全30回レッスンに加え、自学動画で試験対策を強化。', de:'30 Einheiten abgestimmt auf die JLPT, ergänzt durch Selbstlernvideos zur Prüfungsvorbereitung.'},
+  '30 堂課程對應 TOPIK，生活、旅遊、商用主題皆備。': {en:'30 lessons aligned with the TOPIK, covering everyday life, travel, and business topics.', ja:'TOPIK対応の全30回レッスン、日常・旅行・ビジネスのテーマを網羅。', de:'30 Einheiten abgestimmt auf die TOPIK, mit Themen aus Alltag, Reisen und Beruf.'},
+  '30 堂課程搭配指定教材與自學影音，適合中長期規劃的學習者。': {en:'30 lessons with designated materials and self-paced videos, ideal for learners planning a mid-to-long-term study path.', ja:'指定教材と自学動画を組み合わせた全30回レッスン、中長期的な学習計画に適しています。', de:'30 Einheiten mit vorgegebenen Materialien und Selbstlernvideos, ideal für eine mittel- bis langfristige Lernplanung.'},
+  '30 堂課程搭配自學影音，對應 11 級 CEFR 對照表。': {en:'30 lessons with self-paced videos, mapped to the 11-level CEFR framework.', ja:'自学動画付きの全30回レッスン、CEFR11段階に対応。', de:'30 Einheiten mit Selbstlernvideos, abgestimmt auf die 11-stufige CEFR-Skala.'},
+  '30 堂課程涵蓋生活、旅遊、商用主題，企業培訓可包班。': {en:'30 lessons covering everyday life, travel, and business topics; corporate group bookings available.', ja:'日常・旅行・ビジネスのテーマを網羅した全30回レッスン、企業研修の団体予約も可能。', de:'30 Einheiten zu Alltag, Reisen und Beruf; Firmenschulungen als Gruppenbuchung möglich.'},
+  '4 堂直播體驗，感受固定時段團體上課的節奏。': {en:'4 live trial lessons to experience the rhythm of fixed-schedule group classes.', ja:'ライブ体験4回で、決まった時間のグループ授業のペースを体験。', de:'4 Live-Probestunden, um den Rhythmus des Gruppenunterrichts zu festen Zeiten kennenzulernen.'},
+  '90 天聊天室權限，隨時找老師或同儕練習口說。': {en:'90 days of chatroom access to practice speaking anytime with teachers or peers.', ja:'90日間のチャットルーム利用権で、いつでも講師や仲間と会話練習。', de:'90 Tage Chatroom-Zugang, um jederzeit mit Lehrkräften oder Mitlernenden zu sprechen.'},
+  '一對一標準課＋彈性團體課，個人課與團體課雙軌並行。': {en:'1-on-1 standard classes plus flexible group classes — individual and group learning side by side.', ja:'一対一標準コース＋グループコース、個人とグループの両方を並行して学習。', de:'1:1-Standardkurs plus flexibler Gruppenkurs — Einzel- und Gruppenunterricht parallel.'},
+  '一對一體驗課先抓弱點，再加入團體直播課持續練習。': {en:'Start with a 1-on-1 trial to pinpoint weak spots, then join group livestream classes to keep practicing.', ja:'まず一対一体験レッスンで弱点を把握し、その後グループライブ配信で継続練習。', de:'Zunächst eine 1:1-Probestunde zur Schwachstellenanalyse, danach weiter im Gruppen-Livestream üben.'},
+  '三門自學影音課程，隨時看、依自己步調複習。': {en:'Three self-paced video courses to watch anytime, at your own pace.', ja:'自学動画コース3種、いつでも自分のペースで復習可能。', de:'Drei Selbstlern-Videokurse, jederzeit im eigenen Tempo abrufbar.'},
+  '依員工人數與學習目標客製排課，線上進行、可分批分時段上課。': {en:'Scheduling is customized to employee headcount and learning goals, held online, with staggered time slots available.', ja:'従業員数と学習目標に応じてスケジュールをカスタマイズ、オンラインで実施し、時間帯を分けての受講も可能。', de:'Die Terminplanung wird individuell nach Mitarbeiterzahl und Lernzielen gestaltet, online durchgeführt, mit gestaffelten Zeitfenstern.'},
+  '依員工人數與學習目標客製排課，線上進行，員工可分批分時段上課。': {en:'Scheduling is customized to employee headcount and learning goals, held online, and employees can attend in staggered batches.', ja:'従業員数と学習目標に応じてスケジュールをカスタマイズ、オンラインで実施し、従業員は時間帯を分けて受講可能。', de:'Die Terminplanung wird individuell nach Mitarbeiterzahl und Lernzielen gestaltet, online durchgeführt; Mitarbeitende können in gestaffelten Gruppen teilnehmen.'},
+  '先上 10 堂感受一對一教學，確認老師與步調再決定是否延伸方案。': {en:'Start with 10 lessons to experience 1-on-1 teaching, then decide on extending your plan once you\'re happy with the teacher and pace.', ja:'まず一対一レッスン10回で指導を体験し、講師とペースを確認してからプラン継続を検討。', de:'Beginnen Sie mit 10 Einheiten 1:1-Unterricht, um Lehrkraft und Lerntempo kennenzulernen, bevor Sie über eine Verlängerung entscheiden.'},
+  '先上 10 堂體驗一對一教學，對應 TOEFL／IELTS／TOEIC／GEPT。': {en:'Start with 10 trial 1-on-1 lessons, aligned with TOEFL/IELTS/TOEIC/GEPT.', ja:'まず一対一体験レッスン10回、TOEFL／IELTS／TOEIC／GEPT対応。', de:'Beginnen Sie mit 10 1:1-Probestunden, abgestimmt auf TOEFL/IELTS/TOEIC/GEPT.'},
+  '單場茶道體驗直播，輕鬆認識中華文化。': {en:'A single live tea ceremony session — an easy way to discover Chinese culture.', ja:'茶道体験ライブ配信1回、気軽に中華文化に触れられます。', de:'Eine Live-Sitzung zur Teezeremonie — ein einfacher Einstieg in die chinesische Kultur.'},
+  '單場體驗＋當季文化季票＋聊天室權限，深度認識中華文化。': {en:'A single trial session plus this season\'s culture pass and chatroom access — a deeper dive into Chinese culture.', ja:'体験1回＋今シーズンの文化シーズンパス＋チャットルーム利用権で、中華文化を深く体験。', de:'Eine Probestunde plus Kultur-Saisonpass und Chatroom-Zugang — für ein tieferes Eintauchen in die chinesische Kultur.'},
+  '實體校區學期密集班，週時數達申請學生簽證所需條件。': {en:'An intensive in-person semester course meeting the weekly-hour requirement for a student visa application.', ja:'対面キャンパスでの学期集中コース、週の授業時間数は学生ビザ申請の条件を満たします。', de:'Intensiver Präsenz-Semesterkurs am Campus, der die für ein Studentenvisum erforderlichen Wochenstunden erfüllt.'},
+  '茶道、書法、時事聊天，一次報名參加當季 3 場直播體驗。': {en:'Tea ceremony, calligraphy, and current-events chat — one registration for all 3 live sessions this season.', ja:'茶道・書道・時事トークなど、1回の申込みで今シーズンのライブ体験3回に参加。', de:'Teezeremonie, Kalligrafie und Gesprächsrunden zu aktuellen Themen — eine Anmeldung für alle 3 Live-Sitzungen dieser Saison.'},
+  '體驗一對一課＋自學影音＋聊天室權限，新手起步一次到位。': {en:'A trial 1-on-1 class plus self-paced videos and chatroom access — everything a beginner needs to get started.', ja:'体験一対一レッスン＋自学動画＋チャットルーム利用権、初心者のスタートに必要なものが一通り揃います。', de:'Eine 1:1-Probestunde plus Selbstlernvideos und Chatroom-Zugang — alles, was Einsteiger für den Start brauchen.'},
+  '中文一對一線上課': {en:'Online 1-on-1 Chinese Class', ja:'オンライン中国語一対一レッスン', de:'Online-1:1-Unterricht Chinesisch'},
+  '英文一對一線上課': {en:'Online 1-on-1 English Class', ja:'オンライン英語一対一レッスン', de:'Online-1:1-Unterricht Englisch'},
+  '日文一對一線上課': {en:'Online 1-on-1 Japanese Class', ja:'オンライン日本語一対一レッスン', de:'Online-1:1-Unterricht Japanisch'},
+  '韓文一對一線上課': {en:'Online 1-on-1 Korean Class', ja:'オンライン韓国語一対一レッスン', de:'Online-1:1-Unterricht Koreanisch'},
+  '德文一對一線上課': {en:'Online 1-on-1 German Class', ja:'オンラインドイツ語一対一レッスン', de:'Online-1:1-Unterricht Deutsch'},
+  '法文一對一線上課': {en:'Online 1-on-1 French Class', ja:'オンラインフランス語一対一レッスン', de:'Online-1:1-Unterricht Französisch'},
+  '中文彈性團體直播課': {en:'Chinese Flexible Group Livestream Class', ja:'中国語グループライブ配信レッスン', de:'Flexibler Gruppen-Livestream-Kurs Chinesisch'},
+  '英文彈性團體直播課': {en:'English Flexible Group Livestream Class', ja:'英語グループライブ配信レッスン', de:'Flexibler Gruppen-Livestream-Kurs Englisch'},
+  '企業內訓直播課': {en:'Corporate Livestream Training', ja:'企業向けライブ配信研修', de:'Firmen-Livestream-Schulung'},
+  '學期密集班實體課': {en:'In-Person Intensive Semester Class', ja:'対面学期集中コース', de:'Präsenz-Intensiv-Semesterkurs'},
+  '師資認證直播課程': {en:'Teacher Certification Livestream Course', ja:'講師認定ライブ配信コース', de:'Livestream-Kurs zur Lehrerzertifizierung'},
+  '活動': {en:'Activity', ja:'アクティビティ', de:'Veranstaltung'},
+  '聊天室權限': {en:'Chatroom Access', ja:'チャットルーム利用権', de:'Chatroom-Zugang'},
+  '自學影音課程': {en:'Self-Paced Video Course', ja:'自学動画コース', de:'Selbstlern-Videokurs'},
+  '118 小時，分梯次上課': {en:'118 hours, held in cohort sessions', ja:'118時間、回次ごとに開講', de:'118 Stunden, in Kursdurchgängen'},
+  '14 天': {en:'14 days', ja:'14日間', de:'14 Tage'},
+  '30 天': {en:'30 days', ja:'30日間', de:'30 Tage'},
+  '30 天，課後可加入練習': {en:'30 days; join after class to keep practicing', ja:'30日間、授業後も練習に参加可能', de:'30 Tage; nach dem Unterricht zum Üben nutzbar'},
+  '50 分鐘／堂，一期課程': {en:'50 min/lesson, one full term', ja:'1回50分、1期コース', de:'50 Min./Einheit, ein Semester'},
+  '50 分鐘／堂，固定時段開課': {en:'50 min/lesson, fixed time slot', ja:'1回50分、固定時間帯で開講', de:'50 Min./Einheit, zu festen Zeiten'},
+  '50 分鐘／堂，由顧問安排老師與時段': {en:'50 min/lesson; teacher and time arranged by your advisor', ja:'1回50分、講師と時間帯はアドバイザーが手配', de:'50 Min./Einheit; Lehrkraft und Termin werden vom Berater vermittelt'},
+  '60 天': {en:'60 days', ja:'60日間', de:'60 Tage'},
+  '90 天': {en:'90 days', ja:'90日間', de:'90 Tage'},
+  'JLPT N3 衝刺影音': {en:'JLPT N3 intensive-prep videos', ja:'JLPT N3対策動画', de:'JLPT-N3-Intensivvideos'},
+  'TOEIC 聽力影音包': {en:'TOEIC listening video pack', ja:'TOEICリスニング動画パック', de:'TOEIC-Hörverständnis-Videopaket'},
+  '中文發音強化影音': {en:'Chinese pronunciation booster videos', ja:'中国語発音強化動画', de:'Videos zur Verbesserung der chinesischen Aussprache'},
+  '依合約期間開放': {en:'Available for the contracted period', ja:'契約期間に応じて利用可能', de:'Verfügbar für den vertraglich vereinbarten Zeitraum'},
+  '依校區課表安排上課': {en:'Scheduled per the campus timetable', ja:'キャンパスの時間割に従って実施', de:'Nach dem Stundenplan des Campus geplant'},
+  '堂數與教材依合約約定': {en:'Lesson count and materials per contract', ja:'レッスン回数と教材は契約に準じます', de:'Anzahl der Einheiten und Materialien laut Vertrag'},
+  '教學觀摩影音庫': {en:'Teaching observation video library', ja:'教授法観察動画ライブラリ', de:'Video-Bibliothek zur Unterrichtsbeobachtung'},
+  '文化速覽影音（茶道・書法）': {en:'Culture overview videos (tea ceremony, calligraphy)', ja:'文化ダイジェスト動画（茶道・書道）', de:'Kultur-Überblicksvideos (Teezeremonie, Kalligrafie)'},
+  '校園文化活動 2 場': {en:'2 on-campus culture events', ja:'キャンパス文化イベント2回', de:'2 Kulturveranstaltungen am Campus'},
+  '梯次時段與堂數依合約約定': {en:'Cohort schedule and lesson count per contract', ja:'回次の時間帯とレッスン回数は契約に準じます', de:'Zeitplan und Anzahl der Einheiten je Durchgang laut Vertrag'},
+  '生活會話影音包': {en:'Everyday conversation video pack', ja:'日常会話動画パック', de:'Alltagskonversations-Videopaket'},
+  '茶道體驗場次': {en:'Tea ceremony trial session', ja:'茶道体験セッション', de:'Teezeremonie-Probesitzung'},
+  '茶道／書法／時事聊天，共 3 場': {en:'Tea ceremony / calligraphy / current-events chat — 3 sessions total', ja:'茶道／書道／時事トーク、計3回', de:'Teezeremonie/Kalligrafie/Themengespräch — insgesamt 3 Sitzungen'},
+  '企業想為個別員工安排一對一中文培訓': {en:'Companies wanting to arrange individual 1-on-1 Chinese training for staff', ja:'従業員個人向けに一対一中国語研修を用意したい企業', de:'Unternehmen, die individuelles 1:1-Chinesischtraining für Mitarbeitende anbieten möchten'},
+  '企業想為部門或全員安排語言培訓': {en:'Companies wanting language training for a department or all staff', ja:'部署単位・全社員向けに語学研修を用意したい企業', de:'Unternehmen, die Sprachtraining für eine Abteilung oder alle Mitarbeitenden planen'},
+  '企業指派學習商用德文': {en:'Companies assigning employees to learn business German', ja:'企業がビジネスドイツ語の学習を指示する場合', de:'Von Unternehmen für das Erlernen von Wirtschaftsdeutsch beauftragte Mitarbeitende'},
+  '員工分批分時段上課，不影響排班': {en:'Staff attend in staggered batches without disrupting shift schedules', ja:'従業員は時間帯を分けて受講、シフトに影響なし', de:'Mitarbeitende nehmen in gestaffelten Gruppen teil, ohne den Schichtplan zu stören'},
+  '喜愛韓劇韓綜想加強生活會話': {en:'Fans of Korean dramas and shows wanting to improve everyday conversation', ja:'韓国ドラマ・バラエティが好きで、日常会話を強化したい方', de:'Fans koreanischer Dramen und Shows, die ihre Alltagskonversation verbessern möchten'},
+  '外派來台想快速認識在地文化': {en:'Expats relocating to Taiwan who want to quickly get to know local culture', ja:'台湾駐在で、地元文化を早く知りたい方', de:'Expatriates in Taiwan, die die lokale Kultur schnell kennenlernen möchten'},
+  '對中華文化有興趣、想深入體驗': {en:'Those interested in Chinese culture who want an in-depth experience', ja:'中華文化に興味があり、深く体験したい方', de:'Interessierte an chinesischer Kultur, die ein vertieftes Erlebnis suchen'},
+  '對中華文化有興趣、想輕鬆體驗': {en:'Those interested in Chinese culture who want a casual experience', ja:'中華文化に興味があり、気軽に体験したい方', de:'Interessierte an chinesischer Kultur, die ein unkompliziertes Erlebnis suchen'},
+  '已在上正課、想增加口說練習頻率': {en:'Current students wanting more frequent speaking practice', ja:'すでに正規レッスンを受講中で、会話練習の頻度を増やしたい方', de:'Aktuelle Kursteilnehmende, die häufiger Sprechpraxis möchten'},
+  '已在上正課、想額外加強複習': {en:'Current students wanting extra review on top of their class', ja:'すでに正規レッスンを受講中で、追加の復習をしたい方', de:'Aktuelle Kursteilnehmende, die zusätzlich wiederholen möchten'},
+  '已有基礎、想密集加強口說與聽力反應': {en:'Learners with some foundation wanting intensive speaking and listening practice', ja:'基礎がある方で、会話とリスニングの反応を集中的に鍛えたい方', de:'Lernende mit Grundkenntnissen, die intensiv Sprechen und Hörverständnis trainieren möchten'},
+  '希望不受限於排課時段、隨時練習': {en:'Those who want to practice anytime, without being tied to a fixed schedule', ja:'決まった時間帯にとらわれず、いつでも練習したい方', de:'Wer nicht an feste Zeiten gebunden sein und jederzeit üben möchte'},
+  '希望密集累積職場英文能力': {en:'Those wanting to intensively build workplace English skills', ja:'職場で使える英語力を集中的に伸ばしたい方', de:'Wer intensiv berufsbezogene Englischkenntnisse aufbauen möchte'},
+  '希望有實體教室與同儕互動': {en:'Those who want an in-person classroom and peer interaction', ja:'対面の教室で仲間と交流したい方', de:'Wer einen Präsenzunterricht mit Interaktion unter Mitlernenden möchte'},
+  '希望有系統地累積口說能力': {en:'Those wanting to systematically build speaking skills', ja:'会話力を体系的に伸ばしたい方', de:'Wer systematisch Sprechfertigkeiten aufbauen möchte'},
+  '希望紮實建立文法基礎': {en:'Those wanting to build a solid grammar foundation', ja:'文法の基礎をしっかり固めたい方', de:'Wer eine solide Grammatikgrundlage aufbauen möchte'},
+  '想先熟悉教材內容再報名正課': {en:'Those who want to get familiar with the materials before enrolling in a full course', ja:'正規コースに申し込む前に教材の内容を知っておきたい方', de:'Wer sich vor der Anmeldung zum regulären Kurs mit den Materialien vertraut machen möchte'},
+  '想先體驗一對一教學再決定是否延伸方案': {en:'Those who want to try 1-on-1 teaching before deciding on an extended plan', ja:'一対一指導を体験してからプラン継続を決めたい方', de:'Wer den 1:1-Unterricht ausprobieren möchte, bevor er sich für eine Verlängerung entscheidet'},
+  '想全天密集沉浸式學習': {en:'Those wanting full-day immersive intensive learning', ja:'終日集中したイマージョン学習をしたい方', de:'Wer einen ganztägigen intensiven Immersionsunterricht möchte'},
+  '想取得國際華語教師認證': {en:'Those wanting to obtain the international Chinese teacher certification', ja:'国際中国語教師認定を取得したい方', de:'Wer die internationale Zertifizierung als Chinesischlehrkraft erwerben möchte'},
+  '想找同好一起學習、喜歡小組互動': {en:'Those wanting to learn with like-minded peers and enjoy small-group interaction', ja:'同じ目標を持つ仲間と学び、グループでの交流を楽しみたい方', de:'Wer mit Gleichgesinnten lernen und den Austausch in der Gruppe genießen möchte'},
+  '想找非語言課程的主題活動': {en:'Those looking for themed activities beyond language classes', ja:'語学以外のテーマ型アクティビティを探している方', de:'Wer themenbasierte Aktivitäten abseits des Sprachunterrichts sucht'},
+  '想搭配自學影音持續練習聽力': {en:'Those wanting to keep practicing listening with self-paced videos', ja:'自学動画を活用してリスニング力を継続的に鍛えたい方', de:'Wer mit Selbstlernvideos kontinuierlich das Hörverständnis üben möchte'},
+  '想有系統地準備聽解與文法': {en:'Those wanting to systematically prepare listening comprehension and grammar', ja:'リスニングと文法を体系的に準備したい方', de:'Wer Hörverständnis und Grammatik systematisch vorbereiten möchte'},
+  '想結識同樣對文化有興趣的同好': {en:'Those wanting to meet others who share an interest in culture', ja:'文化に興味を持つ仲間と知り合いたい方', de:'Wer Gleichgesinnte mit Interesse an Kultur kennenlernen möchte'},
+  '想透過團體討論練習口說與聽力反應': {en:'Those wanting to practice speaking and listening reactions through group discussion', ja:'グループディスカッションで会話とリスニングの反応を練習したい方', de:'Wer Sprechen und Hörreaktionen durch Gruppendiskussionen üben möchte'},
+  '想連續參加多場主題活動': {en:'Those wanting to attend multiple themed activities in a row', ja:'複数回のテーマ型イベントに連続して参加したい方', de:'Wer mehrere thematische Veranstaltungen in Folge besuchen möchte'},
+  '搭配自學影音複習後想立即實作': {en:'Those who want to put self-paced video review into practice right away', ja:'自学動画で復習した後、すぐに実践したい方', de:'Wer nach dem Wiederholen mit Selbstlernvideos das Gelernte sofort anwenden möchte'},
+  '時間彈性、希望自己安排上課時段': {en:'Those with flexible time who want to arrange their own class schedule', ja:'時間に融通が利き、自分で授業時間を決めたい方', de:'Wer zeitlich flexibel ist und den Unterrichtstermin selbst bestimmen möchte'},
+  '時間零碎、想利用空檔自學': {en:'Those with fragmented free time who want to self-study during gaps', ja:'すきま時間を使って自学したい方', de:'Wer mit knapper Zeit Lücken zum Selbststudium nutzen möchte'},
+  '每週有固定時段可以上課': {en:'Those with a fixed weekly time slot available for class', ja:'毎週決まった時間に受講できる方', de:'Wer wöchentlich zu einer festen Zeit am Unterricht teilnehmen kann'},
+  '準備 DELF／DALF／TCF 檢定': {en:'Preparing for the DELF/DALF/TCF exams', ja:'DELF／DALF／TCF試験対策をしたい方', de:'Vorbereitung auf die Prüfungen DELF/DALF/TCF'},
+  '準備 JLPT 各級檢定': {en:'Preparing for JLPT exams at any level', ja:'JLPT各級の試験対策をしたい方', de:'Vorbereitung auf die JLPT-Prüfungen aller Stufen'},
+  '準備 TOPIK 各級檢定': {en:'Preparing for TOPIK exams at any level', ja:'TOPIK各級の試験対策をしたい方', de:'Vorbereitung auf die TOPIK-Prüfungen aller Stufen'},
+  '準備多益、雅思等檢定考試': {en:'Preparing for TOEIC, IELTS, and similar exams', ja:'TOEIC・IELTSなどの試験対策をしたい方', de:'Vorbereitung auf TOEIC, IELTS und ähnliche Prüfungen'},
+  '現職華語教師想強化教學方法': {en:'Current Chinese teachers wanting to strengthen their teaching methods', ja:'現役の中国語教師で指導法を強化したい方', de:'Aktive Chinesischlehrkräfte, die ihre Unterrichtsmethoden vertiefen möchten'},
+  '短期來台工作或求學，需快速累積生活會話能力': {en:'Those working or studying in Taiwan short-term who need to quickly build everyday conversation skills', ja:'短期間台湾で就労・就学し、日常会話力を素早く身につけたい方', de:'Kurzfristig in Taiwan arbeitende oder studierende Personen, die schnell Alltagskonversation aufbauen möchten'},
+  '短期赴韓旅遊或求學前惡補': {en:'Those cramming before a short trip to Korea for travel or study', ja:'韓国への短期旅行・留学前に集中して学びたい方', de:'Wer sich vor einer Kurzreise oder einem Kurzstudium in Korea intensiv vorbereiten möchte'},
+  '計畫在台長期學習、需申請學生簽證': {en:'Those planning long-term study in Taiwan who need to apply for a student visa', ja:'台湾で長期留学を計画し、学生ビザ申請が必要な方', de:'Wer langfristig in Taiwan studieren und ein Studentenvisum beantragen möchte'},
+  '計畫赴德工作、留學或移居': {en:'Those planning to work, study, or relocate to Germany', ja:'ドイツでの就労・留学・移住を計画している方', de:'Wer plant, in Deutschland zu arbeiten, zu studieren oder auszuwandern'},
+  '計畫赴法留學或工作': {en:'Those planning to study or work in France', ja:'フランスでの留学・就労を計画している方', de:'Wer plant, in Frankreich zu studieren oder zu arbeiten'},
+  '計畫赴海外任教中文教師': {en:'Chinese teachers planning to teach abroad', ja:'海外で中国語を教えることを計画している教師', de:'Chinesischlehrkräfte, die planen, im Ausland zu unterrichten'},
+  '赴日工作或求學前密集加強': {en:'Intensive prep before working or studying in Japan', ja:'日本での就労・就学前に集中的に力をつけたい方', de:'Intensive Vorbereitung vor Arbeit oder Studium in Japan'},
+  '零基礎或初學者，需要從發音、基礎會話建立信心': {en:'Absolute beginners who need to build confidence starting from pronunciation and basic conversation', ja:'全くの初心者で、発音や基礎会話から自信をつけたい方', de:'Absolute Anfänger, die ab Aussprache und Grundkonversation Selbstvertrauen aufbauen möchten'},
+  '需要企業月結發票與客製報表': {en:'Companies needing monthly billing invoices and custom reports', ja:'法人向け月締め請求書とカスタムレポートが必要な企業', de:'Unternehmen, die monatliche Sammelrechnungen und individuelle Berichte benötigen'},
+  '需要對應多益、雅思成績目標': {en:'Those with specific TOEIC or IELTS score goals', ja:'TOEICやIELTSのスコア目標がある方', de:'Wer konkrete Punktzahlziele bei TOEIC oder IELTS erreichen möchte'},
+  '需要申請簽證所需之上課證明': {en:'Those who need attendance certification for a visa application', ja:'ビザ申請に必要な受講証明が必要な方', de:'Wer eine Anwesenheitsbescheinigung für einen Visumantrag benötigt'},
+  '需要針對口說與聽力密集練習': {en:'Those needing intensive speaking and listening practice', ja:'会話とリスニングを集中的に練習したい方', de:'Wer intensives Sprech- und Hörtraining benötigt'},
+  '預算考量，希望比一對一更划算': {en:'Budget-conscious learners wanting something more affordable than 1-on-1', ja:'予算を考慮し、一対一よりお得な方法を探している方', de:'Preisbewusste Lernende, die eine günstigere Alternative zum 1:1-Unterricht suchen'},
+};
+function planText(zh){ var t = PLAN_TR[zh]; return t ? T(zh, t) : zh; }
 function planById(id){ return PLANS.filter(function(p){ return p.id === id; })[0]; }
 function packageById(id){ return PACKAGES.filter(function(p){ return p.id === id; })[0]; }
 function fmtPrice(n){ return 'NT$' + n.toLocaleString('en-US'); }
 function includesSummaryLine(plan){
+  var zhLike = (TLI_I18N.currentLang() === 'zh-TW' || TLI_I18N.currentLang() === 'zh-CN');
   return plan.includes.map(function(item){
-    var label = PRODUCT_TYPE_LABEL[item.type] || item.label;
-    var unit = {booking:'堂','group-live':'堂','self-paced':'門',activity:'場'}[item.type] || '';
+    var label = productTypeLabel(item.type) || item.label;
+    var unit = zhLike ? ({booking:'堂','group-live':'堂','self-paced':'門',activity:'場'}[item.type] || '') : '';
     if(typeof item.qty === 'number' && unit) return label + ' ' + item.qty + unit;
-    if(typeof item.qty === 'number') return label;
+    if(typeof item.qty === 'number') return label + ' ×' + item.qty;
     return label + ' ' + item.qty;
-  }).join('＋');
+  }).join(zhLike ? '＋' : ' + ');
 }
 
 var activeFilters = { category:new Set(), delivery:new Set(), schedule:new Set(), format:new Set(), priceBand:new Set() };
@@ -869,11 +1011,11 @@ function sortedPlans(list){
 function planCardHtml(p){
   var dict = tliDict();
   var dtClass = 'dt-' + ((PLANS.indexOf(p) % 3) + 1);
-  var badge = PLAN_BADGE[p.id] || '';
-  var tagHtml = p.salesTag ? '<span class="card-mode-badge tag-'+p.salesTag+'">'+SALES_TAG_LABEL[p.salesTag]+'</span>' : '';
-  var priceHtml = p.price !== null ? fmtPrice(p.price) : (dict.p02_price_quote || '顧問報價');
+  var badge = planBadgeLabel(p.id);
+  var tagHtml = p.salesTag ? '<span class="card-mode-badge tag-'+p.salesTag+'">'+salesTagLabel(p.salesTag)+'</span>' : '';
+  var priceHtml = p.price !== null ? fmtPrice(p.price) : dict.p02_price_quote;
   var buyBtn = p.mode === 'online-direct'
-    ? '<a class="btn btn-accent btn-sm" href="../會員區/m13_checkout.html?plan='+p.id+'">立即購買</a>'
+    ? '<a class="btn btn-accent btn-sm" href="../會員區/m13_checkout.html?plan='+p.id+'">'+dict.p02_buy_now+'</a>'
     : '';
   return '<div class="course-card">'+
     '<a class="card-media-wrap" href="p03_course_detail.html?plan='+p.id+'" aria-hidden="true" tabindex="-1">'+
@@ -884,10 +1026,10 @@ function planCardHtml(p){
     '<div class="card-body">'+
       '<a class="card-title-link" href="p03_course_detail.html?plan='+p.id+'"><h3>'+p.name+'</h3></a>'+
       '<p class="card-pitch">'+includesSummaryLine(p)+'</p>'+
-      '<div class="card-facts"><b>'+p.validity+'</b></div>'+
+      '<div class="card-facts"><b>'+planText(p.validity)+'</b></div>'+
       '<div class="card-price">'+priceHtml+'</div>'+
       '<div class="card-foot" style="gap:8px;">'+
-        '<a class="btn btn-outline btn-sm" href="p03_course_detail.html?plan='+p.id+'">查看方案</a>'+
+        '<a class="btn btn-outline btn-sm" href="p03_course_detail.html?plan='+p.id+'">'+dict.p02_view_plan+'</a>'+
         buyBtn+
       '</div>'+
     '</div>'+
@@ -915,6 +1057,7 @@ function loadMorePlans(){
 function applySort(){ visibleCount = PLAN_VISIBLE_STEP; renderPlans(); }
 
 function packageCardHtml(pkg){
+  var dict = tliDict();
   var orig = packageOriginalTotal(pkg);
   var planListHtml = pkg.planIds.map(function(pid){
     var p = planById(pid);
@@ -923,12 +1066,12 @@ function packageCardHtml(pkg){
   }).join('');
   return '<div class="package-card">'+
     '<h3>'+pkg.name+'</h3>'+
-    '<p class="pkg-pitch">'+pkg.pitch+'</p>'+
+    '<p class="pkg-pitch">'+planText(pkg.pitch)+'</p>'+
     '<ul class="pkg-plan-list">'+planListHtml+'</ul>'+
-    '<div class="pkg-price-row"><span class="pkg-price-orig">原價 '+fmtPrice(orig)+'</span><span class="pkg-price-combo">組合價 '+fmtPrice(pkg.comboPrice)+'</span></div>'+
+    '<div class="pkg-price-row"><span class="pkg-price-orig">'+dict.p02_pkg_orig_label+' '+fmtPrice(orig)+'</span><span class="pkg-price-combo">'+dict.p02_pkg_combo_label+' '+fmtPrice(pkg.comboPrice)+'</span></div>'+
     '<div class="card-foot" style="gap:8px;">'+
-      '<a class="btn btn-outline btn-sm" href="p03_course_detail.html?plan='+pkg.id+'">查看組合包</a>'+
-      '<a class="btn btn-accent btn-sm" href="../會員區/m13_checkout.html?plan='+pkg.id+'">立即購買組合</a>'+
+      '<a class="btn btn-outline btn-sm" href="p03_course_detail.html?plan='+pkg.id+'">'+dict.p02_view_package+'</a>'+
+      '<a class="btn btn-accent btn-sm" href="../會員區/m13_checkout.html?plan='+pkg.id+'">'+dict.p02_buy_package+'</a>'+
     '</div>'+
   '</div>';
 }
@@ -960,16 +1103,18 @@ function applyUrlFilter(){
     if(legacy.format) activeFilters.format.add(legacy.format);
   }
 }
-function onLangApplied(lang){
+function renderAllDynamic(){
   fillTabs();
   fillPills();
   renderPlans();
   renderPackages();
 }
+/* 註：initial render 與 TLI_I18N.onRefresh 註冊移到檔案後段（語系模組載入、T() 可用之後）再執行，
+   applyUrlFilter() 不依賴 T()，可以留在這裡先跑，決定好篩選條件 */
 applyUrlFilter();
 </script>
 
-<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n="ai_fab_aria" data-i18n-attr="aria-label"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n-aria-label="ai_fab_aria"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
 <div class="ai-fab-label" data-i18n="ai_fab_label">線上諮詢</div>
 
 <div class="ai-overlay" id="aiOverlay-fab" onclick="if(event.target===this) aiClose('fab')">
@@ -983,354 +1128,137 @@ applyUrlFilter();
         </div>
       </div>
       <div class="ai-head-actions">
-        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n="ai_minimize_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n="ai_close_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n-aria-label="ai_minimize_aria" data-i18n-title="ai_minimize_aria"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n-aria-label="ai_close_aria" data-i18n-title="ai_close_aria"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
     </div>
     <div class="ai-body" id="aiBody-fab"></div>
     <div class="ai-chips" id="aiChips-fab"></div>
     <form class="ai-inputrow" onsubmit="return aiSubmitInput(event,'fab')">
-      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-ph="ai_input_placeholder" data-i18n="ai_input_aria" data-i18n-attr="aria-label">
+      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-placeholder="ai_input_placeholder" data-i18n-aria-label="ai_input_aria">
       <button type="submit" id="aiSend-fab" disabled data-i18n="ai_send">送出</button>
     </form>
     <div class="ai-disclaimer" data-i18n="ai_disclaimer">回覆由 AI 產生，重要事項請以顧問確認為準</div>
   </div>
 </div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n_dict_public.js"></script>
+<script src="../assets/_i18n_dict_public_ja.js"></script>
+<script src="../assets/_i18n_dict_public_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
+function T(zh,obj){ return TLI_I18N.t(zh,obj); }
 
 var TLI_AVATAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg>';
 
-/* ===================== i18n：共用引擎（全站逐字相同，見 tli_i18n_shared.js 段落 A） ===================== */
-var TLI_LANG_KEY = 'tli_lang';
-window.TLI_CURRENT_LANG = 'zh-TW';
 function tliFmt(str, obj){
   if(!str) return str;
   return str.replace(/\{(\w+)\}/g, function(_, k){ return (obj && obj[k] !== undefined) ? obj[k] : ''; });
 }
+function applyMetaDesc(){
+  /* <title> 在 <head> 裡，共用模組的 data-i18n 掃描只作用在 document.body，不會處理 <title>，需自行設定 */
+  document.title = T('TLI Connect｜銷售方案與組合包', {en:'TLI Connect | Sales Plans & Bundles', ja:'TLI Connect｜販売プラン＆セット', de:'TLI Connect | Verkaufspläne & Pakete'});
+  var m = document.querySelector('meta[name="description"]');
+  if(m) m.setAttribute('content', T('TLI 銷售方案與組合包總覽：一對一、彈性團體直播、自學影音、文化活動、企業培訓、師資認證等方案，依分類、上課方式、制度與型態篩選。', {en:'Browse TLI sales plans and bundles: 1-on-1, flexible group livestream, self-paced video, culture activities, corporate training, and teacher certification — filter by category, delivery, schedule, and format.', ja:'TLIの販売プランとセット商品一覧：一対一、グループライブ配信、自学動画、文化アクティビティ、企業研修、講師認定など。分類・受講形式・制度・型態で絞り込みできます。', de:'Übersicht der TLI-Verkaufspläne und -Pakete: 1:1-Unterricht, flexibler Gruppen-Livestream, Selbstlern-Videos, Kulturaktivitäten, Firmenschulungen und Lehrerzertifizierung — filterbar nach Kategorie, Unterrichtsform, Zeitmodell und Format.'}));
+}
+/* ===================== i18n：本頁專屬字典（改用共用模組 TLI_I18N，經 T() 直接嵌入譯文；
+   ai_* 為全站共用 AI 小幫手介面文字，與共用詞典 assets/_i18n_dict_public*.js 內容一致，
+   JS 動態插入的訊息無法靠 data-i18n 屬性處理，故在此以 T() 直接提供譯文） ===================== */
 function tliDict(){
-  var lang = window.TLI_CURRENT_LANG;
-  return Object.assign({}, I18N_COMMON[lang] || I18N_COMMON['zh-TW'] || {}, I18N_PAGE[lang] || I18N_PAGE['zh-TW'] || {});
-}
-function applyLang(lang){
-  window.TLI_CURRENT_LANG = lang;
-  document.documentElement.lang = ({'zh-TW':'zh-Hant','zh-CN':'zh-Hans','en':'en','ja':'ja','de':'de'})[lang] || 'zh-Hant';
-  var dict = tliDict();
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var key = el.getAttribute('data-i18n');
-    var v = dict[key];
-    if(v === undefined) return;
-    var attr = el.getAttribute('data-i18n-attr');
-    if(attr){
-      attr.split(',').forEach(function(a){ el.setAttribute(a.trim(), v); });
-    } else {
-      el.textContent = v;
-    }
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
-    var key = el.getAttribute('data-i18n-ph');
-    var v = dict[key];
-    if(v !== undefined) el.setAttribute('placeholder', v);
-  });
-  if(dict.meta_title) document.title = dict.meta_title;
-  if(dict.meta_description){
-    var m = document.querySelector('meta[name="description"]');
-    if(m) m.setAttribute('content', dict.meta_description);
-  }
-  var sel = document.querySelector('.lang-select');
-  if(sel) sel.value = lang;
-  if(lang!=='zh-TW' && lang!=='en' && lang!=='ja' && typeof showToast==='function'){
-    var __langNames={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+(__langNames[lang]||lang));
-  }
-  if(typeof onLangApplied === 'function') onLangApplied(lang);
-}
-function setLang(lang){
-  try{ localStorage.setItem(TLI_LANG_KEY, lang); }catch(e){}
-  applyLang(lang);
-}
-function initLang(){
-  var lang = 'zh-TW';
-  try{ lang = localStorage.getItem(TLI_LANG_KEY) || 'zh-TW'; }catch(e){}
-  applyLang(lang);
-}
+  return {
+    /* ---- AI 小幫手（全站共用，供 aiXxx 系列函式動態插入訊息使用） ---- */
+    ai_chip_trial: T('試聽怎麼預約', {en:'How to book a trial', ja:'体験レッスンの予約方法', de:'Wie bucht man eine Probestunde'}),
+    ai_greeting_default: T('您好，我是 TLI 小幫手，歡迎詢問退費、請假改期、簽證、發票、付款、上課方式或老師配對等問題，也可以直接輸入您的問題。', {en:'Hi, I’m the TLI Assistant. Ask me about refunds, rescheduling, visas, invoices, payment, class formats, or teacher matching — or type your own question.', ja:'こんにちは、TLIアシスタントです。返金、振替・キャンセル、ビザ、領収書、お支払い、受講形式、講師のマッチングなどについてお気軽にご質問ください。', de:'Hallo, ich bin der TLI-Assistent. Fragen Sie mich zu Rückerstattung, Terminverschiebung, Visum, Rechnung, Zahlung, Unterrichtsform oder Lehrer-Zuordnung – oder stellen Sie einfach Ihre eigene Frage.'}),
+    ai_thumbs_prompt: T('這有幫助嗎？', {en:'Was this helpful?', ja:'役に立ちましたか？', de:'War das hilfreich?'}),
+    ai_thumbs_thanks: T('感謝回饋', {en:'Thanks for your feedback', ja:'フィードバックありがとうございます', de:'Danke für Ihr Feedback'}),
+    ai_action_trial: T('預約試聽', {en:'Book a Trial', ja:'体験レッスン予約', de:'Probestunde buchen'}),
+    ai_action_contact: T('聯繫顧問', {en:'Contact an Advisor', ja:'アドバイザーに連絡', de:'Berater kontaktieren'}),
+    ai_repeat: T('剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？', {en:'As mentioned about “{chip}”: {short} Is there anything else you’d like to know?', ja:'先ほどの「{chip}」についてですが：{short}他にご質問はございますか？', de:'Wie bereits zu „{chip}“ erwähnt: {short} Gibt es noch etwas, das Sie wissen möchten?'}),
+    ai_fallback: T('這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。', {en:'Let me have an advisor follow up on this one — please leave your contact info and we’ll reach out within 1 business day.', ja:'こちらはアドバイザーより回答させていただきます。ご連絡先をご記入いただければ1営業日以内にご連絡いたします。', de:'Dazu lasse ich Sie am besten von einem Berater kontaktieren – bitte hinterlassen Sie Ihre Kontaktdaten, wir melden uns innerhalb eines Werktags.'}),
+    ai_escalate_user_msg: T('我想直接聯繫顧問', {en:'I’d like to speak with an advisor', ja:'アドバイザーと直接話したいです', de:'Ich möchte direkt mit einem Berater sprechen'}),
+    ai_form_name_ph: T('姓名', {en:'Name', ja:'お名前', de:'Name'}),
+    ai_form_contact_ph: T('Email 或 LINE ID', {en:'Email or LINE ID', ja:'メールアドレスまたはLINE ID', de:'E-Mail oder LINE-ID'}),
+    ai_form_submit: T('送出，請顧問聯繫我', {en:'Submit — have an advisor contact me', ja:'送信して連絡してもらう', de:'Absenden – Berater soll mich kontaktieren'}),
+    ai_live_btn: T('轉真人客服', {en:'Talk to a live agent', ja:'有人対応に切り替える', de:'Mit einem Mitarbeiter sprechen'}),
+    ai_live_queued: T('已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。', {en:'You’re in the queue — 1 person ahead of you. An agent will assist you as soon as they’re online.', ja:'ただいま順番待ちです（前に1名）。担当者がオンラインになり次第、すぐに対応いたします。', de:'Sie befinden sich in der Warteschlange – 1 Person vor Ihnen. Ein Mitarbeiter betreut Sie, sobald er online ist.'}),
+    ai_toast_fill_required: T('請填寫姓名與聯絡方式', {en:'Please fill in your name and contact info', ja:'お名前とご連絡先をご入力ください', de:'Bitte Name und Kontaktdaten angeben'}),
+    ai_ticket_created: T('已建立諮詢工單 #{ticket}', {en:'Consultation ticket #{ticket} has been created', ja:'お問い合わせチケット #{ticket} を作成しました', de:'Beratungsticket #{ticket} wurde erstellt'}),
+    ai_tl_assigned: T('已指派專責顧問（{advisor}）', {en:'Assigned to advisor: {advisor}', ja:'担当アドバイザー：{advisor}', de:'Zugewiesener Berater: {advisor}'}),
+    ai_tl_followup: T('顧問 1 個工作日內聯繫（{contact}）', {en:'Advisor will contact you within 1 business day via {contact}', ja:'1営業日以内に{contact}宛にご連絡いたします', de:'Der Berater meldet sich innerhalb eines Werktags über {contact}'}),
 
-/* ===================== i18n：共用字典 I18N_COMMON（9 頁逐字相同） ===================== */
-var I18N_COMMON = {
-'zh-TW': {
-  nav_courses: '課程', nav_events: '活動', nav_teachers: '師資', nav_about: '品牌與校區', nav_faq: '常見問題',
-  btn_consult: '預約諮詢', btn_trial: '預約試聽', btn_login: '登入',
-  menu_toggle_aria: '開啟選單', lang_select_aria: '語言切換',
-  footer_brand_name: 'TLI 中華語文研習所',
-  footer_brand_line1: '1956 年創立於美國紐澤西，同年於台北建校',
-  footer_brand_line2: '1976 年教育部核定校名為「中華語文研習所」',
-  footer_col_courses: '課程', footer_link_chinese: '中文課程', footer_link_foreign: '外語課程',
-  footer_link_events: '線上活動', footer_link_teachers: '師資介紹',
-  footer_col_about: '關於 TLI', footer_link_history: '品牌沿革', footer_link_locations: '四校地址', footer_link_faq: '常見問題',
-  footer_col_start: '開始學習', footer_link_trial: '免費試聽', footer_link_login: '會員登入／註冊',
-  footer_copyright: '© 2026 TLI 中華語文研習所．保留所有權利。',
-  ai_fab_label: '線上諮詢', ai_fab_aria: '開啟線上諮詢',
-  ai_title: 'TLI 小幫手', ai_status: '線上・通常 1 分鐘內回覆',
-  ai_minimize_aria: '最小化', ai_close_aria: '關閉',
-  ai_input_placeholder: '輸入您的問題…', ai_input_aria: '輸入問題', ai_send: '送出',
-  ai_disclaimer: '回覆由 AI 產生，重要事項請以顧問確認為準',
-  ai_chip_trial: '試聽怎麼預約',
-  ai_greeting_default: '您好，我是 TLI 小幫手，歡迎詢問退費、請假改期、簽證、發票、付款、上課方式或老師配對等問題，也可以直接輸入您的問題。',
-  ai_thumbs_prompt: '這有幫助嗎？', ai_thumbs_thanks: '感謝回饋',
-  ai_action_trial: '預約試聽', ai_action_contact: '聯繫顧問',
-  ai_repeat: '剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？',
-  ai_fallback: '這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。',
-  ai_escalate_user_msg: '我想直接聯繫顧問',
-  ai_form_name_ph: '姓名', ai_form_contact_ph: 'Email 或 LINE ID',
-  ai_form_submit: '送出，請顧問聯繫我', ai_live_btn: '轉真人客服',
-  ai_live_queued: '已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。',
-  ai_toast_fill_required: '請填寫姓名與聯絡方式',
-  ai_ticket_created: '已建立諮詢工單 #{ticket}',
-  ai_tl_assigned: '已指派專責顧問（{advisor}）',
-  ai_tl_followup: '顧問 1 個工作日內聯繫（{contact}）'
-},
-en: {
-  nav_courses: 'Courses', nav_events: 'Events', nav_teachers: 'Teachers', nav_about: 'About & Locations', nav_faq: 'FAQ',
-  btn_consult: 'Book Consultation', btn_trial: 'Free Trial', btn_login: 'Log in',
-  menu_toggle_aria: 'Open menu', lang_select_aria: 'Language',
-  footer_brand_name: 'TLI - Taipei Language Institute',
-  footer_brand_line1: 'Founded in New Jersey, USA in 1956; the Taipei campus opened the same year',
-  footer_brand_line2: 'Renamed "Taipei Language Institute" by Taiwan’s Ministry of Education in 1976',
-  footer_col_courses: 'Courses', footer_link_chinese: 'Chinese Courses', footer_link_foreign: 'Foreign Language Courses',
-  footer_link_events: 'Online Events', footer_link_teachers: 'Our Teachers',
-  footer_col_about: 'About TLI', footer_link_history: 'Our History', footer_link_locations: 'Campus Locations', footer_link_faq: 'FAQ',
-  footer_col_start: 'Get Started', footer_link_trial: 'Free Trial', footer_link_login: 'Member Login / Sign Up',
-  footer_copyright: '© 2026 TLI - Taipei Language Institute. All rights reserved.',
-  ai_fab_label: 'Chat with us', ai_fab_aria: 'Open live chat',
-  ai_title: 'TLI Assistant', ai_status: 'Online · Usually replies within 1 min',
-  ai_minimize_aria: 'Minimize', ai_close_aria: 'Close',
-  ai_input_placeholder: 'Type your question…', ai_input_aria: 'Type a question', ai_send: 'Send',
-  ai_disclaimer: 'Replies are AI-generated; please confirm important details with an advisor',
-  ai_chip_trial: 'How to book a trial',
-  ai_greeting_default: 'Hi, I’m the TLI Assistant. Ask me about refunds, rescheduling, visas, invoices, payment, class formats, or teacher matching — or type your own question.',
-  ai_thumbs_prompt: 'Was this helpful?', ai_thumbs_thanks: 'Thanks for your feedback',
-  ai_action_trial: 'Book a Trial', ai_action_contact: 'Contact an Advisor',
-  ai_repeat: 'As mentioned about “{chip}”: {short} Is there anything else you’d like to know?',
-  ai_fallback: 'Let me have an advisor follow up on this one — please leave your contact info and we’ll reach out within 1 business day.',
-  ai_escalate_user_msg: 'I’d like to speak with an advisor',
-  ai_form_name_ph: 'Name', ai_form_contact_ph: 'Email or LINE ID',
-  ai_form_submit: 'Submit — have an advisor contact me', ai_live_btn: 'Talk to a live agent',
-  ai_live_queued: 'You’re in the queue — 1 person ahead of you. An agent will assist you as soon as they’re online.',
-  ai_toast_fill_required: 'Please fill in your name and contact info',
-  ai_ticket_created: 'Consultation ticket #{ticket} has been created',
-  ai_tl_assigned: 'Assigned to advisor: {advisor}',
-  ai_tl_followup: 'Advisor will contact you within 1 business day via {contact}'
-},
-ja: {
-  nav_courses: 'コース', nav_events: 'イベント', nav_teachers: '講師陣', nav_about: '沿革と校舎', nav_faq: 'よくある質問',
-  btn_consult: '相談予約', btn_trial: '無料体験', btn_login: 'ログイン',
-  menu_toggle_aria: 'メニューを開く', lang_select_aria: '言語切替',
-  footer_brand_name: 'TLI（台北語文学院）',
-  footer_brand_line1: '1956年に米国ニュージャージーで創立、同年台北校を開校',
-  footer_brand_line2: '1976年、台湾教育部により「中華語文研習所」に改称認可',
-  footer_col_courses: 'コース', footer_link_chinese: '中国語コース', footer_link_foreign: '外国語コース',
-  footer_link_events: 'オンラインイベント', footer_link_teachers: '講師紹介',
-  footer_col_about: 'TLIについて', footer_link_history: '沿革', footer_link_locations: '校舎所在地', footer_link_faq: 'よくある質問',
-  footer_col_start: '学習を始める', footer_link_trial: '無料体験', footer_link_login: '会員ログイン／登録',
-  footer_copyright: '© 2026 TLI（台北語文学院） All rights reserved.',
-  ai_fab_label: 'オンライン相談', ai_fab_aria: 'オンライン相談を開く',
-  ai_title: 'TLIアシスタント', ai_status: 'オンライン・通常1分以内に返信',
-  ai_minimize_aria: '最小化', ai_close_aria: '閉じる',
-  ai_input_placeholder: 'ご質問を入力してください…', ai_input_aria: '質問を入力', ai_send: '送信',
-  ai_disclaimer: '回答はAIによる自動生成です。重要事項は必ずアドバイザーにご確認ください',
-  ai_chip_trial: '体験レッスンの予約方法',
-  ai_greeting_default: 'こんにちは、TLIアシスタントです。返金、振替・キャンセル、ビザ、領収書、お支払い、受講形式、講師のマッチングなどについてお気軽にご質問ください。',
-  ai_thumbs_prompt: '役に立ちましたか？', ai_thumbs_thanks: 'フィードバックありがとうございます',
-  ai_action_trial: '体験レッスン予約', ai_action_contact: 'アドバイザーに連絡',
-  ai_repeat: '先ほどの「{chip}」についてですが：{short}他にご質問はございますか？',
-  ai_fallback: 'こちらはアドバイザーより回答させていただきます。ご連絡先をご記入いただければ1営業日以内にご連絡いたします。',
-  ai_escalate_user_msg: 'アドバイザーと直接話したいです',
-  ai_form_name_ph: 'お名前', ai_form_contact_ph: 'メールアドレスまたはLINE ID',
-  ai_form_submit: '送信して連絡してもらう', ai_live_btn: '有人対応に切り替える',
-  ai_live_queued: 'ただいま順番待ちです（前に1名）。担当者がオンラインになり次第、すぐに対応いたします。',
-  ai_toast_fill_required: 'お名前とご連絡先をご入力ください',
-  ai_ticket_created: 'お問い合わせチケット #{ticket} を作成しました',
-  ai_tl_assigned: '担当アドバイザー：{advisor}',
-  ai_tl_followup: '1営業日以内に{contact}宛にご連絡いたします'
-}
-};
+    /* ---- 卡片與價格區塊固定 UI 詞彙 ---- */
+    p02_price_quote: T('顧問報價', {en:'Contact for Quote', ja:'個別見積り', de:'Preis auf Anfrage'}),
+    p02_buy_now: T('立即購買', {en:'Buy Now', ja:'今すぐ購入', de:'Jetzt kaufen'}),
+    p02_view_plan: T('查看方案', {en:'View Plan', ja:'プランを見る', de:'Plan ansehen'}),
+    p02_pkg_orig_label: T('原價', {en:'Original Price', ja:'通常価格', de:'Regulärer Preis'}),
+    p02_pkg_combo_label: T('組合價', {en:'Bundle Price', ja:'セット価格', de:'Paketpreis'}),
+    p02_view_package: T('查看組合包', {en:'View Bundle', ja:'セットを見る', de:'Paket ansehen'}),
+    p02_buy_package: T('立即購買組合', {en:'Buy Bundle', ja:'セットを購入', de:'Paket kaufen'}),
+    p02_results_count: T('共 {n} 個方案', {en:'{n} plans found', ja:'該当プラン {n} 件', de:'{n} Pläne gefunden'}),
 
-/* ===================== i18n：本頁專屬字典 I18N_PAGE（p02 線上課程） ===================== */
-var I18N_PAGE = {
-'zh-TW': {
-  meta_title: 'TLI Connect｜銷售方案與組合包',
-  meta_description: 'TLI 銷售方案與組合包總覽：一對一、彈性團體直播、自學影音、文化活動、企業培訓、師資認證等方案，依分類、上課方式、制度與型態篩選。',
-  p02_hero_h1: '銷售方案與組合包',
-  p02_hero_lead: '依分類、上課方式、制度與型態篩選，找到最適合你的銷售方案或組合包。',
-  p02_hero_stats: '20 個銷售方案・4 組組合包・7 種語言',
-  p02_filter_clear: '清除篩選',
-  p02_filter_delivery: '上課方式', p02_filter_schedule: '制度', p02_filter_format: '型態', p02_filter_priceband: '價格帶',
-  p02_filter_search_ph: '搜尋方案名稱',
-  p02_sort_label: '排序', p02_sort_reco: '推薦', p02_sort_new: '最新', p02_sort_price: '價格',
-  p02_results_count: '共 {n} 個方案',
-  p02_loadmore: '載入更多方案',
-  p02_empty_title: '目前篩選條件下沒有符合的方案',
-  p02_empty_desc: '試試調整篩選條件，或直接讓顧問幫您推薦合適的方案',
-  p02_empty_cta: '找顧問幫我推薦',
-  p02_note_text: '自學課程與聊天室權益隨方案提供，可請顧問依目標組合專案方案。',
-  p02_note_cta: '聯繫顧問',
-  p02_package_title: '組合包',
-  p02_package_sub: '將常見的方案組合在一起，組合價低於個別方案原價加總',
-  p02_closer_h2: '不知道怎麼選？',
-  p02_closer_lead: '和顧問聊聊，或先測一次目前的程度',
-  p02_closer_quiz: '2 分鐘程度快測 →',
-  p02_closer_stat1_num: '1956', p02_closer_stat1_label: '年創校',
-  p02_closer_stat2_num: '30 萬＋', p02_closer_stat2_label: '全球校友',
-  p02_closer_stat3_num: '1 對 1', p02_closer_stat3_label: '每堂皆為專屬線上教室',
-  p02_card_view: '查看方案 →', p02_price_quote: '顧問報價',
-  p02_cat_zh: '中文', p02_cat_foreign: '外文', p02_cat_culture: '文化', p02_cat_corp: '商業', p02_cat_cert: '師培',
-  p02_delivery_online: '線上', p02_delivery_offline: '實體',
-  p02_sched_semester: '學期制', p02_sched_flexible: '彈性制',
-  p02_format_1on1: '一對一', p02_format_grouplive: '團體直播', p02_format_chatroom: '聊天室', p02_format_selfpaced: '自學', p02_format_activity: '活動',
-  p02_price_lt5k: '5,000 以下', p02_price_5to15k: '5,000–15,000', p02_price_15to35k: '15,000–35,000', p02_price_gt35k: '35,000 以上', p02_price_quote_band: '顧問報價',
-  p02_cat_zh1on1: '一對一線上課', p02_cat_flex: '彈性團體直播', p02_cat_selfpaced: '自學影音',
-  p02_mode_booking: '預約制', p02_mode_live: '直播制', p02_mode_ondemand: '隨選',
-  p02_lang_zh: '中文', p02_lang_en: '英', p02_lang_ja: '日', p02_lang_ko: '韓', p02_lang_de: '德', p02_lang_fr: '法',
-  p02_level_beginner: '入門', p02_level_elementary: '初級', p02_level_intermediate: '中級', p02_level_advanced: '高級',
-  p02_badge_zh: '中', p02_badge_en: '英', p02_badge_ja: '日', p02_badge_ko: '韓', p02_badge_de: '德', p02_badge_fr: '法', p02_badge_corp: '企', p02_badge_cert: '證',
-  p02_c_zh1on1_title: '中文一對一線上課', p02_c_zh1on1_pitch: '資深老師 1 對 1 陪你練，提出方便時段由顧問安排老師，全球最多校友選擇的中文教學法', p02_c_zh1on1_fact1: '50 分鐘／堂', p02_c_zh1on1_fact2: '顧問安排', p02_c_zh1on1_highlight: '最多學員選擇．資深老師 1 對 1',
-  p02_c_en1on1_title: '英文一對一線上課', p02_c_en1on1_pitch: '對應 TOEFL／IELTS／TOEIC／GEPT，11 級 CEFR 對照', p02_c_en1on1_fact1: '50 分鐘／堂', p02_c_en1on1_fact2: '對應多益／雅思',
-  p02_c_jp1on1_title: '日文一對一線上課', p02_c_jp1on1_pitch: '對應 JLPT，提供 10 分鐘免費程度測試', p02_c_jp1on1_fact1: '50 分鐘／堂', p02_c_jp1on1_fact2: '對應 JLPT',
-  p02_c_ko1on1_title: '韓文一對一線上課', p02_c_ko1on1_pitch: '對應 TOPIK，生活、旅遊、商用主題皆備', p02_c_ko1on1_fact1: '50 分鐘／堂', p02_c_ko1on1_fact2: '對應 TOPIK',
-  p02_c_de1on1_title: '德文一對一線上課', p02_c_de1on1_pitch: '生活、旅遊、商用主題，企業培訓可包班', p02_c_de1on1_fact1: '50 分鐘／堂', p02_c_de1on1_fact2: '生活與商用主題',
-  p02_c_fr1on1_title: '法文一對一線上課', p02_c_fr1on1_pitch: '對應 DELF／DALF／TCF 檢定', p02_c_fr1on1_fact1: '50 分鐘／堂', p02_c_fr1on1_fact2: '對應 DELF／DALF',
-  p02_c_flexzh_title: '中文 彈性團體直播', p02_c_flexzh_pitch: '固定時段直播上課，跟同好一起學，錯過可看課程回放（若有提供）', p02_c_flexzh_fact1: '固定班表', p02_c_flexzh_fact2: '報名即入班', p02_c_flexzh_highlight: '固定班表最彈性．報名即入班',
-  p02_c_flexen_title: '英文 彈性團體直播', p02_c_flexen_pitch: '固定時段直播上課，主題式練習口說與聽力', p02_c_flexen_fact1: '固定班表', p02_c_flexen_fact2: '報名即入班',
-  p02_c_selfzh_title: '中文自學影音課', p02_c_selfzh_pitch: '隨時看、依自己步調學習，適合搭配一對一課程加強練習', p02_c_selfzh_fact1: '隨選隨看', p02_c_selfzh_fact2: '不限期限',
-  p02_c_culturezh_title: '中文文化主題線上課', p02_c_culturezh_pitch: '茶道、書法、時事聊天，多元主題直播體驗', p02_c_culturezh_fact1: '單場體驗', p02_c_culturezh_fact2: '主題多元',
-  p02_c_corp_title: '企業線上培訓', p02_c_corp_pitch: '內訓包班，線上進行，員工可分批分時段上課', p02_c_corp_fact1: '依合約規模', p02_c_corp_fact2: '員工分批上課', p02_c_corp_highlight: '依規模客製包班．員工分批彈性上課',
-  p02_c_cert_title: '師資認證線上課程', p02_c_cert_pitch: '2026 TLI 國際華語教師認證，118 小時線上訓練', p02_c_cert_fact1: '118 小時訓練', p02_c_cert_fact2: '線上直播授課', p02_c_cert_highlight: '118 小時線上訓練．國際認證師資'
-},
-en: {
-  meta_title: 'TLI Connect | Online Courses',
-  meta_description: 'Browse TLI online courses: 1-on-1 classes, flexible group livestream, self-paced video, culture courses, corporate training, and teacher certification — filter by language, format, and level.',
-  p02_hero_h1: 'Online Courses',
-  p02_hero_lead: 'Filter by language, class format, and level to find the class and plan that fits you best.',
-  p02_hero_stats: '12 courses · 2 class formats · 7 languages',
-  p02_filter_lang: 'Language', p02_filter_mode: 'Class Format', p02_filter_level: 'Level', p02_filter_clear: 'Clear Filters',
-  p02_sort_label: 'Sort', p02_sort_reco: 'Recommended', p02_sort_new: 'Newest', p02_sort_price: 'Price',
-  p02_results_count: '{n} courses found',
-  p02_empty_title: 'No courses match your current filters',
-  p02_empty_desc: 'Try adjusting your filters, or let an advisor recommend the right class for you',
-  p02_empty_cta: 'Ask an advisor to recommend',
-  p02_closer_h2: 'Not sure where to start?',
-  p02_closer_lead: 'Talk with an advisor, or take a quick level check first',
-  p02_closer_quiz: '2-Minute Level Check →',
-  p02_closer_stat1_num: '1956', p02_closer_stat1_label: 'Founded',
-  p02_closer_stat2_num: '300,000+', p02_closer_stat2_label: 'alumni worldwide',
-  p02_closer_stat3_num: '1-on-1', p02_closer_stat3_label: 'Every session in a dedicated online classroom',
-  p02_card_view: 'View course →', p02_price_quote: 'Contact us for pricing',
-  p02_cat_zh1on1: '1-on-1 Online', p02_cat_flex: 'Flexible Group Livestream', p02_cat_selfpaced: 'Self-Paced Video',
-  p02_cat_culture: 'Culture Courses', p02_cat_corp: 'Corporate Training', p02_cat_cert: 'Teacher Certification',
-  p02_mode_booking: 'Booking-based', p02_mode_live: 'Livestream', p02_mode_ondemand: 'On-demand',
-  p02_lang_zh: 'Chinese', p02_lang_en: 'English', p02_lang_ja: 'Japanese', p02_lang_ko: 'Korean', p02_lang_de: 'German', p02_lang_fr: 'French',
-  p02_level_beginner: 'Beginner', p02_level_elementary: 'Elementary', p02_level_intermediate: 'Intermediate', p02_level_advanced: 'Advanced',
-  p02_badge_zh: 'ZH', p02_badge_en: 'EN', p02_badge_ja: 'JA', p02_badge_ko: 'KO', p02_badge_de: 'DE', p02_badge_fr: 'FR', p02_badge_corp: 'Corp', p02_badge_cert: 'Cert',
-  p02_c_zh1on1_title: 'Chinese 1-on-1 Online', p02_c_zh1on1_pitch: 'Work one-on-one with an experienced teacher — choose your own schedule and instructor, the format most alumni choose worldwide.', p02_c_zh1on1_fact1: '50 min / session', p02_c_zh1on1_fact2: 'Choose your teacher', p02_c_zh1on1_highlight: 'Most popular with students · 1-on-1 with senior teachers',
-  p02_c_en1on1_title: 'English 1-on-1 Online', p02_c_en1on1_pitch: 'Aligned with TOEFL / IELTS / TOEIC / GEPT, mapped across 11 CEFR levels.', p02_c_en1on1_fact1: '50 min / session', p02_c_en1on1_fact2: 'TOEIC / IELTS aligned',
-  p02_c_jp1on1_title: 'Japanese 1-on-1 Online', p02_c_jp1on1_pitch: 'Aligned with the JLPT, with a free 10-minute level check included.', p02_c_jp1on1_fact1: '50 min / session', p02_c_jp1on1_fact2: 'JLPT aligned',
-  p02_c_ko1on1_title: 'Korean 1-on-1 Online', p02_c_ko1on1_pitch: 'Aligned with the TOPIK, covering everyday, travel, and business topics.', p02_c_ko1on1_fact1: '50 min / session', p02_c_ko1on1_fact2: 'TOPIK aligned',
-  p02_c_de1on1_title: 'German 1-on-1 Online', p02_c_de1on1_pitch: 'Everyday, travel, and business topics, with group packages available for corporate training.', p02_c_de1on1_fact1: '50 min / session', p02_c_de1on1_fact2: 'Everyday & business topics',
-  p02_c_fr1on1_title: 'French 1-on-1 Online', p02_c_fr1on1_pitch: 'Aligned with the DELF / DALF / TCF exams.', p02_c_fr1on1_fact1: '50 min / session', p02_c_fr1on1_fact2: 'DELF / DALF aligned',
-  p02_c_flexzh_title: 'Chinese Flexible Group Livestream', p02_c_flexzh_pitch: 'Live classes at fixed times — learn alongside classmates, with a recording available if you miss one (when offered).', p02_c_flexzh_fact1: 'Fixed schedule', p02_c_flexzh_fact2: 'Enroll and join', p02_c_flexzh_highlight: 'Most flexible fixed schedule · Enroll and join anytime',
-  p02_c_flexen_title: 'English Flexible Group Livestream', p02_c_flexen_pitch: 'Live classes at fixed times, with themed practice for speaking and listening.', p02_c_flexen_fact1: 'Fixed schedule', p02_c_flexen_fact2: 'Enroll and join',
-  p02_c_selfzh_title: 'Chinese Self-Paced Video Course', p02_c_selfzh_pitch: 'Watch anytime at your own pace — a great complement to reinforce your 1-on-1 lessons.', p02_c_selfzh_fact1: 'Watch anytime', p02_c_selfzh_fact2: 'No time limit',
-  p02_c_culturezh_title: 'Chinese Culture Online Course', p02_c_culturezh_pitch: 'Tea ceremony, calligraphy, current-events chats — a livestream experience across varied themes.', p02_c_culturezh_fact1: 'Single-session experience', p02_c_culturezh_fact2: 'Wide range of topics',
-  p02_c_corp_title: 'Corporate Online Training', p02_c_corp_pitch: 'In-house group training delivered online — employees can join in staggered batches and time slots.', p02_c_corp_fact1: 'Scaled to your contract', p02_c_corp_fact2: 'Staggered employee sessions', p02_c_corp_highlight: 'Custom group packages · Flexible, staggered employee sessions',
-  p02_c_cert_title: 'Teacher Certification Online Course', p02_c_cert_pitch: '2026 TLI International Chinese Teacher Certification — 118 hours of online training.', p02_c_cert_fact1: '118 hours of training', p02_c_cert_fact2: 'Live online instruction', p02_c_cert_highlight: '118 hours of online training · Internationally certified teachers'
-},
-ja: {
-  meta_title: 'TLI Connect｜オンラインコース',
-  meta_description: 'TLIオンラインコース一覧：一対一オンライン、グループライブ配信、自学動画、文化コース、企業研修、講師認定。言語・受講形式・レベルで絞り込みできます。',
-  p02_hero_h1: 'オンラインコース',
-  p02_hero_lead: '言語・受講形式・レベルで絞り込み、あなたに最適なクラスとプランを見つけましょう。',
-  p02_hero_stats: '12コース・2つの受講形式・7言語',
-  p02_filter_lang: '言語', p02_filter_mode: '受講形式', p02_filter_level: 'レベル', p02_filter_clear: '絞り込みをクリア',
-  p02_sort_label: '並び替え', p02_sort_reco: 'おすすめ', p02_sort_new: '新着', p02_sort_price: '価格',
-  p02_results_count: '該当コース {n} 件',
-  p02_empty_title: '現在の条件に一致するコースはありません',
-  p02_empty_desc: '条件を変更するか、アドバイザーに最適なクラスをご提案いたします',
-  p02_empty_cta: 'アドバイザーにおすすめを聞く',
-  p02_closer_h2: '選び方に迷ったら',
-  p02_closer_lead: 'アドバイザーに相談する、またはまず現在のレベルを測定しましょう',
-  p02_closer_quiz: '2分間レベルチェック →',
-  p02_closer_stat1_num: '1956', p02_closer_stat1_label: '年創立',
-  p02_closer_stat2_num: '30万人以上', p02_closer_stat2_label: '世界の卒業生',
-  p02_closer_stat3_num: '一対一', p02_closer_stat3_label: 'すべてのレッスンが専用オンライン教室',
-  p02_card_view: 'コースを見る →', p02_price_quote: 'お問い合わせください',
-  p02_cat_zh1on1: '一対一オンライン', p02_cat_flex: 'グループライブ配信', p02_cat_selfpaced: '自学動画',
-  p02_cat_culture: '文化コース', p02_cat_corp: '企業研修', p02_cat_cert: '講師認定',
-  p02_mode_booking: '予約制', p02_mode_live: 'ライブ配信', p02_mode_ondemand: 'オンデマンド',
-  p02_lang_zh: '中国語', p02_lang_en: '英語', p02_lang_ja: '日本語', p02_lang_ko: '韓国語', p02_lang_de: 'ドイツ語', p02_lang_fr: 'フランス語',
-  p02_level_beginner: '入門', p02_level_elementary: '初級', p02_level_intermediate: '中級', p02_level_advanced: '上級',
-  p02_badge_zh: '中', p02_badge_en: '英', p02_badge_ja: '日', p02_badge_ko: '韓', p02_badge_de: '独', p02_badge_fr: '仏', p02_badge_corp: '法人', p02_badge_cert: '認定',
-  p02_c_zh1on1_title: '中国語 1対1 オンライン', p02_c_zh1on1_pitch: '経験豊富な講師とマンツーマンで練習。ご都合の良い時間をお伝えいただければアドバイザーが講師を手配、世界で最も選ばれている中国語学習法です。', p02_c_zh1on1_fact1: '1回50分', p02_c_zh1on1_fact2: 'アドバイザーが手配', p02_c_zh1on1_highlight: '受講生に一番人気・ベテラン講師との一対一',
-  p02_c_en1on1_title: '英語 1対1 オンライン', p02_c_en1on1_pitch: 'TOEFL／IELTS／TOEIC／GEPTに対応、CEFR 11段階と対照できます。', p02_c_en1on1_fact1: '1回50分', p02_c_en1on1_fact2: 'TOEIC／IELTS対応',
-  p02_c_jp1on1_title: '日本語 1対1 オンライン', p02_c_jp1on1_pitch: 'JLPTに対応、無料10分レベルチェック付きです。', p02_c_jp1on1_fact1: '1回50分', p02_c_jp1on1_fact2: 'JLPT対応',
-  p02_c_ko1on1_title: '韓国語 1対1 オンライン', p02_c_ko1on1_pitch: 'TOPIKに対応、生活・旅行・ビジネスまで幅広いテーマをご用意しています。', p02_c_ko1on1_fact1: '1回50分', p02_c_ko1on1_fact2: 'TOPIK対応',
-  p02_c_de1on1_title: 'ドイツ語 1対1 オンライン', p02_c_de1on1_pitch: '生活・旅行・ビジネステーマに対応、企業研修向けの団体プランもございます。', p02_c_de1on1_fact1: '1回50分', p02_c_de1on1_fact2: '生活・ビジネステーマ',
-  p02_c_fr1on1_title: 'フランス語 1対1 オンライン', p02_c_fr1on1_pitch: 'DELF／DALF／TCF検定に対応しています。', p02_c_fr1on1_fact1: '1回50分', p02_c_fr1on1_fact2: 'DELF／DALF対応',
-  p02_c_flexzh_title: '中国語 グループライブ配信', p02_c_flexzh_pitch: '決まった時間にライブ配信で受講、他の受講生と一緒に学べます。見逃しても録画提供があれば後から視聴できます。', p02_c_flexzh_fact1: '固定スケジュール', p02_c_flexzh_fact2: '申込みですぐ参加', p02_c_flexzh_highlight: '最も柔軟な固定スケジュール・申込みですぐ参加',
-  p02_c_flexen_title: '英語 グループライブ配信', p02_c_flexen_pitch: '決まった時間にライブ配信で受講、テーマ別にスピーキングとリスニングを練習します。', p02_c_flexen_fact1: '固定スケジュール', p02_c_flexen_fact2: '申込みですぐ参加',
-  p02_c_selfzh_title: '中国語 自学動画コース', p02_c_selfzh_pitch: 'いつでも自分のペースで視聴でき、1対1レッスンの復習にも最適です。', p02_c_selfzh_fact1: 'いつでも視聴可能', p02_c_selfzh_fact2: '期限なし',
-  p02_c_culturezh_title: '中国語文化テーマオンラインコース', p02_c_culturezh_pitch: '茶道、書道、時事トークなど、多彩なテーマのライブ体験です。', p02_c_culturezh_fact1: '単発体験', p02_c_culturezh_fact2: '多彩なテーマ',
-  p02_c_corp_title: '企業向けオンライン研修', p02_c_corp_pitch: '社内研修をオンラインで実施、社員は分割された時間帯で受講できます。', p02_c_corp_fact1: '規模に応じてカスタム', p02_c_corp_fact2: '社員が分割して受講', p02_c_corp_highlight: '規模に応じたカスタム団体研修・社員が柔軟に分割受講',
-  p02_c_cert_title: '講師認定オンラインコース', p02_c_cert_pitch: '2026年 TLI国際中国語教師認定、118時間のオンライン研修です。', p02_c_cert_fact1: '118時間の研修', p02_c_cert_fact2: 'オンラインライブ授業', p02_c_cert_highlight: '118時間のオンライン研修・国際認定講師'
-}
-};
+    /* ---- 語言徽章（課程卡片左上角小標籤，如「中」「德」） ---- */
+    p02_badge_zh: T('中', {en:'ZH', ja:'中', de:'ZH'}),
+    p02_badge_en: T('英', {en:'EN', ja:'英', de:'EN'}),
+    p02_badge_ja: T('日', {en:'JA', ja:'日', de:'JA'}),
+    p02_badge_ko: T('韓', {en:'KO', ja:'韓', de:'KO'}),
+    p02_badge_de: T('德', {en:'DE', ja:'独', de:'DE'}),
+    p02_badge_fr: T('法', {en:'FR', ja:'仏', de:'FR'}),
+    p02_badge_culture: T('文', {en:'Culture', ja:'文', de:'Kultur'}),
+    p02_badge_corp: T('企', {en:'Corp', ja:'法人', de:'Firma'}),
+    p02_badge_cert: T('證', {en:'Cert', ja:'認定', de:'Zert.'}),
 
+    /* ---- 篩選分類 pill 標籤 ---- */
+    p02_cat_zh: T('中文', {en:'Chinese', ja:'中国語', de:'Chinesisch'}),
+    p02_cat_foreign: T('外文', {en:'Foreign Languages', ja:'外国語', de:'Fremdsprachen'}),
+    p02_cat_culture: T('文化', {en:'Culture', ja:'文化', de:'Kultur'}),
+    p02_cat_corp: T('商業', {en:'Corporate', ja:'法人向け', de:'Wirtschaft'}),
+    p02_cat_cert: T('師培', {en:'Teacher Training', ja:'教師養成', de:'Lehrerausbildung'}),
+    p02_delivery_online: T('線上', {en:'Online', ja:'オンライン', de:'Online'}),
+    p02_delivery_offline: T('實體', {en:'In-Person', ja:'対面', de:'Vor Ort'}),
+    p02_sched_semester: T('學期制', {en:'Semester-Based', ja:'学期制', de:'Semesterbasiert'}),
+    p02_sched_flexible: T('彈性制', {en:'Flexible', ja:'フレキシブル制', de:'Flexibel'}),
+    p02_format_1on1: T('一對一', {en:'1-on-1', ja:'一対一', de:'1:1'}),
+    p02_format_grouplive: T('團體直播', {en:'Group Livestream', ja:'グループライブ配信', de:'Gruppen-Livestream'}),
+    p02_format_chatroom: T('聊天室', {en:'Chatroom', ja:'チャットルーム', de:'Chatroom'}),
+    p02_format_selfpaced: T('自學', {en:'Self-Paced', ja:'自学', de:'Selbstlernen'}),
+    p02_format_activity: T('活動', {en:'Activity', ja:'アクティビティ', de:'Veranstaltung'}),
+    p02_price_lt5k: T('5,000 以下', {en:'Under NT$5,000', ja:'5,000以下', de:'Unter NT$5.000'}),
+    p02_price_5to15k: T('5,000–15,000', {en:'NT$5,000–15,000', ja:'5,000～15,000', de:'NT$5.000–15.000'}),
+    p02_price_15to35k: T('15,000–35,000', {en:'NT$15,000–35,000', ja:'15,000～35,000', de:'NT$15.000–35.000'}),
+    p02_price_gt35k: T('35,000 以上', {en:'Over NT$35,000', ja:'35,000以上', de:'Über NT$35.000'}),
+    p02_price_quote_band: T('顧問報價', {en:'Advisor Quote', ja:'個別見積り', de:'Preis auf Anfrage'})
+  };
+}
 /* ===================== i18n：AI 問答庫（三語，段落 C，逐字複製） ===================== */
-var TLI_KB_I18N = {
-'zh-TW': [
-  {id:'refund', chip:'退費', q:'如何申請退費？', a:'課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。', short:'開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。'},
-  {id:'reschedule', chip:'請假改期', q:'臨時無法上課，可以退堂或改期嗎？', a:'請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。', short:'上課前 12 小時可申請改期或退堂，逾時視同已上課。'},
-  {id:'visa', chip:'簽證', q:'上課時數與簽證申請有什麼關係？', a:'台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。', short:'週時數達 15 小時的學期班即符合學生簽證申請條件。'},
-  {id:'invoice', chip:'發票', q:'會開立發票嗎？', a:'是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。', short:'付款完成後會開立發票，企業包班可申請月結。'},
-  {id:'payment', chip:'付款方式', q:'有哪些付款方式？', a:'提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。', short:'可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。'},
-  {id:'format', chip:'上課方式', q:'一對一與彈性團體直播差在哪？', a:'一對一線上課是預約制，你提出方便的時段，由顧問安排老師；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。', short:'一對一是預約制、由顧問安排老師與時段；團體直播是固定時段、費用較划算。'},
-  {id:'classroom', chip:'線上教室', q:'線上教室怎麼進入？連結會不會外流？', a:'上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。', short:'登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。'},
-  {id:'pricing', chip:'價格與報價', q:'課程費用怎麼估算？', a:'費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。', short:'費用依語言、上課方式與堂數而定，可請顧問提供試算報價。'},
-  {id:'trial', chip:'試聽', q:'可以先試聽嗎？', a:'可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。', short:'提供免費試聽，顧問會依程度與目標安排合適老師與時段。'},
-  {id:'teacher', chip:'老師配對', q:'老師怎麼配對？', a:'顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。', short:'依語言、程度與目標配對合適老師，開課後不合適可申請更換。'}
-],
-en: [
-  {id:'refund', chip:'Refunds', q:'How do I request a refund?', a:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.', short:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.'},
-  {id:'reschedule', chip:'Rescheduling', q:'Can I cancel or reschedule a class on short notice?', a:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.', short:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.'},
-  {id:'visa', chip:'Student Visa', q:'How do class hours relate to visa applications?', a:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.', short:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.'},
-  {id:'invoice', chip:'Invoices', q:'Will I receive an invoice or receipt?', a:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.', short:'An invoice is issued after payment; corporate clients can request monthly billing.'},
-  {id:'payment', chip:'Payment Options', q:'What payment methods are available?', a:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.', short:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.'},
-  {id:'format', chip:'Class Formats', q:'What’s the difference between 1-on-1 and flexible group livestream classes?', a:'1-on-1 online classes are booking-based — you submit your available times and our advisor arranges a teacher for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.', short:'1-on-1 is booking-based — our advisor arranges the teacher and time based on your availability; group livestream runs on a fixed schedule and costs less.'},
-  {id:'classroom', chip:'Online Classroom', q:'How do I join the online classroom? Could the link leak to others?', a:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.', short:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.'},
-  {id:'pricing', chip:'Pricing', q:'How is the course fee calculated?', a:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.', short:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.'},
-  {id:'trial', chip:'Trial Class', q:'Can I try a class before signing up?', a:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.', short:'A free trial is available, matched to your level and goals before you commit.'},
-  {id:'teacher', chip:'Teacher Matching', q:'How are teachers matched to students?', a:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.', short:'Matched to a certified teacher by language, level, and goals; you can request a change later.'}
-],
-ja: [
-  {id:'refund', chip:'返金', q:'返金の申請方法は？', a:'開講14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。', short:'開講14日前までなら全額返金、開講後は受講済み回数に応じて算出します。'},
-  {id:'reschedule', chip:'振替・キャンセル', q:'急に受講できなくなった場合、キャンセルや振替はできますか？', a:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。', short:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。'},
-  {id:'visa', chip:'学生ビザ', q:'授業時間数はビザ申請にどう関係しますか？', a:'台湾キャンパスの学期制コースで週15時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。', short:'週15時間以上の学期制コースは学生ビザの出席条件を満たします。'},
-  {id:'invoice', chip:'領収書', q:'領収書は発行されますか？', a:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。', short:'お支払い後に領収書を発行、法人は月締め請求も可能です。'},
-  {id:'payment', chip:'お支払い方法', q:'どのようなお支払い方法がありますか？', a:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。', short:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。'},
-  {id:'format', chip:'受講形式', q:'一対一とグループライブ配信の違いは何ですか？', a:'一対一のオンライン授業は予約制で、ご都合の良い時間帯をお伝えいただければ、アドバイザーが講師を手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。', short:'一対一は予約制でアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。'},
-  {id:'classroom', chip:'オンライン教室', q:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？', a:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。', short:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。'},
-  {id:'pricing', chip:'料金・見積り', q:'コース料金はどのように算出されますか？', a:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。', short:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。'},
-  {id:'trial', chip:'体験レッスン', q:'事前に体験レッスンを受けられますか？', a:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。', short:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。'},
-  {id:'teacher', chip:'講師のマッチング', q:'講師はどのようにマッチングされますか？', a:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。', short:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。'}
-]
-};
+function getKB(){
+  return [
+    {id:'refund', chip:T('退費',{en:'Refunds',ja:'返金',de:'Rückerstattung'}), q:T('如何申請退費？',{en:'How do I request a refund?',ja:'返金の申請方法は？',de:'Wie beantrage ich eine Rückerstattung?'}), a:T('課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。',{en:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.',ja:'開講14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。',de:'Bei Antrag mindestens 14 Tage vor Kursbeginn erhalten Sie eine vollständige Rückerstattung. Nach Kursbeginn wird der erstattungsfähige Betrag anhand der bereits absolvierten Unterrichtseinheiten und der Vertragsbedingungen berechnet — bitte wenden Sie sich dazu an Ihren zuständigen Berater.'}), short:T('開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。',{en:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.',ja:'開講14日前までなら全額返金、開講後は受講済み回数に応じて算出します。',de:'Vollständige Rückerstattung bei Antrag 14+ Tage vor Kursbeginn; danach richtet sich der Betrag nach den bereits absolvierten Einheiten.'})},
+    {id:'reschedule', chip:T('請假改期',{en:'Rescheduling',ja:'振替・キャンセル',de:'Terminverschiebung'}), q:T('臨時無法上課，可以退堂或改期嗎？',{en:'Can I cancel or reschedule a class on short notice?',ja:'急に受講できなくなった場合、キャンセルや振替はできますか？',de:'Kann ich eine Unterrichtsstunde kurzfristig absagen oder verschieben?'}), a:T('請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。',{en:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.',ja:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。',de:'Bitte sagen Sie mindestens 12 Stunden vor dem geplanten Unterricht ab oder verschieben Sie ihn. Anfragen nach Ablauf dieser Frist gelten als abgehaltene Stunde, ohne Nachholtermin oder Rückerstattung.'}), short:T('上課前 12 小時可申請改期或退堂，逾時視同已上課。',{en:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.',ja:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。',de:'Absage oder Verschiebung bis 12 Stunden vor Unterrichtsbeginn möglich; danach gilt die Stunde als abgehalten.'})},
+    {id:'visa', chip:T('簽證',{en:'Student Visa',ja:'学生ビザ',de:'Studentenvisum'}), q:T('上課時數與簽證申請有什麼關係？',{en:'How do class hours relate to visa applications?',ja:'授業時間数はビザ申請にどう関係しますか？',de:'Welchen Einfluss haben die Unterrichtsstunden auf die Visumbeantragung?'}), a:T('台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。',{en:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.',ja:'台湾キャンパスの学期制コースで週15時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。',de:'Semesterkurse an unseren Taiwan-Standorten mit mindestens 15 Unterrichtsstunden pro Woche erfüllen die Anwesenheitsvoraussetzung für die Beantragung eines Studentenvisums. Den genauen Ablauf und die erforderlichen Unterlagen bestätigt Ihnen bitte Ihr Campus-Berater.'}), short:T('週時數達 15 小時的學期班即符合學生簽證申請條件。',{en:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.',ja:'週15時間以上の学期制コースは学生ビザの出席条件を満たします。',de:'Semesterkurse mit mindestens 15 Wochenstunden erfüllen die Anwesenheitsvoraussetzung für das Studentenvisum.'})},
+    {id:'invoice', chip:T('發票',{en:'Invoices',ja:'領収書',de:'Rechnungen'}), q:T('會開立發票嗎？',{en:'Will I receive an invoice or receipt?',ja:'領収書は発行されますか？',de:'Erhalte ich eine Rechnung oder Quittung?'}), a:T('是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。',{en:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.',ja:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。',de:'Ja — nach vollständiger Zahlung wird eine offizielle Rechnung ausgestellt. Firmenkunden mit Gruppenkursen können eine monatliche Sammelrechnung beantragen; Einzelkurse werden nach Abschluss der Bestellung in Rechnung gestellt.'}), short:T('付款完成後會開立發票，企業包班可申請月結。',{en:'An invoice is issued after payment; corporate clients can request monthly billing.',ja:'お支払い後に領収書を発行、法人は月締め請求も可能です。',de:'Die Rechnung wird nach der Zahlung ausgestellt; Firmenkunden können eine monatliche Sammelrechnung beantragen.'})},
+    {id:'payment', chip:T('付款方式',{en:'Payment Options',ja:'お支払い方法',de:'Zahlungsmöglichkeiten'}), q:T('有哪些付款方式？',{en:'What payment methods are available?',ja:'どのようなお支払い方法がありますか？',de:'Welche Zahlungsmöglichkeiten gibt es?'}), a:T('提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。',{en:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.',ja:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。',de:'Wir bieten Zahlung in voller Höhe, Anzahlung + Restbetrag oder Ratenzahlung an. Die genauen Optionen richten sich nach Ihrem Kursplan und den mit Ihrem Berater bestätigten Bestellbedingungen.'}), short:T('可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。',{en:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.',ja:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。',de:'Wahlweise volle Zahlung, Anzahlung + Restbetrag oder Ratenzahlung, gemäß dem mit dem Berater bestätigten Plan.'})},
+    {id:'format', chip:T('上課方式',{en:'Class Formats',ja:'受講形式',de:'Unterrichtsformen'}), q:T('一對一與彈性團體直播差在哪？',{en:'What’s the difference between 1-on-1 and flexible group livestream classes?',ja:'一対一とグループライブ配信の違いは何ですか？',de:'Was ist der Unterschied zwischen 1:1-Unterricht und flexiblem Gruppen-Livestream?'}), a:T('一對一線上課是預約制，你提出方便的時段，由顧問安排老師；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。',{en:'1-on-1 online classes are booking-based — you submit your available times and our advisor arranges a teacher for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.',ja:'一対一のオンライン授業は予約制で、ご都合の良い時間帯をお伝えいただければ、アドバイザーが講師を手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。',de:'Der 1:1-Online-Unterricht basiert auf Terminvereinbarung — Sie teilen uns Ihre verfügbaren Zeiten mit, und unser Berater stellt Ihnen eine Lehrkraft zusammen. Der flexible Gruppen-Livestream findet zu festen Zeiten statt; Sie melden sich einfach an und nehmen teil. Er ist in der Regel günstiger, und falls in diesem Zeitraum eine Aufzeichnung angeboten wird, können Sie eine verpasste Live-Sitzung nachholen.'}), short:T('一對一是預約制、由顧問安排老師與時段；團體直播是固定時段、費用較划算。',{en:'1-on-1 is booking-based — our advisor arranges the teacher and time based on your availability; group livestream runs on a fixed schedule and costs less.',ja:'一対一は予約制でアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。',de:'1:1 basiert auf Terminvereinbarung — unser Berater stellt Lehrkraft und Zeit nach Ihrer Verfügbarkeit zusammen; der Gruppen-Livestream läuft nach festem Zeitplan und kostet weniger.'})},
+    {id:'classroom', chip:T('線上教室',{en:'Online Classroom',ja:'オンライン教室',de:'Online-Klassenzimmer'}), q:T('線上教室怎麼進入？連結會不會外流？',{en:'How do I join the online classroom? Could the link leak to others?',ja:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？',de:'Wie betrete ich das Online-Klassenzimmer? Könnte der Link an andere weitergegeben werden?'}), a:T('上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。',{en:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.',ja:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。',de:'Loggen Sie sich vor dem Unterricht im Mitgliederbereich ein — nach der Identitätsprüfung schaltet die Schaltfläche „Klassenzimmer betreten“ einen Link mit einem Klick zu Ihrer persönlichen Zoom-Sitzung frei. Jede Stunde nutzt ein eigenes Meeting, und Ihre Lehrkraft lässt Sie aus dem Warteraum herein — es gibt also keinen weiterleitbaren Link, der durchsickern könnte.'}), short:T('登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。',{en:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.',ja:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。',de:'Nach dem Login erhalten Sie einen Link zu Ihrer persönlichen Zoom-Sitzung; Ihre Lehrkraft lässt Sie aus dem Warteraum herein.'})},
+    {id:'pricing', chip:T('價格與報價',{en:'Pricing',ja:'料金・見積り',de:'Preise & Angebote'}), q:T('課程費用怎麼估算？',{en:'How is the course fee calculated?',ja:'コース料金はどのように算出されますか？',de:'Wie wird die Kursgebühr berechnet?'}), a:T('費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。',{en:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.',ja:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。',de:'Der Preis richtet sich nach der Sprache, der Unterrichtsform (1:1 oder Gruppe) und der Anzahl der Unterrichtseinheiten. Teilen Sie uns Ihre Lernziele und Ihren Zeitrahmen mit, und ein Berater erstellt Ihnen ein Angebot — oder Sie klären den Preis direkt bei der Buchung einer Probestunde.'}), short:T('費用依語言、上課方式與堂數而定，可請顧問提供試算報價。',{en:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.',ja:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。',de:'Der Preis hängt von Sprache, Unterrichtsform und Stundenzahl ab — fragen Sie Ihren Berater nach einem Angebot.'})},
+    {id:'trial', chip:T('試聽',{en:'Trial Class',ja:'体験レッスン',de:'Probestunde'}), q:T('可以先試聽嗎？',{en:'Can I try a class before signing up?',ja:'事前に体験レッスンを受けられますか？',de:'Kann ich vor der Anmeldung eine Probestunde nehmen?'}), a:T('可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。',{en:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.',ja:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。',de:'Ja — wir bieten eine kostenlose Probestunde an. Ihr Berater ordnet Ihnen passend zu Niveau und Zielen eine geeignete Lehrkraft und einen Termin zu, sodass Sie sich nach dem Ausprobieren entscheiden können.'}), short:T('提供免費試聽，顧問會依程度與目標安排合適老師與時段。',{en:'A free trial is available, matched to your level and goals before you commit.',ja:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。',de:'Eine kostenlose Probestunde wird passend zu Niveau und Zielen angeboten, bevor Sie sich festlegen.'})},
+    {id:'teacher', chip:T('老師配對',{en:'Teacher Matching',ja:'講師のマッチング',de:'Lehrer-Zuordnung'}), q:T('老師怎麼配對？',{en:'How are teachers matched to students?',ja:'講師はどのようにマッチングされますか？',de:'Wie werden Lehrkräfte den Lernenden zugeordnet?'}), a:T('顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。',{en:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.',ja:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。',de:'Ihr Berater ordnet Ihnen anhand von Sprache, Niveau und Zielen eine zertifizierte Lehrkraft zu. Falls es nach Unterrichtsbeginn nicht passt, können Sie einen Wechsel beantragen.'}), short:T('依語言、程度與目標配對合適老師，開課後不合適可申請更換。',{en:'Matched to a certified teacher by language, level, and goals; you can request a change later.',ja:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。',de:'Zuordnung zu einer zertifizierten Lehrkraft nach Sprache, Niveau und Zielen; ein Wechsel kann später beantragt werden.'})}
+  ];
+}
 
+/* ===================== i18n：顧問姓名（五語，示範人名，de 沿用 en 羅馬拼音） ===================== */
 var TLI_ADVISORS_I18N = {
   'zh-TW': ['王顧問','李顧問','陳顧問','張顧問','林顧問'],
   en: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin'],
-  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー']
+  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー'],
+  de: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin']
 };
 function aiPickAdvisor(){
-  var list = TLI_ADVISORS_I18N[window.TLI_CURRENT_LANG] || TLI_ADVISORS_I18N['zh-TW'];
+  var lang = TLI_I18N.currentLang();
+  var list = TLI_ADVISORS_I18N[lang] || TLI_ADVISORS_I18N['zh-TW'];
   return list[Math.floor(Math.random() * list.length)];
 }
 
@@ -1357,7 +1285,7 @@ function aiRenderChips(target){
   var wrap = document.getElementById('aiChips-'+target);
   if(!wrap) return;
   var dict = tliDict();
-  var kb = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  var kb = getKB();
   wrap.innerHTML = '';
   wrap.appendChild(aiMakeChipBtn(dict.ai_chip_trial, function(){ aiAsk(dict.ai_chip_trial, target); }));
   kb.forEach(function(item){
@@ -1446,7 +1374,7 @@ var TLI_AI_KEYWORDS = {
 };
 function aiMatch(text){
   var t = text.trim().toLowerCase();
-  var kbTc = TLI_KB_I18N['zh-TW'], kbCur = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  var kbTc = getKB(), kbCur = kbTc;
   for(var i=0;i<kbTc.length;i++){
     var id = kbTc[i].id;
     var kws = TLI_AI_KEYWORDS[id] || [];
@@ -1602,7 +1530,13 @@ function aiRestoreState(target){
   }catch(e){ return false; }
 }
 
-initLang();
+/* 銷售方案卡片／組合包卡片為 JS 動態渲染（篩選後重繪 DOM），初次渲染在此執行（此時 T()／TLI_I18N 已可用），
+   並登記 TLI_I18N.onRefresh，讓切換語言時重新渲染成目前語言版本 */
+renderAllDynamic();
+TLI_I18N.onRefresh(renderAllDynamic);
+TLI_I18N.onRefresh(applyMetaDesc);
+applyMetaDesc();
+TLI_I18N.init();
 </script>
 </body>
 </html>

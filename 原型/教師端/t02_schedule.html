@@ -169,7 +169,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="app has-side">
   <nav class="side-nav" aria-label="主導覽">
     <div class="side-brand"><a href="../公開網站/p01_home.html" aria-label="回官網"><img src="../assets/tli-logo.svg" alt="TLI"></a></div>
-    <div class="side-role"><strong>林老師</strong><span>TLI 中心教師 · 台北</span></div>
+    <div class="side-role"><strong>林老師</strong><span><span data-i18n="today.profile.role">TLI 中心教師</span> · <span data-i18n="today.profile.city">台北</span></span></div>
     <a class="side-link" href="t01_today.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="nav_t.today">今天</span></a>
     <a class="side-link active" href="t02_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="nav_t.schedule">課表</span></a>
     <a class="side-link" href="t03_lesson_record.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="nav_t.lessonRecord">課後紀錄與回饋</span></a>
@@ -187,7 +187,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </button>
       <div class="bell-panel" id="bellPanel">
         <h4 data-i18n="common.notifications">通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p>今日 15:00 學期班 Lv.5–8 首堂，請留意規則</p><span>今天 08:00</span></div></div>
+        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="t02.notif.text">今日 15:00 學期班 Lv.5–8 首堂，請留意規則</p><span data-i18n="t02.notif.time">今天 08:00</span></div></div>
       </div>
     </div>
   </header>
@@ -225,7 +225,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
             <div class="lb-time">09:00–09:50</div>
             <div class="lb-title">王小明</div>
             <div class="lb-sub">中級 2・士林 A203</div>
-            <div class="lb-tz-line">廠區當地（前一日）18:00–18:50</div>
+            <div class="lb-tz-line"><span data-i18n="sched.tz.factorySitePrevDay">廠區當地（前一日）</span>18:00–18:50</div>
             <div class="lb-badges"><span class="lb-badge-ent" data-i18n="sched.badge.enterprise">企業學員</span><span class="lb-badge-cross" data-i18n="sched.badge.crossDay">跨日</span></div>
           </div>
           <div class="lesson-block flexlive" onclick="openSheet('M2')">
@@ -241,13 +241,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
             <div class="lb-time">09:00–09:50</div>
             <div class="lb-title">王小明</div>
             <div class="lb-sub">中級 2・士林 A203</div>
-            <div class="lb-tz-line">廠區當地（前一日）18:00–18:50</div>
+            <div class="lb-tz-line"><span data-i18n="sched.tz.factorySitePrevDay">廠區當地（前一日）</span>18:00–18:50</div>
             <div class="lb-badges"><span class="lb-badge-ent" data-i18n="sched.badge.enterprise">企業學員</span><span class="lb-badge-cross" data-i18n="sched.badge.crossDay">跨日</span></div>
           </div>
           <div class="lesson-block flexlive" onclick="openSheet('T2')">
             <div class="lb-time">15:00–15:50</div>
             <div class="lb-title">學期班 Lv.5–8</div>
-            <div class="lb-sub">羅斯福校區・首堂・資深教師任教</div>
+            <div class="lb-sub">羅斯福校區・<span data-i18n="sched.badge.firstClassAbbr">首堂・資深教師任教</span></div>
           </div>
         </div>
         <!-- 週三 -->
@@ -261,8 +261,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <div class="lesson-block chatroom" onclick="openSheet('C1')">
             <div class="lb-time">15:30–16:00</div>
             <div class="lb-title">日常對話練習</div>
-            <div class="lb-sub">團體聊天室（30 分鐘，TLI 老師帶）・機構學生・範例州立大學</div>
-            <div class="lb-badges"><span class="lb-badge-chat">已報名 4／名額待定</span></div>
+            <div class="lb-sub"><span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學</div>
+            <div class="lb-badges"><span class="lb-badge-chat"><span data-i18n="sched.badge.registered">已報名</span> 4／<span data-i18n="sched.badge.capacityTbd">名額待定</span></span></div>
           </div>
         </div>
         <!-- 週四 -->
@@ -272,14 +272,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
             <div class="lb-time">09:00–09:50</div>
             <div class="lb-title">王小明</div>
             <div class="lb-sub">中級 2・士林 A203</div>
-            <div class="lb-tz-line">廠區當地（前一日）18:00–18:50</div>
+            <div class="lb-tz-line"><span data-i18n="sched.tz.factorySitePrevDay">廠區當地（前一日）</span>18:00–18:50</div>
             <div class="lb-badges"><span class="lb-badge-ent" data-i18n="sched.badge.enterprise">企業學員</span><span class="lb-badge-cross" data-i18n="sched.badge.crossDay">跨日</span></div>
           </div>
           <div class="lesson-block personal" id="lb-R2" data-enterprise="1" onclick="openSheet('R2')">
             <div class="lb-time">16:00–17:30</div>
             <div class="lb-title">陳雅婷（線上）</div>
-            <div class="lb-sub">高級 1・Zoom・90 分鐘</div>
-            <div class="lb-tz-line">廠區當地 17:00–18:30</div>
+            <div class="lb-sub">高級 1・Zoom・<span data-i18n="sched.duration.90min">90 分鐘</span></div>
+            <div class="lb-tz-line"><span data-i18n="sched.tz.factorySite">廠區當地</span> 17:00–18:30</div>
             <div class="lb-badges"><span class="lb-badge-ent" data-i18n="sched.badge.enterprise">企業學員</span></div>
           </div>
         </div>
@@ -289,8 +289,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <div class="lesson-block chatroom" onclick="openSheet('C2')">
             <div class="lb-time">09:00–09:30</div>
             <div class="lb-title">時事話題討論</div>
-            <div class="lb-sub">團體聊天室（30 分鐘，TLI 老師帶）・全部（全平台開放）</div>
-            <div class="lb-badges"><span class="lb-badge-chat">已報名 2／名額待定</span></div>
+            <div class="lb-sub"><span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span></div>
+            <div class="lb-badges"><span class="lb-badge-chat"><span data-i18n="sched.badge.registered">已報名</span> 2／<span data-i18n="sched.badge.capacityTbd">名額待定</span></span></div>
           </div>
         </div>
         <!-- 週六 -->
@@ -523,6 +523,54 @@ var STUDENT_NOTES = {
 
 var currentSheetId = null;
 var currentEnterId = null;
+/* 20260930en：課堂詳情裡混合「示範資料＋固定樣板字」的欄位（企業學員時區列／教材進度／教材歷程／
+   彈性班入班資訊／出席時間），示範資料（機構名、教材單元名、日期）維持原文，固定樣板字用 TLI_I18N.t()
+   逐段替換成英文；zh-TW／zh-CN 不受影響（t() 內建處理） */
+function trPhrases(str, pairs){
+  if(!str) return str;
+  pairs.forEach(function(p){ str = str.split(p[0]).join(TLI_I18N.t(p[0], p[1])); });
+  return str;
+}
+function trAudience(a){
+  return trPhrases(a, [
+    ['機構學生','Institution Students'],
+    ['全部（全平台開放）','All (Platform-wide)']
+  ]);
+}
+function trEnterpriseLine(s){
+  return trPhrases(s, [
+    ['企業學員・','Enterprise Student · '],
+    ['・廠區當地（前一日）','・Factory-site local time (previous day) '],
+    ['・廠區當地 ','・Factory-site local time '],
+    ['（跨日）',' (cross-day)']
+  ]);
+}
+function trMaterialLine(s){
+  return trPhrases(s, [
+    ['（進度警戒：已累計 12 堂，建議留意學習節奏）',' (Progress Alert: 12 lessons completed so far — recommend monitoring learning pace)'],
+    ['（進度正常）',' (Progress: Normal)']
+  ]);
+}
+function trMaterialHistory(s){
+  return trPhrases(s, [
+    ['；已累計 12 堂，建議與顧問確認續約規劃。','; 12 lessons completed so far — recommend confirming renewal plan with advisor.'],
+    ['已完成：','Completed: '],
+    ['；本次：','; This time: '],
+    ['；下堂預計：','; Next expected: ']
+  ]);
+}
+function trFlexInfo(s){
+  return trPhrases(s, [
+    ['入班名單：','Class Roster: '],
+    [' 位・本期第 ',' students · This term Lesson '],
+    ['／12 堂・教材單元：','/12 · Material Unit: ']
+  ]);
+}
+function trAttendTime(s){
+  return trPhrases(s, [
+    [' 進入・已出席',' Entered · Attended']
+  ]);
+}
 function openSheet(id){
   if(CHAT_SESSIONS[id]){ openChatSheet(id); return; }
   currentSheetId = id;
@@ -541,7 +589,7 @@ function openSheet(id){
   }
   var flexSec = document.getElementById('sheetFlexSec');
   if(l.flexInfo){
-    document.getElementById('sheetFlexInfo').textContent = l.flexInfo;
+    document.getElementById('sheetFlexInfo').textContent = trFlexInfo(l.flexInfo);
     flexSec.classList.remove('hidden');
   }else{
     flexSec.classList.add('hidden');
@@ -556,13 +604,13 @@ function openSheet(id){
   }
   var entSec = document.getElementById('sheetEnterpriseSec');
   if(l.enterprise){
-    document.getElementById('sheetEnterpriseLine').textContent = l.enterprise;
+    document.getElementById('sheetEnterpriseLine').textContent = trEnterpriseLine(l.enterprise);
     entSec.classList.remove('hidden');
   }else{
     entSec.classList.add('hidden');
   }
-  document.getElementById('sheetMaterial').textContent = l.material;
-  document.getElementById('sheetMaterialExtra').textContent = l.materialHistory || TLI_I18N.t('暫無歷程紀錄。','No history record yet.');
+  document.getElementById('sheetMaterial').textContent = trMaterialLine(l.material);
+  document.getElementById('sheetMaterialExtra').textContent = l.materialHistory ? trMaterialHistory(l.materialHistory) : TLI_I18N.t('暫無歷程紀錄。','No history record yet.');
   document.getElementById('sheetMaterialExtra').classList.add('hidden');
   document.getElementById('sheetLastNote').textContent = l.note;
   var attendSec = document.getElementById('sheetAttendSec');
@@ -572,7 +620,7 @@ function openSheet(id){
     l.attendance.forEach(function(a){
       var row = document.createElement('div');
       row.className = 'attend-row';
-      row.innerHTML = '<span>'+a.name+'</span><span>'+a.time+'</span>';
+      row.innerHTML = '<span>'+a.name+'</span><span>'+trAttendTime(a.time)+'</span>';
       attendList.appendChild(row);
     });
     attendSec.classList.remove('hidden');
@@ -705,7 +753,7 @@ function openChatSheet(id){
   modeBadge.textContent = TLI_I18N.t('團體聊天室（30 分鐘，TLI 老師帶）','Group Chat Room (30 min, led by TLI teacher)');
   modeBadge.className = 'badge badge-chat';
   document.getElementById('sheetFlexSec').classList.add('hidden');
-  document.getElementById('sheetMeta').textContent = c.meta+TLI_I18N.t('・面向：','・Audience: ')+c.audience;
+  document.getElementById('sheetMeta').textContent = c.meta+TLI_I18N.t('・面向：','・Audience: ')+trAudience(c.audience);
   document.getElementById('sheetEnterpriseSec').classList.add('hidden');
   document.getElementById('sheetMaterialSec').classList.add('hidden');
   document.getElementById('sheetLastNoteSec').classList.add('hidden');
@@ -919,22 +967,22 @@ var OTHER_WEEK_GRIDS = {};
 OTHER_WEEK_GRIDS[0] = otherWeekGrid(['08/10','08/11','08/12','08/13','08/14','08/15','08/16'], DOW,
   {id:'W0_1', time:'09:00–09:50', title:'陳建宏', sub:'初級 3・士林 A105'},
   {id:'W0_2', time:'14:00–14:50', title:'學期班 Lv.1–4', sub:'羅斯福校區'},
-  {id:'W0_3', time:'09:00–09:30', title:'生活情境會話', sub:'團體聊天室（30 分鐘，TLI 老師帶）・機構學生・範例州立大學'},
+  {id:'W0_3', time:'09:00–09:30', title:'生活情境會話', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學'},
   '本日無排課');
 OTHER_WEEK_GRIDS[1] = otherWeekGrid(['08/17','08/18','08/19','08/20','08/21','08/22','08/23'], DOW,
   {id:'W1_1', time:'09:00–09:50', title:'林佳蓉', sub:'初級 3・士林 A105'},
   {id:'W1_2', time:'14:00–14:50', title:'學期班 Lv.1–4', sub:'羅斯福校區'},
-  {id:'W1_3', time:'09:00–09:30', title:'生活情境會話', sub:'團體聊天室（30 分鐘，TLI 老師帶）・機構學生・範例州立大學'},
+  {id:'W1_3', time:'09:00–09:30', title:'生活情境會話', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學'},
   '本日無排課');
 OTHER_WEEK_GRIDS[3] = otherWeekGrid(['08/31','09/01','09/02','09/03','09/04','09/05','09/06'], DOW,
   {id:'W3_1', time:'09:00–09:50', title:'李明哲', sub:'中級 1・士林 A203'},
   {id:'W3_2', time:'14:00–14:50', title:'初級小組班（4 人）', sub:'士林 A106'},
-  {id:'W3_3', time:'09:00–09:30', title:'時事話題討論', sub:'團體聊天室（30 分鐘，TLI 老師帶）・全部（全平台開放）'},
+  {id:'W3_3', time:'09:00–09:30', title:'時事話題討論', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span>'},
   '本日無排課');
 OTHER_WEEK_GRIDS[4] = otherWeekGrid(['09/07','09/08','09/09','09/10','09/11','09/12','09/13'], DOW,
   {id:'W4_1', time:'09:00–09:50', title:'張雅雯', sub:'中級 1・士林 A203'},
   {id:'W4_2', time:'14:00–14:50', title:'初級小組班（4 人）', sub:'士林 A106'},
-  {id:'W4_3', time:'09:00–09:30', title:'時事話題討論', sub:'團體聊天室（30 分鐘，TLI 老師帶）・全部（全平台開放）'},
+  {id:'W4_3', time:'09:00–09:30', title:'時事話題討論', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span>'},
   '本日無排課');
 
 CURRENT_WEEK_GRID_HTML = document.getElementById('weekGrid').innerHTML;

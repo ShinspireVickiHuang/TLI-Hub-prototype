@@ -126,68 +126,68 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <body>
 <div class="app">
 <div class="sidebar" id="sidebar">
-<a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small>加盟管理後台<span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
+<a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small><span data-i18n="brand.franchisePortal">加盟管理後台</span><span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
 <nav>
-<div class="sec-label">加盟合作管理</div>
-<a data-nav="u01" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span>概況</span></a>
-<a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span>班級管理</span></a>
-<a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span>教師管理</span></a>
-<a data-nav="u02" href="u02_students.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"/><path d="M2.5 16c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="14" cy="7.5" r="2"/><path d="M13 12.2c1.8.2 3.2 1.6 3.5 3.8"/></svg><span>學生名單</span></a>
-<a data-nav="u09" class="active" href="u09_plans_terms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5h4.5a1 1 0 0 1 1 1V9a1 1 0 0 1-.3.7l-6.7 6.7a1 1 0 0 1-1.4 0L3.6 12a1 1 0 0 1 0-1.4L10.3 3.9a1 1 0 0 1 .7-.4z"/><circle cx="13.2" cy="6.8" r="1"/></svg><span>方案與期別</span></a>
-<a data-nav="u07" href="u07_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h10l-1 13H6z"/><line x1="7.5" y1="7" x2="12.5" y2="7"/><line x1="7.5" y1="10" x2="12.5" y2="10"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg><span>訂單管理</span></a>
-<a data-nav="u03" href="u03_usage.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span>使用報表</span></a>
-<a data-nav="u04" href="u04_program.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="2" x2="7" y2="5.5"/><line x1="13" y1="2" x2="13" y2="5.5"/></svg><span>期程與課表</span></a>
-<a data-nav="u06" href="u06_billing.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="13" height="13" rx="1.5"/><line x1="6.5" y1="7.2" x2="13.5" y2="7.2"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><line x1="6.5" y1="12.8" x2="10.5" y2="12.8"/></svg><span>合約與計費</span></a>
+<div class="sec-label" data-i18n="nav_u.groupLabel">加盟合作管理</div>
+<a data-nav="u01" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span data-i18n="nav_u.overview">概況</span></a>
+<a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span data-i18n="nav_u.classes">班級管理</span></a>
+<a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span data-i18n="nav_u.teachers">教師管理</span></a>
+<a data-nav="u02" href="u02_students.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"/><path d="M2.5 16c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="14" cy="7.5" r="2"/><path d="M13 12.2c1.8.2 3.2 1.6 3.5 3.8"/></svg><span data-i18n="nav_u.students">學生名單</span></a>
+<a data-nav="u09" class="active" href="u09_plans_terms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5h4.5a1 1 0 0 1 1 1V9a1 1 0 0 1-.3.7l-6.7 6.7a1 1 0 0 1-1.4 0L3.6 12a1 1 0 0 1 0-1.4L10.3 3.9a1 1 0 0 1 .7-.4z"/><circle cx="13.2" cy="6.8" r="1"/></svg><span data-i18n="nav_u.plansTerms">方案與期別</span></a>
+<a data-nav="u07" href="u07_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h10l-1 13H6z"/><line x1="7.5" y1="7" x2="12.5" y2="7"/><line x1="7.5" y1="10" x2="12.5" y2="10"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg><span data-i18n="nav_u.orders">訂單管理</span></a>
+<a data-nav="u03" href="u03_usage.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span data-i18n="nav_u.usage">使用報表</span></a>
+<a data-nav="u04" href="u04_program.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="2" x2="7" y2="5.5"/><line x1="13" y1="2" x2="13" y2="5.5"/></svg><span data-i18n="nav_u.program">期程與課表</span></a>
+<a data-nav="u06" href="u06_billing.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="13" height="13" rx="1.5"/><line x1="6.5" y1="7.2" x2="13.5" y2="7.2"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><line x1="6.5" y1="12.8" x2="10.5" y2="12.8"/></svg><span data-i18n="nav_u.billing">合約與計費</span></a>
 </nav>
 <div class="sidebar-user" id="sidebarUser">
-<div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag">機構管理者</span></span>
+<div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag" data-i18n="role.orgAdmin">機構管理者</span></span>
 <svg class="su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div>
-<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')">個人設定</a><a href="../公開網站/p01_home.html">前往官網</a><a href="javascript:void(0)" onclick="doLogout()">登出</a></div>
+<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 
 <div class="main">
 <div class="topbar">
-<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
-<div class="tb-title">方案與期別</div>
+<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="aria.openMenu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
+<div class="tb-title" data-i18n="nav_u.plansTerms">方案與期別</div>
 <div class="tb-actions">
-<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單">王</button>
-<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')">個人設定</a><a href="../公開網站/p01_home.html">前往官網</a><a href="javascript:void(0)" onclick="doLogout()">登出</a></div>
+<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="aria.userMenu">王</button>
+<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1>方案與期別</h1><div class="desc">設定要賣給學生的方案與期別；學費由貴中心自行收取，不經過 TLI。</div></div>
+<div><h1 data-i18n="nav_u.plansTerms">方案與期別</h1><div class="desc" data-i18n="u09.pageDesc">設定要賣給學生的方案與期別；學費由貴中心自行收取，不經過 TLI。</div></div>
 </div>
 
 <div class="tabs">
-<button class="active" onclick="switchTab(this,'plans')">我的方案</button>
-<button onclick="switchTab(this,'terms')">期別</button>
+<button class="active" onclick="switchTab(this,'plans')" data-i18n="u09.tabPlans">我的方案</button>
+<button onclick="switchTab(this,'terms')" data-i18n="u09.tabTerms">期別</button>
 </div>
 
 <!-- 分頁一：我的方案 -->
 <div class="tabpanel active" id="tabpanel-plans">
 <div class="pagehead" style="margin-bottom:10px">
-<div><p class="tabdesc" style="margin:0">TLI 授權你可以賣哪些課；售價由貴中心自訂，學費不經過 TLI。</p></div>
-<button class="btn" onclick="openPlanModal(null)">＋新增方案</button>
+<div><p class="tabdesc" style="margin:0" data-i18n="u09.plansTabDesc">TLI 授權你可以賣哪些課；售價由貴中心自訂，學費不經過 TLI。</p></div>
+<button class="btn" onclick="openPlanModal(null)" data-i18n="u09.btnAddPlan">＋新增方案</button>
 </div>
 <div class="filterband filterbar">
-<input type="text" id="fPlanSearch" placeholder="搜尋方案名稱" oninput="renderPlans()">
+<input type="text" id="fPlanSearch" placeholder="搜尋方案名稱" oninput="renderPlans()" data-i18n-placeholder="u09.searchPlanPlaceholder">
 <select id="fPlanStatus" onchange="renderPlans()">
-<option value="">全部狀態</option>
-<option value="販售中">販售中</option>
-<option value="停售">停售</option>
+<option value="" data-i18n="h03.optAllStatus">全部狀態</option>
+<option value="販售中" data-i18n="u09.statusOnSale">販售中</option>
+<option value="停售" data-i18n="u09.statusOffSale">停售</option>
 </select>
 </div>
 <div class="card">
 <div class="tablewrap">
 <table>
-<thead><tr><th>方案名稱</th><th>對應的 TLI 方案</th><th>售價</th><th>堂數/時數</th><th>狀態</th><th>操作</th></tr></thead>
+<thead><tr><th data-i18n="u09.thPlanName">方案名稱</th><th data-i18n="u09.thTliPlan">對應的 TLI 方案</th><th data-i18n="u09.thPrice">售價</th><th data-i18n="u09.thQty">堂數/時數</th><th data-i18n="common.status">狀態</th><th data-i18n="u02.thAction">操作</th></tr></thead>
 <tbody id="plansTbody"></tbody>
 </table>
 </div>
-<p class="emptylist hidden" id="plansEmpty">找不到符合條件的方案。</p>
+<p class="emptylist hidden" id="plansEmpty" data-i18n="u09.noMatchPlan">找不到符合條件的方案。</p>
 <p class="small" id="plansCountNote" style="margin:8px 0 0"></p>
 </div>
 </div>
@@ -195,28 +195,28 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <!-- 分頁二：期別 -->
 <div class="tabpanel" id="tabpanel-terms">
 <div class="pagehead" style="margin-bottom:10px">
-<div><p class="tabdesc" style="margin:0">設定招生期別；每個期別的排課請至「班級管理」。</p></div>
-<button class="btn" onclick="openTermModal(null)">＋新增期別</button>
+<div><p class="tabdesc" style="margin:0" data-i18n="u09.termsTabDesc">設定招生期別；每個期別的排課請至「班級管理」。</p></div>
+<button class="btn" onclick="openTermModal(null)" data-i18n="u09.btnAddTerm">＋新增期別</button>
 </div>
 <div class="filterband filterbar">
-<input type="text" id="fTermSearch" placeholder="搜尋期別名稱" oninput="renderTerms()">
+<input type="text" id="fTermSearch" placeholder="搜尋期別名稱" oninput="renderTerms()" data-i18n-placeholder="u09.searchTermPlaceholder">
 <select id="fTermStatus" onchange="renderTerms()">
-<option value="">全部狀態</option>
-<option value="規劃中">規劃中</option>
-<option value="招生中">招生中</option>
-<option value="上課中">上課中</option>
-<option value="已結束">已結束</option>
-<option value="已停用">已停用</option>
+<option value="" data-i18n="h03.optAllStatus">全部狀態</option>
+<option value="規劃中" data-i18n="u09.statusPlanning">規劃中</option>
+<option value="招生中" data-i18n="u09.statusEnrolling">招生中</option>
+<option value="上課中" data-i18n="u09.statusInSession">上課中</option>
+<option value="已結束" data-i18n="u09.statusEnded">已結束</option>
+<option value="已停用" data-i18n="u09.statusDisabled">已停用</option>
 </select>
 </div>
 <div class="card">
 <div class="tablewrap">
 <table>
-<thead><tr><th>期別名稱</th><th>起訖日</th><th>招生起訖</th><th>狀態</th><th>操作</th></tr></thead>
+<thead><tr><th data-i18n="u09.thTermName">期別名稱</th><th data-i18n="u09.thDateRange">起訖日</th><th data-i18n="u09.thEnrollRange">招生起訖</th><th data-i18n="common.status">狀態</th><th data-i18n="u02.thAction">操作</th></tr></thead>
 <tbody id="termsTbody"></tbody>
 </table>
 </div>
-<p class="emptylist hidden" id="termsEmpty">找不到符合條件的期別。</p>
+<p class="emptylist hidden" id="termsEmpty" data-i18n="u09.noMatchTerm">找不到符合條件的期別。</p>
 <p class="small" id="termsCountNote" style="margin:8px 0 0"></p>
 </div>
 </div>
@@ -227,32 +227,32 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <!-- 新增／編輯方案 modal -->
 <div class="modal-mask" id="planModal" onclick="if(event.target===this) closePlanModal()">
 <div class="modal">
-<h3 id="planModalTitle">新增方案</h3>
-<div class="hint"><span class="req">*</span> 為必填</div>
-<div class="formrow" id="fr_planName"><label>方案名稱<span class="req">*</span></label><input type="text" id="planName" placeholder="例：中文一對一線上課程 20 堂"><div class="rowerr">必填，請輸入方案名稱</div></div>
-<div class="formrow" id="fr_planPkg"><label>對應的 TLI 方案<span class="req">*</span></label>
-<select id="planPkg" onchange="onPlanPkgChange()"><option value="">請選擇 TLI 方案</option></select>
-<div class="rowerr">必填，請選擇對應的 TLI 方案</div>
+<h3 id="planModalTitle" data-i18n="u09.addPlanTitle">新增方案</h3>
+<div class="hint"><span class="req">*</span> <span data-i18n="common.requiredNote">為必填</span></div>
+<div class="formrow" id="fr_planName"><label><span data-i18n="u09.thPlanName">方案名稱</span><span class="req">*</span></label><input type="text" id="planName" placeholder="例：中文一對一線上課程 20 堂" data-i18n-placeholder="u09.planNamePlaceholder"><div class="rowerr" data-i18n="u09.errPlanName">必填，請輸入方案名稱</div></div>
+<div class="formrow" id="fr_planPkg"><label><span data-i18n="u09.thTliPlan">對應的 TLI 方案</span><span class="req">*</span></label>
+<select id="planPkg" onchange="onPlanPkgChange()"><option value="" data-i18n="u09.optChooseTliPlan">請選擇 TLI 方案</option></select>
+<div class="rowerr" data-i18n="u09.errPlanPkg">必填，請選擇對應的 TLI 方案</div>
 <div class="hint" id="planPkgHint" style="margin-top:4px"></div>
 </div>
 <div class="grid2">
-<div class="formrow" id="fr_planPrice"><label>售價<span class="req">*</span></label><input type="number" id="planPrice" min="0" step="10"><div class="rowerr">必填，請輸入大於 0 的售價</div></div>
-<div class="formrow"><label>幣別</label>
+<div class="formrow" id="fr_planPrice"><label><span data-i18n="u09.thPrice">售價</span><span class="req">*</span></label><input type="number" id="planPrice" min="0" step="10"><div class="rowerr" data-i18n="u09.errPlanPrice">必填，請輸入大於 0 的售價</div></div>
+<div class="formrow"><label data-i18n="u09.lblCurrency">幣別</label>
 <select id="planCurrency"><option value="USD">USD</option><option value="TWD">TWD</option><option value="JPY">JPY</option><option value="EUR">EUR</option></select>
 </div>
 </div>
 <div class="grid2">
-<div class="formrow" id="fr_planQty"><label>堂數或時數<span class="req">*</span></label><input type="number" id="planQty" min="0" step="1"><div class="rowerr">必填，請輸入堂數或時數</div></div>
-<div class="formrow"><label>單位</label>
-<select id="planQtyUnit"><option value="堂">堂</option><option value="小時">小時</option><option value="套">套</option><option value="月">月</option></select>
+<div class="formrow" id="fr_planQty"><label><span data-i18n="u09.lblQtyOrHours">堂數或時數</span><span class="req">*</span></label><input type="number" id="planQty" min="0" step="1"><div class="rowerr" data-i18n="u09.errPlanQty">必填，請輸入堂數或時數</div></div>
+<div class="formrow"><label data-i18n="u09.lblUnit">單位</label>
+<select id="planQtyUnit"><option value="堂" data-i18n="u09.unitSession">堂</option><option value="小時" data-i18n="u09.unitHour">小時</option><option value="套" data-i18n="u09.unitPack">套</option><option value="月" data-i18n="u09.unitMonth">月</option></select>
 </div>
 </div>
-<div class="formrow"><label>狀態</label>
-<select id="planStatus"><option value="販售中">販售中</option><option value="停售">停售</option></select>
+<div class="formrow"><label data-i18n="common.status">狀態</label>
+<select id="planStatus"><option value="販售中" data-i18n="u09.statusOnSale">販售中</option><option value="停售" data-i18n="u09.statusOffSale">停售</option></select>
 </div>
 <div class="modal-actions">
-<button class="btn ghost" onclick="closePlanModal()">取消</button>
-<button class="btn" onclick="submitPlan()">儲存</button>
+<button class="btn ghost" onclick="closePlanModal()" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="submitPlan()" data-i18n="common.save">儲存</button>
 </div>
 </div>
 </div>
@@ -260,29 +260,33 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <!-- 新增／編輯期別 modal -->
 <div class="modal-mask" id="termModal" onclick="if(event.target===this) closeTermModal()">
 <div class="modal">
-<h3 id="termModalTitle">新增期別</h3>
-<div class="hint"><span class="req">*</span> 為必填</div>
-<div class="formrow" id="fr_termName"><label>期別名稱<span class="req">*</span></label><input type="text" id="termName" placeholder="例：2028 春季班"><div class="rowerr">必填，請輸入期別名稱</div></div>
+<h3 id="termModalTitle" data-i18n="u09.addTermTitle">新增期別</h3>
+<div class="hint"><span class="req">*</span> <span data-i18n="common.requiredNote">為必填</span></div>
+<div class="formrow" id="fr_termName"><label><span data-i18n="u09.thTermName">期別名稱</span><span class="req">*</span></label><input type="text" id="termName" placeholder="例：2028 春季班" data-i18n-placeholder="u09.termNamePlaceholder"><div class="rowerr" data-i18n="u09.errTermName">必填，請輸入期別名稱</div></div>
 <div class="grid2">
-<div class="formrow" id="fr_termStart"><label>起始日期<span class="req">*</span></label><input type="date" id="termStart"><div class="rowerr">必填</div></div>
-<div class="formrow" id="fr_termEnd"><label>結束日期<span class="req">*</span></label><input type="date" id="termEnd"><div class="rowerr">必填</div></div>
+<div class="formrow" id="fr_termStart"><label><span data-i18n="u09.lblStartDate">起始日期</span><span class="req">*</span></label><input type="date" id="termStart"><div class="rowerr" data-i18n="common.requiredNote2">必填</div></div>
+<div class="formrow" id="fr_termEnd"><label><span data-i18n="u09.lblEndDate">結束日期</span><span class="req">*</span></label><input type="date" id="termEnd"><div class="rowerr" data-i18n="common.requiredNote2">必填</div></div>
 </div>
 <div class="grid2">
-<div class="formrow" id="fr_termEnrollStart"><label>招生起始<span class="req">*</span></label><input type="date" id="termEnrollStart"><div class="rowerr">必填</div></div>
-<div class="formrow" id="fr_termEnrollEnd"><label>招生迄止<span class="req">*</span></label><input type="date" id="termEnrollEnd"><div class="rowerr">必填</div></div>
+<div class="formrow" id="fr_termEnrollStart"><label><span data-i18n="u09.lblEnrollStart">招生起始</span><span class="req">*</span></label><input type="date" id="termEnrollStart"><div class="rowerr" data-i18n="common.requiredNote2">必填</div></div>
+<div class="formrow" id="fr_termEnrollEnd"><label><span data-i18n="u09.lblEnrollEnd">招生迄止</span><span class="req">*</span></label><input type="date" id="termEnrollEnd"><div class="rowerr" data-i18n="common.requiredNote2">必填</div></div>
 </div>
-<div class="formrow"><label>狀態</label>
-<select id="termStatus"><option value="規劃中">規劃中</option><option value="招生中">招生中</option><option value="上課中">上課中</option><option value="已結束">已結束</option><option value="已停用">已停用</option></select>
+<div class="formrow"><label data-i18n="common.status">狀態</label>
+<select id="termStatus"><option value="規劃中" data-i18n="u09.statusPlanning">規劃中</option><option value="招生中" data-i18n="u09.statusEnrolling">招生中</option><option value="上課中" data-i18n="u09.statusInSession">上課中</option><option value="已結束" data-i18n="u09.statusEnded">已結束</option><option value="已停用" data-i18n="u09.statusDisabled">已停用</option></select>
 </div>
 <div class="modal-actions">
-<button class="btn ghost" onclick="closeTermModal()">取消</button>
-<button class="btn" onclick="submitTerm()">儲存</button>
+<button class="btn ghost" onclick="closeTermModal()" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="submitTerm()" data-i18n="common.save">儲存</button>
 </div>
 </div>
 </div>
 
 <script src="../assets/_shared_masters.js"></script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_org.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
+function T(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
 function escapeHtml(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
 /* ===== 本頁登入租戶：範例大學語言中心（對應主檔 partners.id='p02'） ===== */
@@ -331,14 +335,14 @@ var planSeq = PLANS.length, termSeq = TERMS.length;
 function fmtPrice(p){ return p.currency+' '+Math.round(p.price).toLocaleString('en-US'); }
 function pkgLabel(pkgId){
   var pk = TLI_MASTERS.byId('packages', pkgId);
-  return pk ? pk.name : '（找不到對應方案）';
+  return pk ? pk.name : T('（找不到對應方案）','(Plan not found)');
 }
 function pkgScope(pkgId){
   var pk = TLI_MASTERS.byId('packages', pkgId);
   if (!pk) return '';
-  var scope = (pk.courseTypes && pk.courseTypes.length) ? pk.courseTypes.join('、') : '依合約授權範圍';
+  var scope = (pk.courseTypes && pk.courseTypes.length) ? pk.courseTypes.join('、') : T('依合約授權範圍','Per contract authorization scope');
   var qty = (pk.creditRule && pk.creditRule.totalQty) ? pk.creditRule.totalQty : null;
-  return 'TLI 授權範圍：'+scope+(qty ? '｜建議堂數：'+qty : '');
+  return T('TLI 授權範圍：','TLI authorized scope: ')+scope+(qty ? T('｜建議堂數：','｜Recommended sessions: ')+qty : '');
 }
 
 /* ===== 分頁切換 ===== */
@@ -367,24 +371,26 @@ function renderPlans(){
   }
   document.getElementById('plansEmpty').classList.add('hidden');
   tbody.innerHTML = rows.map(function(p){
-    var statusBadge = p.status==='販售中' ? '<span class="badge green">販售中</span>' : '<span class="badge grey">停售</span>';
+    var statusBadge = p.status==='販售中' ? '<span class="badge green">'+T('販售中','On Sale')+'</span>' : '<span class="badge grey">'+T('停售','Off Sale')+'</span>';
     return '<tr class="rowlink" onclick="openPlanModal(\''+p.id+'\')">'+
       '<td>'+escapeHtml(p.name)+'</td>'+
       '<td>'+escapeHtml(pkgLabel(p.tliPackageId))+'</td>'+
       '<td>'+fmtPrice(p)+'</td>'+
-      '<td>'+p.qty+' '+p.qtyUnit+'</td>'+
+      '<td>'+p.qty+' '+escapeHtml(qtyUnitText(p.qtyUnit))+'</td>'+
       '<td>'+statusBadge+'</td>'+
-      '<td><button class="btn ghost sm" onclick="event.stopPropagation();openPlanModal(\''+p.id+'\')">編輯</button></td>'+
+      '<td><button class="btn ghost sm" onclick="event.stopPropagation();openPlanModal(\''+p.id+'\')">'+T('編輯','Edit')+'</button></td>'+
       '</tr>';
   }).join('');
-  document.getElementById('plansCountNote').textContent = '共 '+rows.length+' 筆方案';
+  document.getElementById('plansCountNote').textContent = T('共 ','Total: ')+rows.length+T(' 筆方案',' plan(s)');
 }
+var QTY_UNIT_EN = {'堂':'Session(s)','小時':'Hour(s)','套':'Pack(s)','月':'Month(s)'};
+function qtyUnitText(u){ return T(u, QTY_UNIT_EN[u]||u); }
 
 /* ===== 我的方案：新增／編輯 modal ===== */
 var planEditingId = null;
 function initPlanPkgOptions(){
   var sel = document.getElementById('planPkg');
-  sel.innerHTML = '<option value="">請選擇 TLI 方案</option>' +
+  sel.innerHTML = '<option value="">'+T('請選擇 TLI 方案','Please select a TLI plan')+'</option>' +
     TLI_MASTERS.packages.map(function(pk){ return '<option value="'+pk.id+'">'+escapeHtml(pk.name)+'</option>'; }).join('');
 }
 function onPlanPkgChange(){
@@ -402,7 +408,7 @@ function openPlanModal(id){
   initPlanPkgOptions();
   clearPlanErrors();
   var p = id ? findPlan(id) : null;
-  document.getElementById('planModalTitle').textContent = p ? '編輯方案' : '新增方案';
+  document.getElementById('planModalTitle').textContent = p ? T('編輯方案','Edit Plan') : T('新增方案','Add Plan');
   document.getElementById('planName').value = p ? p.name : '';
   document.getElementById('planPkg').value = p ? p.tliPackageId : '';
   document.getElementById('planPkgHint').textContent = p ? pkgScope(p.tliPackageId) : '';
@@ -441,16 +447,16 @@ function submitPlan(){
   savePlans(PLANS);
   closePlanModal();
   renderPlans();
-  toast(planEditingId ? '已更新方案' : '已新增方案，訂單管理的方案下拉會立即出現');
+  toast(planEditingId ? T('已更新方案','Plan updated') : T('已新增方案，訂單管理的方案下拉會立即出現','Plan added; it will immediately appear in the Order Management plan dropdown'));
 }
 
 /* ===== 期別：列表 ===== */
 function termStatusBadge(s){
-  if (s==='已結束') return '<span class="badge grey">已結束</span>';
-  if (s==='已停用') return '<span class="badge grey">已停用</span>';
-  if (s==='上課中') return '<span class="badge green">上課中</span>';
-  if (s==='招生中') return '<span class="badge blue">招生中</span>';
-  return '<span class="badge amber">規劃中</span>';
+  if (s==='已結束') return '<span class="badge grey">'+T('已結束','Ended')+'</span>';
+  if (s==='已停用') return '<span class="badge grey">'+T('已停用','Disabled')+'</span>';
+  if (s==='上課中') return '<span class="badge green">'+T('上課中','In Session')+'</span>';
+  if (s==='招生中') return '<span class="badge blue">'+T('招生中','Enrolling')+'</span>';
+  return '<span class="badge amber">'+T('規劃中','Planning')+'</span>';
 }
 function renderTerms(){
   var q = document.getElementById('fTermSearch').value.trim().toLowerCase();
@@ -474,11 +480,11 @@ function renderTerms(){
       '<td>'+t.start+' ～ '+t.end+'</td>'+
       '<td>'+t.enrollStart+' ～ '+t.enrollEnd+'</td>'+
       '<td>'+termStatusBadge(t.status)+'</td>'+
-      '<td><a class="btn ghost sm" href="u05_classes.html">查看課表</a> '+
-      '<button class="btn ghost sm" onclick="openTermModal(\''+t.id+'\')">編輯</button></td>'+
+      '<td><a class="btn ghost sm" href="u05_classes.html">'+T('查看課表','View Schedule')+'</a> '+
+      '<button class="btn ghost sm" onclick="openTermModal(\''+t.id+'\')">'+T('編輯','Edit')+'</button></td>'+
       '</tr>';
   }).join('');
-  document.getElementById('termsCountNote').textContent = '共 '+rows.length+' 筆期別';
+  document.getElementById('termsCountNote').textContent = T('共 ','Total: ')+rows.length+T(' 筆期別',' term(s)');
 }
 
 /* ===== 期別：新增／編輯 modal ===== */
@@ -493,7 +499,7 @@ function openTermModal(id){
   termEditingId = id;
   clearTermErrors();
   var t = id ? findTerm(id) : null;
-  document.getElementById('termModalTitle').textContent = t ? '編輯期別' : '新增期別';
+  document.getElementById('termModalTitle').textContent = t ? T('編輯期別','Edit Term') : T('新增期別','Add Term');
   document.getElementById('termName').value = t ? t.name : '';
   document.getElementById('termStart').value = t ? t.start : '';
   document.getElementById('termEnd').value = t ? t.end : '';
@@ -529,16 +535,13 @@ function submitTerm(){
   saveTerms(TERMS);
   closeTermModal();
   renderTerms();
-  toast(termEditingId ? '已更新期別' : '已新增期別，訂單管理的期別下拉會立即出現');
+  toast(termEditingId ? T('已更新期別','Term updated') : T('已新增期別，訂單管理的期別下拉會立即出現','Term added; it will immediately appear in the Order Management term dropdown'));
 }
 
 document.addEventListener('keydown', function(e){
   if (e.key !== 'Escape') return;
   document.querySelectorAll('.modal-mask.open').forEach(function(el){ el.classList.remove('open'); });
 });
-
-renderPlans();
-renderTerms();
 
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarBackdrop').classList.toggle('open'); }
 function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarBackdrop').classList.remove('open'); }
@@ -554,6 +557,9 @@ function toast(msg){
   clearTimeout(window._toastTimer);
   window._toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2400);
 }
+
+function renderAll(){ renderPlans(); renderTerms(); }
+if (window.TLI_I18N){ TLI_I18N.onRefresh(renderAll); TLI_I18N.init(); } else { renderAll(); }
 </script>
 </body>
 </html>

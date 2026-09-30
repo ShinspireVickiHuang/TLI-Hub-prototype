@@ -332,36 +332,72 @@ button.pick-card{width:100%;text-align:left;margin:0;font:inherit;}
   </nav>
 </div>
 
+<div class="toast hidden" id="toast"></div>
+
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_member.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n.js"></script>
+
 <div class="sheet-overlay hidden" id="advisorRequestOverlay" onclick="if(event.target===this) closeAdvisorRequestSheet()">
   <div class="sheet">
     <div class="sheet-handle"></div>
-    <h3 style="margin:0 0 4px;">向顧問提出需求</h3>
-    <p class="small muted" style="margin:0 0 14px;">適用一對一課程的排課或調整需求；送出後由顧問與你聯繫安排，無法直接指定老師或時段。</p>
+    <h3 style="margin:0 0 4px;" data-i18n="m02.advisorSheetTitle">向顧問提出需求</h3>
+    <p class="small muted" style="margin:0 0 14px;" data-i18n="m02.advisorSheetDesc">適用一對一課程的排課或調整需求；送出後由顧問與你聯繫安排，無法直接指定老師或時段。</p>
     <div id="advisorRequestForm">
       <div class="field">
-        <label for="advisorReqCourse">想上的課程</label>
-        <select id="advisorReqCourse">
-          <option value="individual-conversation">中文一對一－會話進階</option>
-          <option value="individual-listening">中文一對一－聽力加強</option>
-          <option value="other">其他（請於備註說明）</option>
-        </select>
+        <label for="advisorReqCourse" data-i18n="m02.advisorCourseLabel">想上的課程</label>
+        <!-- 20260930：課程選項改由 JS 讀共用主檔 TLI_MASTERS.learningTopics.requestCourses 產生，「其他」為頁面自有選項保留不動 -->
+        <select id="advisorReqCourse"></select>
       </div>
       <div class="field">
-        <label for="advisorReqPref">希望的時段偏好</label>
-        <textarea id="advisorReqPref" rows="3" placeholder="例如：平日晚上 19:00 後、週末早上皆可"></textarea>
+        <label for="advisorReqPref" data-i18n="m02.advisorPrefLabel">希望的時段偏好</label>
+        <textarea id="advisorReqPref" rows="3" placeholder="例如：平日晚上 19:00 後、週末早上皆可" data-i18n-placeholder="m02.advisorPrefPlaceholder"></textarea>
       </div>
       <div class="field">
-        <label for="advisorReqNote">備註（選填）</label>
-        <textarea id="advisorReqNote" rows="2" placeholder="想加強的主題、偏好老師性別或口音可選填（無法指定老師）"></textarea>
+        <label for="advisorReqNote" data-i18n="m02.advisorNoteLabel">備註（選填）</label>
+        <textarea id="advisorReqNote" rows="2" placeholder="想加強的主題、偏好老師性別或口音可選填（無法指定老師）" data-i18n-placeholder="m02.advisorNotePlaceholder"></textarea>
       </div>
-      <button type="button" class="btn btn-primary btn-block" onclick="submitAdvisorRequest()">送出</button>
-      <button type="button" class="btn btn-outline btn-block" style="margin-top:8px;" onclick="closeAdvisorRequestSheet()">取消</button>
+      <button type="button" class="btn btn-primary btn-block" onclick="submitAdvisorRequest()" data-i18n="member.submit">送出</button>
+      <button type="button" class="btn btn-outline btn-block" style="margin-top:8px;" onclick="closeAdvisorRequestSheet()" data-i18n="member.cancel">取消</button>
     </div>
-    <div class="banner banner-success hidden" id="advisorRequestSentBanner" style="margin-top:6px;">已送出，顧問會與你聯繫。你也可以到「課表 → 一對一排課」查看完整的時段偏好設定與需求紀錄。</div>
+    <div class="banner banner-success hidden" id="advisorRequestSentBanner" style="margin-top:6px;" data-i18n="m02.advisorSentBanner">已送出，顧問會與你聯繫。你也可以到「課表 → 一對一排課」查看完整的時段偏好設定與需求紀錄。</div>
   </div>
 </div>
 
 <script>
+/* 幣別跟著介面語言連動（與其他會員區頁共用同一份示範匯率） */
+var TLI_RATES={TWD:{rate:1,symbol:'NT$'},USD:{rate:31.5,symbol:'US$'},JPY:{rate:0.211,symbol:'¥'},CNY:{rate:4.4,symbol:'CN¥'},EUR:{rate:35.5,symbol:'€'}};
+function tliFmt(amountTWD,cur){
+  var r=TLI_RATES[cur]||TLI_RATES.TWD;
+  var v=amountTWD/r.rate;
+  var decimals=(cur==='TWD'||cur==='JPY')?0:2;
+  return r.symbol+v.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+}
+function langMoney(amountTWD){
+  var curMap={'zh-TW':'TWD','zh-CN':'CNY','en':'USD','ja':'JPY','de':'EUR'};
+  return tliFmt(amountTWD,curMap[TLI_I18N.currentLang()]||'TWD');
+}
+function T(zh,obj){ return TLI_I18N.t(zh,obj); }
+/* ================= 五語：星期／固定班表 小型翻譯表（僅供 JS 組字串用，不進詞典） ================= */
+var WD_SHORT={'日':{en:'Sun',ja:'日曜',de:'So'},'一':{en:'Mon',ja:'月曜',de:'Mo'},'二':{en:'Tue',ja:'火曜',de:'Di'},'三':{en:'Wed',ja:'水曜',de:'Mi'},'四':{en:'Thu',ja:'木曜',de:'Do'},'五':{en:'Fri',ja:'金曜',de:'Fr'},'六':{en:'Sat',ja:'土曜',de:'Sa'}};
+function wdParen(zh){ var d=WD_SHORT[zh]; if(!d) return '（'+zh+'）'; return T('（'+zh+'）',{en:'('+d.en+')',ja:'（'+d.ja.replace('曜','')+'）',de:'('+d.de+')'}); }
+function xlateDateStr(s){
+  if(!s) return s;
+  return s.replace(/（([一二三四五六日])）/g, function(m,d){ return wdParen(d); });
+}
+function xlateWeeklySchedule(s){
+  var m=/^每週([一二三四五六日](?:、[一二三四五六日])*)(.*)$/.exec(s);
+  if(!m) return xlateDateStr(s);
+  var days=m[1].split('、'), rest=m[2];
+  var enDays=days.map(function(d){return WD_SHORT[d].en;}).join('/');
+  var jaDays=days.map(function(d){return WD_SHORT[d].ja;}).join('・');
+  var deDays=days.map(function(d){return WD_SHORT[d].de+'.';}).join('/');
+  return T(s,{en:'Every '+enDays+rest, ja:'毎週'+jaDays+rest, de:'Wöchentlich '+deDays+rest});
+}
 function showToast(msg){
   var t=document.getElementById('toast');
   if(!t)return;
@@ -369,19 +405,6 @@ function showToast(msg){
   t.classList.remove('hidden');
   clearTimeout(window._toastTimer);
   window._toastTimer=setTimeout(function(){t.classList.add('hidden');},2200);
-}
-function handleLangCurrency(sel){
-  var lang=sel.value||'zh-TW';
-  var langText=sel.options[sel.selectedIndex].text;
-  document.querySelectorAll('[data-i18n-zh]').forEach(function(el){
-    el.textContent = (lang==='zh-TW') ? el.getAttribute('data-i18n-zh') : el.getAttribute('data-i18n-en');
-  });
-  if(lang==='zh-CN'||lang==='de'){
-    var names={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+names[lang]);
-  } else {
-    showToast('顯示語言／幣別已切換為 '+langText);
-  }
 }
 function toggleBell(){document.getElementById('bellPanel').classList.toggle('open');}
 document.addEventListener('click',function(e){
@@ -394,34 +417,41 @@ var NOW_MOMENT=new Date(2026,7,25,10,0,0);
 
 /* ================= 團體聊天室：本週可報名場次摘要（實際報名走 m14） ================= */
 var CHAT_WEEK_SESSIONS=[
-  {id:'cw1', title:'生活會話聊天室', time:'8/25（二）20:00–20:30', seatsText:'剩 4 名額／共 8 名'},
-  {id:'cw2', title:'時事討論聊天室', time:'8/26（三）20:00–20:30', seatsText:'剩 2 名額／共 8 名'},
-  {id:'cw3', title:'商務會話聊天室', time:'8/27（四）19:30–20:00', seatsText:'剩 6 名額／共 10 名'}
+  {id:'cw1', title:'生活會話聊天室', time:'8/25（二）20:00–20:30', left:4, total:8},
+  {id:'cw2', title:'時事討論聊天室', time:'8/26（三）20:00–20:30', left:2, total:8},
+  {id:'cw3', title:'商務會話聊天室', time:'8/27（四）19:30–20:00', left:6, total:10}
 ];
+function chatSeatsText(s){
+  return T('剩 '+s.left+' 名額／共 '+s.total+' 名',{en:s.left+' seats left of '+s.total,ja:'残り'+s.left+'名（定員'+s.total+'名）',de:'Noch '+s.left+' von '+s.total+' Plätzen'});
+}
 function renderChatWeekList(){
   var wrap=document.getElementById('chatWeekList');
   wrap.innerHTML=CHAT_WEEK_SESSIONS.map(function(s){
     return '<div class="list-row">'+
       '<div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>'+
-      '<div class="body"><h4>'+s.title+'</h4><p>'+s.time+'・'+s.seatsText+'</p></div>'+
-      '<div class="trail"><a class="btn btn-outline btn-sm" href="m14_chat_booking.html">報名</a></div>'+
+      '<div class="body"><h4>'+s.title+'</h4><p>'+xlateDateStr(s.time)+'・'+chatSeatsText(s)+'</p></div>'+
+      '<div class="trail"><a class="btn btn-outline btn-sm" href="m14_chat_booking.html">'+T('報名',{en:'Register',ja:'申し込む',de:'Anmelden'})+'</a></div>'+
     '</div>';
   }).join('');
 }
 
 /* ================= 線上活動：即將舉辦，報名等於一次性付費（免費活動僅需報名） ================= */
 var UPCOMING_EVENTS=[
-  {id:'ev1', title:'活動：華語電影賞析', time:'9/5（六）14:00–16:00', feeText:'NT$390（一次性付費）', free:false},
-  {id:'ev2', title:'活動：中秋茶會', time:'9/20（日）14:00–16:00', feeText:'NT$590（一次性付費）', free:false},
-  {id:'ev3', title:'活動：新生入門說明會', time:'8/30（日）10:00–11:00', feeText:'免費', free:true}
+  {id:'ev1', title:'活動：華語電影賞析', time:'9/5（六）14:00–16:00', fee:390, free:false},
+  {id:'ev2', title:'活動：中秋茶會', time:'9/20（日）14:00–16:00', fee:590, free:false},
+  {id:'ev3', title:'活動：新生入門說明會', time:'8/30（日）10:00–11:00', fee:0, free:true}
 ];
+function eventFeeText(e){
+  if(e.free) return T('免費',{en:'Free',ja:'無料',de:'Kostenlos'});
+  return langMoney(e.fee)+T('（一次性付費）',{en:' (One-time fee)',ja:'（都度払い）',de:' (Einmalige Gebühr)'});
+}
 function renderEventList(){
   var wrap=document.getElementById('eventList');
   wrap.innerHTML=UPCOMING_EVENTS.map(function(e){
-    var actionText=e.free?'報名':'報名並付款';
+    var actionText=e.free?T('報名',{en:'Register',ja:'申し込む',de:'Anmelden'}):T('報名並付款',{en:'Register & Pay',ja:'申し込んで支払う',de:'Anmelden & bezahlen'});
     return '<div class="list-row">'+
       '<div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></div>'+
-      '<div class="body"><h4>'+e.title+'</h4><p>'+e.time+'・'+e.feeText+'</p></div>'+
+      '<div class="body"><h4>'+e.title+'</h4><p>'+xlateDateStr(e.time)+'・'+eventFeeText(e)+'</p></div>'+
       '<div class="trail"><a class="btn btn-accent btn-sm" href="../公開網站/p09_events.html?event='+e.id+'&action=register">'+actionText+'</a></div>'+
     '</div>';
   }).join('');
@@ -443,29 +473,31 @@ function flexCardState(f){
 }
 function flexCardHtml(f){
   var state=flexCardState(f);
-  var seatsText = f.joined ? '已加入本期班' : (f.waitlisted ? '候補中' : ('剩 '+Math.max(0,f.capacity-f.enrolled)+' 名額／共 '+f.capacity+' 名'));
+  var seatsText = f.joined ? T('已加入本期班',{en:'Already joined this session',ja:'今期のクラスに参加済み',de:'Bereits an dieser Klasse teilgenommen'})
+    : (f.waitlisted ? T('候補中',{en:'On waitlist',ja:'キャンセル待ち中',de:'Auf der Warteliste'})
+    : T('剩 '+Math.max(0,f.capacity-f.enrolled)+' 名額／共 '+f.capacity+' 名',{en:Math.max(0,f.capacity-f.enrolled)+' seats left of '+f.capacity,ja:'残り'+Math.max(0,f.capacity-f.enrolled)+'名（定員'+f.capacity+'名）',de:'Noch '+Math.max(0,f.capacity-f.enrolled)+' von '+f.capacity+' Plätzen'}));
   var actionHtml='';
   if(state==='ok'){
     actionHtml = f.joined
-      ? '<span class="badge badge-ok">已加入</span>'
-      : '<button type="button" class="btn btn-sm btn-primary" onclick="joinFlex(\''+f.id+'\')">加入本期班</button>';
+      ? '<span class="badge badge-ok">'+T('已加入',{en:'Joined',ja:'参加済み',de:'Beigetreten'})+'</span>'
+      : '<button type="button" class="btn btn-sm btn-primary" onclick="joinFlex(\''+f.id+'\')">'+T('加入本期班',{en:'Join This Session',ja:'今期のクラスに参加',de:'Dieser Klasse beitreten'})+'</button>';
   }else if(state==='mismatch'){
-    actionHtml='<span class="small muted">請洽顧問確認合適班別</span>';
+    actionHtml='<span class="small muted">'+T('請洽顧問確認合適班別',{en:'Contact your advisor to confirm the right class',ja:'適切なクラスについてはアドバイザーにご確認ください',de:'Bitte wenden Sie sich an Ihren Berater für die passende Klasse'})+'</span>';
   }else if(state==='full'){
     actionHtml = f.waitlisted
-      ? '<span class="badge badge-muted">已候補</span>'
-      : '<button type="button" class="btn btn-sm btn-outline" onclick="waitlistFlex(\''+f.id+'\')">候補</button>';
+      ? '<span class="badge badge-muted">'+T('已候補',{en:'Waitlisted',ja:'キャンセル待ち',de:'Warteliste'})+'</span>'
+      : '<button type="button" class="btn btn-sm btn-outline" onclick="waitlistFlex(\''+f.id+'\')">'+T('候補',{en:'Waitlist',ja:'キャンセル待ちに登録',de:'Auf Warteliste setzen'})+'</button>';
   }else{
-    actionHtml='<a class="btn btn-sm btn-outline" href="m13_checkout.html?plan=flex_group">需加購</a>';
+    actionHtml='<a class="btn btn-sm btn-outline" href="m13_checkout.html?plan=flex_group">'+T('需加購',{en:'Add-on Required',ja:'追加購入が必要',de:'Zusatzbuchung nötig'})+'</a>';
   }
-  var noteHtml = state==='mismatch' ? '<p class="small muted" style="margin:4px 0 0;">目前程度尚未達到此班開課等級。</p>' : '';
-  var planTag = f.joined ? '<p class="small muted" style="margin:4px 0 0;">所屬方案：彈性團體直播班・中級會話 B1 班（自費）</p>' : '';
+  var noteHtml = state==='mismatch' ? '<p class="small muted" style="margin:4px 0 0;">'+T('目前程度尚未達到此班開課等級。',{en:'Your current level does not yet meet this class’s requirement.',ja:'現在のレベルはこのクラスの開講レベルに達していません。',de:'Ihr aktuelles Niveau erreicht noch nicht das Anforderungsniveau dieser Klasse.'})+'</p>' : '';
+  var planTag = f.joined ? '<p class="small muted" style="margin:4px 0 0;">'+T('所屬方案：',{en:'Plan: ',ja:'所属プラン：',de:'Zugehöriges Paket: '})+'彈性團體直播班・中級會話 B1 班'+T('（自費）',{en:' (Self-paid)',ja:'（自己負担）',de:' (Selbst bezahlt)'})+'</p>' : '';
   return '<div class="flex-card">'+
-    '<div class="flex-between"><span class="badge badge-live">直播制</span>'+(state==='full'&&!f.joined&&!f.waitlisted?'<span class="badge badge-full">已滿</span>':'')+'</div>'+
+    '<div class="flex-between"><span class="badge badge-live">'+T('直播制',{en:'Livestream',ja:'ライブ配信制',de:'Live-Format'})+'</span>'+(state==='full'&&!f.joined&&!f.waitlisted?'<span class="badge badge-full">'+T('已滿',{en:'Full',ja:'満席',de:'Ausgebucht'})+'</span>':'')+'</div>'+
     '<h4 style="margin:8px 0 2px;font-size:14.5px;">'+f.name+'</h4>'+
-    '<p class="small muted" style="margin:0 0 8px;">'+f.teacher+'・'+f.level+'</p>'+
-    '<div class="small" style="margin-bottom:4px;"><strong>固定班表：</strong>'+f.schedule+'</div>'+
-    '<div class="small muted" style="margin-bottom:4px;">小班制，名額依型態設定；單堂可線上請假，規則見方案詳情</div>'+
+    '<p class="small muted" style="margin:0 0 8px;">'+f.teacher+'・'+f.level.replace('中文',T('中文',{en:'Chinese',ja:'中国語',de:'Chinesisch'}))+'</p>'+
+    '<div class="small" style="margin-bottom:4px;"><strong>'+T('固定班表：',{en:'Fixed schedule: ',ja:'固定スケジュール：',de:'Fester Stundenplan: '})+'</strong>'+xlateWeeklySchedule(f.schedule)+'</div>'+
+    '<div class="small muted" style="margin-bottom:4px;">'+T('小班制，名額依型態設定；單堂可線上請假，規則見方案詳情',{en:'Small class size, seats vary by format; single sessions can be cancelled online — see plan details for rules',ja:'少人数制で、定員は形式により異なります。1回単位でオンライン欠席連絡が可能です。詳細はプラン詳細をご確認ください',de:'Kleingruppe, Plätze je nach Format; einzelne Einheiten können online abgesagt werden – Details siehe Paketbeschreibung'})+'</div>'+
     noteHtml+planTag+
     '<div class="flex-between" style="margin-top:8px;"><span class="small muted">'+seatsText+'</span>'+actionHtml+'</div>'+
   '</div>';
@@ -482,14 +514,14 @@ function joinFlex(id){
   if(!f) return;
   f.joined=true;
   f.enrolled=Math.min(f.capacity, f.enrolled+1);
-  showToast('已加入本期班・'+f.schedule);
+  showToast(T('已加入本期班・',{en:'Joined this session・',ja:'今期のクラスに参加しました・',de:'Dieser Klasse beigetreten・'})+xlateWeeklySchedule(f.schedule));
   renderFlexSection();
 }
 function waitlistFlex(id){
   var f=FLEX_PROGRAMS.filter(function(x){return x.id===id;})[0];
   if(!f) return;
   f.waitlisted=true;
-  showToast('已加入候補名單，開缺會通知你');
+  showToast(T('已加入候補名單，開缺會通知你',{en:'Added to the waitlist. You’ll be notified when a seat opens.',ja:'キャンセル待ちに登録しました。空きが出たらお知らせします。',de:'Zur Warteliste hinzugefügt. Wir benachrichtigen Sie, wenn ein Platz frei wird.'}));
   renderFlexSection();
 }
 function toggleFlexMore(){
@@ -506,13 +538,19 @@ var ONE_TO_ONE_UPCOMING=[
 ];
 function renderOneToOneSummary(){
   var wrap=document.getElementById('oneToOneSummary');
-  var head='<div class="flex-between" style="padding:8px 0;border-bottom:1px solid var(--c-border);"><span class="small">'+ONE_TO_ONE_PLAN.name+'</span><span class="small muted">還有 <b style="color:var(--c-text)">'+ONE_TO_ONE_PLAN.remainLessons+'</b> 堂未排</span></div>';
+  var remainHtml = T('還有 <b style="color:var(--c-text)">'+ONE_TO_ONE_PLAN.remainLessons+'</b> 堂未排',{
+    en:'<b style="color:var(--c-text)">'+ONE_TO_ONE_PLAN.remainLessons+'</b> lessons left to schedule',
+    ja:'未スケジュール <b style="color:var(--c-text)">'+ONE_TO_ONE_PLAN.remainLessons+'</b> コマ',
+    de:'Noch <b style="color:var(--c-text)">'+ONE_TO_ONE_PLAN.remainLessons+'</b> Einheiten zu planen'
+  });
+  var head='<div class="flex-between" style="padding:8px 0;border-bottom:1px solid var(--c-border);"><span class="small">'+ONE_TO_ONE_PLAN.name+'</span><span class="small muted">'+remainHtml+'</span></div>';
   var rows = ONE_TO_ONE_UPCOMING.length
     ? ONE_TO_ONE_UPCOMING.map(function(s){
+        var modeText=T('線上教室',{en:'Online Classroom',ja:'オンライン教室',de:'Online-Klassenzimmer'});
         return '<div class="list-row"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>'+
-          '<div class="body"><h4>'+s.dateLabel+' '+s.time+'</h4><p>'+s.teacher+'・'+s.mode+'</p></div></div>';
+          '<div class="body"><h4>'+xlateDateStr(s.dateLabel)+' '+s.time+'</h4><p>'+s.teacher+'・'+modeText+'</p></div></div>';
       }).join('')
-    : '<p class="small muted" style="padding:8px 0;">目前沒有已排定的一對一課程，可向顧問提出需求。</p>';
+    : '<p class="small muted" style="padding:8px 0;">'+T('目前沒有已排定的一對一課程，可向顧問提出需求。',{en:'No one-on-one lessons scheduled yet. You can submit a request to your advisor.',ja:'現在予定されている一対一レッスンはありません。アドバイザーにご要望をお伝えください。',de:'Aktuell sind keine Einzelstunden geplant. Sie können eine Anfrage an Ihren Berater senden.'})+'</p>';
   wrap.innerHTML = head + rows;
 }
 function openAdvisorRequestSheet(){
@@ -525,12 +563,24 @@ function openAdvisorRequestSheet(){
 function closeAdvisorRequestSheet(){
   document.getElementById('advisorRequestOverlay').classList.add('hidden');
 }
+/* 20260930：想上的課程選項改讀共用主檔 TLI_MASTERS.learningTopics.requestCourses（原本頁面自己寫死兩筆） */
+function renderAdvisorCourseOptions(){
+  var sel = document.getElementById('advisorReqCourse');
+  if (!sel) return;
+  var cur = sel.value;
+  sel.innerHTML = TLI_MASTERS.learningTopics.requestCourses.map(function(c){
+    return '<option value="'+c.id+'">'+T(c.name,{en:c.en})+'</option>';
+  }).join('') + '<option value="other">'+T('其他（請於備註說明）',{en:'Other (please specify in the notes)'})+'</option>';
+  if (cur) sel.value = cur;
+}
+renderAdvisorCourseOptions();
+TLI_I18N.onRefresh(renderAdvisorCourseOptions);
 function submitAdvisorRequest(){
   var pref=document.getElementById('advisorReqPref').value.trim();
-  if(!pref){ showToast('請先填寫希望的時段偏好'); return; }
+  if(!pref){ showToast(T('請先填寫希望的時段偏好',{en:'Please fill in your preferred time slots first',ja:'先にご希望の時間帯をご記入ください',de:'Bitte geben Sie zuerst Ihre bevorzugten Zeiten ein'})); return; }
   document.getElementById('advisorRequestForm').classList.add('hidden');
   document.getElementById('advisorRequestSentBanner').classList.remove('hidden');
-  showToast('已送出，顧問會與你聯繫');
+  showToast(T('已送出，顧問會與你聯繫',{en:'Submitted. Your advisor will contact you.',ja:'送信しました。アドバイザーよりご連絡します。',de:'Gesendet. Ihr Berater wird sich bei Ihnen melden.'}));
 }
 document.addEventListener('keydown',function(e){
   if(e.key!=='Escape')return;
@@ -538,11 +588,15 @@ document.addEventListener('keydown',function(e){
 });
 
 /* ================= 初始化 ================= */
+TLI_I18N.onRefresh(renderFlexSection);
+TLI_I18N.onRefresh(renderChatWeekList);
+TLI_I18N.onRefresh(renderEventList);
+TLI_I18N.onRefresh(renderOneToOneSummary);
 renderFlexSection();
 renderChatWeekList();
 renderEventList();
 renderOneToOneSummary();
+TLI_I18N.init();
 </script>
-<div class="toast hidden" id="toast">已完成</div>
 </body>
 </html>

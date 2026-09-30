@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="meta_title">TLI Connect｜預約諮詢／試聽</title>
-<meta name="description" content="TLI 快速預約諮詢與試聽：填表 30 秒完成預約，不確定怎麼選時再問 AI 諮詢助手，送出後由顧問於 1 個工作日內聯繫。" data-i18n="meta_description" data-i18n-attr="content">
+<meta name="description" content="TLI 快速預約諮詢與試聽：填表 30 秒完成預約，不確定怎麼選時再問 AI 諮詢助手，送出後由顧問於 1 個工作日內聯繫。">
 <style>
 :root{
   --c-primary:#1B4E8C;--c-primary-dark:#123A66;--c-accent:#E8792B;--c-accent-dark:#CF691F;
@@ -215,23 +215,16 @@ body.self-serve-mode .purpose-toggle{display:none;}
 
 <header class="site-header">
   <a class="brand" href="p01_home.html"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n="menu_toggle_aria" data-i18n-attr="aria-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n-aria-label="menu_toggle_aria"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <nav class="site-nav">
     <a href="p02_courses.html" data-i18n="nav_courses">課程</a>
-    <a href="p10_enterprise.html">企業培訓</a>
+    <a href="p10_enterprise.html" data-i18n="nav_enterprise">企業培訓</a>
     <a href="p09_events.html" data-i18n="nav_events">活動</a>
     <a href="p04_teachers.html" data-i18n="nav_teachers">師資</a>
     <a href="p05_about_locations.html" data-i18n="nav_about">品牌與校區</a>
     <a href="p08_faq.html" data-i18n="nav_faq">常見問題</a>
   </nav>
-  <div class="header-right">
-    <select class="lang-select" onchange="setLang(this.value)" aria-label="語言切換" data-i18n="lang_select_aria" data-i18n-attr="aria-label">
-      <option value="zh-TW">繁體中文</option>
-      <option value="zh-CN">简体中文</option>
-      <option value="en">English</option>
-      <option value="ja">日本語</option>
-      <option value="de">Deutsch</option>
-    </select>
+  <div class="header-right tb-actions">
     <a class="btn btn-primary btn-sm" data-i18n="btn_consult" href="p06_trial.html?type=consult">預約諮詢</a>
     <a class="btn btn-accent btn-sm" data-i18n="btn_trial" href="p06_trial.html?type=trial">預約試聽</a>
     <a class="btn btn-outline btn-sm" data-i18n="btn_login" href="p07_login_register.html">登入</a>
@@ -278,16 +271,16 @@ body.self-serve-mode .purpose-toggle{display:none;}
           <div class="field-row">
             <div class="field">
               <label><span data-i18n="p06_field_name_label">姓名</span><span class="req">*</span></label>
-              <input type="text" id="bkName" placeholder="請輸入姓名" data-i18n-ph="p06_ph_name">
+              <input type="text" id="bkName" placeholder="請輸入姓名" data-i18n-placeholder="p06_ph_name">
             </div>
             <div class="field">
               <label><span data-i18n="p06_field_email_label">Email</span><span class="req">*</span></label>
-              <input type="email" id="bkEmail" placeholder="請輸入 Email" data-i18n-ph="p06_ph_email">
+              <input type="email" id="bkEmail" placeholder="請輸入 Email" data-i18n-placeholder="p06_ph_email">
             </div>
           </div>
           <div class="field">
             <label><span data-i18n="p06_field_phone_label">手機（或 LINE ID）</span><span class="req">*</span></label>
-            <input type="text" id="bkPhone" placeholder="請輸入手機號碼或 LINE ID" data-i18n-ph="p06_ph_phone">
+            <input type="text" id="bkPhone" placeholder="請輸入手機號碼或 LINE ID" data-i18n-placeholder="p06_ph_phone">
           </div>
         </div>
 
@@ -296,18 +289,18 @@ body.self-serve-mode .purpose-toggle{display:none;}
           <div class="slot-hint" data-i18n="p06_slot_hint">線上一對一體驗課，30 分鐘</div>
           <div class="slot-calendar" id="slotCalendar">
             <div class="cal-header">
-              <button type="button" class="cal-nav-btn" id="calPrevBtn" data-i18n="p06_cal_prev_aria" data-i18n-attr="aria-label" aria-label="上一月" onclick="calChangeMonth(-1)">
+              <button type="button" class="cal-nav-btn" id="calPrevBtn" aria-label="上一月" data-i18n-aria-label="p06_cal_prev_aria" onclick="calChangeMonth(-1)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
               </button>
               <div class="cal-title" id="calTitle"></div>
-              <button type="button" class="cal-nav-btn" id="calNextBtn" data-i18n="p06_cal_next_aria" data-i18n-attr="aria-label" aria-label="下一月" onclick="calChangeMonth(1)">
+              <button type="button" class="cal-nav-btn" id="calNextBtn" aria-label="下一月" data-i18n-aria-label="p06_cal_next_aria" onclick="calChangeMonth(1)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </button>
             </div>
             <div class="cal-weekday-row" id="calWeekdayRow"></div>
             <div class="cal-grid" id="calGrid"></div>
           </div>
-          <div class="slot-hint" id="calLegend">灰色日期代表當日無可預約時段</div>
+          <div class="slot-hint" id="calLegend" data-i18n="p06_cal_legend">灰色日期代表當日無可預約時段</div>
           <div class="slot-hint" id="slotTimesHint"></div>
           <div class="slot-times" id="slotTimes"></div>
           <p class="slot-hint" data-i18n="p06_slot_multi_hint">時段偏好可複選 2–3 個，供顧問安排時參考</p>
@@ -324,7 +317,7 @@ body.self-serve-mode .purpose-toggle{display:none;}
             <option value="pronunciation" data-i18n="p06_goal_pronunciation">發音矯正</option>
             <option value="culture" data-i18n="p06_goal_culture">文化體驗</option>
           </select>
-          <textarea id="trialNote" rows="2" placeholder="備註（選填）" data-i18n-ph="p06_note_ph" style="width:100%;margin-top:10px;border:1px solid var(--c-border);border-radius:8px;padding:10px 11px;font-size:14px;font-family:inherit;resize:vertical;"></textarea>
+          <textarea id="trialNote" rows="2" placeholder="備註（選填）" data-i18n-placeholder="p06_note_ph" style="width:100%;margin-top:10px;border:1px solid var(--c-border);border-radius:8px;padding:10px 11px;font-size:14px;font-family:inherit;resize:vertical;"></textarea>
         </div>
 
         <div class="form-block" id="teacherShowcaseBlock" style="display:none;">
@@ -460,69 +453,107 @@ var calViewYear = null;
 var calViewMonth = null;
 var calSelectedDate = null;
 
-function buildMultiChipGroup(containerId, ids, keyPrefix, onToggle){
+/* ===== 選項文字：一律用 T() 現算目前語言，不依賴共用詞典（語言切換時由 onRefresh 重繪） ===== */
+function langLabel(id){
+  return ({
+    zh: T('中文',{en:'Chinese',ja:'中国語',de:'Chinesisch'}),
+    en: T('英文',{en:'English',ja:'英語',de:'Englisch'}),
+    ja: T('日文',{en:'Japanese',ja:'日本語',de:'Japanisch'}),
+    ko: T('韓文',{en:'Korean',ja:'韓国語',de:'Koreanisch'}),
+    de: T('德文',{en:'German',ja:'ドイツ語',de:'Deutsch'}),
+    fr: T('法文',{en:'French',ja:'フランス語',de:'Französisch'}),
+    dialect: T('方言',{en:'Dialect',ja:'方言',de:'Dialekt'})
+  })[id] || id;
+}
+function levelLabel(id){
+  return ({
+    none: T('零基礎',{en:'Absolute Beginner',ja:'未経験',de:'Absoluter Anfänger'}),
+    beginner: T('初級',{en:'Beginner',ja:'初級',de:'Anfänger'}),
+    intermediate: T('中級',{en:'Intermediate',ja:'中級',de:'Mittelstufe'}),
+    advanced_plus: T('中高級以上',{en:'Upper-Intermediate+',ja:'中上級以上',de:'Gehobene Mittelstufe+'}),
+    unsure: T('不確定',{en:'Not Sure',ja:'不明',de:'Unsicher'})
+  })[id] || id;
+}
+function formatLabel(id){
+  return ({ online:T('線上',{en:'Online',ja:'オンライン',de:'Online'}), onsite:T('實體',{en:'In-Person',ja:'対面',de:'Vor Ort'}) })[id] || id;
+}
+function campusLabel(id){
+  return ({
+    roosevelt:T('羅斯福校',{en:'Roosevelt Campus',ja:'羅斯福校',de:'Roosevelt-Campus'}),
+    shilin:T('士林校',{en:'Shilin Campus',ja:'士林校',de:'Shilin-Campus'}),
+    taichung:T('台中校',{en:'Taichung Campus',ja:'台中校',de:'Taichung-Campus'}),
+    kaohsiung:T('高雄校',{en:'Kaohsiung Campus',ja:'高雄校',de:'Kaohsiung-Campus'})
+  })[id] || id;
+}
+function contactTimeLabel(id){
+  return ({ morning:T('上午',{en:'Morning',ja:'午前',de:'Vormittag'}), afternoon:T('下午',{en:'Afternoon',ja:'午後',de:'Nachmittag'}), evening:T('晚上',{en:'Evening',ja:'夜間',de:'Abend'}), anytime:T('皆可',{en:'Anytime',ja:'いつでも可',de:'Jederzeit'}) })[id] || id;
+}
+function weekdayLabel(id){
+  return ({ sun:T('日',{en:'Sun',ja:'日',de:'So'}), mon:T('一',{en:'Mon',ja:'月',de:'Mo'}), tue:T('二',{en:'Tue',ja:'火',de:'Di'}), wed:T('三',{en:'Wed',ja:'水',de:'Mi'}), thu:T('四',{en:'Thu',ja:'木',de:'Do'}), fri:T('五',{en:'Fri',ja:'金',de:'Fr'}), sat:T('六',{en:'Sat',ja:'土',de:'Sa'}) })[id] || id;
+}
+
+function buildMultiChipGroup(containerId, ids, labelFn, activeCheckFn, onToggle){
   var wrap = document.getElementById(containerId);
-  var dict = tliDict();
   wrap.innerHTML = '';
   ids.forEach(function(id){
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'opt-btn';
-    b.setAttribute('data-i18n', keyPrefix+id);
     b.setAttribute('data-value', id);
-    b.textContent = dict[keyPrefix+id];
-    b.onclick = function(){ onToggle(id, b); };
+    b.textContent = labelFn(id);
+    if(activeCheckFn(id)) b.classList.add('active');
+    b.onclick = function(){ onToggle(id); };
     wrap.appendChild(b);
   });
 }
-function buildLevelSelect(containerId, ids, keyPrefix){
+function buildLevelSelect(containerId, ids, labelFn, selectedVal){
   var sel = document.getElementById(containerId);
-  var dict = tliDict();
-  var html = '<option value="">請選擇</option>';
+  var html = '<option value="">'+T('請選擇',{en:'Please select',ja:'選択してください',de:'Bitte auswählen'})+'</option>';
   html += ids.map(function(id){
-    return '<option value="'+id+'" data-i18n="'+keyPrefix+id+'">'+(dict[keyPrefix+id]||'')+'</option>';
+    return '<option value="'+id+'">'+labelFn(id)+'</option>';
   }).join('');
   sel.innerHTML = html;
+  if(selectedVal) sel.value = selectedVal;
 }
-function buildSingleChipGroup(containerId, ids, keyPrefix, onSelect){
+function buildSingleChipGroup(containerId, ids, labelFn, activeCheckFn, onSelect){
   var wrap = document.getElementById(containerId);
-  var dict = tliDict();
   wrap.innerHTML = '';
   ids.forEach(function(id){
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'opt-btn';
-    b.setAttribute('data-i18n', keyPrefix+id);
     b.setAttribute('data-value', id);
-    b.textContent = dict[keyPrefix+id];
+    b.textContent = labelFn(id);
+    if(activeCheckFn(id)) b.classList.add('active');
     b.onclick = function(){ onSelect(id); };
     wrap.appendChild(b);
   });
 }
-function selectSingle(containerId, val){
-  document.querySelectorAll('#'+containerId+' .opt-btn').forEach(function(b){
-    b.classList.toggle('active', b.getAttribute('data-value') === val);
-  });
-}
 
-function toggleLangChip(id, btn){
-  if(bookState.langs.has(id)){ bookState.langs.delete(id); btn.classList.remove('active'); }
-  else { bookState.langs.add(id); btn.classList.add('active'); }
+function renderLangChips(){ buildMultiChipGroup('chipLang', LANG_IDS, langLabel, function(id){ return bookState.langs.has(id); }, toggleLangChip); }
+function renderLevelSelect(){ buildLevelSelect('chipLevel', LEVEL_IDS, levelLabel, bookState.level); }
+function renderFormatChips(){ buildSingleChipGroup('chipFormat', FORMAT_IDS, formatLabel, function(id){ return bookState.format === id; }, setFormat); }
+function renderCampusChips(){ buildSingleChipGroup('chipCampus', CAMPUS_IDS, campusLabel, function(id){ return bookState.campus === id; }, setCampus); }
+function renderContactChips(){ buildSingleChipGroup('chipContactTime', CONTACT_TIME_IDS, contactTimeLabel, function(id){ return bookState.contactTime === id; }, setContactTime); }
+
+function toggleLangChip(id){
+  if(bookState.langs.has(id)){ bookState.langs.delete(id); } else { bookState.langs.add(id); }
+  renderLangChips();
   updateValidity();
 }
 function setLevel(id){
   bookState.level = id;
-  var sel = document.getElementById('chipLevel');
-  if(sel && sel.value !== id) sel.value = id;
+  renderLevelSelect();
   updateValidity();
 }
 function setFormat(id){
   bookState.format = id;
-  selectSingle('chipFormat', id);
+  renderFormatChips();
   document.getElementById('onsiteNote').style.display = (id === 'onsite') ? 'block' : 'none';
-  if(id !== 'onsite'){ bookState.campus = null; selectSingle('chipCampus', null); }
+  if(id !== 'onsite'){ bookState.campus = null; }
+  renderCampusChips();
   updateValidity();
 }
-function setCampus(id){ bookState.campus = id; selectSingle('chipCampus', id); updateValidity(); }
-function setContactTime(id){ bookState.contactTime = id; selectSingle('chipContactTime', id); updateValidity(); }
+function setCampus(id){ bookState.campus = id; renderCampusChips(); updateValidity(); }
+function setContactTime(id){ bookState.contactTime = id; renderContactChips(); updateValidity(); }
 
 /* ===== 目的切換：預約諮詢／預約試聽（試聽一律走自助選時段＋付款流程） ===== */
 function setPurpose(type){
@@ -540,16 +571,20 @@ function setPurpose(type){
 }
 
 /* ===== 試聽時段：月曆選日期 ===== */
-function formatSlotDayLabel(d, dict){
-  dict = dict || tliDict();
-  var weekday = dict['p06_weekday_'+WEEKDAY_IDS[d.getDay()]];
-  return tliFmt(dict.p06_slot_day_fmt, {month:(d.getMonth()+1), date:d.getDate(), weekday:weekday});
+function formatSlotDayLabel(d){
+  var weekday = weekdayLabel(WEEKDAY_IDS[d.getDay()]);
+  var tmpl = T('{month}/{date}（{weekday}）', {en:'{month}/{date} ({weekday})', ja:'{month}/{date}（{weekday}）', de:'{month}.{date}. ({weekday})'});
+  return tliFmt(tmpl, {month:(d.getMonth()+1), date:d.getDate(), weekday:weekday});
 }
 function calToday(){ var d = new Date(); d.setHours(0,0,0,0); return d; }
 function calSameDate(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
-function formatCalTitle(year, monthIdx, dict, lang){
+var MONTH_NAMES_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+function formatCalTitle(year, monthIdx){
+  var lang = TLI_I18N.currentLang();
   if(lang === 'en') return MONTH_NAMES_EN[monthIdx] + ' ' + year;
-  return tliFmt(dict.p06_cal_title_fmt, {year:year, month:(monthIdx+1)});
+  if(lang === 'de') return MONTH_NAMES_DE[monthIdx] + ' ' + year;
+  if(lang === 'ja') return year + '年' + (monthIdx+1) + '月';
+  return year + ' 年 ' + (monthIdx+1) + ' 月';
 }
 /* 示範用：今天以前、或週六週日視為無可約時段 */
 function calDateHasSlots(d){
@@ -577,9 +612,7 @@ function calAddMinutes(hhmm, minutes){
   return (nh<10?'0':'')+nh+':'+(nm<10?'0':'')+nm;
 }
 function renderCalendar(){
-  var dict = tliDict();
-  var lang = window.TLI_CURRENT_LANG || 'zh-TW';
-  document.getElementById('calTitle').textContent = formatCalTitle(calViewYear, calViewMonth, dict, lang);
+  document.getElementById('calTitle').textContent = formatCalTitle(calViewYear, calViewMonth);
 
   var today = calToday();
   var isCurrentMonth = (calViewYear === today.getFullYear() && calViewMonth === today.getMonth());
@@ -589,7 +622,7 @@ function renderCalendar(){
   weekRow.innerHTML = '';
   CAL_WEEKDAY_ORDER.forEach(function(id){
     var span = document.createElement('span');
-    span.textContent = dict['p06_weekday_'+id];
+    span.textContent = weekdayLabel(id);
     weekRow.appendChild(span);
   });
 
@@ -636,10 +669,9 @@ function selectCalDate(d){
 function renderSlotTimes(){
   var wrap = document.getElementById('slotTimes');
   var hintEl = document.getElementById('slotTimesHint');
-  var dict = tliDict();
   wrap.innerHTML = '';
   if(!calSelectedDate){
-    hintEl.textContent = dict.p06_cal_pick_date_hint;
+    hintEl.textContent = T('請先在上方月曆選擇日期', {en:'Please choose a date from the calendar above', ja:'上のカレンダーで日付を選択してください', de:'Bitte wählen Sie zuerst ein Datum im Kalender oben aus'});
     hintEl.style.display = 'block';
     document.getElementById('selectedSlotLine').style.display = 'none';
     return;
@@ -659,7 +691,8 @@ function renderSlotTimes(){
   var line = document.getElementById('selectedSlotLine');
   if(bookState.slotPrefs.length){
     var timesText = bookState.slotPrefs.map(function(sp){ return sp.time+'–'+sp.end; }).join('、');
-    line.textContent = tliFmt(dict.p06_selected_slot_line, {date: bookState.slotDateLabel, times: timesText});
+    var tmpl = T('已選 {date}　{times}', {en:'Selected: {date}  {times}', ja:'選択済み：{date}　{times}', de:'Ausgewählt: {date}  {times}'});
+    line.textContent = tliFmt(tmpl, {date: bookState.slotDateLabel, times: timesText});
     line.style.display = 'block';
   } else {
     line.style.display = 'none';
@@ -671,7 +704,7 @@ function toggleSlotTime(t, end){
     bookState.slotPrefs.splice(idx, 1);
   } else {
     if(bookState.slotPrefs.length >= MAX_SLOT_PREFS){
-      showToast(tliDict().p06_slot_max_hint);
+      showToast(T('最多選 3 個時段偏好', {en:'You can pick up to 3 preferred times', ja:'希望時間帯は最大3個まで選択できます', de:'Sie können bis zu 3 bevorzugte Zeiten auswählen'}));
       return;
     }
     bookState.slotPrefs.push({time:t, end:end});
@@ -680,8 +713,7 @@ function toggleSlotTime(t, end){
   updateValidity();
 }
 function refreshSlotDayLabels(){
-  var dict = tliDict();
-  if(calSelectedDate){ bookState.slotDateLabel = formatSlotDayLabel(calSelectedDate, dict); }
+  if(calSelectedDate){ bookState.slotDateLabel = formatSlotDayLabel(calSelectedDate); }
   renderCalendar();
   renderSlotTimes();
 }
@@ -703,18 +735,30 @@ function computeMissing(){
   }
   return m;
 }
+function missingLabel(key){
+  return ({
+    p06_label_lang: T('想學的語言', {en:'Language you want to learn', ja:'学びたい言語', de:'Zu lernende Sprache'}),
+    p06_label_level: T('目前程度', {en:'Current level', ja:'現在のレベル', de:'Aktuelles Niveau'}),
+    p06_missing_campus: T('校區', {en:'Campus', ja:'校舎', de:'Campus'}),
+    p06_missing_slot: T('試聽時段', {en:'Trial time slot', ja:'体験レッスンの時間帯', de:'Termin für die Probestunde'}),
+    p06_field_name_label: T('姓名', {en:'Name', ja:'お名前', de:'Name'}),
+    p06_field_email_label: T('Email', {en:'Email', ja:'Email', de:'E-Mail'}),
+    p06_missing_phone: T('手機或 LINE ID', {en:'Mobile or LINE ID', ja:'携帯電話番号またはLINE ID', de:'Handynummer oder LINE-ID'}),
+    p06_label_contact_time: T('方便聯繫時段', {en:'Best time to reach you', ja:'ご連絡可能な時間帯', de:'Bevorzugte Kontaktzeit'})
+  })[key] || key;
+}
 function updateValidity(){
-  var dict = tliDict();
   var missing = computeMissing();
   var isTrial = bookState.purpose === 'trial';
   var btn = document.getElementById(isTrial ? 'goPaymentBtn' : 'submitBookingBtn');
   var hint = document.getElementById('fieldHint');
   if(missing.length){
     btn.disabled = true;
-    var labels = missing.map(function(k){ return dict[k]; });
+    var labels = missing.map(missingLabel);
+    var sep = T('、', {en:', ', ja:'、', de:', '});
     /* 缺漏欄位一多，逐項列出容易超過一行提示的長度上限，改用數量摘要，完整清單放 title 供需要時查看 */
-    hint.textContent = tliFmt(dict.p06_hint_missing_count, {n: missing.length});
-    hint.title = tliFmt(dict.p06_hint_missing, {items: labels.join(dict.p06_join_sep)});
+    hint.textContent = tliFmt(T('還缺 {n} 項必填欄位', {en:'Still needed: {n} required fields', ja:'必須項目があと{n}件あります', de:'Noch {n} Pflichtfelder ausstehend'}), {n: missing.length});
+    hint.title = tliFmt(T('還缺：{items}', {en:'Still needed: {items}', ja:'未入力の項目：{items}', de:'Noch ausstehend: {items}'}), {items: labels.join(sep)});
     hint.style.display = 'block';
   }else{
     hint.title = '';
@@ -742,31 +786,33 @@ function goToPayment(){
 }
 
 /* ===== 送出預約／已收到 ===== */
+function receivedTitleTrial(){ return T('已收到您的試聽預約', {en:'Your trial booking has been received', ja:'体験レッスンのご予約を受け付けました', de:'Ihre Anmeldung zur Probestunde ist eingegangen'}); }
+function receivedTitleConsult(){ return T('已收到您的諮詢預約', {en:'Your consultation booking has been received', ja:'ご相談のご予約を受け付けました', de:'Ihre Beratungsanmeldung ist eingegangen'}); }
 function buildBookingSteps(){
-  var dict = tliDict();
   var advisor = aiPickAdvisor();
   var ticket = aiTicketNo();
-  var locLabel = bookState.format === 'onsite' ? dict['p06_campus_'+bookState.campus] : dict.p06_group_online;
+  var locLabel = bookState.format === 'onsite' ? campusLabel(bookState.campus) : T('線上組', {en:'the online team', ja:'オンライングループ', de:'das Online-Team'});
   var contact = bookState.email || bookState.phone;
   var steps = [
-    tliFmt(dict.p06_step_ticket, {ticket:ticket}),
-    tliFmt(dict.p06_step_advisor, {loc:locLabel, advisor:advisor}),
-    tliFmt(dict.p06_step_confirm, {contact:contact}),
-    tliFmt(dict.p06_step_added_todo, {name:(bookState.name || dict.p06_default_student)})
+    tliFmt(T('諮詢工單已建立（編號 {ticket}）', {en:'Consultation ticket created (#{ticket})', ja:'お問い合わせチケットを作成しました（番号 {ticket}）', de:'Beratungsticket erstellt (Nr. {ticket})'}), {ticket:ticket}),
+    tliFmt(T('依語言與{loc}自動指派顧問（{advisor}）', {en:'Auto-assigned to an advisor based on language and {loc} ({advisor})', ja:'言語と{loc}に応じて担当アドバイザーを自動割り当て（{advisor}）', de:'Automatisch einem Berater nach Sprache und {loc} zugewiesen ({advisor})'}), {loc:locLabel, advisor:advisor}),
+    tliFmt(T('LINE／Email 確認已送出（{contact}）', {en:'LINE / Email confirmation sent ({contact})', ja:'LINE／Emailで確認をお送りしました（{contact}）', de:'LINE-/E-Mail-Bestätigung gesendet ({contact})'}), {contact:contact}),
+    tliFmt(T('已加入顧問今日待辦（{name}）', {en:'Added to advisor’s to-do list for today ({name})', ja:'本日のアドバイザー対応リストに追加しました（{name}）', de:'Zur heutigen Aufgabenliste des Beraters hinzugefügt ({name})'}), {name:(bookState.name || T('學員', {en:'Student', ja:'受講者', de:'Lernende(r)'}))})
   ];
   if(bookState.purpose === 'trial'){
     var timesText = bookState.slotPrefs.map(function(sp){ return sp.time; }).join('、');
-    steps.push(tliFmt(dict.p06_step_slot_locked, {date:bookState.slotDateLabel, time:timesText}));
+    steps.push(tliFmt(T('已鎖定 {date} {time} 線上教室，開課前 15 分鐘從會員區進入', {en:'Reserved for {date} {time} in the online classroom — join from the member area 15 minutes before class', ja:'{date} {time} のオンライン教室を確保しました。授業開始15分前に会員エリアからご入室ください', de:'Für {date} {time} im Online-Klassenzimmer reserviert — bitte 15 Minuten vor Unterrichtsbeginn über den Mitgliederbereich beitreten'}), {date:bookState.slotDateLabel, time:timesText}));
   }
   return steps;
 }
 function submitBooking(){
   if(computeMissing().length){ updateValidity(); return; }
-  var dict = tliDict();
   document.getElementById('bookView').style.display = 'none';
   var rv = document.getElementById('receivedView');
   rv.style.display = 'block';
-  document.getElementById('receivedTitle').textContent = bookState.purpose === 'trial' ? dict.p06_received_title_trial : dict.p06_received_title_consult;
+  var titleEl = document.getElementById('receivedTitle');
+  titleEl.removeAttribute('data-i18n');
+  titleEl.textContent = bookState.purpose === 'trial' ? receivedTitleTrial() : receivedTitleConsult();
   document.getElementById('receivedActions').style.display = 'none';
   var steps = buildBookingSteps();
   aiPlayTimeline('bookTimeline', steps, function(){
@@ -789,21 +835,39 @@ function resetBooking(){
   document.getElementById('bookCard').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-/* ===== 語系切換後，重新套用本頁動態內容 ===== */
-function onLangApplied(lang){
-  var dict = tliDict();
+/* ===== 課程名稱標籤：一律用 T() 現算，供課程參數帶入橫幅使用 ===== */
+function courseLabel(key){
+  return ({
+    p06_course_zh_1on1: T('中文一對一線上課', {en:'Chinese 1-on-1 Online', ja:'中国語 1対1 オンライン', de:'Chinesisch 1:1 Online'}),
+    p06_course_en_1on1: T('英文一對一線上課', {en:'English 1-on-1 Online', ja:'英語 1対1 オンライン', de:'Englisch 1:1 Online'}),
+    p06_course_ja_1on1: T('日文一對一線上課', {en:'Japanese 1-on-1 Online', ja:'日本語 1対1 オンライン', de:'Japanisch 1:1 Online'}),
+    p06_course_ko_1on1: T('韓文一對一線上課', {en:'Korean 1-on-1 Online', ja:'韓国語 1対1 オンライン', de:'Koreanisch 1:1 Online'}),
+    p06_course_de_1on1: T('德文一對一線上課', {en:'German 1-on-1 Online', ja:'ドイツ語 1対1 オンライン', de:'Deutsch 1:1 Online'}),
+    p06_course_fr_1on1: T('法文一對一線上課', {en:'French 1-on-1 Online', ja:'フランス語 1対1 オンライン', de:'Französisch 1:1 Online'}),
+    p06_course_flex_zh: T('中文 彈性團體直播', {en:'Chinese Flexible Group Livestream', ja:'中国語 グループライブ配信', de:'Chinesisch Flexibler Gruppen-Livestream'}),
+    p06_course_flex_en: T('英文 彈性團體直播', {en:'English Flexible Group Livestream', ja:'英語 グループライブ配信', de:'Englisch Flexibler Gruppen-Livestream'}),
+    p06_course_self_zh: T('中文自學影音課', {en:'Chinese Self-Paced Video Course', ja:'中国語 自習動画コース', de:'Chinesisch Selbstlern-Videokurs'}),
+    p06_course_culture_zh: T('中文文化主題線上課', {en:'Chinese Culture Online Course', ja:'中国語文化テーマオンラインコース', de:'Chinesisch Kultur-Onlinekurs'}),
+    p06_course_corp: T('企業線上培訓', {en:'Corporate Online Training', ja:'法人向けオンライン研修', de:'Firmen-Online-Schulung'}),
+    p06_course_cert: T('師資認證線上課程', {en:'Teacher Certification Online Course', ja:'講師認定オンラインコース', de:'Online-Kurs zur Lehrerzertifizierung'})
+  })[key] || '';
+}
+function leadTextSelfServe(){ return T('付款完成即確認時段，顧問會在試聽後聯繫你', {en:'Your time slot is confirmed as soon as payment completes; an advisor will follow up after your trial class.', ja:'お支払い完了と同時に時間帯が確定します。体験レッスン後にアドバイザーがご連絡いたします。', de:'Ihr Termin ist bestätigt, sobald die Zahlung abgeschlossen ist; ein Berater meldet sich nach der Probestunde bei Ihnen.'}); }
+
+/* ===== 語系切換後，重新套用本頁動態內容（註冊給 TLI_I18N.onRefresh，見檔尾） ===== */
+function refreshDynamicText(){
   refreshSlotDayLabels();
   updateValidity();
   if(isSelfServeTrial){
-    document.querySelector('.lead').textContent = dict.p06_page_lead_selfserve;
+    document.querySelector('.lead').textContent = leadTextSelfServe();
   }
   var banner = document.getElementById('courseBanner');
   if(banner.classList.contains('show') && bookState.courseLabelKey){
-    banner.textContent = tliFmt(dict.p06_course_banner, {course: dict[bookState.courseLabelKey]});
+    banner.textContent = tliFmt(T('已依您點選的課程「{course}」帶入語言，如需調整可自行修改。', {en:'Language auto-filled from the course you selected, "{course}." Feel free to adjust it.', ja:'選択されたコース「{course}」に基づき言語を自動入力しました。必要に応じて変更できます。', de:'Die Sprache wurde automatisch anhand des gewählten Kurses „{course}" übernommen. Sie können sie bei Bedarf ändern.'}), {course: courseLabel(bookState.courseLabelKey)});
   }
   var rv = document.getElementById('receivedView');
   if(rv && rv.style.display === 'block'){
-    document.getElementById('receivedTitle').textContent = (bookState.purpose === 'trial') ? dict.p06_received_title_trial : dict.p06_received_title_consult;
+    document.getElementById('receivedTitle').textContent = (bookState.purpose === 'trial') ? receivedTitleTrial() : receivedTitleConsult();
   }
 }
 
@@ -824,11 +888,11 @@ var COURSE_PRESET_KEYS = {
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-  buildMultiChipGroup('chipLang', LANG_IDS, 'p06_lang_', toggleLangChip);
-  buildLevelSelect('chipLevel', LEVEL_IDS, 'p06_level_');
-  buildSingleChipGroup('chipFormat', FORMAT_IDS, 'p06_format_', setFormat);
-  buildSingleChipGroup('chipCampus', CAMPUS_IDS, 'p06_campus_', setCampus);
-  buildSingleChipGroup('chipContactTime', CONTACT_TIME_IDS, 'p06_contact_', setContactTime);
+  renderLangChips();
+  renderLevelSelect();
+  renderFormatChips();
+  renderCampusChips();
+  renderContactChips();
   var __today = calToday();
   calViewYear = __today.getFullYear();
   calViewMonth = __today.getMonth();
@@ -836,7 +900,6 @@ document.addEventListener('DOMContentLoaded', function(){
   renderSlotTimes();
   setFormat('online');
 
-  var dict = tliDict();
   var params = new URLSearchParams(window.location.search);
   var typeParam = params.get('type');
   var planParam = params.get('plan');
@@ -844,17 +907,19 @@ document.addEventListener('DOMContentLoaded', function(){
   if(isSelfServeTrial) document.body.classList.add('self-serve-mode');
   setPurpose((typeParam === 'trial' || isSelfServeTrial) ? 'trial' : 'consult');
   if(isSelfServeTrial){
-    document.querySelector('.lead').textContent = dict.p06_page_lead_selfserve;
+    var leadEl = document.querySelector('.lead');
+    leadEl.removeAttribute('data-i18n');
+    leadEl.textContent = leadTextSelfServe();
   }
 
   var slug = params.get('course');
   if(slug && COURSE_PRESET_KEYS[slug]){
     var preset = COURSE_PRESET_KEYS[slug];
     bookState.langs.add(preset.lang);
-    document.querySelectorAll('#chipLang .opt-btn').forEach(function(b){ if(b.getAttribute('data-value') === preset.lang) b.classList.add('active'); });
+    renderLangChips();
     bookState.courseLabelKey = preset.labelKey;
     var banner = document.getElementById('courseBanner');
-    banner.textContent = tliFmt(dict.p06_course_banner, {course: dict[preset.labelKey]});
+    banner.textContent = tliFmt(T('已依您點選的課程「{course}」帶入語言，如需調整可自行修改。', {en:'Language auto-filled from the course you selected, "{course}." Feel free to adjust it.', ja:'選択されたコース「{course}」に基づき言語を自動入力しました。必要に応じて変更できます。', de:'Die Sprache wurde automatisch anhand des gewählten Kurses „{course}" übernommen. Sie können sie bei Bedarf ändern.'}), {course: courseLabel(preset.labelKey)});
     banner.classList.add('show');
   }
 
@@ -875,7 +940,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
-<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n="ai_fab_aria" data-i18n-attr="aria-label"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+<button class="ai-fab" onclick="aiOpen('fab')" aria-label="開啟線上諮詢" data-i18n-aria-label="ai_fab_aria"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
 <div class="ai-fab-label" data-i18n="ai_fab_label">線上諮詢</div>
 
 <div class="ai-overlay" id="aiOverlay-fab" onclick="if(event.target===this) aiClose('fab')">
@@ -889,473 +954,90 @@ document.addEventListener('DOMContentLoaded', function(){
         </div>
       </div>
       <div class="ai-head-actions">
-        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n="ai_minimize_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n="ai_close_aria" data-i18n-attr="aria-label,title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="ai-head-btn ai-minimize-btn" onclick="aiMinimize('fab')" aria-label="最小化" title="最小化" data-i18n-aria-label="ai_minimize_aria" data-i18n-title="ai_minimize_aria"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <button class="ai-head-btn" onclick="aiClose('fab')" aria-label="關閉" title="關閉" data-i18n-aria-label="ai_close_aria" data-i18n-title="ai_close_aria"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
     </div>
     <div class="ai-body" id="aiBody-fab"></div>
     <div class="ai-chips" id="aiChips-fab"></div>
     <form class="ai-inputrow" onsubmit="return aiSubmitInput(event,'fab')">
-      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-ph="ai_input_placeholder" data-i18n="ai_input_aria" data-i18n-attr="aria-label">
+      <input id="aiInput-fab" placeholder="輸入您的問題…" aria-label="輸入問題" oninput="aiToggleSend('fab')" data-i18n-placeholder="ai_input_placeholder" data-i18n-aria-label="ai_input_aria">
       <button type="submit" id="aiSend-fab" disabled data-i18n="ai_send">送出</button>
     </form>
     <div class="ai-disclaimer" data-i18n="ai_disclaimer">回覆由 AI 產生，重要事項請以顧問確認為準</div>
   </div>
 </div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n_dict_public.js"></script>
+<script src="../assets/_i18n_dict_public_ja.js"></script>
+<script src="../assets/_i18n_dict_public_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
+function T(zh,obj){ return TLI_I18N.t(zh,obj); }
 
 var TLI_AVATAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg>';
-
-/* ===================== i18n 引擎（段落 A，逐字複製，全站共用） ===================== */
-var TLI_LANG_KEY = 'tli_lang';
-window.TLI_CURRENT_LANG = 'zh-TW';
 
 function tliFmt(str, obj){
   if(!str) return str;
   return str.replace(/\{(\w+)\}/g, function(_, k){ return (obj && obj[k] !== undefined) ? obj[k] : ''; });
 }
-function tliDict(){
-  return Object.assign({}, I18N_COMMON['zh-TW'], I18N_PAGE['zh-TW'], {}, (function(){
-    var lang = window.TLI_CURRENT_LANG;
-    return Object.assign({}, I18N_COMMON[lang] || I18N_COMMON['zh-TW'] || {}, I18N_PAGE[lang] || I18N_PAGE['zh-TW'] || {});
-  })());
-}
-function applyLang(lang){
-  window.TLI_CURRENT_LANG = lang;
-  document.documentElement.lang = ({'zh-TW':'zh-Hant','zh-CN':'zh-Hans','en':'en','ja':'ja','de':'de'})[lang] || 'zh-Hant';
-  var dict = tliDict();
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var key = el.getAttribute('data-i18n');
-    var v = dict[key];
-    if(v === undefined) return;
-    var attr = el.getAttribute('data-i18n-attr');
-    if(attr){
-      attr.split(',').forEach(function(a){ el.setAttribute(a.trim(), v); });
-    } else {
-      el.textContent = v;
-    }
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
-    var key = el.getAttribute('data-i18n-ph');
-    var v = dict[key];
-    if(v !== undefined) el.setAttribute('placeholder', v);
-  });
-  if(dict.meta_title) document.title = dict.meta_title;
-  if(dict.meta_description){
-    var m = document.querySelector('meta[name="description"]');
-    if(m) m.setAttribute('content', dict.meta_description);
-  }
-  var sel = document.querySelector('.lang-select');
-  if(sel) sel.value = lang;
-  if(lang!=='zh-TW' && lang!=='en' && lang!=='ja' && typeof showToast==='function'){
-    var __langNames={'zh-CN':'简体中文','de':'Deutsch'};
-    showToast('已切換為 '+(__langNames[lang]||lang));
-  }
-  if(typeof onLangApplied === 'function') onLangApplied(lang);
-}
-function setLang(lang){
-  try{ localStorage.setItem(TLI_LANG_KEY, lang); }catch(e){}
-  applyLang(lang);
-}
-function initLang(){
-  var lang = 'zh-TW';
-  try{ lang = localStorage.getItem(TLI_LANG_KEY) || 'zh-TW'; }catch(e){}
-  applyLang(lang);
+function applyMetaDesc(){
+  /* <title> 在 <head> 裡，共用模組的 data-i18n 掃描只作用在 document.body，不會處理 <title>，需自行設定 */
+  document.title = T('TLI Connect｜預約諮詢／試聽', {en:'TLI Connect | Book a Consultation or Trial', ja:'TLI Connect｜相談・体験レッスン予約', de:'TLI Connect | Beratung oder Probestunde buchen'});
+  var m = document.querySelector('meta[name="description"]');
+  if(m) m.setAttribute('content', T('TLI 快速預約諮詢與試聽：填表 30 秒完成預約，不確定怎麼選時再問 AI 諮詢助手，送出後由顧問於 1 個工作日內聯繫。', {en:'Book a consultation or free trial with TLI in 30 seconds. Not sure what to choose? Ask our AI assistant — an advisor will follow up within 1 business day.', ja:'TLI の相談・体験レッスンは最短30秒で予約完了。迷ったときはAI相談アシスタントにご質問ください。送信後、アドバイザーが1営業日以内にご連絡します。', de:'Buchen Sie in 30 Sekunden eine Beratung oder kostenlose Probestunde bei TLI. Nicht sicher, was Sie wählen sollen? Fragen Sie unseren KI-Assistenten — ein Berater meldet sich innerhalb eines Werktags bei Ihnen.'}));
 }
 
-/* ===================== 共用字典 I18N_COMMON（段落 B，逐字複製，全站共用） ===================== */
-var I18N_COMMON = {
-'zh-TW': {
-  nav_courses: '課程', nav_events: '活動', nav_teachers: '師資', nav_about: '品牌與校區', nav_faq: '常見問題',
-  btn_consult: '預約諮詢', btn_trial: '預約試聽', btn_login: '登入',
-  menu_toggle_aria: '開啟選單', lang_select_aria: '語言切換',
-  footer_brand_name: 'TLI 中華語文研習所',
-  footer_brand_line1: '1956 年創立於美國紐澤西，同年於台北建校',
-  footer_brand_line2: '1976 年教育部核定校名為「中華語文研習所」',
-  footer_col_courses: '課程', footer_link_chinese: '中文課程', footer_link_foreign: '外語課程',
-  footer_link_events: '線上活動', footer_link_teachers: '師資介紹',
-  footer_col_about: '關於 TLI', footer_link_history: '品牌沿革', footer_link_locations: '四校地址', footer_link_faq: '常見問題',
-  footer_col_start: '開始學習', footer_link_trial: '免費試聽', footer_link_login: '會員登入／註冊',
-  footer_copyright: '© 2026 TLI 中華語文研習所．保留所有權利。',
-  ai_fab_label: '線上諮詢', ai_fab_aria: '開啟線上諮詢',
-  ai_title: 'TLI 小幫手', ai_status: '線上・通常 1 分鐘內回覆',
-  ai_minimize_aria: '最小化', ai_close_aria: '關閉',
-  ai_input_placeholder: '輸入您的問題…', ai_input_aria: '輸入問題', ai_send: '送出',
-  ai_disclaimer: '回覆由 AI 產生，重要事項請以顧問確認為準',
-  ai_chip_trial: '試聽怎麼預約',
-  ai_greeting_default: '您好，我是 TLI 小幫手，歡迎詢問退費、請假改期、簽證、發票、付款、上課方式或老師配對等問題，也可以直接輸入您的問題。',
-  ai_thumbs_prompt: '這有幫助嗎？', ai_thumbs_thanks: '感謝回饋',
-  ai_action_trial: '預約試聽', ai_action_contact: '聯繫顧問',
-  ai_repeat: '剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？',
-  ai_fallback: '這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。',
-  ai_escalate_user_msg: '我想直接聯繫顧問',
-  ai_form_name_ph: '姓名', ai_form_contact_ph: 'Email 或 LINE ID',
-  ai_form_submit: '送出，請顧問聯繫我', ai_live_btn: '轉真人客服',
-  ai_live_queued: '已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。',
-  ai_toast_fill_required: '請填寫姓名與聯絡方式',
-  ai_ticket_created: '已建立諮詢工單 #{ticket}',
-  ai_tl_assigned: '已指派專責顧問（{advisor}）',
-  ai_tl_followup: '顧問 1 個工作日內聯繫（{contact}）'
-},
-en: {
-  nav_courses: 'Courses', nav_events: 'Events', nav_teachers: 'Teachers', nav_about: 'About & Locations', nav_faq: 'FAQ',
-  btn_consult: 'Book Consultation', btn_trial: 'Free Trial', btn_login: 'Log in',
-  menu_toggle_aria: 'Open menu', lang_select_aria: 'Language',
-  footer_brand_name: 'TLI - Taipei Language Institute',
-  footer_brand_line1: 'Founded in New Jersey, USA in 1956; the Taipei campus opened the same year',
-  footer_brand_line2: 'Renamed "Taipei Language Institute" by Taiwan’s Ministry of Education in 1976',
-  footer_col_courses: 'Courses', footer_link_chinese: 'Chinese Courses', footer_link_foreign: 'Foreign Language Courses',
-  footer_link_events: 'Online Events', footer_link_teachers: 'Our Teachers',
-  footer_col_about: 'About TLI', footer_link_history: 'Our History', footer_link_locations: 'Campus Locations', footer_link_faq: 'FAQ',
-  footer_col_start: 'Get Started', footer_link_trial: 'Free Trial', footer_link_login: 'Member Login / Sign Up',
-  footer_copyright: '© 2026 TLI - Taipei Language Institute. All rights reserved.',
-  ai_fab_label: 'Chat with us', ai_fab_aria: 'Open live chat',
-  ai_title: 'TLI Assistant', ai_status: 'Online · Usually replies within 1 min',
-  ai_minimize_aria: 'Minimize', ai_close_aria: 'Close',
-  ai_input_placeholder: 'Type your question…', ai_input_aria: 'Type a question', ai_send: 'Send',
-  ai_disclaimer: 'Replies are AI-generated; please confirm important details with an advisor',
-  ai_chip_trial: 'How to book a trial',
-  ai_greeting_default: 'Hi, I’m the TLI Assistant. Ask me about refunds, rescheduling, visas, invoices, payment, class formats, or teacher matching — or type your own question.',
-  ai_thumbs_prompt: 'Was this helpful?', ai_thumbs_thanks: 'Thanks for your feedback',
-  ai_action_trial: 'Book a Trial', ai_action_contact: 'Contact an Advisor',
-  ai_repeat: 'As mentioned about “{chip}”: {short} Is there anything else you’d like to know?',
-  ai_fallback: 'Let me have an advisor follow up on this one — please leave your contact info and we’ll reach out within 1 business day.',
-  ai_escalate_user_msg: 'I’d like to speak with an advisor',
-  ai_form_name_ph: 'Name', ai_form_contact_ph: 'Email or LINE ID',
-  ai_form_submit: 'Submit — have an advisor contact me', ai_live_btn: 'Talk to a live agent',
-  ai_live_queued: 'You’re in the queue — 1 person ahead of you. An agent will assist you as soon as they’re online.',
-  ai_toast_fill_required: 'Please fill in your name and contact info',
-  ai_ticket_created: 'Consultation ticket #{ticket} has been created',
-  ai_tl_assigned: 'Assigned to advisor: {advisor}',
-  ai_tl_followup: 'Advisor will contact you within 1 business day via {contact}'
-},
-ja: {
-  nav_courses: 'コース', nav_events: 'イベント', nav_teachers: '講師陣', nav_about: '沿革と校舎', nav_faq: 'よくある質問',
-  btn_consult: '相談予約', btn_trial: '無料体験', btn_login: 'ログイン',
-  menu_toggle_aria: 'メニューを開く', lang_select_aria: '言語切替',
-  footer_brand_name: 'TLI（台北語文学院）',
-  footer_brand_line1: '1956年に米国ニュージャージーで創立、同年台北校を開校',
-  footer_brand_line2: '1976年、台湾教育部により「中華語文研習所」に改称認可',
-  footer_col_courses: 'コース', footer_link_chinese: '中国語コース', footer_link_foreign: '外国語コース',
-  footer_link_events: 'オンラインイベント', footer_link_teachers: '講師紹介',
-  footer_col_about: 'TLIについて', footer_link_history: '沿革', footer_link_locations: '校舎所在地', footer_link_faq: 'よくある質問',
-  footer_col_start: '学習を始める', footer_link_trial: '無料体験', footer_link_login: '会員ログイン／登録',
-  footer_copyright: '© 2026 TLI（台北語文学院） All rights reserved.',
-  ai_fab_label: 'オンライン相談', ai_fab_aria: 'オンライン相談を開く',
-  ai_title: 'TLIアシスタント', ai_status: 'オンライン・通常1分以内に返信',
-  ai_minimize_aria: '最小化', ai_close_aria: '閉じる',
-  ai_input_placeholder: 'ご質問を入力してください…', ai_input_aria: '質問を入力', ai_send: '送信',
-  ai_disclaimer: '回答はAIによる自動生成です。重要事項は必ずアドバイザーにご確認ください',
-  ai_chip_trial: '体験レッスンの予約方法',
-  ai_greeting_default: 'こんにちは、TLIアシスタントです。返金、振替・キャンセル、ビザ、領収書、お支払い、受講形式、講師のマッチングなどについてお気軽にご質問ください。',
-  ai_thumbs_prompt: '役に立ちましたか？', ai_thumbs_thanks: 'フィードバックありがとうございます',
-  ai_action_trial: '体験レッスン予約', ai_action_contact: 'アドバイザーに連絡',
-  ai_repeat: '先ほどの「{chip}」についてですが：{short}他にご質問はございますか？',
-  ai_fallback: 'こちらはアドバイザーより回答させていただきます。ご連絡先をご記入いただければ1営業日以内にご連絡いたします。',
-  ai_escalate_user_msg: 'アドバイザーと直接話したいです',
-  ai_form_name_ph: 'お名前', ai_form_contact_ph: 'メールアドレスまたはLINE ID',
-  ai_form_submit: '送信して連絡してもらう', ai_live_btn: '有人対応に切り替える',
-  ai_live_queued: 'ただいま順番待ちです（前に1名）。担当者がオンラインになり次第、すぐに対応いたします。',
-  ai_toast_fill_required: 'お名前とご連絡先をご入力ください',
-  ai_ticket_created: 'お問い合わせチケット #{ticket} を作成しました',
-  ai_tl_assigned: '担当アドバイザー：{advisor}',
-  ai_tl_followup: '1営業日以内に{contact}宛にご連絡いたします'
+/* ===== 共用字典裡已備妥的 key（見交辦說明第 4 點），直接讀取已載入的共用詞典，不重複翻譯 ===== */
+function C(zh, key){
+  var lang = TLI_I18N.currentLang();
+  if(lang === 'en') return (window.TLI_I18N_DICT && TLI_I18N_DICT.en && TLI_I18N_DICT.en[key] !== undefined) ? TLI_I18N_DICT.en[key] : zh;
+  if(lang === 'ja') return (window.TLI_I18N_DICT && TLI_I18N_DICT.ja && TLI_I18N_DICT.ja[key] !== undefined) ? TLI_I18N_DICT.ja[key] : zh;
+  if(lang === 'de') return (window.TLI_I18N_DICT && TLI_I18N_DICT.de && TLI_I18N_DICT.de[key] !== undefined) ? TLI_I18N_DICT.de[key] : zh;
+  return T(zh, {});
 }
-};
-
-/* ===================== 本頁專屬字典 I18N_PAGE（p06 預約諮詢／試聽） ===================== */
-var I18N_PAGE = {
-'zh-TW': {
-  meta_title: 'TLI Connect｜預約諮詢／試聽',
-  meta_description: 'TLI 快速預約諮詢與試聽：填表 30 秒完成預約，不確定怎麼選時再問 AI 諮詢助手，送出後由顧問於 1 個工作日內聯繫。',
-  p06_page_title: '預約諮詢／預約試聽',
-  p06_page_lead: '填表 30 秒完成預約，顧問將主動與您聯繫；不確定怎麼選時，可點右下角「線上諮詢」問 AI',
-  p06_page_lead_selfserve: '付款完成即確認時段，顧問會在試聽後聯繫你',
-  p06_label_lang: '想學的語言', p06_label_level: '目前程度', p06_label_format: '上課形式',
-  p06_onsite_note: 'TLI Connect 目前僅提供線上課程；實體課程請至官網選校區報名。',
-  p06_onsite_link: '前往官網報名 →',
-  p06_field_name_label: '姓名', p06_field_email_label: 'Email', p06_field_phone_label: '手機（或 LINE ID）',
-  p06_ph_name: '請輸入姓名', p06_ph_email: '請輸入 Email', p06_ph_phone: '請輸入手機號碼或 LINE ID',
-  p06_label_slot: '選擇試聽時段', p06_slot_hint: '線上一對一體驗課，30 分鐘', p06_slot_multi_hint: '時段偏好可複選 2–3 個，供顧問安排時參考', p06_slot_max_hint: '最多選 3 個時段偏好',
-  p06_label_goal: '想學的目標（可略過）', p06_goal_none: '請選擇（可略過）', p06_goal_daily: '生活會話', p06_goal_business: '商務會話', p06_goal_exam: '檢定衝刺', p06_goal_pronunciation: '發音矯正', p06_goal_culture: '文化體驗',
-  p06_note_ph: '備註（選填）',
-  p06_label_teacher_showcase: '師資介紹', p06_teacher_showcase_hint: '體驗課由顧問依你的時段與目標安排合適老師，無法在此指定老師',
-  p06_teacher_wang: '王老師', p06_teacher_li: '李老師', p06_teacher_chen: '陳老師',
-  p06_advisor_assign_note: '顧問將依你的時段為你安排老師並通知，完成付款即送出。',
-  p06_selfserve_price_label: '體驗課費用', p06_selfserve_price_value: 'NT$390', p06_selfserve_price_tag: '',
-  p06_go_payment_btn: '前往付款',
-  p06_label_contact_time: '方便聯繫時段', p06_submit_btn: '送出預約',
-  p06_missing_campus: '校區', p06_missing_phone: '手機或 LINE ID', p06_missing_slot: '試聽時段',
-  p06_hint_missing: '還缺：{items}', p06_hint_missing_count: '還缺 {n} 項必填欄位', p06_join_sep: '、',
-  p06_received_title_default: '已收到您的預約', p06_received_title_trial: '已收到您的試聽預約', p06_received_title_consult: '已收到您的諮詢預約',
-  p06_received_sub: '以下流程由系統自動執行，您可即時看到處理進度',
-  p06_automation_note: '以上由自動化流程（N8N）處理，無需人工轉抄。',
-  p06_btn_register_track: '註冊追蹤進度', p06_btn_rebook: '再預約一場',
-  p06_side1_h3: '試聽流程',
-  p06_side1_li1: '填表 30 秒完成預約', p06_side1_li2: '顧問於 1 個工作日內主動聯繫',
-  p06_side1_li3: '安排免費試聽課程', p06_side1_li4: '試聽後再決定是否購買方案',
-  p06_side2_h3: '為什麼選 TLI Connect',
-  p06_side2_li1: '1956 年創校，70 年語言教學經驗', p06_side2_li2: '一對一線上課與彈性團體直播，時段彈性選擇',
-  p06_side2_li3: '顧問全程協助配對師資與方案', p06_side2_li4: '想到校區上實體課？可另至 TLI 官網報名',
-  p06_step_ticket: '諮詢工單已建立（編號 {ticket}）',
-  p06_step_advisor: '依語言與{loc}自動指派顧問（{advisor}）',
-  p06_step_confirm: 'LINE／Email 確認已送出（{contact}）',
-  p06_step_added_todo: '已加入顧問今日待辦（{name}）',
-  p06_step_slot_locked: '已鎖定 {date} {time} 線上教室，開課前 15 分鐘從會員區進入',
-  p06_default_student: '學員', p06_group_online: '線上組',
-  p06_slot_day_fmt: '{month}/{date}（{weekday}）', p06_selected_slot_line: '已選 {date}　{times}',
-  p06_cal_title_fmt: '{year} 年 {month} 月', p06_cal_prev_aria: '上一月', p06_cal_next_aria: '下一月',
-  p06_cal_pick_date_hint: '請先在上方月曆選擇日期',
-  p06_course_banner: '已依您點選的課程「{course}」帶入語言，如需調整可自行修改。',
-  p06_course_zh_1on1: '中文一對一線上課', p06_course_en_1on1: '英文一對一線上課', p06_course_ja_1on1: '日文一對一線上課',
-  p06_course_ko_1on1: '韓文一對一線上課', p06_course_de_1on1: '德文一對一線上課', p06_course_fr_1on1: '法文一對一線上課',
-  p06_course_flex_zh: '中文 彈性團體直播', p06_course_flex_en: '英文 彈性團體直播',
-  p06_course_self_zh: '中文自學影音課', p06_course_culture_zh: '中文文化主題線上課',
-  p06_course_corp: '企業線上培訓', p06_course_cert: '師資認證線上課程',
-  p06_lang_zh: '中文', p06_lang_en: '英文', p06_lang_ja: '日文', p06_lang_ko: '韓文', p06_lang_de: '德文', p06_lang_fr: '法文', p06_lang_dialect: '方言',
-  p06_level_none: '零基礎', p06_level_beginner: '初級', p06_level_intermediate: '中級', p06_level_advanced_plus: '中高級以上', p06_level_unsure: '不確定',
-  p06_format_online: '線上', p06_format_onsite: '實體',
-  p06_campus_roosevelt: '羅斯福校', p06_campus_shilin: '士林校', p06_campus_taichung: '台中校', p06_campus_kaohsiung: '高雄校',
-  p06_contact_morning: '上午', p06_contact_afternoon: '下午', p06_contact_evening: '晚上', p06_contact_anytime: '皆可',
-  p06_weekday_sun: '日', p06_weekday_mon: '一', p06_weekday_tue: '二', p06_weekday_wed: '三', p06_weekday_thu: '四', p06_weekday_fri: '五', p06_weekday_sat: '六',
-  p06_ai_greeting_trial: '需要協助挑選班型，或有退費、請假、簽證、發票、付款相關問題，都可以問我。',
-  p06_quiz_chip_label: '幫我挑班型',
-  p06_quiz_intro: '好的，3 個小問題，30 秒幫您挑班型。先選想學的語言：',
-  p06_quiz_q_goal: '學習目標是？',
-  p06_quiz_q_level: '目前程度大概落在哪個範圍？可以直接選，或做 30 秒快測。',
-  p06_quiz_quicktest_btn: '30 秒快測',
-  p06_quiz_quick_q1: '您能看懂這個語言的簡單句子嗎？',
-  p06_quiz_quick_q1_opt_yes: '可以，能看懂基本句子', p06_quiz_quick_q1_opt_no: '不行，才剛接觸',
-  p06_quiz_quick_q2: '那可以用這個語言進行流暢的日常對話嗎？',
-  p06_quiz_quick_q2_opt_advanced: '可以，想加強進階內容', p06_quiz_quick_q2_opt_intermediate: '大致可以，想穩固基礎', p06_quiz_quick_q2_opt_beginner: '還沒辦法自然對話',
-  p06_quiz_result_intro: '根據您的回答，建議方案：', p06_quiz_apply_btn: '帶入預約表單',
-  p06_goal_work: '工作需求', p06_goal_study_abroad: '留學準備', p06_goal_daily: '生活會話', p06_goal_exam: '檢定考試',
-  p06_plan_name_group: '{lang} 彈性團體直播', p06_plan_name_1on1: '{lang} 一對一線上課',
-  p06_plan_name_1on1_intensive: '{lang} 一對一線上課（密集加強）', p06_plan_name_onsite_semester: '{lang} 實體學期班',
-  p06_plan_note_group_daily: '固定時段直播上課，與同好一起練習口說。',
-  p06_plan_note_1on1_daily: '依個人時間彈性排課，加強口說信心。',
-  p06_plan_note_1on1_exam: '依檢定日程規劃加強進度。',
-  p06_plan_note_group_exam: '固定時段複習，與同儕互相督促。',
-  p06_plan_note_onsite_study: '週時數達 15 小時，符合學生簽證申請條件。',
-  p06_plan_note_1on1_study: '出發前先線上加強，銜接實體課程。',
-  p06_plan_note_1on1_work: '依工作行程彈性排課，內容客製化。',
-  p06_plan_note_group_work: '固定時段上課，成本較親民。',
-  p06_toast_applied: '已帶入預約表單，請確認後送出'
-},
-en: {
-  meta_title: 'TLI Connect | Book a Consultation or Trial',
-  meta_description: 'Book a consultation or free trial with TLI in 30 seconds. Not sure what to choose? Ask our AI assistant — an advisor will follow up within 1 business day.',
-  p06_page_title: 'Book a Consultation or Free Trial',
-  p06_page_lead: 'It takes 30 seconds to book — an advisor will reach out to you directly. Not sure what to pick? Tap “Chat with us” in the bottom right and ask our AI assistant.',
-  p06_page_lead_selfserve: 'Your time slot is confirmed as soon as payment completes; an advisor will follow up after your trial class.',
-  p06_label_lang: 'Language you want to learn', p06_label_level: 'Current level', p06_label_format: 'Class format',
-  p06_onsite_note: 'TLI Connect currently offers online courses only. For in-person classes, please register through our official website by campus.',
-  p06_onsite_link: 'Register on our official website →',
-  p06_field_name_label: 'Name', p06_field_email_label: 'Email', p06_field_phone_label: 'Mobile (or LINE ID)',
-  p06_ph_name: 'Enter your name', p06_ph_email: 'Enter your email', p06_ph_phone: 'Enter your mobile number or LINE ID',
-  p06_label_slot: 'Choose a trial time slot', p06_slot_hint: '30-minute online 1-on-1 trial class', p06_slot_multi_hint: 'Pick 2–3 preferred times to give your advisor flexibility', p06_slot_max_hint: 'You can pick up to 3 preferred times',
-  p06_label_goal: 'Your learning goal (optional)', p06_goal_none: 'Select (optional)', p06_goal_daily: 'Everyday conversation', p06_goal_business: 'Business conversation', p06_goal_exam: 'Exam prep', p06_goal_pronunciation: 'Pronunciation coaching', p06_goal_culture: 'Culture experience',
-  p06_note_ph: 'Notes (optional)',
-  p06_label_teacher_showcase: 'Our Teachers', p06_teacher_showcase_hint: 'Your advisor will match you with a suitable teacher based on your time and goals — you cannot pick a teacher here',
-  p06_teacher_wang: 'Teacher Wang', p06_teacher_li: 'Teacher Li', p06_teacher_chen: 'Teacher Chen',
-  p06_advisor_assign_note: 'Your advisor will assign a teacher based on your selected times and notify you — submitting payment completes your booking.',
-  p06_selfserve_price_label: 'Trial class fee', p06_selfserve_price_value: 'NT$390', p06_selfserve_price_tag: '',
-  p06_go_payment_btn: 'Proceed to Payment',
-  p06_label_contact_time: 'Best time to reach you', p06_submit_btn: 'Submit Booking',
-  p06_missing_campus: 'Campus', p06_missing_phone: 'Mobile or LINE ID', p06_missing_slot: 'Trial time slot',
-  p06_hint_missing: 'Still needed: {items}', p06_hint_missing_count: 'Still needed: {n} required fields', p06_join_sep: ', ',
-  p06_received_title_default: 'Your booking has been received', p06_received_title_trial: 'Your trial booking has been received', p06_received_title_consult: 'Your consultation booking has been received',
-  p06_received_sub: 'The steps below are handled automatically — you can watch the progress in real time',
-  p06_automation_note: 'The above is processed by our automation workflow (N8N); no manual data entry is needed.',
-  p06_btn_register_track: 'Sign Up to Track Progress', p06_btn_rebook: 'Book Another Session',
-  p06_side1_h3: 'Trial Process',
-  p06_side1_li1: 'Fill out the form in 30 seconds', p06_side1_li2: 'An advisor reaches out within 1 business day',
-  p06_side1_li3: 'A free trial class is arranged for you', p06_side1_li4: 'Decide on a plan after trying it out',
-  p06_side2_h3: 'Why Choose TLI Connect',
-  p06_side2_li1: 'Founded in 1956 — 70 years of language teaching experience', p06_side2_li2: '1-on-1 online classes and flexible group livestream, with flexible time slots',
-  p06_side2_li3: 'Advisors help match you with the right teacher and plan throughout', p06_side2_li4: 'Prefer an in-person class at a campus? You can also register on the TLI website',
-  p06_step_ticket: 'Consultation ticket created (#{ticket})',
-  p06_step_advisor: 'Auto-assigned to an advisor based on language and {loc} ({advisor})',
-  p06_step_confirm: 'LINE / Email confirmation sent ({contact})',
-  p06_step_added_todo: 'Added to advisor’s to-do list for today ({name})',
-  p06_step_slot_locked: 'Reserved for {date} {time} in the online classroom — join from the member area 15 minutes before class',
-  p06_default_student: 'Student', p06_group_online: 'the online team',
-  p06_slot_day_fmt: '{month}/{date} ({weekday})', p06_selected_slot_line: 'Selected: {date}  {times}',
-  p06_cal_title_fmt: '{month} {year}', p06_cal_prev_aria: 'Previous month', p06_cal_next_aria: 'Next month',
-  p06_cal_pick_date_hint: 'Please choose a date from the calendar above',
-  p06_course_banner: 'Language auto-filled from the course you selected, “{course}.” Feel free to adjust it.',
-  p06_course_zh_1on1: 'Chinese 1-on-1 Online', p06_course_en_1on1: 'English 1-on-1 Online', p06_course_ja_1on1: 'Japanese 1-on-1 Online',
-  p06_course_ko_1on1: 'Korean 1-on-1 Online', p06_course_de_1on1: 'German 1-on-1 Online', p06_course_fr_1on1: 'French 1-on-1 Online',
-  p06_course_flex_zh: 'Chinese Flexible Group Livestream', p06_course_flex_en: 'English Flexible Group Livestream',
-  p06_course_self_zh: 'Chinese Self-Paced Video Course', p06_course_culture_zh: 'Chinese Culture Online Course',
-  p06_course_corp: 'Corporate Online Training', p06_course_cert: 'Teacher Certification Online Course',
-  p06_lang_zh: 'Chinese', p06_lang_en: 'English', p06_lang_ja: 'Japanese', p06_lang_ko: 'Korean', p06_lang_de: 'German', p06_lang_fr: 'French', p06_lang_dialect: 'Dialect',
-  p06_level_none: 'Absolute Beginner', p06_level_beginner: 'Beginner', p06_level_intermediate: 'Intermediate', p06_level_advanced_plus: 'Upper-Intermediate+', p06_level_unsure: 'Not Sure',
-  p06_format_online: 'Online', p06_format_onsite: 'In-Person',
-  p06_campus_roosevelt: 'Roosevelt Campus', p06_campus_shilin: 'Shilin Campus', p06_campus_taichung: 'Taichung Campus', p06_campus_kaohsiung: 'Kaohsiung Campus',
-  p06_contact_morning: 'Morning', p06_contact_afternoon: 'Afternoon', p06_contact_evening: 'Evening', p06_contact_anytime: 'Anytime',
-  p06_weekday_sun: 'Sun', p06_weekday_mon: 'Mon', p06_weekday_tue: 'Tue', p06_weekday_wed: 'Wed', p06_weekday_thu: 'Thu', p06_weekday_fri: 'Fri', p06_weekday_sat: 'Sat',
-  p06_ai_greeting_trial: 'Need help choosing a class, or have questions about refunds, rescheduling, visas, invoices, or payment? Just ask.',
-  p06_quiz_chip_label: 'Help Me Choose a Class',
-  p06_quiz_intro: 'Sure — 3 quick questions, 30 seconds, and I’ll suggest a class for you. First, which language would you like to learn?',
-  p06_quiz_q_goal: 'What’s your learning goal?',
-  p06_quiz_q_level: 'Roughly what’s your current level? Pick one, or take a 30-second quick check.',
-  p06_quiz_quicktest_btn: '30-Second Quick Check',
-  p06_quiz_quick_q1: 'Can you understand simple sentences in this language?',
-  p06_quiz_quick_q1_opt_yes: 'Yes, I can follow basic sentences', p06_quiz_quick_q1_opt_no: 'No, I’m just starting out',
-  p06_quiz_quick_q2: 'Can you hold a fluent everyday conversation in this language?',
-  p06_quiz_quick_q2_opt_advanced: 'Yes — I’d like to focus on advanced content', p06_quiz_quick_q2_opt_intermediate: 'Mostly — I’d like to solidify the basics', p06_quiz_quick_q2_opt_beginner: 'Not yet — I can’t hold a natural conversation',
-  p06_quiz_result_intro: 'Based on your answers, here’s what we’d suggest:', p06_quiz_apply_btn: 'Apply to Booking Form',
-  p06_goal_work: 'Work', p06_goal_study_abroad: 'Studying Abroad', p06_goal_daily: 'Everyday Conversation', p06_goal_exam: 'Certification Exam',
-  p06_plan_name_group: '{lang} Flexible Group Livestream', p06_plan_name_1on1: '{lang} 1-on-1 Online',
-  p06_plan_name_1on1_intensive: '{lang} 1-on-1 Online (Intensive)', p06_plan_name_onsite_semester: '{lang} In-Person Semester Course',
-  p06_plan_note_group_daily: 'Fixed-time livestream classes — practice speaking together with fellow learners.',
-  p06_plan_note_1on1_daily: 'Flexible scheduling around your own time, building speaking confidence.',
-  p06_plan_note_1on1_exam: 'Progress planned around your exam timeline for focused improvement.',
-  p06_plan_note_group_exam: 'Fixed-time review sessions, keeping each other accountable.',
-  p06_plan_note_onsite_study: '15+ weekly class hours, meeting the student visa attendance requirement.',
-  p06_plan_note_1on1_study: 'Build a foundation online before you go, bridging into in-person classes.',
-  p06_plan_note_1on1_work: 'Flexible scheduling around your work, with content tailored to you.',
-  p06_plan_note_group_work: 'Fixed-time classes at a more affordable cost.',
-  p06_toast_applied: 'Applied to the booking form — please review and submit'
-},
-ja: {
-  meta_title: 'TLI Connect｜相談・体験レッスン予約',
-  meta_description: 'TLI の相談・体験レッスンは最短30秒で予約完了。迷ったときはAI相談アシスタントにご質問ください。送信後、アドバイザーが1営業日以内にご連絡します。',
-  p06_page_title: '相談予約／体験レッスン予約',
-  p06_page_lead: '入力は30秒で完了、アドバイザーからご連絡いたします。迷ったときは右下の「オンライン相談」からAIにご質問ください',
-  p06_page_lead_selfserve: 'お支払い完了と同時に時間帯が確定します。体験レッスン後にアドバイザーがご連絡いたします。',
-  p06_label_lang: '学びたい言語', p06_label_level: '現在のレベル', p06_label_format: '受講形式',
-  p06_onsite_note: 'TLI Connectは現在オンラインコースのみ提供しています。対面授業は公式サイトより校舎を選んでお申し込みください。',
-  p06_onsite_link: '公式サイトで申し込む →',
-  p06_field_name_label: 'お名前', p06_field_email_label: 'Email', p06_field_phone_label: '携帯電話番号（またはLINE ID）',
-  p06_ph_name: 'お名前を入力してください', p06_ph_email: 'Emailを入力してください', p06_ph_phone: '携帯電話番号またはLINE IDを入力してください',
-  p06_label_slot: '体験レッスンの時間帯を選択', p06_slot_hint: 'オンライン一対一体験レッスン、30分間', p06_slot_multi_hint: '希望時間帯は2～3個複数選択可（アドバイザーの調整用）', p06_slot_max_hint: '希望時間帯は最大3個まで選択できます',
-  p06_label_goal: '学習目標（任意）', p06_goal_none: '選択してください（任意）', p06_goal_daily: '日常会話', p06_goal_business: 'ビジネス会話', p06_goal_exam: '検定対策', p06_goal_pronunciation: '発音矯正', p06_goal_culture: '文化体験',
-  p06_note_ph: '備考（任意）',
-  p06_label_teacher_showcase: '講師紹介', p06_teacher_showcase_hint: '体験レッスンはアドバイザーがご希望の時間帯と目標に応じて講師を手配します。こちらでは講師を指定できません',
-  p06_teacher_wang: '王先生', p06_teacher_li: '李先生', p06_teacher_chen: '陳先生',
-  p06_advisor_assign_note: 'アドバイザーがご希望の時間帯に応じて講師を手配しご連絡します。お支払い完了で送信されます。',
-  p06_selfserve_price_label: '体験レッスン費用', p06_selfserve_price_value: 'NT$390', p06_selfserve_price_tag: '',
-  p06_go_payment_btn: 'お支払いへ進む',
-  p06_label_contact_time: 'ご連絡可能な時間帯', p06_submit_btn: '予約を送信',
-  p06_missing_campus: '校舎', p06_missing_phone: '携帯電話番号またはLINE ID', p06_missing_slot: '体験レッスンの時間帯',
-  p06_hint_missing: '未入力の項目：{items}', p06_hint_missing_count: '必須項目があと{n}件あります', p06_join_sep: '、',
-  p06_received_title_default: 'ご予約を受け付けました', p06_received_title_trial: '体験レッスンのご予約を受け付けました', p06_received_title_consult: 'ご相談のご予約を受け付けました',
-  p06_received_sub: '以下の処理はシステムが自動で行い、進捗をリアルタイムでご確認いただけます',
-  p06_automation_note: '上記は自動化ワークフロー（N8N）による処理で、手作業での転記は不要です。',
-  p06_btn_register_track: '登録して進捗を確認する', p06_btn_rebook: 'もう一度予約する',
-  p06_side1_h3: '体験レッスンの流れ',
-  p06_side1_li1: '入力フォームは30秒で完了', p06_side1_li2: 'アドバイザーが1営業日以内にご連絡',
-  p06_side1_li3: '無料体験レッスンを調整', p06_side1_li4: '体験後にプランをご検討いただけます',
-  p06_side2_h3: 'TLI Connectが選ばれる理由',
-  p06_side2_li1: '1956年創立、70年の語学教育実績', p06_side2_li2: '一対一オンライン授業とグループライブ配信、時間帯も柔軟に選択可能',
-  p06_side2_li3: 'アドバイザーが講師とプランのマッチングを全面サポート', p06_side2_li4: '校舎での対面授業をご希望の場合はTLI公式サイトからもお申し込みいただけます',
-  p06_step_ticket: 'お問い合わせチケットを作成しました（番号 {ticket}）',
-  p06_step_advisor: '言語と{loc}に応じて担当アドバイザーを自動割り当て（{advisor}）',
-  p06_step_confirm: 'LINE／Emailで確認をお送りしました（{contact}）',
-  p06_step_added_todo: '本日のアドバイザー対応リストに追加しました（{name}）',
-  p06_step_slot_locked: '{date} {time} のオンライン教室を確保しました。授業開始15分前に会員エリアからご入室ください',
-  p06_default_student: '受講者', p06_group_online: 'オンライングループ',
-  p06_slot_day_fmt: '{month}/{date}（{weekday}）', p06_selected_slot_line: '選択済み：{date}　{times}',
-  p06_cal_title_fmt: '{year}年{month}月', p06_cal_prev_aria: '前の月', p06_cal_next_aria: '次の月',
-  p06_cal_pick_date_hint: '上のカレンダーで日付を選択してください',
-  p06_course_banner: '選択されたコース「{course}」に基づき言語を自動入力しました。必要に応じて変更できます。',
-  p06_course_zh_1on1: '中国語 1対1 オンライン', p06_course_en_1on1: '英語 1対1 オンライン', p06_course_ja_1on1: '日本語 1対1 オンライン',
-  p06_course_ko_1on1: '韓国語 1対1 オンライン', p06_course_de_1on1: 'ドイツ語 1対1 オンライン', p06_course_fr_1on1: 'フランス語 1対1 オンライン',
-  p06_course_flex_zh: '中国語 グループライブ配信', p06_course_flex_en: '英語 グループライブ配信',
-  p06_course_self_zh: '中国語 自習動画コース', p06_course_culture_zh: '中国語文化テーマオンラインコース',
-  p06_course_corp: '法人向けオンライン研修', p06_course_cert: '講師認定オンラインコース',
-  p06_lang_zh: '中国語', p06_lang_en: '英語', p06_lang_ja: '日本語', p06_lang_ko: '韓国語', p06_lang_de: 'ドイツ語', p06_lang_fr: 'フランス語', p06_lang_dialect: '方言',
-  p06_level_none: '未経験', p06_level_beginner: '初級', p06_level_intermediate: '中級', p06_level_advanced_plus: '中上級以上', p06_level_unsure: '不明',
-  p06_format_online: 'オンライン', p06_format_onsite: '対面',
-  p06_campus_roosevelt: '羅斯福校', p06_campus_shilin: '士林校', p06_campus_taichung: '台中校', p06_campus_kaohsiung: '高雄校',
-  p06_contact_morning: '午前', p06_contact_afternoon: '午後', p06_contact_evening: '夜間', p06_contact_anytime: 'いつでも可',
-  p06_weekday_sun: '日', p06_weekday_mon: '月', p06_weekday_tue: '火', p06_weekday_wed: '水', p06_weekday_thu: '木', p06_weekday_fri: '金', p06_weekday_sat: '土',
-  p06_ai_greeting_trial: 'クラス選びのサポートや、返金・振替・ビザ・領収書・お支払いに関するご質問など、お気軽にお尋ねください。',
-  p06_quiz_chip_label: 'クラス選びを手伝ってもらう',
-  p06_quiz_intro: 'かしこまりました。3つの簡単な質問で30秒でクラスをご提案します。まずは学びたい言語をお選びください：',
-  p06_quiz_q_goal: '学習の目的は何ですか？',
-  p06_quiz_q_level: '現在のレベルはどのくらいですか？直接お選びいただくか、30秒クイックテストをどうぞ。',
-  p06_quiz_quicktest_btn: '30秒クイックテスト',
-  p06_quiz_quick_q1: 'この言語の簡単な文章を理解できますか？',
-  p06_quiz_quick_q1_opt_yes: 'はい、基本的な文章は理解できます', p06_quiz_quick_q1_opt_no: 'いいえ、始めたばかりです',
-  p06_quiz_quick_q2: 'それでは、この言語で流暢な日常会話ができますか？',
-  p06_quiz_quick_q2_opt_advanced: 'できます。より上級の内容を学びたいです', p06_quiz_quick_q2_opt_intermediate: '大体できます。基礎を固めたいです', p06_quiz_quick_q2_opt_beginner: 'まだ自然な会話はできません',
-  p06_quiz_result_intro: 'ご回答に基づき、以下のプランをおすすめします：', p06_quiz_apply_btn: '予約フォームに反映する',
-  p06_goal_work: '仕事のため', p06_goal_study_abroad: '留学準備', p06_goal_daily: '日常会話', p06_goal_exam: '検定試験対策',
-  p06_plan_name_group: '{lang} グループライブ配信', p06_plan_name_1on1: '{lang} 1対1 オンライン',
-  p06_plan_name_1on1_intensive: '{lang} 1対1 オンライン（集中強化）', p06_plan_name_onsite_semester: '{lang} 対面学期制コース',
-  p06_plan_note_group_daily: '決まった時間にライブ配信で受講、仲間と一緒にスピーキングを練習できます。',
-  p06_plan_note_1on1_daily: 'ご自身の都合に合わせて柔軟に受講でき、話す自信を高めます。',
-  p06_plan_note_1on1_exam: '試験日程に合わせて計画的に実力を強化します。',
-  p06_plan_note_group_exam: '決まった時間に復習し、仲間と励まし合いながら学べます。',
-  p06_plan_note_onsite_study: '週15時間以上の受講で、学生ビザ申請の出席条件を満たします。',
-  p06_plan_note_1on1_study: '渡航前にオンラインで基礎を固め、対面授業へスムーズに移行します。',
-  p06_plan_note_1on1_work: 'お仕事のスケジュールに合わせて柔軟に受講、内容もカスタマイズ可能です。',
-  p06_plan_note_group_work: '決まった時間に受講でき、費用も抑えられます。',
-  p06_toast_applied: '予約フォームに反映しました。内容をご確認のうえ送信してください'
+function aiGreetingText(){
+  return T('需要協助挑選班型，或有退費、請假、簽證、發票、付款相關問題，都可以問我。', {en:'Need help choosing a class, or have questions about refunds, rescheduling, visas, invoices, or payment? Just ask.', ja:'クラス選びのサポートや、返金・振替・ビザ・領収書・お支払いに関するご質問など、お気軽にお尋ねください。', de:'Brauchen Sie Hilfe bei der Kurswahl oder haben Fragen zu Rückerstattung, Terminverschiebung, Visum, Rechnungen oder Zahlung? Fragen Sie einfach.'});
 }
-};
 
-/* ===================== TLI_KB 語系版本（段落 C，逐字複製，全站共用） ===================== */
-var TLI_KB_I18N = {
-'zh-TW': [
-  {id:'refund', chip:'退費', q:'如何申請退費？', a:'課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。', short:'開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。'},
-  {id:'reschedule', chip:'請假改期', q:'臨時無法上課，可以退堂或改期嗎？', a:'請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。', short:'上課前 12 小時可申請改期或退堂，逾時視同已上課。'},
-  {id:'visa', chip:'簽證', q:'上課時數與簽證申請有什麼關係？', a:'台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。', short:'週時數達 15 小時的學期班即符合學生簽證申請條件。'},
-  {id:'invoice', chip:'發票', q:'會開立發票嗎？', a:'是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。', short:'付款完成後會開立發票，企業包班可申請月結。'},
-  {id:'payment', chip:'付款方式', q:'有哪些付款方式？', a:'提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。', short:'可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。'},
-  {id:'format', chip:'上課方式', q:'一對一與彈性團體直播差在哪？', a:'一對一線上課由你提出有空的時段，顧問依時段為你安排老師與上課時間；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。', short:'一對一由你提出有空時段、顧問安排老師與時間；團體直播是固定時段、費用較划算。'},
-  {id:'classroom', chip:'線上教室', q:'線上教室怎麼進入？連結會不會外流？', a:'上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。', short:'登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。'},
-  {id:'pricing', chip:'價格與報價', q:'課程費用怎麼估算？', a:'費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。', short:'費用依語言、上課方式與堂數而定，可請顧問提供試算報價。'},
-  {id:'trial', chip:'試聽', q:'可以先試聽嗎？', a:'可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。', short:'提供免費試聽，顧問會依程度與目標安排合適老師與時段。'},
-  {id:'teacher', chip:'老師配對', q:'老師怎麼配對？', a:'顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。', short:'依語言、程度與目標配對合適老師，開課後不合適可申請更換。'}
-],
-en: [
-  {id:'refund', chip:'Refunds', q:'How do I request a refund?', a:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.', short:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.'},
-  {id:'reschedule', chip:'Rescheduling', q:'Can I cancel or reschedule a class on short notice?', a:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.', short:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.'},
-  {id:'visa', chip:'Student Visa', q:'How do class hours relate to visa applications?', a:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.', short:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.'},
-  {id:'invoice', chip:'Invoices', q:'Will I receive an invoice or receipt?', a:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.', short:'An invoice is issued after payment; corporate clients can request monthly billing.'},
-  {id:'payment', chip:'Payment Options', q:'What payment methods are available?', a:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.', short:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.'},
-  {id:'format', chip:'Class Formats', q:'What’s the difference between 1-on-1 and flexible group livestream classes?', a:'For 1-on-1 online classes, you submit the times you’re available and your advisor assigns a teacher and schedule for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.', short:'1-on-1: you submit available times and your advisor assigns a teacher and time; group livestream runs on a fixed schedule and costs less.'},
-  {id:'classroom', chip:'Online Classroom', q:'How do I join the online classroom? Could the link leak to others?', a:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.', short:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.'},
-  {id:'pricing', chip:'Pricing', q:'How is the course fee calculated?', a:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.', short:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.'},
-  {id:'trial', chip:'Trial Class', q:'Can I try a class before signing up?', a:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.', short:'A free trial is available, matched to your level and goals before you commit.'},
-  {id:'teacher', chip:'Teacher Matching', q:'How are teachers matched to students?', a:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.', short:'Matched to a certified teacher by language, level, and goals; you can request a change later.'}
-],
-ja: [
-  {id:'refund', chip:'返金', q:'返金の申請方法は？', a:'開講14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。', short:'開講14日前までなら全額返金、開講後は受講済み回数に応じて算出します。'},
-  {id:'reschedule', chip:'振替・キャンセル', q:'急に受講できなくなった場合、キャンセルや振替はできますか？', a:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。', short:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。'},
-  {id:'visa', chip:'学生ビザ', q:'授業時間数はビザ申請にどう関係しますか？', a:'台湾キャンパスの学期制コースで週15時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。', short:'週15時間以上の学期制コースは学生ビザの出席条件を満たします。'},
-  {id:'invoice', chip:'領収書', q:'領収書は発行されますか？', a:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。', short:'お支払い後に領収書を発行、法人は月締め請求も可能です。'},
-  {id:'payment', chip:'お支払い方法', q:'どのようなお支払い方法がありますか？', a:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。', short:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。'},
-  {id:'format', chip:'受講形式', q:'一対一とグループライブ配信の違いは何ですか？', a:'一対一のオンライン授業は、ご希望の時間帯を提出いただくと、アドバイザーが講師とスケジュールを手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。', short:'一対一はご希望の時間帯を提出しアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。'},
-  {id:'classroom', chip:'オンライン教室', q:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？', a:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。', short:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。'},
-  {id:'pricing', chip:'料金・見積り', q:'コース料金はどのように算出されますか？', a:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。', short:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。'},
-  {id:'trial', chip:'体験レッスン', q:'事前に体験レッスンを受けられますか？', a:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。', short:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。'},
-  {id:'teacher', chip:'講師のマッチング', q:'講師はどのようにマッチングされますか？', a:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。', short:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。'}
-]
-};
+/* ===================== i18n：AI 問答庫（五語，函式化以支援語言切換即時重算，全站共用內容） ===================== */
+function getKB(){
+  return [
+    {id:'refund', chip:T('退費',{en:'Refunds',ja:'返金',de:'Rückerstattung'}), q:T('如何申請退費？',{en:'How do I request a refund?',ja:'返金の申請方法は？',de:'Wie beantrage ich eine Rückerstattung?'}), a:T('課程開始前 14 天內申請可全額退費；已開始上課者，依實際已上課堂數與合約約定計算可退款金額，請聯繫原承辦顧問辦理。',{en:'Apply at least 14 days before your course starts for a full refund. Once classes have begun, the refundable amount is calculated based on lessons completed and your contract terms — please contact your original advisor to process it.',ja:'開講14日前までのお申し込みで全額返金いたします。開講後は、実際に受講した回数と契約条件に基づき返金額を算出しますので、担当アドバイザーまでご連絡ください。',de:'Bei Antrag mindestens 14 Tage vor Kursbeginn erhalten Sie eine vollständige Rückerstattung. Nach Kursbeginn wird der erstattungsfähige Betrag anhand der bereits absolvierten Unterrichtseinheiten und der Vertragsbedingungen berechnet — bitte wenden Sie sich dazu an Ihren zuständigen Berater.'}), short:T('開課前 14 天內可全額退費，開課後依已上課堂數計算可退金額。',{en:'Full refund if requested 14+ days before start; after that, refunds are based on lessons completed.',ja:'開講14日前までなら全額返金、開講後は受講済み回数に応じて算出します。',de:'Vollständige Rückerstattung bei Antrag 14+ Tage vor Kursbeginn; danach richtet sich der Betrag nach den bereits absolvierten Einheiten.'})},
+    {id:'reschedule', chip:T('請假改期',{en:'Rescheduling',ja:'振替・キャンセル',de:'Terminverschiebung'}), q:T('臨時無法上課，可以退堂或改期嗎？',{en:'Can I cancel or reschedule a class on short notice?',ja:'急に受講できなくなった場合、キャンセルや振替はできますか？',de:'Kann ich eine Unterrichtsstunde kurzfristig absagen oder verschieben?'}), a:T('請於原訂上課時間 12 小時前申請退堂或改期，逾時未通知則視同已上課，不予補課或退還堂數。',{en:'Please cancel or reschedule at least 12 hours before your scheduled class. Requests after that window count as a completed lesson, with no make-up class or refund.',ja:'授業開始の12時間前までにキャンセルまたは振替の申請をお願いします。それ以降のご連絡は受講済みとみなされ、補講や返金の対象にはなりません。',de:'Bitte sagen Sie mindestens 12 Stunden vor dem geplanten Unterricht ab oder verschieben Sie ihn. Anfragen nach Ablauf dieser Frist gelten als abgehaltene Stunde, ohne Nachholtermin oder Rückerstattung.'}), short:T('上課前 12 小時可申請改期或退堂，逾時視同已上課。',{en:'Cancel or reschedule up to 12 hours before class; after that it counts as completed.',ja:'授業12時間前までなら振替・キャンセル可能、それ以降は受講済み扱いです。',de:'Absage oder Verschiebung bis 12 Stunden vor Unterrichtsbeginn möglich; danach gilt die Stunde als abgehalten.'})},
+    {id:'visa', chip:T('簽證',{en:'Student Visa',ja:'学生ビザ',de:'Studentenvisum'}), q:T('上課時數與簽證申請有什麼關係？',{en:'How do class hours relate to visa applications?',ja:'授業時間数はビザ申請にどう関係しますか？',de:'Welchen Einfluss haben die Unterrichtsstunden auf die Visumbeantragung?'}), a:T('台灣校區學期班課程如週時數達 15 小時，即符合申請學生簽證所需之上課證明條件，實際申請流程與文件請洽校區顧問確認。',{en:'Semester courses at our Taiwan campuses with 15+ class hours per week meet the attendance requirement for a student visa application. Please confirm the exact process and documents with your campus advisor.',ja:'台湾キャンパスの学期制コースで週15時間以上受講する場合、学生ビザ申請に必要な出席証明の条件を満たします。具体的な申請手続きや必要書類はキャンパスのアドバイザーにご確認ください。',de:'Semesterkurse an unseren Taiwan-Standorten mit mindestens 15 Unterrichtsstunden pro Woche erfüllen die Anwesenheitsvoraussetzung für die Beantragung eines Studentenvisums. Den genauen Ablauf und die erforderlichen Unterlagen bestätigt Ihnen bitte Ihr Campus-Berater.'}), short:T('週時數達 15 小時的學期班即符合學生簽證申請條件。',{en:'Semester courses with 15+ weekly hours meet the student visa attendance requirement.',ja:'週15時間以上の学期制コースは学生ビザの出席条件を満たします。',de:'Semesterkurse mit mindestens 15 Wochenstunden erfüllen die Anwesenheitsvoraussetzung für das Studentenvisum.'})},
+    {id:'invoice', chip:T('發票',{en:'Invoices',ja:'領収書',de:'Rechnungen'}), q:T('會開立發票嗎？',{en:'Will I receive an invoice or receipt?',ja:'領収書は発行されますか？',de:'Erhalte ich eine Rechnung oder Quittung?'}), a:T('是，完成付款後將依規定開立發票；企業包班客戶可申請月結發票，個人課程則於訂單完成後開立。',{en:'Yes — an official invoice is issued after payment is completed. Corporate group-class clients may request monthly billing; individual courses are invoiced once the order is completed.',ja:'はい、お支払い完了後に規定に基づき領収書を発行いたします。法人の団体クラスは月締め請求書の申請が可能で、個人受講は注文完了後に発行されます。',de:'Ja — nach vollständiger Zahlung wird eine offizielle Rechnung ausgestellt. Firmenkunden mit Gruppenkursen können eine monatliche Sammelrechnung beantragen; Einzelkurse werden nach Abschluss der Bestellung in Rechnung gestellt.'}), short:T('付款完成後會開立發票，企業包班可申請月結。',{en:'An invoice is issued after payment; corporate clients can request monthly billing.',ja:'お支払い後に領収書を発行、法人は月締め請求も可能です。',de:'Die Rechnung wird nach der Zahlung ausgestellt; Firmenkunden können eine monatliche Sammelrechnung beantragen.'})},
+    {id:'payment', chip:T('付款方式',{en:'Payment Options',ja:'お支払い方法',de:'Zahlungsmöglichkeiten'}), q:T('有哪些付款方式？',{en:'What payment methods are available?',ja:'どのようなお支払い方法がありますか？',de:'Welche Zahlungsmöglichkeiten gibt es?'}), a:T('提供一次付清、訂金＋尾款、分期三種付款模式，實際適用方式依方案內容與顧問確認之訂單條件為準。',{en:'We offer full payment, deposit + balance, or installment plans. The exact options depend on your course plan and the order terms confirmed with your advisor.',ja:'一括払い、内金＋残金、分割払いの3種類がございます。実際にご利用いただける方法はプラン内容とアドバイザーが確認した注文条件によります。',de:'Wir bieten Zahlung in voller Höhe, Anzahlung + Restbetrag oder Ratenzahlung an. Die genauen Optionen richten sich nach Ihrem Kursplan und den mit Ihrem Berater bestätigten Bestellbedingungen.'}), short:T('可選一次付清、訂金＋尾款或分期，依方案與顧問確認條件為準。',{en:'Choose full payment, deposit + balance, or installments, per your advisor-confirmed plan.',ja:'一括、内金＋残金、分割いずれかを選択でき、詳細はアドバイザーとの確認条件によります。',de:'Wahlweise volle Zahlung, Anzahlung + Restbetrag oder Ratenzahlung, gemäß dem mit dem Berater bestätigten Plan.'})},
+    {id:'format', chip:T('上課方式',{en:'Class Formats',ja:'受講形式',de:'Unterrichtsformen'}), q:T('一對一與彈性團體直播差在哪？',{en:'What’s the difference between 1-on-1 and flexible group livestream classes?',ja:'一対一とグループライブ配信の違いは何ですか？',de:'Was ist der Unterschied zwischen 1:1-Unterricht und flexiblem Gruppen-Livestream?'}), a:T('一對一線上課由你提出有空的時段，顧問依時段為你安排老師與上課時間；彈性團體直播是固定時段開課、報名即可入班，費用通常更划算，若當期提供回放，錯過直播仍可補看。',{en:'For 1-on-1 online classes, you submit the times you’re available and your advisor assigns a teacher and schedule for you. Flexible group livestream classes run at fixed times and you simply enroll to join; they’re usually more affordable, and if a recording is offered that term, you can catch up if you miss the live session.',ja:'一対一のオンライン授業は、ご希望の時間帯を提出いただくと、アドバイザーが講師とスケジュールを手配します。グループライブ配信は決まった時間に開講し、申込めばそのまま参加可能で、料金は比較的お得です。その回に録画提供がある場合は、見逃してもあとから視聴できます。',de:'Beim 1:1-Online-Unterricht teilen Sie uns Ihre verfügbaren Zeiten mit, und Ihr Berater stellt Ihnen Lehrkraft und Zeitplan zusammen. Der flexible Gruppen-Livestream findet zu festen Zeiten statt; Sie melden sich einfach an und nehmen teil — meist günstiger, und bei angebotener Aufzeichnung können Sie eine verpasste Sitzung nachholen.'}), short:T('一對一由你提出有空時段、顧問安排老師與時間；團體直播是固定時段、費用較划算。',{en:'1-on-1: you submit available times and your advisor assigns a teacher and time; group livestream runs on a fixed schedule and costs less.',ja:'一対一はご希望の時間帯を提出しアドバイザーが講師と時間を手配、グループライブ配信は固定スケジュールで料金がお得です。',de:'1:1: Sie teilen Ihre verfügbaren Zeiten mit, Ihr Berater stellt Lehrkraft und Zeit zusammen; der Gruppen-Livestream läuft nach festem Zeitplan und ist günstiger.'})},
+    {id:'classroom', chip:T('線上教室',{en:'Online Classroom',ja:'オンライン教室',de:'Online-Klassenzimmer'}), q:T('線上教室怎麼進入？連結會不會外流？',{en:'How do I join the online classroom? Could the link leak to others?',ja:'オンライン教室にはどうやって入りますか？リンクが流出する心配はありませんか？',de:'Wie betrete ich das Online-Klassenzimmer? Könnte der Link an andere weitergegeben werden?'}), a:T('上課前登入會員區，系統驗證身分後開放「進入教室」按鈕，一鍵進入當堂專屬 Zoom 教室；每堂課使用唯一會議並由老師於等候室放行，不提供可轉傳的連結。',{en:'Log into the member area before class — once your identity is verified, the “Enter Classroom” button unlocks a one-click link to your dedicated Zoom session. Each class uses a unique meeting, and your teacher admits you from the waiting room, so there’s no shareable link that could leak.',ja:'授業前に会員エリアにログインし、本人確認後に「教室に入る」ボタンが表示され、ワンクリックでその回専用のZoom教室に入室できます。各授業は個別のミーティングを使用し、講師が待機室から入室を許可するため、転送可能なリンクは発行されません。',de:'Loggen Sie sich vor dem Unterricht im Mitgliederbereich ein — nach der Identitätsprüfung schaltet die Schaltfläche „Klassenzimmer betreten“ einen Link mit einem Klick zu Ihrer persönlichen Zoom-Sitzung frei. Jede Stunde nutzt ein eigenes Meeting, und Ihre Lehrkraft lässt Sie aus dem Warteraum herein — es gibt also keinen weiterleitbaren Link, der durchsickern könnte.'}), short:T('登入會員區後一鍵進教室，每堂唯一連結、老師等候室放行，不怕連結外流。',{en:'Log in to unlock a one-click link to your unique Zoom session; your teacher admits you from the waiting room.',ja:'ログイン後ワンクリックで専用Zoom教室へ、講師が待機室から許可するためリンク流出の心配はありません。',de:'Nach dem Login erhalten Sie einen Link zu Ihrer persönlichen Zoom-Sitzung; Ihre Lehrkraft lässt Sie aus dem Warteraum herein.'})},
+    {id:'pricing', chip:T('價格與報價',{en:'Pricing',ja:'料金・見積り',de:'Preise & Angebote'}), q:T('課程費用怎麼估算？',{en:'How is the course fee calculated?',ja:'コース料金はどのように算出されますか？',de:'Wie wird die Kursgebühr berechnet?'}), a:T('費用依語言、上課方式（一對一／團體）與堂數而定，建議告知學習目標與時間，由顧問提供試算報價；也可直接預約試聽時一併確認費用。',{en:'Pricing depends on the language, class format (1-on-1 or group), and number of lessons. Share your learning goals and timeline and an advisor will prepare a quote — or confirm pricing when you book a trial class.',ja:'料金は言語、受講形式（一対一／グループ）、レッスン回数によって異なります。学習目標とご希望の時期をお伝えいただければ、アドバイザーが見積りをご案内します。体験レッスンご予約時に料金を確認いただくことも可能です。',de:'Der Preis richtet sich nach der Sprache, der Unterrichtsform (1:1 oder Gruppe) und der Anzahl der Unterrichtseinheiten. Teilen Sie uns Ihre Lernziele und Ihren Zeitrahmen mit, und ein Berater erstellt Ihnen ein Angebot — oder Sie klären den Preis direkt bei der Buchung einer Probestunde.'}), short:T('費用依語言、上課方式與堂數而定，可請顧問提供試算報價。',{en:'Pricing depends on language, format, and lesson count — ask your advisor for a quote.',ja:'料金は言語・受講形式・回数によって異なり、アドバイザーが見積りをご案内します。',de:'Der Preis hängt von Sprache, Unterrichtsform und Stundenzahl ab — fragen Sie Ihren Berater nach einem Angebot.'})},
+    {id:'trial', chip:T('試聽',{en:'Trial Class',ja:'体験レッスン',de:'Probestunde'}), q:T('可以先試聽嗎？',{en:'Can I try a class before signing up?',ja:'事前に体験レッスンを受けられますか？',de:'Kann ich vor der Anmeldung eine Probestunde nehmen?'}), a:T('可以，提供免費試聽課程，由顧問依您的程度與目標安排合適的試聽老師與時段，體驗後再決定是否報名。',{en:'Yes — we offer a free trial class. Your advisor will match you with a suitable teacher and time slot based on your level and goals, so you can decide after experiencing it.',ja:'はい、無料体験レッスンをご用意しています。アドバイザーがレベルと目標に合わせて講師と時間帯をご案内しますので、体験後に受講をご検討いただけます。',de:'Ja — wir bieten eine kostenlose Probestunde an. Ihr Berater ordnet Ihnen passend zu Niveau und Zielen eine geeignete Lehrkraft und einen Termin zu, sodass Sie sich nach dem Ausprobieren entscheiden können。'}), short:T('提供免費試聽，顧問會依程度與目標安排合適老師與時段。',{en:'A free trial is available, matched to your level and goals before you commit.',ja:'無料体験レッスンがあり、レベルと目標に合わせて講師・時間をご案内します。',de:'Eine kostenlose Probestunde wird passend zu Niveau und Zielen angeboten, bevor Sie sich festlegen.'})},
+    {id:'teacher', chip:T('老師配對',{en:'Teacher Matching',ja:'講師のマッチング',de:'Lehrer-Zuordnung'}), q:T('老師怎麼配對？',{en:'How are teachers matched to students?',ja:'講師はどのようにマッチングされますか？',de:'Wie werden Lehrkräfte den Lernenden zugeordnet?'}), a:T('顧問會依您的語言、程度與學習目標，從授證師資中配對合適老師；開課後如覺得不適合，也可申請更換老師。',{en:'Your advisor matches you with a certified teacher based on your language, level, and goals. If it’s not the right fit after classes begin, you can request a change.',ja:'アドバイザーが言語・レベル・学習目標に応じて、資格を持つ講師の中から適切な講師をマッチングします。受講開始後に合わないと感じた場合は、講師の変更も申請できます。',de:'Ihr Berater ordnet Ihnen anhand von Sprache, Niveau und Zielen eine zertifizierte Lehrkraft zu. Falls es nach Unterrichtsbeginn nicht passt, können Sie einen Wechsel beantragen.'}), short:T('依語言、程度與目標配對合適老師，開課後不合適可申請更換。',{en:'Matched to a certified teacher by language, level, and goals; you can request a change later.',ja:'言語・レベル・目標に応じて資格講師をマッチング、開始後の変更申請も可能です。',de:'Zuordnung zu einer zertifizierten Lehrkraft nach Sprache, Niveau und Zielen; ein Wechsel kann später beantragt werden.'})}
+  ];
+}
 
-/* ===================== 顧問姓名（段落 D，逐字複製，全站共用） ===================== */
+/* ===================== i18n：顧問姓名（五語，示範人名，de 沿用 en 羅馬拼音，全站共用內容） ===================== */
 var TLI_ADVISORS_I18N = {
   'zh-TW': ['王顧問','李顧問','陳顧問','張顧問','林顧問'],
   en: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin'],
-  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー']
+  ja: ['王アドバイザー','李アドバイザー','陳アドバイザー','張アドバイザー','林アドバイザー'],
+  de: ['Advisor Wang','Advisor Li','Advisor Chen','Advisor Chang','Advisor Lin']
 };
 
 var TLI_CHAT_KEY = 'tliChatState_v1';
 var aiAskedIntents = {};
-var TLI_AI_GREETING_KEY = 'p06_ai_greeting_trial';
 
-/* ===================== AI 面板 JS 函式（段落 E，逐字複製，全站共用） ===================== */
+/* ===================== AI 面板 JS 函式（全站共用） ===================== */
 function aiTicketNo(){
   return 'TL-2026' + String(Math.floor(1000 + Math.random() * 9000));
 }
 function aiPickAdvisor(){
-  var list = TLI_ADVISORS_I18N[window.TLI_CURRENT_LANG] || TLI_ADVISORS_I18N['zh-TW'];
+  var lang = TLI_I18N.currentLang();
+  var list = TLI_ADVISORS_I18N[lang] || TLI_ADVISORS_I18N['zh-TW'];
   return list[Math.floor(Math.random() * list.length)];
 }
 function aiNowStr(){
@@ -1370,10 +1052,9 @@ function aiMakeChipBtn(label, handler){
 function aiRenderChips(target){
   var wrap = document.getElementById('aiChips-'+target);
   if(!wrap) return;
-  var dict = tliDict();
-  var kb = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  var kb = getKB();
   wrap.innerHTML = '';
-  wrap.appendChild(aiMakeChipBtn(dict.ai_chip_trial, function(){ aiAsk(dict.ai_chip_trial, target); }));
+  wrap.appendChild(aiMakeChipBtn(C('試聽怎麼預約','ai_chip_trial'), function(){ aiAsk(C('試聽怎麼預約','ai_chip_trial'), target); }));
   kb.forEach(function(item){
     if(item.id === 'trial') return;
     wrap.appendChild(aiMakeChipBtn(item.chip, function(){ aiAsk(item.chip, target); }));
@@ -1390,8 +1071,7 @@ function aiInit(target){
   if(!body || body.dataset.inited) return;
   body.dataset.inited = '1';
   if(aiRestoreState(target)){ aiRenderChips(target); return; }
-  var dict = tliDict();
-  aiAppendBot(target, (window.TLI_AI_GREETING_KEY && dict[window.TLI_AI_GREETING_KEY]) ? dict[window.TLI_AI_GREETING_KEY] : dict.ai_greeting_default);
+  aiAppendBot(target, aiGreetingText());
   aiRenderChips(target);
 }
 function aiOpen(target){
@@ -1446,44 +1126,41 @@ function aiHideTyping(target){
   var row = document.getElementById('aiTypingRow-'+target);
   if(row) row.remove();
 }
+var TLI_AI_KEYWORDS = {
+  refund:['退費','退款','退學費','可以退','取消課程','退錢','refund','返金'],
+  reschedule:['請假','改期','退堂','取消上課','調課','reschedule','cancel class','振替','キャンセル'],
+  visa:['簽證','visa','學生簽證','居留','ビザ'],
+  invoice:['發票','收據','電子發票','invoice','receipt','領収書'],
+  payment:['付款','付費','分期','刷卡','轉帳','怎麼付錢','payment','pay','installment','支払い'],
+  format:['上課方式','預約制','直播制','怎麼上課','一對一','團體班','class format','1-on-1','group','受講形式'],
+  classroom:['線上教室','怎麼進入','連結','教室連結','外流','Zoom','classroom','教室'],
+  pricing:['價格','報價','費用','學費多少','多少錢','price','pricing','cost','料金'],
+  trial:['試聽','免費體驗','體驗課','試聽怎麼預約','trial','free class','体験'],
+  teacher:['老師','配對','老師怎麼選','指定老師','換老師','teacher','matching','講師']
+};
 function aiMatch(text){
-  var t = text.trim();
-  var kbTc = TLI_KB_I18N['zh-TW'], kbCur = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
-  var KEYWORDS = {
-    refund:['退費','退款','退學費','可以退','取消課程','退錢','refund','返金'],
-    reschedule:['請假','改期','退堂','取消上課','調課','reschedule','cancel class','振替','キャンセル'],
-    visa:['簽證','visa','學生簽證','居留','ビザ'],
-    invoice:['發票','收據','電子發票','invoice','receipt','領収書'],
-    payment:['付款','付費','分期','刷卡','轉帳','怎麼付錢','payment','pay','installment','支払い'],
-    format:['上課方式','預約制','直播制','怎麼上課','一對一','團體班','class format','1-on-1','group','受講形式'],
-    classroom:['線上教室','怎麼進入','連結','教室連結','外流','Zoom','classroom','教室'],
-    pricing:['價格','報價','費用','學費多少','多少錢','price','pricing','cost','料金'],
-    trial:['試聽','免費體驗','體驗課','試聽怎麼預約','trial','free class','体験'],
-    teacher:['老師','配對','老師怎麼選','指定老師','換老師','teacher','matching','講師']
-  };
-  for(var i=0;i<kbTc.length;i++){
-    var id = kbTc[i].id;
-    var kws = KEYWORDS[id] || [];
+  var t = text.trim().toLowerCase();
+  var kb = getKB();
+  for(var i=0;i<kb.length;i++){
+    var id = kb[i].id;
+    var kws = TLI_AI_KEYWORDS[id] || [];
     for(var j=0;j<kws.length;j++){
-      if(t.toLowerCase().indexOf(String(kws[j]).toLowerCase()) !== -1){
-        for(var k=0;k<kbCur.length;k++){ if(kbCur[k].id === id) return kbCur[k]; }
-      }
+      if(t.indexOf(String(kws[j]).toLowerCase()) !== -1) return kb[i];
     }
   }
   return null;
 }
 function aiReplyForMatch(target, match){
-  var dict = tliDict();
   var asked = aiAskedIntents[match.id];
   var html;
   if(asked){
-    html = tliFmt(dict.ai_repeat, {chip: match.chip, short: match.short});
+    html = tliFmt(C('剛剛提過「{chip}」的說明，簡單說是：{short}還有其他想了解的嗎？','ai_repeat'), {chip: match.chip, short: match.short});
   }else{
     html = '<b>'+match.q+'</b><br>'+match.a+
-      '<div class="ai-thumbs"><span>'+dict.ai_thumbs_prompt+'</span>'+
+      '<div class="ai-thumbs"><span>'+C('這有幫助嗎？','ai_thumbs_prompt')+'</span>'+
       '<button type="button" onclick="aiThumb(this,true)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.3a2 2 0 0 0 2-1.7l1.4-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></button>'+
       '<button type="button" onclick="aiThumb(this,false)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.7a2 2 0 0 0-2 1.7l-1.4 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg></button></div>'+
-      '<div class="ai-actions"><a href="p06_trial.html?type=trial">'+dict.ai_action_trial+'</a><button type="button" onclick="aiEscalate(\''+target+'\')">'+dict.ai_action_contact+'</button></div>';
+      '<div class="ai-actions"><a href="p06_trial.html?type=trial">'+C('預約試聽','ai_action_trial')+'</a><button type="button" onclick="aiEscalate(\''+target+'\')">'+C('聯繫顧問','ai_action_contact')+'</button></div>';
     aiAskedIntents[match.id] = true;
   }
   aiAppendBot(target, html);
@@ -1492,7 +1169,6 @@ function aiAsk(text, target){
   if(!text || !text.trim()) return;
   aiAppendUser(target, text);
   var match = aiMatch(text);
-  var dict = tliDict();
   aiShowTyping(target);
   var delay = 600 + Math.floor(Math.random()*600);
   setTimeout(function(){
@@ -1500,7 +1176,7 @@ function aiAsk(text, target){
     if(match){
       aiReplyForMatch(target, match);
     }else{
-      aiAppendBot(target, dict.ai_fallback);
+      aiAppendBot(target, C('這題我請顧問回覆比較準，留下聯絡方式，顧問將於 1 個工作日內主動聯繫您。','ai_fallback'));
       aiShowEscalateForm(target);
     }
   }, delay);
@@ -1516,7 +1192,6 @@ function aiSubmitInput(e, target){
   return false;
 }
 function aiThumb(btn, helpful){
-  var dict = tliDict();
   var wrap = btn.parentElement;
   wrap.querySelectorAll('button').forEach(function(b){ b.classList.remove('picked'); });
   btn.classList.add('picked');
@@ -1526,49 +1201,45 @@ function aiThumb(btn, helpful){
     thanks.className = 'ai-thumbs-thanks';
     wrap.insertAdjacentElement('afterend', thanks);
   }
-  thanks.textContent = dict.ai_thumbs_thanks;
+  thanks.textContent = C('感謝回饋','ai_thumbs_thanks');
 }
 function aiEscalate(target){
-  var dict = tliDict();
-  aiAppendUser(target, dict.ai_escalate_user_msg);
+  aiAppendUser(target, C('我想直接聯繫顧問','ai_escalate_user_msg'));
   aiShowEscalateForm(target);
 }
 function aiShowEscalateForm(target){
-  var dict = tliDict();
   var html = '<div class="ai-mini-form">'+
-    '<input id="aiName-'+target+'" placeholder="'+dict.ai_form_name_ph+'" required>'+
-    '<input id="aiContact-'+target+'" placeholder="'+dict.ai_form_contact_ph+'" required>'+
-    '<button type="button" class="btn btn-accent btn-sm" onclick="aiSubmitEscalate(\''+target+'\')">'+dict.ai_form_submit+'</button>'+
+    '<input id="aiName-'+target+'" placeholder="'+C('姓名','ai_form_name_ph')+'" required>'+
+    '<input id="aiContact-'+target+'" placeholder="'+C('Email 或 LINE ID','ai_form_contact_ph')+'" required>'+
+    '<button type="button" class="btn btn-accent btn-sm" onclick="aiSubmitEscalate(\''+target+'\')">'+C('送出，請顧問聯繫我','ai_form_submit')+'</button>'+
     '</div>'+
-    '<button type="button" class="ai-live-btn" onclick="aiLiveQueue(\''+target+'\')">'+dict.ai_live_btn+'</button>';
+    '<button type="button" class="ai-live-btn" onclick="aiLiveQueue(\''+target+'\')">'+C('轉真人客服','ai_live_btn')+'</button>';
   aiAppendBot(target, html);
 }
 function aiLiveQueue(target){
-  var dict = tliDict();
-  aiAppendUser(target, dict.ai_live_btn);
+  aiAppendUser(target, C('轉真人客服','ai_live_btn'));
   aiShowTyping(target);
   setTimeout(function(){
     aiHideTyping(target);
-    aiAppendBot(target, dict.ai_live_queued);
+    aiAppendBot(target, C('已為您排隊，目前前方 1 位，客服人員上線後將立即為您服務。','ai_live_queued'));
   }, 700);
 }
 function aiSubmitEscalate(target){
-  var dict = tliDict();
   var nameEl = document.getElementById('aiName-'+target);
   var contactEl = document.getElementById('aiContact-'+target);
   var name = nameEl ? nameEl.value.trim() : '';
   var contact = contactEl ? contactEl.value.trim() : '';
-  if(!name || !contact){ if(typeof showToast === 'function') showToast(dict.ai_toast_fill_required); return; }
+  if(!name || !contact){ if(typeof showToast === 'function') showToast(C('請填寫姓名與聯絡方式','ai_toast_fill_required')); return; }
   var ticket = aiTicketNo();
   var advisor = aiPickAdvisor();
   var body = document.getElementById('aiBody-'+target);
   var row = document.createElement('div');
   row.className = 'ai-msg-row bot';
-  row.innerHTML = '<div class="ai-avatar sm" aria-hidden="true">'+TLI_AVATAR_SVG+'</div><div class="ai-msg-stack"><div class="ai-msg bot"><b>'+tliFmt(dict.ai_ticket_created,{ticket:ticket})+'</b><div class="ai-timeline" id="aiTl-'+target+'-'+Date.now()+'"></div></div><div class="ai-msg-time">'+aiNowStr()+'</div></div>';
+  row.innerHTML = '<div class="ai-avatar sm" aria-hidden="true">'+TLI_AVATAR_SVG+'</div><div class="ai-msg-stack"><div class="ai-msg bot"><b>'+tliFmt(C('已建立諮詢工單 #{ticket}','ai_ticket_created'),{ticket:ticket})+'</b><div class="ai-timeline" id="aiTl-'+target+'-'+Date.now()+'"></div></div><div class="ai-msg-time">'+aiNowStr()+'</div></div>';
   body.appendChild(row);
   var tlId = row.querySelector('.ai-timeline').id;
   aiScrollBottom(target);
-  aiPlayTimeline(tlId, [tliFmt(dict.ai_tl_assigned,{advisor:advisor}), tliFmt(dict.ai_tl_followup,{contact:contact})], function(){
+  aiPlayTimeline(tlId, [tliFmt(C('已指派專責顧問（{advisor}）','ai_tl_assigned'),{advisor:advisor}), tliFmt(C('顧問 1 個工作日內聯繫（{contact}）','ai_tl_followup'),{contact:contact})], function(){
     aiSaveState(target);
   });
 }
@@ -1615,14 +1286,34 @@ function aiRestoreState(target){
     return true;
   }catch(e){ return false; }
 }
-initLang();
+TLI_I18N.onRefresh(renderLangChips);
+TLI_I18N.onRefresh(renderLevelSelect);
+TLI_I18N.onRefresh(renderFormatChips);
+TLI_I18N.onRefresh(renderCampusChips);
+TLI_I18N.onRefresh(renderContactChips);
+TLI_I18N.onRefresh(refreshDynamicText);
+TLI_I18N.onRefresh(applyMetaDesc);
+applyMetaDesc();
+TLI_I18N.init();
 </script>
 <script>
-/* ===== p06 專屬：幫我挑班型（3 題快速挑選精靈，i18n 版） ===== */
+/* ===== p06 專屬：幫我挑班型（3 題快速挑選精靈；vicki 需判斷是否與已拿掉的分級測驗重疊，見交辦回報） ===== */
 var aiHelperState = {};
 var AI_HELPER_LANG_IDS = ['zh','en','ja','ko','de','fr'];
 var AI_HELPER_GOAL_IDS = ['work','study_abroad','daily','exam'];
 var AI_HELPER_LEVEL_IDS = ['none','beginner','intermediate','advanced_plus','unsure'];
+
+function quizChipLabel(){ return T('幫我挑班型', {en:'Help Me Choose a Class', ja:'クラス選びを手伝ってもらう', de:'Hilf mir, einen Kurs zu wählen'}); }
+function quizGoalLabel(id){
+  return ({
+    work: T('工作需求',{en:'Work',ja:'仕事のため',de:'Berufliche Gründe'}),
+    study_abroad: T('留學準備',{en:'Studying Abroad',ja:'留学準備',de:'Vorbereitung auf ein Auslandsstudium'}),
+    daily: T('生活會話',{en:'Everyday Conversation',ja:'日常会話',de:'Alltagskonversation'}),
+    exam: T('檢定考試',{en:'Certification Exam',ja:'検定試験対策',de:'Zertifikatsprüfung'})
+  })[id] || id;
+}
+var QUIZ_QUICK_YES = T('可以，能看懂基本句子', {en:'Yes, I can follow basic sentences', ja:'はい、基本的な文章は理解できます', de:'Ja, ich verstehe einfache Sätze'});
+var QUIZ_QUICK_NO = T('不行，才剛接觸', {en:'No, I’m just starting out', ja:'いいえ、始めたばかりです', de:'Nein, ich fange gerade erst an'});
 
 function aiRenderQuizChoices(items, handler){
   var wrap = document.createElement('div');
@@ -1637,149 +1328,132 @@ function aiRenderQuizChoices(items, handler){
 }
 function aiStartPickHelper(target){
   aiHelperState = {};
-  var dict = tliDict();
-  aiAppendUser(target, dict.p06_quiz_chip_label);
+  aiAppendUser(target, quizChipLabel());
   aiShowTyping(target);
   setTimeout(function(){
     aiHideTyping(target);
-    var dict2 = tliDict();
-    var div = aiAppendBot(target, dict2.p06_quiz_intro);
-    var items = AI_HELPER_LANG_IDS.map(function(id){ return {id:id, label:dict2['p06_lang_'+id]}; });
+    var div = aiAppendBot(target, T('好的，3 個小問題，30 秒幫您挑班型。先選想學的語言：', {en:'Sure — 3 quick questions, 30 seconds, and I’ll suggest a class for you. First, which language would you like to learn?', ja:'かしこまりました。3つの簡単な質問で30秒でクラスをご提案します。まずは学びたい言語をお選びください：', de:'Gerne — 3 kurze Fragen, 30 Sekunden, und ich schlage Ihnen einen Kurs vor. Welche Sprache möchten Sie zuerst lernen?'}));
+    var items = AI_HELPER_LANG_IDS.map(function(id){ return {id:id, label:langLabel(id)}; });
     div.appendChild(aiRenderQuizChoices(items, function(id){ aiHelperPickLang(id, target); }));
     aiScrollBottom(target);
   }, 700);
 }
 function aiHelperPickLang(id, target){
-  var dict = tliDict();
-  aiAppendUser(target, dict['p06_lang_'+id]);
+  aiAppendUser(target, langLabel(id));
   aiHelperState.lang = id;
-  var div = aiAppendBot(target, dict.p06_quiz_q_goal);
-  var items = AI_HELPER_GOAL_IDS.map(function(gid){ return {id:gid, label:dict['p06_goal_'+gid]}; });
+  var div = aiAppendBot(target, T('學習目標是？', {en:'What’s your learning goal?', ja:'学習の目的は何ですか？', de:'Was ist Ihr Lernziel?'}));
+  var items = AI_HELPER_GOAL_IDS.map(function(gid){ return {id:gid, label:quizGoalLabel(gid)}; });
   div.appendChild(aiRenderQuizChoices(items, function(gid){ aiHelperPickGoal(gid, target); }));
 }
 function aiHelperPickGoal(id, target){
-  var dict = tliDict();
-  aiAppendUser(target, dict['p06_goal_'+id]);
+  aiAppendUser(target, quizGoalLabel(id));
   aiHelperState.goal = id;
-  var div = aiAppendBot(target, dict.p06_quiz_q_level);
-  var items = AI_HELPER_LEVEL_IDS.map(function(lid){ return {id:lid, label:dict['p06_level_'+lid]}; });
+  var div = aiAppendBot(target, T('目前程度大概落在哪個範圍？', {en:'Roughly what’s your current level?', ja:'現在のレベルはどのくらいですか？', de:'Wie schätzen Sie Ihr aktuelles Niveau ein?'}));
+  var items = AI_HELPER_LEVEL_IDS.map(function(lid){ return {id:lid, label:levelLabel(lid)}; });
   var wrap = aiRenderQuizChoices(items, function(lid){ aiHelperPickLevel(lid, target); });
-  var quick = document.createElement('button');
-  quick.type = 'button'; quick.textContent = dict.p06_quiz_quicktest_btn;
-  quick.onclick = function(){ aiHelperStartQuickTest(target); };
-  wrap.appendChild(quick);
+  /* 20260930 vicki 拍板：拿掉 30 秒程度快測，只保留直接選程度 */
   div.appendChild(wrap);
 }
 function aiHelperPickLevel(id, target){
-  var dict = tliDict();
-  aiAppendUser(target, dict['p06_level_'+id]);
+  aiAppendUser(target, levelLabel(id));
   aiHelperState.level = id;
   aiHelperShowResult(target);
 }
 function aiHelperStartQuickTest(target){
-  var dict = tliDict();
-  aiAppendUser(target, dict.p06_quiz_quicktest_btn);
-  var div = aiAppendBot(target, dict.p06_quiz_quick_q1);
+  aiAppendUser(target, T('30 秒快測', {en:'30-Second Quick Check', ja:'30秒クイックテスト', de:'30-Sekunden-Schnelltest'}));
+  var div = aiAppendBot(target, T('您能看懂這個語言的簡單句子嗎？', {en:'Can you understand simple sentences in this language?', ja:'この言語の簡単な文章を理解できますか？', de:'Können Sie einfache Sätze in dieser Sprache verstehen?'}));
   var items = [
-    {id:'yes', label:dict.p06_quiz_quick_q1_opt_yes},
-    {id:'no', label:dict.p06_quiz_quick_q1_opt_no}
+    {id:'yes', label:QUIZ_QUICK_YES},
+    {id:'no', label:QUIZ_QUICK_NO}
   ];
   div.appendChild(aiRenderQuizChoices(items, function(id){ aiHelperQuickTestStep2(id, target); }));
 }
 function aiHelperQuickTestStep2(id, target){
-  var dict = tliDict();
-  aiAppendUser(target, id === 'yes' ? dict.p06_quiz_quick_q1_opt_yes : dict.p06_quiz_quick_q1_opt_no);
+  aiAppendUser(target, id === 'yes' ? QUIZ_QUICK_YES : QUIZ_QUICK_NO);
   if(id === 'no'){
     aiHelperState.level = 'none';
     aiHelperShowResult(target);
     return;
   }
-  var div = aiAppendBot(target, dict.p06_quiz_quick_q2);
+  var div = aiAppendBot(target, T('那可以用這個語言進行流暢的日常對話嗎？', {en:'Can you hold a fluent everyday conversation in this language?', ja:'それでは、この言語で流暢な日常会話ができますか？', de:'Können Sie in dieser Sprache fließend ein alltägliches Gespräch führen?'}));
   var items = [
-    {id:'advanced', label:dict.p06_quiz_quick_q2_opt_advanced},
-    {id:'intermediate', label:dict.p06_quiz_quick_q2_opt_intermediate},
-    {id:'beginner', label:dict.p06_quiz_quick_q2_opt_beginner}
+    {id:'advanced', label:T('可以，想加強進階內容', {en:'Yes — I’d like to focus on advanced content', ja:'できます。より上級の内容を学びたいです', de:'Ja — ich möchte mich auf fortgeschrittene Inhalte konzentrieren'})},
+    {id:'intermediate', label:T('大致可以，想穩固基礎', {en:'Mostly — I’d like to solidify the basics', ja:'大体できます。基礎を固めたいです', de:'Größtenteils — ich möchte die Grundlagen festigen'})},
+    {id:'beginner', label:T('還沒辦法自然對話', {en:'Not yet — I can’t hold a natural conversation', ja:'まだ自然な会話はできません', de:'Noch nicht — ich kann kein natürliches Gespräch führen'})}
   ];
   var map = {advanced:'advanced_plus', intermediate:'intermediate', beginner:'beginner'};
   div.appendChild(aiRenderQuizChoices(items, function(id2){
-    var d2 = tliDict();
-    aiAppendUser(target, id2 === 'advanced' ? d2.p06_quiz_quick_q2_opt_advanced : (id2 === 'intermediate' ? d2.p06_quiz_quick_q2_opt_intermediate : d2.p06_quiz_quick_q2_opt_beginner));
+    aiAppendUser(target, items.filter(function(it){ return it.id === id2; })[0].label);
     aiHelperState.level = map[id2];
     aiHelperShowResult(target);
   }));
 }
-function aiHelperComputePlans(s, dict){
+function aiHelperComputePlans(s){
   var format = (s.goal === 'study_abroad') ? 'onsite' : 'online';
   var plans;
   if(s.goal === 'daily'){
     plans = [
-      {nameKey:'p06_plan_name_group', noteKey:'p06_plan_note_group_daily'},
-      {nameKey:'p06_plan_name_1on1', noteKey:'p06_plan_note_1on1_daily'}
+      {name:T('{lang} 彈性團體直播',{en:'{lang} Flexible Group Livestream',ja:'{lang} グループライブ配信',de:'{lang} Flexibler Gruppen-Livestream'}), note:T('固定時段直播上課，與同好一起練習口說。',{en:'Fixed-time livestream classes — practice speaking together with fellow learners.',ja:'決まった時間にライブ配信で受講、仲間と一緒にスピーキングを練習できます。',de:'Live-Unterricht zu festen Zeiten — üben Sie das Sprechen gemeinsam mit anderen Lernenden.'})},
+      {name:T('{lang} 一對一線上課',{en:'{lang} 1-on-1 Online',ja:'{lang} 1対1 オンライン',de:'{lang} 1:1 Online'}), note:T('依個人時間彈性排課，加強口說信心。',{en:'Flexible scheduling around your own time, building speaking confidence.',ja:'ご自身の都合に合わせて柔軟に受講でき、話す自信を高めます。',de:'Flexible Terminplanung nach Ihrer Zeit, um Sprechsicherheit aufzubauen.'})}
     ];
   }else if(s.goal === 'exam'){
     plans = [
-      {nameKey:'p06_plan_name_1on1_intensive', noteKey:'p06_plan_note_1on1_exam'},
-      {nameKey:'p06_plan_name_group', noteKey:'p06_plan_note_group_exam'}
+      {name:T('{lang} 一對一線上課（密集加強）',{en:'{lang} 1-on-1 Online (Intensive)',ja:'{lang} 1対1 オンライン（集中強化）',de:'{lang} 1:1 Online (Intensiv)'}), note:T('依檢定日程規劃加強進度。',{en:'Progress planned around your exam timeline for focused improvement.',ja:'試験日程に合わせて計画的に実力を強化します。',de:'Fortschritt wird passend zu Ihrem Prüfungstermin geplant.'})},
+      {name:T('{lang} 彈性團體直播',{en:'{lang} Flexible Group Livestream',ja:'{lang} グループライブ配信',de:'{lang} Flexibler Gruppen-Livestream'}), note:T('固定時段複習，與同儕互相督促。',{en:'Fixed-time review sessions, keeping each other accountable.',ja:'決まった時間に復習し、仲間と励まし合いながら学べます。',de:'Feste Wiederholungstermine, gemeinsam mit anderen motiviert bleiben.'})}
     ];
   }else if(s.goal === 'study_abroad'){
     plans = [
-      {nameKey:'p06_plan_name_onsite_semester', noteKey:'p06_plan_note_onsite_study'},
-      {nameKey:'p06_plan_name_1on1', noteKey:'p06_plan_note_1on1_study'}
+      {name:T('{lang} 實體學期班',{en:'{lang} In-Person Semester Course',ja:'{lang} 対面学期制コース',de:'{lang} Präsenz-Semesterkurs'}), note:T('週時數達 15 小時，符合學生簽證申請條件。',{en:'15+ weekly class hours, meeting the student visa attendance requirement.',ja:'週15時間以上の受講で、学生ビザ申請の出席条件を満たします。',de:'Mindestens 15 Wochenstunden, erfüllt die Anwesenheitsvoraussetzung für das Studentenvisum.'})},
+      {name:T('{lang} 一對一線上課',{en:'{lang} 1-on-1 Online',ja:'{lang} 1対1 オンライン',de:'{lang} 1:1 Online'}), note:T('出發前先線上加強，銜接實體課程。',{en:'Build a foundation online before you go, bridging into in-person classes.',ja:'渡航前にオンラインで基礎を固め、対面授業へスムーズに移行します。',de:'Bauen Sie vor der Abreise online eine Grundlage auf, als Brücke zum Präsenzunterricht.'})}
     ];
   }else{
     plans = [
-      {nameKey:'p06_plan_name_1on1', noteKey:'p06_plan_note_1on1_work'},
-      {nameKey:'p06_plan_name_group', noteKey:'p06_plan_note_group_work'}
+      {name:T('{lang} 一對一線上課',{en:'{lang} 1-on-1 Online',ja:'{lang} 1対1 オンライン',de:'{lang} 1:1 Online'}), note:T('依工作行程彈性排課，內容客製化。',{en:'Flexible scheduling around your work, with content tailored to you.',ja:'お仕事のスケジュールに合わせて柔軟に受講、内容もカスタマイズ可能です。',de:'Flexible Terminplanung passend zu Ihrer Arbeit, mit individuell angepassten Inhalten.'})},
+      {name:T('{lang} 彈性團體直播',{en:'{lang} Flexible Group Livestream',ja:'{lang} グループライブ配信',de:'{lang} Flexibler Gruppen-Livestream'}), note:T('固定時段上課，成本較親民。',{en:'Fixed-time classes at a more affordable cost.',ja:'決まった時間に受講でき、費用も抑えられます。',de:'Fester Unterrichtszeitplan zu einem günstigeren Preis.'})}
     ];
   }
-  var langLabel = dict['p06_lang_'+s.lang];
-  var resolved = plans.map(function(p){
-    return {name: tliFmt(dict[p.nameKey], {lang:langLabel}), note: dict[p.noteKey]};
-  });
+  var langLbl = langLabel(s.lang);
+  var resolved = plans.map(function(p){ return {name: tliFmt(p.name, {lang:langLbl}), note: p.note}; });
   return {format:format, plans:resolved};
 }
 function aiHelperShowResult(target){
-  var dict = tliDict();
   var s = aiHelperState;
-  var r = aiHelperComputePlans(s, dict);
+  var r = aiHelperComputePlans(s);
   s.format = r.format;
-  var html = dict.p06_quiz_result_intro;
+  var html = T('根據您的回答，建議方案：', {en:'Based on your answers, here’s what we’d suggest:', ja:'ご回答に基づき、以下のプランをおすすめします：', de:'Basierend auf Ihren Antworten empfehlen wir:'});
   r.plans.forEach(function(p){
     html += '<div class="ai-plan-card"><h4>'+p.name+'</h4><p>'+p.note+'</p></div>';
   });
-  html += '<button type="button" class="btn btn-accent btn-sm" style="margin-top:10px;" onclick="aiApplyHelperToForm(\''+target+'\')">'+dict.p06_quiz_apply_btn+'</button>';
+  html += '<button type="button" class="btn btn-accent btn-sm" style="margin-top:10px;" onclick="aiApplyHelperToForm(\''+target+'\')">'+T('帶入預約表單', {en:'Apply to Booking Form', ja:'予約フォームに反映する', de:'Ins Buchungsformular übernehmen'})+'</button>';
   aiAppendBot(target, html);
   aiRenderChips(target);
 }
 function aiApplyHelperToForm(target){
-  var dict = tliDict();
   var s = aiHelperState;
   if(s.lang && !bookState.langs.has(s.lang)){
     bookState.langs.add(s.lang);
-    document.querySelectorAll('#chipLang .opt-btn').forEach(function(b){ if(b.getAttribute('data-value') === s.lang) b.classList.add('active'); });
+    renderLangChips();
   }
   if(s.level){ setLevel(s.level); }
   if(s.format){ setFormat(s.format); }
   updateValidity();
-  showToast(dict.p06_toast_applied);
+  showToast(T('已帶入預約表單，請確認後送出', {en:'Applied to the booking form — please review and submit', ja:'予約フォームに反映しました。内容をご確認のうえ送信してください', de:'Ins Buchungsformular übernommen — bitte prüfen und absenden'}));
   aiClose(target);
   document.getElementById('bookCard').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-/* p06 覆寫：開場白與快捷選項加入「幫我挑班型」（置頂，i18n 版） */
+/* p06 覆寫：開場白與快捷選項加入「幫我挑班型」（置頂） */
 function aiRenderChips(target){
   var wrap = document.getElementById('aiChips-'+target);
   if(!wrap) return;
   wrap.innerHTML = '';
-  var dict = tliDict();
   var pickBtn = document.createElement('button');
   pickBtn.type = 'button';
   pickBtn.className = 'ai-chip ai-chip-primary';
-  pickBtn.setAttribute('data-i18n', 'p06_quiz_chip_label');
-  pickBtn.textContent = dict.p06_quiz_chip_label;
+  pickBtn.textContent = quizChipLabel();
   pickBtn.onclick = function(){ aiStartPickHelper(target); };
   wrap.appendChild(pickBtn);
-  var kb = TLI_KB_I18N[window.TLI_CURRENT_LANG] || TLI_KB_I18N['zh-TW'];
+  var kb = getKB();
   kb.forEach(function(item){
     wrap.appendChild(aiMakeChipBtn(item.chip, function(){ aiAsk(item.chip, target); }));
   });
@@ -1789,8 +1463,7 @@ function aiInit(target){
   if(!body || body.dataset.inited) return;
   body.dataset.inited = '1';
   if(aiRestoreState(target)){ aiRenderChips(target); return; }
-  var dict = tliDict();
-  aiAppendBot(target, (window.TLI_AI_GREETING_KEY && dict[window.TLI_AI_GREETING_KEY]) ? dict[window.TLI_AI_GREETING_KEY] : dict.ai_greeting_default);
+  aiAppendBot(target, aiGreetingText());
   aiRenderChips(target);
 }
 /* 補上 ESC 鍵關閉 AI 小幫手浮動視窗（原本只有關閉鈕與背景點擊兩種關法） */

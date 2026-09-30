@@ -133,67 +133,67 @@ border-radius:6px;font-size:13px;box-sizing:border-box;font-family:inherit;}
 <body>
 <div class="app">
 <div class="sidebar" id="sidebar">
-<a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small>加盟管理後台<span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
+<a class="brand" href="u01_overview.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small><span data-i18n="brand.franchisePortal">加盟管理後台</span><span style="display:block;font-weight:600;color:var(--navy,#1f3a68);margin-top:2px">範例大學語言中心</span></small></a>
 <nav>
-<div class="sec-label">加盟合作管理</div>
-<a data-nav="u01" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span>概況</span></a>
-<a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span>班級管理</span></a>
-<a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span>教師管理</span></a>
-<a data-nav="u02" href="u02_students.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"/><path d="M2.5 16c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="14" cy="7.5" r="2"/><path d="M13 12.2c1.8.2 3.2 1.6 3.5 3.8"/></svg><span>學生名單</span></a>
-<a data-nav="u09"  href="u09_plans_terms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5h4.5a1 1 0 0 1 1 1V9a1 1 0 0 1-.3.7l-6.7 6.7a1 1 0 0 1-1.4 0L3.6 12a1 1 0 0 1 0-1.4L10.3 3.9a1 1 0 0 1 .7-.4z"/><circle cx="13.2" cy="6.8" r="1"/></svg><span>方案與期別</span></a>
-<a data-nav="u07" href="u07_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h10l-1 13H6z"/><line x1="7.5" y1="7" x2="12.5" y2="7"/><line x1="7.5" y1="10" x2="12.5" y2="10"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg><span>訂單管理</span></a>
-<a data-nav="u03" href="u03_usage.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span>使用報表</span></a>
-<a data-nav="u04" href="u04_program.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="2" x2="7" y2="5.5"/><line x1="13" y1="2" x2="13" y2="5.5"/></svg><span>期程與課表</span></a>
-<a data-nav="u06" class="active" href="u06_billing.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="13" height="13" rx="1.5"/><line x1="6.5" y1="7.2" x2="13.5" y2="7.2"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><line x1="6.5" y1="12.8" x2="10.5" y2="12.8"/></svg><span>合約與計費</span></a>
+<div class="sec-label" data-i18n="nav_u.groupLabel">加盟合作管理</div>
+<a data-nav="u01" href="u01_overview.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span data-i18n="nav_u.overview">概況</span></a>
+<a data-nav="u05" href="u05_classes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h11v13H5A1.5 1.5 0 0 1 3.5 15z"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="11" y2="10"/></svg><span data-i18n="nav_u.classes">班級管理</span></a>
+<a data-nav="u08" href="u08_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.4"/><path d="M3.5 17c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/></svg><span data-i18n="nav_u.teachers">教師管理</span></a>
+<a data-nav="u02" href="u02_students.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.5"/><path d="M2.5 16c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="14" cy="7.5" r="2"/><path d="M13 12.2c1.8.2 3.2 1.6 3.5 3.8"/></svg><span data-i18n="nav_u.students">學生名單</span></a>
+<a data-nav="u09"  href="u09_plans_terms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5h4.5a1 1 0 0 1 1 1V9a1 1 0 0 1-.3.7l-6.7 6.7a1 1 0 0 1-1.4 0L3.6 12a1 1 0 0 1 0-1.4L10.3 3.9a1 1 0 0 1 .7-.4z"/><circle cx="13.2" cy="6.8" r="1"/></svg><span data-i18n="nav_u.plansTerms">方案與期別</span></a>
+<a data-nav="u07" href="u07_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h10l-1 13H6z"/><line x1="7.5" y1="7" x2="12.5" y2="7"/><line x1="7.5" y1="10" x2="12.5" y2="10"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg><span data-i18n="nav_u.orders">訂單管理</span></a>
+<a data-nav="u03" href="u03_usage.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span data-i18n="nav_u.usage">使用報表</span></a>
+<a data-nav="u04" href="u04_program.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="2" x2="7" y2="5.5"/><line x1="13" y1="2" x2="13" y2="5.5"/></svg><span data-i18n="nav_u.program">期程與課表</span></a>
+<a data-nav="u06" class="active" href="u06_billing.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="13" height="13" rx="1.5"/><line x1="6.5" y1="7.2" x2="13.5" y2="7.2"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><line x1="6.5" y1="12.8" x2="10.5" y2="12.8"/></svg><span data-i18n="nav_u.billing">合約與計費</span></a>
 </nav>
 <div class="sidebar-user" id="sidebarUser">
-<div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag">機構管理者</span></span>
+<div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar">王</span><span class="su-info"><span class="su-name">王小華</span><span class="su-roletag" data-i18n="role.orgAdmin">機構管理者</span></span>
 <svg class="su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div>
-<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')">個人設定</a><a href="../公開網站/p01_home.html">前往官網</a><a href="javascript:void(0)" onclick="doLogout()">登出</a></div>
+<div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 
 <div class="main">
 <div class="topbar">
-<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
-<div class="tb-title">合約與計費</div>
+<button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="aria.openMenu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button>
+<div class="tb-title" data-i18n="nav_u.billing">合約與計費</div>
 <div class="tb-actions">
-<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單">王</button>
-<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')">個人設定</a><a href="../公開網站/p01_home.html">前往官網</a><a href="javascript:void(0)" onclick="doLogout()">登出</a></div>
+<button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="aria.userMenu">王</button>
+<div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast(TLI_I18N.t('功能建置中，敬請期待','This feature is under development'))" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div>
 </div>
 </div>
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1>合約與計費</h1><div class="desc">本期結算（依平台紀錄自動計算）、歷期結算與匯款紀錄，以及合約摘要（唯讀）。</div></div>
+<div><h1 data-i18n="nav_u.billing">合約與計費</h1><div class="desc" data-i18n="u06.pageDesc">本期結算（依平台紀錄自動計算）、歷期結算與匯款紀錄，以及合約摘要（唯讀）。</div></div>
 </div>
 
 <!-- 區塊一：本期結算 -->
 <div class="card" id="periodCard">
 <div class="enthead">
-<div><div class="entname">本期結算：2027 上半年</div><div class="entperiod" id="periodRange">結算期間：2027-01-01 ～ 2027-06-30</div></div>
+<div><div class="entname" id="periodTitle">本期結算：2027 上半年</div><div class="entperiod" id="periodRange">結算期間：2027-01-01 ～ 2027-06-30</div></div>
 <div id="periodStatusWrap"></div>
 </div>
 
-<div class="small" style="margin-bottom:10px">TLI 依平台紀錄之本期開課數、上課人次與課程收入自動計算權利金，毋須貴機構自行申報。</div>
+<div class="small" style="margin-bottom:10px" data-i18n="u06.autoCalcNote">TLI 依平台紀錄之本期開課數、上課人次與課程收入自動計算權利金，毋須貴機構自行申報。</div>
 
 <div style="margin-top:4px">
-<div class="cardesc" style="margin:0 0 8px;font-weight:600;color:var(--g900);">本期計算依據（TLI 平台紀錄）</div>
+<div class="cardesc" style="margin:0 0 8px;font-weight:600;color:var(--g900);" data-i18n="u06.refBasisTitle">本期計算依據（TLI 平台紀錄）</div>
 <div class="refgrid" id="refGrid"></div>
 </div>
 
 <div class="sumgrid" id="sumGrid" style="margin-top:16px"></div>
-<div class="totalrow"><span>本期合計應付</span><b id="totalPayable">－</b></div>
+<div class="totalrow"><span data-i18n="u06.totalPayableLabel">本期合計應付</span><b id="totalPayable">－</b></div>
 <div class="small" style="margin-top:8px" id="dueNote"></div>
 </div>
 
 <!-- 區塊二：歷期結算紀錄 -->
 <div class="card">
-<h2>歷期結算紀錄</h2>
-<div class="cardesc">歷期結算單與匯款紀錄由 TLI 依實際入帳狀態標記，本表僅供查詢。</div>
+<h2 data-i18n="u06.historyTitle">歷期結算紀錄</h2>
+<div class="cardesc" data-i18n="u06.historyDesc">歷期結算單與匯款紀錄由 TLI 依實際入帳狀態標記，本表僅供查詢。</div>
 <div class="tablewrap">
 <table>
-<thead><tr><th>期別</th><th>營業收入（依平台紀錄）</th><th>權利金</th><th>教材費</th><th>回訓費</th><th>合計</th><th>繳款狀態</th><th>操作</th></tr></thead>
+<thead><tr><th data-i18n="u06.thPeriod">期別</th><th data-i18n="u06.thRevenue">營業收入（依平台紀錄）</th><th data-i18n="u06.thRoyalty">權利金</th><th data-i18n="u06.thMaterialFee">教材費</th><th data-i18n="u06.thRetrainFee">回訓費</th><th data-i18n="u06.thTotal">合計</th><th data-i18n="u06.thPayStatus">繳款狀態</th><th data-i18n="u02.thAction">操作</th></tr></thead>
 <tbody id="historyTbody"></tbody>
 </table>
 </div>
@@ -201,20 +201,20 @@ border-radius:6px;font-size:13px;box-sizing:border-box;font-family:inherit;}
 
 <!-- 區塊三：學員回饋 -->
 <div class="card">
-<h2>學員回饋</h2>
-<div class="cardesc">學員在學員端送出的回饋；總部也看得到同一份資料。</div>
+<h2 data-i18n="u06.feedbackTitle">學員回饋</h2>
+<div class="cardesc" data-i18n="u06.feedbackDesc">學員在學員端送出的回饋；總部也看得到同一份資料。</div>
 <div class="filterbar" style="margin-bottom:10px">
-<input type="text" id="fFbSearch" placeholder="搜尋學員或教師姓名" oninput="renderFeedback()" style="padding:7px 10px;border:1px solid var(--g200);border-radius:6px;font-size:13px;font-family:inherit;">
+<input type="text" id="fFbSearch" placeholder="搜尋學員或教師姓名" oninput="renderFeedback()" style="padding:7px 10px;border:1px solid var(--g200);border-radius:6px;font-size:13px;font-family:inherit;" data-i18n-placeholder="u06.fbSearchPlaceholder">
 <select id="fFbStatus" onchange="renderFeedback()" style="padding:7px 10px;border:1px solid var(--g200);border-radius:6px;font-size:13px;font-family:inherit;">
-<option value="">全部狀態</option>
-<option value="待處理">待處理</option>
-<option value="處理中">處理中</option>
-<option value="已結案">已結案</option>
+<option value="" data-i18n="h03.optAllStatus">全部狀態</option>
+<option value="待處理" data-i18n="u06.fbPending">待處理</option>
+<option value="處理中" data-i18n="u06.fbInProgress">處理中</option>
+<option value="已結案" data-i18n="u06.fbClosed">已結案</option>
 </select>
 </div>
 <div class="tablewrap">
 <table>
-<thead><tr><th>日期</th><th>學員</th><th>班級／課程</th><th>授課教師</th><th>評分</th><th>內容摘要</th><th>狀態</th></tr></thead>
+<thead><tr><th data-i18n="u04.thDate">日期</th><th data-i18n="u06.thStudent">學員</th><th data-i18n="u06.thClassCourse">班級／課程</th><th data-i18n="u06.thInstructor">授課教師</th><th data-i18n="u06.thRating">評分</th><th data-i18n="u06.thSummary">內容摘要</th><th data-i18n="common.status">狀態</th></tr></thead>
 <tbody id="feedbackTbody"></tbody>
 </table>
 </div>
@@ -223,19 +223,19 @@ border-radius:6px;font-size:13px;box-sizing:border-box;font-family:inherit;}
 
 <!-- 區塊四：合約摘要（唯讀，參考用） -->
 <details class="card">
-<summary style="cursor:pointer;font-size:15px;font-weight:600">合約摘要（唯讀，如需調整請洽顧問）</summary>
+<summary style="cursor:pointer;font-size:15px;font-weight:600" data-i18n="u06.summaryTitle">合約摘要（唯讀，如需調整請洽顧問）</summary>
 <div style="margin-top:12px">
-<div class="kv"><span>合作型態</span><span>加盟（Franchise）｜品牌授權＋教學系統使用</span></div>
-<div class="kv"><span>合約期間</span><span id="ctrPeriodEl">－</span></div>
-<div class="kv"><span>目前所處年度</span><span id="ctrYearEl">－</span></div>
-<div class="kv"><span>品牌授權費（第 1 年）</span><span>已付清 <span class="badge green">已付</span></span></div>
-<div class="kv"><span>教育系統／營運導入費（第 1 年）</span><span>已付清 <span class="badge green">已付</span></span></div>
-<div class="kv"><span>權利金比例</span><span>營業收入的 6%</span></div>
-<div class="kv"><span>教材費計價方式</span><span>依實際使用教材版本與冊數，按單價計收</span></div>
-<div class="kv"><span>教師培訓費</span><span>新任教師認證培訓，每人次計收</span></div>
-<div class="kv"><span>教師回訓費</span><span>在職教師定期回訓，每人次計收</span></div>
-<div class="kv"><span>結算週期</span><span>每半年結算、支付一次</span></div>
-<div class="kv"><span>品牌露出形式</span><span>雙品牌並列（貴校校名＋TLI）</span></div>
+<div class="kv"><span data-i18n="u06.kvCoopType">合作型態</span><span data-i18n="u06.kvCoopTypeVal">加盟（Franchise）｜品牌授權＋教學系統使用</span></div>
+<div class="kv"><span data-i18n="u04.kvCoopPeriod">合約期間</span><span id="ctrPeriodEl">－</span></div>
+<div class="kv"><span data-i18n="u06.kvCurrentYear">目前所處年度</span><span id="ctrYearEl">－</span></div>
+<div class="kv"><span data-i18n="u06.kvBrandFee">品牌授權費（第 1 年）</span><span><span data-i18n="u06.paidLabel">已付清</span> <span class="badge green" data-i18n="u06.paidBadge">已付</span></span></div>
+<div class="kv"><span data-i18n="u06.kvOnboardFee">教育系統／營運導入費（第 1 年）</span><span><span data-i18n="u06.paidLabel">已付清</span> <span class="badge green" data-i18n="u06.paidBadge">已付</span></span></div>
+<div class="kv"><span data-i18n="u04.kvRoyaltyRate">權利金比例</span><span data-i18n="u04.royaltyRateVal">營業收入的 6%</span></div>
+<div class="kv"><span data-i18n="u06.kvMaterialPricing">教材費計價方式</span><span data-i18n="u06.kvMaterialPricingVal">依實際使用教材版本與冊數，按單價計收</span></div>
+<div class="kv"><span data-i18n="u06.kvTrainingFee">教師培訓費</span><span data-i18n="u06.kvTrainingFeeVal">新任教師認證培訓，每人次計收</span></div>
+<div class="kv"><span data-i18n="u06.kvRetrainFee">教師回訓費</span><span data-i18n="u06.kvRetrainFeeVal">在職教師定期回訓，每人次計收</span></div>
+<div class="kv"><span data-i18n="u04.kvSettleCycle">結算週期</span><span data-i18n="u04.settleCycleVal">每半年結算、支付一次</span></div>
+<div class="kv"><span data-i18n="u06.kvBrandExposure">品牌露出形式</span><span data-i18n="u06.kvBrandExposureVal">雙品牌並列（貴校校名＋TLI）</span></div>
 </div>
 </details>
 
@@ -245,25 +245,29 @@ border-radius:6px;font-size:13px;box-sizing:border-box;font-family:inherit;}
 <!-- 提出疑義 modal（針對歷期結算之營業收入數字，若加盟主認為與實際不符可提出說明，由 TLI 覆核） -->
 <div class="modal-mask" id="disputeModal" onclick="if(event.target===this) closeDisputeModal()">
 <div class="modal">
-<h3>提出疑義</h3>
-<div class="small" style="margin-bottom:12px" id="disputePeriodNote">對「<span id="disputePeriodLabel">－</span>」之營業收入數字提出疑義，請說明理由，TLI 將主動聯繫確認。</div>
+<h3 data-i18n="u06.disputeModalTitle">提出疑義</h3>
+<div class="small" style="margin-bottom:12px" id="disputePeriodNote"><span data-i18n="u06.disputeNote1">對「</span><span id="disputePeriodLabel">－</span><span data-i18n="u06.disputeNote2">」之營業收入數字提出疑義，請說明理由，TLI 將主動聯繫確認。</span></div>
 <div class="formrow" id="fDisputeNoteRow">
-<label for="fDisputeNote">疑義說明</label>
-<textarea id="fDisputeNote" placeholder="請說明與平台紀錄不符之處，例如班級或人次認定差異"></textarea>
-<div class="err">請填寫疑義說明</div>
+<label for="fDisputeNote" data-i18n="u06.disputeNoteLabel">疑義說明</label>
+<textarea id="fDisputeNote" placeholder="請說明與平台紀錄不符之處，例如班級或人次認定差異" data-i18n-placeholder="u06.disputeNotePlaceholder"></textarea>
+<div class="err" data-i18n="u06.disputeNoteRequired">請填寫疑義說明</div>
 </div>
 <div class="modal-actions">
-<button class="btn ghost" onclick="closeDisputeModal()">取消</button>
-<button class="btn" onclick="submitDispute()">送出疑義</button>
+<button class="btn ghost" onclick="closeDisputeModal()" data-i18n="common.cancel">取消</button>
+<button class="btn" onclick="submitDispute()" data-i18n="u06.btnSubmitDispute">送出疑義</button>
 </div>
 </div>
 </div>
 
 <script src="../assets/_shared_masters.js"></script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_org.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
 function seededRand(seed){ var x=Math.sin(seed*9301+49297)*233280; return x-Math.floor(x); }
 function fmtNum(n){ return Math.round(n).toLocaleString('zh-Hant'); }
 function fmtMoney(n){ return 'NT$ '+fmtNum(n); }
+function T(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
 
 /* ===== 20260928fix：本頁登入租戶為 範例大學語言中心（partners.p02），合約起訖／目前所處年度／
    權利金比例／教師回訓費一律讀主檔，與 u01／u04 對齊，不再沿用舊示範資料 ===== */
@@ -276,9 +280,14 @@ function computeContractYear(fromStr, todayStr){
   return Math.max(1, Math.floor(months/12) + 1);
 }
 var CONTRACT_YEAR = AZ_PARTNER.from ? computeContractYear(AZ_PARTNER.from, TODAY_STR) : 1;
-var CONTRACT_YEAR_LABEL = CONTRACT_YEAR <= 1 ? '第 1 年（品牌授權費與導入費計費期）' : '第 '+CONTRACT_YEAR+' 年（權利金計費期）';
-document.getElementById('ctrPeriodEl').textContent = (AZ_PARTNER.from||'－')+' ～ '+(AZ_PARTNER.to||'－');
-document.getElementById('ctrYearEl').textContent = CONTRACT_YEAR_LABEL;
+function contractYearLabel(){
+  return CONTRACT_YEAR <= 1 ? T('第 1 年（品牌授權費與導入費計費期）','Year 1 (brand license & onboarding fee period)') : T('第 '+CONTRACT_YEAR+' 年（權利金計費期）','Year '+CONTRACT_YEAR+' (royalty fee period)');
+}
+function renderContractSummaryHeader(){
+  document.getElementById('ctrPeriodEl').textContent = (AZ_PARTNER.from||'－')+' ～ '+(AZ_PARTNER.to||'－');
+  document.getElementById('ctrYearEl').textContent = contractYearLabel();
+}
+renderContractSummaryHeader();
 
 /* ===== 本期結算資料：由 TLI 依平台紀錄自動計算，加盟主不需自行申報 =====
    PLATFORM_REVENUE 等三項為 TLI 端依本期開課數、上課人次與課程收入（教材銷售＋課程學費分潤等，依合約定義）
@@ -297,24 +306,27 @@ function renderPeriod(){
   var totalEl = document.getElementById('totalPayable');
   var dueNote = document.getElementById('dueNote');
 
+  document.getElementById('periodTitle').textContent = T('本期結算：','This Period\'s Settlement: ')+T('2027 上半年','H1 2027');
+  document.getElementById('periodRange').textContent = T('結算期間：','Settlement Period: ')+'2027-01-01 ～ 2027-06-30';
+
   document.getElementById('refGrid').innerHTML = [
-    {num:String(PLATFORM_COURSES_OPENED), lbl:'本期開課數'},
-    {num:fmtNum(PLATFORM_ATTENDANCE), lbl:'本期上課人次'},
-    {num:fmtMoney(PLATFORM_REVENUE), lbl:'本期課程收入'},
-    {num:PLATFORM_ACTIVATION_RATE+'%', lbl:'帳號啟用率'}
+    {num:String(PLATFORM_COURSES_OPENED), lbl:T('本期開課數','Classes Opened This Period')},
+    {num:fmtNum(PLATFORM_ATTENDANCE), lbl:T('本期上課人次','Attendance This Period')},
+    {num:fmtMoney(PLATFORM_REVENUE), lbl:T('本期課程收入','Course Revenue This Period')},
+    {num:PLATFORM_ACTIVATION_RATE+'%', lbl:T('帳號啟用率','Account Activation Rate')}
   ].map(function(k){ return '<div class="refbox"><div class="num">'+k.num+'</div><div class="lbl">'+k.lbl+'</div></div>'; }).join('');
 
-  statusWrap.innerHTML = '<span class="badge blue">依平台紀錄自動計算</span>';
+  statusWrap.innerHTML = '<span class="badge blue">'+T('依平台紀錄自動計算','Auto-calculated from Platform Records')+'</span>';
   var royalty = PLATFORM_REVENUE * ROYALTY_RATE;
   var total = royalty + MATERIAL_FEE + RETRAIN_FEE;
   sumGrid.innerHTML = [
-    {num:fmtMoney(PLATFORM_REVENUE), lbl:'本期課程收入（依平台紀錄）'},
-    {num:fmtMoney(royalty), lbl:'權利金試算（6%）'},
-    {num:fmtMoney(MATERIAL_FEE), lbl:'本期教材費'},
-    {num:fmtMoney(RETRAIN_FEE), lbl:'本期教師回訓費'}
+    {num:fmtMoney(PLATFORM_REVENUE), lbl:T('本期課程收入（依平台紀錄）','Course Revenue This Period (per Platform Records)')},
+    {num:fmtMoney(royalty), lbl:T('權利金試算（','Royalty Estimate (')+Math.round(ROYALTY_RATE*100)+T('%）','%)')},
+    {num:fmtMoney(MATERIAL_FEE), lbl:T('本期教材費','Materials Fee This Period')},
+    {num:fmtMoney(RETRAIN_FEE), lbl:T('本期教師回訓費','Teacher Re-training Fee This Period')}
   ].map(function(k){ return '<div class="statbox"><div class="num">'+k.num+'</div><div class="lbl">'+k.lbl+'</div></div>'; }).join('');
   totalEl.textContent = fmtMoney(total);
-  dueNote.textContent = '繳款期限：2027-07-30（結算期間結束後 30 日內，線下匯款）｜狀態：待繳款；如對本期課程收入數字有疑義，請至下方「歷期結算紀錄」提出。';
+  dueNote.textContent = T('繳款期限：','Payment Due: ')+'2027-07-30'+T('（結算期間結束後 30 日內，線下匯款）｜狀態：待繳款；如對本期課程收入數字有疑義，請至下方「歷期結算紀錄」提出。',' (within 30 days of period end, offline remittance) ｜ Status: Payment Pending; if you have concerns about this period\'s course revenue figure, please raise them under "Settlement History" below.');
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
@@ -352,7 +364,7 @@ function submitDispute(){
   saveDisputes(DISPUTES);
   closeDisputeModal();
   renderHistory();
-  toast('已送出疑義，TLI 將主動聯繫確認');
+  toast(T('已送出疑義，TLI 將主動聯繫確認','Dispute submitted; TLI will contact you to confirm'));
 }
 function nowStr(){ var d=new Date(); return d.toISOString().slice(0,16).replace('T',' '); }
 
@@ -371,9 +383,9 @@ function renderHistory(){
     var royalty = h.royalty;
     var total = (royalty||0) + h.material + h.retrain;
     var dispute = DISPUTES[h.period];
-    var status = dispute ? '疑義處理中' : h.status;
-    var badgeClass = dispute ? 'amber' : (status==='已付' ? 'green' : 'amber');
-    var disputeBtn = revenue!=null ? '<button class="btn ghost" style="padding:5px 10px;font-size:12px;margin-right:6px;" onclick="openDisputeModal('+"'"+h.period+"'"+')">'+(dispute?'查看疑義':'提出疑義')+'</button>' : '';
+    var status = dispute ? T('疑義處理中','Dispute In Progress') : T(h.status, h.status==='已付'?'Paid':'Payment Pending');
+    var badgeClass = dispute ? 'amber' : (h.status==='已付' ? 'green' : 'amber');
+    var disputeBtn = revenue!=null ? '<button class="btn ghost" style="padding:5px 10px;font-size:12px;margin-right:6px;" onclick="openDisputeModal('+"'"+h.period+"'"+')">'+(dispute?T('查看疑義','View Dispute'):T('提出疑義','Raise Dispute'))+'</button>' : '';
     return '<tr>'+
       '<td style="white-space:normal;min-width:160px;max-width:220px;">'+h.period+'</td>'+
       '<td>'+(revenue!=null ? fmtMoney(revenue) : '－')+'</td>'+
@@ -381,14 +393,14 @@ function renderHistory(){
       '<td>'+fmtMoney(h.material)+'</td>'+
       '<td>'+fmtMoney(h.retrain)+'</td>'+
       '<td>'+(revenue!=null ? fmtMoney(total) : '－')+'</td>'+
-      '<td><span class="badge '+badgeClass+'">'+status+(isCurrent?'（已試算）':'')+'</span><div class="small" style="margin-top:3px">'+h.paidAt+(dispute?'　・　疑義說明：'+escapeHtml(dispute.note):'')+'</div></td>'+
-      '<td>'+disputeBtn+'<button class="btn ghost" style="padding:5px 10px;font-size:12px;margin-right:6px;" onclick="downloadStatement('+"'"+h.period+"'"+')">下載結算單</button>'+
-      '<button class="btn ghost" style="padding:5px 10px;font-size:12px;" onclick="viewRemittance('+"'"+h.period+"'"+')">查看匯款紀錄</button></td>'+
+      '<td><span class="badge '+badgeClass+'">'+status+(isCurrent?T('（已試算）',' (Estimated)'):'')+'</span><div class="small" style="margin-top:3px">'+h.paidAt+(dispute?T('　・　疑義說明：','　・　Dispute Note: ')+escapeHtml(dispute.note):'')+'</div></td>'+
+      '<td>'+disputeBtn+'<button class="btn ghost" style="padding:5px 10px;font-size:12px;margin-right:6px;" onclick="downloadStatement('+"'"+h.period+"'"+')">'+T('下載結算單','Download Statement')+'</button>'+
+      '<button class="btn ghost" style="padding:5px 10px;font-size:12px;" onclick="viewRemittance('+"'"+h.period+"'"+')">'+T('查看匯款紀錄','View Remittance')+'</button></td>'+
       '</tr>';
   }).join('');
 }
-function downloadStatement(period){ toast('已產生「'+period+'」結算單 PDF（示範，不會實際下載檔案）'); }
-function viewRemittance(period){ toast('「'+period+'」匯款紀錄：示範資料，無實際銀行明細'); }
+function downloadStatement(period){ toast(T('已產生「','Generated the PDF statement for “')+period+T('」結算單 PDF（示範，不會實際下載檔案）','” (demo, no file is actually downloaded)')); }
+function viewRemittance(period){ toast(T('「','“')+period+T('」匯款紀錄：示範資料，無實際銀行明細','” remittance record: demo data, no actual bank details')); }
 
 renderPeriod();
 renderHistory();
@@ -408,9 +420,9 @@ var FEEDBACK = [
   {date:'2026-08-30', student:'Kevin Lee', course:'大學班・進階讀寫 第 3 週', teacher:'陳嘉玲', rating:4, summary:'內容紮實，希望增加寫作批改回饋。', status:'已結案'}
 ];
 function fbStatusBadge(s){
-  if (s==='已結案') return '<span class="badge green">已結案</span>';
-  if (s==='處理中') return '<span class="badge blue">處理中</span>';
-  return '<span class="badge amber">待處理</span>';
+  if (s==='已結案') return '<span class="badge green">'+T('已結案','Closed')+'</span>';
+  if (s==='處理中') return '<span class="badge blue">'+T('處理中','In Progress')+'</span>';
+  return '<span class="badge amber">'+T('待處理','Pending')+'</span>';
 }
 function fbStars(n){ return '★'.repeat(n)+'☆'.repeat(5-n)+' ('+n+')'; }
 function renderFeedback(){
@@ -432,7 +444,7 @@ function renderFeedback(){
       '<td>'+fbStatusBadge(f.status)+'</td>'+
       '</tr>';
   }).join('');
-  document.getElementById('feedbackCountNote').textContent = '共 '+rows.length+' 筆回饋';
+  document.getElementById('feedbackCountNote').textContent = T('共 ','')+rows.length+T(' 筆回饋',' feedback item(s)');
 }
 renderFeedback();
 
@@ -449,6 +461,13 @@ function toast(msg){
   el.textContent = msg; el.classList.add('show');
   clearTimeout(window._toastTimer);
   window._toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2400);
+}
+if (window.TLI_I18N){
+  TLI_I18N.onRefresh(renderContractSummaryHeader);
+  TLI_I18N.onRefresh(renderPeriod);
+  TLI_I18N.onRefresh(renderHistory);
+  TLI_I18N.onRefresh(renderFeedback);
+  TLI_I18N.init();
 }
 </script>
 </body>

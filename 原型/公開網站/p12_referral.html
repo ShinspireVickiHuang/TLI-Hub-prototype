@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>成為 TLI 合作夥伴｜TLI Connect</title>
+<title data-i18n="meta_title">成為 TLI 合作夥伴｜TLI Connect</title>
 <meta name="description" content="TLI 合作夥伴招募：介紹加盟、經銷、代理三種合作型態，說明各自的合作方式與適合對象，並提供洽談合作入口。">
 <style>
 :root{
@@ -36,7 +36,6 @@ h1,h2,h3,p{margin:0;}
 .site-nav{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:600;color:var(--c-text);}
 .site-nav a:hover{color:var(--c-primary);}
 .header-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-.lang-select{border:1px solid var(--c-border);border-radius:6px;padding:6px 8px;font-size:13px;background:#fff;color:var(--c-text);}
 .menu-toggle{display:none;background:none;border:1px solid var(--c-border);border-radius:6px;padding:6px 10px;font-size:16px;cursor:pointer;}
 @media(max-width:780px){
   .brand img{height:26px;}
@@ -153,23 +152,16 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
 
 <header class="site-header">
   <a class="brand" href="p01_home.html"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n="menu_toggle_aria" data-i18n-attr="aria-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <button class="menu-toggle" onclick="document.querySelector('.site-nav').classList.toggle('open')" aria-label="開啟選單" data-i18n-aria-label="menu_toggle_aria"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <nav class="site-nav">
     <a href="p02_courses.html" data-i18n="nav_courses">課程</a>
-    <a href="p10_enterprise.html">企業培訓</a>
+    <a href="p10_enterprise.html" data-i18n="nav_enterprise">企業培訓</a>
     <a href="p09_events.html" data-i18n="nav_events">活動</a>
     <a href="p04_teachers.html" data-i18n="nav_teachers">師資</a>
     <a href="p05_about_locations.html" data-i18n="nav_about">品牌與校區</a>
     <a href="p08_faq.html" data-i18n="nav_faq">常見問題</a>
   </nav>
-  <div class="header-right">
-    <select class="lang-select" onchange="setLang(this.value)" aria-label="語言切換" data-i18n="lang_select_aria" data-i18n-attr="aria-label">
-      <option value="zh-TW">繁體中文</option>
-      <option value="zh-CN">简体中文</option>
-      <option value="en">English</option>
-      <option value="ja">日本語</option>
-      <option value="de">Deutsch</option>
-    </select>
+  <div class="header-right tb-actions">
     <a class="btn btn-primary btn-sm" data-i18n="btn_consult" href="p06_trial.html?type=consult">預約諮詢</a>
     <a class="btn btn-accent btn-sm" data-i18n="btn_trial" href="p06_trial.html?type=trial">預約試聽</a>
     <a class="btn btn-outline btn-sm" data-i18n="btn_login" href="p07_login_register.html">登入</a>
@@ -180,42 +172,42 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
 <section id="recruitMode">
   <section class="ref-hero">
     <div class="ref-hero-inner">
-      <span class="ref-hero-eyebrow">合作夥伴招募</span>
-      <h1>成為 TLI 合作夥伴</h1>
-      <p class="ref-hero-lead">同一套課程與教材，三種合作型態決定你要用什麼方式加入：取得經營權自己招生授課、採購課程包進自己的產品銷售，或單純介紹客戶賺取佣金。選一種最適合你現況的方式，與 TLI 一起把課程賣出去。</p>
+      <span class="ref-hero-eyebrow" data-i18n="p12_hero1_eyebrow">合作夥伴招募</span>
+      <h1 data-i18n="p12_hero1_title">成為 TLI 合作夥伴</h1>
+      <p class="ref-hero-lead" data-i18n="p12_hero1_lead">同一套課程與教材，三種合作型態決定你要用什麼方式加入：取得經營權自己招生授課、採購課程包進自己的產品銷售，或單純介紹客戶賺取佣金。選一種最適合你現況的方式，與 TLI 一起把課程賣出去。</p>
     </div>
   </section>
 
   <main>
     <section class="home-section">
       <div class="section-head2">
-        <h2>三種合作型態</h2>
-        <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);">直營（TLI 自己招生授課）不屬於合作夥伴，以下為對外開放的三種型態</p>
+        <h2 data-i18n="p12_types_title">三種合作型態</h2>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-i18n="p12_types_sub">直營（TLI 自己招生授課）不屬於合作夥伴，以下為對外開放的三種型態</p>
       </div>
       <div class="partner-types">
 
         <div class="partner-card">
           <div class="partner-icon franchise" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M9 12h.01M15 12h.01M9 9h.01M15 9h.01"/></svg></div>
-          <h3><span class="partner-sub">加盟 Franchise</span>取得經營權</h3>
-          <p>以 TLI 品牌與教學系統，在自己的據點招生授課。TLI 提供品牌授權、教師培訓與回訓、教材、課程架構、教學法與測驗、證書。</p>
-          <div class="partner-fit"><b>適合：</b>有自己場地與師資的語言學校或大學</div>
-          <button type="button" class="btn btn-primary" onclick="openPartnerModal('franchise')">洽談合作</button>
+          <h3><span class="partner-sub" data-i18n="p12_card_franchise_sub">加盟 Franchise</span><span data-i18n="p12_card_franchise_title">取得經營權</span></h3>
+          <p data-i18n="p12_card_franchise_desc">以 TLI 品牌與教學系統，在自己的據點招生授課。TLI 提供品牌授權、教師培訓與回訓、教材、課程架構、教學法與測驗、證書。</p>
+          <div class="partner-fit"><b data-i18n="p12_fit_label">適合：</b><span data-i18n="p12_card_franchise_fit">有自己場地與師資的語言學校或大學</span></div>
+          <button type="button" class="btn btn-primary" data-i18n="p12_btn_contact" onclick="openPartnerModal('franchise')">洽談合作</button>
         </div>
 
         <div class="partner-card">
           <div class="partner-icon distributor" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
-          <h3><span class="partner-sub">經銷 Distributor</span>採購課程打包銷售</h3>
-          <p>向 TLI 採購課程或名額，包進自己的遊學、旅遊或培訓產品對外販售。用自己的品牌、自己定價、直接向客戶收費。</p>
-          <div class="partner-fit"><b>適合：</b>遊學代辦、旅行社、教育代理機構</div>
-          <button type="button" class="btn btn-primary" onclick="openPartnerModal('distributor')">洽談合作</button>
+          <h3><span class="partner-sub" data-i18n="p12_card_distributor_sub">經銷 Distributor</span><span data-i18n="p12_card_distributor_title">採購課程打包銷售</span></h3>
+          <p data-i18n="p12_card_distributor_desc">向 TLI 採購課程或名額，包進自己的遊學、旅遊或培訓產品對外販售。用自己的品牌、自己定價、直接向客戶收費。</p>
+          <div class="partner-fit"><b data-i18n="p12_fit_label">適合：</b><span data-i18n="p12_card_distributor_fit">遊學代辦、旅行社、教育代理機構</span></div>
+          <button type="button" class="btn btn-primary" data-i18n="p12_btn_contact" onclick="openPartnerModal('distributor')">洽談合作</button>
         </div>
 
         <div class="partner-card">
           <div class="partner-icon agent" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3><span class="partner-sub">代理 Agent</span>介紹客戶</h3>
-          <p>介紹學生或企業客戶給 TLI，客戶向 TLI 購買並付款，TLI 依成交學費支付佣金，每半年結算一次。</p>
-          <div class="partner-fit"><b>適合：</b>個人顧問、留學代辦、企業人資顧問</div>
-          <button type="button" class="btn btn-primary" onclick="openPartnerModal('agent')">洽談合作</button>
+          <h3><span class="partner-sub" data-i18n="p12_card_agent_sub">代理 Agent</span><span data-i18n="p12_card_agent_title">介紹客戶</span></h3>
+          <p data-i18n="p12_card_agent_desc">介紹學生或企業客戶給 TLI，客戶向 TLI 購買並付款，TLI 依成交學費支付佣金，每半年結算一次。</p>
+          <div class="partner-fit"><b data-i18n="p12_fit_label">適合：</b><span data-i18n="p12_card_agent_fit">個人顧問、留學代辦、企業人資顧問</span></div>
+          <button type="button" class="btn btn-primary" data-i18n="p12_btn_contact" onclick="openPartnerModal('agent')">洽談合作</button>
         </div>
 
       </div>
@@ -227,16 +219,16 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
 <section id="studentReferralMode" style="display:none">
   <section class="ref-hero">
     <div class="ref-hero-inner">
-      <span class="ref-hero-eyebrow">合作夥伴推薦</span>
-      <h1 id="refHeadline">由合作夥伴推薦加入 TLI 學習</h1>
-      <p class="ref-hero-lead" id="refLead">確認推薦來源後即可註冊帳號，自行付費購買課程，系統會自動將您的訂單歸屬給推薦您的代理商。</p>
+      <span class="ref-hero-eyebrow" data-i18n="p12_hero2_eyebrow">合作夥伴推薦</span>
+      <h1 id="refHeadline" data-i18n="p12_ref_headline_default">由合作夥伴推薦加入 TLI 學習</h1>
+      <p class="ref-hero-lead" id="refLead" data-i18n="p12_ref_lead">確認推薦來源後即可註冊帳號，自行付費購買課程，系統會自動將您的訂單歸屬給推薦您的代理商。</p>
 
       <div class="ref-card" id="refKnownCard">
-        <span class="ref-badge" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 5"/></svg>推薦來源已確認</span>
-        <div class="ref-agent-name">由 <span id="refAgentName">環宇教育顧問</span> 推薦</div>
-        <div class="ref-agent-code">轉介碼：<strong id="refAgentCode">—</strong></div>
-        <a class="btn btn-accent" id="refRegisterBtn" href="p07_login_register.html">開始註冊</a>
-        <div class="ref-note">歸屬有效期：由 TLI 拍板（待定）。請於有效期內完成註冊並自行付費購買課程，訂單將歸屬於此代理商；代理商僅負責推薦，不會經手您的付款。</div>
+        <span class="ref-badge" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10 8 14 16 5"/></svg><span data-i18n="p12_ref_badge">推薦來源已確認</span></span>
+        <div class="ref-agent-name" id="refAgentNameRow">由 <span id="refAgentName">環宇教育顧問</span> 推薦</div>
+        <div class="ref-agent-code"><span data-i18n="p12_ref_code_label">轉介碼：</span><strong id="refAgentCode">—</strong></div>
+        <a class="btn btn-accent" id="refRegisterBtn" href="p07_login_register.html" data-i18n="p12_ref_register_btn">開始註冊</a>
+        <div class="ref-note" data-i18n="p12_ref_note">歸屬有效期：由 TLI 拍板（待定）。請於有效期內完成註冊並自行付費購買課程，訂單將歸屬於此代理商；代理商僅負責推薦，不會經手您的付款。</div>
       </div>
     </div>
   </section>
@@ -244,41 +236,41 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
   <main>
     <section class="home-section">
       <div class="section-head2">
-        <h2>推薦流程怎麼運作</h2>
-        <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);">代理商只負責推薦，不代收款；學生一律直接向 TLI 付費</p>
+        <h2 data-i18n="p12_flow_title">推薦流程怎麼運作</h2>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-i18n="p12_flow_sub">代理商只負責推薦，不代收款；學生一律直接向 TLI 付費</p>
       </div>
       <div class="ref-steps">
         <div class="step-item">
           <span class="step-num">1</span>
-          <div><h3>由代理商連結進入</h3><p>透過代理商提供的專屬連結進入本頁，系統自動帶入推薦來源。</p></div>
+          <div><h3 data-i18n="p12_step1_title">由代理商連結進入</h3><p data-i18n="p12_step1_desc">透過代理商提供的專屬連結進入本頁，系統自動帶入推薦來源。</p></div>
         </div>
         <div class="step-item">
           <span class="step-num">2</span>
-          <div><h3>完成註冊</h3><p>填寫基本資料建立 TLI 學習帳號。</p></div>
+          <div><h3 data-i18n="p12_step2_title">完成註冊</h3><p data-i18n="p12_step2_desc">填寫基本資料建立 TLI 學習帳號。</p></div>
         </div>
         <div class="step-item">
           <span class="step-num">3</span>
-          <div><h3>自行付費購買課程</h3><p>直接向 TLI 付款，代理商不經手任何款項。</p></div>
+          <div><h3 data-i18n="p12_step3_title">自行付費購買課程</h3><p data-i18n="p12_step3_desc">直接向 TLI 付款，代理商不經手任何款項。</p></div>
         </div>
         <div class="step-item">
           <span class="step-num">4</span>
-          <div><h3>歸屬該代理商</h3><p>訂單自動計入推薦您的代理商，作為佣金依據。</p></div>
+          <div><h3 data-i18n="p12_step4_title">歸屬該代理商</h3><p data-i18n="p12_step4_desc">訂單自動計入推薦您的代理商，作為佣金依據。</p></div>
         </div>
       </div>
     </section>
 
     <section class="home-section" style="padding-top:0;">
       <div class="section-head2">
-        <h2>常見問題</h2>
+        <h2 data-i18n="p12_faq_title">常見問題</h2>
       </div>
       <div class="link-cards">
         <div class="link-card">
-          <h3>推薦碼有時效限制嗎？</h3>
-          <p>有。需在歸屬有效期內完成付費，逾期需重新由代理商連結進入才會計入該代理商的轉介。</p>
+          <h3 data-i18n="p12_faq1_q">推薦碼有時效限制嗎？</h3>
+          <p data-i18n="p12_faq1_a">有。需在歸屬有效期內完成付費，逾期需重新由代理商連結進入才會計入該代理商的轉介。</p>
         </div>
         <div class="link-card">
-          <h3>代理商會知道我的付款資訊嗎？</h3>
-          <p>不會。代理商只看得到推薦名單與轉換狀態，所有金流與發票皆由 TLI 直接處理。</p>
+          <h3 data-i18n="p12_faq2_q">代理商會知道我的付款資訊嗎？</h3>
+          <p data-i18n="p12_faq2_a">不會。代理商只看得到推薦名單與轉換狀態，所有金流與發票皆由 TLI 直接處理。</p>
         </div>
       </div>
     </section>
@@ -325,36 +317,36 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
   <div class="modal-box">
     <div class="modal-head">
       <h3 id="partnerModalTitle">洽談合作</h3>
-      <button class="modal-close-btn" onclick="closePartnerModal()" aria-label="關閉"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="modal-close-btn" onclick="closePartnerModal()" aria-label="關閉" data-i18n-aria-label="p12_modal_close_aria"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <form id="partnerInquiryForm" onsubmit="return submitPartnerInquiry(event)" novalidate>
       <div class="modal-body">
         <div class="field">
-          <label>聯絡人姓名<span class="req-mark">*</span></label>
-          <input type="text" id="piName" placeholder="請輸入姓名" oninput="clearFieldErr('piName','piNameErr')">
-          <div class="field-error" id="piNameErr">請輸入聯絡人姓名。</div>
+          <label><span data-i18n="p12_field_name_label">聯絡人姓名</span><span class="req-mark">*</span></label>
+          <input type="text" id="piName" placeholder="請輸入姓名" data-i18n-placeholder="p12_ph_name" oninput="clearFieldErr('piName','piNameErr')">
+          <div class="field-error" id="piNameErr" data-i18n="p12_err_name_required">請輸入聯絡人姓名。</div>
         </div>
         <div class="field">
-          <label>機構／公司名稱<span class="req-mark">*</span></label>
-          <input type="text" id="piOrg" placeholder="請輸入機構或公司名稱" oninput="clearFieldErr('piOrg','piOrgErr')">
-          <div class="field-error" id="piOrgErr">請輸入機構或公司名稱。</div>
+          <label><span data-i18n="p12_field_org_label">機構／公司名稱</span><span class="req-mark">*</span></label>
+          <input type="text" id="piOrg" placeholder="請輸入機構或公司名稱" data-i18n-placeholder="p12_ph_org" oninput="clearFieldErr('piOrg','piOrgErr')">
+          <div class="field-error" id="piOrgErr" data-i18n="p12_err_org_required">請輸入機構或公司名稱。</div>
         </div>
         <div class="field">
-          <label>聯絡 Email<span class="req-mark">*</span></label>
-          <input type="email" id="piEmail" placeholder="請輸入 Email" oninput="clearFieldErr('piEmail','piEmailErr')">
-          <div class="field-error" id="piEmailErr">請輸入有效的 Email。</div>
+          <label><span data-i18n="p12_field_email_label">聯絡 Email</span><span class="req-mark">*</span></label>
+          <input type="email" id="piEmail" placeholder="請輸入 Email" data-i18n-placeholder="p12_ph_email" oninput="clearFieldErr('piEmail','piEmailErr')">
+          <div class="field-error" id="piEmailErr" data-i18n="p12_err_email_invalid">請輸入有效的 Email。</div>
         </div>
         <div class="field">
-          <label>電話（選填）</label>
-          <input type="tel" id="piPhone" placeholder="請輸入聯絡電話">
+          <label data-i18n="p12_field_phone_label">電話（選填）</label>
+          <input type="tel" id="piPhone" placeholder="請輸入聯絡電話" data-i18n-placeholder="p12_ph_phone">
         </div>
         <div class="field">
-          <label>想合作的內容（選填）</label>
-          <textarea id="piMessage" placeholder="例如：據點城市、預計規模、想銷售的課程類型等"></textarea>
+          <label data-i18n="p12_field_message_label">想合作的內容（選填）</label>
+          <textarea id="piMessage" placeholder="例如：據點城市、預計規模、想銷售的課程類型等" data-i18n-placeholder="p12_ph_message"></textarea>
         </div>
       </div>
       <div class="modal-foot">
-        <button type="submit" class="btn btn-accent btn-block">送出洽談需求</button>
+        <button type="submit" class="btn btn-accent btn-block" data-i18n="p12_btn_submit_inquiry">送出洽談需求</button>
       </div>
     </form>
   </div>
@@ -362,7 +354,17 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
 
 <div class="toast" id="toast"></div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en','ja','de'];</script>
+<script src="../assets/_i18n_dict.js"></script>
+<script src="../assets/_i18n_dict_ja.js"></script>
+<script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_i18n_dict_public.js"></script>
+<script src="../assets/_i18n_dict_public_ja.js"></script>
+<script src="../assets/_i18n_dict_public_de.js"></script>
+<script src="../assets/_i18n.js"></script>
 <script>
+function T(zh,obj){ return TLI_I18N.t(zh,obj); }
+
 function showToast(msg){
   var t = document.getElementById('toast');
   t.textContent = msg;
@@ -370,9 +372,9 @@ function showToast(msg){
   clearTimeout(window._toastTimer);
   window._toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
 }
-function setLang(){ showToast('僅呈現介面語系切換'); }
 
 /* ===================== 代理商轉介：示範資料與顯示邏輯（供夥伴端「我的推薦連結」串接） ===================== */
+/* AGENT_DIRECTORY 為示範資料（代理商全名），比照其他頁「機構名稱」demo 資料不翻的慣例，維持中文不譯 */
 var AGENT_DIRECTORY = {
   'REF-SEA07': '環宇教育顧問（東南亞地區）',
   'REF-JP10': '環宇教育顧問（日本地區）',
@@ -390,10 +392,19 @@ function renderReferralState(){
     recruitMode.style.display = 'none';
     studentMode.style.display = '';
     var name = AGENT_DIRECTORY[code] || '環宇教育顧問';
-    document.getElementById('refAgentName').textContent = name;
     document.getElementById('refAgentCode').textContent = code;
     document.getElementById('refRegisterBtn').setAttribute('href', 'p07_login_register.html?ref=' + encodeURIComponent(code));
-    document.getElementById('refHeadline').textContent = '由 ' + name + ' 推薦';
+    /* 標題與夥伴名稱列含代理商全名（動態、含變數），改用 T() 組字串範本再置換 {name}，
+       確保切換語言時（TLI_I18N.onRefresh 重跑本函式）也能正確套用當下語言。
+       h1 原本帶的 data-i18n="p12_ref_headline_default" 只是給「未帶 ?ref= 進來」情境的預設文字用；
+       一旦進了轉介情境、內容改由這裡動態組出，就要拿掉這個屬性，
+       否則共用模組會在每次 walk() 時用字典裡的靜態預設值蓋掉這裡剛組好的動態文字 */
+    var refHeadlineEl = document.getElementById('refHeadline');
+    refHeadlineEl.removeAttribute('data-i18n');
+    var headlineTpl = T('由 {name} 推薦', {en:'Referred by {name}', ja:'{name}のご紹介', de:'Empfohlen von {name}'});
+    refHeadlineEl.textContent = headlineTpl.replace('{name}', name);
+    var nameRowTpl = T('由 {name} 推薦', {en:'Referred by {name}', ja:'{name}のご紹介', de:'Empfohlen von {name}'});
+    document.getElementById('refAgentNameRow').innerHTML = nameRowTpl.replace('{name}', '<span id="refAgentName">' + name + '</span>');
   } else {
     recruitMode.style.display = '';
     studentMode.style.display = 'none';
@@ -402,15 +413,21 @@ function renderReferralState(){
 renderReferralState();
 
 /* ===================== 洽談合作 modal ===================== */
-var PARTNER_TYPE_LABEL = {
-  franchise: '加盟',
-  distributor: '經銷',
-  agent: '代理'
-};
+function partnerTypeLabel(type){
+  if (type === 'franchise') return T('加盟', {en:'Franchise', ja:'フランチャイズ', de:'Franchise'});
+  if (type === 'distributor') return T('經銷', {en:'Distributor', ja:'代理店', de:'Vertriebspartner'});
+  if (type === 'agent') return T('代理', {en:'Agent', ja:'エージェント', de:'Vermittler'});
+  return '';
+}
 var currentPartnerType = '';
+function refreshPartnerModalTitle(){
+  if (!currentPartnerType) return;
+  var titleTpl = T('洽談合作－{type}', {en:'Partner Inquiry – {type}', ja:'提携のご相談－{type}', de:'Partneranfrage – {type}'});
+  document.getElementById('partnerModalTitle').textContent = titleTpl.replace('{type}', partnerTypeLabel(currentPartnerType));
+}
 function openPartnerModal(type){
   currentPartnerType = type;
-  document.getElementById('partnerModalTitle').textContent = '洽談合作－' + (PARTNER_TYPE_LABEL[type] || '');
+  refreshPartnerModalTitle();
   document.getElementById('partnerModalOverlay').classList.add('show');
 }
 function closePartnerModal(){
@@ -437,9 +454,22 @@ function submitPartnerInquiry(e){
   if(!ok) return false;
   closePartnerModal();
   document.getElementById('partnerInquiryForm').reset();
-  showToast('已收到您的洽談需求，TLI 商務團隊將盡快與您聯繫');
+  showToast(T('已收到您的洽談需求，TLI 商務團隊將盡快與您聯繫', {en:'Your inquiry has been received. Our partnerships team will contact you soon.', ja:'ご相談内容を受け付けました。TLIの担当チームより追ってご連絡いたします。', de:'Ihre Anfrage ist eingegangen. Unser Partnerteam wird sich in Kürze bei Ihnen melden.'}));
   return false;
 }
+
+function applyMetaDesc(){
+  /* <title> 在 <head> 裡，共用模組的 data-i18n 掃描只作用在 document.body，不會處理 <title>，需自行設定 */
+  document.title = T('成為 TLI 合作夥伴｜TLI Connect', {en:'Become a TLI Partner | TLI Connect', ja:'TLIパートナーになる｜TLI Connect', de:'TLI-Partner werden | TLI Connect'});
+  var m = document.querySelector('meta[name="description"]');
+  if(m) m.setAttribute('content', T('TLI 合作夥伴招募：介紹加盟、經銷、代理三種合作型態，說明各自的合作方式與適合對象，並提供洽談合作入口。', {en:'TLI Partner Recruitment: an overview of three partnership types — franchise, distributor, and agent — including how each works, who it fits, and how to start a conversation.', ja:'TLIパートナー募集：フランチャイズ・代理店・エージェントの3つの提携形態について、それぞれの仕組みと適した対象、お問い合わせ方法をご紹介します。', de:'TLI-Partnerprogramm: Übersicht über drei Partnerschaftsformen – Franchise, Vertrieb und Vermittlung – mit Erläuterung der jeweiligen Zusammenarbeit, Zielgruppe und Kontaktmöglichkeit.'}));
+}
+
+TLI_I18N.onRefresh(applyMetaDesc);
+TLI_I18N.onRefresh(renderReferralState);
+TLI_I18N.onRefresh(refreshPartnerModalTitle);
+applyMetaDesc();
+TLI_I18N.init();
 </script>
 
 </body>
