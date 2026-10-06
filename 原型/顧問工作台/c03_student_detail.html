@@ -466,7 +466,12 @@ html,body{overflow-x:hidden;}
       </div>
       <div class="note" id="bNote" style="display:none;"></div>
 
-      <div class="ent-card">
+      <div class="ent-card" id="plCard">
+        <div class="ent-card-head"><h2 data-i18n="c03.secPlacement">程度測驗報告</h2><span id="plHeadTag"></span></div>
+        <div id="plBody"></div>
+      </div>
+
+      <div class="ent-card" id="acctCard">
         <div class="ent-card-head"><h2 data-i18n="c03.secAccount">帳號區</h2></div>
         <div class="acct-row">
           <div class="acct-status"><span class="l" data-i18n="c03.lblActivationStatus">開通狀態</span><span class="badge" id="acctStatusBadge">—</span></div>
@@ -649,6 +654,40 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_i18n.js"></script>
 <script>
 function T(zh,en){return window.TLI_I18N?TLI_I18N.t(zh,en):zh;}
+/* ===== 程度測驗資料：讀官網 p15 寫入的 localStorage，另含既有學生的歷史紀錄 ===== */
+var PL_KEY='tliPlacementResults_v1';
+var PL_LV=[1,1,2,3,4,5,6,7,8,9,9];
+var PL_SEED=[
+  {id:'pt_s_wang01', sid:'wang01', lang:'zh', date:'2026-07-18', L:3, R:3, status:'已聯絡'},
+  {id:'pt_s_zhang01', sid:'zhang01', lang:'zh', date:'2026-08-09', L:2, R:2, status:'已聯絡'},
+  {id:'pt_s_yamada01', sid:'yamada01', lang:'zh', date:'2026-06-30', L:4, R:3, status:'已聯絡'},
+  {id:'pt_s_emma01', sid:'emma01', lang:'zh', date:'2026-06-12', L:2, R:1, status:'已聯絡'}
+];
+function plRange(n){
+  return TLI_MASTERS.levelSystems.ranges.filter(function(r){
+    var a=r.levelFrom.replace('Lv.',''), b=r.levelTo.replace('Lv.','');
+    var an=a==='H'?99:+a, bn=b==='H'?99:+b; return r.enabled && n>=an && n<=bn;
+  })[0]||{};
+}
+function plLangName(id){ var l=TLI_MASTERS.teachLangs.filter(function(x){return x.id===id;})[0]; return l?l.name:id; }
+function plAll(){
+  var raw=[]; try{ raw=JSON.parse(localStorage.getItem(PL_KEY))||[]; }catch(e){}
+  var seeds=PL_SEED.map(function(x){
+    var tot=x.L+x.R, n=PL_LV[tot], r=plRange(n);
+    return {id:x.id, studentId:x.sid, name:'', email:'', lang:x.lang, langName:plLangName(x.lang), date:x.date,
+      listening:x.L, listeningMax:5, reading:x.R, readingMax:5, total:tot, totalMax:10,
+      level:'Lv.'+n, levelNum:n, rangeName:r.name, cefr:r.cefr, status:x.status, seed:true};
+  });
+  return raw.concat(seeds);
+}
+function plStatusSet(id,status){
+  try{
+    var raw=JSON.parse(localStorage.getItem(PL_KEY))||[];
+    raw.forEach(function(r){ if(r.id===id) r.status=status; });
+    localStorage.setItem(PL_KEY,JSON.stringify(raw));
+  }catch(e){}
+}
+
 var STUDENTS={
   wang01:{name:'王大同',cls:'B',campus:'羅斯福',hours:12,expire:'2026-11-20',status:'學習中',join:'2024-03-02',
     activation:{status:'已開通',activatedAt:'2024-03-05'},
@@ -684,9 +723,9 @@ var STUDENTS={
       {date:'2026-07-30',course:'日文團體班 N4 第 9 堂',teacher:'佐藤直樹老師',courseStar:2,teacherStar:2,summary:'班上人數偏多，個人練習機會少，希望增加口說時間。',lowFlag:true},
       {date:'2026-06-10',course:'日文團體班 N4 第 6 堂',teacher:'佐藤直樹老師',courseStar:4,teacherStar:4,summary:'老師發音示範清楚，內容豐富。',lowFlag:false}
     ]},
-  emma01:{name:'Emma Chen',cls:'C',campus:'士林',hours:0,expire:'2026-10-01',status:'停止中',join:'2025-06-18',
+  emma01:{name:'Emma Johnson',cls:'C',campus:'士林',hours:0,expire:'2026-10-01',status:'停止中',join:'2025-06-18',
     activation:{status:'已開通',activatedAt:'2025-06-20'},
-    contact:'+1-628-555-0110／emma.chen@example.com',company:'',
+    contact:'+1-628-555-0110／emma.johnson@example.com',company:'',
     orders:[{no:'0855',item:'中文一對一 30 堂',amount:'NT$65,000',mode:'訂金加尾款',status:'待開票'}],
     courses:[{plan:'中文一對一',total:30,used:30,left:0,expire:'2026-10-01'}],
     lessons:[{date:'2026-06-20',course:'中文一對一',teacher:'王淑芬老師',progress:'NPC 第 12 課',att:'出席'}],
@@ -882,9 +921,9 @@ function renderEnterprise(S){
 renderEnterprise(S);
 
 /* ================= C11 測驗結果 / C13 回饋彙整（20260909 新增） ================= */
-// 20260930 修正：改讀主檔 TLI_MASTERS.packages（a04 銷售方案主檔），只列上架中、非專案型方案，與 c04 開單頁一致
+// 20260930 修正：改讀主檔 TLI_MASTERS.packages（a04 銷售方案主檔），只列上架中、方案，與 c04 開單頁一致
 var RECOMMEND_PLANS=TLI_MASTERS.packages.filter(function(pkg){
-  return pkg.status==='上架'&&pkg.planType!=='project';
+  return pkg.status==='上架';
 }).map(function(pkg){
   return {id:pkg.id,name:pkg.name};
 });
@@ -1195,6 +1234,41 @@ function tlRenderTimeline(){
 function tlRender(){ tlRenderChips(); tlRenderTimeline(); }
 tlRender();
 
+
+/* ================= 程度測驗報告：各項得分、建議等級、測驗日期與下載成績單 ================= */
+function plRecordsOf(S){
+  return plAll().filter(function(r){ return (r.studentId&&r.studentId===curId)||r.id===curId; }).sort(function(a,b){return b.date.localeCompare(a.date);});
+}
+var PL_LANG_EN={'中文':'Chinese','英文':'English','日文':'Japanese','韓文':'Korean','德文':'German','法文':'French','台語':'Taiwanese','上海話':'Shanghainese','廣東話':'Cantonese'};
+var PL_RANGE_EN={'初級':'Beginner','中級':'Intermediate','中高級':'Upper-intermediate','高級':'Advanced'};
+var PL_CUR_IDX=0;
+function renderPlacement03(idx){
+  var recs=plRecordsOf(S), body=document.getElementById('plBody');
+  if(!recs.length){
+    document.getElementById('plHeadTag').innerHTML='<span class="badge muted">'+T('未測驗','Not Tested')+'</span>';
+    body.innerHTML='<div class="empty-note">'+T('尚無程度測驗紀錄。學生可在官網「程度測驗」自行測驗，成績報告會送到這裡。','No placement test records yet. Students can take the test on the website under Placement Test, and the score report will arrive here.')+'</div>';
+    return;
+  }
+  idx=idx||0; PL_CUR_IDX=idx; var r=recs[idx];
+  var lname=function(x){ return T(x.langName, PL_LANG_EN[x.langName]||x.langName); };
+  document.getElementById('plHeadTag').innerHTML='<span class="badge ok">'+T('已測驗','Tested')+'</span>';
+  var sel=recs.length>1?'<select onchange="renderPlacement03(+this.value)" aria-label="'+T('測驗紀錄','Test records')+'" style="padding:5px 8px;border:1px solid var(--gray-300);border-radius:6px;font-size:12.5px;">'+recs.map(function(x,i){return '<option value="'+i+'"'+(i===idx?' selected':'')+'>'+x.date+'　'+lname(x)+'　'+x.level+'</option>';}).join('')+'</select>':'';
+  body.innerHTML=
+    '<div class="test-summary-card"><div>'+
+      '<div class="l">'+T(r.langName+'程度測驗（'+r.date+'）',lname(r)+' placement test ('+r.date+')')+(sel?'　'+sel:'')+'</div>'+
+      '<div class="lv">'+T('建議等級 '+r.level+'　'+r.rangeName,'Suggested level '+r.level+'　'+(PL_RANGE_EN[r.rangeName]||r.rangeName))+'</div>'+
+      '<div class="suggest">'+T('對應 CEFR '+(r.cefr||'—')+'。線上測驗只含聽力與閱讀，口說與寫作請於諮詢時補評。','Maps to CEFR '+(r.cefr||'—')+'. The online test covers listening and reading only; please assess speaking and writing during the consultation.')+'</div>'+
+      '<div class="skill4-row">'+
+        '<span class="s4">'+T('聽力','Listening')+'<b>'+r.listening+'/'+r.listeningMax+'</b></span>'+
+        '<span class="s4">'+T('閱讀','Reading')+'<b>'+r.reading+'/'+r.readingMax+'</b></span>'+
+        '<span class="s4">'+T('總分','Total')+'<b>'+r.total+'/'+r.totalMax+'</b></span>'+
+        '<span class="s4">'+T('口說','Speaking')+'<b>'+T('待評','Pending')+'</b></span><span class="s4">'+T('寫作','Writing')+'<b>'+T('待評','Pending')+'</b></span>'+
+      '</div></div>'+
+      '<a class="btn sm" target="_blank" href="../會員區/m20_transcripts.html?tab=placement&consult=1&id='+encodeURIComponent(r.id)+'&rec='+encodeURIComponent(JSON.stringify(r))+'&name='+encodeURIComponent(S.name||'')+'">'+T('下載成績單','Download transcript')+'</a>'+
+    '</div>';
+}
+renderPlacement03(0);
+
 function tliShowTab(name,btn){
   document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.tabbtn').forEach(function(b){b.classList.remove('active');});
@@ -1379,6 +1453,7 @@ if (window.TLI_I18N) {
   TLI_I18N.onRefresh(function(){renderContracts(S);});
   TLI_I18N.onRefresh(function(){renderEnterprise(S);});
   TLI_I18N.onRefresh(function(){renderTestResults(S);});
+  TLI_I18N.onRefresh(function(){renderPlacement03(PL_CUR_IDX);});
   TLI_I18N.onRefresh(function(){renderFeedback(S);});
   TLI_I18N.onRefresh(tlRender);
   TLI_I18N.onRefresh(renderNotifPanel);

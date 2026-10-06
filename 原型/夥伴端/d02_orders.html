@@ -143,6 +143,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 .topbar{padding:0 16px;margin:-16px -16px 18px;}
 .dl{grid-template-columns:1fr;}
 }
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -177,7 +178,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1 data-i18n="nav_d.orders">訂購單</h1><div class="desc" data-i18n="desc.d02Orders">訂購單由 TLI 依雙方線下確認的數量、規格與專案折讓價建立。您可在此提出採購需求，並查看訂購單、訂金與尾款狀態、名單掛入進度。</div></div>
+<div><h1 style="display:inline-block" data-i18n="nav_d.orders">訂購單</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span><div class="desc" data-i18n="desc.d02Orders">訂購單由 TLI 依雙方線下確認的數量、規格與專案折讓價建立。您可在此提出採購需求，並查看訂購單、訂金與尾款狀態、名單掛入進度。</div></div>
 <button class="btn" onclick="openNewDemand()" data-i18n="btn.newDemand">提出採購需求</button>
 </div>
 
@@ -253,7 +254,7 @@ function renderPlanOptions(){
     return '<option value="' + escHtml(pk.name) + '">' + escHtml(pk.name) + '</option>';
   }).join('');
 }
-/* 訂購方案一律取自 TLI_MASTERS.packages（pk1–pk7 中的上架方案），單價＝方案 C 對象牌價 × 80%（示範專案折讓） */
+/* 訂購方案一律取自 TLI_MASTERS.packages（pk1–pk6 中的上架方案），單價＝方案 C 對象牌價 × 80%（專案折讓） */
 var ORDERS = [
  {id:'PO-2026-001', orderDate:'2026-03-02', plan:'學期班 Lv.5–8 一期方案', qty:20, unitPrice:28800, totalAmount:576000,
   periodFrom:'2026-04-06', periodTo:'2026-05-01', depositRate:0.3, depositAmount:172800, depositDate:'2026-03-08',

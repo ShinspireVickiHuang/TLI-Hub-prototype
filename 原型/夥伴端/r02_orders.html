@@ -156,6 +156,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 }
 
 
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -189,14 +190,14 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1 data-i18n="nav_r.orders">訂單歸屬</h1><div class="desc" id="pageDesc"></div></div>
+<div><h1 style="display:inline-block" data-i18n="nav_r.orders">訂單歸屬</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span><div class="desc" id="pageDesc"></div></div>
 </div>
 
 <div class="filterbar">
 <div class="ff" style="flex:1;min-width:220px"><label for="q" data-i18n="label.search">搜尋</label>
 <div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span>
 <input type="text" id="q" placeholder="訂單或合約編號、會員、企業、方案" data-i18n-placeholder="placeholder.r02Search" oninput="onFilterChange()"></div></div>
-<div class="ff"><label for="f_type" data-i18n="label.type">型態</label><select id="f_type" onchange="onFilterChange()"><option value="" data-i18n="opt.allTypes">全部型態</option><option value="b2c" data-i18n="type.b2c">B2C 訂單</option><option value="b2b" data-i18n="type.b2b">B2B 企業合約</option><option value="edu" data-i18n="type.edu">B2B 機構授權合約</option></select></div>
+<div class="ff"><label for="f_type" data-i18n="label.type">型態</label><select id="f_type" onchange="onFilterChange()"><option value="" data-i18n="opt.allTypes">全部型態</option><option value="b2c" data-i18n="type.b2c">B2C 訂單</option><option value="b2b" data-i18n="type.b2b">B2B 企業合約</option></select></div>
 <div class="ff"><label for="f_pay" data-i18n="label.platformPayStatus">平台收款狀態</label><select id="f_pay" onchange="onFilterChange()"><option value="" data-i18n="opt.allPayStatus">全部收款狀態</option><option data-i18n="status.paid2">已收款</option><option data-i18n="status.partiallyPaid">部分收款</option><option data-i18n="status.unpaid">未收款</option><option data-i18n="status.refunded">退款</option></select></div>
 <div class="ff"><label for="f_period" data-i18n="label.period">期間</label><select id="f_period" onchange="onPeriodChange()"><option value="" data-i18n="opt.allPeriods">全部期間</option><option value="thism" data-i18n="opt.thisMonth">本月</option><option value="lastm" data-i18n="opt.lastMonth">上月</option><option value="3m" data-i18n="opt.last3Months">近三個月</option><option value="custom" data-i18n="opt.customRange">自訂區間</option></select></div>
 <button type="button" class="clearlink" onclick="toggleMoreFilter()" data-i18n="btn.moreFilters2">更多篩選</button>
@@ -259,7 +260,6 @@ var ORDERS = [
  {id:'CTR-26090004', date:'2026-09-08', type:'b2b', cust:'電子零組件製造商（員工約 120 人）', plan:'企業培訓合約・時數池 300 小時', amount:720000, paid:360000, pay:'部分收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26090019', date:'2026-09-05', type:'b2c', cust:'學生 B07', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'爭議中', channel:'Stripe'},
  {id:'ORD-26090008', date:'2026-09-02', type:'b2c', cust:'學生 A12', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'CTR-26090001', date:'2026-09-01', type:'edu', cust:'北部私立大學・華語中心', plan:'機構授權合約・授權費＋權利金', amount:460000, paid:0, pay:'未收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26080042', date:'2026-08-28', type:'b2c', cust:'學生 C03', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26080035', date:'2026-08-24', type:'b2c', cust:'學生 B11', plan:'一對一課程包 20 堂', amount:48000, paid:0,     pay:'退款',     basis:'轉介碼', attr:'已解除', channel:'藍新金流'},
  {id:'CTR-26080006', date:'2026-08-20', type:'b2b', cust:'精密機械製造商（員工約 340 人）', plan:'企業培訓合約・預付款倒扣制', amount:1200000, paid:1200000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
@@ -270,17 +270,16 @@ var ORDERS = [
  {id:'ORD-26070033', date:'2026-07-22', type:'b2c', cust:'學生 B04', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26070027', date:'2026-07-18', type:'b2c', cust:'學生 A05', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
  {id:'ORD-26070011', date:'2026-07-09', type:'b2c', cust:'學生 D06', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'CTR-26060002', date:'2026-06-25', type:'edu', cust:'中部科技大學・應用外語系', plan:'機構授權合約・授權費＋權利金', amount:320000, paid:320000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26060019', date:'2026-06-16', type:'b2c', cust:'學生 C11', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26060007', date:'2026-06-04', type:'b2c', cust:'學生 A21', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26050024', date:'2026-05-20', type:'b2c', cust:'學生 B15', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
  {id:'CTR-26050001', date:'2026-05-12', type:'b2b', cust:'金融服務業者（員工約 210 人）', plan:'企業培訓合約・時數池 200 小時', amount:500000, paid:500000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26040016', date:'2026-04-18', type:'b2c', cust:'學生 D09', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'}
 ];
-var TYPE_LABEL = {b2c:'B2C 訂單', b2b:'B2B 企業合約', edu:'B2B 機構授權合約'};
-var TYPE_LABEL_EN = {b2c:'B2C Order', b2b:'B2B Corporate Contract', edu:'B2B Institutional License Contract'};
-var TYPE_SHORT = {b2c:'B2C', b2b:'B2B 企業', edu:'B2B 機構'};
-var TYPE_SHORT_EN = {b2c:'B2C', b2b:'B2B Corp', edu:'B2B Institution'};
+var TYPE_LABEL = {b2c:'B2C 訂單', b2b:'B2B 企業合約'};
+var TYPE_LABEL_EN = {b2c:'B2C Order', b2b:'B2B Corporate Contract'};
+var TYPE_SHORT = {b2c:'B2C', b2b:'B2B 企業'};
+var TYPE_SHORT_EN = {b2c:'B2C', b2b:'B2B Corp'};
 /* 結算紀錄由總部 a20 產生並標記，夥伴端唯讀 */
 var SETTLEMENTS = [
  {period:'2026-08', amount:127680, status:'已結算', settledAt:'2026-09-05'},

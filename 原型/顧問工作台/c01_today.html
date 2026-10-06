@@ -364,7 +364,7 @@ html,body{overflow-x:hidden;}
           <thead><tr><th data-i18n="col.orderNo">訂單編號</th><th data-i18n="col.student">學生</th><th data-i18n="col.item">項目</th><th data-i18n="col.receivedAmount">已收款</th><th data-i18n="common.status">狀態</th><th></th></tr></thead>
           <tbody>
             <tr class="clickable" onclick="location.href='c05_order_detail.html?order=0855'">
-              <td>TLI-2026-0855</td><td>Emma Chen</td><td>中文一對一 30 堂</td><td>NT$65,000</td>
+              <td>TLI-2026-0855</td><td>Emma Johnson</td><td>中文一對一 30 堂</td><td>NT$65,000</td>
               <td><span class="badge warn" data-i18n="c01.badgePendingInvoiceSplit">待開立（免稅＋應稅分張）</span></td>
               <td><a class="btn sm primary" href="c05_order_detail.html?order=0855"><span data-i18n="btn.issueInvoice">開立發票</span></a><div class="row-actions"><button class="btn sm" onclick="event.stopPropagation();tliRowDone(this)" title="標示已處理" data-i18n-title="btn.markDoneTitle"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="5 13 10 18 19 7"/></svg> <span data-i18n="btn.markDone">已處理</span></button><button class="btn sm" onclick="event.stopPropagation();tliRowDefer(this)" title="延後至明天" data-i18n-title="btn.deferTitle"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="8.5"/><polyline points="12 7.5 12 12 15.5 14"/></svg> <span data-i18n="btn.defer">延後</span></button></div></td>
             </tr>
@@ -454,7 +454,7 @@ html,body{overflow-x:hidden;}
           <thead><tr><th data-i18n="col.student">學生</th><th data-i18n="col.langClassType">語言／班型</th><th data-i18n="col.preferredSlot">偏好時段</th><th data-i18n="common.status">狀態</th><th></th></tr></thead>
           <tbody>
             <tr class="clickable" onclick="location.href='c07_scheduling.html?mode=online&student=std1'">
-              <td>Emma Chen</td><td data-i18n="c01.langType.zh1v1">中文・一對一</td><td>週二三晚上 19:00–21:00</td>
+              <td>Emma Johnson</td><td data-i18n="c01.langType.zh1v1">中文・一對一</td><td>週二三晚上 19:00–21:00</td>
               <td><span class="badge warn" data-i18n="c01.badgeNewPendingSchedule">新單待排</span></td>
               <td><a class="btn sm primary" href="c07_scheduling.html?mode=online&student=std1"><span data-i18n="btn.goToScheduling">前往排課</span></a><div class="row-actions"><button class="btn sm" onclick="event.stopPropagation();tliRowDone(this)" title="標示已處理" data-i18n-title="btn.markDoneTitle"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="5 13 10 18 19 7"/></svg> <span data-i18n="btn.markDone">已處理</span></button><button class="btn sm" onclick="event.stopPropagation();tliRowDefer(this)" title="延後至明天" data-i18n-title="btn.deferTitle"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="8.5"/><polyline points="12 7.5 12 12 15.5 14"/></svg> <span data-i18n="btn.defer">延後</span></button></div></td>
             </tr>
@@ -594,7 +594,7 @@ function tliAskDemo(n){
     tliAppendMsg('bot',T01('王大同的訂單 <b>TLI-2026-0841</b>（春季學期班）第 3 期應收 NT$15,000，應收日 2026-08-20，目前逾期 5 天。','Wang Da-tong order <b>TLI-2026-0841</b> (Spring Semester Class) installment 3 has NT$15,000 due on 2026-08-20, currently 5 days overdue.')+'<div class="src">'+T01('資料來源：3.0 中台／訂單模組・收款紀錄','Source: 3.0 Platform / Order Module · Payment Records')+'</div><div class="act"><a class="btn sm primary" href="c05_order_detail.html?order=0841"><span data-i18n="btn.viewOrder">查看訂單</span></a><button class="btn sm" onclick="tliToast(T01(&quot;已加入今日待辦提醒&quot;,&quot;Added to the task reminders for today&quot;))">'+T01('建立催收提醒','Create Collection Reminder')+'</button></div>');
   }else{
     tliAppendMsg('user',T01('有哪些單逾期未開發票？','Which orders are overdue for invoicing?'));
-    tliAppendMsg('bot',T01('目前有 2 筆待開票：Emma Chen（TLI-2026-0855，需免稅＋應稅分張開立）、王大同（TLI-2026-0891，教材加購）。','There are currently 2 orders pending invoice: Emma Chen (TLI-2026-0855, needs tax-exempt + taxable split invoicing), Wang Da-tong (TLI-2026-0891, material add-on purchase).')+'<div class="src">'+T01('資料來源：3.0 中台／發票模組','Source: 3.0 Platform / Invoice Module')+'</div><div class="act"><a class="btn sm primary" href="c05_order_detail.html?order=0855">'+T01('查看 0855','View 0855')+'</a></div>');
+    tliAppendMsg('bot',T01('目前有 2 筆待開票：Emma Johnson（TLI-2026-0855，需免稅＋應稅分張開立）、王大同（TLI-2026-0891，教材加購）。','There are currently 2 orders pending invoice: Emma Johnson (TLI-2026-0855, needs tax-exempt + taxable split invoicing), Wang Da-tong (TLI-2026-0891, material add-on purchase).')+'<div class="src">'+T01('資料來源：3.0 中台／發票模組','Source: 3.0 Platform / Invoice Module')+'</div><div class="act"><a class="btn sm primary" href="c05_order_detail.html?order=0855">'+T01('查看 0855','View 0855')+'</a></div>');
   }
 }
 function tliAskFree(){

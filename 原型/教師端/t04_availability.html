@@ -120,7 +120,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .btn-danger:hover{background:#FBE5E1;}
 .btn:disabled{background:var(--c-border)!important;color:#98A2B3!important;cursor:not-allowed;border-color:var(--c-border)!important;}
 .btn-block{width:100%;}
-/* ---------- 團體聊天室場次：建立／編輯小表單（v2 新增） ---------- */
+/* ---------- Mandarin Lounge 場次：建立／編輯小表單（v2 新增） ---------- */
 .hidden{display:none!important;}
 .sheet-overlay{position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:100;display:flex;align-items:flex-end;justify-content:center;}
 .sheet-overlay.hidden{display:none;}
@@ -134,7 +134,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .field-input,.field-select{width:100%;border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:10px 12px;font-size:14px;font-family:inherit;color:var(--c-text);background:#fff;}
 .field-static{font-size:13px;color:var(--c-muted);background:var(--c-bg);border-radius:var(--radius-sm);padding:9px 12px;}
 .stack{display:flex;flex-direction:column;gap:10px;}
-/* ---------- 團體聊天室場次列表（v2 新增） ---------- */
+/* ---------- Mandarin Lounge 場次列表（v2 新增） ---------- */
 .session-card{border:1px solid var(--c-border);border-radius:var(--radius-sm);padding:12px;}
 .session-card + .session-card{margin-top:8px;}
 .session-card .s-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;}
@@ -190,14 +190,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <a class="page-tab active" href="t04_availability.html" data-i18n="avail.pageTitle">可授課時段</a>
       <a class="page-tab" href="t06_hours_pay.html" data-i18n="avail.tabHoursPay">時數與薪資</a>
     </div>
-    <p class="page-sub" style="margin:0 0 14px;" data-i18n="avail.pageSub">設定你可提供給顧問排課的時段：一對一課程由顧問依此時段安排，不會由學生直接預約；團體聊天室場次仍依此時段開放，由學生自行報名（不受影響）。</p>
+    <p class="page-sub" style="margin:0 0 14px;" data-i18n="avail.pageSub">設定你可提供給顧問排課的時段：一對一課程由顧問依此時段安排，不會由學生直接預約；Mandarin Lounge 場次仍依此時段開放，由學生自行報名（不受影響）。</p>
     <div class="card">
       <div class="banner banner-info">
         <b data-i18n="avail.banner.rulesTitle">時段規則</b>
         <ul>
           <li data-i18n="avail.rule1">每堂課 50 分鐘（可依課程調整為 30–180 分鐘）</li>
           <li data-i18n="avail.rule2">一對一課程：此時段是提供給顧問排課參考的可授課時段，實際排課由顧問操作安排學生與時間，你不會被學生直接預約</li>
-          <li data-i18n="avail.rule3">團體聊天室場次：學生仍依此時段開放自行報名（見下方「開團體聊天室場次」）</li>
+          <li data-i18n="avail.rule3">Mandarin Lounge 場次：學生仍依此時段開放自行報名（見下方「開 Mandarin Lounge 場次」）</li>
           <li><span data-i18n="avail.rule4a">時段一旦關閉，需間隔</span> <b data-i18n="avail.rule4b">2 小時</b><span data-i18n="avail.rule4c">後才能重新開放（關閉冷卻）</span></li>
           <li data-i18n="avail.rule5">已被顧問排定一對一課程的時段會鎖定，如需異動由顧問透過「請假／代課」流程處理</li>
           <li><span data-i18n="avail.rule6a">點擊已開放時段可設定「重複至」某日期；移除時段可選擇：只移除本週／移除至指定日期／移除全部，</span><b data-i18n="avail.rule6b">過去已發生的開放時段不會被移除</b></li>
@@ -231,7 +231,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <label class="switch"><input type="checkbox" id="flexMarkSwitch"><span class="track"></span></label>
         </div>
         <div class="repeat-toggle">
-          <span data-i18n="avail.toggle.chatMark">開團體聊天室場次</span>
+          <span data-i18n="avail.toggle.chatMark">開 Mandarin Lounge 場次</span>
           <label class="switch"><input type="checkbox" id="chatMarkSwitch"><span class="track"></span></label>
         </div>
         <div class="repeat-toggle">
@@ -244,7 +244,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         </div>
       </div>
       <div class="small muted" id="flexMarkHint" style="margin:-4px 0 4px;" data-i18n="avail.hint.flexMark">切換為開啟後，點擊「已開放」時段可標記／取消標記為可帶 彈性團體直播班。</div>
-      <div class="small muted" id="chatMarkHint" style="margin:0 0 12px;" data-i18n="avail.hint.chatMark">切換為開啟後，點擊「已開放」時段可建立團體聊天室場次（30 分鐘，TLI 老師帶，由機構授權學生或全平台學生報名）；點擊已建立的場次可編輯或取消。</div>
+      <div class="small muted" id="chatMarkHint" style="margin:0 0 12px;" data-i18n="avail.hint.chatMark">切換為開啟後，點擊「已開放」時段可建立 Mandarin Lounge 團體場次（每場 30 分鐘、6–10 人，TLI 老師帶，專案合作學生與直營學員皆可報名）；點擊已建立的場次可編輯或取消。</div>
       <div class="small muted" id="slotDetailHint" style="margin:0 0 12px;" data-i18n="avail.hint.slotDetail">切換為開啟後，點擊「已開放」時段可設定這一格單獨的「重複至」日期，或選擇移除方式（只本週／至指定日期／全部）。</div>
 
       <div class="legend">
@@ -252,7 +252,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         <span><i class="closed"></i><span data-i18n="avail.legend.closed">未開放</span></span>
         <span><i class="locked"></i><span data-i18n="avail.legend.locked">已排定一對一課程（鎖定）</span></span>
         <span><i class="flexmark"></i><span data-i18n="avail.legend.flexmark">可帶直播班</span></span>
-        <span><i class="chatmark"></i><span data-i18n="avail.legend.chatmark">團體聊天室場次</span></span>
+        <span><i class="chatmark"></i><span data-i18n="avail.legend.chatmark">Mandarin Lounge 場次</span></span>
         <span><i class="overseas-swatch"></i><span data-i18n="avail.legend.overseas">海外學員下班後可約區間</span></span>
       </div>
 
@@ -264,11 +264,18 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
     <div class="card">
       <div class="flex-between" style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:2px;">
-        <div class="section-title" style="font-size:15px;font-weight:700;margin:0;" data-i18n="avail.sessionListTitle">團體聊天室場次列表</div>
+        <div class="section-title" style="font-size:15px;font-weight:700;margin:0;" data-i18n="avail.sessionListTitle">Mandarin Lounge 場次列表</div>
               </div>
-      <p class="small muted" style="margin:4px 0 12px;" data-i18n="avail.sessionListDesc">團體聊天室（30 分鐘，TLI 老師帶）；名額上限由「基礎資料設定 → 上課型態設定」決定，開場次時可在上限內下修，不可上修。</p>
+      <p class="small muted" style="margin:4px 0 12px;" data-i18n="avail.sessionListDesc">Mandarin Lounge 團體場次（每場 30 分鐘，TLI 老師帶）；名額 6–10 人，視訊工具由場次設定。</p>
       <div id="sessionList"></div>
     </div>
+    <div class="card" id="loungeOverview" style="margin-top:14px;">
+      <div class="section-title" style="margin-top:0;" data-en="Group session sign-ups and rosters">團體場次報名與名單</div>
+      <p class="small muted" style="margin:4px 0 12px;" data-en="Sessions led by you in the next weeks, with live sign-up counts from students.">你帶領的近期團體場次，報名人數即時反映學員在會員區的報名與取消。</p>
+      <div id="loungeOvList"></div>
+      <div style="text-align:center;margin-top:10px;"><button type="button" class="btn btn-outline btn-sm" id="loungeOvMore" data-en="Show more">顯示更多</button></div>
+    </div>
+    <div class="sheet-overlay hidden" id="rosterOverlay" onclick="if(event.target===this)this.classList.add('hidden')"><div class="sheet" id="rosterBody" style="max-width:420px;"></div></div>
   </main>
 
   <nav class="bottom-nav">
@@ -283,26 +290,31 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="sheet-overlay hidden" id="chatFormOverlay">
   <div class="sheet">
     <div class="sheet-handle"></div>
-    <h3 id="chatFormTitle">建立團體聊天室場次</h3>
+    <h3 id="chatFormTitle">建立 Mandarin Lounge 場次</h3>
     <p class="small muted" id="chatFormSlotLabel" style="margin:2px 0 14px;">—</p>
     <div class="sheet-sec">
       <div class="lbl" data-i18n="avail.field.topic">主題</div>
       <input type="text" class="field-input" id="chatFormTopic" placeholder="如：日常對話練習" data-i18n-placeholder="avail.ph.topicExample" maxlength="30">
     </div>
     <div class="sheet-sec">
+      <div class="lbl" data-en="Video tool">視訊工具</div>
+      <select class="field-select" id="chatFormTool"><option value="teams">Microsoft Teams</option><option value="zoom">Zoom</option></select>
+      <div class="small muted" style="margin:4px 0 12px;" data-en="Students see this tool on the session and cannot change it.">學員在場次上看到此工具，不能自行更換。</div>
       <div class="lbl" data-i18n="avail.field.capacity">名額</div>
-      <input type="number" class="field-input" id="chatFormCapacity" min="1" oninput="clampChatCapacity(this)">
+      <input type="number" class="field-input" id="chatFormCapacity" min="6" max="10" oninput="clampChatCapacity(this)">
       <div class="small muted" id="chatFormCapHint" style="margin-top:4px;">—</div>
     </div>
     <div class="sheet-sec">
       <div class="lbl" data-i18n="avail.field.audienceGroup">面向（權益群組）</div>
       <select class="field-select" id="chatFormAudienceGroup" onchange="onChatAudienceGroupChange(this.value)">
-        <option value="all" data-i18n="avail.audience.all">全部有權益者</option>
+        <option value="all" data-i18n="avail.audience.all">全部（專案合作學生與直營學員）</option>
+        <option value="project" data-en="Project-partnership students only">僅專案合作學生</option>
+        <option value="direct" data-en="Direct students only">僅直營學員</option>
         <option value="enterprise" data-i18n="avail.audience.enterprise">指定企業</option>
         <option value="institution" data-i18n="avail.audience.institution">指定學校</option>
       </select>
       <select class="field-select hidden" id="chatFormAudienceTarget" style="margin-top:8px"></select>
-      <div class="small muted" style="margin-top:4px;" data-i18n="avail.audience.hint">全部有權益者：合約／方案含團體聊天室型態者皆可報名；指定企業／學校僅該企業員工或學校學生可報名。</div>
+      <div class="small muted" style="margin-top:4px;" data-i18n="avail.audience.hint">全部有權益者：合約／方案含 Mandarin Lounge 型態者皆可報名；指定企業／學校僅該企業員工或學校學生可報名。</div>
       <div class="hidden" id="chatFormDeptWrap" style="margin-top:10px;">
         <div class="lbl" data-i18n="avail.field.depts">適用科系（可複選，不選＝不限科系）</div>
         <div class="stack" id="chatFormDeptList"></div>
@@ -311,7 +323,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     </div>
     <div class="sheet-sec">
       <div class="lbl" data-i18n="avail.field.summary">主題簡介</div>
-      <textarea class="field-input" id="chatFormSummary" rows="3" maxlength="150" placeholder="用 2–3 句話說明這場聊天室的內容與練習重點" data-i18n-placeholder="avail.ph.summary"></textarea>
+      <textarea class="field-input" id="chatFormSummary" rows="3" maxlength="150" placeholder="用 2–3 句話說明這場 Mandarin Lounge 的內容與練習重點" data-i18n-placeholder="avail.ph.summary"></textarea>
     </div>
     <div class="sheet-sec">
       <div class="lbl" data-i18n="avail.field.level">適合等級</div>
@@ -379,6 +391,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="toast hidden" id="toast"></div>
 
 <script src="../assets/_shared_masters.js"></script>
+<script src="../會員區/_project_learning.js"></script>
 <script src="../assets/_i18n_dict.js"></script>
 <script src="../assets/_i18n_dict_teacher.js"></script>
 <script src="../assets/_i18n.js"></script>
@@ -394,7 +407,7 @@ var days = ['一','二','三','四','五','六','日'];
 var times = ['09:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
 function tt(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
 
-/* ===== 團體聊天室場次「語言」選項改讀主檔 teachLangs（不再各頁寫死教學語言清單）；
+/* ===== Mandarin Lounge 場次「語言」選項改讀主檔 teachLangs（不再各頁寫死教學語言清單）；
    沿用本頁原本以語言名稱作為 value 的寫法，只收原本就有提供的 6 種語言，
    data-i18n key 沿用既有詞典（avail.lang.zh/en/ja/ko/de/fr），翻譯行為不變 ===== */
 var CHAT_LANG_I18N_KEY = {zh:'avail.lang.zh', en:'avail.lang.en', ja:'avail.lang.ja', ko:'avail.lang.ko', de:'avail.lang.de', fr:'avail.lang.fr'};
@@ -448,15 +461,15 @@ var flexMarked = {'1-4':1,'2-5':1};
 var slotRepeatUntil = {};
 // 本週被「只移除本週」處理過的時段（示範用：僅記錄哪些格子本週被單次關閉，不影響其餘週的重複規則）
 var slotThisWeekRemoved = {};
-/* ---------- 團體聊天室場次（v2 改版：老師開場次、看名單、出席勾選，資料為模擬數字） ---------- */
-// key（日-時段索引）對應已建立的團體聊天室場次；chatMarked 由此物件的 key 集合推導，維持與既有格子渲染邏輯相容
-/* 名額上限與可加入身分取自 a17 基礎資料設定→上課型態設定→團體聊天室（暫定值 30，尚未拍板） */
-var CHAT_TYPE_CAP = 30;
+/* ---------- Mandarin Lounge 場次（v2 改版：老師開場次、看名單、出席勾選，資料為模擬數字） ---------- */
+// key（日-時段索引）對應已建立的 Mandarin Lounge 場次；chatMarked 由此物件的 key 集合推導，維持與既有格子渲染邏輯相容
+/* 團體場次名額 6–10 人（與專案合作額度設定的團體場次人數上限一致） */
+var CHAT_TYPE_CAP = 10, CHAT_TYPE_MIN = 6;
 /* 面向＝權益群組（20260910f 改版）：全部有權益者／指定企業／指定學校，取代舊版 general/enterprise/institution/all 四選一。
    企業名單與 a04_packages.html、a19_b2b_enterprise.html 的示範企業名一致，不自創名稱；學校僅一個示範對象。 */
 var CHAT_ENT_NAMES = ['和霖科技股份有限公司','裕發國際貿易有限公司','瑞新金融顧問股份有限公司','東岳生技股份有限公司','大西華國際物流股份有限公司'];
 var CHAT_INST_NAMES = ['範例州立大學'];
-/* ---------- 適用科系（2026-09-11 新增）：面向選「指定學校」時，可複選該校科系；一場聊天室可對應多個科系（一對多）。
+/* ---------- 適用科系（2026-09-11 新增）：面向選「指定學校」時，可複選該校科系；一場 Mandarin Lounge 可對應多個科系（一對多）。
    讀取與機構端 u02／u04、管理後台 a19「學院與科系」共用的 localStorage，資料由 TLI 依合作合約建檔，教師端唯讀選用。
    選定的適用科系會同步一份摘要到 tliDemoInstChatSessions，供機構端 u02「各科系可報名場次」總覽讀取。 ---------- */
 var LS_ORG_COLLEGE_KEY = 'tliDemoOrgColleges';
@@ -495,7 +508,9 @@ var CURRENT_TEACHER_INTRO_DEFAULT = '資深中文教師，擅長生活會話與�
 function chatAudienceLabel(session){
   if (session.audienceGroup === 'enterprise') return tt('指定企業：','Enterprise: ')+(session.audienceTarget||tt('（未指定）','(unspecified)'));
   if (session.audienceGroup === 'institution') return tt('指定學校：','Institution: ')+(session.audienceTarget||tt('（未指定）','(unspecified)'));
-  return tt('全部有權益者','All Eligible Members');
+  if (session.audienceGroup === 'project') return tt('專案合作學生','Project-partnership students');
+  if (session.audienceGroup === 'direct') return tt('直營學員','Direct students');
+  return tt('全部（專案合作與直營）','All (project-partnership and direct)');
 }
 function chatAudienceBadgeClass(session){
   if (session.audienceGroup === 'enterprise') return 'ent';
@@ -512,19 +527,20 @@ function chatDeptSummary(session){
 }
 function orgDeptCollegeId(id){ var d = ORG_DEPARTMENTS.find(function(x){return x.id===id;}); return d ? d.collegeId : ''; }
 var chatSessions = {
-  '2-6':{topic:'日常對話練習', audienceGroup:'institution', audienceTarget:CHAT_INST_NAMES[0], registered:4, capacity:20,
+  '2-6':{topic:'日常對話練習', audienceGroup:'project', audienceTarget:null, registered:4, capacity:8, tool:'teams',
     summary:'鎖定日常生活情境，透過簡單提問與情境模擬，讓學員練習開口說中文，適合累積基礎會話信心。', level:'初階',
     teacherIntro:CURRENT_TEACHER_INTRO_DEFAULT, points:['分享今天做了哪些事','描述你最喜歡的一餐','練習問路與指路對話'], prep:'請先複習教材第 1–2 課常用句型。', lang:'中文', introStatus:'已發佈',
     deptIds:['d2','d3']},
-  '4-2':{topic:'職場情境會話', audienceGroup:'all', audienceTarget:null, registered:0, capacity:20,
+  '4-2':{topic:'職場情境會話', audienceGroup:'all', audienceTarget:null, registered:0, capacity:10, tool:'zoom',
     summary:'模擬會議、面試等職場情境，訓練學員使用得體的中文表達。', level:'中高階',
     teacherIntro:CURRENT_TEACHER_INTRO_DEFAULT, points:['自我介紹與工作背景說明','模擬一段簡短的會議發言',''], prep:'', lang:'中文', introStatus:'草稿'},
-  '5-3':{topic:'旅遊實用會話', audienceGroup:'institution', audienceTarget:CHAT_INST_NAMES[0], registered:3, capacity:20,
+  '5-3':{topic:'旅遊實用會話', audienceGroup:'project', audienceTarget:null, registered:3, capacity:6, tool:'zoom',
     summary:'情境設定在機場、飯店、景點，練習旅行中最常用到的華語表達。', level:'初級',
     teacherIntro:CURRENT_TEACHER_INTRO_DEFAULT, points:['詢問交通與方向','在飯店辦理入住的對話','推薦一個你想去的景點'], prep:'', lang:'中文', introStatus:'已發佈',
     deptIds:['d4','d5']}
 };
 function chatMarkedKeys(){ return Object.keys(chatSessions); }
+try{ var _sv = JSON.parse(localStorage.getItem('tliT04ChatSessions_v1')); if(_sv && typeof _sv==='object' && Object.keys(_sv).length){ chatSessions = _sv; } }catch(e){}
 
 /* 時段格的「開」狀態文字：用 data-i18n key 切換而非 t() 字面值，
    避免格子在頁面剛載入（TLI_I18N.init() 尚未讀出實際語言）時就被 t() 寫死成錯誤語言。 */
@@ -566,7 +582,7 @@ times.forEach(function(t, ti){
     }else{
       cell.className='slot-cell'+(openState[key] ? ' open':'')+(flexMarked[key] ? ' flexmark':'')+(chatSessions[key] ? ' chatmark':'')+(slotRepeatUntil[key] ? ' repeatuntil':'');
       markCellOpen(cell, !!openState[key]);
-      if(chatSessions[key]) cell.title = tt('團體聊天室場次：','Group Chat Session: ')+chatSessions[key].topic;
+      if(chatSessions[key]) cell.title = tt('Mandarin Lounge 場次：','Mandarin Lounge Session: ')+chatSessions[key].topic;
       else if(slotRepeatUntil[key]) cell.title = tt('重複開放至 ','Repeats until ')+slotRepeatUntil[key];
       cell.onclick = function(){
         var flexMode = document.getElementById('flexMarkSwitch').checked;
@@ -588,7 +604,7 @@ times.forEach(function(t, ti){
           if (window.TLI_I18N) TLI_I18N.refresh();
         }else if(chatMode){
           if(!this.classList.contains('open')){
-            showToast(tt('請先開放此時段，才能建立團體聊天室場次','Please open this slot first before creating a group chat session'));
+            showToast(tt('請先開放此時段，才能建立 Mandarin Lounge 場次','Please open this slot first before creating a Mandarin Lounge session'));
             return;
           }
           openChatForm(this.dataset.key, this);
@@ -671,7 +687,7 @@ document.getElementById('repeatSwitch').addEventListener('change', function(){
 document.getElementById('flexMarkSwitch').addEventListener('change', function(){
   if(this.checked && document.getElementById('chatMarkSwitch').checked){
     document.getElementById('chatMarkSwitch').checked=false;
-    showToast(tt('已自動關閉「團體聊天室建立模式」，切換為：點擊已開放時段可標記可帶直播班','Automatically turned off "Group Chat Session Mode", switched to: click an open slot to mark it for livestream classes'));
+    showToast(tt('已自動關閉「Mandarin Lounge 建立模式」，切換為：點擊已開放時段可標記可帶直播班','Automatically turned off "Mandarin Lounge Session Mode", switched to: click an open slot to mark it for livestream classes'));
   }else{
     showToast(this.checked ? tt('標記模式已開啟：點擊已開放時段可標記可帶直播班','Marking mode is on: click an open slot to mark it for livestream classes') : tt('已回到一般開放／關閉模式','Back to normal open/close mode'));
   }
@@ -680,16 +696,16 @@ document.getElementById('flexMarkSwitch').addEventListener('change', function(){
 document.getElementById('chatMarkSwitch').addEventListener('change', function(){
   if(this.checked && document.getElementById('flexMarkSwitch').checked){
     document.getElementById('flexMarkSwitch').checked=false;
-    showToast(tt('已自動關閉「彈性團體直播班標記模式」，切換為：點擊已開放時段可建立團體聊天室場次','Automatically turned off "Flexible Group Livestream Marking Mode", switched to: click an open slot to create a group chat session'));
+    showToast(tt('已自動關閉「彈性團體直播班標記模式」，切換為：點擊已開放時段可建立 Mandarin Lounge 場次','Automatically turned off "Flexible Group Livestream Marking Mode", switched to: click an open slot to create a Mandarin Lounge session'));
   }else{
-    showToast(this.checked ? tt('建立模式已開啟：點擊已開放時段可建立團體聊天室場次；點擊已建立的場次可編輯或取消','Creation mode is on: click an open slot to create a group chat session; click an existing session to edit or cancel it') : tt('已回到一般開放／關閉模式','Back to normal open/close mode'));
+    showToast(this.checked ? tt('建立模式已開啟：點擊已開放時段可建立 Mandarin Lounge 場次；點擊已建立的場次可編輯或取消','Creation mode is on: click an open slot to create a Mandarin Lounge session; click an existing session to edit or cancel it') : tt('已回到一般開放／關閉模式','Back to normal open/close mode'));
   }
   if(this.checked && document.getElementById('slotDetailSwitch').checked){
     document.getElementById('slotDetailSwitch').checked=false;
   }
 });
 
-/* 20260929 新增：編輯時段細節（重複至／刪除）模式，與可帶直播班／團體聊天室建立模式互斥 */
+/* 20260929 新增：編輯時段細節（重複至／刪除）模式，與可帶直播班／Mandarin Lounge 建立模式互斥 */
 document.getElementById('slotDetailSwitch').addEventListener('change', function(){
   if(this.checked){
     if(document.getElementById('flexMarkSwitch').checked){ document.getElementById('flexMarkSwitch').checked=false; }
@@ -774,10 +790,10 @@ function removeSlotAll(){
 function saveAvailability(){
   var flexCount = grid.querySelectorAll('.slot-cell.flexmark').length;
   var chatCount = Object.keys(chatSessions).length;
-  showToast(tt('已儲存可授課時段設定（可帶直播班時段：'+flexCount+'，團體聊天室場次：'+chatCount+'）','Saved your availability settings (livestream-enabled slots: '+flexCount+', group chat sessions: '+chatCount+')'));
+  showToast(tt('已儲存可授課時段設定（可帶直播班時段：'+flexCount+'，Mandarin Lounge 場次：'+chatCount+'）','Saved your availability settings (livestream-enabled slots: '+flexCount+', Mandarin Lounge sessions: '+chatCount+')'));
 }
 
-/* ---------- 團體聊天室場次：建立／編輯／取消（v2 新增） ---------- */
+/* ---------- Mandarin Lounge 場次：建立／編輯／取消（v2 新增） ---------- */
 var DOW_EN_MAP = {'一':'Mon','二':'Tue','三':'Wed','四':'Thu','五':'Fri','六':'Sat','日':'Sun'};
 function slotLabel(key){
   var parts = key.split('-');
@@ -858,7 +874,7 @@ function openChatForm(key, cellEl){
   chatFormKey = key;
   var session = chatSessions[key];
   document.getElementById('chatFormSlotLabel').textContent = slotLabel(key);
-  document.getElementById('chatFormTitle').textContent = session ? tt('編輯團體聊天室場次','Edit Group Chat Session') : tt('建立團體聊天室場次','Create Group Chat Session');
+  document.getElementById('chatFormTitle').textContent = session ? tt('編輯 Mandarin Lounge 場次','Edit Mandarin Lounge Session') : tt('建立 Mandarin Lounge 場次','Create Mandarin Lounge Session');
   document.getElementById('chatFormTopic').value = session ? session.topic : '';
   var group = session ? (session.audienceGroup || 'all') : 'all';
   document.getElementById('chatFormAudienceGroup').value = group;
@@ -866,8 +882,10 @@ function openChatForm(key, cellEl){
   renderChatDeptCheckboxes(group==='institution' ? ((session && session.deptIds) ? session.deptIds : []) : []);
   var capEl = document.getElementById('chatFormCapacity');
   capEl.max = CHAT_TYPE_CAP;
-  capEl.value = session ? session.capacity : CHAT_TYPE_CAP;
-  document.getElementById('chatFormCapHint').textContent = tt('型態上限 '+CHAT_TYPE_CAP+'（待定）・可視需求下修，不可超過上限','Type cap '+CHAT_TYPE_CAP+' (tentative) · Can be adjusted down as needed, may not exceed the cap');
+  capEl.min = CHAT_TYPE_MIN;
+  capEl.value = session ? session.capacity : 8;
+  document.getElementById('chatFormTool').value = session ? (session.tool||'teams') : 'teams';
+  document.getElementById('chatFormCapHint').textContent = tt('每場 6–10 人','6 to 10 learners per session');
   document.getElementById('chatFormSubmitBtn').textContent = session ? tt('儲存變更','Save Changes') : tt('建立場次','Create Session');
   document.getElementById('chatFormCancelBtn').classList.toggle('hidden', !session);
   document.getElementById('chatFormSummary').value = session ? (session.summary||'') : '';
@@ -880,14 +898,14 @@ function openChatForm(key, cellEl){
   document.getElementById('chatFormLang').value = session ? (session.lang||'中文') : '中文';
   document.getElementById('chatFormOverlay').classList.remove('hidden');
 }
-/* 讓已開啟的「建立／編輯團體聊天室場次」浮層在切換語言時，標題／時段列／名額提示／送出鍵文字即時更新；
+/* 讓已開啟的「建立／編輯 Mandarin Lounge 場次」浮層在切換語言時，標題／時段列／名額提示／送出鍵文字即時更新；
    不重新呼叫 openChatForm()，避免使用者尚未送出的欄位輸入被重置回原始資料 */
 function refreshChatFormIfOpen(){
   if (!chatFormKey || document.getElementById('chatFormOverlay').classList.contains('hidden')) return;
   var session = chatSessions[chatFormKey];
   document.getElementById('chatFormSlotLabel').textContent = slotLabel(chatFormKey);
-  document.getElementById('chatFormTitle').textContent = session ? tt('編輯團體聊天室場次','Edit Group Chat Session') : tt('建立團體聊天室場次','Create Group Chat Session');
-  document.getElementById('chatFormCapHint').textContent = tt('型態上限 '+CHAT_TYPE_CAP+'（待定）・可視需求下修，不可超過上限','Type cap '+CHAT_TYPE_CAP+' (tentative) · Can be adjusted down as needed, may not exceed the cap');
+  document.getElementById('chatFormTitle').textContent = session ? tt('編輯 Mandarin Lounge 場次','Edit Mandarin Lounge Session') : tt('建立 Mandarin Lounge 場次','Create Mandarin Lounge Session');
+  document.getElementById('chatFormCapHint').textContent = tt('每場 6–10 人','6 to 10 learners per session');
   document.getElementById('chatFormSubmitBtn').textContent = session ? tt('儲存變更','Save Changes') : tt('建立場次','Create Session');
 }
 if (window.TLI_I18N) TLI_I18N.onRefresh(refreshChatFormIfOpen);
@@ -899,7 +917,7 @@ function clampChatCapacity(el){
   var v = parseInt(el.value,10);
   if(!isNaN(v) && v>CHAT_TYPE_CAP){
     el.value = CHAT_TYPE_CAP;
-    showToast(tt('名額不可超過型態上限 '+CHAT_TYPE_CAP,'Capacity cannot exceed the type cap of '+CHAT_TYPE_CAP));
+    showToast(tt('團體場次名額最多 10 人','A group session holds 10 learners at most'));
   }
 }
 function submitChatForm(){
@@ -914,9 +932,10 @@ function submitChatForm(){
   var audienceTarget = (audienceGroup !== 'all') ? audienceTargetEl.value : null;
   var capEl = document.getElementById('chatFormCapacity');
   var capacity = parseInt(capEl.value,10);
-  if(isNaN(capacity) || capacity<1) capacity = CHAT_TYPE_CAP;
+  if(isNaN(capacity) || capacity<CHAT_TYPE_MIN) capacity = CHAT_TYPE_MIN;
   if(capacity>CHAT_TYPE_CAP) capacity = CHAT_TYPE_CAP;
   var existing = chatSessions[chatFormKey];
+  var tool = document.getElementById('chatFormTool').value;
   var summary = document.getElementById('chatFormSummary').value.trim();
   var level = document.getElementById('chatFormLevel').value;
   var teacherIntro = document.getElementById('chatFormTeacherIntro').value.trim();
@@ -926,14 +945,14 @@ function submitChatForm(){
   /* 教師端只能存草稿：已發佈的介紹內容不因教師編輯其他欄位而被打回草稿；尚未發佈者填了簡介即存為草稿 */
   var introStatus = (existing && existing.introStatus === '已發佈') ? '已發佈' : (summary ? '草稿' : (existing ? existing.introStatus : undefined));
   var deptIds = (audienceGroup === 'institution') ? chatFormDeptIds.slice() : [];
-  chatSessions[chatFormKey] = {topic:topic, audienceGroup:audienceGroup, audienceTarget:audienceTarget, capacity:capacity, registered: existing ? existing.registered : 0,
+  chatSessions[chatFormKey] = {topic:topic, audienceGroup:audienceGroup, audienceTarget:audienceTarget, capacity:capacity, tool:tool, registered: existing ? existing.registered : 0,
     summary:summary, level:level, teacherIntro:teacherIntro, points:points, prep:prep, lang:lang, introStatus:introStatus, deptIds:deptIds};
   var cell = grid.querySelector('.slot-cell[data-key="'+chatFormKey+'"]');
   if(cell){
     cell.classList.add('chatmark');
-    cell.title = tt('團體聊天室場次：','Group Chat Session: ')+topic;
+    cell.title = tt('Mandarin Lounge 場次：','Mandarin Lounge Session: ')+topic;
   }
-  showToast(existing ? tt('已儲存場次變更','Session changes saved') : tt('已建立團體聊天室場次','Group chat session created'));
+  showToast(existing ? tt('已儲存場次變更','Session changes saved') : tt('已建立 Mandarin Lounge 場次','Group Mandarin Lounge session created'));
   renderSessionList();
   syncInstChatSessionsToLocalStorage();
   closeChatForm();
@@ -957,13 +976,55 @@ function cancelChatSession(){
     cell.classList.remove('chatmark');
     cell.removeAttribute('title');
   }
-  showToast(tt('已取消團體聊天室場次','Group chat session cancelled'));
+  showToast(tt('已取消 Mandarin Lounge 場次','Group Mandarin Lounge session cancelled'));
   renderSessionList();
   syncInstChatSessionsToLocalStorage();
   closeChatForm();
 }
 /* 將指定學校且已設定適用科系的場次摘要同步到 localStorage，供機構端 u02「各科系可報名場次」總覽讀取 */
+var LS_T04_KEY = 'tliT04ChatSessions_v1', TEACHER_ID = 'tc1', PL_PREFIX = 'LS-OP-tc1-', ovShown = 6;
+/* 時段 key（日-時段索引）對應到下週的實際日期與台北時間，同步到會員區可報名的團體場次 */
+function syncPL(){
+  if(!window.TLI_PL) return;
+  var list = [];
+  Object.keys(chatSessions).forEach(function(key){
+    var s = chatSessions[key], p = key.split('-').map(Number);
+    if(s.audienceGroup==='enterprise') return;
+    if(s.base===undefined) s.base = s.registered||0;
+    list.push({id:PL_PREFIX+key, tpDate:TLI_PL.addDays('2027-03-22', p[0]), tpTime:times[p[1]], cap:s.capacity, tool:s.tool||'teams', topic:s.topic, topicEn:s.topic,
+      teacher:CURRENT_TEACHER_NAME, teacherId:TEACHER_ID, audience:(s.audienceGroup==='institution'?'project':s.audienceGroup), baseTaken:s.base});
+  });
+  TLI_PL.replaceOpened(PL_PREFIX, list);
+  var all = TLI_PL.teacherSessions(TEACHER_ID);
+  Object.keys(chatSessions).forEach(function(key){
+    var hit = all.filter(function(x){ return x.id===PL_PREFIX+key; })[0];
+    if(hit) chatSessions[key].registered = hit.taken;
+  });
+  try{ localStorage.setItem(LS_T04_KEY, JSON.stringify(chatSessions)); }catch(e){}
+  renderLoungeOverview();
+}
+function showRoster(id){
+  var x = TLI_PL.teacherSessions(TEACHER_ID).filter(function(z){ return z.id===id; })[0]; if(!x) return;
+  var names = []; for(var i=0;i<x.baseTaken;i++){ names.push(tt('學員（已報名）','Student (enrolled)')+' '+(i+1)); }
+  x.live.forEach(function(b){ names.push((b.name||b.rid)+(b.mode==='project'?tt('（專案合作）','（project）'):tt('（直營）','（direct）'))); });
+  document.getElementById('rosterBody').innerHTML = '<h3 style="margin:0 0 6px;font-size:16px;">'+TLI_PL.esc(x.topic)+'</h3><p class="small muted" style="margin:0 0 10px;">'+TLI_PL.mdLabel(x.tpDate)+' '+x.tpTime+tt('（台北）・','（Taipei）・')+tt('已報名 ','Enrolled ')+x.taken+' / '+x.cap+'</p>'+
+    (names.length ? '<ol style="margin:0 0 14px;padding-left:20px;font-size:13.5px;">'+names.map(function(n){ return '<li>'+TLI_PL.esc(n)+'</li>'; }).join('')+'</ol>' : '<p class="small muted">'+tt('目前沒有人報名。','No one has enrolled yet.')+'</p>')+
+    '<button type="button" class="btn btn-primary btn-block" onclick="enterLounge(\''+id+'\')">'+tt('進入教室','Enter classroom')+'</button><button type="button" class="btn btn-outline btn-block" style="margin-top:8px;" onclick="document.getElementById(\'rosterOverlay\').classList.add(\'hidden\')">'+tt('關閉','Close')+'</button>';
+  document.getElementById('rosterOverlay').classList.remove('hidden');
+}
+function enterLounge(id){ showToast(tt('已進入教室，團體場次由你帶領，出席請於名單確認','Entered the classroom. You lead this group session; confirm attendance on the roster')); document.getElementById('rosterOverlay').classList.add('hidden'); }
+function renderLoungeOverview(){
+  var wrap = document.getElementById('loungeOvList'); if(!wrap || !window.TLI_PL) return;
+  var all = TLI_PL.teacherSessions(TEACHER_ID);
+  wrap.innerHTML = all.slice(0, ovShown).map(function(x){
+    return '<div class="session-card" style="margin-bottom:8px;"><div class="s-top"><div class="s-title">'+TLI_PL.esc(x.topic)+'</div></div><div class="s-meta">'+TLI_PL.mdLabel(x.tpDate)+' '+TLI_PL.wd(x.tpDate)+' '+x.tpTime+tt('（台北）','（Taipei）')+'<br>'+tt('已報名 ','Enrolled ')+x.taken+tt(' 人／名額 ',' / capacity ')+x.cap+(x.left===0?' ・ '+tt('已額滿','Full'):'')+'<br>'+tt('視訊工具：','Video tool: ')+TLI_PL.toolName(x.tool)+'</div>'+
+      '<div class="s-actions"><button type="button" class="btn btn-outline" onclick="showRoster(\''+x.id+'\')">'+tt('名單','Roster')+'</button><button type="button" class="btn btn-primary" onclick="enterLounge(\''+x.id+'\')">'+tt('進入教室','Enter classroom')+'</button></div></div>';
+  }).join('') || '<div class="session-empty">'+tt('近期沒有團體場次。','No upcoming group sessions.')+'</div>';
+  document.getElementById('loungeOvMore').style.display = all.length>ovShown ? '' : 'none';
+}
+document.getElementById('loungeOvMore').addEventListener('click', function(){ ovShown += 6; renderLoungeOverview(); });
 function syncInstChatSessionsToLocalStorage(){
+  syncPL();
   var list = [];
   Object.keys(chatSessions).forEach(function(key){
     var s = chatSessions[key];
@@ -977,7 +1038,7 @@ function renderSessionList(){
   var wrap = document.getElementById('sessionList');
   var keys = Object.keys(chatSessions);
   if(keys.length === 0){
-    wrap.innerHTML = '<div class="session-empty">'+tt('尚未建立團體聊天室場次。開啟上方「開團體聊天室場次」後點擊已開放的時段即可建立。','No group chat sessions yet. Turn on "Create Group Chat Session" above, then click an open slot to create one.')+'</div>';
+    wrap.innerHTML = '<div class="session-empty">'+tt('尚未建立 Mandarin Lounge 場次。開啟上方「開 Mandarin Lounge 場次」後點擊已開放的時段即可建立。','No Mandarin Lounge sessions yet. Turn on "Create Mandarin Lounge Session" above, then click an open slot to create one.')+'</div>';
     if (window.TLI_I18N) TLI_I18N.refresh();
     return;
   }
@@ -996,7 +1057,7 @@ function renderSessionList(){
     var deptLineHtml = s.audienceGroup==='institution' ? ('<br>'+tt('適用科系：','Departments: ')+chatDeptSummary(s)) : '';
     card.innerHTML =
       '<div class="s-top"><div class="s-title">'+s.topic+introBadgeHtml+'</div></div>'+
-      '<div class="s-meta">'+slotLabel(key)+'<br>'+tt('團體聊天室（30 分鐘，TLI 老師帶）','Group Chat Session (30 min, led by a TLI teacher)')+'<br>'+tt('已報名 '+s.registered+' 人／名額 '+s.capacity+'（型態上限 '+CHAT_TYPE_CAP+'，待定）','Registered '+s.registered+' / Capacity '+s.capacity+' (type cap '+CHAT_TYPE_CAP+', tentative)')+'<br>'+tt('面向：','Audience: ')+audBadgeHtml+deptLineHtml+'</div>'+
+      '<div class="s-meta">'+slotLabel(key)+'<br>'+tt('Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）','Mandarin Lounge group session (30 min, led by a TLI teacher)')+'<br>'+tt('已報名 '+s.registered+' 人／名額 '+s.capacity,'Registered '+s.registered+' / Capacity '+s.capacity)+'<br>'+tt('視訊工具：','Video tool: ')+TLI_PL.toolName(s.tool||'teams')+'<br>'+tt('面向：','Audience: ')+audBadgeHtml+deptLineHtml+'</div>'+
       '<div class="s-actions"></div>';
     var actions = card.querySelector('.s-actions');
     var editBtn = document.createElement('button');
@@ -1014,7 +1075,7 @@ function renderSessionList(){
       delete chatSessions[key];
       var cell = grid.querySelector('.slot-cell[data-key="'+key+'"]');
       if(cell){ cell.classList.remove('chatmark'); cell.removeAttribute('title'); }
-      showToast(tt('已取消團體聊天室場次','Group chat session cancelled'));
+      showToast(tt('已取消 Mandarin Lounge 場次','Group Mandarin Lounge session cancelled'));
       renderSessionList();
       syncInstChatSessionsToLocalStorage();
     };
@@ -1036,6 +1097,7 @@ document.addEventListener('keydown', function(e){
   if (e.key !== 'Escape') return;
   document.querySelectorAll('.sheet-overlay').forEach(function(el){ el.classList.add('hidden'); });
 });
+syncPL();
 renderSessionList();
 syncInstChatSessionsToLocalStorage();
 

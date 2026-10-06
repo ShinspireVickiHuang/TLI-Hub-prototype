@@ -292,8 +292,8 @@ var SKUS = TLI_MASTERS.products.map(function(p){
 var CHANNEL_ALL = ['公開網站','顧問建訂單','企業專案'];
 var WEEKDAYS = ['一','二','三','四','五','六','日'];
 /* 包含上課型態（20260910k 改為唯讀推導）：方案挑選了哪些產品（items），型態就由產品的 courseType 帶出來，
-   顯示成徽章摘要，不再手動勾選；決定學員能否看到並報名聊天室場次（見 m14_chat_booking.html） */
-var COURSE_TYPE_OPTIONS = ['一對一','團體直播','團體聊天室','自學影音'];
+   顯示成徽章摘要，不再手動勾選；決定學員能否看到並報名 Mandarin Lounge 場次（見 m14_chat_booking.html） */
+var COURSE_TYPE_OPTIONS = ['一對一','團體直播','Mandarin Lounge','自學影音'];
 function pkgCourseTypes(p){
   var types = (p.items||[]).map(function(it){ var s = skuById(it.sku); return s ? s.courseType : null; }).filter(Boolean);
   return types.filter(function(v,i){ return types.indexOf(v)===i; });
@@ -302,7 +302,7 @@ function courseTypeBadgeHtml(list){
   list = list || [];
   if (!list.length) return '<span class="small">'+TLI_I18N.t('未設定','Not set')+'</span>';
   return list.map(function(t){
-    return '<span class="badge'+(t==='團體聊天室'?' orange':' grey')+'">'+courseTypeLabel(t)+'</span>';
+    return '<span class="badge'+(t==='Mandarin Lounge'?' orange':' grey')+'">'+courseTypeLabel(t)+'</span>';
   }).join(' ');
 }
 /* 20260929i18n：課程型態／上課方式為主檔帶出的固定詞彙（非個案示範資料），一併提供英文對照 */
@@ -310,7 +310,7 @@ function courseTypeLabel(t){
   switch(t){
     case '一對一': return TLI_I18N.t('一對一','One-on-One');
     case '團體直播': return TLI_I18N.t('團體直播','Group Livestream');
-    case '團體聊天室': return TLI_I18N.t('團體聊天室','Group Chat Room');
+    case 'Mandarin Lounge': return TLI_I18N.t('Mandarin Lounge','Mandarin Lounge');
     case '自學影音': return TLI_I18N.t('自學影音','Self-paced Video');
     default: return t;
   }
@@ -664,7 +664,7 @@ function renderPkgBasicPanel(p){
       '<label class="small"><input type="checkbox" class="chk" '+(p.requireLogin?'checked':'')+' onchange="onPkgField(\''+p.id+'\',\'requireLogin\',this.checked)"> <span data-i18n="label.requireLoginCheckbox">需登入（未登入導向註冊／登入頁再結帳）</span></label></div>' +
     '<div class="formrow"><label data-i18n="label.deliveryMode">上課方式</label><div class="static">'+pkgDeliveryBadgeHtml(p)+'　<span class="small" data-i18n="hint.deliveryModeReadonly">由組成課程帶出，此處唯讀；若組成含多種上課方式則全部列出。</span></div></div>' +
     '<div class="formrow"><label data-i18n="label.courseTypeIncluded">包含上課型態</label><div class="static">'+courseTypeSummary+'</div>' +
-    '<div class="hint" data-i18n="hint.courseTypeReadonly">由「組成」分頁挑選的產品帶出，此處唯讀；挑選含「團體聊天室」的產品，方案購買後才會在會員區看到並可報名聊天室場次。</div></div>' +
+    '<div class="hint" data-i18n="hint.courseTypeReadonly">由「組成」分頁挑選的產品帶出，此處唯讀；挑選含「Mandarin Lounge」的產品，方案購買後才會在會員區看到並可報名 Mandarin Lounge 場次。</div></div>' +
     '</div>' + scheduleHtml;
   if (window.TLI_I18N) TLI_I18N.refresh();
 }
@@ -720,8 +720,8 @@ function renderPkgPriceAudPanel(p){
      '<div class="hint" data-i18n="hint.quotaRefill">每期配給日系統補滿可用堂數；適用訂閱型一對一課程包（例如每月配給 4 堂）。</div>') :
     ('<div class="formrow" style="max-width:200px"><label data-i18n="label.totalQty">總堂數</label><input type="number" min="0" value="'+cr.totalQty+'" onchange="onCreditField(\''+p.id+'\',\'totalQty\',Number(this.value)||0)"></div>' +
      '<div class="hint" data-i18n="hint.totalQtyExplain">學生在方案效期內共可使用的總堂數，用完為止。</div>');
-  var chatCapHtml = creditTypes.indexOf('團體聊天室') > -1 ?
-    '<div class="hint" style="margin-top:10px" data-i18n="hint.chatWeeklyCap">聊天室每週可報名場次上限：依設定</div>' : '';
+  var chatCapHtml = creditTypes.indexOf('Mandarin Lounge') > -1 ?
+    '<div class="hint" style="margin-top:10px" data-i18n="hint.chatWeeklyCap">Mandarin Lounge 每週可報名場次上限：依設定</div>' : '';
   var creditRuleHtml = showCreditRule ?
     ('<div class="card"><h3 style="margin-top:0" data-i18n="h3.creditRule">堂數規則</h3>' + creditTypeRadio + quotaFieldsHtml + chatCapHtml + '</div>') :
     (chatCapHtml ? '<div class="card"><h3 style="margin-top:0" data-i18n="h3.creditRule">堂數規則</h3>'+chatCapHtml+'</div>' : '');
@@ -731,7 +731,7 @@ function renderPkgPriceAudPanel(p){
     '<a href="a21_projects.html" data-i18n="nav.a21">專案設定</a>' +
     '<span data-i18n="hint.pricingMechanismB">的專案折讓價，企業走</span>' +
     '<a href="a19_b2b_enterprise.html" data-i18n="nav.a19">組織客戶</a>' +
-    '<span data-i18n="hint.pricingMechanismC">的合約價，加盟由加盟主自訂售價。</span>' +
+    '<span data-i18n="hint.pricingMechanismC">的合約價。</span>' +
     '</div>';
   var priceHtml;
   if (p.salesMode === 'advisor'){
@@ -1051,8 +1051,7 @@ function onChannelToggle(pid, el){
 /* 20260927e 新增：示範「方案上架前需至少被一個生效中專案納入」的把關規則。
    正式版應查詢 a21 專案設定的實際綁定資料，此處以示範對照表模擬；未列在表中的方案預設視為已納入，
    避免影響既有示範資料；pk1、pk2 明確示範為「已被生效中專案納入」，pk4 明確示範為「尚未被任何生效中專案納入」以利測試擋下邏輯
-   （pk4 目前為下架狀態，可實測點擊上架被擋）。pk7（master 資料留有舊版專案型欄位，20260929 起本頁已不再讀取）因組成課程為空，
-   會被「組成課程」把關擋下，屬合理行為，不再是本示範表的特例。 */
+   （pk4 目前為下架狀態，可實測點擊上架被擋）。 */
 var DEMO_PROJECT_INCLUSION = {pk1:true, pk2:true, pk4:false};
 function pkgInActiveProject(pid){ return DEMO_PROJECT_INCLUSION.hasOwnProperty(pid) ? DEMO_PROJECT_INCLUSION[pid] : true; }
 function pkgNameMissing(p){ return !p.name || !p.name.trim(); }

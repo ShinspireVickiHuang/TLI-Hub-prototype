@@ -134,6 +134,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 .sechead a{font-size:12.5px;text-decoration:none;white-space:nowrap;}
 .sechead a:hover{text-decoration:underline;}
 
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -168,7 +169,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1 data-i18n="nav_d.overview">總覽</h1><div class="desc" data-i18n="desc.d01Overview">本年度訂購與返佣摘要、待處理事項與最近的訂購單。訂金、尾款與返佣款項一律線下匯款，本頁僅供對帳查詢，無線上收付功能。</div></div>
+<div><h1 style="display:inline-block" data-i18n="nav_d.overview">總覽</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span><div class="desc" data-i18n="desc.d01Overview">本年度訂購與返佣摘要、待處理事項與最近的訂購單。訂金、尾款與返佣款項一律線下匯款，本頁僅供對帳查詢，無線上收付功能。</div></div>
 </div>
 
 <div class="card" id="frontUrlCard">
@@ -225,7 +226,7 @@ var TODAY_STR = '2026-09-28';
 
 /* ===== 20260928u 新增：你的前台入口卡——資料一律讀 TLI_MASTERS.partners，網址樣板需與 a20「合作夥伴管理」的
    詳情抽屜一致（同一 slug 與樣板）。主檔名稱為「環球遊學顧問」（不含地區括號），用 indexOf 比對即可命中。 ===== */
-var PARTNER_SLUG = {p01:'pudong', p02:'az', p03:'tsubasa', p04:'bridge', p05:'mytravel', p06:'vnstudy', p07:'krlang'};
+var PARTNER_SLUG = {p05:'mytravel', p06:'vnstudy', p07:'krlang'};
 function ensureFrontUrls(p){
   if (!p || p.frontUrls) return p;
   var slug = p.slug || PARTNER_SLUG[p.id] || p.id;
@@ -237,9 +238,8 @@ function ensureFrontUrls(p){
   return p;
 }
 function frontPreviewHref(p, key){
-  if (key === 'home') return '../公開網站/f01_franchise_home.html';
-  if (key === 'courses') return '../公開網站/f02_franchise_apply.html';
-  if (p.type === 'franchise') return '../公開網站/f03_franchise_login.html';
+  if (key === 'home') return '../公開網站/p01_home.html';
+  if (key === 'courses') return '../公開網站/p02_courses.html';
   var slug = p.slug || PARTNER_SLUG[p.id] || p.id;
   return '../公開網站/p14_partner_login.html?tenant=' + encodeURIComponent(slug);
 }
@@ -273,7 +273,7 @@ renderFrontUrlCard();
 if (window.TLI_I18N) TLI_I18N.onRefresh(renderFrontUrlCard);
 /* 訂購單：課程仍由 TLI 交付，經銷商向 TLI 一次訂購名額，包進自己的產品對外賣。
    三階段金流：訂金（訂購時）→ 尾款（依實際開課量）→ 年度返佣（依業績級距），全部線下匯款，後台只記錄狀態。 */
-/* 訂購方案一律取自 TLI_MASTERS.packages（pk1–pk7 中的上架方案），單價＝方案 C 對象牌價 × 80%（示範專案折讓） */
+/* 訂購方案一律取自 TLI_MASTERS.packages（pk1–pk6 中的上架方案），單價＝方案 C 對象牌價 × 80%（專案折讓） */
 var ORDERS = [
  {id:'PO-2026-001', orderDate:'2026-03-02', plan:'學期班 Lv.5–8 一期方案', qty:20, unitPrice:28800, totalAmount:576000,
   periodFrom:'2026-04-06', periodTo:'2026-05-01', depositRate:0.3, depositAmount:172800, depositDate:'2026-03-08',

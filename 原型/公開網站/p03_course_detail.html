@@ -484,7 +484,7 @@ function productTypeLabel(type){
   var m = {
     booking:{zh:'一對一課程',en:'1-on-1 Course',ja:'一対一コース',de:'1:1-Kurs'},
     'group-live':{zh:'團體直播課',en:'Group Livestream Course',ja:'グループライブ配信コース',de:'Gruppen-Livestream-Kurs'},
-    chatroom:{zh:'聊天室權限',en:'Chatroom Access',ja:'チャットルーム利用権',de:'Chatroom-Zugang'},
+    chatroom:{zh:'Mandarin Lounge 權限',en:'Mandarin Lounge Access',ja:'Mandarin Lounge 利用権',de:'Mandarin-Lounge-Zugang'},
     'self-paced':{zh:'自學影音課程',en:'Self-Paced Video Course',ja:'自習動画コース',de:'Selbstlern-Videokurs'},
     activity:{zh:'活動',en:'Activity',ja:'イベント',de:'Aktivität'}
   };
@@ -527,7 +527,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'booking', qty:10, label:'中文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天，課後可加入練習'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'30 天，課後可加入練習'}
    ],
    suitFor:['零基礎或初學者，需要從發音、基礎會話建立信心','想先體驗一對一教學再決定是否延伸方案','時間彈性、希望自己安排上課時段']},
 
@@ -539,7 +539,7 @@ var PLANS = [
    includes:[
      {type:'booking', qty:30, label:'中文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
      {type:'self-paced', qty:1, label:'自學影音課程', note:'中文發音強化影音'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'}
    ],
    suitFor:['已有基礎、想密集加強口說與聽力反應','短期來台工作或求學，需快速累積生活會話能力','需要申請簽證所需之上課證明']},
 
@@ -550,7 +550,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依合約條款辦理，由顧問於報價時一併說明。',
    includes:[
      {type:'booking', qty:'依合約', label:'中文一對一線上課', note:'堂數與教材依合約約定'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'依合約期間開放'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'依合約期間開放'}
    ],
    suitFor:['企業想為個別員工安排一對一中文培訓','需要企業月結發票與客製報表','員工分批分時段上課，不影響排班']},
 
@@ -561,7 +561,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'booking', qty:10, label:'英文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'30 天'}
    ],
    suitFor:['準備多益、雅思等檢定考試','想先體驗一對一教學再決定是否延伸方案','需要針對口說與聽力密集練習']},
 
@@ -573,7 +573,7 @@ var PLANS = [
    includes:[
      {type:'booking', qty:30, label:'英文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
      {type:'self-paced', qty:1, label:'自學影音課程', note:'TOEIC 聽力影音包'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'}
    ],
    suitFor:['需要對應多益、雅思成績目標','希望密集累積職場英文能力','想搭配自學影音持續練習聽力']},
 
@@ -585,7 +585,7 @@ var PLANS = [
    includes:[
      {type:'booking', qty:30, label:'日文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
      {type:'self-paced', qty:1, label:'自學影音課程', note:'JLPT N3 衝刺影音'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'}
    ],
    suitFor:['準備 JLPT 各級檢定','赴日工作或求學前密集加強','想有系統地準備聽解與文法']},
 
@@ -596,7 +596,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'booking', qty:30, label:'韓文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'}
    ],
    suitFor:['準備 TOPIK 各級檢定','喜愛韓劇韓綜想加強生活會話','短期赴韓旅遊或求學前惡補']},
 
@@ -607,7 +607,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'booking', qty:30, label:'德文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'}
    ],
    suitFor:['計畫赴德工作、留學或移居','企業指派學習商用德文','希望紮實建立文法基礎']},
 
@@ -618,7 +618,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'booking', qty:30, label:'法文一對一線上課', note:'50 分鐘／堂，由顧問安排老師與時段'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'}
    ],
    suitFor:['準備 DELF／DALF／TCF 檢定','計畫赴法留學或工作','希望有系統地累積口說能力']},
 
@@ -629,7 +629,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'group-live', qty:4, label:'中文彈性團體直播課', note:'50 分鐘／堂，固定時段開課'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'30 天'}
    ],
    suitFor:['想找同好一起學習、喜歡小組互動','每週有固定時段可以上課','預算考量，希望比一對一更划算']},
 
@@ -641,7 +641,7 @@ var PLANS = [
    includes:[
      {type:'group-live', qty:12, label:'中文彈性團體直播課', note:'50 分鐘／堂，一期課程'},
      {type:'self-paced', qty:1, label:'自學影音課程', note:'生活會話影音包'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'60 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'60 天'}
    ],
    suitFor:['想透過團體討論練習口說與聽力反應','每週有固定時段可以上課','預算考量，希望比一對一更划算']},
 
@@ -652,7 +652,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'group-live', qty:12, label:'英文彈性團體直播課', note:'50 分鐘／堂，一期課程'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'60 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'60 天'}
    ],
    suitFor:['想透過團體討論練習口說與聽力反應','每週有固定時段可以上課','預算考量，希望比一對一更划算']},
 
@@ -675,7 +675,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'activity', qty:1, label:'活動', note:'茶道體驗場次'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'14 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'14 天'}
    ],
    suitFor:['對中華文化有興趣、想輕鬆體驗','想找非語言課程的主題活動','外派來台想快速認識在地文化']},
 
@@ -686,7 +686,7 @@ var PLANS = [
    rulesSummary:'請假、改期、退費依本方案規則辦理，詳細條款於購買頁揭露。',
    includes:[
      {type:'activity', qty:3, label:'活動', note:'茶道／書法／時事聊天，共 3 場'},
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'30 天'}
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'30 天'}
    ],
    suitFor:['想連續參加多場主題活動','對中華文化有興趣、想深入體驗','想結識同樣對文化有興趣的同好']},
 
@@ -722,13 +722,13 @@ var PLANS = [
    ],
    suitFor:['計畫在台長期學習、需申請學生簽證','希望有實體教室與同儕互動','想全天密集沉浸式學習']},
 
-  {id:'chatroom-pass-90', name:'聊天室 90 天強化方案', categoryKeys:['zh'], salesTag:'promo', mode:'online-direct',
+  {id:'chatroom-pass-90', name:'Mandarin Lounge 90 天強化方案', categoryKeys:['zh'], salesTag:'promo', mode:'online-direct',
    deliveryKeys:['online'], scheduleKey:'flexible', formatKeys:['chatroom'], price:1800,
    validity:'購買後 90 天內開放使用', audience:'想額外加強口說練習頻率的學員',
-   pitch:'90 天聊天室權限，隨時找老師或同儕練習口說。',
+   pitch:'90 天 Mandarin Lounge 權限，隨時找老師或同儕練習口說。',
    rulesSummary:'數位內容依規定不適用退費，詳細條款於購買頁揭露。',
    includes:[
-     {type:'chatroom', qty:1, label:'聊天室權限', note:'90 天'},
+     {type:'chatroom', qty:1, label:'Mandarin Lounge 權限', note:'90 天'},
      {type:'self-paced', qty:1, label:'自學影音課程', note:'生活會話影音包'}
    ],
    suitFor:['已在上正課、想增加口說練習頻率','希望不受限於排課時段、隨時練習','搭配自學影音複習後想立即實作']}
@@ -736,13 +736,13 @@ var PLANS = [
 
 var PACKAGES = [
   {id:'pkg-zh-starter', name:'中文起步組合包', planIds:['zh-1on1-trial','self-zh-pack','chatroom-pass-90'], comboPrice:14500,
-   pitch:'體驗一對一課＋自學影音＋聊天室權限，新手起步一次到位。'},
+   pitch:'體驗一對一課＋自學影音＋Mandarin Lounge 權限，新手起步一次到位。'},
   {id:'pkg-zh-fulltrack', name:'中文全效組合包', planIds:['zh-1on1-standard','flex-zh-standard'], comboPrice:44800,
    pitch:'一對一標準課＋彈性團體課，個人課與團體課雙軌並行。'},
   {id:'pkg-en-boost', name:'英文加強組合包', planIds:['en-1on1-trial','flex-en-standard'], comboPrice:21000,
    pitch:'一對一體驗課先抓弱點，再加入團體直播課持續練習。'},
   {id:'pkg-culture-explorer', name:'文化探索組合包', planIds:['culture-zh-single','culture-zh-season','chatroom-pass-90'], comboPrice:5400,
-   pitch:'單場體驗＋當季文化季票＋聊天室權限，深度認識中華文化。'}
+   pitch:'單場體驗＋當季文化季票＋Mandarin Lounge 權限，深度認識中華文化。'}
 ];
 /* 銷售方案／組合包描述性文字翻譯對照表（不含方案名稱，名稱為示範資料維持不翻）
    key 為繁體中文原文，值為 en/ja/de 譯文；供 planText() 於渲染時查詢 */
@@ -772,7 +772,7 @@ var PLAN_TR = {
   '30 堂課程搭配自學影音，對應 11 級 CEFR 對照表。': {en:'30 lessons with self-paced videos, mapped to the 11-level CEFR framework.', ja:'自学動画付きの全30回レッスン、CEFR11段階に対応。', de:'30 Einheiten mit Selbstlernvideos, abgestimmt auf die 11-stufige CEFR-Skala.'},
   '30 堂課程涵蓋生活、旅遊、商用主題，企業培訓可包班。': {en:'30 lessons covering everyday life, travel, and business topics; corporate group bookings available.', ja:'日常・旅行・ビジネスのテーマを網羅した全30回レッスン、企業研修の団体予約も可能。', de:'30 Einheiten zu Alltag, Reisen und Beruf; Firmenschulungen als Gruppenbuchung möglich.'},
   '4 堂直播體驗，感受固定時段團體上課的節奏。': {en:'4 live trial lessons to experience the rhythm of fixed-schedule group classes.', ja:'ライブ体験4回で、決まった時間のグループ授業のペースを体験。', de:'4 Live-Probestunden, um den Rhythmus des Gruppenunterrichts zu festen Zeiten kennenzulernen.'},
-  '90 天聊天室權限，隨時找老師或同儕練習口說。': {en:'90 days of chatroom access to practice speaking anytime with teachers or peers.', ja:'90日間のチャットルーム利用権で、いつでも講師や仲間と会話練習。', de:'90 Tage Chatroom-Zugang, um jederzeit mit Lehrkräften oder Mitlernenden zu sprechen.'},
+  '90 天 Mandarin Lounge 權限，隨時找老師或同儕練習口說。': {en:'90 days of Mandarin Lounge access to practice speaking anytime with teachers or peers.', ja:'90日間のMandarin Lounge 利用権で、いつでも講師や仲間と会話練習。', de:'90 Tage Mandarin-Lounge-Zugang, um jederzeit mit Lehrkräften oder Mitlernenden zu sprechen.'},
   '一對一標準課＋彈性團體課，個人課與團體課雙軌並行。': {en:'1-on-1 standard classes plus flexible group classes — individual and group learning side by side.', ja:'一対一標準コース＋グループコース、個人とグループの両方を並行して学習。', de:'1:1-Standardkurs plus flexibler Gruppenkurs — Einzel- und Gruppenunterricht parallel.'},
   '一對一體驗課先抓弱點，再加入團體直播課持續練習。': {en:'Start with a 1-on-1 trial to pinpoint weak spots, then join group livestream classes to keep practicing.', ja:'まず一対一体験レッスンで弱点を把握し、その後グループライブ配信で継続練習。', de:'Zunächst eine 1:1-Probestunde zur Schwachstellenanalyse, danach weiter im Gruppen-Livestream üben.'},
   '三門自學影音課程，隨時看、依自己步調複習。': {en:'Three self-paced video courses to watch anytime, at your own pace.', ja:'自学動画コース3種、いつでも自分のペースで復習可能。', de:'Drei Selbstlern-Videokurse, jederzeit im eigenen Tempo abrufbar.'},
@@ -781,10 +781,10 @@ var PLAN_TR = {
   '先上 10 堂感受一對一教學，確認老師與步調再決定是否延伸方案。': {en:'Start with 10 lessons to experience 1-on-1 teaching, then decide on extending your plan once you\'re happy with the teacher and pace.', ja:'まず一対一レッスン10回で指導を体験し、講師とペースを確認してからプラン継続を検討。', de:'Beginnen Sie mit 10 Einheiten 1:1-Unterricht, um Lehrkraft und Lerntempo kennenzulernen, bevor Sie über eine Verlängerung entscheiden.'},
   '先上 10 堂體驗一對一教學，對應 TOEFL／IELTS／TOEIC／GEPT。': {en:'Start with 10 trial 1-on-1 lessons, aligned with TOEFL/IELTS/TOEIC/GEPT.', ja:'まず一対一体験レッスン10回、TOEFL／IELTS／TOEIC／GEPT対応。', de:'Beginnen Sie mit 10 1:1-Probestunden, abgestimmt auf TOEFL/IELTS/TOEIC/GEPT.'},
   '單場茶道體驗直播，輕鬆認識中華文化。': {en:'A single live tea ceremony session — an easy way to discover Chinese culture.', ja:'茶道体験ライブ配信1回、気軽に中華文化に触れられます。', de:'Eine Live-Sitzung zur Teezeremonie — ein einfacher Einstieg in die chinesische Kultur.'},
-  '單場體驗＋當季文化季票＋聊天室權限，深度認識中華文化。': {en:'A single trial session plus this season\'s culture pass and chatroom access — a deeper dive into Chinese culture.', ja:'体験1回＋今シーズンの文化シーズンパス＋チャットルーム利用権で、中華文化を深く体験。', de:'Eine Probestunde plus Kultur-Saisonpass und Chatroom-Zugang — für ein tieferes Eintauchen in die chinesische Kultur.'},
+  '單場體驗＋當季文化季票＋Mandarin Lounge 權限，深度認識中華文化。': {en:'A single trial session plus this season\'s culture pass and Mandarin Lounge access — a deeper dive into Chinese culture.', ja:'体験1回＋今シーズンの文化シーズンパス＋Mandarin Lounge 利用権で、中華文化を深く体験。', de:'Eine Probestunde plus Kultur-Saisonpass und Mandarin-Lounge-Zugang — für ein tieferes Eintauchen in die chinesische Kultur.'},
   '實體校區學期密集班，週時數達申請學生簽證所需條件。': {en:'An intensive in-person semester course meeting the weekly-hour requirement for a student visa application.', ja:'対面キャンパスでの学期集中コース、週の授業時間数は学生ビザ申請の条件を満たします。', de:'Intensiver Präsenz-Semesterkurs am Campus, der die für ein Studentenvisum erforderlichen Wochenstunden erfüllt.'},
   '茶道、書法、時事聊天，一次報名參加當季 3 場直播體驗。': {en:'Tea ceremony, calligraphy, and current-events chat — one registration for all 3 live sessions this season.', ja:'茶道・書道・時事トークなど、1回の申込みで今シーズンのライブ体験3回に参加。', de:'Teezeremonie, Kalligrafie und Gesprächsrunden zu aktuellen Themen — eine Anmeldung für alle 3 Live-Sitzungen dieser Saison.'},
-  '體驗一對一課＋自學影音＋聊天室權限，新手起步一次到位。': {en:'A trial 1-on-1 class plus self-paced videos and chatroom access — everything a beginner needs to get started.', ja:'体験一対一レッスン＋自学動画＋チャットルーム利用権、初心者のスタートに必要なものが一通り揃います。', de:'Eine 1:1-Probestunde plus Selbstlernvideos und Chatroom-Zugang — alles, was Einsteiger für den Start brauchen.'},
+  '體驗一對一課＋自學影音＋Mandarin Lounge 權限，新手起步一次到位。': {en:'A trial 1-on-1 class plus self-paced videos and Mandarin Lounge access — everything a beginner needs to get started.', ja:'体験一対一レッスン＋自学動画＋Mandarin Lounge 利用権、初心者のスタートに必要なものが一通り揃います。', de:'Eine 1:1-Probestunde plus Selbstlernvideos und Mandarin-Lounge-Zugang — alles, was Einsteiger für den Start brauchen.'},
   '中文一對一線上課': {en:'Online 1-on-1 Chinese Class', ja:'オンライン中国語一対一レッスン', de:'Online-1:1-Unterricht Chinesisch'},
   '英文一對一線上課': {en:'Online 1-on-1 English Class', ja:'オンライン英語一対一レッスン', de:'Online-1:1-Unterricht Englisch'},
   '日文一對一線上課': {en:'Online 1-on-1 Japanese Class', ja:'オンライン日本語一対一レッスン', de:'Online-1:1-Unterricht Japanisch'},
@@ -797,7 +797,7 @@ var PLAN_TR = {
   '學期密集班實體課': {en:'In-Person Intensive Semester Class', ja:'対面学期集中コース', de:'Präsenz-Intensiv-Semesterkurs'},
   '師資認證直播課程': {en:'Teacher Certification Livestream Course', ja:'講師認定ライブ配信コース', de:'Livestream-Kurs zur Lehrerzertifizierung'},
   '活動': {en:'Activity', ja:'アクティビティ', de:'Veranstaltung'},
-  '聊天室權限': {en:'Chatroom Access', ja:'チャットルーム利用権', de:'Chatroom-Zugang'},
+  'Mandarin Lounge 權限': {en:'Mandarin Lounge Access', ja:'Mandarin Lounge 利用権', de:'Mandarin-Lounge-Zugang'},
   '自學影音課程': {en:'Self-Paced Video Course', ja:'自学動画コース', de:'Selbstlern-Videokurs'},
   '118 小時，分梯次上課': {en:'118 hours, held in cohort sessions', ja:'118時間、回次ごとに開講', de:'118 Stunden, in Kursdurchgängen'},
   '14 天': {en:'14 days', ja:'14日間', de:'14 Tage'},

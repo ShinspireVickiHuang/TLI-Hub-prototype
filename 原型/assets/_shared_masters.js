@@ -108,13 +108,13 @@ var videoTools = [
  {id:'teams', name:'Microsoft Teams', licenses:10, inUse:3, owner:'TLI'}
 ];
 
-/* ---- 8. 產品分類：固定五類（來源 a02「產品管理」；20260929 拍板不用分級測驗，移除原 c_leveltest 分類與其產品） ---- */
+/* ---- 8. 產品分類：固定五類（來源 a02「產品管理」；程度測驗已於 2026-10-05 客戶會議恢復為一階段 B，測驗走 a22 測驗管理，不掛產品分類） ---- */
 var productCategories = [
  {id:'c_1to1', name:'一對一課程', desc:'教師一對一授課，依約時段預約上課。', order:1, status:'啟用'},
  {id:'c_group', name:'團體直播班', desc:'固定班級、多人共學，依課表排定上課時間；含實體、線上與混合班。', order:2, status:'啟用'},
  {id:'c_selfpace', name:'自學課程', desc:'不綁時段的隨選學習內容，含影音課程包。', order:3, status:'啟用'},
  {id:'c_event', name:'活動', desc:'單場次的體驗課、工作坊、講座與相關活動費。', order:4, status:'啟用'},
- {id:'c_chat', name:'聊天室與會話預約', desc:'會員權益型的會話練習，含團體聊天室與一對一會話預約。', order:5, status:'啟用'}
+ {id:'c_chat', name:'Mandarin Lounge 團體場次', desc:'會員權益型的會話練習，只有 Mandarin Lounge 團體場次（每場 30 分鐘、6–10 人）。', order:5, status:'啟用'}
 ];
 
 /* ---- 9. 產品（來源 a02「產品管理」＋a04「銷售方案設定」SKU 明細合併，消除兩頁各自一套產品清單的問題）
@@ -144,10 +144,11 @@ var products = [
  {id:'sku07', code:'ZH-CUL-TEA', name:'文化體驗活動－茶道體驗', categoryId:'c_event', teachLangId:'zh', deliveryModeId:null, needsVideoRoom:false, mode:'實體', classType:'活動', duration:'2 小時／場', unit:'場', levelRange:'不分級', levelId:null, materials:[], feeCat:'活動', tax:'應稅', courseType:'', line:'中文', legacyCategory:'文化課', desc:'實體文化體驗活動。', enabled:true},
  {id:'sku13', code:'ZH-EVT-TEA', name:'活動費－結業茶會', categoryId:'c_event', teachLangId:'zh', deliveryModeId:null, needsVideoRoom:false, mode:'實體', classType:'活動', duration:'不限', unit:'場', levelRange:'不分級', levelId:null, materials:[], feeCat:'活動', tax:'應稅', courseType:'', line:'中文', legacyCategory:'學期班', desc:'學期班結業茶會活動。', enabled:false},
 
- {id:'skuC09', code:'CN-CHAT-ZH', name:'中文團體聊天室（會員權益）', categoryId:'c_chat', teachLangId:'zh', deliveryModeId:'booking', needsVideoRoom:true, mode:'線上', classType:'大班', duration:'不限', unit:'期', levelRange:'不分級', levelId:null, materials:[], feeCat:'學費', tax:'免稅', courseType:'團體聊天室', desc:'會員權益型的團體聊天室，供會員預約加入練習會話。', enabled:true},
- {id:'p_chat02', code:'CN-CHAT-EN', name:'英語會話預約（15 分鐘／次）', categoryId:'c_chat', teachLangId:'en', deliveryModeId:'booking', needsVideoRoom:true, mode:'線上', classType:'一對一', duration:'15 分鐘／次', unit:'次', levelRange:'不分級', levelId:null, materials:[], feeCat:'學費', tax:'免稅', courseType:'', desc:'一對一線上會話預約，供會員單次預約練習口說。', enabled:true},
+ {id:'skuC09', code:'CN-CHAT-ZH', name:'中文 Mandarin Lounge（會員權益）', categoryId:'c_chat', teachLangId:'zh', deliveryModeId:'booking', needsVideoRoom:true, mode:'線上', classType:'大班', duration:'不限', unit:'期', levelRange:'不分級', levelId:null, materials:[], feeCat:'學費', tax:'免稅', courseType:'Mandarin Lounge', desc:'會員權益型的 Mandarin Lounge，供會員預約加入練習會話。', enabled:true},
+ {id:'skuC10', code:'CN-LOUNGE-GRP', name:'Mandarin Lounge 團體會話', categoryId:'c_chat', teachLangId:'zh', deliveryModeId:'booking', needsVideoRoom:true, mode:'線上', classType:'小班', duration:'50 分鐘／場', unit:'場', levelRange:'不分級', levelId:null, materials:[], feeCat:'學費', tax:'免稅', courseType:'Mandarin Lounge', desc:'Mandarin Lounge 團體會話，每場 6–10 人，由在地教師帶領，學員於額度內預約。', enabled:true},
+ {id:'p_chat02', code:'CN-CHAT-EN', name:'英語 Mandarin Lounge 團體場次（30 分鐘／場）', categoryId:'c_chat', teachLangId:'en', deliveryModeId:'booking', needsVideoRoom:true, mode:'線上', classType:'小班', duration:'30 分鐘／場', unit:'場', levelRange:'不分級', levelId:null, materials:[], feeCat:'學費', tax:'免稅', courseType:'', desc:'團體場次，每場 30 分鐘、6–10 人，會員依額度報名練習口說。', enabled:true},
 
- /* 20260929：移除原 c_leveltest 分類下的 p_level01（中文分級測驗）、p_level02（英語分級測驗）——分級測驗功能整體下架 */
+ /* 程度測驗：2026-10-05 客戶會議恢復為一階段 B，題庫與證書在 a22 管理，不設 c_leveltest 產品分類 */
 
  /* ---- 以下 3 筆只在 a04 SKU 表出現過，非教學產品（教材／註冊費），categoryId 掛在最相關的課程分類供顯示用 ---- */
  {id:'sku03', code:'', name:'教材《新實用華語》上冊', categoryId:'c_group', teachLangId:'zh', deliveryModeId:null, needsVideoRoom:false, mode:'實體', classType:'', duration:'－', unit:'冊', levelRange:'不分級', levelId:null, materials:['新實用華語（上冊）'], feeCat:'教材', tax:'應稅', courseType:'', line:'中文', legacyCategory:'學期班', desc:'學期班搭配教材。', enabled:true, nonTeaching:true},
@@ -155,9 +156,9 @@ var products = [
  {id:'sku11', code:'', name:'師培教材包', categoryId:'c_group', teachLangId:'zh', deliveryModeId:null, needsVideoRoom:false, mode:'混合', classType:'', duration:'－', unit:'套', levelRange:'不分級', levelId:null, materials:['師培教材包'], feeCat:'教材', tax:'應稅', courseType:'', line:'師資班', legacyCategory:'師資認證班', desc:'師資認證班搭配教材包。', enabled:true, nonTeaching:true}
 ];
 
-/* ---- 10. 教師（來源 a10「老師管理」；type:'center' 中心教師／'local' 在地教師；
-   certified：是否已完成認證（中心教師視為既有正職教師，預設已認證；在地教師依 certStatus 判定）；
-   partnerId：在地教師所屬加盟方，對應 partners 的 id ---- */
+/* ---- 10. 教師（來源 a10「老師管理」；只有 TLI 中心教師，type 一律 'center'；
+   certified：是否已完成認證（中心教師視為既有正職教師，預設已認證）。
+   海外學校的班級老師不在這裡，見第 20 節 projectRoster（role:'老師'） ---- */
 var teachers = [
  {id:'tc1', type:'center', name:'林俊傑', campus:'羅斯福校區', timezone:'GMT+8（台北）', centerSchedule:true, langs:['中文'], level:'資深', tenure:8, totalHours:5200, status:'在職', email:'jj.lin@tli.example', phone:'0912-345-678', active:true, certified:true,
   langLevels:[{lang:'中文',range:'Lv.1–8（全級別）'}],
@@ -204,117 +205,65 @@ var teachers = [
   salary:{t1_2:700,t3_5:600,t6_9:0,t10p:0},
   records:[
     {date:'2026-05-10', course:'中文一對一 50 分鐘', students:1, hours:1, note:'離職前最後授課'}
-  ]},
- {id:'tl1', type:'local', name:'王建國', org:'範例大學語言中心', partnerId:'p02', langs:['中文'], level:'中階', tenure:2, totalHours:900, status:'在職', email:'chienkuo.wang@az.example', phone:'+1-520-555-0142', active:true, createdDate:'2026-08-15', certStatus:'已認證', certified:true,
-  langLevels:[{lang:'中文',range:'大學班・會話與商務中文'}],
-  certDate:'2026-01-15', lastRetrain:'2026-01-15', nextRetrainDue:'2027-01-15',
-  records:[
-    {date:'2026-09-24', course:'企業管理學系 範例交換班 B・第 5 課', students:11, hours:2, note:'11／12 出席'},
-    {date:'2026-09-08', course:'人文學院 範例選修會話班・第 2 課', students:5, hours:2, note:'5／6 出席'}
-  ]},
- {id:'tl2', type:'local', name:'張惠玲', org:'台灣普動教育股份有限公司', partnerId:'p01', langs:['中文'], level:'初階', tenure:1, totalHours:320, status:'在職', email:'huiling.chang@pudong.example', phone:'0965-224-118', active:true, createdDate:'2025-02-10', certStatus:'待回訓', certified:false,
-  langLevels:[{lang:'中文',range:'Lv.1–3'}],
-  certDate:'2025-03-01', lastRetrain:'2025-03-01', nextRetrainDue:'2026-10-15',
-  records:[
-    {date:'2026-09-20', course:'中文初級會話班・第 8 週', students:9, hours:2, note:''}
-  ]},
- {id:'tl3', type:'local', name:'田中 小百合', org:'日本翼教育學院', partnerId:'p03', langs:['日語'], level:'中階', tenure:3, totalHours:1400, status:'在職', email:'sayuri.tanaka@tsubasa.example', phone:'+81-90-1234-5678', active:true, createdDate:'2025-05-20', certStatus:'已認證', certified:true,
-  langLevels:[{lang:'日語',range:'學期班 Lv.1–6'}],
-  certDate:'2025-06-01', lastRetrain:'2025-06-01', nextRetrainDue:'2027-06-01',
-  records:[
-    {date:'2026-09-18', course:'日語學期班 二期・第 3 週', students:7, hours:2, note:''}
-  ]},
- {id:'tl4', type:'local', name:'小林 健二', org:'日本翼教育學院', partnerId:'p03', langs:['日語'], level:'初階', tenure:0, totalHours:0, status:'在職', email:'kenji.kobayashi@tsubasa.example', phone:'+81-80-2345-6789', active:true, createdDate:'2026-07-01', certStatus:'未認證', certified:false,
-  langLevels:[{lang:'日語',range:'Lv.1–2'}],
-  certDate:null, lastRetrain:null, nextRetrainDue:null,
-  records:[]},
- {id:'tl5', type:'local', name:'佐藤直樹', org:'日本翼教育學院', partnerId:'p03', langs:['日語'], level:'中階', tenure:2, totalHours:1100, status:'在職', email:'naoki.sato@tsubasa.example', phone:'+81-90-9876-5432', active:true, createdDate:'2025-09-01', certStatus:'已認證', certified:true,
-  langLevels:[{lang:'日語',range:'學期班 Lv.1–6'}],
-  certDate:'2025-10-01', lastRetrain:'2025-10-01', nextRetrainDue:'2027-10-01',
-  records:[
-    {date:'2026-09-15', course:'日語學期班 一期・第 4 週', students:6, hours:2, note:''}
-  ]},
- {id:'tl6', type:'local', name:'Sarah Whitfield', org:'範例大學語言中心', partnerId:'p02', langs:['中文'], level:'中階', tenure:1, totalHours:420, status:'在職', email:'s.whitfield@az.example', phone:'+1-520-555-0177', active:true, createdDate:'2026-08-20', certStatus:'已認證', certified:true,
-  langLevels:[{lang:'中文',range:'大學班・初級會話'}],
-  certDate:'2026-02-10', lastRetrain:'2026-02-10', nextRetrainDue:'2027-02-10',
-  records:[]},
- {id:'tl7', type:'local', name:'陳嘉玲', org:'範例大學語言中心', partnerId:'p02', langs:['中文'], level:'高階', tenure:1, totalHours:760, status:'在職', email:'chialing.chen@az.example', phone:'+1-520-555-0193', active:true, createdDate:'2026-08-20', certStatus:'已認證', certified:true,
-  langLevels:[{lang:'中文',range:'大學班・進階讀寫'}],
-  certDate:'2026-02-10', lastRetrain:'2026-02-10', nextRetrainDue:'2027-02-10',
-  records:[]},
- {id:'tl8', type:'local', name:'David Okafor', org:'範例大學語言中心', partnerId:'p02', langs:['中文'], level:'初階', tenure:1, totalHours:0, status:'在職', email:'d.okafor@az.example', phone:'+1-520-555-0208', active:true, createdDate:'2026-08-20', certStatus:'待總部認證', certified:false,
-  langLevels:[{lang:'中文',range:'大學班・初級會話'}],
-  certDate:null, lastRetrain:null, nextRetrainDue:null,
-  records:[]}
+  ]}
 ];
 
 /* ---- 11. 合作夥伴（來源 a20「合作夥伴管理」）
    uiLocales：對外開放的介面語系（id 對照 uiLocales 清單）；代理型態不經手租戶無需設定，留空陣列
-   videoLicense：'tli' 使用 TLI 授權額度／'own' 使用自有視訊授權，僅加盟／經銷型態適用 ---- */
+   videoLicense：'tli' 使用 TLI 授權額度／'own' 使用自有視訊授權，僅經銷型態適用
+   type 只有三種：'agent' 代理／'distributor' 經銷／'project' 專案合作；
+   專案合作不經手任何金流（無分潤、費率、結算、發票），只記基本資料、合作期間、Mandarin Lounge 額度、視訊工具；
+   欄位契約見原型2 根目錄 _契約_專案合作主檔_20261006.md ---- */
 var partners = [
- {id:'p01', name:'台灣普動教育股份有限公司', contact:'林建宏', country:'台灣', type:'franchise',
-  tenant:'TENANT-TW-PUDONG', status:'啟用', from:'2025-09-01', to:'2028-08-31',
-  brandFee:1500000, setupFee:800000, royaltyRate:8, materialFee:'依教材品項計價', teacherTrainFee:120000, retrainFee:40000,
-  brandExposure:'整個掛TLI', coMarketing:true, langs:['zh-TW'], uiLocales:['zh-TW'], videoLicense:'tli'},
- {id:'p02', name:'範例大學語言中心', contact:'Dr. Chen', country:'美國', type:'franchise',
-  tenant:'TENANT-US-AZU', status:'啟用', from:'2026-02-01', to:'2029-01-31',
-  brandFee:2000000, setupFee:1000000, royaltyRate:6, materialFee:'依教材品項計價', teacherTrainFee:150000, retrainFee:50000,
-  brandExposure:'雙品牌並列', coMarketing:false, langs:['en','zh-TW'], uiLocales:['zh-TW','zh-CN','en'], videoLicense:'own'},
- {id:'p03', name:'日本翼教育學院', contact:'佐藤直樹', country:'日本', type:'franchise',
-  tenant:'TENANT-JP-TSUBASA', status:'啟用', from:'2025-11-01', to:'2028-10-31',
-  brandFee:1600000, setupFee:850000, royaltyRate:7, materialFee:'依教材品項計價', teacherTrainFee:130000, retrainFee:42000,
-  brandExposure:'整個掛TLI', coMarketing:true, langs:['en'], uiLocales:['en'], videoLicense:'tli'},
- {id:'p04', name:'新加坡橋樑語言中心', contact:'Tan Wei Ling', country:'新加坡', type:'franchise',
-  tenant:'TENANT-SG-BRIDGE', status:'啟用', from:'2026-05-01', to:'2029-04-30',
-  brandFee:1700000, setupFee:900000, royaltyRate:7.5, materialFee:'依教材品項計價', teacherTrainFee:135000, retrainFee:45000,
-  brandExposure:'雙品牌並列', coMarketing:false, langs:['en','zh-TW','zh-CN'], uiLocales:['en','zh-TW','zh-CN'], videoLicense:'own'},
- {id:'p05', name:'大馬旅遊教育集團', contact:'Ahmad Faisal', country:'馬來西亞', type:'distributor',
+ {id:'p02', name:'範例州立大學', contact:'Dr. Chen', country:'美國', type:'project',
+  tenant:'TENANT-US-AZU', status:'啟用', from:'2027-02-01', to:'2027-05-31', createdAt:'2026-09-05',
+  loungeQuota:{perStudentPerMonth:4, groupCap:8},
+  videoTool:'teams', langs:['en','zh-TW'], uiLocales:['zh-TW','en']},
+ {id:'p05', code:'DST-MY05', name:'大馬旅遊教育集團', contact:'Ahmad Faisal', country:'馬來西亞', type:'distributor',
   tenant:'TENANT-MY-TRAVEL', status:'啟用', from:'2025-06-01', to:'2027-05-31',
   depositRate:20, distSettleCycle:'每季',
   rebateTiers:[{min:'0',max:'500,000',rate:'2'},{min:'500,001',max:'1,500,000',rate:'4'},{min:'1,500,001',max:'',rate:'6'}],
   coMarketing:true, langs:['en','zh-TW'], uiLocales:['en','zh-TW'], videoLicense:'tli'},
- {id:'p06', name:'越南遊學顧問公司', contact:'Nguyen Thi Lan', country:'越南', type:'distributor',
+ {id:'p06', code:'DST-VN06', name:'越南遊學顧問公司', contact:'Nguyen Thi Lan', country:'越南', type:'distributor',
   tenant:'TENANT-VN-STUDY', status:'啟用', from:'2025-08-01', to:'2027-07-31',
   depositRate:15, distSettleCycle:'每年',
   rebateTiers:[{min:'0',max:'300,000',rate:'1.5'},{min:'300,001',max:'1,000,000',rate:'3'},{min:'1,000,001',max:'',rate:'5'}],
   coMarketing:false, langs:['en'], uiLocales:['en'], videoLicense:'tli'},
- {id:'p07', name:'韓國語言留學社', contact:'김민준', country:'韓國', type:'distributor',
+ {id:'p07', code:'DST-KR07', name:'韓國語言留學社', contact:'김민준', country:'韓國', type:'distributor',
   tenant:'TENANT-KR-LANG', status:'啟用', from:'2026-01-01', to:'2027-12-31',
   depositRate:25, distSettleCycle:'每月',
   rebateTiers:[{min:'0',max:'400,000',rate:'2'},{min:'400,001',max:'',rate:'4.5'}],
   coMarketing:true, langs:['en','zh-TW'], uiLocales:['en','zh-TW'], videoLicense:'tli'},
- {id:'p08', name:'中東教育顧問公司', contact:'Fatima Al-Sayed', country:'阿聯', type:'agent',
+ {id:'p08', code:'REF-MEA08', name:'中東教育顧問公司', contact:'Fatima Al-Sayed', country:'阿聯', type:'agent',
   tenant:null, status:'啟用', from:'2025-03-01', to:'2027-02-28', commRate:10, validDays:60, langs:[], uiLocales:[], videoLicense:'tli'},
- {id:'p09', name:'香港教育橋樑', contact:'陳曉明', country:'香港', type:'agent',
+ {id:'p09', code:'REF-HKB09', name:'香港教育橋樑', contact:'陳曉明', country:'香港', type:'agent',
   tenant:null, status:'啟用', from:'2025-01-01', to:'2026-12-31', commRate:8, validDays:45, langs:[], uiLocales:[], videoLicense:'tli'},
- {id:'p10', name:'歐洲文化交流協會', contact:'Hans Müller', country:'德國', type:'agent',
+ {id:'p10', code:'REF-EUR10', name:'歐洲文化交流協會', contact:'Hans Müller', country:'德國', type:'agent',
   tenant:null, status:'停用', from:'2024-10-01', to:'2026-09-30', commRate:12, validDays:90, langs:[], uiLocales:[], videoLicense:'tli'},
- {id:'p11', name:'環球遊學顧問', contact:'山田花子', country:'日本', type:'distributor',
+ {id:'p11', code:'DST-JP11', name:'環球遊學顧問', contact:'山田花子', country:'日本', type:'distributor',
   tenant:'TENANT-JP-GLOBALSTUDY', slug:'global-study', status:'啟用', from:'2026-01-01', to:'2028-12-31',
   depositRate:30, distSettleCycle:'年度',
   rebateTiers:[{min:'0',max:'1,000,000',rate:'3'},{min:'1,000,001',max:'3,000,000',rate:'5'},{min:'3,000,001',max:'',rate:'8'}],
   brandExposure:'露出授權標示', coMarketing:true, langs:['ja','zh-TW'], uiLocales:['en','zh-TW'], videoLicense:'tli'},
- {id:'p12', name:'環宇教育顧問', contact:'張家瑜', country:'台灣', type:'agent',
+ {id:'p12', code:'REF-SEA07', name:'環宇教育顧問', contact:'張家瑜', country:'台灣', type:'agent',
   tenant:null, status:'啟用', from:'2026-01-01', to:'2027-12-31', commRate:10, validDays:90, langs:[], uiLocales:[], videoLicense:'tli'},
 ];
 
-/* ---- 12. 組織客戶（來源 a19「組織客戶」；type:'general' 企業／'institution' 學校，學校本質走加盟型態，
-   partnerId 對應 partners 的加盟夥伴）---- */
+/* ---- 12. 組織客戶（來源 a19「組織客戶」；只收企業，type 一律 'general'。
+   學校類夥伴走 a20「合作夥伴管理」的專案合作型態，不放在這裡）---- */
 var orgCustomers = [
  {id:'ent0', name:'和霖科技股份有限公司', type:'general'},
  {id:'ent1', name:'北辰精密工業股份有限公司', type:'general'},
  {id:'ent2', name:'裕發國際貿易有限公司', type:'general'},
  {id:'ent3', name:'安泰保經股份有限公司', type:'general'},
  {id:'ent4', name:'瑞新金融顧問股份有限公司', type:'general'},
- {id:'ent5', name:'範例州立大學', type:'institution'},
  {id:'ent6', name:'東岳生技股份有限公司', type:'general'},
  {id:'ent7', name:'大西華國際物流股份有限公司', type:'general'},
  {id:'ent8', name:'崇信會計師事務所', type:'general'},
- {id:'ent9', name:'範例州立大學 分校A', type:'institution'},
  {id:'ent10', name:'立準工程顧問股份有限公司', type:'general'},
  {id:'ent11', name:'翔宇航運股份有限公司', type:'general'},
- /* 20260928：移除原 ent12「範例大學語言中心」——它是加盟夥伴（見 partners 的 p02），不該同時是組織客戶，
-    合約與加盟資訊統一在「合作夥伴管理」a20 維護；原索引改補企業管理者角色（h00–h07，陳雅婷）示範租戶，
+ /* 20260928：移除原 ent12 學校類單位——它是合作夥伴（見 partners 的 p02），不該同時是組織客戶，
+    合作資訊統一在「合作夥伴管理」a20 維護；原索引改補企業管理者角色（h00–h07，陳雅婷）示範租戶，
     合約明細（方案／期間／6,000 小時時數池／月結／負責顧問王大明）見 a19 該筆 ENT_TYPE_OVERRIDE 覆寫 */
  {id:'ent12', name:'範例半導體股份有限公司', type:'general'}
 ];
@@ -394,52 +343,32 @@ var packages = [
   channel:['公開網站','顧問建訂單','企業專案'], periodStart:'2026-09-01', periodEnd:'2027-01-31',
   schedule:null,
   creditRule:{type:'once', totalQty:32},
-  status:'上架'},
- {id:'pk7', name:'客製化企業華語專案方案', type:'pkg', nameEn:'', nameJa:'', desc:'依企業客戶需求由顧問自組課程項目之專案型方案，價格另議。',
-  salesMode:'advisor', requireLogin:false,
-  courseTypes:['團體直播'],
-  items:[],
-  audiences:['B'], prices:{}, consultantQuote:{B:true},
-  discountRules:[], promoCodes:[],
-  channel:['企業專案'], periodStart:'', periodEnd:'',
-  schedule:null,
-  creditRule:{type:'once', totalQty:0},
-  planType:'project',
-  projectClient:'和霖科技股份有限公司',
-  projectItems:[
-    {course:'企業華語線上培訓（團體班）', qty:24, qtyType:'堂', paymentMethod:'月結'},
-    {course:'文化主題線上工作坊－茶道體驗', qty:2, qtyType:'堂', paymentMethod:'預付款倒扣'}
-  ],
-  projectVersions:[
-    {version:'v1.0', date:'2026-03-15', summary:'首次簽約，含企業華語培訓 20 堂', status:'歷史版本'},
-    {version:'v1.1', date:'2026-08-20', summary:'續約加開茶道體驗工作坊 2 場', status:'生效中'}
-  ],
-  status:'草稿'}
+  status:'上架'}
 ];
 
 /* ---- 14. 專案（來源 a21「專案設定」） ---- */
 var projects = [
  {code:'PRJ-B2C-TW', name:'個人線上課．台灣直營', market:'台灣', status:'已上線', from:'2026-01-01', to:'2026-12-31', version:'v3', tpl:'tpl-b2c',
   sell:{categories:['cat-1on1'], items:['pkgself-01']}, openRange:false, /* 20260928 移除殘留舊方案 id pkgself-02（packages 主檔無對應項目，LEGACY_PACKAGE_MAP 也未收錄） */
-  channels:{direct:true,franchise:false,distributor:false,agent:false}, partners:[],
+  channels:{direct:true,project:false,distributor:false,agent:false}, partners:[],
   rulesOnline:{leave:'標準線上規則', makeup:'可補課＋提供回放', validity:'每月重置', refund:'可退費可轉讓', approval:'學員自主'},
   rulesOffline:{leave:'標準實體規則', makeup:'僅可補課，無回放', validity:'一次性（效期到即失效）', refund:'只可轉讓不可退費', approval:'學員自主'},
   brandExposure:'整個掛TLI', domain:'connect.tli.com.tw', sender:'TLI Connect 台灣'},
  {code:'PRJ-ENT-JP', name:'企業培訓．日本（直營＋代理介紹）', market:'日本', status:'已上線', from:'2026-04-01', to:'2027-03-31', version:'v2', tpl:'tpl-ent',
   sell:{categories:[], items:['pkggroup-02']}, openRange:false,
-  channels:{direct:true,franchise:false,distributor:false,agent:true}, partners:['中東教育顧問公司'],
+  channels:{direct:true,project:false,distributor:false,agent:true}, partners:['中東教育顧問公司'],
   rulesOnline:{leave:'寬鬆規則（企業合約）', makeup:'可補課＋提供回放', validity:'依堂數門檻延展', refund:'只可轉讓不可退費', approval:'HR／機構管理者核准'},
   rulesOffline:{leave:'寬鬆規則（企業合約）', makeup:'僅提供回放', validity:'依堂數門檻延展', refund:'不可退費不可轉讓', approval:'HR／機構管理者核准'},
   brandExposure:'整個掛TLI', domain:'enterprise.tli.com.tw', sender:'TLI 企業培訓服務'},
- {code:'PRJ-EDU-AZU', name:'大學加盟．美國 範例大學', market:'美國', status:'已上線', from:'2026-02-01', to:'2029-01-31', version:'v1', tpl:'tpl-edu',
-  sell:{categories:['cat-1on1','cat-group','cat-selfpaced'], items:[]}, openRange:true,
-  channels:{direct:false,franchise:true,distributor:false,agent:false}, partners:['範例大學語言中心'],
-  rulesOnline:{leave:'嚴格規則（機構加盟）', makeup:'僅可補課，無回放', validity:'一次性（效期到即失效）', refund:'不可退費不可轉讓', approval:'僅能改期不能取消'},
-  rulesOffline:{leave:'嚴格規則（機構加盟）', makeup:'不可補課不提供回放', validity:'一次性（效期到即失效）', refund:'不可退費不可轉讓', approval:'僅能改期不能取消'},
-  brandExposure:'雙品牌並列', domain:'sample-u.tliconnect.com', sender:'Sample University × TLI'},
+ {code:'PRJ-EDU-AZU', name:'Gateway 專案合作．美國 範例州立大學', market:'美國', status:'草稿', from:'2027-02-01', to:'2027-05-31', version:'v1', tpl:'tpl-edu',
+  sell:{categories:[], items:[], productIds:['skuC05','skuC10']}, openRange:false,
+  channels:{direct:false,project:true,distributor:false,agent:false}, partners:['範例州立大學'],
+  rulesOnline:{leave:'標準線上規則', makeup:'僅可補課，無回放', validity:'一次性（效期到即失效）', refund:'不可退費不可轉讓', approval:'僅能改期不能取消'},
+  rulesOffline:{leave:'標準實體規則', makeup:'不可補課不提供回放', validity:'一次性（效期到即失效）', refund:'不可退費不可轉讓', approval:'僅能改期不能取消'},
+  brandExposure:'整個掛TLI', domain:'gateway.tli.com.tw', sender:'TLI Gateway'},
  {code:'PRJ-RESELL-SEA', name:'個人線上課．東南亞經銷', market:'東南亞', status:'草稿', from:'2026-10-01', to:'2027-09-30', version:'v1', tpl:'tpl-resell',
   sell:{categories:[], items:['pkg1on1-01','pkggroup-01']}, openRange:false,
-  channels:{direct:false,franchise:false,distributor:true,agent:false}, partners:['大馬旅遊教育集團'],
+  channels:{direct:false,project:false,distributor:true,agent:false}, partners:['大馬旅遊教育集團'],
   rulesOnline:{leave:'標準線上規則', makeup:'可補課＋提供回放', validity:'每月重置', refund:'可退費可轉讓', approval:'學員自主'},
   rulesOffline:{leave:'標準實體規則', makeup:'僅可補課，無回放', validity:'一次性（效期到即失效）', refund:'只可轉讓不可退費', approval:'學員自主'},
   brandExposure:'完全不露出', domain:'（由經銷商自有通路銷售，無獨立網域）', sender:'（由經銷商自有品牌發送）'}
@@ -449,14 +378,14 @@ var projects = [
    欄位刻意精簡，只留單元挑選需要的部分；a18「資源庫」影片庫本身有更完整的管理欄位（狀態／標籤／來源等），
    兩邊示範資料的影片主題彼此對應但非同一份，正式串接時建議合併為一份 ---- */
 var videoLibrary = [
- {id:'cv1', name:'機場入境情境示範', en:'Airport Arrival Scenario Demo', platform:'Vimeo', duration:'6:20'},
- {id:'cv2', name:'校園生活會話示範', en:'Campus Life Conversation Demo', platform:'CloudFront', duration:'7:05'},
- {id:'cv3', name:'商務會議開場示範', en:'Business Meeting Opening Demo', platform:'Vimeo', duration:'6:45'},
- {id:'cv4', name:'電話聯繫用語示範', en:'Phone Contact Phrases Demo', platform:'Vimeo', duration:'5:50'},
- {id:'cv5', name:'Email 商務書信示範', en:'Business Email Writing Demo', platform:'Vimeo', duration:'6:10'},
- {id:'cv6', name:'產品簡報練習示範', en:'Product Presentation Practice Demo', platform:'CloudFront', duration:'7:30'},
- {id:'cv7', name:'價格協商情境示範', en:'Price Negotiation Scenario Demo', platform:'Vimeo', duration:'6:55'},
- {id:'cv8', name:'期中口說總複習示範', en:'Midterm Speaking Review Demo', platform:'Vimeo', duration:'8:10'}
+ {id:'cv1', name:'機場入境情境教學', en:'Airport Arrival Scenario Lesson', platform:'Vimeo', duration:'6:20'},
+ {id:'cv2', name:'校園生活會話教學', en:'Campus Life Conversation Lesson', platform:'CloudFront', duration:'7:05'},
+ {id:'cv3', name:'商務會議開場教學', en:'Business Meeting Opening Lesson', platform:'Vimeo', duration:'6:45'},
+ {id:'cv4', name:'電話聯繫用語教學', en:'Phone Contact Phrases Lesson', platform:'Vimeo', duration:'5:50'},
+ {id:'cv5', name:'Email 商務書信教學', en:'Business Email Writing Lesson', platform:'Vimeo', duration:'6:10'},
+ {id:'cv6', name:'產品簡報練習教學', en:'Product Presentation Practice Lesson', platform:'CloudFront', duration:'7:30'},
+ {id:'cv7', name:'價格協商情境教學', en:'Price Negotiation Scenario Lesson', platform:'Vimeo', duration:'6:55'},
+ {id:'cv8', name:'期中口說總複習教學', en:'Midterm Speaking Review Lesson', platform:'Vimeo', duration:'8:10'}
 ];
 
 /* ---- 16. 測驗庫（20260930 新增，來源 a03「產品詳情」CONTENT_QUIZZES；供自學課程單元挑選單元測驗用，
@@ -504,7 +433,7 @@ var paymentMethods = [
 ];
 
 /* ---- 19. 會員學習主題（20260930 新增；三個會員頁情境各自的挑選清單彼此獨立，用子物件分組。
-   chatTopics 僅提供 m14／m14b 下拉選項與翻譯，主題詳細教材（等級／簡介／討論題綱／帶領老師）
+   chatTopics 僅提供 m14 下拉選項與翻譯，主題詳細教材（等級／簡介／討論題綱／帶領老師）
    仍在各頁本地 TOPIC_INFO 維護，正式串接時建議與本集合合併 ---- */
 var learningTopics = {
   requestCourses: [
@@ -528,6 +457,68 @@ var learningTopics = {
    {id:'文化觀察分享', name:'文化觀察分享', en:'Cultural Observation Sharing'}
   ]
 };
+
+/* ---- 20. 專案合作班級與名單（20261006 新增；a20 專案合作夥伴「班級與名單」分頁維護，教師端、會員區共用）
+   projectClasses：{id, partnerId, projectCode, name, from, to, teacherRid（對應 projectRoster 中 role:'老師' 成員的 id）}
+   projectRoster：{id, classId, name, email, role:'學生'|'老師', status:'未寄送'|'已寄開通信'|'連結已作廢'|'已啟用', sentAt, expiresAt（開通連結 7 天有效）, linkToken（目前有效連結版本）, activatedAt（開通時間）}
+   頁面存檔至 localStorage（key 見契約檔），本集合為初始值 ---- */
+var projectClasses = [
+ {id:'pcl1', partnerId:'p02', projectCode:'PRJ-EDU-AZU', name:'Chinese 101 Section A', from:'2027-02-01', to:'2027-05-31', teacherRid:'pr07'},
+ {id:'pcl2', partnerId:'p02', projectCode:'PRJ-EDU-AZU', name:'Chinese 101 Section B', from:'2027-02-01', to:'2027-05-31', teacherRid:'pr18'},
+ {id:'pcl3', partnerId:'p02', projectCode:'PRJ-EDU-AZU', name:'Chinese 201 Conversation', from:'2027-02-01', to:'2027-05-31', teacherRid:'pr27'}
+];
+var projectRoster = [
+ {id:'pr01', classId:'pcl1', name:'Emily Carter', email:'e.carter@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr02', classId:'pcl1', name:'Jason Nguyen', email:'j.nguyen@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr03', classId:'pcl1', name:'Maria Lopez', email:'m.lopez@students.sample-u.example', role:'學生', status:'已寄開通信'},
+ {id:'pr04', classId:'pcl1', name:'Tyler Brooks', email:'t.brooks@students.sample-u.example', role:'學生', status:'已寄開通信'},
+ {id:'pr05', classId:'pcl1', name:'Aisha Patel', email:'a.patel@students.sample-u.example', role:'學生', status:'未寄送'},
+ {id:'pr06', classId:'pcl1', name:'Daniel Kim', email:'d.kim@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr07', classId:'pcl1', name:'Sarah Whitfield', email:'s.whitfield@az.example', role:'老師', status:'已啟用'},
+ {id:'pr11', classId:'pcl2', name:'Olivia Martin', email:'o.martin@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr12', classId:'pcl2', name:'Ethan Walker', email:'e.walker@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr13', classId:'pcl2', name:'Sophia Chen', email:'s.chen@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr14', classId:'pcl2', name:'Lucas Hall', email:'l.hall@students.sample-u.example', role:'學生', status:'已寄開通信'},
+ {id:'pr15', classId:'pcl2', name:'Grace Young', email:'g.young@students.sample-u.example', role:'學生', status:'已寄開通信'},
+ {id:'pr16', classId:'pcl2', name:'Noah Adams', email:'n.adams@students.sample-u.example', role:'學生', status:'未寄送'},
+ {id:'pr17', classId:'pcl2', name:'Isabella Reed', email:'i.reed@students.sample-u.example', role:'學生', status:'未寄送'},
+ {id:'pr18', classId:'pcl2', name:'王建國', email:'chienkuo.wang@az.example', role:'老師', status:'已啟用'},
+ {id:'pr21', classId:'pcl3', name:'Henry Scott', email:'h.scott@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr22', classId:'pcl3', name:'Chloe Turner', email:'c.turner@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr23', classId:'pcl3', name:'Mason Rivera', email:'m.rivera@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr24', classId:'pcl3', name:'Zoe Campbell', email:'z.campbell@students.sample-u.example', role:'學生', status:'已寄開通信'},
+ {id:'pr25', classId:'pcl3', name:'Liam Foster', email:'l.foster@students.sample-u.example', role:'學生', status:'未寄送'},
+ {id:'pr26', classId:'pcl3', name:'Ava Mitchell', email:'a.mitchell@students.sample-u.example', role:'學生', status:'已啟用'},
+ {id:'pr27', classId:'pcl3', name:'陳嘉玲', email:'chialing.chen@az.example', role:'老師', status:'已啟用'}
+];
+
+/* 班級與名單存 localStorage；載入時就地覆蓋上面的初始值，所有讀 TLI_MASTERS 的頁面拿到同一份最新資料 */
+var PC_KEY = 'tliProjectClasses_v1', PR_KEY = 'tliProjectRoster_v1';
+function loadProjectData(){
+  try {
+    var a = JSON.parse(global.localStorage.getItem(PC_KEY) || 'null');
+    var b = JSON.parse(global.localStorage.getItem(PR_KEY) || 'null');
+    if (Array.isArray(a) && Array.isArray(b)){
+      /* 舊版存檔班級用 teacherId（指向已移除的在地教師），改指向該班名單的老師 */
+      a.forEach(function(c){ if (!c.teacherRid) { var t = b.filter(function(r){ return r.classId === c.id && r.role === '老師'; })[0]; c.teacherRid = t ? t.id : ''; } delete c.teacherId; });
+      projectClasses.length = 0; a.forEach(function(x){ projectClasses.push(x); });
+      projectRoster.length = 0; b.forEach(function(x){ projectRoster.push(x); });
+    }
+  } catch(e){}
+}
+function saveProjectData(){
+  try {
+    global.localStorage.setItem(PC_KEY, JSON.stringify(projectClasses));
+    global.localStorage.setItem(PR_KEY, JSON.stringify(projectRoster));
+  } catch(e){}
+}
+loadProjectData();
+/* 開通連結欄位補預設：已寄開通信者補寄送日與 7 天到期日、連結版本；已啟用者補開通時間 */
+projectRoster.forEach(function(r){
+  if (r.status === '已寄開通信' && !r.expiresAt){ r.sentAt = '2027-03-12'; r.expiresAt = '2027-03-19'; }
+  if (!r.linkToken && r.status !== '未寄送'){ r.linkToken = 'k1'; }
+  if (r.status === '已啟用' && !r.activatedAt){ r.activatedAt = '2027-02-' + ('0' + (3 + (parseInt(String(r.id).replace(/\D/g, ''), 10) || 0) % 20)).slice(-2) + ' 10:' + ('0' + ((parseInt(String(r.id).replace(/\D/g, ''), 10) || 0) * 7 % 60)).slice(-2); }
+});
 
 /* ================= 工具函式 ================= */
 function options(listName, opts){
@@ -557,6 +548,8 @@ var MANAGE_LINKS = {
   teachers:'a10_teachers.html',
   orgCustomers:'a19_b2b_enterprise.html',
   partners:'a20_agents.html',
+  projectClasses:'a20_agents.html',
+  projectRoster:'a20_agents.html',
   packages:'a04_packages.html',
   projects:'a21_projects.html',
   videoLibrary:'a18_resource_library.html',
@@ -589,6 +582,8 @@ global.TLI_MASTERS = {
   products: products,
   teachers: teachers,
   partners: partners,
+  projectClasses: projectClasses,
+  projectRoster: projectRoster,
   orgCustomers: orgCustomers,
   packages: packages,
   projects: projects,
@@ -601,6 +596,8 @@ global.TLI_MASTERS = {
   guessLevelId: guessLevelId,
   options: options,
   byId: byId,
+  saveProjectData: saveProjectData,
+  reloadProjectData: loadProjectData,
   manageLink: manageLink
 };
 

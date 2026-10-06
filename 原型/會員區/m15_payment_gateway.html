@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TLI Connect 會員區－金流付款示意頁</title>
+<title>TLI Connect 會員區－金流付款頁</title>
 <style>
 :root{
   --c-primary:#1B4E8C;--c-primary-dark:#123A68;--c-accent:#E8792B;--c-accent-dark:#CF691F;--c-secondary:#0F9B79;
@@ -54,13 +54,13 @@ svg{display:block;}
 <header class="gw-topbar">
   <span class="gw-topbar-badge" id="gwBadge">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-    <span id="gwBadgeText">示意：藍新金流付款頁</span>
+    <span id="gwBadgeText">藍新金流付款頁</span>
   </span>
-  <span class="gw-topbar-title" data-i18n="m15.topbarTitle">第三方金流付款（示意畫面）</span>
+  <span class="gw-topbar-title" data-i18n="m15.topbarTitle">第三方金流付款</span>
 </header>
 
 <main class="gw-wrap">
-  <p class="gw-note-line" data-i18n="m15.note">示意畫面，非真實金流頁面，卡號僅作格式檢查。</p>
+  <p class="gw-note-line" data-i18n="m15.note">請填寫付款資訊，卡號會先檢查格式。</p>
 
   <div class="gw-card">
     <div class="gw-store-row"><span data-i18n="m15.storeNameLabel">商店名稱</span><span data-i18n="m15.storeName">TLI 中華語文研習所</span></div>
@@ -134,13 +134,13 @@ function renderGatewayDynamic(){
   document.getElementById('gwOrderNo').textContent = orderNo;
   document.getElementById('gwAmount').textContent = amount ? ('NT$'+amount.toLocaleString('zh-Hant')) : TLI_I18N.t('待定',{en:'TBD',ja:'未定',de:'Ausstehend'});
   if(gw === 'stripe'){
-    document.getElementById('gwBadgeText').textContent = TLI_I18N.t('示意：Stripe Checkout',{en:'Demo: Stripe Checkout',ja:'デモ：Stripe Checkout',de:'Demo: Stripe Checkout'});
-    document.title = TLI_I18N.t('Stripe Checkout（示意）',{en:'Stripe Checkout (Demo)',ja:'Stripe Checkout（デモ）',de:'Stripe Checkout (Demo)'});
+    document.getElementById('gwBadgeText').textContent = TLI_I18N.t('Stripe Checkout',{en:'Stripe Checkout',ja:'Stripe Checkout',de:'Stripe Checkout'});
+    document.title = TLI_I18N.t('Stripe Checkout',{en:'Stripe Checkout',ja:'Stripe Checkout',de:'Stripe Checkout'});
     /* Stripe 海外卡流程無零利率分期選項，僅藍新提供分期 */
     document.getElementById('installmentField').style.display = 'none';
   } else {
-    document.getElementById('gwBadgeText').textContent = TLI_I18N.t('示意：藍新金流付款頁',{en:'Demo: NewebPay Payment Page',ja:'デモ：藍新金流決済ページ',de:'Demo: NewebPay-Zahlungsseite'});
-    document.title = TLI_I18N.t('藍新金流付款頁（示意）',{en:'NewebPay Payment Page (Demo)',ja:'藍新金流決済ページ（デモ）',de:'NewebPay-Zahlungsseite (Demo)'});
+    document.getElementById('gwBadgeText').textContent = TLI_I18N.t('藍新金流付款頁',{en:'NewebPay Payment Page',ja:'藍新金流決済ページ',de:'NewebPay-Zahlungsseite'});
+    document.title = TLI_I18N.t('藍新金流付款頁',{en:'NewebPay Payment Page',ja:'藍新金流決済ページ',de:'NewebPay-Zahlungsseite'});
   }
 }
 /* 錯誤訊息可能在切換語言當下仍顯示中，重新套用目前語言的驗證訊息 */

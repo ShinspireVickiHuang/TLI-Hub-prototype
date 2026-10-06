@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<title>會員帳號開通｜TLI Connect</title>
+<title>帳號開通｜TLI Connect</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{--navy:#1B4E8C;--navy-dark:#123a68;--orange:#E8792B;--teal:#0F9B79;
@@ -98,358 +98,227 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 .phone-row select{flex:none;width:100%;}
 }
 </style>
+<style>
+.ctx{background:var(--g50);border:1px solid var(--g200);border-radius:10px;padding:4px 14px;margin-bottom:18px;}
+.ctx-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--g200);font-size:13px;}
+.ctx-row:first-child{border-top:none;}
+.ctx-row span:first-child{color:var(--g500);flex:none;}
+.ctx-row span:last-child{font-weight:600;text-align:right;min-width:0;overflow-wrap:anywhere;}
+.pwwrap{position:relative;}
+.pwwrap input{padding-right:64px;}
+.pwtoggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--navy);font-size:12.5px;cursor:pointer;padding:6px 8px;font-family:inherit;}
+.callout{display:flex;gap:10px;background:#E6EEF8;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.7;color:#123a68;margin-bottom:16px;}
+.callout svg{flex:none;margin-top:2px;}
+.bindlist{margin:0 0 6px;padding:0;list-style:none;}
+.bindlist li{display:flex;gap:8px;font-size:13px;padding:5px 0;}
+.bindlist svg{flex:none;margin-top:3px;color:var(--teal);}
+.pane{display:none;}
+.pane.on{display:block;}
+</style>
 </head>
 <body>
 
 <div class="wrap">
-<div class="topmark"><img src="../assets/tli-logo.svg" alt="TLI"><span data-i18n="fr.p13.topmark">會員帳號開通</span></div>
-<p class="intro-line" id="scenarioNote" data-i18n="fr.p13.introLine">歡迎加入 TLI Connect！請完成以下步驟啟用你的帳號。</p>
+<div class="topmark"><img src="../assets/tli-logo.svg" alt="TLI"><span data-en="Account activation">帳號開通</span></div>
 
-<div id="wizardWrap">
-<div class="steps" id="stepsBar"></div>
 <div class="card">
 
-<div id="stepPane1">
-  <div id="noticeSection">
-    <h1 class="sth" data-i18n="fr.p13.step1Title">步驟 1／3　設定密碼</h1>
-    <div class="stdesc" id="noticeDesc">你的顧問已為你建立帳號，請先設定登入密碼。</div>
+<!-- A：新帳號開通 -->
+<div class="pane" id="paneNew">
+  <h1 class="sth" data-en="Activate your account">開通你的帳號</h1>
+  <div class="stdesc" data-en="Set a password to finish. This link can be used only once and is valid for 7 days. Your school and class are shown after activation.">設定密碼即可完成開通。此連結僅能使用一次，7 天內有效；開通完成後會顯示你所屬的學校與班級。</div>
+  <div class="hint" id="expNote" style="margin:-6px 0 12px;"></div>
+  <div class="formrow"><label for="fEmail" data-en="Email (your login ID)">Email（登入帳號）</label><input id="fEmail" type="email" readonly></div>
+  <div class="formrow">
+    <label for="fPw"><span data-en="Password">設定密碼</span><span class="req-mark">*</span></label>
+    <div class="pwwrap"><input id="fPw" type="password" autocomplete="new-password" data-en-ph="At least 8 characters, letters and numbers" placeholder="至少 8 碼，含英文字母與數字"><button type="button" class="pwtoggle" id="tg1" data-en="Show">顯示</button></div>
+    <div class="pwmeter" id="pwMeter"><i></i></div>
+    <div class="pwmeterlbl" id="pwLbl"></div>
+    <div class="errmsg" id="errPw"></div>
   </div>
-  <div id="loginSection" style="display:none;">
-    <h1 class="sth" data-i18n="fr.p13.step1TitleLogin">步驟 1／3　登入並設定新密碼</h1>
-    <div class="stdesc" data-i18n="fr.p13.loginDesc">請輸入 Email 與信中提供的預設密碼登入，登入後系統將要求你設定新密碼。</div>
-    <div class="field-required-note"><span class="req-mark">*</span> <span data-i18n="fr.common.requiredNote">為必填欄位</span></div>
-    <div class="formrow"><label data-i18n="fr.p13.labelAccountEmail">帳號 Email</label><input type="text" id="loginEmail" readonly></div>
-    <div class="formrow"><label><span data-i18n="fr.p13.labelTempPw">預設密碼</span><span class="req-mark">*</span></label><input type="password" id="loginTempPw" placeholder="請輸入信中提供的預設密碼" data-i18n-placeholder="fr.p13.phTempPw" oninput="clearLoginErr()">
-    <div class="errmsg" id="loginErr" data-i18n="fr.p13.errTempPw">請輸入信中提供的預設密碼。</div></div>
-    <div class="btnrow"><span></span><button class="btn" onclick="doPwLogin()" data-i18n="fr.f03.submitBtn">登入</button></div>
+  <div class="formrow">
+    <label for="fPw2"><span data-en="Confirm password">確認密碼</span><span class="req-mark">*</span></label>
+    <div class="pwwrap"><input id="fPw2" type="password" autocomplete="new-password"><button type="button" class="pwtoggle" id="tg2" data-en="Show">顯示</button></div>
+    <div class="errmsg" id="errPw2"></div>
   </div>
-  <div id="pwSection" style="display:none;">
-    <div class="field-required-note"><span class="req-mark">*</span> <span data-i18n="fr.common.requiredNote">為必填欄位</span></div>
-    <div class="formrow" id="acctEmailRow"><label data-i18n="fr.p13.labelAccountEmail">帳號 Email</label><input type="text" id="acctEmail" readonly></div>
-    <div class="formrow"><label><span data-i18n="fr.p13.labelSetPw">設定密碼</span><span class="req-mark">*</span></label><input type="password" id="pw1" oninput="onPwInput()" placeholder="密碼規則依系統設定" data-i18n-placeholder="fr.p13.phSetPw">
-    <div class="pwmeter" id="pwmeter"><i></i></div><div class="pwmeterlbl" id="pwmeterlbl" data-i18n="fr.p13.pwNotEntered">尚未輸入</div></div>
-    <div class="formrow"><label><span data-i18n="fr.p13.labelConfirmPw">再次輸入密碼</span><span class="req-mark">*</span></label><input type="password" id="pw2" oninput="clearPwErr()" placeholder="請再輸入一次" data-i18n-placeholder="fr.p13.phConfirmPw">
-    <div class="errmsg" id="pwErr" data-i18n="fr.p13.errPw">兩次輸入的密碼不一致，或密碼強度不足，請重新確認。</div></div>
-    <div class="hint" data-i18n="fr.p13.pwHint">密碼規則（長度與組合要求）依系統設定，設定後可於會員區個人設定隨時修改。</div>
-    <div class="btnrow"><span></span><button class="btn" onclick="goStep2()" style="margin-left:auto;" data-i18n="fr.common.nextStep">下一步</button></div>
+  <label class="checkbox-label"><input type="checkbox" id="fAgree"><span><span data-en="I have read and agree to the">我已閱讀並同意</span><a href="#" onclick="openTerms();return false;" data-en="Terms of Service and Privacy Policy">服務條款與隱私權政策</a></span></label>
+  <div class="errmsg" id="errAgree" data-en="Please agree to the terms to continue.">請先同意服務條款與隱私權政策。</div>
+  <div class="btnrow" style="justify-content:flex-end;"><button class="btn orange" id="btnActivate" data-en="Activate account">開通帳號</button></div>
+</div>
+
+<!-- B：此 Email 已是 TLI 會員，登入後加綁 -->
+<div class="pane" id="paneMember">
+  <h1 class="sth" data-en="This email is already a TLI member">此 Email 已是 TLI 會員</h1>
+  <div class="stdesc" data-en="You do not need a new account. Sign in with your existing password, then confirm the link below.">不需要另開帳號，請用原本的密碼登入，再確認加綁下列單位。</div>
+    <div id="memStep1">
+    <div class="formrow"><label for="mEmail" data-en="Email">Email</label><input id="mEmail" type="email" readonly></div>
+    <div class="formrow"><label for="mPw"><span data-en="Your current TLI password">原本的 TLI 密碼</span><span class="req-mark">*</span></label><input id="mPw" type="password" autocomplete="current-password"><div class="errmsg" id="errMPw"></div></div>
+    <div class="hint"><a href="#" id="forgot" data-en="Forgot password?">忘記密碼？</a></div>
+    <div class="btnrow" style="justify-content:flex-end;"><button class="btn" id="btnMemLogin" data-en="Sign in">登入</button></div>
+  </div>
+  <div id="memStep2" style="display:none;">
+    <div class="callout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span data-en="Signed in. Confirm to add the school, project and class below to your existing account. Your plans and records stay as they are.">已登入。確認後，下列單位、專案與班級會加綁到你現有的帳號，原本的方案與紀錄不受影響。</span></div>
+    <ul class="bindlist" id="bindList"></ul>
+    <div class="btnrow" style="justify-content:flex-end;"><button class="btn orange" id="btnBind" data-en="Confirm and link">確認加綁</button></div>
   </div>
 </div>
 
-<div id="stepPane2" style="display:none">
-  <h1 class="sth" data-i18n="fr.p13.step2Title">步驟 2／3　確認你的資料</h1>
-  <div class="stdesc" data-i18n="fr.p13.step2Desc">以下資料由顧問建檔時填入，請確認或補齊，作為日後排課與上課聯繫使用。</div>
-  <div class="field-required-note"><span class="req-mark">*</span> <span data-i18n="fr.common.requiredNote">為必填欄位</span></div>
-  <div class="formrow"><label><span data-i18n="fr.p13.labelName">姓名</span><span class="req-mark">*</span></label><input type="text" id="fName" oninput="clearErr('nameErr')"><div class="errmsg" id="nameErr" data-i18n="fr.p13.errName">請輸入姓名。</div></div>
-  <div class="formrow"><label><span data-i18n="fr.p13.labelPhone">手機</span><span class="opt-mark" data-i18n="fr.common.optional">（選填）</span></label>
-    <div class="phone-row"><select id="fPhoneCc" aria-label="國碼" data-i18n-aria-label="fr.p13.ccAriaLabel"></select><input type="tel" id="fPhone" placeholder="請輸入手機號碼" data-i18n-placeholder="fr.p13.phPhone" oninput="clearErr('phoneErr')"></div>
-    <div class="errmsg" id="phoneErr" data-i18n="fr.p13.errPhone">請輸入有效的手機號碼。</div>
-  </div>
-  <div class="formrow"><label><span data-i18n="fr.p13.labelTz">上課時區</span><span class="req-mark">*</span></label><select id="fTz" onchange="clearErr('tzErr')"></select><div class="errmsg" id="tzErr" data-i18n="fr.p13.errTz">請選擇上課時區。</div>
-  <div class="hint" data-i18n="fr.p13.tzHint">已依你目前所在位置預選，如非慣用上課時區請自行調整。</div></div>
-  <div class="formrow"><label data-i18n="fr.p13.labelLang">語言（選填）</label><select id="fLang"></select><div class="hint" data-i18n="fr.p13.langHint">用於課程教材與系統介面的語言偏好。</div></div>
-  <div class="formrow"><label><span data-i18n="fr.p13.labelZoom">Zoom 登入 Email</span><span class="req-mark">*</span></label><input type="text" id="fZoom" oninput="clearErr('zoomErr')"><div class="errmsg" id="zoomErr" data-i18n="fr.p13.errZoom">請輸入 Zoom 登入 Email。</div>
-  <div class="hint" data-i18n="fr.p13.zoomHint">用於加入視訊上課連結，可與帳號 Email 不同。</div></div>
-  <div class="formrow">
-    <label class="checkbox-label"><input type="checkbox" id="termsCheck" onchange="clearErr('termsErr')">
-    <span data-i18n="fr.p13.termsLine">我已閱讀並同意<a href="#" onclick="openTerms();return false;" data-i18n="fr.p13.termsLink">服務條款</a>與<a href="#" onclick="openTerms();return false;" data-i18n="fr.p13.privacyLink">隱私權政策</a></span><span class="req-mark">*</span></label>
-    <div class="errmsg" id="termsErr" data-i18n="fr.p13.errTerms">請詳閱並勾選同意服務條款與隱私權政策。</div>
-  </div>
-  <div class="formrow">
-    <label class="checkbox-label"><input type="checkbox" id="marketingCheck">
-    <span data-i18n="fr.p13.marketingLine">我同意 TLI 使用我的學習資料進行課程推薦與行銷（可隨時取消）</span></label>
-  </div>
-  <div class="btnrow"><button class="btn ghost" onclick="goStep(1)" data-i18n="fr.common.prevStep">上一步</button><button class="btn" onclick="goStep3()" data-i18n="fr.p13.confirmActivate">確認並開通</button></div>
+<!-- C：帳號已開通過，直接登入 -->
+<div class="pane" id="paneDone">
+  <h1 class="sth" data-en="This account is already active">此帳號已開通</h1>
+  <div class="stdesc" data-en="This activation link can be used only once and has been used. Sign in with your password.">這個開通連結僅能使用一次，已經使用過，請直接用密碼登入。</div>
+  <div class="formrow"><label for="dEmail" data-en="Email">Email</label><input id="dEmail" type="email" readonly></div>
+  <div class="formrow"><label for="dPw"><span data-en="Password">密碼</span><span class="req-mark">*</span></label><input id="dPw" type="password" autocomplete="current-password"><div class="errmsg" id="errDPw"></div></div>
+  <div class="btnrow" style="justify-content:flex-end;"><button class="btn" id="btnDone" data-en="Sign in">登入</button></div>
 </div>
 
-<div id="stepPane3" style="display:none">
+<!-- D：連結無效 -->
+<div class="pane" id="paneBad">
+  <div class="expiredwrap">
+    <div class="expiredicon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div class="expiredtitle" data-en="This activation link is no longer valid">這個開通連結已失效</div>
+    <div class="expireddesc" data-en="Please contact TLI to have it sent again.">請聯絡 TLI 重新寄送。</div>
+    <div class="resendrow"><a class="btn" id="btnContact" href="mailto:service@tli.example?subject=%E9%87%8D%E5%AF%84%E9%96%8B%E9%80%9A%E4%BF%A1" data-en="Contact TLI">聯絡 TLI</a></div>
+  </div>
+  </div>
+</div>
+
+<!-- E：完成 -->
+<div class="pane" id="paneFin">
   <div class="donewrap">
-    <div class="doneicon"><svg width="26" height="26" viewBox="0 0 20 20" fill="none" stroke="#0F9B79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10.5 8 14.5 16 5.5"/></svg></div>
-    <div class="donetitle" data-i18n="fr.p13.doneTitle">帳號已開通</div>
-    <div class="donedesc" data-i18n="fr.p13.doneDesc">歡迎使用 TLI Connect，你的帳號已可登入會員區。</div>
-    <div class="donenote" id="doneNote">你的顧問會依你的有空時間安排課程，開課前會另行通知確認上課時間。</div>
-    <a class="btn" href="../會員區/m01_home.html?new=1" style="display:block" data-i18n="fr.p13.goHomeBtn">進入我的首頁</a>
+    <div class="doneicon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F9B79" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="donetitle" id="finTitle"></div>
+    <div class="donedesc" id="finDesc"></div>
+    <div class="donenote" id="finNote"></div>
+    <div class="donedesc" id="finMail" style="margin-top:10px;"></div>
+    <a class="btn teal" id="finGo" href="#"></a>
   </div>
 </div>
 
 </div>
 </div>
 
-<div id="expiredPane" style="display:none">
-<div class="card">
-<div class="expiredwrap">
-<div class="expiredicon"><svg width="26" height="26" viewBox="0 0 20 20" fill="none" stroke="#C0392B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><line x1="10" y1="6.5" x2="10" y2="11"/><circle cx="10" cy="13.6" r="0.6" fill="#C0392B"/></svg></div>
-<div class="expiredtitle" data-i18n="fr.p13.expiredTitle">開通連結已逾期</div>
-<div class="expireddesc" data-i18n="fr.p13.expiredDesc">此開通連結已逾期（連結有效時數依系統設定），為維護帳號安全，請重新申請開通信，或聯繫你的專屬顧問協助處理。</div>
-<div class="resendrow"><input type="email" id="resendEmail" placeholder="請輸入你的帳號 Email" data-i18n-placeholder="fr.p13.phResendEmail"><button class="btn orange" onclick="doResend()" data-i18n="fr.p13.resendBtn">重寄開通信</button></div>
-<div class="expiredactions"><button class="btn ghost" onclick="toast(T('已通知你的專屬顧問協助處理','Your dedicated advisor has been notified'))" data-i18n="fr.p13.contactAdvisorBtn">聯繫顧問</button></div>
-</div>
-</div>
-</div>
-
-<div id="alreadyDonePane" style="display:none">
-<div class="card">
-<div class="donewrap">
-<div class="doneicon info"><svg width="26" height="26" viewBox="0 0 20 20" fill="none" stroke="#1B4E8C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><line x1="10" y1="9" x2="10" y2="14"/><circle cx="10" cy="6.4" r="0.6" fill="#1B4E8C"/></svg></div>
-<div class="donetitle" data-i18n="fr.p13.alreadyDoneTitle">此帳號已開通</div>
-<div class="donedesc" data-i18n="fr.p13.alreadyDoneDesc">此開通連結已完成使用，請直接前往登入頁使用帳號。</div>
-<a class="btn" href="p07_login_register.html" style="display:block" data-i18n="fr.p13.goLoginBtn">前往登入</a>
-</div>
-</div>
-</div>
-
-</div>
-
-<div class="modal-overlay" id="termsModalOverlay" onclick="if(event.target===this) closeTerms()">
+<div class="modal-overlay" id="termsModal">
   <div class="modal-box">
-    <div class="modal-head">
-      <h3 data-i18n="fr.p13.termsModalTitle">服務條款與隱私權政策</h3>
-      <button class="modal-close-btn" onclick="closeTerms()" aria-label="關閉" data-i18n-aria-label="fr.common.close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    </div>
+    <div class="modal-head"><h3 data-en="Terms of Service and Privacy Policy">服務條款與隱私權政策</h3>
+      <button class="modal-close-btn" onclick="closeTerms()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
     <div class="modal-body">
-      <h4 data-i18n="fr.p13.termsH4">服務條款</h4>
-      <p data-i18n="fr.p13.termsBody">本服務由 TLI 中華語文研習所提供，會員帳號開通後，須配合顧問安排完成排課與上課相關程序。課程異動、請假與退費規則依當次購買方案之合約條款為準。</p>
-      <h4 data-i18n="fr.p13.privacyH4">隱私權政策（個資蒐集告知）</h4>
-      <p data-i18n="fr.p13.privacyBody">我們蒐集之姓名、Email、手機、上課時區等資料，僅用於課程安排、帳號驗證與必要通知，不會提供第三方行銷使用。詳細條款內容以正式環境公告版本為準。</p>
+      <h4 data-en="Terms of Service">服務條款</h4>
+      <p data-en="This service is provided by TLI. The account is for the named student or teacher only. Learning content and Mandarin Lounge sessions are offered under the project arrangement between your school and TLI.">本服務由 TLI 中華語文研習所提供，帳號僅供登記之學生或教師本人使用。學習內容與 Mandarin Lounge 會話場次，依學校與 TLI 的專案合作安排提供。</p>
+      <h4 data-en="Privacy Policy">隱私權政策</h4>
+      <p data-en="We collect your name, email, class and learning records only to run your courses, verify your account and send necessary notices. Your teacher can see your study time and progress in the classes they teach.">我們蒐集姓名、Email、班級與學習紀錄，僅用於課程營運、帳號驗證與必要通知。你的老師可以看到所授班級的學習時數與進度。</p>
     </div>
-    <div class="modal-foot">
-      <button type="button" class="btn teal" onclick="closeTerms()" data-i18n="fr.p13.termsAckBtn">我已閱讀</button>
-    </div>
+    <div class="modal-foot"><button type="button" class="btn teal" onclick="closeTerms()" data-en="I have read it">我已閱讀</button></div>
   </div>
 </div>
-
 <div class="toast" id="toastEl"></div>
 
+<script>window.TLI_I18N_PAGE_LANGS=['zh-TW','zh-CN','en'];</script>
 <script src="../assets/_shared_masters.js"></script>
 <script src="../assets/_i18n_dict.js"></script>
-<script src="../assets/_i18n_dict_fr_front.js"></script>
+<script src="../會員區/_project_learning.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
-function T(zh,en){ return window.TLI_I18N ? TLI_I18N.t(zh,en) : zh; }
+var PL = TLI_PL, T = PL.T;
+function $(i){ return document.getElementById(i); }
+function toast(msg){ var el=$('toastEl'); el.textContent=msg; el.classList.add('show'); clearTimeout(window._tt); window._tt=setTimeout(function(){ el.classList.remove('show'); },2600); }
+function openTerms(){ $('termsModal').classList.add('show'); }
+function closeTerms(){ $('termsModal').classList.remove('show'); }
 
-/* ===== 示範資料（陳建宏：由合作機構建檔、尚未開通的會員；本頁示範身分固定為 範例大學加盟學生，
-   兩種學員（加盟／經銷）都會走這頁，沒有網址參數或其他示範身分時預設用加盟夥伴） ===== */
-var ACCOUNT_EMAIL = 'chen.jh@example.com';
-var ACCOUNT_NAME = '陳建宏';
-var ACCOUNT_ORG = '範例大學華語課程';
+/* ---- 解析開通信連結：?rid=名單 id（缺省時取第一位已寄開通信、尚非會員的學生）---- */
+var rid = PL.qs('rid');
+var R = rid ? PL.rosterById(rid) : TLI_MASTERS.projectRoster.filter(function(r){ return r.role==='學生' && r.status==='已寄開通信' && !PL.isExistingMember(r.email); })[0];
+var CLS = R ? PL.classById(R.classId) : null;
+var TEA = CLS ? PL.teacherOfClass(CLS.id) : null;
+var P = PL.partner();
 
-/* ===== 國碼／時區／語言下拉選項（純前端 demo，示範資料維持原文不翻） ===== */
-function countryCodeOptions(){
-  return [['+886',T('台灣 +886','Taiwan +886')],['+86',T('中國 +86','China +86')],['+852',T('香港 +852','Hong Kong +852')],['+853',T('澳門 +853','Macau +853')],['+81',T('日本 +81','Japan +81')],['+82',T('韓國 +82','South Korea +82')],['+65',T('新加坡 +65','Singapore +65')],['+60',T('馬來西亞 +60','Malaysia +60')],['+66',T('泰國 +66','Thailand +66')],['+84',T('越南 +84','Vietnam +84')],['+62',T('印尼 +62','Indonesia +62')],['+63',T('菲律賓 +63','Philippines +63')],['+1',T('美國／加拿大 +1','US/Canada +1')],['+44',T('英國 +44','UK +44')],['+61',T('澳洲 +61','Australia +61')],['+49',T('德國 +49','Germany +49')]];
+function ctxHtml(){
+  if(!R||!CLS) return '';
+  var role = R.role==='老師' ? T('班級老師','Class teacher') : T('學生','Student');
+  var rows = [
+    [T('所屬單位','Institution'), P.name],
+    [T('專案','Project'), PL.projectName()],
+    [T('班級','Class'), CLS.name],
+    [T('角色','Role'), role],
+    [T('姓名','Name'), R.name]
+  ];
+  if(R.role==='學生' && TEA) rows.splice(4,0,[T('授課老師','Teacher'), TEA.name]);
+  return rows.map(function(r){ return '<div class="ctx-row"><span>'+PL.esc(r[0])+'</span><span>'+PL.esc(r[1])+'</span></div>'; }).join('');
 }
-function timezoneOptions(){
-  return [['Asia/Taipei',T('台北（UTC+8）','Taipei (UTC+8)')],['Asia/Shanghai',T('上海（UTC+8）','Shanghai (UTC+8)')],['Asia/Hong_Kong',T('香港（UTC+8）','Hong Kong (UTC+8)')],['Asia/Tokyo',T('東京（UTC+9）','Tokyo (UTC+9)')],['Asia/Seoul',T('首爾（UTC+9）','Seoul (UTC+9)')],['Asia/Singapore',T('新加坡（UTC+8）','Singapore (UTC+8)')],['Asia/Kuala_Lumpur',T('吉隆坡（UTC+8）','Kuala Lumpur (UTC+8)')],['Asia/Bangkok',T('曼谷（UTC+7）','Bangkok (UTC+7)')],['Asia/Jakarta',T('雅加達（UTC+7）','Jakarta (UTC+7)')],['Asia/Ho_Chi_Minh',T('胡志明市（UTC+7）','Ho Chi Minh City (UTC+7)')],['Asia/Manila',T('馬尼拉（UTC+8）','Manila (UTC+8)')],['America/Los_Angeles',T('美國西岸（UTC-8）','US West Coast (UTC-8)')],['America/New_York',T('美國東岸（UTC-5）','US East Coast (UTC-5)')],['Europe/London',T('倫敦（UTC+0）','London (UTC+0)')],['Europe/Berlin',T('柏林（UTC+1）','Berlin (UTC+1)')],['Australia/Sydney',T('雪梨（UTC+10）','Sydney (UTC+10)')]];
-}
-var TLI_COUNTRY_CODES=countryCodeOptions();
-var TLI_TIMEZONES=timezoneOptions();
-function nativeLangOptions(){
-  return [['',T('請選擇（選填）','Select (optional)')],['zh',T('中文','Chinese')],['en',T('英文','English')],['ja',T('日文','Japanese')],['ko',T('韓文','Korean')],['vi',T('越南文','Vietnamese')],['th',T('泰文','Thai')],['id',T('印尼文','Indonesian')],['de',T('德文','German')],['other',T('其他','Other')]];
-}
-function buildSelectOptions(selectEl, list, fallbackValue){
-  if(!selectEl) return;
-  selectEl.innerHTML='';
-  list.forEach(function(pair){
-    var opt=document.createElement('option');
-    opt.value=pair[0]; opt.textContent=pair[1];
-    selectEl.appendChild(opt);
-  });
-  if(fallbackValue) selectEl.value=fallbackValue;
-}
-function detectTimezoneValue(){
-  try{
-    var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if(TLI_TIMEZONES.some(function(p){return p[0]===tz;})) return tz;
-  }catch(e){}
-  return 'Asia/Taipei';
+function showPane(id){ document.querySelectorAll('.pane').forEach(function(p){ p.classList.toggle('on', p.id===id); }); }
+function renderCtx(){ renderBind(); if(R && $('expNote')){ $('expNote').textContent = R.expiresAt ? T('連結有效至 ','Valid until ')+R.expiresAt : ''; } }
+function renderBind(){
+  if(!R||!CLS) return;
+  var chk = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  $('bindList').innerHTML = [
+    T('單位：','Institution: ')+P.name, T('專案：','Project: ')+PL.projectName(), T('班級：','Class: ')+CLS.name, (R.role==='老師' ? T('角色：班級老師','Role: Class teacher') : T('角色：學生','Role: Student'))
+  ].map(function(t){ return '<li>'+chk+'<span>'+PL.esc(t)+'</span></li>'; }).join('');
 }
 
-/* ===== 情境固定為最常見狀態：機構建檔後寄出開通連結、會員點連結設定密碼 =====
-   （原本可用網址參數切換 password／expired／done 等示範情境，對外交付不需要，故固定不再依參數切換） */
-var mode = 'link';
-var state = 'ok';
-var pwPhase = 'login'; /* mode=password 專用：login -> setpw，本頁固定不會進入 */
-
-function renderSourceCopy(){
-  document.getElementById('noticeDesc').textContent = T('您的帳號由「'+ACCOUNT_ORG+'」建立，請設定密碼完成啟用。', 'Your account was created by “'+ACCOUNT_ORG+'”. Please set a password to activate it.');
-  document.getElementById('doneNote').textContent = T('開課單位會依你的名單安排課程，開課前會另行通知確認上課時間。', 'The teaching institution will schedule your course based on your enrollment; class times will be confirmed before the course starts.');
+/* ---- 密碼強度 ---- */
+function pwLevel(v){ var s=0; if(v.length>=8) s++; if(/[A-Za-z]/.test(v)&&/\d/.test(v)) s++; if(v.length>=12||/[^A-Za-z0-9]/.test(v)) s++; return v.length<8?0:s; }
+function renderMeter(){
+  var v=$('fPw').value, l=pwLevel(v), m=$('pwMeter'), lbl=$('pwLbl');
+  m.className='pwmeter'+(v?(l<=1?' weak':(l===2?' medium':' strong')):'');
+  lbl.textContent = !v ? '' : (l<=1 ? T('強度：弱','Strength: weak') : (l===2 ? T('強度：中','Strength: medium') : T('強度：強','Strength: strong')));
 }
+function wireToggle(btn, input){ btn.addEventListener('click', function(){ var show=input.type==='password'; input.type=show?'text':'password'; btn.textContent=show?T('隱藏','Hide'):T('顯示','Show'); btn.dataset.zh=show?'隱藏':'顯示'; btn.setAttribute('data-en', show?'Hide':'Show'); }); }
+function setErr(id,msg){ var e=$(id); if(msg){ e.textContent=msg; e.classList.add('show'); } else { e.classList.remove('show'); } }
 
-/* ===== 頂層畫面切換 ===== */
-function renderTop(){
-  document.getElementById('wizardWrap').style.display = state==='ok' ? '' : 'none';
-  document.getElementById('expiredPane').style.display = state==='expired' ? '' : 'none';
-  document.getElementById('alreadyDonePane').style.display = state==='done' ? '' : 'none';
-}
-
-/* ===== 步驟列 ===== */
-function stepLabels(){ return [T('帳號與密碼','Account & Password'), T('確認資料','Confirm Info'), T('完成','Done')]; }
-var currentStep=1;
-function renderSteps(){
-  var labels = stepLabels();
-  var html=labels.map(function(lbl,i){
-    var n=i+1;
-    var cls=n<currentStep?'done':(n===currentStep?'current':'');
-    var dotContent=n<currentStep?'<svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10.5 8 14.5 16 5.5"/></svg>':n;
-    return '<div class="stepitem '+cls+'"><span class="stepline"></span><span class="dot">'+dotContent+'</span><span class="stlbl">'+lbl+'</span></div>';
-  }).join('');
-  document.getElementById('stepsBar').innerHTML=html;
-}
-function goStep(n){
-  currentStep=n;
-  document.getElementById('stepPane1').style.display=n===1?'':'none';
-  document.getElementById('stepPane2').style.display=n===2?'':'none';
-  document.getElementById('stepPane3').style.display=n===3?'':'none';
-  renderSteps();
-  window.scrollTo({top:0,behavior:'smooth'});
+/* ---- 完成後導向：學生 → 會員區首頁；老師 → 教師端我的班級 ---- */
+function finish(kind){
+  var isTeacher = R.role==='老師';
+  if(isTeacher){ PL.signInTeacher(R.id); } else { PL.signInStudent(R.id); }
+  var dest = isTeacher ? '../教師端/t08_my_classes.html?rid='+R.id : '../會員區/m01_home.html?activated=project';
+  $('finTitle').textContent = kind==='bind' ? T('已加綁完成','Linked to your account') : T('帳號已開通','Your account is active');
+  $('finDesc').textContent = (isTeacher ? T('你可以在教師端查看班級學生的自學時數與進度。','You can now see your students’ study time and progress in the teacher portal.')
+                                       : T('你已加入 ','You have joined ')+CLS.name+T('，可以開始自學課程並預約 Mandarin Lounge。',' and can start the self-paced course and book Mandarin Lounge.'));
+  $('finNote').textContent = P.name+'・'+PL.projectName()+'・'+CLS.name;
+  $('finMail').textContent = kind==='login' ? '' : T('我們已寄出開通完成通知信到你的信箱（','We have sent an activation confirmation to your inbox (')+R.email+T('），如果不是你本人操作，請立即聯絡 TLI。','). If this was not you, contact TLI right away.');
+  var go=$('finGo'); go.href=dest; go.textContent = isTeacher ? T('前往我的班級','Go to My Classes') : T('前往首頁','Go to Home');
+  showPane('paneFin');
 }
 
-/* ===== 步驟 1：依 mode 顯示不同內容 ===== */
-function renderStep1(){
-  document.getElementById('noticeSection').style.display = (mode==='link') ? '' : 'none';
-  document.getElementById('loginSection').style.display = (mode==='password' && pwPhase==='login') ? '' : 'none';
-  document.getElementById('pwSection').style.display = (mode==='link' || (mode==='password' && pwPhase==='setpw')) ? '' : 'none';
-  document.getElementById('loginEmail').value = ACCOUNT_EMAIL;
-  document.getElementById('acctEmail').value = ACCOUNT_EMAIL;
-  document.getElementById('acctEmailRow').style.display = (mode==='link') ? '' : 'none';
-}
-function clearLoginErr(){
-  document.getElementById('loginErr').classList.remove('show');
-  document.getElementById('loginTempPw').classList.remove('invalid');
-}
-function doPwLogin(){
-  var pwEl=document.getElementById('loginTempPw');
-  if(!pwEl.value){
-    document.getElementById('loginErr').classList.add('show');
-    pwEl.classList.add('invalid');
-    pwEl.focus();
-    return;
-  }
-  pwPhase='setpw';
-  renderStep1();
+function init(){
+  var tok = PL.qs('t');
+  var stale = R && ((PL.qs('state')==='invalid') || R.status==='連結已作廢' || R.status==='未寄送' || (tok && R.linkToken && tok!==R.linkToken) || (R.status==='已寄開通信' && R.expiresAt && R.expiresAt < PL.today));
+  if(!R||!CLS||stale){ showPane('paneBad'); return; }
+  $('fEmail').value=R.email; $('mEmail').value=R.email; $('dEmail').value=R.email;
+  renderCtx();
+  var existing = PL.qs('member')==='1' || (R.role==='學生' && PL.isExistingMember(R.email));
+  if(R.status==='已啟用'){ showPane('paneDone'); }
+  else if(R.status==='未寄送'){ showPane('paneBad'); }
+  else if(existing){ showPane('paneMember'); }
+  else { showPane('paneNew'); }
+  renderMeter();
 }
 
-/* ===== 密碼強度與一致性 ===== */
-function pwStrength(pw){
-  if(!pw) return 0;
-  var score=0;
-  if(pw.length>=8) score++;
-  if(/[a-zA-Z]/.test(pw) && /[0-9]/.test(pw)) score++;
-  if(pw.length>=12 && /[^a-zA-Z0-9]/.test(pw)) score++;
-  return score;
-}
-function onPwInput(){
-  clearPwErr();
-  var pw=document.getElementById('pw1').value;
-  var s=pwStrength(pw);
-  var meter=document.getElementById('pwmeter'), lbl=document.getElementById('pwmeterlbl');
-  meter.className='pwmeter';
-  if(!pw){ lbl.textContent=T('尚未輸入','Not entered yet'); return; }
-  if(s<=1){ meter.classList.add('weak'); lbl.textContent=T('強度：弱（建議至少 8 碼，混合英文與數字）','Strength: Weak (at least 8 characters, mixing letters and numbers is recommended)'); }
-  else if(s===2){ meter.classList.add('medium'); lbl.textContent=T('強度：中','Strength: Medium'); }
-  else { meter.classList.add('strong'); lbl.textContent=T('強度：強','Strength: Strong'); }
-}
-function clearPwErr(){
-  document.getElementById('pwErr').classList.remove('show');
-  document.getElementById('pw1').classList.remove('invalid');
-  document.getElementById('pw2').classList.remove('invalid');
-}
-function goStep2(){
-  var pw1El=document.getElementById('pw1'), pw2El=document.getElementById('pw2');
-  var pw1=pw1El.value, pw2=pw2El.value;
-  if(!pw1 || pwStrength(pw1)<1 || pw1!==pw2){
-    document.getElementById('pwErr').classList.add('show');
-    pw1El.classList.add('invalid');
-    pw2El.classList.add('invalid');
-    var focusTarget = !pw1 ? pw1El : pw2El;
-    focusTarget.scrollIntoView({behavior:'smooth',block:'center'});
-    setTimeout(function(){ try{ focusTarget.focus(); }catch(err){} },250);
-    return;
-  }
-  pw1El.classList.remove('invalid'); pw2El.classList.remove('invalid');
-  goStep(2);
-}
+$('fPw').addEventListener('input', renderMeter);
+wireToggle($('tg1'),$('fPw')); wireToggle($('tg2'),$('fPw2'));
+$('btnActivate').addEventListener('click', function(){
+  var pw=$('fPw').value, pw2=$('fPw2').value, ok=true;
+  setErr('errPw', (pwLevel(pw)<2) ? T('密碼至少 8 碼，需同時包含英文字母與數字。','Use at least 8 characters with both letters and numbers.') : '');
+  if(pwLevel(pw)<2) ok=false;
+  var mism = pw2!==pw || !pw2; setErr('errPw2', mism ? T('兩次輸入的密碼不一致。','The two passwords do not match.') : ''); if(mism) ok=false;
+  var ag=$('fAgree').checked; $('errAgree').classList.toggle('show', !ag); if(!ag) ok=false;
+  if(!ok) return;
+  PL.activate(R.id); finish('new');
+});
+$('btnMemLogin').addEventListener('click', function(){
+  var v=$('mPw').value; if(!v){ setErr('errMPw', T('請輸入密碼。','Enter your password.')); return; }
+  setErr('errMPw',''); $('memStep1').style.display='none'; $('memStep2').style.display='block';
+});
+$('forgot').addEventListener('click', function(e){ e.preventDefault(); toast(T('已寄出重設密碼信到 ','A reset email was sent to ')+R.email); });
+$('btnBind').addEventListener('click', function(){ PL.activate(R.id); finish('bind'); });
+$('btnDone').addEventListener('click', function(){
+  if(!$('dPw').value){ setErr('errDPw', T('請輸入密碼。','Enter your password.')); return; }
+  setErr('errDPw',''); finish('login');
+});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeTerms(); });
 
-/* ===== 步驟 2：確認資料 ===== */
-function clearErr(id){
-  document.getElementById(id).classList.remove('show');
-  var map={nameErr:'fName',phoneErr:'fPhone',tzErr:'fTz',zoomErr:'fZoom',termsErr:'termsCheck'};
-  var fld=map[id]; if(fld) document.getElementById(fld).classList.remove('invalid');
-}
-function markInvalid(id,errId){
-  document.getElementById(id).classList.add('invalid');
-  document.getElementById(errId).classList.add('show');
-}
-function goStep3(){
-  var ok=true, firstInvalid=null;
-  var name=document.getElementById('fName');
-  if(!name.value.trim()){ markInvalid('fName','nameErr'); ok=false; firstInvalid=firstInvalid||name; }
-  var phone=document.getElementById('fPhone');
-  var digits=phone.value.replace(/[^0-9]/g,'');
-  /* 手機選填（vicki 2026-09-17）：留白放行，有填才檢查格式 */
-  if(phone.value.trim() && digits.length<7){ markInvalid('fPhone','phoneErr'); ok=false; firstInvalid=firstInvalid||phone; }
-  var tz=document.getElementById('fTz');
-  if(!tz.value){ document.getElementById('tzErr').classList.add('show'); tz.classList.add('invalid'); ok=false; firstInvalid=firstInvalid||tz; }
-  var zoom=document.getElementById('fZoom');
-  if(!zoom.value.trim()){ markInvalid('fZoom','zoomErr'); ok=false; firstInvalid=firstInvalid||zoom; }
-  var terms=document.getElementById('termsCheck');
-  if(!terms.checked){ document.getElementById('termsErr').classList.add('show'); ok=false; firstInvalid=firstInvalid||terms; }
-  if(!ok){
-    firstInvalid.scrollIntoView({behavior:'smooth',block:'center'});
-    setTimeout(function(){ try{ firstInvalid.focus(); }catch(err){} },250);
-    return;
-  }
-  goStep(3);
-}
-
-/* ===== 逾期畫面：重寄開通信 ===== */
-function doResend(){
-  var el=document.getElementById('resendEmail');
-  if(!el.value.trim()){ toast(T('請輸入帳號 Email 以重寄開通信','Please enter your account email to resend the activation email')); el.focus(); return; }
-  toast(T('已重新寄出開通信，請至信箱查收','The activation email has been resent — please check your inbox'));
-}
-
-/* ===== 條款 modal ===== */
-function openTerms(){ document.getElementById('termsModalOverlay').classList.add('show'); }
-function closeTerms(){ document.getElementById('termsModalOverlay').classList.remove('show'); }
-
-/* ===== toast ===== */
-function toast(msg){
-  var el=document.getElementById('toastEl');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(window._toastTimer);
-  window._toastTimer=setTimeout(function(){ el.classList.remove('show'); },2400);
-}
-
-/* ===================== 介面語系（20260929 新增）：本頁示範身分固定為 範例大學加盟學生（partners.p02），
-   沒有網址參數或其他示範身分時一律用加盟夥伴的開放語系 ===================== */
-function restrictPartnerLocales(){
-  if (!window.TLI_I18N || !window.TLI_MASTERS) return;
-  var p = TLI_MASTERS.partners.find(function(x){ return x.name.indexOf('範例大學語言中心') >= 0; }) || {};
-  var allowed = (p.uiLocales && p.uiLocales.length) ? p.uiLocales : ['zh-TW','zh-CN','en'];
-  document.querySelectorAll('.tli-i18n-opt').forEach(function(btn){
-    if (allowed.indexOf(btn.getAttribute('data-lang')) === -1) btn.style.display = 'none';
-  });
-  if (allowed.indexOf(TLI_I18N.currentLang()) === -1) TLI_I18N.apply(allowed[0]);
-}
-
-/* ===== 初始化 ===== */
-if (window.TLI_I18N) TLI_I18N.init();
-restrictPartnerLocales();
-renderTop();
-renderSteps();
-renderStep1();
-renderSourceCopy();
-document.getElementById('fName').value=ACCOUNT_NAME;
-document.getElementById('fZoom').value=ACCOUNT_EMAIL;
-buildSelectOptions(document.getElementById('fPhoneCc'),TLI_COUNTRY_CODES,'+886');
-buildSelectOptions(document.getElementById('fTz'),TLI_TIMEZONES,detectTimezoneValue());
-buildSelectOptions(document.getElementById('fLang'),nativeLangOptions(),'');
-if (window.TLI_I18N){
-  TLI_I18N.onRefresh(renderSourceCopy);
-  TLI_I18N.onRefresh(renderSteps);
-  TLI_I18N.onRefresh(function(){ buildSelectOptions(document.getElementById('fLang'), nativeLangOptions(), document.getElementById('fLang').value); });
-  TLI_I18N.onRefresh(function(){ buildSelectOptions(document.getElementById('fPhoneCc'), countryCodeOptions(), document.getElementById('fPhoneCc').value); });
-  TLI_I18N.onRefresh(function(){ buildSelectOptions(document.getElementById('fTz'), timezoneOptions(), document.getElementById('fTz').value); });
-}
+if (window.TLI_I18N){ TLI_I18N.onRefresh(function(){ renderCtx(); renderMeter(); }); TLI_I18N.init(); }
+init();
+PL.xl(document);
 </script>
 </body>
 </html>

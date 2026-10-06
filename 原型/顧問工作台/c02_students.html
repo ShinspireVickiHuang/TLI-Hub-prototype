@@ -343,12 +343,14 @@ html,body{overflow-x:hidden;}
           <option value="" data-i18n="filter.statusAll">狀態：全部</option>
           <option value="學習中" data-i18n="c02.statusActive">學習中</option><option value="停止中" data-i18n="c02.statusPaused">停止中</option><option value="已流失" data-i18n="c02.statusChurned">已流失</option>
         </select>
+        <select id="fSort" onchange="tliFilter()" aria-label="排序" data-i18n-aria-label="c02.sortAria">
+          <option value="" data-i18n="c02.sortDefault">排序：預設</option><option value="name" data-i18n="col.name">姓名</option><option value="plDate" data-i18n="c02.sortPlDate">程度測驗日期（新到舊）</option><option value="plLv" data-i18n="c02.sortPlLv">程度測驗等級（高到低）</option>
+        </select>
         <button type="button" class="btn sm" onclick="tliToggleMoreFilter()" data-i18n="common.moreFilters">更多篩選</button>
       </div>
       <div class="filters" id="moreFilterPanel" style="display:none;">
-        <select id="fTestLevel" onchange="tliFilter()">
-          <option value="" data-i18n="c02.filterTestLevelAll">最新測驗等級：全部</option>
-          <option value="Lv.4">Lv.4</option><option value="Lv.5">Lv.5</option><option value="Lv.6">Lv.6</option><option value="Lv.7">Lv.7</option><option value="N4">N4</option><option value="華語 Lv.3">華語 Lv.3</option><option value="未測驗" data-i18n="c02.notTested">未測驗</option>
+        <select id="fPlacement" onchange="tliFilter()">
+          <option value="" data-i18n="c02.plAll">程度測驗：全部</option><option value="none" data-i18n="c02.notTested">未測驗</option>
         </select>
         <select id="fActivation" onchange="tliFilter()">
           <option value="" data-i18n="c02.filterActivationAll">開通狀態：全部</option>
@@ -359,7 +361,7 @@ html,body{overflow-x:hidden;}
 
       <div class="card">
         <table id="stuTable">
-          <thead><tr><th data-i18n="col.name">姓名</th><th data-i18n="c02.colClass">會員分類</th><th data-i18n="col.campus">校區</th><th data-i18n="c02.colRemainingHours">剩餘課時</th><th data-i18n="c02.colValidUntil">效期</th><th data-i18n="common.status">狀態</th><th data-i18n="c02.colActivationStatus">開通狀態</th><th data-i18n="c02.colLatestTestLevel">最新測驗等級</th></tr></thead>
+          <thead><tr><th data-i18n="col.name">姓名</th><th data-i18n="c02.colClass">會員分類</th><th data-i18n="col.campus">校區</th><th data-i18n="c02.colRemainingHours">剩餘課時</th><th data-i18n="c02.colValidUntil">效期</th><th data-i18n="common.status">狀態</th><th data-i18n="c02.colActivationStatus">開通狀態</th><th data-i18n="c02.colPlacement">程度測驗</th></tr></thead>
           <tbody id="stuBody"></tbody>
         </table>
         <div class="empty" id="emptyRow" style="display:none;" data-i18n="c02.emptyState">沒有符合條件的學生</div>
@@ -392,10 +394,44 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_i18n_dict_consultant.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
+/* ===== 程度測驗資料：讀會員測驗 p15 寫入的 localStorage，另含既有學生的歷史紀錄 ===== */
+var PL_KEY='tliPlacementResults_v1';
+var PL_LV=[1,1,2,3,4,5,6,7,8,9,9];
+var PL_SEED=[
+  {id:'pt_s_wang01', sid:'wang01', lang:'zh', date:'2026-07-18', L:3, R:3, status:'已聯絡'},
+  {id:'pt_s_zhang01', sid:'zhang01', lang:'zh', date:'2026-08-09', L:2, R:2, status:'已聯絡'},
+  {id:'pt_s_yamada01', sid:'yamada01', lang:'zh', date:'2026-06-30', L:4, R:3, status:'已聯絡'},
+  {id:'pt_s_emma01', sid:'emma01', lang:'zh', date:'2026-06-12', L:2, R:1, status:'已聯絡'}
+];
+function plRange(n){
+  return TLI_MASTERS.levelSystems.ranges.filter(function(r){
+    var a=r.levelFrom.replace('Lv.',''), b=r.levelTo.replace('Lv.','');
+    var an=a==='H'?99:+a, bn=b==='H'?99:+b; return r.enabled && n>=an && n<=bn;
+  })[0]||{};
+}
+function plLangName(id){ var l=TLI_MASTERS.teachLangs.filter(function(x){return x.id===id;})[0]; return l?l.name:id; }
+function plAll(){
+  var raw=[]; try{ raw=JSON.parse(localStorage.getItem(PL_KEY))||[]; }catch(e){}
+  var seeds=PL_SEED.map(function(x){
+    var tot=x.L+x.R, n=PL_LV[tot], r=plRange(n);
+    return {id:x.id, studentId:x.sid, name:'', email:'', lang:x.lang, langName:plLangName(x.lang), date:x.date,
+      listening:x.L, listeningMax:5, reading:x.R, readingMax:5, total:tot, totalMax:10,
+      level:'Lv.'+n, levelNum:n, rangeName:r.name, cefr:r.cefr, status:x.status, seed:true};
+  });
+  return raw.concat(seeds);
+}
+function plStatusSet(id,status){
+  try{
+    var raw=JSON.parse(localStorage.getItem(PL_KEY))||[];
+    raw.forEach(function(r){ if(r.id===id) r.status=status; });
+    localStorage.setItem(PL_KEY,JSON.stringify(raw));
+  }catch(e){}
+}
+
 var STUDENTS=[
   {id:'wang01',name:'王大同',cls:'B',campus:'羅斯福',hours:12,expire:'2026-11-20',status:'學習中',testLevel:'Lv.6',activation:'已開通'},
   {id:'chen01',name:'陳美惠',cls:'G',campus:'士林',hours:0,expire:'2026-11-01',status:'學習中',testLevel:'N4',activation:'已開通'},
-  {id:'emma01',name:'Emma Chen',cls:'C',campus:'士林',hours:0,expire:'2026-10-01',status:'停止中',testLevel:'華語 Lv.3',activation:'已開通'},
+  {id:'emma01',name:'Emma Johnson',cls:'C',campus:'士林',hours:0,expire:'2026-10-01',status:'停止中',testLevel:'華語 Lv.3',activation:'已開通'},
   {id:'yamada01',name:'山田太郎',cls:'BIP',campus:'台中',hours:20,expire:'2027-01-15',status:'學習中',testLevel:'Lv.7',activation:'已開通'},
   {id:'li01',name:'李文彬',cls:'B',campus:'羅斯福',hours:5,expire:'2026-08-01',status:'學習中',testLevel:'Lv.5',activation:'已開通'},
   {id:'zhang01',name:'張雅婷',cls:'G',campus:'高雄',hours:8,expire:'2026-12-10',status:'學習中',testLevel:'Lv.4',activation:'已開通'},
@@ -413,15 +449,27 @@ function activationBadge(a){
   if(a==='未開通') return '<span class="badge warn">'+T02('未開通','Not Activated')+'</span>';
   return '<span class="badge muted">'+T02('已開通','Activated')+'</span>';
 }
+function plOf(s){ return PL_ALL.filter(function(r){return (r.studentId&&r.studentId===s.id)||(r.id===s.id);}).sort(function(a,b){return b.date.localeCompare(a.date);})[0]||null; }
+var PL_RANGE_EN={'初級':'Beginner','中級':'Intermediate','中高級':'Upper-intermediate','高級':'Advanced'};
+function plRangeName(n){ return T02(n, PL_RANGE_EN[n]||n); }
+function plCell(p,s){
+  if(!p){
+    /* 沒有官網程度測驗紀錄時，沿用該學生既有的測驗等級（例如外部檢定成績） */
+    if(s && s.testLevel && s.testLevel!=='未測驗') return '<b>'+s.testLevel+'</b>';
+    return '<span class="badge muted">'+T02('未測驗','Not Tested')+'</span>';
+  }
+  return '<b>'+p.level+'</b> '+plRangeName(p.rangeName)+'<div style="font-size:11.5px;color:var(--gray-500)">'+p.date+'</div>';
+}
 function renderStudents(list){
   var body=document.getElementById('stuBody');
   body.innerHTML=list.map(function(s){
+    var lead=!!s.lead;
     return '<tr class="clickable" onclick="location.href=\'c03_student_detail.html?id='+s.id+'\'">'+
-      '<td>'+s.name+'</td><td>'+classBadge(s.cls)+'</td><td>'+T02(s.campus+'校區',(CAMPUS_EN_C02[s.campus]||s.campus)+' Campus')+'</td>'+
-      '<td>'+s.hours+T02(' 堂',' lessons')+'</td><td>'+s.expire+(s.expire<'2026-08-25'?' <span class="badge warn" style="background:#fff4e5;color:#b54708;">'+T02('已過期','Expired')+'</span>':'')+'</td>'+
-      '<td>'+statusBadge(s.status)+'</td>'+
-      '<td>'+activationBadge(s.activation)+'</td>'+
-      '<td>'+((!s.testLevel||s.testLevel==='未測驗')?T02('未測驗','Not Tested'):s.testLevel)+'</td></tr>';
+      '<td>'+s.name+(lead?'<div style="font-size:11.5px;color:var(--gray-500)">'+(s.email||'')+'</div>':'')+'</td><td>'+(lead?'—':classBadge(s.cls))+'</td><td>'+(lead?'—':T02(s.campus+'校區',(CAMPUS_EN_C02[s.campus]||s.campus)+' Campus'))+'</td>'+
+      '<td>'+(lead?'—':s.hours+T02(' 堂',' lessons'))+'</td><td>'+(lead?'—':s.expire+(s.expire<'2026-08-25'?' <span class="badge warn" style="background:#fff4e5;color:#b54708;">'+T02('已過期','Expired')+'</span>':''))+'</td>'+
+      '<td>'+(lead?'<span class="badge b">'+T02('潛在學員','Prospect')+'</span>':statusBadge(s.status))+'</td>'+
+      '<td>'+(lead?'—':activationBadge(s.activation))+'</td>'+
+      '<td>'+plCell(s.pl,s)+'</td></tr>';
   }).join('');
   document.getElementById('emptyRow').style.display=list.length?'none':'block';
 }
@@ -430,7 +478,7 @@ function tliToggleMoreFilter(){
   el.style.display = (el.style.display==='none') ? 'flex' : 'none';
 }
 function renderActiveFilters(){
-  var map=[['fClass','會員分類'],['fCampus','校區'],['fStatus','狀態'],['fTestLevel','最新測驗等級'],['fActivation','開通狀態']];
+  var map=[['fClass','會員分類'],['fCampus','校區'],['fStatus','狀態'],['fPlacement','程度測驗'],['fActivation','開通狀態']];
   var tags=map.filter(function(m){ return document.getElementById(m[0]).value; }).map(function(m){
     var el=document.getElementById(m[0]);
     var label=el.options[el.selectedIndex].textContent;
@@ -439,16 +487,35 @@ function renderActiveFilters(){
   });
   document.getElementById('activeFilters').innerHTML=tags.join('');
 }
+function buildPlOptions(){
+  var sel=document.getElementById('fPlacement'), cur=sel.value;
+  var base=[['',T02('程度測驗：全部','Placement test: All')],['none',T02('未測驗','Not Tested')]];
+  var rs=TLI_MASTERS.levelSystems.ranges.filter(function(r){return r.enabled;}).map(function(r){return [r.name, plRangeName(r.name)+'（'+r.levelFrom+(r.levelFrom!==r.levelTo?'–'+r.levelTo.replace('Lv.',''):'')+'）'];});
+  sel.innerHTML=base.concat(rs).map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>';}).join('');
+  sel.value=cur;
+}
 function tliFilter(){
-  var q=document.getElementById('q').value.trim();
+  buildPlOptions();
+  var q=document.getElementById('q').value.trim().toLowerCase();
   var fc=document.getElementById('fClass').value;
   var fp=document.getElementById('fCampus').value;
   var fs=document.getElementById('fStatus').value;
-  var ft=document.getElementById('fTestLevel').value;
   var fa=document.getElementById('fActivation').value;
-  var list=STUDENTS.filter(function(s){
-    return (!q||s.name.indexOf(q)>-1)&&(!fc||s.cls===fc)&&(!fp||s.campus===fp)&&(!fs||s.status===fs)&&(!ft||(s.testLevel||'未測驗')===ft)&&(!fa||s.activation===fa);
+  var fpl=document.getElementById('fPlacement').value;
+  var sort=document.getElementById('fSort').value;
+  var list=ROWS.filter(function(s){
+    if(q && (s.name+' '+(s.email||'')).toLowerCase().indexOf(q)<0) return false;
+    if(fc && s.cls!==fc) return false;
+    if(fp && s.campus!==fp) return false;
+    if(fs && s.status!==fs) return false;
+    if(fa && s.activation!==fa) return false;
+    if(fpl==='none' && s.pl) return false;
+    if(fpl && fpl!=='none' && fpl!=='pending' && !(s.pl && s.pl.rangeName===fpl)) return false;
+    return true;
   });
+  if(sort==='name') list.sort(function(a,b){return a.name.localeCompare(b.name,'zh-Hant');});
+  if(sort==='plDate') list.sort(function(a,b){return (b.pl?b.pl.date:'').localeCompare(a.pl?a.pl.date:'');});
+  if(sort==='plLv') list.sort(function(a,b){return (b.pl?b.pl.levelNum:-1)-(a.pl?a.pl.levelNum:-1);});
   renderActiveFilters();
   renderStudents(list);
 }
@@ -459,7 +526,11 @@ document.getElementById('fCampus').innerHTML+=TLI_MASTERS.campuses.filter(functi
 }).join('');
 // 會員分類下拉改讀主檔 memberTiers（與學生 cls 欄位代碼一致）
 document.getElementById('fClass').innerHTML+=TLI_MASTERS.memberTiers.map(function(t){return '<option value="'+t.code+'">'+t.code+'</option>';}).join('');
-renderStudents(STUDENTS);
+/* 程度測驗是會員限定：紀錄只來自會員（已登入才能測），不再有訪客留 Email 的潛在學員列 */
+var PL_ALL=plAll();
+var ROWS=STUDENTS.slice();
+ROWS.forEach(function(s){ s.pl=plOf(s); });
+tliFilter();
 
 function tliToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(function(){t.classList.remove('show');},2600);}
 function tliToggleAI(){

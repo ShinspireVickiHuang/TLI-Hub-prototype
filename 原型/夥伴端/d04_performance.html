@@ -118,6 +118,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 @media (max-width:479px){
 .statgrid{grid-template-columns:1fr;}
 }
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -152,7 +153,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1 data-i18n="nav_d.performance">業績與返佣</h1><div class="desc" data-i18n="desc.d04Performance">本年度累積業績、返佣級距與試算，以及歷年結算紀錄。本頁是對帳單，返佣款項一律由總部依匯款方式撥付，本頁不受理任何線上申領。</div></div>
+<div><h1 style="display:inline-block" data-i18n="nav_d.performance">業績與返佣</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span><div class="desc" data-i18n="desc.d04Performance">本年度累積業績、返佣級距與試算，以及歷年結算紀錄。本頁是對帳單，返佣款項一律由總部依匯款方式撥付，本頁不受理任何線上申領。</div></div>
 </div>
 
 <div class="card">
@@ -164,7 +165,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 
 <div class="card">
 <h2 data-i18n="h2.rebateTierTable">返佣級距表</h2>
-<div class="cardesc" data-i18n="desc.rebateTierTable">示範三級，依本年度採購金額判定，目前落點以標色列標示。</div>
+<div class="cardesc" data-i18n="desc.rebateTierTable">三級，依本年度採購金額判定，目前落點以標色列標示。</div>
 <div class="tablewrap"><table id="tierTable"></table></div>
 </div>
 
@@ -212,7 +213,7 @@ restrictPartnerLocales();
 var MY_DIST_NAME = '環球遊學顧問（日本）';
 var MY_DIST_CODE = 'DIST-JP03';
 var TODAY_STR = '2026-09-28';
-/* 訂購方案一律取自 TLI_MASTERS.packages（pk1–pk7 中的上架方案），單價＝方案 C 對象牌價 × 80%（示範專案折讓） */
+/* 訂購方案一律取自 TLI_MASTERS.packages（pk1–pk6 中的上架方案），單價＝方案 C 對象牌價 × 80%（專案折讓） */
 var ORDERS = [
  {id:'PO-2026-001', orderDate:'2026-03-02', plan:'學期班 Lv.5–8 一期方案', qty:20, unitPrice:28800, totalAmount:576000,
   periodFrom:'2026-04-06', periodTo:'2026-05-01', rosterFilled:20, rosterTotal:20, delivered:true},

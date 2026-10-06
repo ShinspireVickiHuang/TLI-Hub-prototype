@@ -439,7 +439,8 @@ var pendingSaveData = null;
 var pendingEditCode = null;
 
 /* ---- 示範用：已成立訂單數（原型無真實訂單關聯資料，僅供示範儲存確認情境用）---- */
-var DEMO_ORDER_COUNTS = {'PRJ-B2C-TW':128, 'PRJ-ENT-JP':34, 'PRJ-EDU-AZU':56, 'PRJ-RESELL-SEA':0};
+var DEMO_ORDER_COUNTS = {'PRJ-B2C-TW':128, 'PRJ-ENT-JP':34, 'PRJ-EDU-AZU':0, 'PRJ-RESELL-SEA':0};
+function isProjCh(p){ return !!(p.channels && p.channels.project); }
 function orderCountOf(p){ return (typeof p.orderCount === 'number') ? p.orderCount : 0; }
 
 /* ---- 示範資料轉接（20260928 新增，唯讀轉換，不改共用主檔結構）----
@@ -452,7 +453,7 @@ var LEGACY_OWNER_SEED = {'PRJ-B2C-TW':'林思穎','PRJ-ENT-JP':'陳建宏','PRJ-
 var LEGACY_LASTMOD = {
   'PRJ-B2C-TW':{by:'林思穎', at:'2026-09-20 14:32'},
   'PRJ-ENT-JP':{by:'陳建宏', at:'2026-09-18 09:05'},
-  'PRJ-EDU-AZU':{by:'王雅婷', at:'2026-08-30 16:47'},
+  'PRJ-EDU-AZU':{by:'王雅婷', at:'2026-10-06 10:20'},
   'PRJ-RESELL-SEA':{by:'張哲瑋', at:'2026-09-25 11:10'}
 };
 function guessRuleSetId(oldText, scope){
@@ -467,7 +468,7 @@ function guessRuleSetId(oldText, scope){
     var catIds = (oldSell.categories || []).map(function(c){ return LEGACY_CATEGORY_MAP[c]; }).filter(Boolean);
     var pkgIds = (oldSell.items || []).map(function(i){ return LEGACY_PACKAGE_MAP[i]; }).filter(Boolean);
     p.owner = p.owner || LEGACY_OWNER_SEED[p.code] || '';
-    p.sell = {categoryIds:catIds, productIds:[], packageIds:pkgIds, allPackages:false};
+    p.sell = {categoryIds:catIds, productIds:(oldSell.productIds || []).slice(), packageIds:pkgIds, allPackages:false};
     p.ruleOnlineId = guessRuleSetId(p.rulesOnline && p.rulesOnline.leave, 'online');
     p.ruleOnsiteId = guessRuleSetId(p.rulesOffline && p.rulesOffline.leave, 'onsite');
     delete p.version; /* 20260929：版本功能整個拿掉 */
@@ -512,7 +513,7 @@ function detailHtml(p){
      [TLI_I18N.t('專案代號','Project Code'), p.code], [TLI_I18N.t('專案名稱','Project Name'), p.name],
      [TLI_I18N.t('負責人','Owner'), p.owner || TLI_I18N.t('未設定','Not set')],
      [TLI_I18N.t('開始與結束日期','Start & End Date'), p.from + ' ～ ' + p.to], [TLI_I18N.t('狀態','Status'), TLI_I18N.t(p.status, {en:(p.status==='已上線'?'Active':(p.status==='草稿'?'Draft':'Ended'))})],
-     [TLI_I18N.t('已成立訂單數','Orders Created'), TLI_I18N.t(orderCountOf(p) + ' 筆', orderCountOf(p) + ' order(s)')]]},
+     ].concat(isProjCh(p) ? [] : [[TLI_I18N.t('已成立訂單數','Orders Created'), TLI_I18N.t(orderCountOf(p) + ' 筆', orderCountOf(p) + ' order(s)')]])},
    {g:'2', t:TLI_I18N.t('賣什麼','What to Sell'), rows:[[TLI_I18N.t('銷售內容','Sales Content'), sellSummaryText(p)]]},
    {g:'3', t:TLI_I18N.t('使用規則','Usage Rules'), rows:[
      [TLI_I18N.t('線上課程規則組','Online Course Rule Set'), ruleSetName(p.ruleOnlineId)],
@@ -562,7 +563,7 @@ function renderPrjTable(){
     tr.className = 'rowlink' + (open ? ' opened' : '');
     tr.setAttribute('onclick', 'toggleRow(\'' + p.code + '\')');
     tr.innerHTML = '<td>' + escHtml(p.code) + '</td><td>' + escHtml(p.name) + '</td>' +
-      '<td>' + escHtml(p.owner || '—') + '</td><td>' + TLI_I18N.t(orderCountOf(p) + ' 筆', orderCountOf(p) + ' order(s)') + '</td>' +
+      '<td>' + escHtml(p.owner || '—') + '</td><td>' + (isProjCh(p) ? '－' : TLI_I18N.t(orderCountOf(p) + ' 筆', orderCountOf(p) + ' order(s)')) + '</td>' +
       '<td>' + p.from + ' ～ ' + p.to + '</td><td>' + statusBadge(p.status) + '</td>' +
       '<td>' + (open ? TLI_I18N.t('收合','Collapse') : TLI_I18N.t('展開','Expand')) + '</td>';
     t.appendChild(tr);
@@ -921,7 +922,7 @@ document.addEventListener('click', function(){ closePanel('suMenu'); });
 
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
-  {t:'專案「大學加盟．美國 範例大學」即將於下月開學，請確認教材授權包已備齊', en:'Project \u201c大學加盟．美國 範例大學\u201d starts next month \u2014 please confirm the material license package is ready', time:'25 分鐘前', timeEn:'25 minutes ago', unread:true},
+  {t:'專案「Gateway 專案合作．美國 範例州立大學」預計 2027 年 2 月開課，請確認班級與名單已建立', en:'Project \u201cGateway 專案合作．美國 範例州立大學\u201d is scheduled to start in February 2027 \u2014 please confirm classes and rosters are set up', time:'25 分鐘前', timeEn:'25 minutes ago', unread:true},
   {t:'專案「個人線上課．東南亞經銷」仍為草稿，尚未指派合作夥伴以外的內容', en:'Project \u201c個人線上課．東南亞經銷\u201d is still a draft \u2014 content beyond the partner has not been assigned', time:'2 小時前', timeEn:'2 hours ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}

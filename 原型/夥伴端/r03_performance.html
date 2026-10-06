@@ -169,6 +169,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 @media (max-width:1100px){.statgrid5{grid-template-columns:1fr 1fr;}}
 @media (max-width:479px){.statgrid5{grid-template-columns:1fr;}}
 
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -202,7 +203,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1 id="pageH1">業績與佣金</h1><div class="desc" id="pageDesc"></div></div>
+<div><h1 style="display:inline-block" id="pageH1">業績與佣金</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span><div class="desc" id="pageDesc"></div></div>
 <div><button class="btn ghost" onclick="exportCsv()" data-i18n="btn.exportCsv">匯出 CSV</button></div>
 </div>
 
@@ -221,7 +222,6 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <option value="all" data-i18n="common.all">全部</option>
 <option value="b2c" data-i18n="type.b2c">B2C 訂單</option>
 <option value="b2b" data-i18n="type.b2b">B2B 企業合約</option>
-<option value="edu" data-i18n="type.edu">B2B 機構授權合約</option>
 </select>
 </div>
 <button type="button" class="clearlink" onclick="toggleMoreFilter()" data-i18n="btn.moreFilters2">更多篩選</button>
@@ -291,7 +291,6 @@ var ORDERS = [
  {id:'CTR-26090004', date:'2026-09-08', type:'b2b', cust:'電子零組件製造商（員工約 120 人）', plan:'企業培訓合約・時數池 300 小時', amount:720000, paid:360000, pay:'部分收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26090019', date:'2026-09-05', type:'b2c', cust:'學生 B07', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'爭議中', channel:'Stripe'},
  {id:'ORD-26090008', date:'2026-09-02', type:'b2c', cust:'學生 A12', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'CTR-26090001', date:'2026-09-01', type:'edu', cust:'北部私立大學・華語中心', plan:'機構授權合約・授權費＋權利金', amount:460000, paid:0, pay:'未收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26080042', date:'2026-08-28', type:'b2c', cust:'學生 C03', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26080035', date:'2026-08-24', type:'b2c', cust:'學生 B11', plan:'一對一課程包 20 堂', amount:48000, paid:0,     pay:'退款',     basis:'轉介碼', attr:'已解除', channel:'藍新金流'},
  {id:'CTR-26080006', date:'2026-08-20', type:'b2b', cust:'精密機械製造商（員工約 340 人）', plan:'企業培訓合約・預付款倒扣制', amount:1200000, paid:1200000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
@@ -302,17 +301,16 @@ var ORDERS = [
  {id:'ORD-26070033', date:'2026-07-22', type:'b2c', cust:'學生 B04', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26070027', date:'2026-07-18', type:'b2c', cust:'學生 A05', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
  {id:'ORD-26070011', date:'2026-07-09', type:'b2c', cust:'學生 D06', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'CTR-26060002', date:'2026-06-25', type:'edu', cust:'中部科技大學・應用外語系', plan:'機構授權合約・授權費＋權利金', amount:320000, paid:320000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26060019', date:'2026-06-16', type:'b2c', cust:'學生 C11', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26060007', date:'2026-06-04', type:'b2c', cust:'學生 A21', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
  {id:'ORD-26050024', date:'2026-05-20', type:'b2c', cust:'學生 B15', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
  {id:'CTR-26050001', date:'2026-05-12', type:'b2b', cust:'金融服務業者（員工約 210 人）', plan:'企業培訓合約・時數池 200 小時', amount:500000, paid:500000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
  {id:'ORD-26040016', date:'2026-04-18', type:'b2c', cust:'學生 D09', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'}
 ];
-var TYPE_LABEL = {b2c:'B2C 訂單', b2b:'B2B 企業合約', edu:'B2B 機構授權合約'};
-var TYPE_LABEL_EN = {b2c:'B2C Order', b2b:'B2B Corporate Contract', edu:'B2B Institutional License Contract'};
-var TYPE_SHORT = {b2c:'B2C', b2b:'B2B 企業', edu:'B2B 機構'};
-var TYPE_SHORT_EN = {b2c:'B2C', b2b:'B2B Corp', edu:'B2B Institution'};
+var TYPE_LABEL = {b2c:'B2C 訂單', b2b:'B2B 企業合約'};
+var TYPE_LABEL_EN = {b2c:'B2C Order', b2b:'B2B Corporate Contract'};
+var TYPE_SHORT = {b2c:'B2C', b2b:'B2B 企業'};
+var TYPE_SHORT_EN = {b2c:'B2C', b2b:'B2B Corp'};
 /* 結算紀錄由總部 a20 產生並標記，夥伴端唯讀 */
 /* 金額＝原始成交已收款金額 × P48_RATE（10%），與 a20 p12 commRate 定案一致重算 */
 var SETTLEMENTS = [
@@ -536,7 +534,7 @@ function renderTrend(){
 
 /* ================= 彙總表 ================= */
 function renderLineTable(rows){
-  var order = ['b2c','b2b','edu'];
+  var order = ['b2c','b2b'];
   var t = document.getElementById('lineTable');
   t.innerHTML = '<tr><th>'+T('產品分類','Product Category')+'</th><th class="num">'+T('筆數','Count')+'</th><th class="num">'+T('成交金額','Deal Amount')+'</th><th class="num">' + M().col4 + '</th><th class="num">' + M().col5 + '</th></tr>';
   var tot = {c:0,a:0,p:0,m:0};

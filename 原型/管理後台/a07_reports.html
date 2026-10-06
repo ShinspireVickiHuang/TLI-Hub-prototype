@@ -296,7 +296,7 @@ function closeSidebar(){
 }
 /* ---- 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ---- */
 var NOTIFS = [
-  {t:'加盟夥伴「範例大學語言中心」本期權利金結算單已產出，待對帳', en:'Franchise partner \u201cAZ 大學語言中心\u201d this period\u2019s royalty settlement statement has been generated, pending reconciliation', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
+  {t:'代理商「環宇教育顧問」本期佣金已試算完成，待對帳', en:'Agent \u201c環宇教育顧問\u201d commission for this period has been calculated, pending reconciliation', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由行銷主管發佈', en:'Content Management: homepage hero copy has been published by the marketing manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
@@ -404,8 +404,8 @@ function showDetailModal(title, kvPairs){
 /* 報表名稱中文常數固定當內部索引用（onclick 參數／篩選比對），顯示與 toast 一律另外經 TLI_I18N.t() 轉語言 */
 var REPORT_NAME_EN = {
   '依專案':'By Project', '依合作模式':'By Cooperation Mode', '依產品分類':'By Product Category', '依市場':'By Market',
-  '夥伴業績總表':'Partner Performance Summary', '加盟權利金':'Franchise Royalty', '經銷返佣':'Distributor Rebate', '代理佣金':'Agent Commission',
-  '企業使用狀況':'Enterprise Usage', '學校（加盟）使用狀況':'School (Franchise) Usage',
+  '夥伴業績總表':'Partner Performance Summary', '代理銷售報表':'Agent Sales Report', '經銷返傭試算':'Distributor Rebate Estimate',
+  '企業使用狀況':'Enterprise Usage', '專案合作使用狀況':'Project Partnership Usage',
   '教師授課統計':'Teacher Teaching Stats', '學員學習進度':'Student Learning Progress', '出席與請假':'Attendance & Leave',
   '收款彙總':'Collection Summary', '開票統計':'Invoice Stats', '應收帳齡':'Receivables Aging'
 };
@@ -433,38 +433,45 @@ function modeSelectHtml(id, onchange, selected){
    仍留在本頁；但名稱／代號／市場／型態一律反查主檔，確保跟 a21／a20／a02 是同一份名單。 */
 var PROJECT_STATS = {
   'PRJ-B2C-TW': {orders:482, revenue:3120000, students:410},
-  'PRJ-ENT-JP': {orders:36, revenue:2860000, students:520},
-  'PRJ-EDU-AZU': {orders:158, revenue:1450000, students:158},
-  'PRJ-RESELL-SEA': {orders:64, revenue:980000, students:64}
+  'PRJ-ENT-JP': {orders:39, revenue:905400, students:520},
+  'PRJ-RESELL-SEA': {orders:6, revenue:1160000, students:64}
 };
 /* 合作模式中文常數固定當內部值／篩選比對用，顯示時一律另外經 TLI_I18N.t() 轉語言，避免翻譯影響篩選邏輯 */
 function projectModeLabel(pr){
   var ch = pr.channels || {};
   var labels = [];
   if (ch.direct) labels.push(TLI_I18N.t('直營','Direct'));
-  if (ch.franchise) labels.push(TLI_I18N.t('加盟','Franchise'));
+  if (ch.project) labels.push(TLI_I18N.t('專案合作','Project Partnership'));
   if (ch.distributor) labels.push(TLI_I18N.t('經銷','Distributor'));
   if (ch.agent) labels.push(TLI_I18N.t('代理','Agent'));
   return labels.join('／') || TLI_I18N.t('未設定','Not Set');
 }
-var PROJECTS = TLI_MASTERS.projects.map(function(pr){
+/* 專案合作型態的專案不經手金流，不列入任何金額報表 */
+var PROJECTS = TLI_MASTERS.projects.filter(function(pr){ return !(pr.channels && pr.channels.project); }).map(function(pr){
   var s = PROJECT_STATS[pr.code] || {orders:0, revenue:0, students:0};
   return {code:pr.code, name:pr.name, market:pr.market, channels:pr.channels, orders:s.orders, revenue:s.revenue, students:s.students};
 });
-var MARKETS = TLI_MASTERS.projects.map(function(p){return p.market;}).filter(function(v,i,a){return a.indexOf(v)===i;});
-var MODES = ['直營','加盟','經銷','代理'];
-var MODE_EN = {'直營':'Direct','加盟':'Franchise','經銷':'Distributor','代理':'Agent'};
-var PARTNER_TYPE_LABEL = {franchise:'加盟', distributor:'經銷', agent:'代理'};
-var PARTNERS = TLI_MASTERS.partners.map(function(p){ return {id:p.id, name:p.name, type:p.type, country:p.country}; });
+var MARKETS = PROJECTS.map(function(p){return p.market;}).filter(function(v,i,a){return a.indexOf(v)===i;});
+var MODES = ['直營','經銷','代理'];
+var MODE_EN = {'直營':'Direct','經銷':'Distributor','代理':'Agent','專案合作':'Project Partnership'};
+var PARTNER_TYPE_LABEL = {project:'專案合作', distributor:'經銷', agent:'代理'};
+/* 金額報表只收代理與經銷；專案合作不經手金流，不列入 */
+var PARTNERS = TLI_MASTERS.partners.filter(function(p){ return p.type==='agent' || p.type==='distributor'; }).map(function(p){ return {id:p.id, name:p.name, type:p.type, country:p.country}; });
 var CATEGORIES = TLI_MASTERS.productCategories.map(function(c){ return {id:c.id, name:c.name}; });
+var CATEGORY_EN = {c_1to1:'1-on-1 Courses', c_group:'Group Live Classes', c_selfpace:'Self-Paced Courses', c_event:'Events', c_chat:'Mandarin Lounge & Conversation Booking'};
+function catLabel(id, name){ return TLI_I18N.t(name, CATEGORY_EN[id]||name); }
 
 /* ================= 銷售群 ================= */
 function render_sales_by_project(){
   var mkSel = document.getElementById('f_market');
   var mk = mkSel ? mkSel.value : '';
   var rows = PROJECTS.filter(function(p){ return !mk || p.market===mk; });
-  var totalRev = rows.reduce(function(s,p){return s+p.revenue;},0);
-  var totalOrd = rows.reduce(function(s,p){return s+p.orders;},0);
+  /* 未綁定專案的夥伴訂單（代理 p09／p10／p12、經銷 p07／p11）：訂單 15 筆、NT$ 1,665,600；
+     加上三個專案後總額對到「依合作模式」合計 NT$ 6,851,000 */
+  var OTHER_ROW = {orders:15, revenue:1665600};
+  var showOther = !mk;
+  var totalRev = rows.reduce(function(s,p){return s+p.revenue;},0) + (showOther?OTHER_ROW.revenue:0);
+  var totalOrd = rows.reduce(function(s,p){return s+p.orders;},0) + (showOther?OTHER_ROW.orders:0);
   var totalStu = rows.reduce(function(s,p){return s+p.students;},0);
   var html = '<div class="filterbar">'+periodFilterHtml('f_p','2026-07-01','2026-09-30')+marketSelectHtml('f_market','render_sales_by_project',mk)+
     '<button class="btn ghost" onclick="reportRequery(\'依專案\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
@@ -476,23 +483,22 @@ function render_sales_by_project(){
       var modeLabel = projectModeLabel(p);
       return [p.code, p.name, p.market, modeLabel, p.orders, fmtNT(p.revenue), p.students,
         '<span class="linklike" onclick=\'showDetailModal("'+p.name+'",[["'+TLI_I18N.t('專案代號','Project Code')+'","'+p.code+'"],["'+TLI_I18N.t('市場','Market')+'","'+p.market+'"],["'+TLI_I18N.t('合作模式','Cooperation Mode')+'","'+modeLabel+'"],["'+TLI_I18N.t('成交金額','Deal Amount')+'","'+fmtNT(p.revenue)+'"],["'+TLI_I18N.t('學員數','Students')+'","'+p.students+' '+TLI_I18N.t('人','ppl')+'"]])\'>'+TLI_I18N.t('看明細','View Details')+'</span>'];
-    }),
+    }).concat(showOther ? [['－', TLI_I18N.t('未綁定專案的夥伴訂單','Partner orders not bound to a project'), '－', '－', OTHER_ROW.orders, fmtNT(OTHER_ROW.revenue), '－', '']] : []),
     [TLI_I18N.t('合計','Total'),'','','', totalOrd, fmtNT(totalRev), totalStu, '']
   );
   document.getElementById('reportContent').innerHTML = html;
 }
 var SALES_BY_MODE = [
  {mode:'直營', revenue:3980000},
- {mode:'加盟', revenue:1450000},
- {mode:'經銷', revenue:980000},
- {mode:'代理', revenue:2860000}
+ {mode:'經銷', revenue:2680000},
+ {mode:'代理', revenue:191000}
 ];
 function render_sales_by_mode(){
   var total = SALES_BY_MODE.reduce(function(s,m){return s+m.revenue;},0);
   var html = '<div class="filterbar">'+periodFilterHtml('f_m2','2026-07-01','2026-09-30')+
     '<button class="btn ghost" onclick="reportRequery(\'依合作模式\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
     '<button class="btn ghost" onclick="reportExport(\'依合作模式\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('四種合作型態決定誰招生、誰收錢；直營與代理走線上收款，加盟與經銷走線下匯款。','The four cooperation modes determine who enrolls students and who collects payment; Direct and Agent use online payment, Franchise and Distributor use offline remittance.')+'</div>';
+  html += '<div class="subhint">'+TLI_I18N.t('三種合作型態決定誰招生、誰收錢；直營與代理走線上收款，經銷走線下匯款。','The three cooperation modes determine who enrolls students and who collects payment; Direct and Agent use online payment, Distributor uses offline remittance.')+'</div>';
   html += tableHtml(trH([['合作模式','Cooperation Mode'],['成交金額','Deal Amount'],['佔比','Share']]), SALES_BY_MODE.map(function(m){
     return [TLI_I18N.t(m.mode, MODE_EN[m.mode]), fmtNT(m.revenue), Math.round(m.revenue/total*100)+'%'];
   }), [TLI_I18N.t('合計','Total'), fmtNT(total), '100%']);
@@ -500,7 +506,7 @@ function render_sales_by_mode(){
 }
 var SALES_BY_CATEGORY = [
  {id:'c_1to1', revenue:2650000},
- {id:'c_group', revenue:1980000},
+ {id:'c_group', revenue:2221000},
  {id:'c_selfpace', revenue:1120000},
  {id:'c_event', revenue:320000},
  {id:'c_chat', revenue:540000}
@@ -513,15 +519,15 @@ function render_sales_by_category(){
   html += '<div class="subhint">'+TLI_I18N.t('對齊產品分類（a02）目前固定的 5 個分類。','Aligned with Product Categories (a02): currently 5 fixed categories.')+' <a class="manage-link" href="a02_products.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
   html += tableHtml(trH([['分類','Category'],['銷售金額','Sales Amount'],['佔比','Share']]), SALES_BY_CATEGORY.map(function(c){
     var cat = CATEGORIES.find(function(x){return x.id===c.id;});
-    return [cat.name, fmtNT(c.revenue), Math.round(c.revenue/total*100)+'%'];
+    return [catLabel(cat.id, cat.name), fmtNT(c.revenue), Math.round(c.revenue/total*100)+'%'];
   }), [TLI_I18N.t('合計','Total'), fmtNT(total), '100%']);
   document.getElementById('reportContent').innerHTML = html;
 }
 var SALES_BY_MARKET = [
- {market:'台灣', modeLabel:'直營', orders:482, revenue:3120000},
- {market:'日本', modeLabel:'直營／代理', orders:36, revenue:2860000},
- {market:'東南亞', modeLabel:'經銷', orders:64, revenue:980000},
- {market:'美國', modeLabel:'加盟', orders:158, revenue:1450000}
+ {market:'台灣', modeLabel:'直營／代理', orders:486, revenue:3181000},
+ {market:'日本', modeLabel:'直營／代理／經銷', orders:42, revenue:1825400},
+ {market:'東南亞', modeLabel:'經銷', orders:6, revenue:1160000},
+ {market:'其他地區', modeLabel:'經銷／代理', orders:8, revenue:684600}
 ];
 /* 台灣市場（直營）校區拆分：校區清單改讀共用主檔 TLI_MASTERS.campuses；權重與金額為示範數字，非實際數字，
    合計會對到「依市場」表台灣列的成交金額，供校區維度的示範拆解 */
@@ -543,7 +549,7 @@ function render_sales_by_market(){
   html += tableHtml(trH([['市場','Market'],['主要合作模式','Primary Cooperation Mode'],['訂單數','Orders'],['成交金額','Deal Amount']]), rows.map(function(m){
     /* modeLabel 內部值固定用原始中文（篩選比對用），顯示時逐段翻譯 */
     var modeDisplay = m.modeLabel.split('／').map(function(x){ return TLI_I18N.t(x, MODE_EN[x] || x); }).join('／');
-    return [m.market, modeDisplay, m.orders, fmtNT(m.revenue)];
+    return [m.market==='其他地區' ? TLI_I18N.t('其他地區','Other Regions') : m.market, modeDisplay, m.orders, fmtNT(m.revenue)];
   }), [TLI_I18N.t('合計','Total'),'', totalOrd, fmtNT(total)]);
   if (rows.some(function(m){ return m.market==='台灣'; })){
     var campusTotal = CAMPUS_SALES_TW.reduce(function(s,c){return s+c.revenue;},0);
@@ -555,7 +561,7 @@ function render_sales_by_market(){
 
 /* ================= 合作夥伴群 ================= */
 function partnerAmountLabel(type){
-  return type==='agent' ? TLI_I18N.t('應付佣金','Commission Payable') : (type==='franchise' ? TLI_I18N.t('應收權利金','Royalty Receivable') : TLI_I18N.t('應收貨款','Payment Receivable'));
+  return type==='agent' ? TLI_I18N.t('應付佣金','Commission Payable') : TLI_I18N.t('應收貨款','Payment Receivable');
 }
 function partnerPerfStats(idx){
   var r1=seededRand(idx*31+7), r2=seededRand(idx*37+11), r3=seededRand(idx*41+13);
@@ -568,94 +574,206 @@ function partnerPerfStats(idx){
 function render_partner_performance(){
   var typeSel = document.getElementById('f_ptype');
   var mode = typeSel ? typeSel.value : '';
-  var typeMap = {'直營':'', '加盟':'franchise','經銷':'distributor','代理':'agent'};
+  var typeMap = {'直營':'', '經銷':'distributor','代理':'agent'};
   var rows = !mode ? PARTNERS.slice() : PARTNERS.filter(function(p){ return p.type===typeMap[mode]; });
   var html = '<div class="filterbar">'+periodFilterHtml('f_pp','2026-07-01','2026-09-30')+modeSelectHtml('f_ptype','render_partner_performance',mode)+
     '<button class="btn ghost" onclick="reportRequery(\'夥伴業績總表\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
     '<button class="btn ghost" onclick="reportExport(\'夥伴業績總表\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('對齊合作夥伴管理（a20）目前 10 家夥伴：4 加盟／3 經銷／3 代理；直營由 TLI 自營，不列於本表。','Aligned with Partner Management (a20): currently 10 partners — 4 Franchise / 3 Distributor / 3 Agent; Direct is operated by TLI itself and not listed here.')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
+  var nAg=PARTNERS.filter(function(p){return p.type==='agent';}).length, nDi=PARTNERS.filter(function(p){return p.type==='distributor';}).length;
+  html += '<div class="subhint">'+TLI_I18N.t('對齊合作夥伴管理（a20）：'+nDi+' 家經銷／'+nAg+' 家代理；直營由 TLI 自營，不列於本表。','Aligned with Partner Management (a20): '+nDi+' Distributors / '+nAg+' Agents; Direct is operated by TLI itself and is not listed here.')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
   if (mode==='直營'){
     html += '<div class="note">'+TLI_I18N.t('直營是 TLI 自己經營，不是合作夥伴，本表不列示。','Direct is operated by TLI itself, not a partner, so it is not listed in this table.')+'</div>';
   } else {
-    html += tableHtml(trH([['夥伴','Partner'],['型態','Type'],['本期成交','Deals This Period'],['學員數','Students'],['應收／應付','Receivable/Payable']]), rows.map(function(p){
-      var idx = PARTNERS.indexOf(p);
-      var s = partnerPerfStats(idx);
-      return [p.name, TLI_I18N.t(PARTNER_TYPE_LABEL[p.type], MODE_EN[PARTNER_TYPE_LABEL[p.type]]), fmtNT(s.revenue), s.students+' '+TLI_I18N.t('人','ppl'), partnerAmountLabel(p.type)+'　'+fmtNT(s.amount)];
+    html += tableHtml(trH([['夥伴','Partner'],['型態','Type'],['本期成交','Deals This Period'],['訂單數','Orders'],['應付佣金／返傭','Commission / Rebate Payable']]), rows.map(function(p){
+      var m = TLI_MASTERS.byId('partners', p.id), from='2026-07-01', to='2026-09-30', deal, cnt, pay;
+      if (p.type==='agent'){
+        var os = AGENT_ORDERS.filter(function(o){ return o.pid===p.id && o.status==='已完成' && inRange(o.date,from,to); });
+        var amt = os.reduce(function(a,o){ return a+o.amount; },0);
+        deal = fmtNT(amt); cnt = os.length; pay = TLI_I18N.t('應付佣金','Commission Payable')+'　'+fmtNT(Math.round(amt*m.commRate/100));
+      } else {
+        var ds = DIST_ORDERS.filter(function(o){ return o.pid===p.id && inRange(o.date,from,to); });
+        var tot = ds.reduce(function(a,o){ return a+o.amount; },0);
+        deal = fmtUSD(tot); cnt = ds.length; pay = TLI_I18N.t('應付返傭','Rebate Payable')+'　'+fmtUSD(Math.round(tot*Number(pickTier(m,tot).rate)/100));
+      }
+      return [p.name, TLI_I18N.t(PARTNER_TYPE_LABEL[p.type], MODE_EN[PARTNER_TYPE_LABEL[p.type]]), deal, cnt+' '+TLI_I18N.t('筆','orders'), pay];
     }));
   }
   document.getElementById('reportContent').innerHTML = html;
 }
-function royaltyStats(idx){
-  var r1=seededRand(idx*53+3), r2=seededRand(idx*59+5), r3=seededRand(idx*61+7);
-  var reportedRevenue = 800000 + Math.floor(r1*3000000);
-  var rate = 6;
-  var royalty = Math.round(reportedRevenue*rate/100);
-  return {
-    reportedRevenue: reportedRevenue, rate: rate, royalty: royalty,
-    students: 40 + Math.floor(r2*260), classes: 3 + Math.floor(r3*18),
-    status: ['已繳款','待對帳','已開立待收款'][idx%3]
-  };
+/* ================= 代理銷售報表／經銷返傭試算 =================
+   夥伴名稱、型態、佣金比例（commRate）、返傭級距（rebateTiers）一律讀主檔 TLI_MASTERS.partners；
+   識別碼讀主檔 partners.code（代理沿用夥伴端轉介碼 REF-…）。專案合作不經手金流，不列入本區任何報表。 */
+var AGENT_ORDERS = [
+ {id:'ORD-2026-A301', date:'2026-07-05', pid:'p08', amount:15800, status:'已完成'},
+ {id:'ORD-2026-A302', date:'2026-07-19', pid:'p08', amount:12800, status:'已完成'},
+ {id:'ORD-2026-A303', date:'2026-09-02', pid:'p08', amount:16800, status:'已完成'},
+ {id:'ORD-2026-A304', date:'2026-07-11', pid:'p09', amount:12800, status:'已完成'},
+ {id:'ORD-2026-A202', date:'2026-08-07', pid:'p09', amount:14200, status:'已完成'},
+ {id:'ORD-2026-A305', date:'2026-08-22', pid:'p09', amount:9800,  status:'已完成'},
+ {id:'ORD-2026-A306', date:'2026-09-09', pid:'p09', amount:16800, status:'已完成'},
+ {id:'ORD-2026-A307', date:'2026-09-15', pid:'p09', amount:14200, status:'已取消'},
+ {id:'ORD-2026-A201', date:'2026-08-01', pid:'p10', amount:16800, status:'已完成'},
+ {id:'ORD-2026-A308', date:'2026-07-27', pid:'p10', amount:14200, status:'已完成'},
+ {id:'ORD-2026-A203', date:'2026-08-13', pid:'p12', amount:15600, status:'已完成'},
+ {id:'ORD-2026-A309', date:'2026-07-03', pid:'p12', amount:12800, status:'已完成'},
+ {id:'ORD-2026-A310', date:'2026-08-29', pid:'p12', amount:12800, status:'已完成'},
+ {id:'ORD-2026-A311', date:'2026-09-12', pid:'p12', amount:19800, status:'已完成'},
+ {id:'ORD-2026-A312', date:'2026-09-20', pid:'p12', amount:15600, status:'待收款'}
+];
+var DIST_ORDERS = [
+ {id:'ORD-2026-D301-1', date:'2026-07-01', pid:'p05', tag:'KL-旅行社通路', amount:180000},
+ {id:'ORD-2026-D301-2', date:'2026-07-01', pid:'p05', tag:'KL-旅行社通路', amount:140000},
+ {id:'ORD-2026-D301-3', date:'2026-07-01', pid:'p05', tag:'KL-校園展', amount:240000},
+ {id:'ORD-2026-D302-1', date:'2026-07-10', pid:'p06', tag:'HCM-學生團', amount:230000},
+ {id:'ORD-2026-D302-2', date:'2026-07-10', pid:'p06', tag:'HCM-學生團', amount:150000},
+ {id:'ORD-2026-D302-3', date:'2026-07-10', pid:'p06', tag:'HCM-企業團', amount:220000},
+ {id:'ORD-2026-D303-1', date:'2026-07-19', pid:'p07', tag:'SEL-留學展', amount:350000},
+ {id:'ORD-2026-D303-2', date:'2026-07-19', pid:'p07', tag:'SEL-老客戶轉介', amount:250000},
+ {id:'ORD-2026-D304-1', date:'2026-07-28', pid:'p11', tag:'TYO-春季班', amount:300000},
+ {id:'ORD-2026-D304-2', date:'2026-07-28', pid:'p11', tag:'TYO-春季班', amount:220000},
+ {id:'ORD-2026-D304-3', date:'2026-07-28', pid:'p11', tag:'TYO-夏季班', amount:400000}
+];
+function partnerM(pid){ return TLI_MASTERS.byId('partners', pid); }
+function fmtUSD(n){ return fmtNT(n); }
+function inRange(d, from, to){ return (!from || d>=from) && (!to || d<=to); }
+function valOf(id, def){ var el=document.getElementById(id); return el ? el.value : def; }
+function downloadCsv(name, rows){
+  try{
+    var csv = '﻿' + rows.map(function(r){ return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(','); }).join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+    a.download = name+'.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }catch(e){}
 }
-function royaltyStatusBadge(s){
-  if (s==='已繳款') return '<span class="badge green">'+TLI_I18N.t('已繳款','Paid')+'</span>';
-  if (s==='已開立待收款') return '<span class="badge blue">'+TLI_I18N.t('已開立待收款','Invoiced, Pending')+'</span>';
-  return '<span class="badge orange">'+TLI_I18N.t('待對帳','Pending Reconciliation')+'</span>';
-}
-function render_partner_royalty(){
-  var rows = PARTNERS.filter(function(p){return p.type==='franchise';});
-  var html = '<div class="filterbar">'+periodFilterHtml('f_roy','2026-01-01','2026-06-30')+
-    '<button class="btn ghost" onclick="reportRequery(\'加盟權利金\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
-    '<button class="btn ghost" onclick="reportExport(\'加盟權利金\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  /* 20260929：拍板加盟不申報營收，權利金由平台教學紀錄自動計算，加盟方改為提出疑義（與 u06 口徑一致） */
-  html += '<div class="subhint">'+TLI_I18N.t('權利金＝營業收入（依平台紀錄的開課數、上課人次與課程收入計算）× 比例，比例依各加盟方合約於合作夥伴管理設定；加盟方對計算結果有疑義時，可在加盟後台提出。','Royalty = business revenue (calculated from platform records of classes held, attendance and course revenue) × rate; the rate is set per franchisee contract in Partner Management. Franchisees may raise disputes over the calculation in the franchise portal.')+'</div>';
-  html += tableHtml(trH([['加盟方','Franchisee'],['營業收入（依平台紀錄）','Revenue (Platform Records)'],['權利金','Royalty'],['學生數','Students'],['開班數','Classes Opened'],['繳款狀態','Payment Status']]), rows.map(function(p){
-    var idx = PARTNERS.indexOf(p);
-    var s = royaltyStats(idx);
-    return [p.name, fmtNT(s.reportedRevenue)+'（'+s.rate+'%）', fmtNT(s.royalty), s.students+' '+TLI_I18N.t('人','ppl'), s.classes+' '+TLI_I18N.t('班','classes'), royaltyStatusBadge(s.status)];
-  }));
-  document.getElementById('reportContent').innerHTML = html;
-}
-function rebateStats(idx){
-  var r1=seededRand(idx*67+9);
-  var qty = 60 + Math.floor(r1*400);
-  var tier = qty>300 ? TLI_I18N.t('Tier 3（>300 名額）','Tier 3 (>300 seats)') : qty>150 ? TLI_I18N.t('Tier 2（151–300 名額）','Tier 2 (151–300 seats)') : TLI_I18N.t('Tier 1（≤150 名額）','Tier 1 (≤150 seats)');
-  var rate = qty>300?6:qty>150?4:2;
-  var amount = Math.round(qty*3500*rate/100);
-  return {qty:qty, tier:tier, rate:rate, amount:amount};
-}
-function render_partner_rebate(){
-  var rows = PARTNERS.filter(function(p){return p.type==='distributor';});
-  var html = '<div class="filterbar">'+periodFilterHtml('f_reb','2026-01-01','2026-12-31')+
-    '<button class="btn ghost" onclick="reportRequery(\'經銷返佣\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
-    '<button class="btn ghost" onclick="reportExport(\'經銷返佣\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('依年度累積採購或開課量分級距給返佣，級距與比例於基礎資料設定（a17）維護。','Rebates are tiered by cumulative annual purchase or class volume; tiers and rates are maintained in Master Data Settings (a17).')+'</div>';
-  html += tableHtml(trH([['經銷商','Distributor'],['年度採購量（名額）','Annual Purchase (Seats)'],['級距','Tier'],['返佣比例','Rebate Rate'],['返佣金額','Rebate Amount']]), rows.map(function(p){
-    var idx = PARTNERS.indexOf(p);
-    var s = rebateStats(idx);
-    return [p.name, s.qty+' '+TLI_I18N.t('名額','seats'), s.tier, s.rate+'%', fmtNT(s.amount)];
-  }));
-  document.getElementById('reportContent').innerHTML = html;
-}
-function agentCommissionStats(idx){
-  var r1=seededRand(idx*73+13);
-  var tuition = 200000 + Math.floor(r1*1800000);
-  var rate = 10;
-  var commission = Math.round(tuition*rate/100);
-  var status = idx%2===0 ? '待結算' : '已結算';
-  return {tuition:tuition, rate:rate, commission:commission, status:status};
+function agentRows(){
+  var from = valOf('ag_from','2026-07-01'), to = valOf('ag_to','2026-09-30');
+  var q = valOf('ag_q','').trim().toLowerCase(), pid = valOf('ag_p','');
+  var out = [];
+  TLI_MASTERS.partners.filter(function(p){ return p.type==='agent'; }).forEach(function(p){
+    if (pid && p.id!==pid) return;
+    var code = p.code || '';
+    if (q && (p.name+' '+code).toLowerCase().indexOf(q)<0) return;
+    var os = AGENT_ORDERS.filter(function(o){ return o.pid===p.id && inRange(o.date, from, to); });
+    var done = os.filter(function(o){ return o.status==='已完成'; });
+    var amount = done.reduce(function(s,o){ return s+o.amount; },0);
+    out.push({p:p, code:code, orders:os, count:done.length, amount:amount, rate:p.commRate, commission:Math.round(amount*p.commRate/100),
+      pending: os.filter(function(o){ return o.status==='待收款'; }).length});
+  });
+  var sort = valOf('ag_sort','amount');
+  out.sort(function(a,b){
+    if (sort==='count') return b.count-a.count;
+    if (sort==='commission') return b.commission-a.commission;
+    if (sort==='name') return a.p.name.localeCompare(b.p.name,'zh-Hant');
+    return b.amount-a.amount;
+  });
+  return out;
 }
 function render_partner_agent(){
-  var rows = PARTNERS.filter(function(p){return p.type==='agent';});
-  var html = '<div class="filterbar">'+periodFilterHtml('f_ag','2026-01-01','2026-06-30')+
-    '<button class="btn ghost" onclick="reportRequery(\'代理佣金\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
-    '<button class="btn ghost" onclick="reportExport(\'代理佣金\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('佣金＝代理帶來的實際成交學費 × 約定比例（示範 10%），每半年統一結算一次。','Commission = actual tuition brought in by the agent × agreed rate (demo 10%), settled uniformly every half year.')+'</div>';
-  html += tableHtml(trH([['代理商','Agent'],['成交學費','Tuition Closed'],['佣金比例','Commission Rate'],['佣金金額','Commission Amount'],['結算狀態','Settlement Status']]), rows.map(function(p){
-    var idx = PARTNERS.indexOf(p);
-    var s = agentCommissionStats(idx);
-    return [p.name, fmtNT(s.tuition), s.rate+'%', fmtNT(s.commission), s.status==='已結算'?'<span class="badge green">'+TLI_I18N.t('已結算','Settled')+'</span>':'<span class="badge orange">'+TLI_I18N.t('待結算','Pending Settlement')+'</span>'];
-  }));
+  var agents = TLI_MASTERS.partners.filter(function(p){ return p.type==='agent'; });
+  var html = '<div class="filterbar">'+
+    '<input type="date" id="ag_from" value="2026-07-01" onchange="updateAgentReport()"> <span class="small">～</span> <input type="date" id="ag_to" value="2026-09-30" onchange="updateAgentReport()">'+
+    '<select id="ag_p" onchange="updateAgentReport()"><option value="">'+TLI_I18N.t('全部代理商','All Agents')+'</option>'+agents.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join('')+'</select>'+
+    '<input type="text" id="ag_q" placeholder="'+TLI_I18N.t('搜尋代理商或折扣碼','Search agent or code')+'" oninput="updateAgentReport()" style="min-width:180px">'+
+    '<select id="ag_sort" onchange="updateAgentReport()"><option value="amount">'+TLI_I18N.t('依成交金額','By Deal Amount')+'</option><option value="count">'+TLI_I18N.t('依訂單數','By Orders')+'</option><option value="commission">'+TLI_I18N.t('依佣金金額','By Commission')+'</option><option value="name">'+TLI_I18N.t('依名稱','By Name')+'</option></select>'+
+    '<button class="btn ghost" onclick="exportAgentReport()">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
+  html += '<div class="subhint">'+TLI_I18N.t('依折扣碼（識別碼）統計各代理商帶來的訂單；成交金額只計「已完成」訂單，待收款與已取消不計入。佣金＝成交金額 × 該代理商佣金比例（取自合作夥伴管理）。','Orders are grouped by discount code (identifier). Deal amount counts completed orders only; pending and cancelled orders are excluded. Commission = deal amount × the agent commission rate (from Partner Management).')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
+  html += '<div id="agArea"></div>';
   document.getElementById('reportContent').innerHTML = html;
+  updateAgentReport();
+}
+function updateAgentReport(){
+  var rows = agentRows();
+  var tc=0, ta=0, tm=0;
+  rows.forEach(function(r){ tc+=r.count; ta+=r.amount; tm+=r.commission; });
+  var area = document.getElementById('agArea'); if (!area) return;
+  if (!rows.length){ area.innerHTML = '<div class="note">'+TLI_I18N.t('沒有符合條件的代理商。','No agents match the filters.')+'</div>'; return; }
+  area.innerHTML = tableHtml(
+    trH([['代理商','Agent'],['折扣碼／識別碼','Discount Code'],['訂單數','Orders'],['成交金額','Deal Amount'],['佣金比例','Commission Rate'],['佣金金額','Commission'],['','']]),
+    rows.map(function(r){
+      return [r.p.name+(r.p.status==='停用'?' <span class="badge grey">'+TLI_I18N.t('停用','Inactive')+'</span>':''), r.code, r.count+(r.pending?' <span class="small">（'+TLI_I18N.t('另有待收款 ','Pending: ')+r.pending+'）</span>':''), fmtNT(r.amount), r.rate+'%', fmtNT(r.commission),
+        '<span class="linklike" onclick="showAgentDetail(\''+r.p.id+'\')">'+TLI_I18N.t('訂單明細','Order Details')+'</span>'];
+    }),
+    [TLI_I18N.t('合計','Total'),'',tc,fmtNT(ta),'',fmtNT(tm),'']
+  );
+}
+function showAgentDetail(pid){
+  var r = agentRows().filter(function(x){ return x.p.id===pid; })[0]; if (!r) return;
+  showDetailModal(r.p.name+'（'+r.code+'）', r.orders.sort(function(a,b){ return a.date.localeCompare(b.date); }).map(function(o){
+    return [o.date+'　'+o.id+'　'+o.status, fmtNT(o.amount)];
+  }).concat([[TLI_I18N.t('已完成合計','Completed Total'), fmtNT(r.amount)],[TLI_I18N.t('佣金（'+r.rate+'%）','Commission ('+r.rate+'%)'), fmtNT(r.commission)]]));
+}
+function exportAgentReport(){
+  var rows = agentRows();
+  downloadCsv('代理銷售報表', [['代理商','折扣碼','訂單數','成交金額','佣金比例','佣金金額']].concat(rows.map(function(r){ return [r.p.name,r.code,r.count,r.amount,r.rate+'%',r.commission]; })));
+  toast(TLI_I18N.t('已匯出「代理銷售報表」報表 CSV','Exported “Agent Sales Report” as CSV'));
+}
+
+/* 返傭級距取主檔 rebateTiers：依經銷商期間內累計採購額落在哪一級距，整筆適用該級距比例，各來源標籤按金額分攤 */
+function tierNum(s){ return s==='' || s==null ? Infinity : Number(String(s).replace(/,/g,'')); }
+function pickTier(p, total){
+  var tiers = p.rebateTiers || [];
+  for (var i=0;i<tiers.length;i++){
+    var min = tierNum(tiers[i].min) || 0, max = tierNum(tiers[i].max);
+    if (total>=min && total<=max) return tiers[i];
+  }
+  return tiers[0] || {min:'0',max:'',rate:'0'};
+}
+function rebateData(){
+  var from = valOf('rb_from','2026-07-01'), to = valOf('rb_to','2026-09-30');
+  var pid = valOf('rb_p',''), tag = valOf('rb_tag','');
+  var dists = TLI_MASTERS.partners.filter(function(p){ return p.type==='distributor' && (!pid || p.id===pid); });
+  var sums = [], tagRows = [];
+  dists.forEach(function(p){
+    var all = DIST_ORDERS.filter(function(o){ return o.pid===p.id && inRange(o.date,from,to); });
+    var allTotal = all.reduce(function(s,o){ return s+o.amount; },0);
+    var os = all.filter(function(o){ return !tag || o.tag===tag; });
+    var total = os.reduce(function(s,o){ return s+o.amount; },0);
+    var tier = pickTier(p, allTotal), rate = Number(tier.rate);
+    sums.push({p:p, total:total, count:os.length, tier:tier, rate:rate, rebate:Math.round(total*rate/100)});
+    var byTag = {};
+    os.forEach(function(o){ (byTag[o.tag] = byTag[o.tag] || {tag:o.tag, count:0, amount:0}); byTag[o.tag].count++; byTag[o.tag].amount += o.amount; });
+    Object.keys(byTag).forEach(function(k){ tagRows.push({p:p, tag:k, count:byTag[k].count, amount:byTag[k].amount, rate:rate, rebate:Math.round(byTag[k].amount*rate/100)}); });
+  });
+  var sort = valOf('rb_sort','rebate');
+  sums.sort(function(a,b){ return sort==='total' ? b.total-a.total : sort==='name' ? a.p.name.localeCompare(b.p.name,'zh-Hant') : b.rebate-a.rebate; });
+  tagRows.sort(function(a,b){ return sort==='name' ? (a.p.name+a.tag).localeCompare(b.p.name+b.tag,'zh-Hant') : b.rebate-a.rebate; });
+  return {sums:sums, tagRows:tagRows};
+}
+function tierText(t){ return fmtUSDnum(t.min)+(t.max===''?TLI_I18N.t(' 以上',' and above'):' – '+fmtUSDnum(t.max)); }
+function fmtUSDnum(s){ return 'NT$ '+s; }
+function render_partner_rebate(){
+  var dists = TLI_MASTERS.partners.filter(function(p){ return p.type==='distributor'; });
+  var tags = DIST_ORDERS.map(function(o){ return o.tag; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
+  var html = '<div class="filterbar">'+
+    '<input type="date" id="rb_from" value="2026-07-01" onchange="updateRebateReport()"> <span class="small">～</span> <input type="date" id="rb_to" value="2026-09-30" onchange="updateRebateReport()">'+
+    '<select id="rb_p" onchange="updateRebateReport()"><option value="">'+TLI_I18N.t('全部經銷商','All Distributors')+'</option>'+dists.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join('')+'</select>'+
+    '<select id="rb_tag" onchange="updateRebateReport()"><option value="">'+TLI_I18N.t('全部來源標籤','All Source Tags')+'</option>'+tags.map(function(t){ return '<option>'+t+'</option>'; }).join('')+'</select>'+
+    '<select id="rb_sort" onchange="updateRebateReport()"><option value="rebate">'+TLI_I18N.t('依返傭金額','By Rebate')+'</option><option value="total">'+TLI_I18N.t('依採購額','By Purchase')+'</option><option value="name">'+TLI_I18N.t('依名稱','By Name')+'</option></select>'+
+    '<button class="btn ghost" onclick="exportRebateReport()">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
+  html += '<div class="subhint">'+TLI_I18N.t('依來源標籤統計經銷商的採購額，返傭比例取經銷商期間內累計採購額所在的級距（級距取自合作夥伴管理），整筆適用該比例，各標籤按金額分攤。含待收款訂單，僅供試算，實際返傭以收款對帳為準。','Purchases are grouped by source tag. The rebate rate is the tier that the distributor’s cumulative purchases fall into (tiers from Partner Management), applied to the whole amount and allocated to tags pro rata. Includes unpaid orders; for estimation only, actual rebates follow payment reconciliation.')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
+  html += '<div class="sectiontitle">'+TLI_I18N.t('依經銷商','By Distributor')+'</div><div id="rbSum"></div>';
+  html += '<div class="sectiontitle">'+TLI_I18N.t('依來源標籤','By Source Tag')+'</div><div id="rbTag"></div>';
+  document.getElementById('reportContent').innerHTML = html;
+  updateRebateReport();
+}
+function updateRebateReport(){
+  var d = rebateData();
+  var sumEl = document.getElementById('rbSum'), tagEl = document.getElementById('rbTag'); if (!sumEl) return;
+  var tt=0, tr_=0, tc=0;
+  d.sums.forEach(function(r){ tt+=r.total; tr_+=r.rebate; tc+=r.count; });
+  sumEl.innerHTML = tableHtml(trH([['經銷商','Distributor'],['訂單數','Orders'],['期間採購額','Purchases'],['適用級距','Tier'],['返傭比例','Rebate Rate'],['返傭金額','Rebate']]),
+    d.sums.map(function(r){ return [r.p.name, r.count, fmtUSD(r.total), tierText(r.tier), r.rate+'%', fmtUSD(r.rebate)]; }),
+    [TLI_I18N.t('合計','Total'), tc, fmtUSD(tt), '', '', fmtUSD(tr_)]);
+  var tt2=0, tr2=0, tc2=0;
+  d.tagRows.forEach(function(r){ tt2+=r.amount; tr2+=r.rebate; tc2+=r.count; });
+  tagEl.innerHTML = d.tagRows.length ? tableHtml(trH([['經銷商','Distributor'],['來源標籤','Source Tag'],['訂單數','Orders'],['採購額','Purchases'],['返傭比例','Rebate Rate'],['返傭金額','Rebate']]),
+    d.tagRows.map(function(r){ return [r.p.name, r.tag, r.count, fmtUSD(r.amount), r.rate+'%', fmtUSD(r.rebate)]; }),
+    [TLI_I18N.t('合計','Total'),'',tc2,fmtUSD(tt2),'',fmtUSD(tr2)]) : '<div class="note">'+TLI_I18N.t('沒有符合條件的訂單。','No orders match the filters.')+'</div>';
+}
+function exportRebateReport(){
+  var d = rebateData();
+  downloadCsv('經銷返傭試算', [['經銷商','來源標籤','訂單數','採購額','返傭比例','返傭金額']].concat(d.tagRows.map(function(r){ return [r.p.name,r.tag,r.count,r.amount,r.rate+'%',r.rebate]; })));
+  toast(TLI_I18N.t('已匯出「經銷返傭試算」報表 CSV','Exported “Distributor Rebate Estimate” as CSV'));
 }
 
 /* ================= 組織客戶群 ================= */
@@ -735,55 +853,49 @@ function renderEnterpriseTable(){
     }).join('') +
     (rows.length>1 ? '<tr><td><b>'+TLI_I18N.t('合計／均值','Total/Average')+'</b></td><td><b>'+avgAttend+'%</b></td><td><b>'+poolPct+'%</b></td></tr>' : '');
 }
-/* 20260930：學校名單改讀共用主檔——機構型組織客戶（TLI_MASTERS.orgCustomers，type='institution'）
-   ＋加盟夥伴中的大學語言中心（TLI_MASTERS.partners，id 'p02'），不再各自寫死同名清單 */
-var SCHOOLS = TLI_MASTERS.orgCustomers.filter(function(o){ return o.type==='institution'; }).map(function(o){
-  return {id:o.id, name:o.name};
-}).concat(
-  TLI_MASTERS.partners.filter(function(p){ return p.id==='p02'; }).map(function(p){
-    return {id:p.id, name:p.name+'（'+p.id+'）'};
-  })
-);
-function schoolStats(idx){
-  var r1=seededRand(idx*83+19), r2=seededRand(idx*89+23), r3=seededRand(idx*97+29), r4=seededRand(idx*101+31);
-  return {
-    students: 80+Math.floor(r1*320),
-    classes: 3+Math.floor(r2*12),
-    activation: 55+Math.floor(r3*40),
-    lessons: 120+Math.floor(r4*600)
-  };
+/* 專案合作使用狀況：夥伴取自主檔（type='project'），學生／班級／啟用率直接由 projectClasses、projectRoster 計算；不含任何金額 */
+var PROJECT_PARTNERS = TLI_MASTERS.partners.filter(function(p){ return p.type==='project'; });
+function projectUsageStats(pid){
+  var classes = TLI_MASTERS.projectClasses.filter(function(c){ return c.partnerId===pid; });
+  var ids = classes.map(function(c){ return c.id; });
+  var roster = TLI_MASTERS.projectRoster.filter(function(r){ return ids.indexOf(r.classId)>-1; });
+  var students = roster.filter(function(r){ return r.role==='學生'; });
+  var active = students.filter(function(r){ return r.status==='已啟用'; });
+  return {students:students.length, classes:classes.length, teachers:roster.filter(function(r){ return r.role==='老師'; }).length,
+    activation: students.length ? Math.round(active.length/students.length*100) : 0, classList:classes};
 }
 function render_org_school(){
   var content = document.getElementById('reportContent');
   content.innerHTML = '<div class="filterbar">'+
-    '<select id="sch_select" onchange="renderSchoolTable()">'+SCHOOLS.map(function(s){return '<option value="'+s.id+'">'+s.name+'</option>';}).join('')+'</select>'+
-    periodFilterHtml('sch','2026-07-01','2026-08-31')+
-    '<button class="btn ghost" onclick="reportRequery(\'學校（加盟）使用狀況\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
-    '<button class="btn ghost" onclick="reportExport(\'學校（加盟）使用狀況\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>'+
-    '<div class="subhint">'+TLI_I18N.t('學校走加盟型態，對齊合作夥伴管理（a20）範例大學語言中心與組織客戶（a19）機構授權資料。','Schools use the Franchise mode; aligned with Sample University Language Center in Partner Management (a20) and institution licensing data in Organization Customers (a19).')+'</div>'+
+    '<select id="sch_select" onchange="renderSchoolTable()">'+PROJECT_PARTNERS.map(function(s){return '<option value="'+s.id+'">'+s.name+'</option>';}).join('')+'</select>'+
+    '<button class="btn ghost" onclick="reportRequery(\'專案合作使用狀況\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
+    '<button class="btn ghost" onclick="reportExport(\'專案合作使用狀況\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>'+
+    '<div class="subhint">'+TLI_I18N.t('專案合作夥伴的班級與名單資料取自合作夥伴管理（a20），本表只呈現使用狀況。','Class and roster data for project-partnership partners come from Partner Management (a20). This report shows usage only.')+'</div>'+
     '<div class="grid4" id="schKpiRow"></div>'+
     '<div class="tablewrap"><table id="schTable"></table></div>';
   renderSchoolTable();
 }
 function renderSchoolTable(){
-  var sel = document.getElementById('sch_select');
-  var idx = SCHOOLS.findIndex(function(s){return s.id===sel.value;});
-  if (idx<0) idx = 0;
-  var sch = SCHOOLS[idx];
-  var s = schoolStats(idx);
+  var sel = document.getElementById('sch_select'); if (!sel || !PROJECT_PARTNERS.length) return;
+  var p = PROJECT_PARTNERS.filter(function(x){ return x.id===sel.value; })[0] || PROJECT_PARTNERS[0];
+  var s = projectUsageStats(p.id);
   document.getElementById('schKpiRow').innerHTML =
     '<div class="statcard"><div class="lbl">'+TLI_I18N.t('學生數','Students')+'</div><div class="val">'+s.students+'</div><div class="sub">'+TLI_I18N.t('人','ppl')+'</div></div>' +
     '<div class="statcard"><div class="lbl">'+TLI_I18N.t('班級數','Classes')+'</div><div class="val">'+s.classes+'</div><div class="sub">'+TLI_I18N.t('班','classes')+'</div></div>' +
     '<div class="statcard"><div class="lbl">'+TLI_I18N.t('帳號啟用率','Account Activation Rate')+'</div><div class="val">'+s.activation+'%</div></div>' +
-    '<div class="statcard"><div class="lbl">'+TLI_I18N.t('上課堂數','Sessions Held')+'</div><div class="val">'+s.lessons+'</div><div class="sub">'+TLI_I18N.t('堂','sessions')+'</div></div>';
+    '<div class="statcard"><div class="lbl">'+TLI_I18N.t('老師數','Teachers')+'</div><div class="val">'+s.teachers+'</div><div class="sub">'+TLI_I18N.t('人','ppl')+'</div></div>';
   document.getElementById('schTable').innerHTML =
-    '<tr>'+trH([['機構','Institution'],['學生數','Students'],['班級數','Classes'],['帳號啟用率','Account Activation Rate'],['上課堂數','Sessions Held']]).map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr>' +
-    '<tr><td>'+sch.name+'</td><td>'+s.students+' '+TLI_I18N.t('人','ppl')+'</td><td>'+s.classes+' '+TLI_I18N.t('班','classes')+'</td><td>'+s.activation+'%</td><td>'+s.lessons+' '+TLI_I18N.t('堂','sessions')+'</td></tr>';
+    '<tr>'+trH([['班級','Class'],['學生數','Students'],['帳號啟用率','Account Activation Rate'],['合作期間','Period']]).map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr>' +
+    s.classList.map(function(c){
+      var st = TLI_MASTERS.projectRoster.filter(function(r){ return r.classId===c.id && r.role==='學生'; });
+      var act = st.filter(function(r){ return r.status==='已啟用'; }).length;
+      return '<tr><td>'+c.name+'</td><td>'+st.length+' '+TLI_I18N.t('人','ppl')+'</td><td>'+(st.length?Math.round(act/st.length*100):0)+'%</td><td>'+c.from+' ～ '+c.to+'</td></tr>';
+    }).join('');
 }
 
 /* ================= 教學群：教師姓名改讀共用主檔 TLI_MASTERS.teachers（老師管理 a10），不再各頁各自寫死示範名單 =================
    授課時數／學生數／評分是報表示範用的模擬數字，主檔沒有這些統計欄位，仍留在本頁，但姓名／服務校區時區／
-   所屬加盟方／認證狀態一律反查主檔。中心教師只取在職者（tc1／tc2／tc3／tc4）；在地教師取三家加盟方各一位。 */
+   所屬夥伴／認證狀態一律反查主檔。中心教師只取在職者（tc1／tc2／tc3／tc4）；班級老師取專案合作名單（projectRoster）中角色為老師的成員。 */
 function teacherMarketLabel(t){
   if (!t) return TLI_I18N.t('未設定','Not Set');
   if (/GMT-5/.test(t.timezone||'')) return TLI_I18N.t('美洲','Americas');
@@ -801,23 +913,21 @@ var CENTER_TEACHERS = CENTER_TEACHER_STATS.map(function(s){
   var t = TLI_MASTERS.byId('teachers', s.id);
   return {name: t ? t.name : s.id, _teacher: t, hours:s.hours, students:s.students, rating:s.rating};
 });
-var LOCAL_TEACHER_STATS = [
-  {id:'tl1', hours:64, students:38},
-  {id:'tl5', hours:88, students:46},
-  {id:'tl2', hours:40, students:22}
-];
-var LOCAL_TEACHERS = LOCAL_TEACHER_STATS.map(function(s){
-  var t = TLI_MASTERS.byId('teachers', s.id);
-  var partner = t && t.partnerId ? TLI_MASTERS.byId('partners', t.partnerId) : null;
-  return {name: t ? t.name : s.id, partner: partner ? partner.name : (t ? t.org : ''), cert: t ? t.certStatus : '未認證', hours:s.hours, students:s.students};
-});
-var CERT_STATUS_EN = {'已認證':'Certified', '未認證':'Not Certified'};
+/* 班級老師：取專案合作名單中角色為老師的成員；班級、學生數由 projectClasses／projectRoster 即時計算 */
+function classTeacherRows(){
+  return TLI_MASTERS.projectClasses.map(function(c){
+    var t = TLI_MASTERS.projectRoster.filter(function(r){ return r.id===c.teacherRid; })[0];
+    var partner = TLI_MASTERS.byId('partners', c.partnerId);
+    var stu = TLI_MASTERS.projectRoster.filter(function(r){ return r.classId===c.id && r.role==='學生'; });
+    return {name: t ? t.name : '－', partner: partner ? partner.name : '', cls: c.name, students: stu.length, status: t ? t.status : ''};
+  });
+}
 var teachTeacherKey = 'center';
 function render_teach_teachers(){
   var content = document.getElementById('reportContent');
   content.innerHTML = '<div class="chiprow" id="ttChips">'+
     '<button class="active" onclick="teachTeacherTab(this,\'center\')">'+TLI_I18N.t('中心教師','Center Teachers')+'</button>'+
-    '<button onclick="teachTeacherTab(this,\'local\')">'+TLI_I18N.t('在地教師','Local Teachers')+'</button></div>'+
+    '<button onclick="teachTeacherTab(this,\'local\')">'+TLI_I18N.t('班級老師','Class Teachers')+'</button></div>'+
     '<div class="filterbar">'+periodFilterHtml('tt','2026-07-01','2026-09-30')+
     '<button class="btn ghost" onclick="reportRequery(\'教師授課統計\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
     '<button class="btn ghost" onclick="reportExport(\'教師授課統計\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>'+
@@ -839,11 +949,11 @@ function renderTeachTeacherBody(){
       CENTER_TEACHERS.map(function(t){return [t.name, teacherMarketLabel(t._teacher), t.hours+' '+TLI_I18N.t('小時','hrs'), t.students, t.rating];})
     );
   } else {
-    el.innerHTML = '<div class="subhint">'+TLI_I18N.t('在地教師由加盟方自建，經 TLI 培訓認證後只服務自己的學生。','Local teachers are onboarded by franchisees and, once certified by TLI training, serve only their own students.')+' <a class="manage-link" href="a10_teachers.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>'+tableHtml(
-      trH([['教師姓名','Teacher Name'],['所屬加盟方','Franchisee'],['認證狀態','Certification Status'],['授課時數','Teaching Hours'],['學生數','Students']]),
-      LOCAL_TEACHERS.map(function(t){
-        var badge = t.cert==='已認證' ? '<span class="badge green">'+TLI_I18N.t('已認證','Certified')+'</span>' : '<span class="badge orange">'+TLI_I18N.t(t.cert, CERT_STATUS_EN[t.cert] || t.cert)+'</span>';
-        return [t.name, t.partner, badge, t.hours+' '+TLI_I18N.t('小時','hrs'), t.students];
+    el.innerHTML = '<div class="subhint">'+TLI_I18N.t('班級老師是專案合作夥伴名單中的老師，只看自己班級學生的自學進度。','Class teachers are teachers on a project partner\'s roster; they only see the self-paced progress of their own class.')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>'+tableHtml(
+      trH([['老師姓名','Teacher Name'],['所屬夥伴','Partner'],['班級','Class'],['學生數','Students'],['帳號狀態','Account Status']]),
+      classTeacherRows().map(function(t){
+        var badge = t.status==='已啟用' ? '<span class="badge green">'+TLI_I18N.t('已啟用','Active')+'</span>' : '<span class="badge orange">'+TLI_I18N.t(t.status||'未寄送', t.status==='已寄開通信' ? 'Invite sent' : 'Not sent')+'</span>';
+        return [t.name, t.partner, t.cls, t.students, badge];
       })
     );
   }
@@ -905,17 +1015,16 @@ function renderAttendBody(){
 
 /* ================= 財務群 ================= */
 var COLLECTION_ROWS = [
- {method:'線上收款', mode:'直營', amount:3120000},
- {method:'線上收款', mode:'代理', amount:2860000},
- {method:'線下匯款', mode:'加盟', amount:1450000},
- {method:'線下匯款', mode:'經銷', amount:980000}
+ {method:'線上收款', mode:'直營', amount:3980000},
+ {method:'線上收款', mode:'代理', amount:191000},
+ {method:'線下匯款', mode:'經銷', amount:2680000}
 ];
 function render_fin_collection(){
   var total = COLLECTION_ROWS.reduce(function(s,r){return s+r.amount;},0);
   var html = '<div class="filterbar">'+periodFilterHtml('fc','2026-07-01','2026-09-30')+
     '<button class="btn ghost" onclick="reportRequery(\'收款彙總\')">'+TLI_I18N.t('重新取數','Refresh')+'</button>'+
     '<button class="btn ghost" onclick="reportExport(\'收款彙總\')">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('客戶付錢給 TLI 走線上收款（直營／代理）；TLI 與合作夥伴之間的錢走線下匯款（加盟／經銷），後台只記錄不經手。','Students pay TLI via online payment (Direct/Agent); money between TLI and partners moves via offline remittance (Franchise/Distributor) — the back office only records it, never handles the funds.')+'</div>';
+  html += '<div class="subhint">'+TLI_I18N.t('客戶付錢給 TLI 走線上收款（直營／代理）；TLI 與經銷商之間的錢走線下匯款，後台只記錄不經手。','Students pay TLI via online payment (Direct/Agent); money between TLI and distributors moves via offline remittance; the back office only records it, never handles the funds.')+'</div>';
   html += tableHtml(trH([['收款方式','Collection Method'],['合作模式','Cooperation Mode'],['金額','Amount'],['佔比','Share']]), COLLECTION_ROWS.map(function(r){
     return [TLI_I18N.t(r.method, r.method==='線上收款'?'Online Payment':'Offline Remittance'), TLI_I18N.t(r.mode, MODE_EN[r.mode]), fmtNT(r.amount), Math.round(r.amount/total*100)+'%'];
   }), [TLI_I18N.t('合計','Total'),'', fmtNT(total), '100%']);
@@ -924,7 +1033,7 @@ function render_fin_collection(){
 var billingCurrentKey = 'tw';
 var INVOICE_TW = CATEGORIES.map(function(c){
   var sc = SALES_BY_CATEGORY.find(function(x){return x.id===c.id;});
-  return {name:c.name, orders: Math.round(sc.revenue/6500), revenue:sc.revenue};
+  return {id:c.id, name:c.name, orders: Math.round(sc.revenue/6500), revenue:sc.revenue};
 });
 var INVOICE_OS = [
  {currency:'USD', entity:'企業客戶（示例）', orders:3, amount:12800},
@@ -954,7 +1063,7 @@ function billTab(btn, key){
     var total = INVOICE_TW.reduce(function(s,c){return s+c.revenue;},0);
     var totalOrders = INVOICE_TW.reduce(function(s,c){return s+c.orders;},0);
     area.innerHTML = tableHtml(trH([['產品分類','Product Category'],['訂單數','Orders'],['營收（NT$）','Revenue (NT$)'],['','']]), INVOICE_TW.map(function(c){
-      return [c.name, c.orders, fmtNT(c.revenue), '<span class="linklike" onclick=\'showDetailModal("'+c.name+'",[["'+TLI_I18N.t('開票主體','Billing Entity')+'","'+TLI_I18N.t('TLI 台灣總部','TLI Taiwan HQ')+'"],["'+TLI_I18N.t('幣別','Currency')+'","'+TLI_I18N.t('新台幣（TWD）','New Taiwan Dollar (TWD)')+'"],["'+TLI_I18N.t('營收','Revenue')+'","'+fmtNT(c.revenue)+'"]])\'>'+TLI_I18N.t('看明細','View Details')+'</span>'];
+      return [catLabel(c.id,c.name), c.orders, fmtNT(c.revenue), '<span class="linklike" onclick=\'showDetailModal("'+catLabel(c.id,c.name)+'",[["'+TLI_I18N.t('開票主體','Billing Entity')+'","'+TLI_I18N.t('TLI 台灣總部','TLI Taiwan HQ')+'"],["'+TLI_I18N.t('幣別','Currency')+'","'+TLI_I18N.t('新台幣（TWD）','New Taiwan Dollar (TWD)')+'"],["'+TLI_I18N.t('營收','Revenue')+'","'+fmtNT(c.revenue)+'"]])\'>'+TLI_I18N.t('看明細','View Details')+'</span>'];
     }), [TLI_I18N.t('合計','Total'), totalOrders, fmtNT(total), '']) +
     '<div class="hint">'+TLI_I18N.t('開票主體：TLI 台灣總部，幣別：新台幣（TWD）。','Billing entity: TLI Taiwan HQ, currency: New Taiwan Dollar (TWD).')+'</div>';
   } else {
@@ -971,7 +1080,6 @@ var STUDENT_OVERDUE = [
  {order:'ORD-2026-0058', student:'周佳蓉', project:'PRJ-ENT-JP', amount:21000, days:27}
 ];
 var PARTNER_AGING = [
- {partner:'台灣普動教育股份有限公司', type:'加盟', item:'權利金（2026 H1）', amount:186000, days:9, status:'逾期'},
  {partner:'韓國語言留學社', type:'經銷', item:'尾款（9 月開課）', amount:96000, days:3, status:'逾期'},
  {partner:'中東教育顧問公司', type:'代理', item:'佣金（2026 H1）', amount:64000, days:0, status:'即將到期'}
 ];
@@ -999,13 +1107,12 @@ var REPORT_GROUPS = {
   ]},
   partner: {label:'合作夥伴', reports:[
     {id:'partner_performance', name:'夥伴業績總表', render:render_partner_performance},
-    {id:'partner_royalty', name:'加盟權利金', render:render_partner_royalty},
-    {id:'partner_rebate', name:'經銷返佣', render:render_partner_rebate},
-    {id:'partner_agent', name:'代理佣金', render:render_partner_agent}
+    {id:'partner_agent', name:'代理銷售報表', render:render_partner_agent},
+    {id:'partner_rebate', name:'經銷返傭試算', render:render_partner_rebate}
   ]},
   org: {label:'組織客戶', reports:[
     {id:'org_enterprise', name:'企業使用狀況', render:render_org_enterprise},
-    {id:'org_school', name:'學校（加盟）使用狀況', render:render_org_school}
+    {id:'org_school', name:'專案合作使用狀況', render:render_org_school}
   ]},
   teaching: {label:'教學', reports:[
     {id:'teach_teachers', name:'教師授課統計', render:render_teach_teachers},

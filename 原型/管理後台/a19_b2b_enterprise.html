@@ -396,27 +396,6 @@ html,body{overflow-x:hidden;}
 <div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('campusModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="saveCampus()" data-i18n="btn.saveCampus">儲存廠區</button></div>
 </div></div>
 
-<!-- 機構授權：學院 新增／編輯 modal（2026-09-11 新增：學院由 TLI 建檔，非機構自助維護） -->
-<div class="modal-mask" id="collegeOrgModal" onclick="if(event.target===this) closeModal('collegeOrgModal')"><div class="modal">
-<h3 data-i18n="modal.addEditCollege">新增／編輯學院</h3>
-<div class="formrow"><label data-i18n="label.selectCollege">選擇學院</label><select id="collegeOrgPicker" onchange="onCollegeOrgPickerChange(this.value)"></select></div>
-<div class="formrow"><label data-i18n="label.collegeName">學院名稱</label><span class="req">*</span><input type="text" id="collegeOrgName"placeholder="例：商學院" data-i18n-placeholder="ph.collegeNameExample"></div>
-<div class="formrow"><label data-i18n="common.status">狀態</label><select id="collegeOrgStatusSel"><option value="啟用" data-i18n="status.enabled2">啟用</option><option value="停用" data-i18n="status.disabled2">停用</option></select></div>
-<div class="hint" data-i18n="hint.collegeHasActiveDept">學院下仍有啟用中的科系時無法停用，請先停用該學院下所有科系。</div>
-<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('collegeOrgModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="saveCollegeOrg()" data-i18n="btn.saveCollege">儲存學院</button></div>
-</div></div>
-
-<!-- 機構授權：科系 新增／編輯 modal（2026-09-11 新增：科系由 TLI 建檔，聊天室場次「適用科系」即引用此清單） -->
-<div class="modal-mask" id="deptOrgModal" onclick="if(event.target===this) closeModal('deptOrgModal')"><div class="modal">
-<h3 data-i18n="modal.addEditDept">新增／編輯科系</h3>
-<div class="formrow"><label data-i18n="label.selectDept">選擇科系</label><select id="deptOrgPicker" onchange="onDeptOrgPickerChange(this.value)"></select></div>
-<div class="formrow"><label data-i18n="label.deptName">科系名稱</label><span class="req">*</span><input type="text" id="deptOrgName" placeholder="例：企業管理學系" data-i18n-placeholder="ph.deptNameExample"></div>
-<div class="formrow"><label data-i18n="label.parentCollege">所屬學院</label><select id="deptOrgCollegeSel"></select></div>
-<div class="formrow"><label data-i18n="common.status">狀態</label><select id="deptOrgStatusSel"><option value="啟用" data-i18n="status.enabled2">啟用</option><option value="停用" data-i18n="status.disabled2">停用</option></select></div>
-<div class="hint" data-i18n="hint.deptHasActiveClass">科系下仍有啟用中的班級時無法停用，班級由機構窗口在機構端自助維護。</div>
-<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('deptOrgModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="saveDeptOrg()" data-i18n="btn.saveDept">儲存科系</button></div>
-</div></div>
-
 <!-- 代為修改部門配額 modal（2026-09-11 新增：部門配額改由企業自行維護，
      後台僅保留「代為修改」單一入口，儲存時於修改紀錄標記由 TLI 代操作） -->
 <div class="modal-mask" id="deptQuotaEditModal" onclick="if(event.target===this) closeModal('deptQuotaEditModal')"><div class="modal">
@@ -449,21 +428,6 @@ html,body{overflow-x:hidden;}
 <h3 data-i18n="modal.editNote">編輯備註</h3>
 <div class="formrow"><label id="connReqNoteLabel"></label><textarea id="connReqNoteInput" placeholder="輸入本次追蹤備註" data-i18n-placeholder="ph.trackingNote"></textarea></div>
 <div style="text-align:right;margin-top:16px"><button class="btn ghost" onclick="closeModal('connReqNoteModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doSaveConnReqNote()" data-i18n="btn.saveNote">儲存備註</button></div>
-</div></div>
-
-<!-- 新增下學期 modal（v2 新增：機構授權「學期設定」用，示範畫面，資料為模擬數字） -->
-<div class="modal-mask" id="addSemesterModal" onclick="if(event.target===this) closeModal('addSemesterModal')"><div class="modal">
-<h3 data-i18n="modal.addNextSemester">新增下學期</h3>
-<div class="hint" style="margin-bottom:10px"><span class="req">*</span> <span data-i18n="common.required">為必填</span></div>
-<div class="formrow"><label data-i18n="label.semesterName">學期名稱</label><span class="req">*</span><input type="text" id="semName" placeholder="例：2026 秋季班" data-i18n-placeholder="ph.semesterNameExample"></div>
-<div class="formrow"><label data-i18n="label.dateRange">起訖日期</label><span class="req">*</span><div style="display:flex;gap:8px"><input type="date" id="semStart"><span class="small" style="align-self:center">～</span><input type="date" id="semEnd"></div></div>
-<div style="text-align:right;margin-top:16px"><button class="btn ghost" onclick="closeModal('addSemesterModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doAddSemester()" data-i18n="btn.addSemester">新增學期</button></div>
-</div></div>
-
-<!-- 核准權益展延 modal（v2 新增：機構授權型專用，示範畫面，資料為模擬數字） -->
-<div class="modal-mask" id="institutionRenewalModal" onclick="if(event.target===this) closeModal('institutionRenewalModal')"><div class="modal wide">
-<h3 data-i18n="modal.approveRenewal">核准權益展延</h3>
-<div id="institutionRenewalBody"></div>
 </div></div>
 
 <!-- 新增組織客戶 抽屜表單（沿用主抽屜） -->
@@ -502,199 +466,9 @@ function renderOrgLogMini(e){
   }).join('') + '</div>';
 }
 
-/* ================= 機構授權：學院／科系（2026-09-11 新增）=================
-   vicki 拍板：學院、科系一年幾乎不會變，改由 TLI／顧問在後台建檔（此分頁），
-   不是機構端自助維護；機構端 u04「系所與班級管理」僅唯讀顯示學院／科系供選班級隸屬用，
-   班級才是機構窗口自助新增／改名／停用的層級。
-   資料寫入共用 localStorage（與機構端 u02／u04、教師端 t04、會員區 m14 讀寫同一組 key），
-   聊天室場次「適用科系」（t04）即引用 ORG_DEPARTMENTS 清單，一場場次可對應多個科系（一對多）。
-   正式環境應改為讀寫後端機構組織主檔並依機構 ID 區隔，而非瀏覽器端共用儲存；此處為原型示範簡化。 */
-var LS_ORG_COLLEGE_KEY = 'tliDemoOrgColleges';
-var LS_ORG_DEPT_KEY = 'tliDemoOrgDepartments';
-var LS_ORG_CLASS_KEY = 'tliDemoOrgClasses';
-var LS_ORG_LOG_KEY = 'tliDemoInstOrgLog';
-function defaultOrgColleges(){
-  return [
-    {id:'c0', name:'商學院', status:'啟用'},
-    {id:'c1', name:'工學院', status:'啟用'},
-    {id:'c2', name:'外語學院', status:'啟用'},
-    {id:'c3', name:'人文學院', status:'啟用'},
-    {id:'c4', name:'理學院', status:'啟用'}
-  ];
-}
-function defaultOrgDepartments(){
-  return [
-    {id:'d0', collegeId:'c0', name:'企業管理學系', status:'啟用'},
-    {id:'d1', collegeId:'c0', name:'國際貿易學系', status:'啟用'},
-    {id:'d2', collegeId:'c1', name:'資訊工程學系', status:'啟用'},
-    {id:'d3', collegeId:'c1', name:'機械工程學系', status:'啟用'},
-    {id:'d4', collegeId:'c2', name:'應用外語學系', status:'啟用'},
-    {id:'d5', collegeId:'c3', name:'歷史學系', status:'啟用'},
-    {id:'d6', collegeId:'c3', name:'中國文學系', status:'啟用'},
-    {id:'d7', collegeId:'c4', name:'應用數學學系', status:'啟用'}
-  ];
-}
-function defaultOrgClassesForCount(){
-  /* 僅供本頁計算「班級數」用，班級本體由機構端 u04 自助維護；預設值需與 u04 一致才不會首次載入時數字對不上 */
-  return [
-    {id:'cl0', deptId:'d0', status:'啟用'}, {id:'cl1', deptId:'d0', status:'啟用'},
-    {id:'cl2', deptId:'d2', status:'啟用'}, {id:'cl3', deptId:'d3', status:'啟用'},
-    {id:'cl4', deptId:'d4', status:'啟用'}, {id:'cl5', deptId:'d5', status:'啟用'},
-    {id:'cl6', deptId:'d6', status:'啟用'}, {id:'cl7', deptId:'d7', status:'啟用'}
-  ];
-}
-function loadOrgColleges(){
-  try{ var raw = localStorage.getItem(LS_ORG_COLLEGE_KEY); if (raw){ var arr = JSON.parse(raw); if (arr && arr.length) return arr; } }catch(err){}
-  return defaultOrgColleges();
-}
-function loadOrgDepartments(){
-  try{ var raw = localStorage.getItem(LS_ORG_DEPT_KEY); if (raw){ var arr = JSON.parse(raw); if (arr && arr.length) return arr; } }catch(err){}
-  return defaultOrgDepartments();
-}
-function loadOrgClassesForCount(){
-  try{ var raw = localStorage.getItem(LS_ORG_CLASS_KEY); if (raw){ var arr = JSON.parse(raw); if (arr && arr.length) return arr; } }catch(err){}
-  return defaultOrgClassesForCount();
-}
-function saveOrgColleges(list){ try{ localStorage.setItem(LS_ORG_COLLEGE_KEY, JSON.stringify(list)); }catch(err){} }
-function saveOrgDepartments(list){ try{ localStorage.setItem(LS_ORG_DEPT_KEY, JSON.stringify(list)); }catch(err){} }
-function loadInstOrgLog(){
-  try{ var raw = localStorage.getItem(LS_ORG_LOG_KEY); if (raw){ var arr = JSON.parse(raw); if (arr) return arr; } }catch(err){}
-  return [
-    {time:'2026-09-08 10:15', who:'王小華（機構管理者）', what:'新增班級「應用數學學系二年級」'},
-    {time:'2026-09-09 09:40', who:'王小華（機構管理者）', what:'將「機械工程學系二年級」班級人數更新為 33 人'}
-  ];
-}
-function pushInstOrgLog(what){
-  var log = loadInstOrgLog();
-  log.unshift({time: nowStr(), who:'TLI 顧問', what: what});
-  if (log.length > 20) log.length = 20;
-  try{ localStorage.setItem(LS_ORG_LOG_KEY, JSON.stringify(log)); }catch(err){}
-}
-function orgCollegeName(id, colleges){ var c = colleges.find(function(x){return x.id===id;}); return c ? c.name : '－'; }
-function renderOrgStructureTab(e){
-  var colleges = loadOrgColleges();
-  var depts = loadOrgDepartments();
-  var classes = loadOrgClassesForCount();
-  var deptCountOf = function(collegeId){ return depts.filter(function(d){ return d.collegeId===collegeId; }).length; };
-  var classCountOf = function(deptId){ return classes.filter(function(c){ return c.deptId===deptId && c.status==='啟用'; }).length; };
-  var collegeRows = colleges.map(function(c){
-    return '<tr><td>'+c.name+'</td><td>'+deptCountOf(c.id)+'</td><td>'+(c.status==='啟用'?'<span class="badge green">'+i18nT('啟用','Enabled')+'</span>':'<span class="badge grey">'+i18nT('停用','Disabled')+'</span>')+'</td></tr>';
-  }).join('');
-  var deptRows = depts.map(function(d){
-    return '<tr><td>'+d.name+'</td><td>'+orgCollegeName(d.collegeId, colleges)+'</td><td>'+classCountOf(d.id)+'</td><td>'+(d.status==='啟用'?'<span class="badge green">'+i18nT('啟用','Enabled')+'</span>':'<span class="badge grey">'+i18nT('停用','Disabled')+'</span>')+'</td></tr>';
-  }).join('');
-  var log = loadInstOrgLog();
-  var logHtml = log.length ? '<div class="loglist"><div class="hint" style="margin-bottom:4px">'+i18nT('修改紀錄（含機構端班級自助維護）','Change Log (includes self-service class changes on the institution side)')+'</div>' + log.slice(0,6).map(function(l){
-    return '<div class="logrow">'+l.time+'　'+l.who+'　'+l.what+'</div>';
-  }).join('') + '</div>' : '';
-  return '<div class="note" style="margin-bottom:12px">'+i18nT('學院與科系由 TLI 依合作合約建檔，機構端僅唯讀顯示；班級由機構窗口在「期程與課表 → 系所與班級管理」自行維護。聊天室場次「適用科系」（教師端）即引用此科系清單，一場可對應多個科系。','Colleges and departments are set up by TLI according to the partnership contract; the institution side only sees them read-only. Classes are self-maintained by the institution contact under “Term & Schedule → Colleges & Classes”. A chatroom session’s “applicable departments” (teacher side) references this department list, and one session can map to multiple departments.')+'</div>' +
-    '<div class="sectiontitle">'+i18nT('學院','College')+'<span class="demo-tag">'+i18nT('由 TLI 建檔','Set up by TLI')+'</span></div>' +
-    '<div class="tablewrap"><table><tr><th>'+i18nT('學院名稱','College Name')+'</th><th>'+i18nT('科系數','Departments')+'</th><th>'+i18nT('狀態','Status')+'</th></tr>'+collegeRows+'</table></div>' +
-    '<div style="text-align:right;margin:8px 0 4px"><button class="btn ghost" onclick="openCollegeOrgModal()">'+i18nT('新增／編輯學院','Add / Edit College')+'</button></div>' +
-    '<div class="sectiontitle" style="margin-top:16px">'+i18nT('科系','Department')+'<span class="demo-tag">'+i18nT('由 TLI 建檔','Set up by TLI')+'</span></div>' +
-    '<div class="tablewrap"><table><tr><th>'+i18nT('科系名稱','Department Name')+'</th><th>'+i18nT('所屬學院','College')+'</th><th>'+i18nT('班級數','Classes')+'</th><th>'+i18nT('狀態','Status')+'</th></tr>'+deptRows+'</table></div>' +
-    '<div style="text-align:right;margin:8px 0 4px"><button class="btn ghost" onclick="openDeptOrgModal()">'+i18nT('新增／編輯科系','Add / Edit Department')+'</button></div>' +
-    logHtml;
-}
-/* ---- 學院：代為新增／編輯 modal ---- */
-function openCollegeOrgModal(){
-  var colleges = loadOrgColleges();
-  var picker = document.getElementById('collegeOrgPicker');
-  picker.innerHTML = colleges.map(function(c,idx){ return '<option value="'+idx+'">'+c.name+'</option>'; }).join('') + '<option value="__new__">'+i18nT('＋ 新增學院','＋ Add College')+'</option>';
-  onCollegeOrgPickerChange(picker.value);
-  document.getElementById('collegeOrgModal').classList.add('open');
-}
-function onCollegeOrgPickerChange(val){
-  var colleges = loadOrgColleges();
-  if (val==='__new__'){
-    document.getElementById('collegeOrgName').value = '';
-    document.getElementById('collegeOrgStatusSel').value = '啟用';
-  } else {
-    var c = colleges[Number(val)];
-    document.getElementById('collegeOrgName').value = c.name;
-    document.getElementById('collegeOrgStatusSel').value = c.status;
-  }
-}
-function saveCollegeOrg(){
-  var colleges = loadOrgColleges();
-  var depts = loadOrgDepartments();
-  var picker = document.getElementById('collegeOrgPicker');
-  var name = document.getElementById('collegeOrgName').value.trim();
-  if (!name){ toast(i18nT('請輸入學院名稱','Please enter a college name')); return; }
-  var status = document.getElementById('collegeOrgStatusSel').value;
-  var label;
-  if (picker.value==='__new__'){
-    colleges.push({id:'cnew'+Date.now(), name:name, status:status});
-    label = i18nT('新增學院「'+name+'」','College “'+name+'” added');
-  } else {
-    var c = colleges[Number(picker.value)];
-    if (status==='停用'){
-      var activeDeptCount = depts.filter(function(d){ return d.collegeId===c.id && d.status==='啟用'; }).length;
-      if (activeDeptCount>0){ toast(i18nT('「'+c.name+'」目前仍有 '+activeDeptCount+' 個啟用中的科系，請先停用該學院下所有科系。','“'+c.name+'” still has '+activeDeptCount+' active department(s). Please disable all departments under this college first.')); return; }
-    }
-    label = i18nT('編輯學院「'+c.name+'」','College “'+c.name+'” updated');
-    c.name = name; c.status = status;
-  }
-  saveOrgColleges(colleges);
-  pushInstOrgLog(label);
-  closeModal('collegeOrgModal');
-  renderEntDrawerBody(entById(currentEntId));
-  toast(i18nT('已儲存：','Saved: ')+label);
-}
-/* ---- 科系：代為新增／編輯 modal ---- */
-function openDeptOrgModal(){
-  var depts = loadOrgDepartments();
-  var colleges = loadOrgColleges();
-  var picker = document.getElementById('deptOrgPicker');
-  picker.innerHTML = depts.map(function(d,idx){ return '<option value="'+idx+'">'+d.name+'</option>'; }).join('') + '<option value="__new__">'+i18nT('＋ 新增科系','＋ Add Department')+'</option>';
-  document.getElementById('deptOrgCollegeSel').innerHTML = colleges.map(function(c){ return '<option value="'+c.id+'">'+c.name+'</option>'; }).join('');
-  onDeptOrgPickerChange(picker.value);
-  document.getElementById('deptOrgModal').classList.add('open');
-}
-function onDeptOrgPickerChange(val){
-  var depts = loadOrgDepartments();
-  var colleges = loadOrgColleges();
-  if (val==='__new__'){
-    document.getElementById('deptOrgName').value = '';
-    document.getElementById('deptOrgCollegeSel').value = colleges[0] ? colleges[0].id : '';
-    document.getElementById('deptOrgStatusSel').value = '啟用';
-  } else {
-    var d = depts[Number(val)];
-    document.getElementById('deptOrgName').value = d.name;
-    document.getElementById('deptOrgCollegeSel').value = d.collegeId;
-    document.getElementById('deptOrgStatusSel').value = d.status;
-  }
-}
-function saveDeptOrg(){
-  var depts = loadOrgDepartments();
-  var classes = loadOrgClassesForCount();
-  var picker = document.getElementById('deptOrgPicker');
-  var name = document.getElementById('deptOrgName').value.trim();
-  if (!name){ toast(i18nT('請輸入科系名稱','Please enter a department name')); return; }
-  var collegeId = document.getElementById('deptOrgCollegeSel').value;
-  var status = document.getElementById('deptOrgStatusSel').value;
-  var label;
-  if (picker.value==='__new__'){
-    depts.push({id:'dnew'+Date.now(), collegeId:collegeId, name:name, status:status});
-    label = i18nT('新增科系「'+name+'」','Department “'+name+'” added');
-  } else {
-    var d = depts[Number(picker.value)];
-    if (status==='停用'){
-      var activeClsCount = classes.filter(function(c){ return c.deptId===d.id && c.status==='啟用'; }).length;
-      if (activeClsCount>0){ toast(i18nT('「'+d.name+'」目前仍有 '+activeClsCount+' 個啟用中的班級，請先請機構窗口停用該科系下所有班級。','“'+d.name+'” still has '+activeClsCount+' active class(es). Please ask the institution contact to disable all classes under this department first.')); return; }
-    }
-    label = i18nT('編輯科系「'+d.name+'」','Department “'+d.name+'” updated');
-    d.name = name; d.collegeId = collegeId; d.status = status;
-  }
-  saveOrgDepartments(depts);
-  pushInstOrgLog(label);
-  closeModal('deptOrgModal');
-  renderEntDrawerBody(entById(currentEntId));
-  toast(i18nT('已儲存：','Saved: ')+label);
-}
-
 /* ================= 示範資料：企業客戶 ================= */
-var ENT_NAMES = TLI_MASTERS.orgCustomers.slice(0,12).map(function(o){ return o.name; }); // 來源：共用主檔 TLI_MASTERS.orgCustomers，其清單維護入口在 a17
+var ENT_NAMES = {}; // 索引＝主檔 orgCustomers 的 id 數字（ent6 → 6），索引不因主檔刪項而位移
+TLI_MASTERS.orgCustomers.forEach(function(o){ ENT_NAMES[parseInt(String(o.id).replace(/\D/g,''),10)] = o.name; }); // 來源：共用主檔 TLI_MASTERS.orgCustomers，其清單維護入口在 a17
 var ENT_ADVISORS = ['顧問 A','顧問 B','顧問 C','顧問 D'];
 var ENT_MANAGERS = [
   {name:'林淑惠', title:'人資處長'}, {name:'陳建宏', title:'教育訓練主管'}, {name:'黃雅婷', title:'總務經理'},
@@ -726,32 +500,15 @@ function orgPlanOptionsHtml(tierCode, selected){
   return plans.map(function(p){ return '<option'+(p.name===selected?' selected':'')+'>'+p.name+'</option>'; }).join('');
 }
 
-/* 客戶類型（v43 架構定案，2026-09-27 改版；2026-09-28 再修正：拿掉與「合作夥伴管理」a20 重複的加盟合約欄位）：
-   企業與學校在系統底層是同一種東西——一個單位出錢，買課給底下一群人上，做一套系統就夠，每一家只開通它用得到
-   的功能，合約內容（方案／期間／付款條件／時數池或預付金額）跟企業完全一樣。原本獨立的「代理商」類型不屬於
-   組織客戶（代理是介紹客戶來源的合作夥伴，本身不買課、不buy課給底下的人上，歸「合作夥伴管理」a20 管理），
-   故不再是本頁可選類型；原索引 1、3 的代理商示範資料回退為一般企業（沿用 ENT_NAMES 既有公司名）。
-   機構（學校）的企業名稱一律用虛構名，指定索引覆寫，不與 ENT_NAMES 混用；本頁的「學校」＝像企業一樣付費買課
-   給自己學生／教職員使用的組織客戶，跟「學校是否同時也是 a20 的加盟夥伴」是兩件事、不在本頁記錄或連結，
-   如需查加盟合約請至「合作夥伴管理」（a20）。 */
-var ENT_TYPE_OVERRIDE = {
-  5: {type:'institution', name:'範例州立大學'},
-  9: {type:'institution', name:'範例州立大學 分校A'},
-  /* 12＝「範例半導體股份有限公司」：企業管理者角色（h00–h07，陳雅婷）示範租戶，
-     對應共用主檔 orgCustomers 的 ent12；合約細節見下方 makeEnterprise 的 isRefSemi 覆寫。
-     20260928 移除原索引 12「範例大學語言中心」——範例是加盟夥伴（合作夥伴管理 a20 的 p02），
-     不該同時是本頁「組織客戶」，故不再於本頁與 orgCustomers 主檔重複列出 */
-  12: {type:'general', name:'範例半導體股份有限公司'}
-};
-var ENT_TYPE_LABELS = {general:'企業', institution:'學校'};
-var ENT_TYPE_LABELS_EN = {general:'Enterprise', institution:'Institution'};
+/* 客戶類型：組織客戶一律是企業（entType='general'）；代理屬於合作夥伴，不在本頁。
+   學校類夥伴走「合作夥伴管理」a20 的專案合作型態，不在本頁建檔。
+   index 12＝「範例半導體股份有限公司」：企業管理者角色（h00–h07，陳雅婷）示範租戶，
+   合約細節見下方 makeEnterprise 的 isRefSemi 覆寫。 */
+var ENT_TYPE_LABELS = {general:'企業'};
+var ENT_TYPE_LABELS_EN = {general:'Enterprise'};
 function entTypeLabelText(t){ return i18nT(ENT_TYPE_LABELS[t], ENT_TYPE_LABELS_EN[t]); }
-/* 功能開關（v43 架構定案；20260929 隨「拿掉學校類型」改版：本頁組織客戶只剩企業一種型態，
-   系所／班級／期程課表等機構專屬功能不再對外開放設定——加盟方（可能是學校也可能是其他機構）
-   一律在「合作夥伴管理」a20 與加盟端處理。合約與時數池、成員名單、使用報表每一家都一樣、預設恆為開啟；
-   HR 儀表板／部門管理／請假與申訴審核／老師評語／資料串接為可個別開關的企業功能。
-   舊有 institution 分支保留在 FEATURE_DEFS／defaultFeatures 供既有機構示範資料（範例州立大學等，
-   已從本頁列表排除）內部資料結構相容用，不再對外顯示切換介面。 */
+/* 功能開關：本頁組織客戶只剩企業一種型態。合約與時數池、成員名單、使用報表每一家都一樣、預設恆為開啟；
+   HR 儀表板／部門管理／請假與申訴審核／老師評語／資料串接為可個別開關的企業功能。 */
 var FEATURE_DEFS = {
   common: [
     {key:'contractPool', label:'合約與時數池', en:'Contract & Hour Pool'},
@@ -764,20 +521,12 @@ var FEATURE_DEFS = {
     {key:'leaveApproval', label:'請假與申訴審核', en:'Leave & Appeal Review'},
     {key:'teacherComments', label:'老師評語', en:'Teacher Comments'},
     {key:'dataIntegration', label:'資料串接', en:'Data Integration'}
-  ],
-  institution: [
-    {key:'orgStructure', label:'系所／班級三層組織', en:'College / Department / Class Structure'},
-    {key:'classMgmt', label:'班級管理', en:'Class Management'},
-    {key:'semesterSchedule', label:'期程與課表', en:'Term & Schedule'},
-    {key:'localTeachers', label:'在地教師建檔', en:'Local Teacher Records'}
   ]
 };
 function defaultFeatures(entType){
   var f = {contractPool:true, memberList:true, usageReport:true,
-    hrDashboard:false, deptMgmt:false, leaveApproval:false, teacherComments:false, dataIntegration:false,
-    orgStructure:false, classMgmt:false, semesterSchedule:false, localTeachers:false};
+    hrDashboard:false, deptMgmt:false, leaveApproval:false, teacherComments:false, dataIntegration:false};
   if (entType==='general'){ f.hrDashboard=true; f.deptMgmt=true; f.leaveApproval=true; f.teacherComments=true; f.dataIntegration=true; }
-  if (entType==='institution'){ f.orgStructure=true; f.classMgmt=true; f.semesterSchedule=true; f.localTeachers=true; }
   return f;
 }
 /* activeFeatureDraft：目前可編輯的功能開關草稿指標，新增組織客戶表單與功能開關編輯 modal 共用同一個 checkbox 渲染函式，
@@ -789,8 +538,7 @@ function renderFeatureTogglesHtml(entType, features, editable){
     FEATURE_DEFS.common.map(function(f){
       return '<label style="display:block;font-size:13px;margin-bottom:6px"><input type="checkbox" checked disabled> '+i18nT(f.label,f.en)+'</label>';
     }).join('') + '</div>';
-  /* 本頁組織客戶只剩企業一種型態，企業專屬功能一律顯示；entType!=='general' 只會發生在已從本頁列表
-     排除的機構示範資料（不會經由這個渲染函式被實際看到），故不再另外分兩張卡片顯示適用/不適用訊息 */
+  /* 本頁組織客戶只剩企業一種型態，企業專屬功能一律顯示 */
   html += '<div class="card" style="padding:12px"><h2 style="font-size:13px;margin:0 0 8px">'+i18nT('企業功能','Enterprise Features')+'</h2>';
   html += FEATURE_DEFS.general.map(function(f){
     var checked = features[f.key] ? 'checked' : '';
@@ -800,10 +548,10 @@ function renderFeatureTogglesHtml(entType, features, editable){
   html += '</div>';
   return html;
 }
-/* 包含上課型態與聊天室報名模式（20260910f 新增）：與 a04_packages.html 的 COURSE_TYPE_OPTIONS 為同一組列舉，
-   決定此合約下的員工／學生能否看到並報名聊天室場次；chatRegMode 決定報名方式是全員開放還是白名單（見 h02／u02） */
-var COURSE_TYPE_OPTIONS = ['一對一','團體直播','團體聊天室','自學影音'];
-var COURSE_TYPE_EN = {'一對一':'1-on-1','團體直播':'Group Livestream','團體聊天室':'Group Chatroom','自學影音':'Self-paced Video'};
+/* 包含上課型態與 Mandarin Lounge 報名模式（20260910f 新增）：與 a04_packages.html 的 COURSE_TYPE_OPTIONS 為同一組列舉，
+   決定此合約下的員工／學生能否看到並報名 Mandarin Lounge 場次；chatRegMode 決定報名方式是全員開放還是白名單（見 h02／u02） */
+var COURSE_TYPE_OPTIONS = ['一對一','團體直播','Mandarin Lounge','自學影音'];
+var COURSE_TYPE_EN = {'一對一':'1-on-1','團體直播':'Group Livestream','Mandarin Lounge':'Mandarin Lounge','自學影音':'Self-paced Video'};
 function courseTypeLabel(ct){ return i18nT(ct, COURSE_TYPE_EN[ct] || ct); }
 
 /* 廠區／據點（2026-09-10 新增）：每家一般企業可設多個廠區，各自綁定國家地區與時區，
@@ -907,40 +655,6 @@ function makeContractHistory(i, currentPlanName, currentDiscountRate, currentSta
   versions.push({version:'v'+(histCount+1)+'.0', effectiveDate:currentStart, planSummary: currentPlanName+'／折扣 '+currentDiscountRate+'%', status:'生效中'});
   return versions;
 }
-/* 學期紀錄清單（v2 新增：機構授權「學期設定」表格用，示範畫面，資料為模擬數字。
-   固定產出「上一學期（已結束）／本學期（進行中）／下學期（未開始）」三筆，狀態於畫面渲染時依今天日期動態判斷。
-   學期只用於「期程與課表」這項學校專屬功能開關的示範畫面，跟合約商務條款無關（合約欄位跟企業共用，見
-   buildContractsFromLegacy）。
-   20260909f 修正：學期年份改錨定「今天」的實際年份，不再取合約起始日（start，最舊可回溯到 2025-01-01）的年份——
-   合約起始日隨機分布可能落在較舊年份，若沿用該年份推算學期，三筆學期會全數早於今天，導致「本學期」永遠找不到
-   進行中的學期。此處僅影響學期起訖年份的計算基準，不影響 contractStart/contractEnd 等既有合約日期欄位。 */
-function makeSemesterList(i, start){
-  var y = new Date().getFullYear();
-  return [
-    {id:'sem'+i+'_0', name:(y-1)+' 秋季班', start:(y-1)+'-09-01', end:(y-1)+'-12-20'},
-    {id:'sem'+i+'_1', name:y+' 春季班', start:y+'-02-01', end:y+'-06-15'},
-    {id:'sem'+i+'_2', name:y+' 秋季班', start:y+'-09-01', end:y+'-12-20'}
-  ];
-}
-/* 機構授權型專屬資料（v2 新增；2026-09-28 改版：拿掉加盟合約才有的結算欄位——那是「合作夥伴管理」a20
-   加盟合約的內容，跟本頁「學校＝組織客戶」是兩件事；本頁機構專屬資料只留學期、專屬代碼、資源包、機構窗口
-   這些跟企業無對應、需要學校特有欄位示範的部分。） */
-function makeInstitutionInfo(i, start, end){
-  var r = seededRand(i*431+241), r2 = seededRand(i*443+251);
-  var semester = r > 0.5 ? '上學期' : '下學期';
-  var semStart = semester==='上學期' ? start.slice(0,4)+'-09-01' : start.slice(0,4)+'-02-01';
-  var mgr = ENT_MANAGERS[(i+2) % ENT_MANAGERS.length];
-  return {
-    periodStart: start, periodEnd: end,
-    semester: semester, semesterStart: semStart, semesterEnd: addDays(semStart, 130),
-    code: 'INST-'+padNum(i+1,4), emailDomain: '@example-state-u.edu',
-    studentCount: 300 + Math.floor(r2*1200),
-    contactName: mgr.name, contactTitle: mgr.title,
-    contactEmail: 'contact'+i+'@example-state-u.edu',
-    semesters: makeSemesterList(i, start),
-    extensionLog: [] /* 20260909 新增：權益展延核准紀錄，比照合約展延申請的紀錄列做法 */
-  };
-}
 /* 代理商型專屬資料（v2 新增：轉介碼、名單歸屬規則、結算週期，示範畫面） */
 function makeAgentInfo(i){
   var r = seededRand(i*457+263);
@@ -957,9 +671,7 @@ function makeAgentInfo(i){
 /* ================= 合約（v4 改版，2026-09-28：合約管理（原 a12）併入本頁——合約跟著組織客戶走。
    一家組織客戶可有多份合約（沿用既有 contractHistory 版本紀錄），欄位改採 a12 合約管理原本的
    合約欄位結構（方案／期間／付款條件／幣別／計價單位／時數池或預付金額／合約預設值／附件／備註），
-   企業與學校（機構）共用同一組欄位、檢視與編輯共用同一組欄位——學校跟企業一樣是「買課給自己的人用」，
-   不是加盟，故不放品牌授權金額／營收分潤比例／教材費用／教師培訓費用／品牌露出這些加盟合約欄位（那些是
-   「合作夥伴管理」a20 加盟型夥伴的合約內容，跟本頁組織客戶合約是兩件事）。
+   檢視與編輯共用同一組欄位；合作夥伴（代理／經銷／專案合作）的條件不放在本頁，一律在「合作夥伴管理」a20 維護。
    合約預設值（時區判定基準／階梯計價／預付款門檻％／合約展延）沿用原「合約參數」分頁的對應設定值；
    原合約參數分頁其餘欄位（取消與改期規則、審核模式、部門配額、上課型態等）移至「使用狀況」分頁，
    屬使用規則而非合約商務條款，故不重複出現於合約分頁。 ================= */
@@ -983,21 +695,18 @@ function buildContractsFromLegacy(e){
       renewalMode: (cp.renewalExtension && cp.renewalExtension.days) ? 'auto' : 'none',
       renewalMonths: (cp.renewalExtension && cp.renewalExtension.days) ? Math.max(1,Math.round(Number(cp.renewalExtension.days)/30)) : 12
     };
-    /* 「範例州立大學」（索引 5）示範跨頁對齊教材：改成跟企業一樣的時數池合約，
-       200 小時時數池提供給交換學生使用，非加盟計費 */
-    var isFeaturedUniv = (e.id === 'ent5');
     var contract = {
       id: 'CT-'+e.id.toUpperCase()+'-'+padNum(idx+1,2),
       planName: planName, start: start, end: end,
       status: isLast ? '生效' : '到期',
       paymentTerms: (cp.paymentMethod==='monthly') ? '月結' : (cp.paymentMethod==='prepaid' ? '預付' : '季結'),
       currency: 'TWD',
-      pricingMode: isFeaturedUniv ? 'hourpool' : (cp.pricingUnit || 'hourpool'),
-      poolTotal: isFeaturedUniv ? 200 : (cp.poolTotal || 0),
+      pricingMode: (cp.pricingUnit || 'hourpool'),
+      poolTotal: (cp.poolTotal || 0),
       prepaidAmount: cp.prepaidAmount || 0,
       defaults: defaults,
       files: [{name: e.name+'_合約.pdf', size: (600+idx*35)+' KB'}],
-      notes: isFeaturedUniv ? '本合約時數池提供交換學生使用，依學期使用進度追蹤。' : ''
+      notes: ''
     };
     return contract;
   });
@@ -1005,9 +714,8 @@ function buildContractsFromLegacy(e){
 function makeEnterprise(i){
   var r = seededRand(i*5+31), r2 = seededRand(i*9+33), r3 = seededRand(i*13+35), r4 = seededRand(i*17+37);
   var r5 = seededRand(i*19+41), r6 = seededRand(i*23+43);
-  var override = ENT_TYPE_OVERRIDE[i];
-  var entType = override ? override.type : 'general';
-  var entName = override ? override.name : ENT_NAMES[i];
+  var entType = 'general';
+  var entName = ENT_NAMES[i];
   /* 13＝「範例半導體股份有限公司」：企業管理者角色（h00–h07，陳雅婷）示範租戶，合約條件改為固定值，
      與 h01／h05 顯示的合約期間、時數池對齊，而不是跟其他公司一樣隨機產生 */
   var isRefSemi = (i===12);
@@ -1051,7 +759,7 @@ function makeEnterprise(i){
     overageLeavePolicy: ['appeal','appeal','deduct','noleave'][Math.floor(r5*4)],
     /* 取消時限與扣時數判定基準（2026-09-10 修改：原「企業慣用時區」單一時區改為兩種判定基準）：
        'campus' = 依員工所屬廠區時區（預設，一般企業有廠區時才可選）；'contract' = 統一用合約指定時區。
-       沒有廠區資料的客戶類型（機構授權／代理商）固定只能用 contract 基準。 */
+       沒有廠區資料的客戶固定只能用 contract 基準。 */
     tzBasis: (campuses.length && i % 5 !== 0) ? 'campus' : 'contract',
     timezone: CAMPUS_TZ_LIST[i % CAMPUS_TZ_LIST.length].tz,
     poolTotal: isRefSemi ? 6000 : (500 + Math.floor(r3*2000)),
@@ -1071,11 +779,10 @@ function makeEnterprise(i){
     prepaidDeductUnit: '', // 每堂倒扣單價待定，由 TLI 拍板
     prepaidBalance: Math.floor(prepaidAmount * (0.3 + seededRand(i*421+227)*0.6)),
     prepaidThreshold: '', // 低於門檻提醒之門檻值待定，由 TLI 拍板，不由固定比例試算
-    /* 包含上課型態：一般企業／機構授權示範資料中，除 i%3===2 外都含團體聊天室（index 5「範例州立大學」固定含，
-       以對齊 t04／u02／m14 的示範情境）；chatRegMode 預設全員開放，index 0 示範白名單模式供 h02 對照 */
+    /* 包含上課型態：除 i%3===2 外都含 Mandarin Lounge；chatRegMode 預設全員開放，index 0 示範白名單模式供 h02 對照 */
     courseTypes: (function(){
       var base = ['一對一','團體直播'];
-      if (i % 3 !== 2 || i === 5) base.push('團體聊天室');
+      if (i % 3 !== 2) base.push('Mandarin Lounge');
       if (i % 4 === 0) base.push('自學影音');
       return base;
     })(),
@@ -1084,9 +791,8 @@ function makeEnterprise(i){
   var discountRate = 5 + Math.floor(r2*20);
   var tierPlansForEnt = orgPlansForTier(tier);
   var planName = tierPlansForEnt.length ? tierPlansForEnt[i % tierPlansForEnt.length].name : '';
-  var institutionInfo = entType==='institution' ? makeInstitutionInfo(i, start, end) : null;
   var agentInfo = entType==='agent' ? makeAgentInfo(i) : null;
-  var finalEmpCount = entType==='institution' ? institutionInfo.studentCount : (entType==='agent' ? 0 : employees.length);
+  var finalEmpCount = (entType==='agent' ? 0 : employees.length);
   var ent = {
     id:'ent'+i, name:entName, entType:entType, tier:tier, planName: planName,
     empCount:finalEmpCount, contractStart:start, contractEnd:end, manager:mgr,
@@ -1102,7 +808,6 @@ function makeEnterprise(i){
     contractParamsSet: contractParamsSet, contractParams: contractParams,
     connectionRequests: connectionRequests, renewalRequests: makeRenewalRequests(i, end),
     contractHistory: makeContractHistory(i, planName, discountRate, start, tier),
-    institutionInfo: institutionInfo,
     agentInfo: agentInfo,
     /* 功能開關（v43 架構定案）：預設值依客戶類型套用共同＋型別專屬功能，可於「功能設定」分頁編輯 */
     features: defaultFeatures(entType),
@@ -1115,7 +820,7 @@ function makeEnterprise(i){
   ent.contracts = buildContractsFromLegacy(ent);
   return ent;
 }
-var ENTERPRISES = []; for (var ei=0; ei<13; ei++) ENTERPRISES.push(makeEnterprise(ei));
+var ENTERPRISES = []; Object.keys(ENT_NAMES).map(Number).sort(function(a,b){ return a-b; }).forEach(function(ei){ ENTERPRISES.push(makeEnterprise(ei)); });
 
 function entById(id){ return ENTERPRISES.find(function(e){return e.id===id;}); }
 
@@ -1344,10 +1049,9 @@ function convertLeadToCustomer(){
 
 /* ================= 徽章 ================= */
 function entTypeBadge(t){
-  if (t==='institution') return '<span class="badge teal">'+entTypeLabelText('institution')+'</span>';
   return '<span class="badge blue">'+entTypeLabelText('general')+'</span>';
 }
-/* 20260929：組織客戶列表與詳情改以「會員分類」（企業簽約 B／政府單位 G）當唯一分類徽章，取代舊的企業／學校類型徽章 */
+/* 20260929：組織客戶列表與詳情改以「會員分類」（企業簽約 B／政府單位 G）當唯一分類徽章，取代舊的類型徽章 */
 function entTierBadge(tierCode){
   return '<span class="badge '+(tierCode==='G'?'teal':'blue')+'">'+orgTierLabel(tierCode)+'</span>';
 }
@@ -1359,13 +1063,6 @@ function invoiceBadge(s){
   return '<span class="badge orange">'+i18nT('待開立','Pending')+'</span>';
 }
 function contractParamsBadge(e){ return e.contractParamsSet ? '<span class="badge green">'+i18nT('已設定','Configured')+'</span>' : '<span class="badge grey">'+i18nT('未設定','Not Configured')+'</span>'; }
-/* 學期狀態徽章：依今天日期與學期起訖判斷進行中／已結束／未開始（v2 新增） */
-function semesterStatusBadge(s){
-  var today = new Date().toISOString().slice(0,10);
-  if (today < s.start) return '<span class="badge grey">'+i18nT('未開始','Not Started')+'</span>';
-  if (today > s.end) return '<span class="badge grey">'+i18nT('已結束','Ended')+'</span>';
-  return '<span class="badge green">'+i18nT('進行中','In Progress')+'</span>';
-}
 function contractExpiryCell(e){
   var today = new Date();
   var end = new Date(e.contractEnd+'T00:00:00');
@@ -1416,10 +1113,8 @@ function switchMainTab(key){
 /* ================= 企業列表 ================= */
 /* 20260928 改版：篩選改為 ≤2 下拉（類型／狀態）＋更多篩選（會員分類／請款狀態），
    禁用 chip 牆；篩選值改為單選（下拉本質即單選），移除 toggleEntFilter 陣列式寫法；
-   拿掉「所屬夥伴」篩選與欄位——那是「合作夥伴管理」a20 的加盟夥伴歸屬，跟本頁組織客戶無關。
-   20260929 改版：拿掉「類型」（企業／學校）篩選與分類——本頁組織客戶不再分企業／學校，一律以
-   會員分類（企業簽約 B／政府單位 G，讀主檔 TLI_MASTERS.memberTiers）分類；主檔 orgCustomers 裡
-   type='institution' 的示範資料（範例州立大學／分校A）不在本頁顯示，見 entFiltered() 的排除條件。 */
+   拿掉「所屬夥伴」篩選與欄位——夥伴歸屬在「合作夥伴管理」a20 維護，跟本頁組織客戶無關。
+   20260929 改版：組織客戶只收企業，一律以會員分類（企業簽約 B／政府單位 G，讀主檔 TLI_MASTERS.memberTiers）分類。 */
 var entState = {search:'', filters:{tier:'', invoice:'', status:''}, page:1, pageSize:10};
 var ENT_FILTER_LABELS = {
   status:{'合約有效':'合約有效', '已到期':'已到期'},
@@ -1470,7 +1165,6 @@ function onEntPageSizeChange(el){ entState.pageSize = Number(el.value); entState
 function entFiltered(){
   var term = entState.search.trim().toLowerCase();
   return ENTERPRISES.filter(function(e){
-    if (e.entType==='institution') return false; // 本頁不再顯示「學校」——加盟方（可能是學校也可能是其他機構）一律在「合作夥伴管理」a20 與加盟端處理
     if (term && e.name.toLowerCase().indexOf(term)===-1 && e.manager.name.toLowerCase().indexOf(term)===-1) return false;
     if (entState.filters.tier && entState.filters.tier!==e.tier) return false;
     if (entState.filters.invoice && entState.filters.invoice!==e.invoiceStatus) return false;
@@ -1560,8 +1254,7 @@ function entDrawerTab(name){
   currentEntTab = name;
   renderEntDrawerBody(entById(currentEntId));
 }
-/* 20260928 改版：詳情分頁統一為「基本資料／窗口與成員／使用狀況／合約」四區，企業與學校共用同一套分頁，
-   內容依類型調整（不再依類型顯示不同分頁組合）；每區檢視＝表單唯讀，右上「編輯」切換可輸入，不留獨立編輯 modal。 */
+/* 20260928 改版：詳情分頁統一為「基本資料／窗口與成員／使用狀況／合約」四區，四區固定；每區檢視＝表單唯讀，右上「編輯」切換可輸入，不留獨立編輯 modal。 */
 var ENT_DETAIL_TABS = ['basic','people','usage','contracts'];
 var ENT_DETAIL_LABELS = {basic:'基本資料', people:'窗口與成員', usage:'使用狀況', contracts:'合約'};
 var ENT_DETAIL_LABELS_EN = {basic:'Basic Info', people:'Contacts & Members', usage:'Usage', contracts:'Contracts'};
@@ -1814,18 +1507,18 @@ function renderUsageRulesBlock(e){
     var checked = cp.courseTypes.indexOf(ct) > -1 ? 'checked' : '';
     return '<label style="display:inline-block;margin:0 18px 8px 0;font-size:13.5px"><input type="checkbox" class="chk" value="'+ct+'" '+checked+' onchange="onEntCourseTypeToggle(this)"> '+courseTypeLabel(ct)+'</label>';
   }).join('');
-  var hasChatRoom = cp.courseTypes.indexOf('團體聊天室') > -1;
+  var hasChatRoom = cp.courseTypes.indexOf('Mandarin Lounge') > -1;
   var chatRegModeHtml = hasChatRoom ? (
-    '<div class="formrow" style="margin-top:10px"><label>'+i18nT('聊天室報名模式','Chatroom Registration Mode')+'</label>' +
+    '<div class="formrow" style="margin-top:10px"><label>'+i18nT('Mandarin Lounge 報名模式','Mandarin Lounge Registration Mode')+'</label>' +
     '<label style="margin-right:20px;font-size:13px"><input type="radio" name="chatRegMode-'+e.id+'" value="open" '+(cp.chatRegMode!=='whitelist'?'checked':'')+' onchange="onChatRegModeChange(this.value)"> '+i18nT('全員開放（預設）','Open to all (default)')+'</label>' +
     '<label style="font-size:13px"><input type="radio" name="chatRegMode-'+e.id+'" value="whitelist" '+(cp.chatRegMode==='whitelist'?'checked':'')+' onchange="onChatRegModeChange(this.value)"> '+i18nT('白名單','Whitelist')+'</label>' +
-    '<div class="hint" style="margin-top:4px">'+i18nT('白名單模式由企業 HR／學校窗口在其後台維護名單；全員開放則所有在學員工／學生皆可自主報名，兩者皆受名額上限管控。','In whitelist mode, the enterprise HR / institution contact maintains the list on their side; in open mode, all active employees/students can self-register. Both modes are still subject to the seat cap.')+'</div></div>'
+    '<div class="hint" style="margin-top:4px">'+i18nT('白名單模式由企業 HR 在其後台維護名單；全員開放則所有在學員工皆可自主報名，兩者皆受名額上限管控。','In whitelist mode, the enterprise HR maintains the list on their side; in open mode, all active employees can self-register. Both modes are still subject to the seat cap.')+'</div></div>'
   ) : '';
   return '<div class="note">'+i18nT('合約商務條款（方案、期間、付款條件等）請至「合約」分頁查看與編輯；此處為使用行為規則設定。','Commercial contract terms (plan, period, payment terms, etc.) are viewed and edited under the “Contracts” tab; this section covers usage behavior rules.')+'</div>' +
    '<div class="crosslink">'+i18nT('請假與取消規則之類型預設值來自','Leave & cancellation rule type defaults come from ')+'<a href="a17_master_data.html#params-leaverules">'+i18nT('基礎資料設定 → 參數設定 → 請假與取消規則組','Master Data Settings → Parameters → Leave & Cancellation Rule Sets')+'</a>'+i18nT('，此處僅供本合約覆寫；其餘參數預設值來自','; this section only overrides them for this contract. Other parameter defaults come from ')+'<a href="a17_master_data.html#params">'+i18nT('參數設定','Parameters')+'</a>'+i18nT('。','.')+'</div>' +
-   '<div class="sectiontitle">'+i18nT('包含上課型態與聊天室報名','Included Class Types & Chatroom Registration')+'</div>' +
+   '<div class="sectiontitle">'+i18nT('包含上課型態與 Mandarin Lounge 報名','Included Class Types & Mandarin Lounge Registration')+'</div>' +
    '<div class="formrow"><label>'+i18nT('包含上課型態','Included Class Types')+'</label><div>'+courseTypeBoxes+'</div>' +
-   '<div class="hint">'+i18nT('勾選此合約涵蓋的上課型態；勾選「團體聊天室」後，本企業員工／學校學生才能在會員區看到並報名聊天室場次。','Check the class types covered by this contract; checking “Group Chatroom” lets this enterprise’s employees/students see and register for chatroom sessions in the member area.')+'</div></div>' +
+   '<div class="hint">'+i18nT('勾選此合約涵蓋的上課型態；勾選「Mandarin Lounge」後，本企業員工才能在會員區看到並報名 Mandarin Lounge 場次。','Check the class types covered by this contract; checking “Mandarin Lounge” lets this enterprise’s employees see and register for Mandarin Lounge sessions in the member area.')+'</div></div>' +
    '<div id="chatRegModeWrap-'+e.id+'">'+chatRegModeHtml+'</div>' +
    '<div class="switchrow" style="margin-top:10px"><span class="small">'+i18nT('沿用 C2C 預設（取消時限 12 小時）。企業合約層規則只套用於本企業員工學員，不影響 C2C 個人學員的既有規則。','Follow the C2C default (12-hour cancellation window). Enterprise contract-level rules only apply to this enterprise’s employees/students and do not affect existing C2C individual member rules.')+'</span><label class="switch"><input type="checkbox" '+(cp.followC2CDefault?'checked':'')+' onchange="onFollowC2CToggle(this)"><span class="slider"></span></label></div>' +
    '<div class="sectiontitle">'+i18nT('取消與改期','Cancellation & Rescheduling')+'</div>' +
@@ -1980,9 +1673,6 @@ function renderBasicTab(e){
     html += '<div class="kv"><span>'+i18nT('統一編號','Tax ID')+'</span><span>'+(e.taxId||'－')+'</span></div>';
     html += '<div class="kv"><span>'+i18nT('對應顧問','Advisor')+'</span><span>'+e.advisor+'</span></div>';
   }
-  if (e.entType==='institution'){
-    html += '<div class="hint" style="margin:4px 0 8px">'+i18nT('如此學校同時是加盟夥伴，其加盟合約請至「','If this institution is also a franchise partner, view its franchise contract under “')+'<a class="crosslink" href="a20_agents.html" target="_blank">'+i18nT('合作夥伴管理','Partner Management')+'</a>'+i18nT('」查看。','”.')+'</div>';
-  }
   if (editing){
     html += '<div style="text-align:right;margin-top:10px"><button class="btn ghost" onclick="cancelEditSection()">'+i18nT('取消','Cancel')+'</button> <button class="btn" onclick="saveBasicSection()">'+i18nT('儲存','Save')+'</button></div>';
   }
@@ -1993,7 +1683,6 @@ function renderBasicTab(e){
     html += '<div style="text-align:right;margin-top:4px"><button class="btn ghost" onclick="cancelEditSection()">'+i18nT('取消','Cancel')+'</button> <button class="btn" onclick="saveBasicSection()">'+i18nT('儲存','Save')+'</button></div>';
   }
   html += (e.campuses && e.campuses.length ? renderCampusSection(e) : '');
-  if (e.entType==='institution') html += renderOrgStructureTab(e);
   if (window.TLI_I18N) TLI_I18N.refresh();
   return html;
 }
@@ -2004,10 +1693,7 @@ function startEditSection(section){
     entEditDraft = {taxId:e.taxId, advisor:e.advisor, features:Object.assign({}, e.features)};
   } else if (section==='people'){
     entEditDraft = {
-      managerName:e.manager.name, managerTitle:e.manager.title,
-      instContactName: e.institutionInfo?e.institutionInfo.contactName:'',
-      instContactTitle: e.institutionInfo?e.institutionInfo.contactTitle:'',
-      instContactEmail: e.institutionInfo?e.institutionInfo.contactEmail:''
+      managerName:e.manager.name, managerTitle:e.manager.title
     };
   }
   renderEntDrawerBody(e);
@@ -2037,29 +1723,16 @@ function renderPeopleTab(e){
     '<div class="sectiontitle" style="margin:0">主要窗口</div>' +
     (editing ? '' : '<button class="btn ghost small2" onclick="startEditSection(\'people\')">'+i18nT('編輯','Edit')+'</button>') +
     '</div>';
-  if (e.entType==='institution'){
-    var info = e.institutionInfo;
-    if (editing){
-      html += '<div class="formrow"><label>'+i18nT('姓名','Name')+'</label><input type="text" id="pe_name" value="'+d.instContactName+'"></div>';
-      html += '<div class="formrow"><label>'+i18nT('職稱','Title')+'</label><input type="text" id="pe_title" value="'+d.instContactTitle+'"></div>';
-      html += '<div class="formrow"><label>Email</label><input type="email" id="pe_email" value="'+d.instContactEmail+'"></div>';
-    } else {
-      html += '<div class="kv"><span>'+i18nT('姓名／職稱','Name / Title')+'</span><span>'+info.contactName+'（'+info.contactTitle+'）</span></div>';
-      html += '<div class="kv"><span>'+i18nT('聯絡方式','Contact Info')+'</span><span>'+info.contactEmail+'</span></div>';
-    }
-    html += '<div class="hint" style="margin:8px 0">'+i18nT('此機構學生名單由學校端自行維護，本頁僅顯示窗口資訊與彙總學生數（'+info.studentCount+' 人）。','This institution’s student roster is self-maintained on the institution side; this page only shows contact info and total student count ('+info.studentCount+').')+'</div>';
+  if (editing){
+    html += '<div class="formrow"><label>'+i18nT('姓名','Name')+'</label><input type="text" id="pe_name" value="'+d.managerName+'"></div>';
+    html += '<div class="formrow"><label>'+i18nT('職稱','Title')+'</label><input type="text" id="pe_title" value="'+d.managerTitle+'"></div>';
   } else {
-    if (editing){
-      html += '<div class="formrow"><label>'+i18nT('姓名','Name')+'</label><input type="text" id="pe_name" value="'+d.managerName+'"></div>';
-      html += '<div class="formrow"><label>'+i18nT('職稱','Title')+'</label><input type="text" id="pe_title" value="'+d.managerTitle+'"></div>';
-    } else {
-      html += '<div class="kv"><span>'+i18nT('姓名／職稱','Name / Title')+'</span><span>'+e.manager.name+'（'+e.manager.title+'）</span></div>';
-    }
+    html += '<div class="kv"><span>'+i18nT('姓名／職稱','Name / Title')+'</span><span>'+e.manager.name+'（'+e.manager.title+'）</span></div>';
   }
   if (editing){
     html += '<div style="text-align:right;margin-top:10px"><button class="btn ghost" onclick="cancelEditSection()">'+i18nT('取消','Cancel')+'</button> <button class="btn" onclick="savePeopleSection()">'+i18nT('儲存','Save')+'</button></div>';
   }
-  if (e.entType!=='institution'){
+  {
     html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('成員名單','Member List')+'</div>' +
       '<div style="text-align:right;margin:0 0 10px"><button class="btn ghost" onclick="openInviteModal()">'+i18nT('邀請員工','Invite Employees')+'</button></div>' +
       '<div class="orgtree">';
@@ -2080,14 +1753,8 @@ function renderPeopleTab(e){
 function savePeopleSection(){
   var e = entById(currentEntId);
   var nameEl=document.getElementById('pe_name'), titleEl=document.getElementById('pe_title'), emailEl=document.getElementById('pe_email');
-  if (e.entType==='institution'){
-    e.institutionInfo.contactName = nameEl?nameEl.value:e.institutionInfo.contactName;
-    e.institutionInfo.contactTitle = titleEl?titleEl.value:e.institutionInfo.contactTitle;
-    e.institutionInfo.contactEmail = emailEl?emailEl.value:e.institutionInfo.contactEmail;
-  } else {
-    e.manager.name = nameEl?nameEl.value:e.manager.name;
-    e.manager.title = titleEl?titleEl.value:e.manager.title;
-  }
+  e.manager.name = nameEl?nameEl.value:e.manager.name;
+  e.manager.title = titleEl?titleEl.value:e.manager.title;
   entEditSection = null; entEditDraft = null;
   renderEntDrawerBody(e);
   renderEntTable();
@@ -2097,13 +1764,9 @@ function savePeopleSection(){
 /* ---- 使用狀況 ---- */
 function renderUsageTab(e){
   var html = '';
-  if (e.entType==='institution'){
-    html += renderInstitutionUsageExtras(e, e.institutionInfo);
-  } else {
-    html += '<div class="sectiontitle">'+i18nT('學習報告','Learning Report')+'</div>' + renderReportTab(e);
-    html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('請款','Billing')+'</div>' + renderInvoiceTab(e);
-    html += renderConnReqTab(e);
-  }
+  html += '<div class="sectiontitle">'+i18nT('學習報告','Learning Report')+'</div>' + renderReportTab(e);
+  html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('請款','Billing')+'</div>' + renderInvoiceTab(e);
+  html += renderConnReqTab(e);
   html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('使用規則','Usage Rules')+'</div>' + renderUsageRulesBlock(e);
   if (window.TLI_I18N) TLI_I18N.refresh();
   return html;
@@ -2360,127 +2023,6 @@ function doSaveConnReqNote(){
   toast(i18nT('已儲存備註','Note saved'));
 }
 
-/* ================= 機構授權型詳情（2026-09-28 改版：拿掉加盟合約的分潤結算——那是「合作夥伴管理」a20
-   加盟合約的結算方式，跟本頁組織客戶無關；本頁機構「使用狀況」只留使用面資訊——學期設定、權益展延、
-   專屬代碼與信箱網域、資源包，跟企業的合約商務條款一樣已搬到「合約」分頁） ================= */
-var RESOURCE_ITEM_EN = {'影片':'Video','音檔':'Audio','測驗':'Quiz','聊天室':'Chatroom'};
-function renderInstitutionUsageExtras(e, info){
-  var resourceRows = [
-    {key:'video', label:'影片'}, {key:'audio', label:'音檔'}, {key:'quiz', label:'測驗'}, {key:'chat', label:'聊天室'}
-  ].map(function(r){
-    return '<tr><td>'+i18nT(r.label,RESOURCE_ITEM_EN[r.label])+'</td><td><input type="text" value="" placeholder="由 TLI 拍板" disabled data-i18n-placeholder="ph.decidedByTli" style="width:140px"></td></tr>';
-  }).join('');
-  var semesters = info.semesters || [];
-  var semesterRows = semesters.map(function(s){
-    return '<tr><td>'+s.name+'</td><td>'+s.start+' ～ '+s.end+'</td><td>'+semesterStatusBadge(s)+'</td></tr>';
-  }).join('');
-  var out = '<div class="sectiontitle">'+i18nT('學期設定','Semester Settings')+'</div>' +
-   '<div class="tablewrap"><table><tr><th data-i18n="label.semesterName">學期名稱</th><th data-i18n="label.dateRange">起訖日期</th><th data-i18n="common.status">狀態</th></tr>' +
-   (semesterRows || '<tr><td colspan="3" class="small" style="white-space:normal;padding:14px 12px">'+i18nT('此機構尚未建立學期紀錄。','This institution has no semester records yet.')+'</td></tr>') +
-   '</table></div>' +
-   '<div style="text-align:right;margin-top:10px"><button class="btn ghost" onclick="openAddSemesterModal()">'+i18nT('新增下學期','Add Next Semester')+'</button></div>' +
-   '<div class="sectiontitle">'+i18nT('權益展延','Entitlement Extension')+'</div>' +
-   '<div class="hint" style="margin-bottom:10px">'+i18nT('機構學生逾期未使用課程權益之展延申請。','Extension requests for institution students’ unused course entitlements past expiry.')+'</div>' +
-   renderExtensionLog(info) +
-   '<div style="text-align:right;margin-top:10px"><button class="btn orange" onclick="openInstitutionRenewalModal()">'+i18nT('核准權益展延','Approve Extension')+'</button></div>' +
-   '<div class="sectiontitle">'+i18nT('專屬代碼與信箱網域','Dedicated Code & Email Domain')+'</div>' +
-   '<div class="kv"><span>'+i18nT('專屬代碼','Dedicated Code')+'</span><span>'+info.code+'</span></div>' +
-   '<div class="kv"><span>'+i18nT('校內信箱網域','Campus Email Domain')+'</span><span>'+info.emailDomain+'</span></div>' +
-   '<div class="sectiontitle">'+i18nT('資源包','Resource Package')+'</div>' +
-   '<div class="tablewrap"><table><tr><th data-i18n="label.resourceItem">資源項目</th><th data-i18n="label.weeklyCap">每週上限</th></tr>'+resourceRows+'</table></div>';
-  if (window.TLI_I18N) TLI_I18N.refresh();
-  return out;
-}
-
-/* 新增下學期 modal（v2 新增：機構授權「學期設定」用，示範畫面，資料為模擬數字） */
-function openAddSemesterModal(){
-  document.getElementById('semName').value = '';
-  document.getElementById('semStart').value = '';
-  document.getElementById('semEnd').value = '';
-  document.getElementById('addSemesterModal').classList.add('open');
-}
-function doAddSemester(){
-  var e = entById(currentEntId);
-  var name = document.getElementById('semName').value.trim();
-  var start = document.getElementById('semStart').value;
-  var end = document.getElementById('semEnd').value;
-  if (!name || !start || !end){ toast(i18nT('請完整填寫學期名稱與起訖日期','Please fill in the semester name and date range completely')); return; }
-  if (!e.institutionInfo.semesters) e.institutionInfo.semesters = [];
-  e.institutionInfo.semesters.push({id:'semnew'+Date.now(), name:name, start:start, end:end});
-  closeModal('addSemesterModal');
-  renderEntDrawerBody(e);
-  toast(i18nT('已新增學期「'+name+'」','Semester “'+name+'” added'));
-}
-
-/* 核准權益展延 modal（v2 新增：可選擇學生或整批核准，核准前二次確認，示範畫面，資料為模擬數字） */
-var institutionRenewalState = {mode:'batch'};
-function openInstitutionRenewalModal(){
-  institutionRenewalState = {mode:'batch'};
-  renderInstitutionRenewalModal();
-  document.getElementById('institutionRenewalModal').classList.add('open');
-}
-function renderInstitutionRenewalModal(){
-  var e = entById(currentEntId);
-  var mode = institutionRenewalState.mode;
-  var students = e.employees || [];
-  var studentRows = students.map(function(em){
-    return '<div class="orgemp"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;width:100%"><input type="checkbox" class="ext-stu-check" value="'+em.id+'">'+em.name+'　<span class="small">'+em.email+'</span></label></div>';
-  }).join('');
-  var body = document.getElementById('institutionRenewalBody');
-  body.innerHTML = '<div class="note" style="margin-bottom:10px">'+i18nT('核准後僅更新畫面顯示，不會實際延長系統權益。','Approval only updates the display; it does not actually extend system entitlements.')+'</div>' +
-    '<div class="formrow"><label>'+i18nT('核准範圍','Approval Scope')+'</label>' +
-    '<label style="display:block;margin-bottom:6px"><input type="radio" name="ext_scope" value="batch" '+(mode==='batch'?'checked':'')+' onchange="onExtScopeChange(this.value)"> '+i18nT('整批核准（全部學生，共 '+students.length+' 人）','Approve all (all students, '+students.length+' total)')+'</label>' +
-    '<label style="display:block"><input type="radio" name="ext_scope" value="select" '+(mode==='select'?'checked':'')+' onchange="onExtScopeChange(this.value)"> '+i18nT('選擇學生','Select Students')+'</label>' +
-    '</div>' +
-    (mode==='select' ? '<div class="orgtree">'+(studentRows || '<div class="small">'+i18nT('此機構目前無可選學生。','This institution has no selectable students.')+'</div>')+'</div>' : '') +
-    '<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal(\'institutionRenewalModal\')">'+i18nT('取消','Cancel')+'</button> <button class="btn orange" onclick="doApproveInstitutionRenewal()">'+i18nT('核准展延','Approve Extension')+'</button></div>';
-  if (window.TLI_I18N) TLI_I18N.refresh();
-}
-function onExtScopeChange(val){
-  institutionRenewalState.mode = val;
-  renderInstitutionRenewalModal();
-}
-/* 20260909 新增：權益展延紀錄列渲染，比照 renderRenewalRequests（合約展延申請）的做法——
-   核准後直接以紀錄呈現，不再放可互動按鈕（該筆狀態已是「已核准」，無待處理動作） */
-function renderExtensionLog(info){
-  var log = info.extensionLog || [];
-  if (!log.length) return '<div class="small" style="margin-top:8px">'+i18nT('此機構目前尚無權益展延核准紀錄。','This institution has no approved extension records yet.')+'</div>';
-  var rows = log.map(function(r){
-    return '<tr><td>'+r.target+'</td><td>'+r.oldExpiry+'</td><td>'+r.newExpiry+'</td><td>'+r.approvedBy+'</td><td>'+r.time+'</td><td><span class="badge green">'+i18nT('已核准','Approved')+'</span></td></tr>';
-  }).join('');
-  return '<div class="tablewrap" style="margin-top:8px"><table><tr><th>'+i18nT('對象','Target')+'</th><th>'+i18nT('原到期','Original Expiry')+'</th><th>'+i18nT('新到期','New Expiry')+'</th><th>'+i18nT('核准人','Approved By')+'</th><th>'+i18nT('核准時間','Approved At')+'</th><th>'+i18nT('狀態','Status')+'</th></tr>'+rows+'</table></div>';
-}
-function doApproveInstitutionRenewal(){
-  var e = entById(currentEntId);
-  var info = e.institutionInfo;
-  var mode = institutionRenewalState.mode;
-  var count, label;
-  if (mode==='batch'){
-    count = (e.employees||[]).length;
-    label = i18nT('整批核准・全部學生（共 '+count+' 人）','Batch approval - all students ('+count+' total)');
-  } else {
-    var checked = document.querySelectorAll('#institutionRenewalBody .ext-stu-check:checked');
-    count = checked.length;
-    if (!count){ toast(i18nT('請至少選擇一位學生','Please select at least one student')); return; }
-    label = i18nT('選擇學生・共 '+count+' 人','Selected students - '+count+' total');
-  }
-  if (!confirm(i18nT('確認核准'+label+'的權益展延？','Confirm approving the entitlement extension for '+label+'?'))) return;
-  /* 原到期取目前最新一筆學期迄日；新到期示範展延 30 天，實際天數由 TLI 拍板 */
-  var semesters = info.semesters || [];
-  var oldExpiry = semesters.length ? semesters[semesters.length-1].end : info.periodEnd;
-  var newExpiry = addDays(oldExpiry, 30);
-  if (!info.extensionLog) info.extensionLog = [];
-  var now = new Date();
-  var timeStr = now.toISOString().slice(0,10)+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  info.extensionLog.unshift({
-    target: label, oldExpiry: oldExpiry, newExpiry: newExpiry,
-    approvedBy: '王大明（總公司管理者）', time: timeStr
-  });
-  closeModal('institutionRenewalModal');
-  renderEntDrawerBody(e);
-  toast(i18nT('已核准'+label+'的權益展延，紀錄已寫入（原到期 '+oldExpiry+' → 新到期 '+newExpiry+'）','Entitlement extension for '+label+' approved; record saved (original expiry '+oldExpiry+' → new expiry '+newExpiry+')'));
-}
-
 /* ================= 代理商型詳情（v2 新增：摘要卡＋連結至代理商詳細管理，示範畫面，資料為模擬數字） ================= */
 function renderAgentInfoTab(e){
   var info = e.agentInfo;
@@ -2622,13 +2164,6 @@ function saveNewEnterprise(){
       paymentMethod:'monthly', pricingUnit:'hourpool', prepaidAmount:0, prepaidDeductUnit:'', prepaidBalance:0, prepaidThreshold:''},
     connectionRequests:[], renewalRequests:[],
     contractHistory:[{version:'v1.0', effectiveDate:todayStr, planSummary:newEntDraft.planName+'／折扣 10%', status:'生效中'}],
-    institutionInfo: newEntDraft.entType==='institution' ? {
-      periodStart:todayStr, periodEnd:addDays(todayStr,365), semester:'上學期', semesterStart:todayStr, semesterEnd:addDays(todayStr,130),
-      code:'INST-NEW', emailDomain:'@example-state-u.edu', studentCount:0,
-      contactName:mgrName, contactTitle:mgrTitle, contactEmail:'contact@example-state-u.edu',
-      semesters: makeSemesterList(0, todayStr),
-      extensionLog: []
-    } : null,
     agentInfo: null,
     features: newEntDraft.features || defaultFeatures(newEntDraft.entType)
   };

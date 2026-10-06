@@ -283,6 +283,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
     <a class="side-link active" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
     <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m18_learning_dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="6" width="3" height="12" rx="1"/><rect x="16" y="9" width="3" height="9" rx="1"/></svg><span data-en="Learning Dashboard">學習儀表板</span></a>
+    <a class="side-link" href="m20_transcripts.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
+    <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg><span data-en="Certificates">結業證書</span></a>
     <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
     <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
     <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
@@ -386,7 +389,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         <option value="all" data-i18n="m03.filterAll">全部類型</option>
         <option value="individual" data-i18n="m03.typeIndividual">一對一</option>
         <option value="live" data-i18n="m03.typeLive">團體直播</option>
-        <option value="chat" data-i18n="m03.typeChat">聊天室</option>
+        <option value="chat" data-i18n="m03.typeChat">Mandarin Lounge</option>
         <option value="event" data-i18n="m03.typeEvent">活動</option>
       </select>
       <select class="tool-select" id="statusFilterSel" aria-label="狀態" onchange="setStatusFilter(this.value)" data-i18n-aria-label="m03.statusAria">
@@ -403,7 +406,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <option value="plan-a" data-i18n="m03.planA">自費一對一</option>
           <option value="plan-b" data-i18n="m03.planB">自費團體直播</option>
           <option value="plan-c" data-i18n="m03.planC">企業合約</option>
-          <option value="plan-d" data-i18n="m03.planD">機構授權</option>
+          <option value="plan-d" data-i18n="m03.planD">專案合作</option>
         </select>
       </div>
     </div>
@@ -520,6 +523,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="../assets/_i18n_dict_member.js"></script>
 <script src="../assets/_i18n_dict_ja.js"></script>
 <script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="_project_learning.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
 
@@ -564,15 +569,15 @@ function calTitleText(y,m,spaced){
   var zh = spaced ? (y+' 年 '+m+' 月') : (y+'年'+m+'月');
   return T(zh,{en:MONTH_EN[m-1]+' '+y, ja:y+'年'+m+'月', de:MONTH_DE[m-1]+' '+y});
 }
-var TYPE_LABEL_DICT={individual:{en:'One-on-One',ja:'一対一',de:'Einzelunterricht'},live:{en:'Group Livestream',ja:'グループライブ配信',de:'Gruppen-Live-Unterricht'},chat:{en:'Chat Room',ja:'チャットルーム',de:'Chatroom'},event:{en:'Event',ja:'イベント',de:'Veranstaltung'}};
+var TYPE_LABEL_DICT={individual:{en:'One-on-One',ja:'一対一',de:'Einzelunterricht'},live:{en:'Group Livestream',ja:'グループライブ配信',de:'Gruppen-Live-Unterricht'},chat:{en:'Mandarin Lounge',ja:'Mandarin Lounge',de:'Mandarin Lounge'},event:{en:'Event',ja:'イベント',de:'Veranstaltung'}};
 function typeLabelT(type){ return T(TYPE_META[type].label, TYPE_LABEL_DICT[type]); }
-var TYPE_ABBR_DICT={individual:{en:'1:1',ja:'1',de:'1:1'},live:{en:'Grp',ja:'配',de:'Grp'},chat:{en:'Chat',ja:'談',de:'Chat'},event:{en:'Evt',ja:'会',de:'Evt'}};
+var TYPE_ABBR_DICT={individual:{en:'1:1',ja:'1',de:'1:1'},live:{en:'Grp',ja:'配',de:'Grp'},chat:{en:'ML',ja:'ML',de:'ML'},event:{en:'Evt',ja:'会',de:'Evt'}};
 function typeAbbrT(type){ return T(TYPE_META[type].abbr, TYPE_ABBR_DICT[type]); }
 var STATUS_LABEL_DICT={upcoming:{en:'Upcoming',ja:'開催予定',de:'Bevorstehend'},done:{en:'Completed',ja:'完了',de:'Abgeschlossen'},canceled:{en:'Canceled / On Leave',ja:'キャンセル・欠席',de:'Storniert / Abwesend'}};
 function statusLabelT(status){ return T(STATUS_META[status].label, STATUS_LABEL_DICT[status]); }
 var PAYER_LABEL_DICT={self:{zh:'自費',en:'Self-paid',ja:'自己負担',de:'Selbstzahler'},company:{zh:'公司提供',en:'Company-provided',ja:'企業提供',de:'Vom Unternehmen bereitgestellt'},institution:{zh:'學校提供',en:'School-provided',ja:'学校提供',de:'Von der Schule bereitgestellt'}};
 function payerLabelT(payer){ var d=PAYER_LABEL_DICT[payer]||PAYER_LABEL_DICT.self; return T(d.zh,{en:d.en,ja:d.ja,de:d.de}); }
-var MODE_DICT={'線上教室':{en:'Online Classroom',ja:'オンライン教室',de:'Onlinekurs'},'線上聊天室':{en:'Online Chat Room',ja:'オンラインチャットルーム',de:'Online-Chat'},'線上直播':{en:'Online Livestream',ja:'オンラインライブ配信',de:'Livestream'}};
+var MODE_DICT={'線上教室':{en:'Online Classroom',ja:'オンライン教室',de:'Onlinekurs'},'Mandarin Lounge 線上會話':{en:'Online Mandarin Lounge',ja:'Mandarin Lounge',de:'Online-Chat'},'線上直播':{en:'Online Livestream',ja:'オンラインライブ配信',de:'Livestream'}};
 function modeT(zh){ var d=MODE_DICT[zh]; return d?T(zh,d):zh; }
 function liveNowTagParen(){ return T('（進行中）',{en:' (Live)',ja:'（配信中）',de:' (Live)'}); }
 function liveNowTagPlain(){ return T('進行中',{en:'Live',ja:'配信中',de:'Live'}); }
@@ -620,22 +625,22 @@ function fmtOnePoint(d){
   return fmtMD(d)+wdParen(WEEKDAY_ZH[d.getDay()])+pad2(d.getHours())+':'+pad2(d.getMinutes());
 }
 
-/* ================= 課堂資料（類型：individual 一對一／live 團體直播／chat 聊天室／event 活動） ================= */
+/* ================= 課堂資料（類型：individual 一對一／live 團體直播／chat Mandarin Lounge／event 活動） ================= */
 var SESSIONS = [
   /* -- 過去（已完成／已取消，供列表「更早」與統計示範） -- */
   {id:'p1',type:'individual',status:'done',start:new Date(2026,6,21,14,0),end:new Date(2026,6,21,14,50),teacher:'杜老師',mode:'線上教室',material:'《漢語口語》第 5 課',title:'中文一對一－會話進階'},
-  {id:'p2',type:'chat',status:'done',start:new Date(2026,6,23,20,0),end:new Date(2026,6,23,20,30),teacher:'陳美惠老師',mode:'線上聊天室',material:'《生活會話》Unit 4',title:'中文聊天室－生活會話'},
+  {id:'p2',type:'chat',status:'done',start:new Date(2026,6,23,20,0),end:new Date(2026,6,23,20,30),teacher:'陳美惠老師',mode:'Mandarin Lounge 線上會話',material:'《生活會話》Unit 4',title:'Mandarin Lounge－生活會話'},
   {id:'p3',type:'event',status:'done',start:new Date(2026,6,30,19,30),end:new Date(2026,6,30,21,0),teacher:'TLI 活動組',mode:'線上直播',material:'活動講義 PDF',title:'活動：中元節文化小教室',replay:true},
   {id:'p4',type:'individual',status:'canceled',start:new Date(2026,7,6,14,0),end:new Date(2026,7,6,14,50),teacher:'杜老師',mode:'線上教室',material:'《漢語口語》第 7 課',title:'中文一對一－會話進階'},
   {id:'p7',type:'live',status:'canceled',start:new Date(2026,7,6,19,0),end:new Date(2026,7,6,20,0),teacher:'林俊傑老師',mode:'線上教室',material:'《彈性團體直播班 直播教材》第 4 週',title:'TLI 彈性團體直播班・中級會話直播班',shortLabel:'中級班'},
-  {id:'p6',type:'chat',status:'done',start:new Date(2026,7,11,20,0),end:new Date(2026,7,11,20,30),teacher:'陳美惠老師',mode:'線上聊天室',material:'《生活會話》Unit 5',title:'中文聊天室－生活會話'},
+  {id:'p6',type:'chat',status:'done',start:new Date(2026,7,11,20,0),end:new Date(2026,7,11,20,30),teacher:'陳美惠老師',mode:'Mandarin Lounge 線上會話',material:'《生活會話》Unit 5',title:'Mandarin Lounge－生活會話'},
   {id:'p5',type:'live',status:'done',start:new Date(2026,7,13,19,0),end:new Date(2026,7,13,20,0),teacher:'林俊傑老師',mode:'線上教室',material:'《彈性團體直播班 直播教材》第 5 週',title:'TLI 彈性團體直播班・中級會話直播班',replay:true,shortLabel:'中級班'},
   /* -- 本週（2026/08/24－08/30） -- */
   {id:'c0',type:'individual',status:'upcoming',start:new Date(2026,7,25,9,50),end:new Date(2026,7,25,10,40),teacher:'陳美惠老師',mode:'線上教室',material:'《漢語聽力》第 5 課',title:'中文一對一－聽力加強',planId:'plan-a'},
   {id:'c1',type:'individual',status:'upcoming',start:new Date(2026,7,25,18,0),end:new Date(2026,7,25,18,50),teacher:'杜老師',mode:'線上教室',material:'《漢語口語》第 8 課',title:'中文一對一－會話進階',planId:'plan-a'},
   {id:'c4',type:'live',status:'upcoming',start:new Date(2026,7,25,19,0),end:new Date(2026,7,25,20,0),teacher:'林俊傑老師',mode:'線上教室',material:'《彈性團體直播班 直播教材》第 6 週',title:'TLI 彈性團體直播班・中級會話直播班',shortLabel:'中級班',planId:'plan-b'},
   {id:'c2',type:'individual',status:'upcoming',start:new Date(2026,7,26,14,0),end:new Date(2026,7,26,14,50),teacher:'杜老師',mode:'線上教室',material:'《漢語口語》第 9 課',title:'中文一對一－會話進階',planId:'plan-a'},
-  {id:'e1',type:'chat',status:'upcoming',start:new Date(2026,7,26,20,0),end:new Date(2026,7,26,20,30),teacher:'陳美惠老師',mode:'線上聊天室',material:'《生活會話》Unit 6',title:'中文聊天室－生活會話',planId:'plan-d'},
+  {id:'e1',type:'chat',status:'upcoming',start:new Date(2026,7,26,20,0),end:new Date(2026,7,26,20,30),teacher:'陳美惠老師',mode:'Mandarin Lounge 線上會話',material:'《生活會話》Unit 6',title:'Mandarin Lounge－生活會話',planId:'plan-d'},
   {id:'c5',type:'live',status:'upcoming',start:new Date(2026,7,27,19,0),end:new Date(2026,7,27,20,0),teacher:'林俊傑老師',mode:'線上教室',material:'《彈性團體直播班 直播教材》第 7 週',title:'TLI 彈性團體直播班・中級會話直播班',shortLabel:'中級班',planId:'plan-b'},
   {id:'c3',type:'live',status:'upcoming',start:new Date(2026,7,29,10,0),end:new Date(2026,7,29,11,30),teacher:'林俊傑老師',mode:'台北校區 A203 教室',material:'《新版實用視聽華語》第 3 冊',title:'中文團體班（初級）',shortLabel:'初級班',planId:'plan-b'},
   {id:'b1',type:'individual',status:'upcoming',start:new Date(2026,7,30,10,0),end:new Date(2026,7,30,10,50),teacher:'杜老師',mode:'線上教室',material:'《商務華語會話》第 3 課',title:'中文一對一－商務會話',planId:'plan-c'},
@@ -644,7 +649,7 @@ var SESSIONS = [
   {id:'e3',type:'individual',status:'upcoming',start:new Date(2026,8,2,10,0),end:new Date(2026,8,2,10,50),teacher:'陳美惠老師',mode:'線上教室',material:'《漢語聽力》第 7 課',title:'中文一對一－聽力加強',planId:'plan-a'},
   {id:'e4',type:'live',status:'upcoming',start:new Date(2026,8,3,19,0),end:new Date(2026,8,3,20,0),teacher:'林俊傑老師',mode:'線上教室',material:'《彈性團體直播班 直播教材》第 8 週',title:'TLI 彈性團體直播班・中級會話直播班',shortLabel:'中級班',planId:'plan-b'},
   {id:'e2',type:'event',status:'upcoming',start:new Date(2026,8,5,14,0),end:new Date(2026,8,5,16,0),teacher:'TLI 活動組',mode:'線上直播',material:'活動講義 PDF',title:'活動：華語電影賞析',planId:'plan-a'},
-  {id:'e5',type:'chat',status:'upcoming',start:new Date(2026,8,9,20,0),end:new Date(2026,8,9,20,30),teacher:'杜老師',mode:'線上聊天室',material:'《生活會話》Unit 7',title:'中文聊天室－生活會話',planId:'plan-d'},
+  {id:'e5',type:'chat',status:'upcoming',start:new Date(2026,8,9,20,0),end:new Date(2026,8,9,20,30),teacher:'杜老師',mode:'Mandarin Lounge 線上會話',material:'《生活會話》Unit 7',title:'Mandarin Lounge－生活會話',planId:'plan-d'},
   {id:'e6',type:'event',status:'upcoming',start:new Date(2026,8,20,14,0),end:new Date(2026,8,20,16,0),teacher:'TLI 活動組',mode:'線上直播',material:'活動講義 PDF',title:'活動：中秋茶會',planId:'plan-a'}
 ];
 var SESSIONS_BY_ID={};
@@ -671,7 +676,7 @@ var TYPE_META = {
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>'},
   live:{label:'團體直播',abbr:'播',pillClass:'live',badgeClass:'badge-live',iconClass:'icon-live',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="15" height="10" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>'},
-  chat:{label:'聊天室',abbr:'聊',pillClass:'chat',badgeClass:'badge-chat',iconClass:'icon-chat',
+  chat:{label:'Mandarin Lounge',abbr:'ML',pillClass:'chat',badgeClass:'badge-chat',iconClass:'icon-chat',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'},
   event:{label:'活動',abbr:'動',pillClass:'event',badgeClass:'badge-event',iconClass:'icon-event',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>'}
@@ -1070,7 +1075,7 @@ function renderMonth(){
   for(var day=1; day<=daysInMonth; day++){ _loop(day); }
   renderEmptyMsg('monthEmptyMsg', total);
 }
-/* 月檢視名稱條文字：時間＋類型＋簡稱（一對一／聊天室／活動用老師，團體直播用班級簡稱） */
+/* 月檢視名稱條文字：時間＋類型＋簡稱（一對一／Mandarin Lounge／活動用老師，團體直播用班級簡稱） */
 function monthClassLineLabel(it){
   var suffix = it.shortLabel || it.teacher || '';
   return pad2(it.start.getHours())+':'+pad2(it.start.getMinutes())+' '+typeLabelT(it.type)+(suffix?(' '+suffix):'');

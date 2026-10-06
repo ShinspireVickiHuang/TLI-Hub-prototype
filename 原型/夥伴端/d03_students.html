@@ -124,6 +124,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 .main{padding:16px 16px 40px;}
 .topbar{padding:0 16px;margin:-16px -16px 18px;}
 }
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -158,7 +159,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <div class="pagehead">
-<div><h1 data-i18n="nav_d.students">學生名單</h1><div class="desc" data-i18n="desc.d03Students">各訂購單已補入的學生，售價由經銷商自訂，本頁不顯示金額。</div></div>
+<div><h1 style="display:inline-block" data-i18n="nav_d.students">學生名單</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span><div class="desc" data-i18n="desc.d03Students">各訂購單已補入的學生，售價由經銷商自訂，本頁不顯示金額。</div></div>
 <button class="btn" onclick="openAddStudent()" data-i18n="btn.addToRoster">補入名單</button>
 </div>
 
@@ -216,7 +217,7 @@ var MY_DIST_NAME = '環球遊學顧問（日本）';
 var MY_DIST_CODE = 'DIST-JP03';
 var TODAY_STR = '2026-09-28';
 /* 本頁涉及的訂購單，僅供標示所屬訂購單與預計開課日使用，刻意不含任何金額欄位 */
-/* 方案名稱與 d01/d02/d04 同款訂購單一致，皆取自 TLI_MASTERS.packages（pk1–pk7） */
+/* 方案名稱與 d01/d02/d04 同款訂購單一致，皆取自 TLI_MASTERS.packages（pk1–pk6） */
 var ORDER_LABELS = {
   'PO-2026-002': {plan:'中文一對一線上課 20 堂方案', periodFrom:'2026-07-06', periodTo:'2026-07-24', lessonsTotal:45},
   'PO-2026-003': {plan:'中文彈性團體直播班 一期方案', periodFrom:'2026-09-01', periodTo:'2026-09-14', lessonsTotal:20},

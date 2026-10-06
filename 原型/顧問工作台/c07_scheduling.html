@@ -571,7 +571,7 @@ table.cal td{height:32px;}
       <div class="ai-msg bot" data-i18n="c07.aiIntro">可以問我某位學生哪些時段可排，或目前還有幾筆待排。</div>
     </div>
     <div class="ai-quick">
-      <button id="aiQuick1" onclick="tliAskDemo(1)">Emma Chen 下週有哪些時段可以排？</button>
+      <button id="aiQuick1" onclick="tliAskDemo(1)">Emma Johnson 下週有哪些時段可以排？</button>
       <button id="aiQuick2" onclick="tliAskDemo(2)">目前還有幾筆待排？</button>
     </div>
     <div class="ai-input">
@@ -802,7 +802,7 @@ function planOf(q){
   return {name:q.planText||'',sku:null};
 }
 var QUEUE=[
-  {id:'q1',stu:'std1',name:'Emma Chen',email:'emma.chen@example.com',type:'new',src:'新訂單',order:'TLI-2026-0915',pkg:'pk1',lang:'中文',campus:'線上',way:'online',remaining:20,paid:true,waited:3,
+  {id:'q1',stu:'std1',name:'Emma Johnson',email:'emma.johnson@example.com',type:'new',src:'新訂單',order:'TLI-2026-0915',pkg:'pk1',lang:'中文',campus:'線上',way:'online',remaining:20,paid:true,waited:3,
    free:{'一':['14:00–16:00'],'二':['19:00–21:00'],'三':['19:00–21:00'],'四':['19:00–21:00'],'六':['10:00–12:00']},note:'希望固定每週同一位老師'},
   {id:'q2',stu:'std4',name:'陳建宏',email:'chen.jh@example.com',type:'leave',src:'老師請假',order:'TLI-2026-0870',pkg:'pk1',lang:'中文',campus:'線上',way:'online',remaining:1,paid:true,waited:2,
    orig:'08/27（四）19:00–19:50 原課程因老師請假取消',free:{'一':['14:00–17:00'],'四':['19:00–21:00'],'五':['20:00–21:00']},note:'學生提出的有空時間，優先安排'},
@@ -1141,11 +1141,11 @@ function confirmBox(title,html,okText,fn,disableOk){
 function tliAskDemo(n){
   if(n===1){
     var q=qById('q1');
-    tliAppendMsg('user',T('Emma Chen 下週有哪些時段可以排？','Which time slots is Emma Chen available next week?'));
+    tliAppendMsg('user',T('Emma Johnson 下週有哪些時段可以排？','Which time slots is Emma Johnson available next week?'));
     var saved=selId;selId='q1';if(!q.picked)q.picked=candidates(q).filter(function(c){return c.overlap>0;}).slice(0,3).map(function(c){return c.t.id;});
     var hits=[];for(var d=0;d<7;d++)HOURS.forEach(function(h){var st=cellState(q,0,d,h);if(st.cls==='ok')hits.push(dayLabel(d)+' '+pad(h)+':00（'+st.tags.map(function(t){return tById(t).name;}).join(T('、',', '))+'）');});
     selId=saved;
-    tliAppendMsg('bot',T('Emma Chen 下週（','Emma Chen next week (')+md(dateOf(0,0))+T(' 起）學生與老師都有空的時段：',') \u2014 times when both student and teacher are free: ')+(hits.length?hits.join(T('；','; ')):T('沒有','None'))+T('。','.')+'<div class="src">'+T('依學生提出的有空時間與老師開放時段比對','Based on the student\u2019s stated availability matched against the teacher\u2019s open hours')+'</div><div class="act"><button class="btn sm primary" onclick="selectItem(\'q1\')">'+T('帶入 Emma Chen','Select Emma Chen')+'</button></div>');
+    tliAppendMsg('bot',T('Emma Johnson 下週（','Emma Johnson next week (')+md(dateOf(0,0))+T(' 起）學生與老師都有空的時段：',') \u2014 times when both student and teacher are free: ')+(hits.length?hits.join(T('；','; ')):T('沒有','None'))+T('。','.')+'<div class="src">'+T('依學生提出的有空時間與老師開放時段比對','Based on the student\u2019s stated availability matched against the teacher\u2019s open hours')+'</div><div class="act"><button class="btn sm primary" onclick="selectItem(\'q1\')">'+T('帶入 Emma Johnson','Select Emma Johnson')+'</button></div>');
   }else{
     var pend=QUEUE.filter(function(q){return q.status!=='done';});
     tliAppendMsg('user',T('目前還有幾筆待排？','How many items are currently pending?'));
@@ -1153,7 +1153,7 @@ function tliAskDemo(n){
   }
 }
 function renderAiQuick(){
-  var b1=document.getElementById('aiQuick1');if(b1)b1.textContent=T('Emma Chen 下週有哪些時段可以排？','Which time slots is Emma Chen available next week?');
+  var b1=document.getElementById('aiQuick1');if(b1)b1.textContent=T('Emma Johnson 下週有哪些時段可以排？','Which time slots is Emma Johnson available next week?');
   var b2=document.getElementById('aiQuick2');if(b2)b2.textContent=T('目前還有幾筆待排？','How many items are currently pending?');
 }
 function tliAskFree(){

@@ -6,6 +6,7 @@
 Object.assign(TLI_I18N_DICT.en, {
 
 /* ---- 品牌／導覽（經銷商 d 系列、代理商 r 系列共用） ---- */
+"badge.phase2":"Phase 2",
 "brand.dealerPortal":"Dealer Portal",
 "brand.agentPortal":"Agent Portal",
 "navgroup.dealer":"Dealer",
@@ -127,7 +128,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "opt.allTypes":"All Types",
 "type.b2c":"B2C Order",
 "type.b2b":"B2B Corporate Contract",
-"type.edu":"B2B Institutional License Contract",
+"type.edu":"Project Partnership Agreement",
 "label.platformPayStatus":"Platform Payment Status",
 "opt.allPayStatus":"All Payment Statuses",
 "status.paid2":"Paid",

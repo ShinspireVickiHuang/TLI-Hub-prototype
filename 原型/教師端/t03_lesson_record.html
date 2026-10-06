@@ -686,7 +686,7 @@ function submitRecord(){
     student: studentLabel, course: courseLabel, date: '今天 ' + nowHM(), order: 999, status: 'wait-student',
     messages: [{role:'teacher', time:'今天 '+nowHM(), record:{skills:skills, note:document.getElementById('studentNote').value, attendance:attendance}}]
   };
-  /* 團體班點名（缺席／遲到）記入學員成效，20260910h 新增 */
+  /* 團體班缺席／遲到記入學員成效，20260910h 新增 */
   showToast(info.mode === 'flex' ? TLI_I18N.t('已送出，已記入學員成效，系統將通知學員填寫回饋','Submitted. Recorded in student performance; the system will notify the student to fill in feedback.') : TLI_I18N.t('已送出，系統將自動通知學員填寫回饋','Submitted. The system will automatically notify the student to fill in feedback.'));
   showThreadView(lessonId, false);
 }

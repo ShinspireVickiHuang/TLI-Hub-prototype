@@ -417,8 +417,8 @@ function makeImage(i){
 var IMAGES = []; for (var ii=0; ii<14; ii++) IMAGES.push(makeImage(ii));
 
 /* ---- 影片庫（v3：影音不放主機，一律走外部串流服務登記連結） ---- */
-var VIDEO_NAMES = ['L03 點餐會話 示範','L05 問路情境 示範影片','聲調練習：一聲到四聲','TLI-CPT 模擬口說示範',
-  '老師示範：自我介紹','文化專題：端午節由來','初級語法動畫：是／不是','日常會話 Lv.2 總複習','商用會話：會議開場','旅遊華語：機場對話'];
+var VIDEO_NAMES = ['L03 點餐會話 講解','L05 問路情境 講解影片','聲調練習：一聲到四聲','TLI-CPT 模擬口說講解',
+  '老師講解：自我介紹','文化專題：端午節由來','初級語法動畫：是／不是','日常會話 Lv.2 總複習','商用會話：會議開場','旅遊華語：機場對話'];
 var VIDEO_PLATFORMS = ['Vimeo','CloudFront','其他'];
 function makeVideoRef(platform, i){
   if (platform==='Vimeo') return String(900000000 + Math.floor(seededRand(i*31+5)*90000000));
@@ -435,7 +435,7 @@ function makeVideo(i){
     id:'vid'+i, name:VIDEO_NAMES[i % VIDEO_NAMES.length]+(i>=VIDEO_NAMES.length ? '（'+(Math.floor(i/VIDEO_NAMES.length)+1)+'）' : ''),
     platform:platform, videoRef:makeVideoRef(platform, i), thumbnailUrl:'https://img.example.com/thumbs/vid'+i+'.jpg',
     duration:fmtMinSec(durSec), sourceNote: fromKolable ? 'kolable 移轉' : '新上傳',
-    tags: i%2===0 ? ['會話示範'] : ['文化','中級'],
+    tags: i%2===0 ? ['會話講解'] : ['文化','中級'],
     status:status, updated: addDays('2026-05-20', Math.floor(r*290)), modifiedBy: STAFF_NAMES[i % STAFF_NAMES.length]
   };
 }

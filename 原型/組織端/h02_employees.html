@@ -125,7 +125,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 .csvpanel{display:none;background:var(--g50);border:1px solid var(--g200);border-radius:8px;padding:14px;margin-top:10px;font-size:12.5px;line-height:1.8;}
 .csvpanel.open{display:block;}
 .csvpanel code{background:#fff;border:1px solid var(--g200);border-radius:4px;padding:1px 5px;font-size:11.5px;}
-/* ---- 聊天室報名設定（20260910f 新增） ---- */
+/* ---- Mandarin Lounge 報名設定（20260910f 新增） ---- */
 .modewrap{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px;}
 .modewrap label{font-size:13.5px;display:flex;align-items:center;gap:6px;cursor:pointer;}
 .wl-toolrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0;flex-wrap:wrap;}
@@ -221,7 +221,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 
 <div class="card">
 <h2 data-i18n="h02.modesTitle">上課型態與可報名對象</h2>
-<div class="small" data-i18n="h02.modesDesc">哪些上課型態可用、以及哪些員工可以報名需要搶名額的型態（團體直播班、團體聊天室），統一在「合約與時數池」設定，與部門、廠區、關注規則放在一起。</div>
+<div class="small" data-i18n="h02.modesDesc">哪些上課型態可用、以及哪些員工可以報名需要搶名額的型態（團體直播班、Mandarin Lounge），統一在「合約與時數池」設定，與部門、廠區、關注規則放在一起。</div>
 <div style="margin-top:10px"><a class="btn ghost" href="h05_contract.html#modes" data-i18n="h02.modesLink">前往設定上課型態與可用對象</a></div>
 </div>
 
@@ -539,7 +539,7 @@ function doSaveEmployee(){
 function resendActivation(id){
   var e = EMPLOYEES.find(function(x){ return x.id===id; });
   if (!e) return;
-  toast(T('已重新寄出開通信至 ','Activation email resent to ')+e.email+T('（示意連結：','(sample link: ')+'../公開網站/p13_activate.html?token=demo&source=hr&mode=link&state=ok）');
+  toast(T('已重新寄出開通信至 ','Activation email resent to ')+e.email+T('（開通連結：','(activation link: ')+'../公開網站/p13_activate.html?token=Tn7Qx2mVb9Lk4RaE&source=hr&mode=link&state=ok）');
 }
 
 /* ===== 停用員工 ===== */
@@ -569,7 +569,7 @@ document.addEventListener('keydown', function(e){
 function toggleCsvPanel(){ document.getElementById('csvPanel').classList.toggle('open'); }
 function simulateCsvImport(){ toast(T('已收到檔案，實際上線後將解析 CSV 並批次建立員工帳號','File received; once live, the system will parse the CSV and batch-create employee accounts')); }
 
-/* 聊天室報名設定已於 2026-09-17 搬到 h05_contract.html#modes（上課型態與可用對象），此頁不再重複。 */
+/* Mandarin Lounge 報名設定已於 2026-09-17 搬到 h05_contract.html#modes（上課型態與可用對象），此頁不再重複。 */
 function initEmpTable(){
   renderDeptChips();
   renderStatusChips();

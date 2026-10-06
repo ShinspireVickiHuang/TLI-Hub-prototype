@@ -27,8 +27,10 @@ img{max-width:100%;display:block;}
 ul{margin:0;padding:0;list-style:none;}
 h1,h2,h3,p{margin:0;}
 
-/* 站台頁首：TLI Connect 單一品牌，本頁為機構外部連結導入，不放行銷主導覽 */
-.site-header{background:#fff;border-bottom:1px solid var(--c-border);padding:14px 24px;display:flex;align-items:center;justify-content:center;}
+/* 站台頁首：TLI Connect 品牌＋程度測驗入口 */
+.site-header{background:#fff;border-bottom:1px solid var(--c-border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.site-nav{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:600;}
+.site-nav a:hover{color:var(--c-primary);}
 .brand{display:flex;align-items:center;gap:9px;}
 .brand img{height:28px;width:auto;display:block;}
 .brand-name{font-size:16px;font-weight:800;color:var(--c-primary);letter-spacing:.2px;}
@@ -71,6 +73,7 @@ main{max-width:1040px;margin:0 auto;padding:56px 24px 80px;display:flex;justify-
 
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#101828;color:#fff;font-size:13.5px;padding:12px 20px;border-radius:8px;box-shadow:0 8px 24px rgba(16,24,40,.16);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100;max-width:90vw;text-align:center;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -80,12 +83,14 @@ main{max-width:1040px;margin:0 auto;padding:56px 24px 80px;display:flex;justify-
     <img src="../assets/tli-logo.svg" alt="TLI">
     <span class="brand-name">TLI Connect</span>
   </a>
+  <nav class="site-nav">
+  </nav>
 </header>
 
 <main>
   <div class="auth-wrap">
     <div class="auth-head">
-      <h1 data-i18n="fr.p14.title">合作機構學員登入</h1>
+      <h1 style="display:inline-block" data-i18n="fr.p14.title">合作機構學員登入</h1><span class="phase2-pill" data-i18n="badge.phase2">第二階段</span>
       <p data-i18n="fr.p14.sub">透過合作機構參加課程的學員請由此登入</p>
     </div>
 
@@ -113,7 +118,7 @@ main{max-width:1040px;margin:0 auto;padding:56px 24px 80px;display:flex;justify-
           <input type="password" id="pLoginPassword" placeholder="請輸入密碼" data-i18n-placeholder="fr.p14.phPassword" oninput="clearPartnerFieldError('pLoginPassword')">
           <div class="field-error" id="err_pLoginPassword" data-i18n="fr.p14.errPassword">請輸入密碼</div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" data-i18n="fr.f03.submitBtn">登入</button>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="fr.partnerLogin.submitBtn">登入</button>
       </form>
       <!-- 經銷／合作機構學員由機構提供名單建檔，不提供自行註冊入口 -->
       <div class="switch-note" data-i18n="fr.p14.noRegisterNote">帳號由合作機構為您建立，如無法登入請聯繫該機構窗口協助處理。</div>

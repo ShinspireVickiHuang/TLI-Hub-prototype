@@ -1,28 +1,27 @@
-/* TLI Hub 原型：加盟／經銷夥伴前台＋會員區擴充詞典（20260929 新增）
- * 供以下 12 頁使用，需在 _i18n_dict.js 之後、_i18n.js 之前載入：
- *   公開網站/f01_franchise_home.html、f02_franchise_apply.html、f03_franchise_login.html、
- *   公開網站/p13_activate.html、p14_partner_login.html、
- *   會員區/m01b_home_franchise.html、m04b_course_detail_franchise.html、m08b_self_paced_franchise.html、
- *   會員區/m14b_chat_booking_franchise.html、
- *   會員區/m01c_home_reseller.html、m03c_schedule_reseller.html、m08c_self_paced_reseller.html
- * key 命名一律加 "fr." 前綴避免與其他端詞典衝突；跨頁共用的骨架字（首頁／學習／課表等）共用同一 key。
- * 不可改版面設計，只放翻譯資料。
+/* TLI Hub 原型：經銷夥伴前台＋會員區擴充詞典
+ * key 命名一律加 "fr." 前綴避免與其他端詞典衝突。
  */
 Object.assign(TLI_I18N_DICT.en, {
+"badge.phase2":"Phase 2",
+"fr.common.mainNav":"Main Navigation",
+"fr.common.classesUnit":"classes",
+"fr.common.optional":"(optional)",
+"fr.partnerLogin.submitBtn":"Log In",
+"fr.m08c.hint":"Tap a unit title to expand its video, e-book and quiz",
+"fr.m08c.unitsTitle":"Course Units",
 
-/* ---- 共用：側欄／底部導覽／頁首（f01-f03、m01b/c、m03c、m04b、m08b/c、m14b 共用） ---- */
+/* ---- 共用：側欄／底部導覽／頁首（p13、p14、m01c、m03c、m08c 共用） ---- */
 "fr.nav.home":"Home",
 "fr.common.brandAriaLabel":"Sample University Chinese Language Center × TLI Home",
 "fr.nav.plan":"My Plan",
 "fr.nav.schedule":"Schedule",
 "fr.nav.learn":"Online Learning",
-"fr.nav.chat":"Chatroom & Conversation Booking",
-"fr.bn.chat":"Chat",
+"fr.nav.chat":"Mandarin Lounge & Conversation Booking",
+"fr.bn.chat":"Lounge",
 "fr.common.notifTitle":"Notifications",
 "fr.common.close":"Close",
 "fr.common.openMenu":"Open Menu",
 "fr.common.officialSite":"TLI Official Website",
-"fr.common.sideIdentityFranchise":"Wang Xiao-Ming｜Sample University Chinese Language Center Student",
 "fr.common.sideIdentityReseller":"Li Mei-Ling｜Global Study Consultants Student",
 "fr.nav.courses":"Courses & Consultation",
 "fr.nav.about":"About TLI",
@@ -35,121 +34,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "fr.common.officeHours":"Office Hours",
 "fr.common.officeHoursValue":"Mon–Fri 09:00–17:00 (local time)",
 "fr.common.footerBrandName":"Sample University Chinese Language Center",
-"fr.common.footerFranchiseNote":"This center is a TLI-licensed franchise teaching center",
 "fr.common.footerLinks":"Quick Links",
-"fr.common.footerCopyright":"© Sample University Chinese Language Center・A TLI-licensed franchise institution",
-
-/* ---- f01 首頁 ---- */
-"fr.f01.headerCta":"Learn About Courses",
-"fr.f01.eyebrow":"Sample University・TLI-Licensed Teaching Center",
-"fr.f01.h1":"Learn Chinese at Sample University with TLI’s 60-year teaching system.",
-"fr.f01.lead":"Sample University Chinese Language Center is a TLI-licensed franchise teaching center, using TLI’s teaching system, materials and certified faculty to offer Chinese courses on the Sample University campus. Students who complete the program receive a TLI certificate of completion and can also use the TLI Connect online learning platform for review after class.",
-"fr.f01.ctaConsult":"Book a Consultation",
-"fr.f01.coursesTitle":"Course Overview",
-"fr.f01.coursesDesc":"The plans below are designed and priced by Sample University Chinese Language Center within TLI’s licensing scope; tuition is paid directly to Sample University Chinese Language Center.",
-"fr.f01.tagPopular":"Most Popular",
-"fr.f01.tagHot":"Popular Pick",
-"fr.f01.tagHsk":"Test Prep",
-"fr.f01.planBeginner":"Beginner Chinese",
-"fr.f01.planBeginnerMeta1":"16 weeks・3 classes/week・Sample University Language Center Room 201",
-"fr.f01.planBeginnerSuit":"Complete beginners",
-"fr.f01.planBusiness":"Business Chinese",
-"fr.f01.planBusinessMeta1":"8 weeks・2 classes/week・Sample University Language Center Room 105",
-"fr.f01.planBusinessSuit":"Basic conversational ability",
-"fr.f01.planHsk":"HSK Test Prep",
-"fr.f01.planHskMeta1":"6 weeks・4 classes/week・Sample University Language Center Room 201",
-"fr.f01.planHskSuit":"Planning to take HSK 3–4",
-"fr.f01.planSummer":"Summer Intensive",
-"fr.f01.planSummerMeta1":"4 weeks・full-day (with lunch break)・Sample University multipurpose classroom",
-"fr.f01.planSummerSuit":"All levels, class format arranged as needed",
-"fr.f01.whyTitle":"Why Choose Us",
-"fr.f01.whyDesc":"Sample University Chinese Language Center is a TLI-licensed franchise teaching center; teaching quality and materials are overseen by TLI.",
-"fr.f01.feat1Title":"TLI Teaching System",
-"fr.f01.feat1Desc":"Uses TLI’s 60-year Chinese teaching framework and leveled materials, ensuring consistent course content and quality standards.",
-"fr.f01.feat2Title":"TLI-Certified Faculty",
-"fr.f01.feat2Desc":"All instructors are local Sample University teachers, trained and periodically re-certified by TLI; they serve only this center’s students.",
-"fr.f01.feat3Title":"TLI Certificate of Completion",
-"fr.f01.feat3Desc":"Students who complete the course and pass the assessment receive an official TLI certificate of completion, recognized worldwide.",
-"fr.f01.feat4Title":"TLI Connect Online Platform",
-"fr.f01.feat4Desc":"After enrollment, activate your TLI Connect account for instructional videos, e-books, online quizzes and conversation bookings anytime after class.",
-"fr.f01.stepsTitle":"Learning Journey",
-"fr.f01.stepsDesc":"From consultation booking to graduation, in four stages",
-"fr.f01.step1Title":"Book a Consultation",
-"fr.f01.step1Desc":"Fill out the form with your contact info; an Sample University Chinese Language Center staff member will explain the course content and arrangements",
-"fr.f01.step2Title":"Class Placement",
-"fr.f01.step2Desc":"Placed into a suitable class based on level and preferred time slot",
-"fr.f01.step3Title":"On-Campus Classes + Online Resources",
-"fr.f01.step3Desc":"Attend in-person classes on the Sample University campus, and use TLI Connect for review after class",
-"fr.f01.step4Title":"Certificate of Completion",
-"fr.f01.step4Desc":"TLI issues a certificate of completion after finishing the course",
-"fr.f01.stepsNote":"Course fees and payment methods are explained by Sample University Chinese Language Center during the consultation.",
-"fr.f01.contactDesc":"For any course or consultation questions, please contact Sample University Chinese Language Center",
-"fr.f01.readyTitle":"Ready to Get Started?",
-"fr.f01.readyDesc":"Go to the Courses & Consultation page and fill out the form to book a consultation; Sample University Chinese Language Center will contact you within 2 business days.",
-"fr.f01.readyCta":"Book a Consultation Now",
-
-/* ---- f02 課程與諮詢 ---- */
-"fr.f02.headerCta":"Book a Consultation",
-"fr.f02.pageTitle":"Courses & Consultation",
-"fr.f02.pageSub":"Learn about each course’s content and format, then fill out the form below to book a consultation. Sample University Chinese Language Center will contact you within 2 business days to explain the course arrangements and payment method.",
-"fr.f02.courseListTitle":"Course List",
-"fr.f02.miDuration":"Duration",
-"fr.f02.miLocation":"Location",
-"fr.f02.miTime":"Schedule",
-"fr.common.suitForLabel":"Best For",
-"fr.f02.locBeginner":"Sample Campus・Language Center Room 201",
-"fr.f02.timeBeginner":"Mon/Wed/Fri 18:00–19:30",
-"fr.f02.descBeginner":"Builds basic listening, speaking, reading and writing skills, from pronunciation and basic vocabulary to everyday conversation.",
-"fr.f02.locBusiness":"Sample Campus・Language Center Room 105",
-"fr.f02.timeBusiness":"Tue/Thu 19:00–20:30",
-"fr.f02.descBusiness":"Focuses on workplace conversation and business correspondence to strengthen practical communication at work.",
-"fr.f02.locHsk":"Sample Campus・Language Center Room 201",
-"fr.f02.timeHsk":"Mon–Thu 18:00–19:30",
-"fr.f02.descHsk":"Intensive pre-test review focused on listening, reading and writing test formats.",
-"fr.f02.locSummer":"Sample Campus・Multipurpose Classroom",
-"fr.f02.timeSummer":"Mon–Fri 09:00–15:00",
-"fr.f02.descSummer":"Short, high-intensity immersive learning, ideal for an intensive listening & speaking boost during a break.",
-"fr.f02.interestedBtn":"I’m Interested",
-"fr.f02.goApplyForm":"Go to Consultation Form →",
-"fr.f02.applyTitle":"Book a Consultation",
-"fr.common.requiredNote":"Required field",
-"fr.f02.labelName":"Name",
-"fr.f02.phName":"Enter your name",
-"fr.f02.errName":"Please enter your name",
-"fr.f02.errEmail":"Please enter a valid email",
-"fr.f02.labelPhone":"Phone",
-"fr.f02.phPhone":"Enter your phone number",
-"fr.f02.errPhone":"Please enter your phone number",
-"fr.f02.labelCourses":"Courses of Interest",
-"fr.common.multiSelect":"(multiple choice)",
-"fr.f02.errCourses":"Please select at least one course of interest",
-"fr.f02.labelTime":"Preferred Contact Time",
-"fr.common.optional":"(optional)",
-"fr.f02.timeAny":"No preference",
-"fr.f02.timeMorning":"Morning (09:00–12:00)",
-"fr.f02.timeAfternoon":"Afternoon (13:00–17:00)",
-"fr.f02.timeEvening":"Evening (18:00–20:00)",
-"fr.f02.labelNote":"Notes",
-"fr.f02.phNote":"Questions you'd like answered, or anything else we should know",
-"fr.f02.submitBtn":"Submit Consultation Request",
-"fr.f02.successTitle":"Consultation Request Submitted",
-"fr.f02.successDesc":"We’ve received your request. Sample University Chinese Language Center will contact you within 2 business days to explain course arrangements, fees and payment methods. Once you confirm enrollment, you’ll receive an activation email for the TLI Connect learning platform.",
-"fr.f02.applyAgainBtn":"Submit Another Request",
-"fr.f02.noOnlinePurchase":"This center does not offer online course purchases. Course arrangements and payment are handled by Sample University Chinese Language Center staff.",
-
-/* ---- f03 學員登入 ---- */
-"fr.f03.title":"Sample University Chinese Language Center Student Login",
-"fr.f03.sub":"Log in to the TLI Connect learning platform with your school-issued account",
-"fr.f03.labelEmail":"Email",
-"fr.f03.phEmail":"Enter your email",
-"fr.f03.errEmail":"Please enter your email",
-"fr.f03.labelPassword":"Password",
-"fr.f03.phPassword":"Enter your password",
-"fr.f03.errPassword":"Please enter your password",
-"fr.f03.remember":"Remember me",
-"fr.f03.submitBtn":"Log In",
-"fr.f03.activateNote":"Haven’t set a password yet? Use the activation link your school emailed you.",
-"fr.f03.activateLink":"Activate your account",
 
 /* ---- p13 帳號開通 ---- */
 "fr.p13.ccAriaLabel":"Country Code",
@@ -228,7 +113,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "fr.p14.errPassword":"Please enter your password",
 "fr.p14.noRegisterNote":"Your account is created by the partner institution. If you cannot log in, please contact your institution’s coordinator.",
 
-/* ---- 會員區共用（m01b/m01c/m03c/m04b/m08b/m08c/m14b 共用骨架字） ---- */
+/* ---- 會員區共用（m01c/m03c/m08c 共用骨架字） ---- */
 "fr.common.today":"Today 09:00",
 "fr.common.secSummary":"This Week’s Summary",
 "fr.common.statQuiz":"Quizzes Completed",
@@ -242,15 +127,6 @@ Object.assign(TLI_I18N_DICT.en, {
 "fr.common.viewAll":"View All",
 "fr.common.badgeOk":"Completed",
 "fr.common.badgeMuted":"Not Started",
-
-/* ---- m01b 加盟首頁 ---- */
-"fr.m01b.notif1":"New unit materials are available — check Online Learning",
-"fr.m01b.welcomeH3":"Good morning, Wang Xiao-Ming",
-"fr.m01b.welcomeP":"Here is your weekly learning summary for the Sample University Business Chinese semester course.",
-"fr.m01b.statVideo":"Videos Watched",
-"fr.m01b.continueTitle":"Unit 3: Business Meeting Opening",
-"fr.m01b.continueSub":"2/3 resources completed · Last viewed: Instructional Video",
-"fr.m01b.announceSub":"The midterm speaking test is scheduled for 11/15. Please check the course registration system for updates.",
 
 /* ---- m01c 經銷首頁 ---- */
 "fr.m01c.notif1":"10/12 Field Trip — gathering info is now available",
@@ -278,26 +154,11 @@ Object.assign(TLI_I18N_DICT.en, {
 /* ---- 共用：返回鍵 ---- */
 "fr.common.back":"Back",
 
-/* ---- m04b 我的方案（加盟） ---- */
-"fr.m04b.pageSub":"Your Chinese course is arranged by Sample University Chinese Language Center; below are the learning resources currently available to you.",
-"fr.m04b.planName":"Business Chinese Semester Course・Sample University Chinese Language Center",
-"fr.m04b.licensePeriodLabel":"License Period: ",
-"fr.m04b.resourcesTitle":"Available Learning Resources",
-"fr.m04b.resVideoTitle":"Instructional Videos",
-"fr.m04b.resVideoDesc":"Full course video series, available within the license scope",
-"fr.m04b.goWatch":"Go Watch",
-"fr.m04b.resBookTitle":"E-Books & Materials",
-"fr.m04b.resBookDesc":"Textbook e-books, listening audio and supplementary materials",
-"fr.m04b.goView":"Go View",
-"fr.m04b.resQuizTitle":"Online Quizzes",
-"fr.m04b.resQuizDesc":"Unit quizzes and after-class review tests",
-"fr.m04b.goQuiz":"Go to Quiz",
-
 /* ---- m03c 課表（經銷） ---- */
 "fr.m03c.pageSub":"Beginner Chinese Class A・2026/10/05–2026/10/19, full schedule for the Taipei study tour.",
 "fr.m03c.note":"Class times are set uniformly by TLI; contact your study-abroad consultant for any changes.",
 
-/* ---- m08b/m08c 共用：線上學習 modal／單元手風琴 ---- */
+/* ---- m08c 線上學習 modal／單元手風琴 ---- */
 "fr.common.quizModalTitle":"Unit Quiz",
 "fr.common.submitAnswers":"Submit Answers",
 "fr.common.notStartedPlaying":"Not started yet",
@@ -305,36 +166,8 @@ Object.assign(TLI_I18N_DICT.en, {
 "fr.common.prevPage":"‹ Previous",
 "fr.common.nextPage":"Next ›",
 
-/* ---- m08b 線上學習（加盟） ---- */
-"fr.m08b.pageSub":"Below are the units licensed for you under the Sample University Chinese Language Center Business Chinese semester course — learn at your own pace.",
-"fr.m08b.hint":"Tap a unit title to expand its video, e-book and quiz",
-"fr.m08b.unitsTitle":"Course Units",
-
 /* ---- m08c 線上學習（經銷） ---- */
 "fr.m08c.pageSub":"Below are the units paired with your Taipei study tour course progress — learn at your own pace.",
-
-/* ---- m14b 聊天室與會話預約（加盟，第二階段示意頁） ---- */
-"fr.m14b.notif1":"Tomorrow’s session is starting soon — remember to be online on time",
-"fr.m14b.notif1Sub":"Reminder",
-"fr.m14b.pageSub":"Group chatroom: 30 minutes, teacher-led, capacity per settings; unlike the flexible group livestream course, these sessions do not count toward class hours.",
-"fr.m14b.legendAssigned":"Assigned = arranged for you by your company or school",
-"fr.m14b.legendInvited":"Invited = a teacher or coordinator invited you — you may accept or decline",
-"fr.m14b.legendOpen":"Open = free registration within capacity",
-"fr.m14b.viewWeek":"Week",
-"fr.m14b.viewMonth":"Month",
-"fr.m14b.filterAll":"All Open Sessions",
-"fr.m14b.filterMine":"My Sessions Only",
-"fr.m14b.wdMon":"Mon","fr.m14b.wdTue":"Tue","fr.m14b.wdWed":"Wed","fr.m14b.wdThu":"Thu","fr.m14b.wdFri":"Fri","fr.m14b.wdSat":"Sat","fr.m14b.wdSun":"Sun",
-"fr.m14b.expandRecord":"Expand My Records (Completed/Cancelled)",
-"fr.common.loadMore":"Load More",
-"fr.common.brandSub":"Sample University Chinese Language Center・TLI-Licensed Teaching Center",
-"fr.m14b.secNext":"Next Up",
-"fr.m14b.secMyRecord":"My Records",
-"fr.m14b.prevPeriod":"Previous period",
-"fr.m14b.nextPeriod":"Next period",
-"fr.m14b.topicFilterAria":"Filter by topic type",
-"fr.common.mainNav":"Main Navigation",
-"fr.common.classesUnit":"classes"
 
 });
 

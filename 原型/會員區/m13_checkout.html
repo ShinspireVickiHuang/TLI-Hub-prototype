@@ -141,6 +141,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
     <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
     <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m18_learning_dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="6" width="3" height="12" rx="1"/><rect x="16" y="9" width="3" height="9" rx="1"/></svg><span data-en="Learning Dashboard">學習儀表板</span></a>
+    <a class="side-link" href="m20_transcripts.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
+    <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg><span data-en="Certificates">結業證書</span></a>
     <a class="side-link active" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
     <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
     <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
@@ -381,6 +384,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="../assets/_i18n_dict_member.js"></script>
 <script src="../assets/_i18n_dict_ja.js"></script>
 <script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="_project_learning.js"></script>
 <script src="../assets/_i18n.js"></script>
 
 <script>
@@ -508,7 +513,7 @@ function renderExistingOrderBanner(){
     banner.classList.add('hidden');
   }
 }
-/* 機構授權方案改由大學支付，不可在此結帳；?plan=university 一律導向說明頁 */
+/* 專案合作方案改由大學支付，不可在此結帳；?plan=university 一律導向說明頁 */
 var isUniversityPlan = getParam('plan') === 'university';
 /* 付費活動報名結帳；?plan=event&event=<id>，活動 id 由外部頁面（如 p09）決定，
    不限於本檔示範字典 EVENTS 裡的 ev01／ev02。優先顯示網址帶入的 name／time／price，
@@ -744,13 +749,13 @@ var TLI_SHARED_TERMS = {
     title: '服務條款',
     items: [
       '帳號與識別：會員以註冊時填寫之 Email 作為帳號唯一識別（主鍵），同一 Email 僅能建立一個會員帳號，Email 變更須經身分驗證程序。',
-      '課程型態：本平台提供之課程分為一對一預約制、團體直播制、自學影音，以及透過企業或學校取得授權之機構授權課程，各型態之上課方式與規則詳見各課程頁面說明。',
+      '課程型態：本平台提供之課程分為一對一預約制、團體直播制、自學影音，以及透過企業或學校取得授權之專案合作課程，各型態之上課方式與規則詳見各課程頁面說明。',
       '預約與取消（一對一）：一對一課程如需取消或改期，須於課程開始前 12 小時提出，逾時取消視同已上課，不予退還堂數或時數。',
       '預約與取消（團體班）：團體直播班之取消與退班規則依各班別開課簡章（班規）辦理，開課簡章公告之規則與本條款不一致時，以開課簡章為準。',
-      '聊天室報名：透過線上客服／聊天室完成之課程報名，其成立時點與資料留存方式與網頁表單報名相同，報名資訊將併入會員帳號課程紀錄。',
+      'Mandarin Lounge 報名：透過線上客服／Mandarin Lounge 完成之課程報名，其成立時點與資料留存方式與網頁表單報名相同，報名資訊將併入會員帳號課程紀錄。',
       '上課方式與錄影：課程得以實體、線上直播或錄影課程等形式進行；直播課程若提供課後錄影，僅供原報名學員於效期內回放，不得下載、轉錄或轉散。',
       '智慧財產：教材依授權層級分為「公開通用教材」與「企業／機構專屬教材」；專屬教材僅供該企業或機構所屬學員於在學期間使用，離職或畢業後之使用權限依合約另行規範。',
-      '個人資料之提供對象：學員之學習紀錄（如出席、進度、測驗結果）於企業客戶方案下，得提供予付費企業之 HR 窗口；於機構授權方案下，得提供予合作學校之窗口；提供範圍以完成課程管理所需為限。',
+      '個人資料之提供對象：學員之學習紀錄（如出席、進度、測驗結果）於企業客戶方案下，得提供予付費企業之 HR 窗口；於專案合作方案下，得提供予合作學校之窗口；提供範圍以完成課程管理所需為限。',
       '教師評語之揭露層級：教師針對學員之課堂評語分為「學員本人可見」與「提供予企業 HR 或學校窗口參考」兩層，評語內容涉及學習表現而非人身評價。',
       '帳號停用與終止：會員得申請停用帳號；平台如發現會員有違反本條款、代他人上課、盜用帳號等情事，得逕行停權或終止服務，並保留相關紀錄。',
       '準據法與爭議處理：本條款之解釋與適用另依 TLI 法務確認後之正式版本為準，本頁內容為草稿，尚未定案。'
@@ -766,7 +771,7 @@ var TLI_SHARED_TERMS = {
       '團體直播班－開課後：團體班開課後申請退費者，依已上課堂數與開課簡章公告之比例計算，未上課部分依比例退還。',
       '自學影音課程：自學影音課程一經開通觀看權限，即視為已提供服務內容，不予退費；未開通者得依規定申請退費。',
       '體驗課：體驗課性質為試聽，原則不收費亦不涉及退費；如另有收費之體驗課方案，退費依該方案公告條件辦理。',
-      '機構授權與企業合約：透過機構授權或企業合約取得之課程權益，其退費條件另依平台與該機構或企業簽訂之合約辦理，不適用本規則之個人退費比例。',
+      '專案合作與企業合約：透過專案合作或企業合約取得之課程權益，其退費條件另依平台與該機構或企業簽訂之合約辦理，不適用本規則之個人退費比例。',
       '退費申請流程：會員得於會員區提出退費申請並填寫退費原因；平台審核後於工作天內（天數待 TLI 訂定公告）處理退款。',
       '代辦費用：因代辦（如報名、行政作業）所生之費用，於符合退費條件時應全額退還，不受課程費用退費比例限制。',
       '適用原則：本規則以短期補習班相關法規之退費精神為原則擬定，實際執行以主管機關現行規定為準；如平台名義或契約型態變更，退費規定得配合調整並另行公告。'

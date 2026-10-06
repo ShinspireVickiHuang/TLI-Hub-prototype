@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="meta_title">成為 TLI 合作夥伴｜TLI Connect</title>
-<meta name="description" content="TLI 合作夥伴招募：介紹加盟、經銷、代理三種合作型態，說明各自的合作方式與適合對象，並提供洽談合作入口。">
+<meta name="description" content="TLI 合作夥伴招募：介紹經銷、代理兩種合作型態，說明各自的合作方式與適合對象，並提供洽談合作入口。">
 <style>
 :root{
   --c-primary:#1B4E8C;
@@ -113,12 +113,11 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
 .step-item p{font-size:14px;color:var(--c-muted);}
 
 /* 合作夥伴三型態卡片 */
-.partner-types{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.partner-types{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
 @media(max-width:900px){.partner-types{grid-template-columns:1fr;}}
 .partner-card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:30px 26px;display:flex;flex-direction:column;gap:14px;transition:border-color .15s,box-shadow .15s;}
 .partner-card:hover{border-color:var(--c-primary);box-shadow:var(--shadow);}
 .partner-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;}
-.partner-icon.franchise{background:#E6EEF8;color:var(--c-primary);}
 .partner-icon.distributor{background:#E6F4EF;color:var(--c-secondary);}
 .partner-icon.agent{background:#FCEEE3;color:var(--c-accent);}
 .partner-card h3{font-size:19px;font-weight:800;line-height:1.4;}
@@ -174,25 +173,18 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
     <div class="ref-hero-inner">
       <span class="ref-hero-eyebrow" data-i18n="p12_hero1_eyebrow">合作夥伴招募</span>
       <h1 data-i18n="p12_hero1_title">成為 TLI 合作夥伴</h1>
-      <p class="ref-hero-lead" data-i18n="p12_hero1_lead">同一套課程與教材，三種合作型態決定你要用什麼方式加入：取得經營權自己招生授課、採購課程包進自己的產品銷售，或單純介紹客戶賺取佣金。選一種最適合你現況的方式，與 TLI 一起把課程賣出去。</p>
+      <p class="ref-hero-lead" data-i18n="p12_hero1_lead">同一套課程與教材，兩種合作型態決定你要用什麼方式加入：採購課程包進自己的產品銷售，或單純介紹客戶賺取佣金。選一種最適合你現況的方式，與 TLI 一起把課程賣出去。</p>
     </div>
   </section>
 
   <main>
     <section class="home-section">
       <div class="section-head2">
-        <h2 data-i18n="p12_types_title">三種合作型態</h2>
-        <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-i18n="p12_types_sub">直營（TLI 自己招生授課）不屬於合作夥伴，以下為對外開放的三種型態</p>
+        <h2 data-i18n="p12_types_title">兩種合作型態</h2>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-i18n="p12_types_sub">直營（TLI 自己招生授課）不屬於合作夥伴，以下為對外開放的兩種型態</p>
       </div>
       <div class="partner-types">
 
-        <div class="partner-card">
-          <div class="partner-icon franchise" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M9 12h.01M15 12h.01M9 9h.01M15 9h.01"/></svg></div>
-          <h3><span class="partner-sub" data-i18n="p12_card_franchise_sub">加盟 Franchise</span><span data-i18n="p12_card_franchise_title">取得經營權</span></h3>
-          <p data-i18n="p12_card_franchise_desc">以 TLI 品牌與教學系統，在自己的據點招生授課。TLI 提供品牌授權、教師培訓與回訓、教材、課程架構、教學法與測驗、證書。</p>
-          <div class="partner-fit"><b data-i18n="p12_fit_label">適合：</b><span data-i18n="p12_card_franchise_fit">有自己場地與師資的語言學校或大學</span></div>
-          <button type="button" class="btn btn-primary" data-i18n="p12_btn_contact" onclick="openPartnerModal('franchise')">洽談合作</button>
-        </div>
 
         <div class="partner-card">
           <div class="partner-icon distributor" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
@@ -414,7 +406,6 @@ renderReferralState();
 
 /* ===================== 洽談合作 modal ===================== */
 function partnerTypeLabel(type){
-  if (type === 'franchise') return T('加盟', {en:'Franchise', ja:'フランチャイズ', de:'Franchise'});
   if (type === 'distributor') return T('經銷', {en:'Distributor', ja:'代理店', de:'Vertriebspartner'});
   if (type === 'agent') return T('代理', {en:'Agent', ja:'エージェント', de:'Vermittler'});
   return '';
@@ -462,7 +453,7 @@ function applyMetaDesc(){
   /* <title> 在 <head> 裡，共用模組的 data-i18n 掃描只作用在 document.body，不會處理 <title>，需自行設定 */
   document.title = T('成為 TLI 合作夥伴｜TLI Connect', {en:'Become a TLI Partner | TLI Connect', ja:'TLIパートナーになる｜TLI Connect', de:'TLI-Partner werden | TLI Connect'});
   var m = document.querySelector('meta[name="description"]');
-  if(m) m.setAttribute('content', T('TLI 合作夥伴招募：介紹加盟、經銷、代理三種合作型態，說明各自的合作方式與適合對象，並提供洽談合作入口。', {en:'TLI Partner Recruitment: an overview of three partnership types — franchise, distributor, and agent — including how each works, who it fits, and how to start a conversation.', ja:'TLIパートナー募集：フランチャイズ・代理店・エージェントの3つの提携形態について、それぞれの仕組みと適した対象、お問い合わせ方法をご紹介します。', de:'TLI-Partnerprogramm: Übersicht über drei Partnerschaftsformen – Franchise, Vertrieb und Vermittlung – mit Erläuterung der jeweiligen Zusammenarbeit, Zielgruppe und Kontaktmöglichkeit.'}));
+  if(m) m.setAttribute('content', T('TLI 合作夥伴招募：介紹經銷、代理兩種合作型態，說明各自的合作方式與適合對象，並提供洽談合作入口。', {en:'TLI Partner Recruitment: an overview of two partnership types — distributor and agent — including how each works, who it fits, and how to start a conversation.', ja:'TLIパートナー募集：フランチャイズ・代理店・エージェントの3つの提携形態について、それぞれの仕組みと適した対象、お問い合わせ方法をご紹介します。', de:'TLI-Partnerprogramm: Übersicht über zwei Partnerschaftsformen – Vertrieb und Vermittlung – mit Erläuterung der jeweiligen Zusammenarbeit, Zielgruppe und Kontaktmöglichkeit.'}));
 }
 
 TLI_I18N.onRefresh(applyMetaDesc);

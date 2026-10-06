@@ -67,6 +67,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .badge-muted{background:var(--c-border);color:var(--c-muted);}
 .badge-payer-self{background:#E6EEF8;color:var(--c-primary);}
 .badge-payer-company{background:#FCEBDC;color:var(--c-accent-dark);}
+.badge-payer-project{background:#E4F5F0;color:#0B6B52;}
 .badge-payer-school{background:#F3E8FD;color:#6B21A8;}
 .badge-type-1on1{background:#E6EEF8;color:var(--c-primary);}
 .badge-type-group{background:#E4F5F0;color:#0B6B52;}
@@ -120,6 +121,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
     <a class="side-link active" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
     <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m18_learning_dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="6" width="3" height="12" rx="1"/><rect x="16" y="9" width="3" height="9" rx="1"/></svg><span data-en="Learning Dashboard">學習儀表板</span></a>
+    <a class="side-link" href="m20_transcripts.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
+    <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg><span data-en="Certificates">結業證書</span></a>
     <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
     <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
     <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
@@ -217,6 +221,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="../assets/_i18n_dict_member.js"></script>
 <script src="../assets/_i18n_dict_ja.js"></script>
 <script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="_project_learning.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
 function T(zh,obj){ return TLI_I18N.t(zh,obj); }
@@ -249,7 +255,7 @@ function qs(name){
   return m ? decodeURIComponent(m[1]) : null;
 }
 
-/* ---------- 示範課堂資料：5 筆涵蓋一對一／團體直播／團體聊天室／線上活動四型態，
+/* ---------- 示範課堂資料：5 筆涵蓋一對一／團體直播／Mandarin Lounge／線上活動四型態，
    分別對應 _示範會員方案資料_20260910.md 的 plan-a～d（自費×2、企業提供×2、學校提供×1），
    用來示範方案徽章、廠區時區對照與依方案不同的請假提醒文案。 ---------- */
 var LESSONS = [
@@ -261,7 +267,7 @@ var LESSONS = [
     planId:'plan-b', planName:'彈性團體直播班・中級會話 B1 班', payer:'self',
     dateLabel:'9/10（四）', timeLabel:'19:00–20:30', tzLabel:null,
     material:'B1 班 第 5 週教材（PDF）', countdownMin:0, defaultState:'ended', replayEligible:true },
-  { id:'l3', type:'chat', title:'日常對話練習（團體聊天室）', teacherName:'林俊傑老師（TLI）', teacherIntro:'資深華語教師，擅長生活會話與文化主題引導，教學風格活潑親切。',
+  { id:'l3', type:'chat', title:'日常對話練習（Mandarin Lounge）', teacherName:'林俊傑老師（TLI）', teacherIntro:'資深華語教師，擅長生活會話與文化主題引導，教學風格活潑親切。',
     planId:'plan-c', planName:'商務華語企業培訓', payer:'company', payerOrg:'和霖科技股份有限公司',
     dateLabel:'9/10（四）', timeLabel:'20:00–20:30', tzLabel:'美國廠區（美國西部時間，UTC-7）05:00（前一天）',
     material:'日常對話練習 討論題綱（PDF）', countdownMin:5, defaultState:'open', replayEligible:false },
@@ -277,19 +283,45 @@ var LESSONS = [
 function typeLabel(type){
   var map={'1on1':['一對一',{en:'1-on-1',ja:'1対1',de:'Einzelunterricht'}],
     'group':['團體直播',{en:'Group Livestream',ja:'団体ライブ授業',de:'Gruppen-Livestream'}],
-    'chat':['團體聊天室',{en:'Group Chat Room',ja:'団体チャットルーム',de:'Gruppen-Chatraum'}],
+    'chat':['Mandarin Lounge',{en:'Mandarin Lounge',ja:'Mandarin Lounge',de:'Mandarin Lounge'}],
     'event':['線上活動',{en:'Online Event',ja:'オンラインイベント',de:'Online-Event'}]};
   var e=map[type]||['',{}];
   return T(e[0],e[1]);
 }
 function payerLabelFor(payer, org){
   if(payer==='company') return T('公司提供',{en:'Company-provided',ja:'企業提供',de:'Vom Unternehmen bereitgestellt'}) + (org ? '・'+org : '');
+  if(payer==='project') return T('專案合作',{en:'Partner program',ja:'提携プログラム',de:'Partnerprogramm'}) + (org ? '・'+org : '');
   if(payer==='school') return T('學校提供',{en:'School-provided',ja:'学校提供',de:'Von der Schule bereitgestellt'}) + (org ? '・'+org : '');
   return T('自費',{en:'Self-paid',ja:'自己負担',de:'Selbstzahler'});
 }
 
 var LESSON_ID = qs('lesson');
-var LESSON = LESSONS.filter(function(l){ return l.id===LESSON_ID; })[0] || LESSONS[0];
+var LESSON = LESSONS.filter(function(l){ return l.id===LESSON_ID; })[0];
+/* Mandarin Lounge 預約（LB- 開頭）：由 localStorage 的預約組出課堂資料 */
+if(!LESSON && window.TLI_PL){
+  var _bk = TLI_PL.bookings().filter(function(b){ return b.id===LESSON_ID; })[0];
+  if(_bk){
+    var _u = TLI_PL.me();
+    var _p = _bk.tpTime ? _bk.tpTime : _bk.time;
+    var _mins = Math.max(0, Math.round((_bk.utc - TLI_PL.nowUtc)/60000));
+    LESSON = { id:_bk.id, type:'chat', title:'Mandarin Lounge'+'（團體場次）'+(_bk.topic ? '：'+_bk.topic : ''), teacherName:_bk.teacher+'老師（TLI）', teacherIntro:'TLI 中心教師，帶領 30 分鐘口說練習。',
+      planId:'plan-lounge', planName:_u.mode==='project' ? _u.projectName : 'Mandarin Lounge', payer:_u.mode==='project' ? 'project' : 'self', payerOrg:_u.mode==='project' ? _u.partnerName : '',
+      dateLabel:_bk.date.slice(5).replace('-','/'), timeLabel:_bk.time+'–'+(function(t){var p=t.split(':');var m=(+p[0])*60+(+p[1])+30;return ('0'+Math.floor(m/60)%24).slice(-2)+':'+('0'+m%60).slice(-2);})(_bk.time),
+      tzLabel:null, material:'Mandarin Lounge 討論題綱（PDF）', countdownMin:_mins, defaultState:'before', replayEligible:false, tool:_bk.tool };
+  }
+}
+if(!LESSON && LESSON_ID==='lounge' && window.TLI_PL){
+  var _lu = TLI_PL.me();
+  var _ls = TLI_PL.sessionsFor(_lu).filter(function(x){ return x.type==='group'; })[0];
+  if(_ls){
+    var _lm = Math.max(0, Math.round((_ls.utc - TLI_PL.nowUtc)/60000));
+    var _le = (function(t){var p=t.split(':');var m=(+p[0])*60+(+p[1])+30;return ('0'+Math.floor(m/60)%24).slice(-2)+':'+('0'+m%60).slice(-2);})(_ls.tpTime);
+    LESSON = { id:'lounge', type:'chat', title:'Mandarin Lounge（團體）：'+_ls.topic, teacherName:_ls.teacher+'老師（TLI）', teacherIntro:'TLI 中心教師，帶領 30 分鐘口說練習。',
+      planId:'plan-lounge', planName:_lu.mode==='project' ? _lu.projectName : 'Mandarin Lounge', payer:'project', payerOrg:_lu.mode==='project' ? _lu.partnerName : '',
+      dateLabel:_ls.tpDate.slice(5).replace('-','/'), timeLabel:_ls.tpTime+'–'+_le, tzLabel:null, material:'Mandarin Lounge 討論題綱（PDF）', countdownMin:_lm, defaultState:'before', replayEligible:false, tool:_lu.tool };
+  }
+}
+LESSON = LESSON || LESSONS[0];
 var STATE_PARAM = qs('state');
 var STATE = (STATE_PARAM==='before'||STATE_PARAM==='open'||STATE_PARAM==='ended') ? STATE_PARAM : LESSON.defaultState;
 
@@ -321,7 +353,7 @@ function renderStatus(){
     html += '<div class="small muted">'+T('開課前 15 分鐘開放進入教室',{en:'Opens 15 minutes before class',ja:'開始15分前から入室可能',de:'Öffnet 15 Minuten vor Unterrichtsbeginn'})+'</div>';
   } else if (STATE==='open'){
     html += '<div class="badge badge-ok" style="margin-bottom:12px;">'+T('可進入',{en:'Ready to join',ja:'入室可能',de:'Beitritt möglich'})+'</div>';
-    html += '<button type="button" class="btn btn-primary btn-block" onclick="openZoomModal()">'+T('開啟 Zoom 教室',{en:'Open Zoom Classroom',ja:'Zoom 教室を開く',de:'Zoom-Klassenzimmer öffnen'})+'</button>';
+    html += '<button type="button" class="btn btn-primary btn-block" onclick="openZoomModal()">'+(LESSON.tool==='teams'?T('開啟 Teams 教室',{en:'Open Teams Classroom'}):T('開啟 Zoom 教室',{en:'Open Zoom Classroom',ja:'Zoom 教室を開く',de:'Zoom-Klassenzimmer öffnen'}))+'</button>';
   } else {
     html += '<div style="font-weight:700;margin-bottom:10px;">'+T('本堂已結束',{en:'This class has ended',ja:'このクラスは終了しました',de:'Diese Stunde ist beendet'})+'</div>';
     html += '<div class="stack">';
@@ -340,10 +372,12 @@ function renderReminders(){
     T('請準時於開課時間登入，避免錯過課程內容。',{en:'Please log in on time to avoid missing course content.',ja:'授業開始時刻までにログインしてください。内容を見逃さないようにご注意ください。',de:'Bitte melden Sie sich pünktlich an, um keine Inhalte zu verpassen.'}),
     T('上課全程請開啟攝影機與麥克風，以利口說練習與互動。',{en:'Keep your camera and microphone on throughout the class for speaking practice and interaction.',ja:'授業中はカメラとマイクを常にオンにし、会話練習とやり取りに参加してください。',de:'Bitte Kamera und Mikrofon während der gesamten Stunde aktiviert lassen für Sprechübungen und Interaktion.'})
   ];
-  if (LESSON.payer==='company'){
+  if (LESSON.payer==='project'){
+    lines.push(T('Mandarin Lounge 每場 30 分鐘，開始前 2 小時以上可在預約頁取消，名額會釋出給其他同學。',{en:'Each Mandarin Lounge session runs 30 minutes. You can cancel on the booking page up to 2 hours before the start so the seat opens for others.',ja:'Mandarin Lounge は 1 回 30 分です。開始の 2 時間前までは予約ページでキャンセルできます。',de:'Jede Mandarin-Lounge-Sitzung dauert 30 Minuten. Bis 2 Stunden vor Beginn können Sie auf der Buchungsseite stornieren.'}));
+  } else if (LESSON.payer==='company'){
     lines.push(T('企業合約：如需請假需經 HR 核准，送出後顯示「等待 HR 核准」，核准前仍請準時出席。',{en:'Company contract: leave requests need HR approval; you\'ll see "Awaiting HR approval" after submitting — please still attend on time until approved.',ja:'企業契約：欠席連絡には HR の承認が必要です。送信後は「HR承認待ち」と表示されますが、承認前は通常どおり出席してください。',de:'Firmenvertrag: Abwesenheiten benötigen HR-Genehmigung; nach dem Absenden erscheint „Warten auf HR-Genehmigung“ — bitte bis zur Genehmigung trotzdem pünktlich teilnehmen.'}));
   } else if (LESSON.payer==='school'){
-    lines.push(T('由學校提供之方案，出缺席規則依授權設定，如需異動請洽學校窗口。',{en:'For school-provided plans, attendance rules follow the school\'s authorization; contact your school liaison for changes.',ja:'学校提供のプランは、出欠ルールが学校の許可設定に従います。変更が必要な場合は学校窓口までご連絡ください。',de:'Bei von der Schule bereitgestellten Paketen gelten die Anwesenheitsregeln der Schule; Änderungen bitte über die Schulkontaktstelle.'}));
+    lines.push(T('由學校提供之方案，請假規則依授權設定，如需異動請洽學校窗口。',{en:'For school-provided plans, attendance rules follow the school\'s authorization; contact your school liaison for changes.',ja:'学校提供のプランは、出欠ルールが学校の許可設定に従います。変更が必要な場合は学校窓口までご連絡ください。',de:'Bei von der Schule bereitgestellten Paketen gelten die Anwesenheitsregeln der Schule; Änderungen bitte über die Schulkontaktstelle.'}));
   } else if (LESSON.type==='group'){
     lines.push(T('團體直播班單堂請假：需於開課前（依設定）小時內送出，逾提前時限記缺席。',{en:'Group livestream single-session leave: submit within the set hours before class, or it will be marked absent.',ja:'団体ライブ授業の単回欠席連絡：開始前の設定時間内に送信してください。過ぎると欠席扱いになります。',de:'Abwesenheit bei Gruppen-Livestream-Einzelstunden: innerhalb der festgelegten Frist vor Beginn melden, sonst gilt die Stunde als versäumt.'}));
   } else {
@@ -399,7 +433,7 @@ function maskEmail(email){
 }
 function getZoomEmailDemo(){
   try{ var v = localStorage.getItem('tli_zoom_email'); if (v) return v; }catch(e){}
-  return 'emma.chen@gmail.com';
+  return 'emma.johnson@example.com';
 }
 var MEETING_ID_MAP = {l1:'839 2201 5567', l2:'921 4432 1180', l3:'745 8890 3321', l4:'602 1178 4459', l5:'318 7742 9903'};
 function openZoomModal(){

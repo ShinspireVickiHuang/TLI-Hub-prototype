@@ -401,7 +401,7 @@ body .toast{top:20px;bottom:auto;height:auto;}
 .quick-form{border:1px solid var(--gray-200);border-radius:8px;padding:12px;margin-top:10px;background:var(--gray-50);display:none;}
 .quick-form.open{display:block;}
 .mode-tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10.5px;font-weight:700;background:var(--gray-100);color:var(--gray-700);}
-/* 20260910q 新增：選銷售方案三頁籤（銷售方案／組合包／專案型）與多筆訂單明細 */
+/* 20260910q 新增：選銷售方案兩頁籤（銷售方案／組合包）與多筆訂單明細 */
 .pkg-tabs{display:flex;gap:2px;border-bottom:1px solid var(--gray-200);margin-bottom:12px;}
 .pkg-tab{padding:8px 14px;border:none;background:none;font-size:13px;color:var(--gray-500);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .pkg-tab.active{color:var(--primary);border-color:var(--primary);font-weight:700;}
@@ -503,11 +503,6 @@ html,body{overflow-x:hidden;}
                 <div><div class="l" data-i18n="c04.ent.currencyLabel">幣別</div><div class="v" id="entCurrency">—</div></div>
                 <div><div class="l" data-i18n="c04.ent.invoiceEntityLabel">開票主體</div><div class="v" id="entInvoiceEntity">—</div></div>
               </div>
-              <!-- 20260909 新增：計價方式二擇一——階梯計價卡／專案型方案，兩者互斥並存 -->
-              <div class="radio-group" id="entPricingModeGroup" style="margin-top:12px;">
-                <label class="radio-opt"><input type="radio" name="entPricingMode" value="ladder" checked onchange="tliOnPricingModeChange()"><span><span class="t" data-i18n="c04.ent.pricingModeLadder.t">階梯計價</span><span class="d" data-i18n="c04.ent.pricingModeLadder.d">依企業共用時數池／帳號數的合約階梯規則試算</span></span></label>
-                <label class="radio-opt"><input type="radio" name="entPricingMode" value="project" onchange="tliOnPricingModeChange()"><span><span class="t" data-i18n="c04.ent.pricingModeProject.t">選用專案型方案</span><span class="d" data-i18n="c04.ent.pricingModeProject.d">適用長期客製企業客戶，帶入既有專案合約的課程項目摘要（見 a04）</span></span></label>
-              </div>
               <div class="ladder-box" id="entLadderBox">
                 <div class="hint" data-i18n="c04.ent.ladderCalcHint">階梯計價規則試算</div>
                 <div class="ladder-grid">
@@ -516,19 +511,6 @@ html,body{overflow-x:hidden;}
                   <div class="field"><label data-i18n="c04.ent.hoursLabel">本次總時數</label><input type="number" id="entLadderHours" min="1" step="1" placeholder="輸入本次總時數" data-i18n-placeholder="c04.ent.hoursPlaceholder" oninput="tliRecalcLadder()"></div>
                 </div>
                 <div class="ladder-result empty" id="entLadderResult">請輸入帳號數與總時數，系統將依合約設定的規則類型試算級距</div>
-              </div>
-              <!-- 20260909 新增：專案型方案分頁——列出 a04 該客戶的專案型方案與版本，選定後帶入課程項目摘要，合約價欄仍留白由顧問另議 -->
-              <div class="ladder-box" id="entProjectBox" style="display:none;">
-                <div class="hint" data-i18n="c04.ent.projectSectionHint">專案型方案（來自 a04 企業客戶已建立之專案合約）</div>
-                <div class="field">
-                  <label data-i18n="c04.ent.projectPlanLabel">專案型方案版本</label>
-                  <select id="entProjectPlanSelect" onchange="tliOnProjectPlanChange()"></select>
-                </div>
-                <div id="entProjectEmpty" class="ent-blank-hint" style="display:none;" data-i18n="c04.ent.projectEmptyHint">此企業客戶尚未建立專案型方案，請先至 a19 或 a04 建立後再回來選用</div>
-                <div id="entProjectSummary" style="display:none;">
-                  <div class="hint" style="margin-bottom:2px;" data-i18n="c04.ent.projectSummaryHint">課程項目摘要（唯讀，帶出自所選版本）</div>
-                  <div class="tablewrap"><table class="course-table"><tr><th data-i18n="c04.th.courseItem">課程項目</th><th class="num" data-i18n="c04.th.qty">數量</th><th data-i18n="c04.th.unit">單位</th></tr><tbody id="entProjectItemRows"></tbody></table></div>
-                </div>
               </div>
             </div>
           </div>
@@ -551,7 +533,7 @@ html,body{overflow-x:hidden;}
             <div class="field" id="entPrepaidBox" style="display:none;margin-top:10px;">
               <label data-i18n="c04.ent.prepaidAmountLabel">預付金額（NT$）</label>
               <input type="number" id="entPrepaidAmount" min="0" step="1000" placeholder="輸入本次預付總金額" data-i18n-placeholder="c04.ent.prepaidAmountPlaceholder" oninput="tliRecalcEnt()">
-              <div class="ent-blank-hint" data-i18n="c04.ent.prepaidHint">入帳後轉 a13 預付款頁面，由財務登記每堂扣抵明細；本原型不預先帶入數字</div>
+              <div class="ent-blank-hint" data-i18n="c04.ent.prepaidHint">入帳後轉 a13 預付款頁面，由財務登記每堂扣抵明細；由顧問依合約填入</div>
             </div>
           </div>
 
@@ -569,7 +551,7 @@ html,body{overflow-x:hidden;}
             <div class="field">
               <label data-i18n="c04.ent.contractPriceLabel">合約價（NT$）</label>
               <input type="number" id="entContractPrice" min="0" step="1000" placeholder="依階梯規則由顧問填入，級距由 TLI 拍板" data-i18n-placeholder="c04.ent.contractPricePlaceholder" oninput="tliRecalcEnt()">
-              <div class="ent-blank-hint" data-i18n="c04.ent.contractPriceHint">此欄位刻意留白，需依企業合約階梯計價規則由顧問填入；級距與折扣數字一律由 TLI 拍板，本原型不預先帶入數字</div>
+              <div class="ent-blank-hint" data-i18n="c04.ent.contractPriceHint">此欄位刻意留白，需依企業合約階梯計價規則由顧問填入；級距與折扣數字一律由 TLI 拍板</div>
             </div>
           </div>
         </div>
@@ -657,7 +639,6 @@ html,body{overflow-x:hidden;}
               <div class="pkg-tabs" id="pkgTabs">
                 <button type="button" class="pkg-tab active" data-tab="plan" onclick="switchPkgTab('plan')" data-i18n="c04.pkgTab.plan">銷售方案</button>
                 <button type="button" class="pkg-tab" data-tab="bundle" onclick="switchPkgTab('bundle')" data-i18n="c04.pkgTab.bundle">組合包</button>
-                <button type="button" class="pkg-tab" data-tab="project" onclick="switchPkgTab('project')" data-i18n="c04.pkgTab.project">專案型（顧問組合）</button>
               </div>
 
               <div class="pkg-panel" id="pkgPanelPlan">
@@ -687,23 +668,6 @@ html,body{overflow-x:hidden;}
                 <div class="bundle-list" id="bundleListTable"></div>
               </div>
 
-              <div class="pkg-panel" id="pkgPanelProject" style="display:none;">
-                <div class="field">
-                  <label data-i18n="c04.project.copyLastLabel">複製上次合約</label>
-                  <select id="projectHistorySelect" onchange="onCopyLastContract(this.value)"></select>
-                  <div class="hint" data-i18n="c04.project.copyLastHint">帶入既有專案型合約的產品組成，可再調整數量。</div>
-                </div>
-                <div class="grid2" id="projectProductInputs"></div>
-                <div class="note" id="projectSummary">尚未挑選任何產品。</div>
-                <div class="field" style="margin-top:10px;">
-                  <label data-i18n="c04.project.quoteLabel">報價金額</label>
-                  <input type="number" min="0" step="1000" id="projectQuoteInput" placeholder="請輸入報價" data-i18n-placeholder="c04.project.quotePlaceholder">
-                </div>
-                <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin:10px 0;">
-                  <input type="checkbox" id="projectApprovalCheck" style="width:auto;"> <span data-i18n="c04.project.needApproval">需主管核准</span>
-                </label>
-                <button type="button" class="btn primary sm" style="width:auto;" onclick="addProjectToOrder()" data-i18n="c04.addToOrderBtn">加入訂單</button>
-              </div>
             </div>
           </div>
 
@@ -713,7 +677,7 @@ html,body{overflow-x:hidden;}
               <svg class="sec-chevron" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
             </div>
             <div class="sec-body">
-              <div class="hint" id="courseHint" style="margin-bottom:8px;" data-i18n="c04.orderLinesHint">已加入的方案／組合包／專案型列於下方，可分別調整數量、期數與折扣。</div>
+              <div class="hint" id="courseHint" style="margin-bottom:8px;" data-i18n="c04.orderLinesHint">已加入的方案／組合包列於下方，可分別調整數量、期數與折扣。</div>
               <div style="overflow-x:auto;">
                 <table class="course-table order-lines-table" id="orderLinesTable"></table>
               </div>
@@ -893,7 +857,7 @@ var STUDENTS=[
   {id:'wang01',name:'王大同',email:'wang.dt01@example.com',phone:'0912345678',cls:'B',campus:'羅斯福',hours:12,expire:'2026-11-20',taxId:'12345678',taxTitle:'範例工業股份有限公司',enterprise:'範例工業股份有限公司',planCount:2,advisor:'顧問 A',activated:true},
   {id:'wang02',name:'王大同',email:'dtwang02@example.com',phone:'0933221100',cls:'C',campus:'士林',hours:3,expire:'2026-09-30',taxId:'',taxTitle:'',enterprise:'',planCount:1,advisor:'顧問 B',activated:true},
   {id:'chen01',name:'陳美惠',email:'chen.mh@example.com',phone:'0955667788',cls:'G',campus:'士林',hours:0,expire:'2026-11-01',taxId:'',taxTitle:'',enterprise:'',planCount:0,advisor:'顧問 A',activated:true},
-  {id:'emma01',name:'Emma Chen',email:'emma.chen@example.com',phone:'0966778899',cls:'C',campus:'士林',hours:0,expire:'2026-10-01',taxId:'',taxTitle:'',enterprise:'',planCount:1,advisor:'顧問 C',activated:true},
+  {id:'emma01',name:'Emma Johnson',email:'emma.johnson@example.com',phone:'0966778899',cls:'C',campus:'士林',hours:0,expire:'2026-10-01',taxId:'',taxTitle:'',enterprise:'',planCount:1,advisor:'顧問 C',activated:true},
   {id:'yamada01',name:'山田太郎',email:'yamada.t@example.com',phone:'0977889900',cls:'BIP',campus:'台中',hours:20,expire:'2027-01-15',taxId:'',taxTitle:'',enterprise:'',planCount:3,advisor:'顧問 B',activated:true},
   {id:'li01',name:'李文彬',email:'li.wb@example.com',phone:'0988990011',cls:'B',campus:'羅斯福',hours:5,expire:'2026-08-01',taxId:'',taxTitle:'',enterprise:'',planCount:1,advisor:'顧問 A',activated:true},
   {id:'zhang01',name:'張雅婷',email:'zhang.yt@example.com',phone:'0999001122',cls:'G',campus:'高雄',hours:8,expire:'2026-12-10',taxId:'',taxTitle:'',enterprise:'',planCount:2,advisor:'顧問 C',activated:true}
@@ -906,7 +870,7 @@ function tliPkgProd(pkg){
 }
 function tliPkgCat(pkg){
   var prod=tliPkgProd(pkg);
-  if(pkg.planType==='project'||/企業/.test(pkg.name))return '商業';
+  if(/企業/.test(pkg.name))return '商業';
   if(prod&&prod.categoryId==='c_event')return '文化';
   if(prod&&prod.line==='師資班')return '師培';
   if(prod&&prod.teachLangId&&prod.teachLangId!=='zh')return '外文';
@@ -920,9 +884,9 @@ function tliPkgTags(pkg){
   if(pkg.periodStart==='2026-09-01')tags.push('新上架');
   return tags;
 }
-// 只列「上架中、非專案型」的方案供一般開單挑選；專案型（planType:'project'）走下方「專案型（顧問組合）」頁籤
+// 只列「上架中」的銷售方案供開單挑選（企業客戶一律用已上架方案建訂單）
 var PLANS=TLI_MASTERS.packages.filter(function(pkg){
-  return pkg.status==='上架'&&pkg.planType!=='project';
+  return pkg.status==='上架';
 }).map(function(pkg){
   var quotable=!pkg.prices||!Object.keys(pkg.prices).length;
   return {
@@ -955,18 +919,6 @@ var BUNDLES=[
   {id:'bd_pk5_pk3',name:'中文一對一 30 堂＋教材＋註冊費 ＋ 自學影音課程包',planIds:['pk5','pk3'],audience:['C','BIP'],bundleDiscount:0.93},
   {id:'bd_pk1_pk2',name:'中文一對一線上課 20 堂 ＋ 中文彈性團體直播班一期',planIds:['pk1','pk2'],audience:['C','BIP'],bundleDiscount:0.91}
 ];
-// 專案型（顧問組合）：顧問自行挑選產品數量後輸入報價，比照 a19 企業端「專案型方案」概念，示範用歷史紀錄供複製
-var PROJECT_PRODUCTS=[
-  {key:'course_hours',label:'課程堂數（中文一對一 50 分鐘）',labelEn:'Course Lessons (Chinese 1-on-1, 50 min)',unit:'堂',unitEn:'lessons',taxable:false},
-  {key:'group_class',label:'團體班堂數',labelEn:'Group Class Lessons',unit:'堂',unitEn:'lessons',taxable:false},
-  {key:'chat_room',label:'聊天室權益',labelEn:'Chat Room Access',unit:'則／月',unitEn:'msgs/mo',taxable:false},
-  {key:'self_paced',label:'自學影音課程',labelEn:'Self-Paced Video Course',unit:'門',unitEn:'courses',taxable:true},
-  {key:'event_ticket',label:'活動票',labelEn:'Event Ticket',unit:'張',unitEn:'tickets',taxable:true}
-];
-var PROJECT_HISTORY=[
-  {id:'ph1',label:'CT-2026-014　2026 年續約，加開新人基礎會話班',qty:{course_hours:20,group_class:12,chat_room:0,self_paced:0,event_ticket:0}},
-  {id:'ph2',label:'CT-2025-077　2025 年度生醫廠區日常會話學期班',qty:{course_hours:0,group_class:24,chat_room:0,self_paced:0,event_ticket:0}}
-];
 // 付款方式：統一清單，所有會員分類共用，不隨分類切換
 var PAYMENT_MODES=[
   {v:'full',t:'一次付清',tEn:'Pay in Full',d:'訂單成立後一次收取全部金額',dEn:'Collect the full amount once the order is created'},
@@ -993,12 +945,10 @@ var CONTRACT_TEMPLATES=[
 ];
 var __channelState=null; // {channel, status, ref, label}
 var __contractConfirmed=false;
-var __orderLines=[]; // 訂單明細（多筆）：每筆為已加入的銷售方案／組合包／專案型
+var __orderLines=[]; // 訂單明細（多筆）：每筆為已加入的銷售方案／組合包
 var __planListFull=[];
 var __planListShown=0;
 var __planListPageSize=8;
-var __projectQty={};
-PROJECT_PRODUCTS.forEach(function(pr){__projectQty[pr.key]=0;});
 
 function qs(k){return new URLSearchParams(location.search).get(k);}
 function fmt(n){return 'NT$'+n.toLocaleString();}
@@ -1008,7 +958,7 @@ var CAMPUS_EN_C04={'羅斯福':'Roosevelt','士林':'Shilin','台中':'Taichung'
 
 /* ================= v2 新增：企業訂單分支（不影響下方既有個人訂單流程） ================= */
 // 20260928 修正：企業客戶改讀主檔 orgCustomers（a19 組織客戶主檔），不再各頁另造一套虛構企業名單；
-// 排除 type:'institution'（學校／加盟機構走加盟合約，不是一般企業訂單）
+// 排除 type:'institution'（學校走專案合作，不是一般企業訂單）
 var __orgGeneral=TLI_MASTERS.orgCustomers.filter(function(o){return o.type==='general';});
 function __findOrg(pattern){return __orgGeneral.find(function(o){return pattern.test(o.name);});}
 var ORG_TECH=__findOrg(/北辰|精密/);
@@ -1032,24 +982,6 @@ var ENTERPRISE_CLIENTS=__orgGeneral.map(function(o,i){
     invoiceEntity:'中華語文（企業合作）'
   };
 });
-/* 20260909 新增：專案型方案示範資料——列出各企業客戶已建立的專案型方案與版本（比照 a04 的合約歷史紀錄結構）
-   S19：長期客戶專案型方案複製上次合約，c04 建訂單時需能直接選用既有版本
-   20260928 修正：key 改為主檔企業客戶的真實 id */
-var PROJECT_PLANS={};
-PROJECT_PLANS[ORG_SEMI.id]=[
-  {id:'proj_semi_1',contractNo:'CT-2025-101',date:'2025-04-10',summary:'2025 年度半導體廠區主管溝通專班（一期）',
-    items:[{course:'主管溝通專班（企業內訓）',qty:16,qtyType:'堂'}]},
-  {id:'proj_semi_2',contractNo:'CT-2026-014',date:'2026-08-05',summary:'2026 年續約，加開新人基礎會話班',
-    items:[
-      {course:'主管溝通專班（企業內訓）',qty:20,qtyType:'堂'},
-      {course:'新人基礎會話班（企業內訓）',qty:12,qtyType:'堂'}
-    ]}
-];
-if(ORG_BIO)PROJECT_PLANS[ORG_BIO.id]=[
-  {id:'proj_bio_1',contractNo:'CT-2025-077',date:'2025-09-22',summary:'2025 年度生醫廠區日常會話學期班',
-    items:[{course:'日常會話學期班 Lv.5–8（企業內訓）',qty:24,qtyType:'堂'}]}
-];
-/* 其餘企業客戶尚未建立專案型方案，下拉會顯示提示文字，示範畫面，資料為模擬數字 */
 // wang01（王大同，B 類會員）所屬企業改指向主檔既有企業，不再另造「範例工業股份有限公司」
 (function(){
   var w=STUDENTS.find(function(s){return s.id==='wang01';});
@@ -1065,48 +997,6 @@ function currentEntClient(){
   var id=document.getElementById('entClientSelect').value;
   return ENTERPRISE_CLIENTS.find(function(c){return c.id===id;});
 }
-/* 20260909 新增：計價方式二擇一（階梯計價／專案型方案）*/
-function currentPricingMode(){var r=document.querySelector('input[name="entPricingMode"]:checked');return r?r.value:'ladder';}
-function tliOnPricingModeChange(){
-  var mode=currentPricingMode();
-  document.getElementById('entLadderBox').style.display=mode==='ladder'?'':'none';
-  document.getElementById('entProjectBox').style.display=mode==='project'?'':'none';
-  if(mode==='project'){
-    initEntProjectPlanSelect();
-    tliOnProjectPlanChange();
-  }
-  tliRecalcEnt();
-}
-function initEntProjectPlanSelect(){
-  var c=currentEntClient();
-  var sel=document.getElementById('entProjectPlanSelect');
-  var plans=(c&&PROJECT_PLANS[c.id])||[];
-  if(!plans.length){
-    sel.innerHTML='';
-    sel.style.display='none';
-    document.getElementById('entProjectEmpty').style.display='';
-    document.getElementById('entProjectSummary').style.display='none';
-    return;
-  }
-  sel.style.display='';
-  document.getElementById('entProjectEmpty').style.display='none';
-  sel.innerHTML=plans.map(function(p){return '<option value="'+p.id+'">'+p.contractNo+'　'+p.summary+'</option>';}).join('');
-}
-function tliOnProjectPlanChange(){
-  var c=currentEntClient();
-  var plans=(c&&PROJECT_PLANS[c.id])||[];
-  var sel=document.getElementById('entProjectPlanSelect');
-  var plan=plans.find(function(p){return p.id===sel.value;});
-  var summaryBox=document.getElementById('entProjectSummary');
-  if(!plan){ summaryBox.style.display='none'; return; }
-  summaryBox.style.display='';
-  document.getElementById('entProjectItemRows').innerHTML=plan.items.map(function(it){
-    return '<tr><td>'+it.course+'</td><td class="num">'+it.qty+'</td><td>'+it.qtyType+'</td></tr>';
-  }).join('');
-  /* S19：帶入課程項目摘要，合約價欄仍維持留白，由顧問依專案另議金額 */
-  document.getElementById('entContractPrice').value='';
-  tliRecalcEnt();
-}
 function tliOnEntClientChange(){
   var c=currentEntClient();
   var box=document.getElementById('entContractParams');
@@ -1119,11 +1009,6 @@ function tliOnEntClientChange(){
   document.getElementById('entLadderRuleType').textContent=(c.ruleType==='accounts'?T('依帳號數分級','By number of accounts'):T('依總時數分級','By total hours'))+T('（門檻待定，由 TLI 拍板）',' (threshold TBD, set by TLI)');
   document.getElementById('entLadderAccounts').value='';
   document.getElementById('entLadderHours').value='';
-  /* 換企業客戶時，計價方式重置回預設「階梯計價」，避免帶到上一個客戶的專案型方案殘留內容 */
-  var ladderRadio=document.querySelector('input[name="entPricingMode"][value="ladder"]');
-  if(ladderRadio)ladderRadio.checked=true;
-  document.getElementById('entLadderBox').style.display='';
-  document.getElementById('entProjectBox').style.display='none';
   tliRecalcLadder();
   tliRecalcEnt();
 }
@@ -1475,15 +1360,13 @@ function tliOnModeChange(){
   tliRecalc();
 }
 
-// ---- ② 選銷售方案（銷售方案／組合包／專案型三頁籤，皆可「加入訂單」成為下方多筆明細）----
+// ---- ② 選銷售方案（銷售方案／組合包兩頁籤，皆可「加入訂單」成為下方多筆明細）----
 function switchPkgTab(tab){
   document.querySelectorAll('.pkg-tab').forEach(function(b){b.classList.toggle('active',b.dataset.tab===tab);});
   document.getElementById('pkgPanelPlan').style.display=tab==='plan'?'':'none';
   document.getElementById('pkgPanelBundle').style.display=tab==='bundle'?'':'none';
-  document.getElementById('pkgPanelProject').style.display=tab==='project'?'':'none';
   if(tab==='plan')renderPlanList();
   if(tab==='bundle')renderBundleList();
-  if(tab==='project')renderProjectProductInputs();
 }
 var CAT_I18N={商業:['商業','Business'],文化:['文化','Culture'],師培:['師培','Teacher Training'],外文:['外文','Foreign Language'],中文:['中文','Chinese']};
 var TAG_I18N={促銷:['促銷','Promo'],新上架:['新上架','New']};
@@ -1610,63 +1493,7 @@ function addBundleToOrder(id){
   tliToast(T('已整包加入訂單：','Added bundle to order: ')+b.name);
 }
 
-// ---- 專案型（顧問組合）----
-function renderProjectProductInputs(){
-  var box=document.getElementById('projectProductInputs');
-  if(!box)return;
-  box.innerHTML=PROJECT_PRODUCTS.map(function(pr){
-    return '<div class="field"><label>'+T(pr.label,pr.labelEn)+'（'+T(pr.unit,pr.unitEn)+'）</label><input type="number" min="0" value="'+(__projectQty[pr.key]||0)+'" oninput="onProjectQtyChange(\''+pr.key+'\',this.value)"></div>';
-  }).join('');
-  renderProjectSummary();
-  var histSel=document.getElementById('projectHistorySelect');
-  var keepHist=histSel?histSel.value:'';
-  if(histSel)histSel.innerHTML='<option value="">'+T('不複製，從空白開始','Don’t copy, start blank')+'</option>'+PROJECT_HISTORY.map(function(h){return '<option value="'+h.id+'"'+(keepHist===h.id?' selected':'')+'>'+h.label+'</option>';}).join('');
-}
-function onProjectQtyChange(key,v){__projectQty[key]=Math.max(0,parseInt(v)||0);renderProjectSummary();}
-function renderProjectSummary(){
-  var box=document.getElementById('projectSummary');
-  if(!box)return;
-  var items=PROJECT_PRODUCTS.filter(function(pr){return (__projectQty[pr.key]||0)>0;});
-  box.textContent=items.length?(T('包含：','Includes: ')+items.map(function(pr){return T(pr.label,pr.labelEn)+' × '+__projectQty[pr.key];}).join('、')):T('尚未挑選任何產品。','No products selected yet.');
-}
-function onCopyLastContract(id){
-  if(!id)return;
-  var h=PROJECT_HISTORY.find(function(x){return x.id===id;});
-  if(!h)return;
-  PROJECT_PRODUCTS.forEach(function(pr){__projectQty[pr.key]=h.qty[pr.key]||0;});
-  renderProjectProductInputs();
-  tliToast(T('已帶入「'+h.label+'」的產品組成，請確認並輸入報價','Loaded the product mix from “'+h.label+'”. Please confirm and enter a quote.'));
-}
-function resetProjectForm(){
-  PROJECT_PRODUCTS.forEach(function(pr){__projectQty[pr.key]=0;});
-  renderProjectProductInputs();
-  var q=document.getElementById('projectQuoteInput'); if(q)q.value='';
-  var c=document.getElementById('projectApprovalCheck'); if(c)c.checked=false;
-  var h=document.getElementById('projectHistorySelect'); if(h)h.value='';
-}
-function addProjectToOrder(){
-  var s=currentStudent();
-  if(!s)return;
-  var items=PROJECT_PRODUCTS.filter(function(pr){return (__projectQty[pr.key]||0)>0;});
-  if(!items.length){tliToast(T('請至少填寫一項產品數量','Please enter a quantity for at least one product'));return;}
-  var quote=parseFloat(document.getElementById('projectQuoteInput').value)||0;
-  var needApproval=document.getElementById('projectApprovalCheck').checked;
-  var courses=items.map(function(pr){return {name:T(pr.label,pr.labelEn),qty:__projectQty[pr.key],taxable:pr.taxable};});
-  __orderLines.push({
-    lineId:'ol_'+Date.now()+'_'+Math.floor(Math.random()*1000),
-    kind:'project',name:T('專案型（顧問組合）','Project-Based (Advisor Bundle)')+(needApproval?T('（需主管核准）',' (needs manager approval)'):''),courses:courses,system:'彈性制',
-    term:null,qty:1,unitPrice:quote,quotable:true,needApproval:needApproval,
-    discountType:'none',discountValue:0
-  });
-  markSectionDone(2,true);
-  renderInvoiceEntity();
-  renderOrderLines();
-  tliRecalc();
-  tliToast(T('已加入訂單：專案型（顧問組合）','Added to order: Project-Based (Advisor Bundle)')+(needApproval?T('，待主管核准',', pending manager approval'):''));
-  resetProjectForm();
-}
-
-// ---- ③ 訂單明細（多筆：每筆方案／組合包／專案型一列，可調整數量、期數、折扣）----
+// ---- ③ 訂單明細（多筆：每筆方案／組合包一列，可調整數量、期數、折扣）----
 function lineBaseAmount(line){return (line.unitPrice||0)*(line.qty||1);}
 function lineDiscountAmt(line){
   var base=lineBaseAmount(line);
@@ -1725,7 +1552,7 @@ function removeOrderLine(i){
 }
 // 供稅別試算與合約預覽使用：將每筆訂單明細攤平為課程單價列（依線內課程金額佔比分攤該筆折扣）
 function courseUnitRowsForLine(line){
-  var addonsTotal=(line.courses||[]).filter(function(c){return c.taxable&&line.kind!=='project';}).length?0:0; // 保留擴充欄位，目前無固定加購金額
+  var addonsTotal=(line.courses||[]).filter(function(c){return c.taxable;}).length?0:0; // 保留擴充欄位，目前無固定加購金額
   var base=line.unitPrice||0;
   var qtySum=(line.courses||[]).reduce(function(s,c){return s+(c.qty||1);},0)||1;
   return (line.courses||[]).map(function(c){
@@ -1762,7 +1589,6 @@ function tliOnStudentChange(){
     renderPlanFilterChips();
     switchPkgTab('plan');
     renderBundleList();
-    resetProjectForm();
     renderOrderLines();
     return;
   }
@@ -1779,7 +1605,6 @@ function tliOnStudentChange(){
   document.getElementById('planSystemFilter').value='';
   switchPkgTab('plan');
   renderBundleList();
-  resetProjectForm();
   renderInvoiceEntity();
   renderOrderLines();
   __channelState=null;
@@ -2107,7 +1932,7 @@ function tliAiDemoOrder(){
   sel.value='emma01';
   tliOnStudentChange();
   addPlanToOrder('p_flex30_on');
-  tliAppendMsg('bot',T('已代入：會員 Emma Chen（C 類／士林校區）、方案「中文一對一 30 堂（線上）」、開票主體「世華」（士林校區固定）。付款方式先預設「一次付清」，請於「收款渠道」與「合約」完成剩餘步驟後送出。','Pre-filled: member Emma Chen (Class C / Shilin Campus), plan “中文一對一 30 堂（線上）”, invoice entity “Shihua” (fixed for Shilin Campus). Payment method defaults to “Pay in Full”; please complete the remaining steps under “Payment Channel” and “Contract” before submitting.')+'<div class="src">'+T('資料來源：3.0 中台／會員查詢工具＋產品與定價工具','Source: 3.0 Middle Platform / Member Lookup Tool + Product & Pricing Tool')+'</div>');
+  tliAppendMsg('bot',T('已代入：會員 Emma Johnson（C 類／士林校區）、方案「中文一對一 30 堂（線上）」、開票主體「世華」（士林校區固定）。付款方式先預設「一次付清」，請於「收款渠道」與「合約」完成剩餘步驟後送出。','Pre-filled: member Emma Johnson (Class C / Shilin Campus), plan “中文一對一 30 堂（線上）”, invoice entity “Shihua” (fixed for Shilin Campus). Payment method defaults to “Pay in Full”; please complete the remaining steps under “Payment Channel” and “Contract” before submitting.')+'<div class="src">'+T('資料來源：3.0 中台／會員查詢工具＋產品與定價工具','Source: 3.0 Middle Platform / Member Lookup Tool + Product & Pricing Tool')+'</div>');
   tliToast(T('AI 已代入①②③區塊，請顧問確認後完成剩餘步驟並送出','AI has pre-filled sections ①②③; please confirm and complete the remaining steps before submitting'));
 }
 function tliAiDemoOrder2(){
@@ -2219,7 +2044,6 @@ if (window.TLI_I18N) {
   TLI_I18N.onRefresh(renderPlanFilterChips);
   TLI_I18N.onRefresh(renderPlanList);
   TLI_I18N.onRefresh(renderBundleList);
-  TLI_I18N.onRefresh(renderProjectProductInputs);
   TLI_I18N.onRefresh(renderInvoiceEntity);
   TLI_I18N.onRefresh(initEntClientSelect);
   TLI_I18N.onRefresh(tliRefreshContractStatusNote);

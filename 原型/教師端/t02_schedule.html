@@ -149,7 +149,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .lb-badge-ent{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#E4F5F0;color:#0B6B52;}
 .lb-badge-cross{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#FCEBDC;color:var(--c-accent-dark);}
 .lesson-block.lb-hidden{display:none;}
-/* ---------- 團體聊天室場次（改版：TLI 老師帶團體場次，非一對一自約，v2 新增） ---------- */
+/* ---------- Mandarin Lounge 場次（改版：TLI 老師帶團體場次，非一對一自約，v2 新增） ---------- */
 .lb-badge-chat{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#FCE7F3;color:#BE185D;}
 .chat-attend{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#BE185D;cursor:pointer;}
 .chat-attend input{width:16px;height:16px;accent-color:#BE185D;cursor:pointer;}
@@ -207,7 +207,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <div class="legend">
         <span><i class="personal"></i><span data-i18n="sched.legend.oneToOne">一對一（顧問排定）</span></span>
         <span><i class="flexlive"></i><span data-i18n="badge.flexGroup">彈性團體直播班（團體）</span></span>
-        <span><i class="chatroom"></i><span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span></span>
+        <span><i class="chatroom"></i><span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span></span>
         <span><i class="enterprise"></i><span data-i18n="sched.legend.enterprise">企業學員（雙時區顯示）</span></span>
       </div>
       <p class="small muted" style="margin:6px 0 0;" data-i18n="sched.desc.cancelRule">取消時限以學員所屬廠區時區（合約設定之判定基準）計算；課表以台北時間為主、廠區當地時間為輔並列顯示。</p>
@@ -261,7 +261,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <div class="lesson-block chatroom" onclick="openSheet('C1')">
             <div class="lb-time">15:30–16:00</div>
             <div class="lb-title">日常對話練習</div>
-            <div class="lb-sub"><span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學</div>
+            <div class="lb-sub"><span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學</div>
             <div class="lb-badges"><span class="lb-badge-chat"><span data-i18n="sched.badge.registered">已報名</span> 4／<span data-i18n="sched.badge.capacityTbd">名額待定</span></span></div>
           </div>
         </div>
@@ -289,7 +289,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <div class="lesson-block chatroom" onclick="openSheet('C2')">
             <div class="lb-time">09:00–09:30</div>
             <div class="lb-title">時事話題討論</div>
-            <div class="lb-sub"><span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span></div>
+            <div class="lb-sub"><span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span></div>
             <div class="lb-badges"><span class="lb-badge-chat"><span data-i18n="sched.badge.registered">已報名</span> 2／<span data-i18n="sched.badge.capacityTbd">名額待定</span></span></div>
           </div>
         </div>
@@ -491,22 +491,22 @@ var lessons = {
       flexInfo:'入班名單：3 位・本期第 4／12 堂・教材單元：《NPC》第 5 冊 第 2 課',
       attendance:[{name:'陳雅婷', time:'10:31 進入・已出席'},{name:'周文正', time:'10:29 進入・已出席'},{name:'林詩涵', time:'10:33 進入・已出席'}]},
   T1:{title:'王小明・個人班', meta:'08/25（二）09:00–09:50・士林校區 A203', roster:[['王小明','中級 2']], material:'《NPC》第 5 冊 第 4 課', materialHistory:'已完成：第 1–3 課；本次：第 4 課；下堂預計：第 5 課。', note:'延續上次「把」字句練習，本次加入情境對話。', mode:'onetoone', enterprise:'企業學員・和霖科技股份有限公司・美國廠區・廠區當地（前一日）18:00–18:50（跨日）'},
-  T2:{title:'學期班 Lv.5–8（首堂）', meta:'08/25（二）15:00–15:50・羅斯福校區', roster:[['共 12 位學生','學期班名單於現場點名']], material:'《NICD》第 1 冊 第 1 課（開課）', materialHistory:'新開班，尚無歷史進度紀錄。', note:'新開班，尚無歷史紀錄。', rule:'首堂課由資深教師任教（規則：需累積 600 小時以上）。', mode:'flex',
+  T2:{title:'學期班 Lv.5–8（首堂）', meta:'08/25（二）15:00–15:50・羅斯福校區', roster:[['共 12 位學生','學期班名單於現場確認']], material:'《NICD》第 1 冊 第 1 課（開課）', materialHistory:'新開班，尚無歷史進度紀錄。', note:'新開班，尚無歷史紀錄。', rule:'首堂課由資深教師任教（規則：需累積 600 小時以上）。', mode:'flex',
       flexInfo:'入班名單：12 位・本期第 1／12 堂・教材單元：《NICD》第 1 冊 第 1 課'},
   W1:{title:'初級小組班（4 人）', meta:'08/26（三）14:00–14:50・士林校區 A106', roster:[['張家豪','初級 3'],['李佳融','初級 3'],['黃思穎','初級 2'],['吳冠廷','初級 3']], material:'《NPC》第 2 冊 第 8 課（進度正常）', materialHistory:'已完成：第 1–7 課；本次：第 8 課；下堂預計：第 9 課。', note:'黃思穎進度稍慢，已安排加強練習。', mode:'flex',
       flexInfo:'入班名單：4 位・本期第 9／12 堂・教材單元：《NPC》第 2 冊 第 8 課'},
   R1:{title:'王小明・個人班', meta:'08/27（四）09:00–09:50・士林校區 A203', roster:[['王小明','中級 2']], material:'《NPC》第 5 冊 第 4 課', materialHistory:'已完成：第 1–3 課；本次：第 4 課；下堂預計：第 5 課。', note:'同上次進度，持續練習情境對話。', mode:'onetoone', enterprise:'企業學員・和霖科技股份有限公司・美國廠區・廠區當地（前一日）18:00–18:50（跨日）'},
   R2:{title:'陳雅婷（線上）・個人班', meta:'08/27（四）16:00–17:30・Zoom・90 分鐘', roster:[['陳雅婷','高級 1']], material:'《NICD》第 3 冊 第 6 課（進度警戒：已累計 12 堂，建議留意學習節奏）', materialHistory:'已完成：第 1–5 課；本次：第 6 課；已累計 12 堂，建議與顧問確認續約規劃。', note:'口語表達進步明顯，寫作待加強。', mode:'onetoone', enterprise:'企業學員・瑞新金融顧問股份有限公司・日本廠區・廠區當地 17:00–18:30', videoToolId:'zoom'},
-  S1:{title:'學期班 Lv.5–8', meta:'08/29（六）10:00–10:50・羅斯福校區', roster:[['共 12 位學生','學期班名單於現場點名']], material:'《NICD》第 1 冊 第 3 課（進度正常）', materialHistory:'已完成：第 1–2 課；本次：第 3 課；下堂預計：第 4 課。', note:'班級整體出席穩定。', mode:'flex',
+  S1:{title:'學期班 Lv.5–8', meta:'08/29（六）10:00–10:50・羅斯福校區', roster:[['共 12 位學生','學期班名單於現場確認']], material:'《NICD》第 1 冊 第 3 課（進度正常）', materialHistory:'已完成：第 1–2 課；本次：第 3 課；下堂預計：第 4 課。', note:'班級整體出席穩定。', mode:'flex',
       flexInfo:'入班名單：12 位・本期第 2／12 堂・教材單元：《NICD》第 1 冊 第 3 課'}
 };
 
-/* ---------- 團體聊天室場次（改版：TLI 老師帶團體場次，資料為模擬數字） ---------- */
+/* ---------- Mandarin Lounge 場次（改版：TLI 老師帶團體場次，資料為模擬數字） ---------- */
 // 學生一律以化名顯示（不揭露真實姓名），所屬大學統一以「範例州立大學」示範
 var CHAT_SESSIONS = {
-  C1:{title:'日常對話練習', meta:'08/26（三）15:30–16:00・線上聊天室', audience:'機構學生・範例州立大學',
+  C1:{title:'日常對話練習', meta:'08/26（三）15:30–16:00・Mandarin Lounge 線上會話', audience:'機構學生・範例州立大學',
       roster:[{name:'學員A', uni:'範例州立大學'},{name:'學員B', uni:'範例州立大學'},{name:'學員C', uni:'範例州立大學'},{name:'學員D', uni:'範例州立大學'}]},
-  C2:{title:'時事話題討論', meta:'08/28（五）09:00–09:30・線上聊天室', audience:'全部（全平台開放）',
+  C2:{title:'時事話題討論', meta:'08/28（五）09:00–09:30・Mandarin Lounge 線上會話', audience:'全部（全平台開放）',
       roster:[{name:'學員E', uni:'範例州立大學'},{name:'學員F', uni:'範例州立大學'}]}
 };
 
@@ -744,13 +744,13 @@ function closeSheet(){
   document.getElementById('sheetOverlay').classList.add('hidden');
 }
 
-/* ---------- 團體聊天室場次詳情：化名名單＋出席勾選＋開始（v2 改版） ---------- */
+/* ---------- Mandarin Lounge 場次詳情：化名名單＋出席勾選＋開始（v2 改版） ---------- */
 function openChatSheet(id){
   currentSheetId = id;
   var c = CHAT_SESSIONS[id];
   document.getElementById('sheetTitle').textContent = c.title;
   var modeBadge = document.getElementById('sheetModeBadge');
-  modeBadge.textContent = TLI_I18N.t('團體聊天室（30 分鐘，TLI 老師帶）','Group Chat Room (30 min, led by TLI teacher)');
+  modeBadge.textContent = TLI_I18N.t('Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）','Mandarin Lounge group session (30 min, led by a TLI teacher)');
   modeBadge.className = 'badge badge-chat';
   document.getElementById('sheetFlexSec').classList.add('hidden');
   document.getElementById('sheetMeta').textContent = c.meta+TLI_I18N.t('・面向：','・Audience: ')+trAudience(c.audience);
@@ -778,7 +778,7 @@ function openChatSheet(id){
   var startBtn = document.createElement('button');
   startBtn.className = 'btn btn-primary btn-block';
   startBtn.textContent = TLI_I18N.t('開始','Start');
-  startBtn.onclick = function(){ showToast(TLI_I18N.t('已進入教室・團體聊天室由 TLI 老師帶領，出席請於名單勾選','Entered the classroom · This is a TLI-teacher-led group chat room — mark attendance from the roster')); };
+  startBtn.onclick = function(){ showToast(TLI_I18N.t('已進入教室・Mandarin Lounge 由 TLI 老師帶領，出席請於名單勾選','Entered the classroom · This is a TLI-teacher-led Mandarin Lounge — mark attendance from the roster')); };
   actionsEl.appendChild(startBtn);
   document.getElementById('sheetOverlay').classList.remove('hidden');
   if (window.TLI_I18N) TLI_I18N.refresh();
@@ -899,11 +899,11 @@ function confirmEnterClassroom(){
   showToast(TLI_I18N.t('已進入線上教室（主持人），出席將自動寫回系統','Entered the online classroom (host) — attendance will be recorded automatically'));
 }
 
-/* ---------- 團體聊天室場次：出席勾選（僅出席勾選，不含課後紀錄/回饋表單，v2 改版） ---------- */
+/* ---------- Mandarin Lounge 場次：出席勾選（僅出席勾選，不含課後紀錄/回饋表單，v2 改版） ---------- */
 function toggleChatAttend(checkbox){
   var label = checkbox.closest('.chat-attend');
   label.classList.toggle('checked', checkbox.checked);
-  showToast(checkbox.checked ? TLI_I18N.t('已標記出席（團體聊天室）','Marked as attended (group chat room)') : TLI_I18N.t('已取消出席標記','Attendance mark removed'));
+  showToast(checkbox.checked ? TLI_I18N.t('已標記出席（Mandarin Lounge）','Marked as attended (Mandarin Lounge)') : TLI_I18N.t('已取消出席標記','Attendance mark removed'));
 }
 
 /* ---------- 已開啟浮層的語言即時切換：判斷目前哪個浮層開著，重新呼叫對應渲染邏輯 ---------- */
@@ -931,20 +931,20 @@ function showToast(msg){
 
 /* ---------- 上一週／下一週示範資料（按週位移產生，讓切週後課表卡片內容確實跟著換） ---------- */
 lessons.W0_1 = {title:'陳建宏・個人班', meta:'08/10（一）09:00–09:50・士林校區 A105', roster:[['陳建宏','初級 3']], material:'《NPC》第 2 冊 第 5 課（進度正常）', materialHistory:'已完成：第 1–4 課；本次：第 5 課；下堂預計：第 6 課。', note:'發音穩定，可加快進度。', mode:'onetoone'};
-lessons.W0_2 = {title:'學期班 Lv.1–4', meta:'08/12（三）14:00–14:50・羅斯福校區', roster:[['共 10 位學生','學期班名單於現場點名']], material:'《NICD》第 1 冊 第 1 課（開課）', materialHistory:'新開班，尚無歷史進度紀錄。', note:'新開班，尚無歷史紀錄。', mode:'flex', flexInfo:'入班名單：10 位・本期第 1／12 堂・教材單元：《NICD》第 1 冊 第 1 課'};
-CHAT_SESSIONS.W0_3 = {title:'生活情境會話', meta:'08/14（五）09:00–09:30・線上聊天室', audience:'機構學生・範例州立大學', roster:[{name:'學員A', uni:'範例州立大學'},{name:'學員B', uni:'範例州立大學'}]};
+lessons.W0_2 = {title:'學期班 Lv.1–4', meta:'08/12（三）14:00–14:50・羅斯福校區', roster:[['共 10 位學生','學期班名單於現場確認']], material:'《NICD》第 1 冊 第 1 課（開課）', materialHistory:'新開班，尚無歷史進度紀錄。', note:'新開班，尚無歷史紀錄。', mode:'flex', flexInfo:'入班名單：10 位・本期第 1／12 堂・教材單元：《NICD》第 1 冊 第 1 課'};
+CHAT_SESSIONS.W0_3 = {title:'生活情境會話', meta:'08/14（五）09:00–09:30・Mandarin Lounge 線上會話', audience:'機構學生・範例州立大學', roster:[{name:'學員A', uni:'範例州立大學'},{name:'學員B', uni:'範例州立大學'}]};
 
 lessons.W1_1 = {title:'林佳蓉・個人班', meta:'08/17（一）09:00–09:50・士林校區 A105', roster:[['林佳蓉','初級 3']], material:'《NPC》第 2 冊 第 6 課（進度正常）', materialHistory:'已完成：第 1–5 課；本次：第 6 課；下堂預計：第 7 課。', note:'聽力進步明顯。', mode:'onetoone'};
-lessons.W1_2 = {title:'學期班 Lv.1–4', meta:'08/19（三）14:00–14:50・羅斯福校區', roster:[['共 10 位學生','學期班名單於現場點名']], material:'《NICD》第 1 冊 第 2 課（進度正常）', materialHistory:'已完成：第 1 課；本次：第 2 課；下堂預計：第 3 課。', note:'班級整體出席穩定。', mode:'flex', flexInfo:'入班名單：10 位・本期第 2／12 堂・教材單元：《NICD》第 1 冊 第 2 課'};
-CHAT_SESSIONS.W1_3 = {title:'生活情境會話', meta:'08/21（五）09:00–09:30・線上聊天室', audience:'機構學生・範例州立大學', roster:[{name:'學員C', uni:'範例州立大學'},{name:'學員D', uni:'範例州立大學'}]};
+lessons.W1_2 = {title:'學期班 Lv.1–4', meta:'08/19（三）14:00–14:50・羅斯福校區', roster:[['共 10 位學生','學期班名單於現場確認']], material:'《NICD》第 1 冊 第 2 課（進度正常）', materialHistory:'已完成：第 1 課；本次：第 2 課；下堂預計：第 3 課。', note:'班級整體出席穩定。', mode:'flex', flexInfo:'入班名單：10 位・本期第 2／12 堂・教材單元：《NICD》第 1 冊 第 2 課'};
+CHAT_SESSIONS.W1_3 = {title:'生活情境會話', meta:'08/21（五）09:00–09:30・Mandarin Lounge 線上會話', audience:'機構學生・範例州立大學', roster:[{name:'學員C', uni:'範例州立大學'},{name:'學員D', uni:'範例州立大學'}]};
 
 lessons.W3_1 = {title:'李明哲・個人班', meta:'08/31（一）09:00–09:50・士林校區 A203', roster:[['李明哲','中級 1']], material:'《NPC》第 4 冊 第 1 課（開課）', materialHistory:'新開課程，尚無歷史進度紀錄。', note:'首堂課，先確認程度分班是否合適。', mode:'onetoone'};
 lessons.W3_2 = {title:'初級小組班（4 人）', meta:'09/02（三）14:00–14:50・士林校區 A106', roster:[['張家豪','初級 3'],['李佳融','初級 3'],['黃思穎','初級 2'],['吳冠廷','初級 3']], material:'《NPC》第 2 冊 第 9 課（進度正常）', materialHistory:'已完成：第 1–8 課；本次：第 9 課；下堂預計：第 10 課。', note:'整體進度穩定。', mode:'flex', flexInfo:'入班名單：4 位・本期第 10／12 堂・教材單元：《NPC》第 2 冊 第 9 課'};
-CHAT_SESSIONS.W3_3 = {title:'時事話題討論', meta:'09/04（五）09:00–09:30・線上聊天室', audience:'全部（全平台開放）', roster:[{name:'學員E', uni:'範例州立大學'},{name:'學員F', uni:'範例州立大學'}]};
+CHAT_SESSIONS.W3_3 = {title:'時事話題討論', meta:'09/04（五）09:00–09:30・Mandarin Lounge 線上會話', audience:'全部（全平台開放）', roster:[{name:'學員E', uni:'範例州立大學'},{name:'學員F', uni:'範例州立大學'}]};
 
 lessons.W4_1 = {title:'張雅雯・個人班', meta:'09/07（一）09:00–09:50・士林校區 A203', roster:[['張雅雯','中級 1']], material:'《NPC》第 4 冊 第 2 課（進度正常）', materialHistory:'已完成：第 1 課；本次：第 2 課；下堂預計：第 3 課。', note:'口說表現穩定。', mode:'onetoone'};
 lessons.W4_2 = {title:'初級小組班（4 人）', meta:'09/09（三）14:00–14:50・士林校區 A106', roster:[['張家豪','初級 3'],['李佳融','初級 3'],['黃思穎','初級 2'],['吳冠廷','初級 3']], material:'《NPC》第 2 冊 第 10 課（進度正常）', materialHistory:'已完成：第 1–9 課；本次：第 10 課；下堂預計：第 11 課。', note:'整體進度穩定。', mode:'flex', flexInfo:'入班名單：4 位・本期第 11／12 堂・教材單元：《NPC》第 2 冊 第 10 課'};
-CHAT_SESSIONS.W4_3 = {title:'時事話題討論', meta:'09/11（五）09:00–09:30・線上聊天室', audience:'全部（全平台開放）', roster:[{name:'學員E', uni:'範例州立大學'},{name:'學員F', uni:'範例州立大學'}]};
+CHAT_SESSIONS.W4_3 = {title:'時事話題討論', meta:'09/11（五）09:00–09:30・Mandarin Lounge 線上會話', audience:'全部（全平台開放）', roster:[{name:'學員E', uni:'範例州立大學'},{name:'學員F', uni:'範例州立大學'}]};
 
 function otherWeekGrid(dateList, dowList, mon, wed, fri, satNote){
   var noClass = '<div class="small muted" style="padding:8px 0;" data-i18n="sched.status.noClass">本日無排課</div>';
@@ -967,22 +967,22 @@ var OTHER_WEEK_GRIDS = {};
 OTHER_WEEK_GRIDS[0] = otherWeekGrid(['08/10','08/11','08/12','08/13','08/14','08/15','08/16'], DOW,
   {id:'W0_1', time:'09:00–09:50', title:'陳建宏', sub:'初級 3・士林 A105'},
   {id:'W0_2', time:'14:00–14:50', title:'學期班 Lv.1–4', sub:'羅斯福校區'},
-  {id:'W0_3', time:'09:00–09:30', title:'生活情境會話', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學'},
+  {id:'W0_3', time:'09:00–09:30', title:'生活情境會話', sub:'<span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學'},
   '本日無排課');
 OTHER_WEEK_GRIDS[1] = otherWeekGrid(['08/17','08/18','08/19','08/20','08/21','08/22','08/23'], DOW,
   {id:'W1_1', time:'09:00–09:50', title:'林佳蓉', sub:'初級 3・士林 A105'},
   {id:'W1_2', time:'14:00–14:50', title:'學期班 Lv.1–4', sub:'羅斯福校區'},
-  {id:'W1_3', time:'09:00–09:30', title:'生活情境會話', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學'},
+  {id:'W1_3', time:'09:00–09:30', title:'生活情境會話', sub:'<span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.institutionStudents">機構學生</span>・範例州立大學'},
   '本日無排課');
 OTHER_WEEK_GRIDS[3] = otherWeekGrid(['08/31','09/01','09/02','09/03','09/04','09/05','09/06'], DOW,
   {id:'W3_1', time:'09:00–09:50', title:'李明哲', sub:'中級 1・士林 A203'},
   {id:'W3_2', time:'14:00–14:50', title:'初級小組班（4 人）', sub:'士林 A106'},
-  {id:'W3_3', time:'09:00–09:30', title:'時事話題討論', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span>'},
+  {id:'W3_3', time:'09:00–09:30', title:'時事話題討論', sub:'<span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span>'},
   '本日無排課');
 OTHER_WEEK_GRIDS[4] = otherWeekGrid(['09/07','09/08','09/09','09/10','09/11','09/12','09/13'], DOW,
   {id:'W4_1', time:'09:00–09:50', title:'張雅雯', sub:'中級 1・士林 A203'},
   {id:'W4_2', time:'14:00–14:50', title:'初級小組班（4 人）', sub:'士林 A106'},
-  {id:'W4_3', time:'09:00–09:30', title:'時事話題討論', sub:'<span data-i18n="sched.legend.chatroom">團體聊天室（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span>'},
+  {id:'W4_3', time:'09:00–09:30', title:'時事話題討論', sub:'<span data-i18n="sched.legend.chatroom">Mandarin Lounge 團體場次（30 分鐘，TLI 老師帶）</span>・<span data-i18n="sched.audience.allPlatformWide">全部（全平台開放）</span>'},
   '本日無排課');
 
 CURRENT_WEEK_GRID_HTML = document.getElementById('weekGrid').innerHTML;

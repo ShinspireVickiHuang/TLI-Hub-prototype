@@ -205,6 +205,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
     <a class="side-link active" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
     <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link" href="m18_learning_dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="5" y="11" width="3" height="7" rx="1"/><rect x="10.5" y="6" width="3" height="12" rx="1"/><rect x="16" y="9" width="3" height="9" rx="1"/></svg><span data-en="Learning Dashboard">學習儀表板</span></a>
+    <a class="side-link" href="m20_transcripts.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
+    <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg><span data-en="Certificates">結業證書</span></a>
     <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
     <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
     <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
@@ -435,6 +438,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="../assets/_i18n_dict_member.js"></script>
 <script src="../assets/_i18n_dict_ja.js"></script>
 <script src="../assets/_i18n_dict_de.js"></script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="_project_learning.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
 
@@ -550,8 +555,8 @@ var ALL_CLASSES=[
   {id:'c1', planId:'plan-c', title:'中文一對一－商務會話', time:'08/30（日）10:00–10:50', start:new Date(2026,7,30,10,0), teacher:'杜老師', mode:'線上 Zoom', demoFreeRemain:null},
   {id:'c2', planId:'plan-c', title:'中文一對一－聽力加強', time:'08/25（二）今天 16:00–16:50', start:new Date(2026,7,25,16,0), teacher:'陳美惠老師', mode:'線上 Zoom', demoFreeRemain:1, applied:true, badge:'ok', resultText:'不扣時數'},
   {id:'c3', planId:'plan-c', title:'中文一對一－閱讀寫作', time:'08/25（二）今天 13:00–13:50', start:new Date(2026,7,25,13,0), teacher:'林俊傑老師', mode:'線上 Zoom', demoFreeRemain:0, applied:true, badge:'deduct', resultText:'記缺席，扣 1 堂時數，已記入出勤'},
-  {id:'d1', planId:'plan-d', title:'團體聊天室－生活會話', time:'08/25（二）今天 20:00–20:40', start:new Date(2026,7,25,20,0), mode:'線上聊天室'},
-  {id:'d2', planId:'plan-d', title:'團體聊天室－時事討論', time:'08/27（四）10:00–10:40', start:new Date(2026,7,27,10,0), mode:'線上聊天室'}
+  {id:'d1', planId:'plan-d', title:'Mandarin Lounge－生活會話', time:'08/25（二）今天 20:00–20:40', start:new Date(2026,7,25,20,0), mode:'Mandarin Lounge 線上會話'},
+  {id:'d2', planId:'plan-d', title:'Mandarin Lounge－時事討論', time:'08/27（四）10:00–10:40', start:new Date(2026,7,27,10,0), mode:'Mandarin Lounge 線上會話'}
 ];
 function findClass(id){ return ALL_CLASSES.filter(function(c){return c.id===id;})[0]; }
 function firstClassIdForPlan(planId){
@@ -593,11 +598,11 @@ var RECORDS=[
   mkRec('plan-c',40,'中文一對一－聽力加強','請假','等待 HR 核准','pending'),
   mkRec('plan-c',47,'中文一對一－閱讀寫作','請假','已核准，不扣時數','ok'),
   mkRec('plan-c',54,'中文一對一－商務會話','改期','已改期至 06/30（二）10:00–10:50','ok'),
-  mkRec('plan-d',2,'團體聊天室－生活會話','取消','不影響本週次數','ok'),
-  mkRec('plan-d',6,'團體聊天室－時事討論','改期','已改期至 08/21（五）20:00–20:40','ok'),
-  mkRec('plan-d',9,'團體聊天室－生活會話','取消','不影響本週次數','ok'),
-  mkRec('plan-d',18,'團體聊天室－生活會話','改期','已改期至 08/07（五）20:00–20:40','ok'),
-  mkRec('plan-d',29,'團體聊天室－時事討論','取消','不影響本週次數','ok')
+  mkRec('plan-d',2,'Mandarin Lounge－生活會話','取消','不影響本週次數','ok'),
+  mkRec('plan-d',6,'Mandarin Lounge－時事討論','改期','已改期至 08/21（五）20:00–20:40','ok'),
+  mkRec('plan-d',9,'Mandarin Lounge－生活會話','取消','不影響本週次數','ok'),
+  mkRec('plan-d',18,'Mandarin Lounge－生活會話','改期','已改期至 08/07（五）20:00–20:40','ok'),
+  mkRec('plan-d',29,'Mandarin Lounge－時事討論','取消','不影響本週次數','ok')
 ];
 function addRecord(cls,action,result,badgeKind,note){
   var rec=mkRec(cls.planId,0,cls.title,action,result,badgeKind,note);
@@ -743,7 +748,7 @@ function renderRuleCard(planId){
   }else if(plan.ruleGroup==='institution'){
     el.className='card';
     el.innerHTML=
-      '<h3 style="margin:0 0 10px;font-size:15px;">'+t('你的取消規則（機構授權規則）',{en:'Your Cancellation Rules (Institution-Authorized Rules)',ja:'あなたのキャンセル規則（学校認定規則）',de:'Ihre Stornierungsregeln (Von der Einrichtung autorisiert)'})+'</h3>'+
+      '<h3 style="margin:0 0 10px;font-size:15px;">'+t('你的取消規則（專案合作規則）',{en:'Your Cancellation Rules (Project Partnership Rules)',ja:'あなたのキャンセル規則（プロジェクト連携の規則）',de:'Ihre Stornierungsregeln (Regeln der Projektpartnerschaft)'})+'</h3>'+
       '<ul class="rule-list">'+
         '<li>'+t('課前 12 小時以上可取消場次報名。',{en:'You may cancel your registration 12+ hours before the session.',ja:'開始12時間以上前であれば申込のキャンセルが可能です。',de:'Anmeldung kann 12+ Stunden vor dem Termin storniert werden.'})+'</li>'+
         '<li>'+t('12 小時內無法取消場次報名，未到場將記為 no-show。',{en:'Registration cannot be cancelled within 12 hours; not attending is recorded as a no-show.',ja:'12時間以内は申込のキャンセルができません。欠席の場合は no-show として記録されます。',de:'Innerhalb von 12 Stunden kann die Anmeldung nicht storniert werden; Nichterscheinen gilt als No-Show.'})+'</li>'+
@@ -858,7 +863,7 @@ function renderClassCard(cls){
   wrap.classList.remove('hidden');
   var plan=PLAN_META[cls.planId];
   var isGroupLive=plan.ruleGroup==='group-live';
-  var defaultBadgeLabel=plan.ruleGroup==='institution' ? t('團體聊天室',{en:'Group Chat Room',ja:'グループチャットルーム',de:'Gruppenchat'}) : t('一對一',{en:'1-on-1',ja:'一対一',de:'Einzelunterricht'});
+  var defaultBadgeLabel=plan.ruleGroup==='institution' ? t('Mandarin Lounge',{en:'Mandarin Lounge',ja:'Mandarin Lounge',de:'Mandarin Lounge'}) : t('一對一',{en:'1-on-1',ja:'一対一',de:'Einzelunterricht'});
   var badgeLabel=isGroupLive ? t('團體直播班',{en:'Live Group Class',ja:'グループライブ授業',de:'Live-Gruppenkurs'}) : defaultBadgeLabel;
   var tzNote = plan.ruleGroup==='enterprise' ? ('<p class="small muted" style="margin:0 0 10px;">'+t('廠區當地時間（'+ENTERPRISE_CAMPUS+'）：',{en:'Local time at '+ENTERPRISE_CAMPUS+': ',ja:ENTERPRISE_CAMPUS+'現地時間：',de:'Ortszeit '+ENTERPRISE_CAMPUS+': '})+enterpriseCampusLocalTime(cls.start)+t('・企業合約單位：',{en:' · Company contract: ',ja:'・企業契約単位：',de:' · Firmenvertrag: '})+ENTERPRISE_COMPANY+'</p>') : '';
   var groupNote=isGroupLive ? '<p class="small muted" style="margin:0 0 10px;">'+t('團體直播班單堂請假說明：本堂線上請假，逾提前時限記缺席；核准後可看回放，補課限同級班（依設定）。',{en:'Live group class leave notice: submit online; past the lead time it is marked absent. Approved leave can view the recording; make-up sessions are limited to same-level classes (as configured).',ja:'グループライブ授業の欠席連絡について：オンラインで送信してください。期限を過ぎると欠席扱いになります。承認後は録画を視聴でき、補講は同レベルのクラスに限られます（設定による）。',de:'Hinweis zu Live-Gruppenkurs-Abwesenheit: online melden; nach Ablauf der Frist gilt es als Fehlzeit. Bei Genehmigung ist die Aufzeichnung verfügbar; Nachholtermine nur in Kursen gleichen Niveaus (je nach Einstellung).'})+'</p>' : '';
@@ -932,7 +937,7 @@ function submitGeneralLeave(){
   renderRecords();
 }
 
-/* ================= 取消：二次確認（一般規則組／機構授權共用） ================= */
+/* ================= 取消：二次確認（一般規則組／專案合作共用） ================= */
 var pendingCancel=null;
 function requestGeneralCancel(id){
   var cls=findClass(id);
@@ -1192,7 +1197,7 @@ function confirmReschedule(){
 }
 
 /* ================= 改期：一對一課（一般規則組／企業合約）改為提出有空時間，由顧問調整 =================
-   機構授權（團體聊天室改報名其他場次）維持原地月曆自選場次，見 openRescheduleSheet。 */
+   專案合作（Mandarin Lounge 改報名其他場次）維持原地月曆自選場次，見 openRescheduleSheet。 */
 function openRescheduleFlow(id){
   var cls=findClass(id);
   if(!cls) return;

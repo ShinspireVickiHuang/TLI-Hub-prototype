@@ -318,7 +318,7 @@ html,body{overflow-x:hidden;}
 <div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="psSearchInput" placeholder="搜尋夥伴／企業／結算期" oninput="onPsSearchInput(this)"></div>
 </div>
 <div class="filterbar" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
-<select id="ps_f_type" onchange="onPsFilterChange('type', this.value)" class="ps-i18n-select"><option value="" data-zh="全部型態" data-en="All Types">全部型態</option><option value="加盟" data-en="Franchise">加盟</option><option value="經銷" data-en="Distributor">經銷</option><option value="代理" data-en="Agent">代理</option><option value="企業合約" data-en="Enterprise Contract">企業合約</option></select>
+<select id="ps_f_type" onchange="onPsFilterChange('type', this.value)" class="ps-i18n-select"><option value="" data-zh="全部型態" data-en="All Types">全部型態</option><option value="經銷" data-en="Distributor">經銷</option><option value="代理" data-en="Agent">代理</option><option value="企業合約" data-en="Enterprise Contract">企業合約</option></select>
 <select id="ps_f_status" onchange="onPsFilterChange('status', this.value)" class="ps-i18n-select"><option value="" data-zh="全部狀態" data-en="All Statuses">全部狀態</option><option value="待產出" data-en="Pending">待產出</option><option value="已寄結算單" data-en="Statement Sent">已寄結算單</option><option value="已開發票" data-en="Invoiced">已開發票</option><option value="已收款" data-en="Received">已收款</option><option value="已付款" data-en="Paid">已付款</option><option value="有差異" data-en="Discrepancy">有差異</option></select>
 <select id="ps_f_period" onchange="onPsFilterChange('period', this.value)"><option value="" data-en="All Periods">全部結算期</option></select>
 <button class="clearlink" onclick="clearPsFilters()" id="btnClearPsFilters">清除全部篩選</button>
@@ -353,7 +353,7 @@ html,body{overflow-x:hidden;}
 <!-- 產生結算單 modal -->
 <div class="modal-mask" id="settleModal" onclick="if(event.target===this) closeSettleModal()"><div class="modal">
 <div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 id="settleModalTitle">產生結算單</h3><button type="button" class="drawer-close" onclick="closeSettleModal()" aria-label="關閉" data-i18n-aria-label="common.close">&times;</button></div>
-<div class="formrow"><label id="lblSettleType">型態</label><span class="req">*</span><select id="settle_type" onchange="onSettleTypeChange(this.value)" class="ps-i18n-select"><option value="" data-zh="請選擇" data-en="Please Select">請選擇</option><option value="加盟" data-en="Franchise">加盟</option><option value="經銷" data-en="Distributor">經銷</option><option value="代理" data-en="Agent">代理</option><option value="企業合約" data-en="Enterprise Contract">企業合約</option></select></div>
+<div class="formrow"><label id="lblSettleType">型態</label><span class="req">*</span><select id="settle_type" onchange="onSettleTypeChange(this.value)" class="ps-i18n-select"><option value="" data-zh="請選擇" data-en="Please Select">請選擇</option><option value="經銷" data-en="Distributor">經銷</option><option value="代理" data-en="Agent">代理</option><option value="企業合約" data-en="Enterprise Contract">企業合約</option></select></div>
 <div class="formrow"><label id="lblSettleSubject">夥伴／企業</label><span class="req">*</span><select id="settle_subject"><option value="">請先選擇型態</option></select></div>
 <div class="formrow"><label id="lblSettlePeriod">結算期</label><span class="req">*</span><select id="settle_period"><option value="">請先選擇型態</option></select></div>
 <div class="hint" id="settleHint" title="結算單彙總該對象本期應收或應付金額，供對方核對後線下匯款">產生後可於列表追蹤付款狀態</div>
@@ -397,7 +397,7 @@ document.addEventListener('click', function(){ var m=document.getElementById('su
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
 var NOTIFS = [
   {t:'夥伴「大馬旅遊教育集團」尾款已逾期，請確認匯款', en:'Partner \u201c大馬旅遊教育集團\u201d balance payment is overdue \u2014 please confirm the transfer', time:'20 分鐘前', timeEn:'20 minutes ago', unread:true},
-  {t:'台灣普動教育股份有限公司 2026 H2 權利金結算單已寄出', en:'台灣普動教育股份有限公司 2026 H2 royalty settlement statement has been sent', time:'今天 09:40', timeEn:'Today 09:40', unread:true},
+  {t:'香港教育橋樑 2026 H2 佣金結算單已寄出', en:'香港教育橋樑 2026 H2 commission statement has been sent', time:'今天 09:40', timeEn:'Today 09:40', unread:true},
   {t:'崇信會計師事務所本期對帳有差異，待確認原因', en:'崇信會計師事務所 reconciliation discrepancy this period \u2014 reason pending confirmation', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
 function renderNotifPanel(){
@@ -424,17 +424,17 @@ function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 renderNotifPanel();
 
 /* ==================================================================
-   結算與對帳（20260928y 新增）：加盟／經銷／代理／企業合約月結，與 TLI 之間
+   結算與對帳（20260928y 新增）：經銷／代理／企業合約月結，與 TLI 之間
    一律線下收付，此處只記錄應收應付金額、產出結算單、記錄付款、追蹤對帳差異。
    費率全域預設見 a17 參數設定；夥伴費率明細見 a20 合作夥伴管理；
-   企業合約使用時數與費率見 a19 組織客戶／機構授權。
+   企業合約使用時數與費率見 a19 組織客戶。
    ================================================================== */
 function money(n){ if (typeof n !== 'number') return n; return 'NT$'+n.toLocaleString('zh-Hant-TW'); }
 
 /* ================= 靜態骨架文字與型態／狀態顯示文字的三語套用（20260930i18n 新增）
    資料層（PARTNER_SETTLEMENTS.typeLabel／status／direction）維持中文原字串不變，
    篩選比對與資料寫入都用原字串；以下只負責「顯示文字」轉換，不動資料值。 ================= */
-var PS_TYPE_EN = {'加盟':'Franchise','經銷':'Distributor','代理':'Agent','企業合約':'Enterprise Contract'};
+var PS_TYPE_EN = {'經銷':'Distributor','代理':'Agent','企業合約':'Enterprise Contract'};
 var PS_STATUS_EN = {'待產出':'Pending','已寄結算單':'Statement Sent','已開發票':'Invoiced','已收款':'Received','已付款':'Paid','有差異':'Discrepancy'};
 function psTypeText(zh){ return TLI_I18N.t(zh, PS_TYPE_EN[zh] || zh); }
 function psStatusText(zh){ return TLI_I18N.t(zh, PS_STATUS_EN[zh] || zh); }
@@ -474,10 +474,6 @@ function applyA24StaticI18n(){
   });
 }
 
-function franchiseCalc(revenue, royaltyRate, materialFee, retrainFee){
-  var royalty = Math.round(revenue * royaltyRate / 100);
-  return {kind:'franchise', revenue:revenue, royaltyRate:royaltyRate, royalty:royalty, materialFee:materialFee, retrainFee:retrainFee, total:royalty+materialFee+retrainFee};
-}
 function distributorCalc(depositRate, orderTotal, depositAmount, headcount, unitPrice, balanceAmount){
   return {kind:'distributor', depositRate:depositRate, orderTotal:orderTotal, depositAmount:depositAmount, headcount:headcount, unitPrice:unitPrice, balanceAmount:balanceAmount, total:depositAmount+balanceAmount};
 }
@@ -495,14 +491,6 @@ function enterpriseCalc(hoursUsed, unitPrice, poolDeduction){
 }
 
 var PARTNER_SETTLEMENTS = [
- {id:'PS-001', subject:'台灣普動教育股份有限公司', typeLabel:'加盟', period:'2026 H2', direction:'receivable', status:'已收款',
-  calc:franchiseCalc(2860000,8,79200,36000), payments:[{date:'2026-09-25',amount:344000,invoiceNo:'RV-2026-0912',note:''}], diffReason:''},
- {id:'PS-002', subject:'範例大學語言中心', typeLabel:'加盟', period:'2026 H1', direction:'receivable', status:'有差異',
-  calc:franchiseCalc(1580000,6,52000,0), payments:[{date:'2026-03-05',amount:140000,invoiceNo:'RV-2026-0301',note:'對方扣除匯款手續費與匯損'}], diffReason:'銀行匯款手續費與匯損由對方扣除，未於結算單事先列示'},
- {id:'PS-003', subject:'日本翼教育學院', typeLabel:'加盟', period:'2026 H2', direction:'receivable', status:'已開發票',
-  calc:franchiseCalc(1980000,7,64800,28000), payments:[], diffReason:''},
- {id:'PS-004', subject:'新加坡橋樑語言中心', typeLabel:'加盟', period:'2026 H1', direction:'receivable', status:'待產出',
-  calc:franchiseCalc(1420000,7.5,58000,0), payments:[], diffReason:''},
  {id:'PS-005', subject:'大馬旅遊教育集團', typeLabel:'經銷', period:'2026-09 梯次', direction:'receivable', status:'已寄結算單',
   calc:distributorCalc(20,800000,160000,35,16000,400000), payments:[], diffReason:''},
  {id:'PS-006', subject:'越南遊學顧問公司', typeLabel:'經銷', period:'2026-11 梯次', direction:'receivable', status:'已開發票',
@@ -542,7 +530,6 @@ function psRealized(row){ return row.payments.reduce(function(s,p){ return s+p.a
 function psDiff(row){ return psAmount(row) - psRealized(row); }
 
 function psTypeBadge(t){
-  if (t==='加盟') return '<span class="badge blue">'+psTypeText('加盟')+'</span>';
   if (t==='經銷') return '<span class="badge orange">'+psTypeText('經銷')+'</span>';
   if (t==='代理') return '<span class="badge green">'+psTypeText('代理')+'</span>';
   return '<span class="badge grey" style="background:#EAF0FF;color:var(--navy)">'+psTypeText('企業合約')+'</span>';
@@ -646,37 +633,9 @@ function renderPsTable(){
 /* ================= 結算單詳情抽屜 ================= */
 var currentPsId = null;
 function findPs(id){ return PARTNER_SETTLEMENTS.find(function(x){return x.id===id;}); }
-/* ===== 加盟主提出的疑義（唯讀，讀取組織端「合約與計費」頁寫入的共用 localStorage；
-   本頁不提供修改，僅供 TLI 端核對後主動聯繫加盟主，正式環境應改為讀取後端結算疑義工單。） ===== */
-var LS_FRANCHISE_DISPUTE_KEY = 'tliDemoOrgRoyaltyDisputes';
-function loadFranchiseDisputes(){
-  try{ var raw = localStorage.getItem(LS_FRANCHISE_DISPUTE_KEY); if (raw) return JSON.parse(raw); }catch(err){}
-  return {};
-}
-function franchiseDisputesHtml(row){
-  if (row.subject !== '範例大學語言中心') return '';
-  var disputes = loadFranchiseDisputes();
-  var periods = Object.keys(disputes);
-  if (!periods.length) return '';
-  var rows = periods.map(function(p){
-    var d = disputes[p];
-    return '<div class="kv"><span>'+p+'</span><span>'+escapeHtmlPs(d.note)+'（'+d.submittedAt+'）</span></div>';
-  }).join('');
-  return '<div class="hint" style="margin-top:10px;font-weight:600;color:var(--g900)">'+TLI_I18N.t('加盟主提出的疑義（待 TLI 覆核）','Disputes raised by the franchisee (pending TLI review)')+'</div>' + rows;
-}
 function escapeHtmlPs(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function calcRowsHtml(row){
   var c = row.calc, t = TLI_I18N.t;
-  if (c.kind==='franchise'){
-    return '<div class="kv"><span>'+t('課程收入（依平台紀錄）','Course Revenue (per platform records)')+'</span><span>'+money(c.revenue)+'</span></div>' +
-      '<div class="kv"><span>'+t('權利金比例（Royalty）','Royalty Rate')+'</span><span>'+c.royaltyRate+'%</span></div>' +
-      '<div class="kv"><span>'+t('權利金','Royalty')+'</span><span>'+money(c.royalty)+'</span></div>' +
-      '<div class="kv"><span>'+t('教材費','Material Fee')+'</span><span>'+money(c.materialFee)+'</span></div>' +
-      '<div class="kv"><span>'+t('教師回訓費','Teacher Retraining Fee')+'</span><span>'+money(c.retrainFee)+'</span></div>' +
-      '<div class="kv" style="font-weight:600"><span>'+t('合計（應收）','Total (Receivable)')+'</span><span>'+money(c.total)+'</span></div>' +
-      '<div class="hint">'+t('課程收入（依平台紀錄） × Royalty% ＋ 教材費 ＋ 回訓費；收入數字來源：TLI 平台本期開課數、上課人次與課程收入自動計算，加盟主無需自行申報。','Course Revenue (per platform records) × Royalty% + Material Fee + Retraining Fee; revenue figures are auto-calculated by the TLI platform from this period\'s class count, attendance and course revenue — the franchisee does not need to self-report.')+'</div>' +
-      franchiseDisputesHtml(row);
-  }
   if (c.kind==='distributor'){
     return '<div class="kv"><span>'+t('訂金比例／已收訂金','Deposit Rate / Deposit Received')+'</span><span>'+c.depositRate+'%　'+money(c.depositAmount)+'</span></div>' +
       '<div class="kv"><span>'+t('實際開課量','Actual Enrollment')+'</span><span>'+c.headcount+t(' 人',' people')+'</span></div>' +
@@ -759,7 +718,7 @@ function closePsDrawer(){
 function issuePsStatement(){
   var row = findPs(currentPsId); if (!row) return;
   if (row.status==='待產出') row.status='已寄結算單';
-  toast(TLI_I18N.t('已產出「'+row.subject+'／'+row.period+'」結算單 PDF（示範，不會實際下載檔案）','Statement PDF generated for "'+row.subject+' / '+row.period+'" (demo only, no file is actually downloaded)'));
+  toast(TLI_I18N.t('已產出「'+row.subject+'／'+row.period+'」結算單 PDF','Statement PDF generated for "'+row.subject+' / '+row.period+'"'));
   psRefreshAfterChange(row);
 }
 function markPsPaid(){
@@ -805,13 +764,12 @@ function savePsPayment(){
 
 /* ================= 產生結算單 modal ================= */
 function subjectOptionsForType(type){
-  if (type==='加盟') return TLI_MASTERS.partners.filter(function(p){return p.type==='franchise';}).map(function(p){return p.name;});
   if (type==='經銷') return TLI_MASTERS.partners.filter(function(p){return p.type==='distributor';}).map(function(p){return p.name;});
   if (type==='代理') return TLI_MASTERS.partners.filter(function(p){return p.type==='agent';}).map(function(p){return p.name;});
   if (type==='企業合約') return TLI_MASTERS.orgCustomers.filter(function(o){return o.type==='general';}).map(function(o){return o.name;});
   return [];
 }
-/* ===== 結算期選項依「型態」連動：加盟／代理為半年結算；經銷同時有年度（Rebate）與梯次（訂金尾款）
+/* ===== 結算期選項依「型態」連動：代理為半年結算；經銷同時有年度（Rebate）與梯次（訂金尾款）
    兩種結算週期，用 optgroup 分組讓人看得懂差別；企業合約為月結。顯示文字附期間說明，
    value 維持與既有 PARTNER_SETTLEMENTS 示範資料相同的代號格式，供期別篩選下拉比對一致。 ===== */
 function periodOptionsForType(type){
@@ -833,7 +791,7 @@ function periodOptionsForType(type){
     {value:'2026-09', label:'2026-09'+t('（月結）',' (Monthly)')},
     {value:'2026-10', label:'2026-10'+t('（月結）',' (Monthly)')}
   ];
-  if (type==='加盟' || type==='代理') return {flat: HALF};
+  if (type==='代理') return {flat: HALF};
   if (type==='經銷') return {groups:[{label:t('年度結算','Annual Settlement'), items:ANNUAL}, {label:t('梯次結算','Batch Settlement'), items:BATCH}]};
   if (type==='企業合約') return {flat: MONTHLY};
   return {flat: []};
@@ -870,7 +828,6 @@ function submitSettleStatement(){
   if (!type || !subject || !period){ toast(TLI_I18N.t('請選擇型態、夥伴／企業與結算期','Please select a type, partner/enterprise, and settlement period')); return; }
   var direction = type==='代理' ? 'payable' : 'receivable';
   var calc = type==='企業合約' ? enterpriseCalc(0,380,false) :
-    type==='加盟' ? franchiseCalc(0,0,0,0) :
     type==='經銷' ? distributorCalc(0,0,0,0,0,0) : agentCalc(0,0);
   var id = 'PS-'+String(1000+PARTNER_SETTLEMENTS.length);
   PARTNER_SETTLEMENTS.unshift({id:id, subject:subject, typeLabel:type, period:period, direction:direction, status:'待產出', calc:calc, payments:[], diffReason:''});

@@ -437,7 +437,7 @@ var CLOSE_REASONS=['已在其他機構報名','預算不符','時段無法配合
 var CLOSE_REASONS_EN={'已在其他機構報名':'Already enrolled elsewhere','預算不符':'Budget mismatch','時段無法配合':'Schedule conflict','僅為詢價，暫無學習計畫':'Price inquiry only, no learning plan yet','聯繫多次無回應':'No response after multiple contacts'};
 // 20260930 修正：安排試聽老師改讀主檔 teachers（中心教師、已認證、在職），不再各頁各寫一套
 var TRIAL_TEACHERS=TLI_MASTERS.teachers.filter(function(t){return t.type==='center'&&t.certified&&t.active;}).map(function(t){return t.name;});
-var NAME_POOL=['林思妤','黃冠霖','張雅婷','陳建宏','王大同','Emma Chen','Kevin Wu','山田太郎','李文彬','陳美惠','Sophie Lin','吳建霖','林佳穎','張小華','林小雅','許雅筑','蔡承翰','周于庭','謝孟哲','曾雅雯','Rachel Wu','Daniel Lin','高子晴','游承恩','邱思穎'];
+var NAME_POOL=['林思妤','黃冠霖','張雅婷','陳建宏','王大同','Emma Johnson','Kevin Wu','山田太郎','李文彬','陳美惠','Sophie Lin','吳建霖','林佳穎','張小華','林小雅','許雅筑','蔡承翰','周于庭','謝孟哲','曾雅雯','Rachel Wu','Daniel Lin','高子晴','游承恩','邱思穎'];
 
 var SLA_ACTIVE=['新進','已聯繫'];
 function isSlaActive(o){return SLA_ACTIVE.indexOf(o.status)>-1;}
@@ -586,7 +586,7 @@ var ENTERPRISE_SEED_DATA=[
   {id:'INQ-2026-B12',daysAgo:32,status:'未成交',company:'東亞精密機械股份有限公司',industry:'精密機械',location:'日本廠區',tz:'日本時間（UTC+9）',headcount:'7',nativeLang:'日文',contactName:'伊藤先生',contactInfo:'ito.hr@example-mech.example',note:'洽談期間與現有時段無法配合，暫緩導入',advisor:'王大明',lostReason:'時段無法配合'}
 ];
 // 20260928 修正：企業客戶改讀主檔 orgCustomers（a19 組織客戶主檔），不再各筆另造虛構企業名，
-// industry／location 等敘事欄位維持示範文字，company 一律換成主檔既有的一般企業（排除加盟／學校型態）
+// industry／location 等敘事欄位維持示範文字，company 一律換成主檔既有的一般企業（排除學校型態）
 (function(){
   var gen=TLI_MASTERS.orgCustomers.filter(function(o){return o.type==='general';});
   ENTERPRISE_SEED_DATA.forEach(function(rec,i){ if(gen.length)rec.company=gen[i%gen.length].name; });

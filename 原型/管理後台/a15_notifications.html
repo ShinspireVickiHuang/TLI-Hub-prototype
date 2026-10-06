@@ -317,9 +317,8 @@ var EVENT_NOTIFS = [
  {key:'contract_90', name:'合約到期 90 天', recipients:['顧問'], channels:['Email','站內'], timing:'immediate', enabled:true},
  {key:'contract_60', name:'合約到期 60 天', recipients:['顧問','HR'], channels:['Email','站內'], timing:'immediate', enabled:true},
  {key:'contract_30', name:'合約到期 30 天', recipients:['顧問','HR','財務'], channels:['Email','站內'], timing:'immediate', enabled:true},
- {key:'revenue_report_pending', name:'加盟營收申報待確認', recipients:['財務','學校窗口'], channels:['Email'], timing:'daily', enabled:true},
  {key:'institution_invoice', name:'機構帳單已開立', recipients:['學校窗口','財務'], channels:['Email'], timing:'immediate', enabled:true},
- {key:'chatroom_full', name:'聊天室場次名額將滿', recipients:['學生','老師'], channels:['LINE 通知','站內'], timing:'immediate', enabled:true},
+ {key:'chatroom_full', name:'Mandarin Lounge 場次名額將滿', recipients:['學生','老師'], channels:['LINE 通知','站內'], timing:'immediate', enabled:true},
  {key:'consecutive_absent', name:'連續缺席達門檻', recipients:['HR','顧問'], channels:['Email','站內'], timing:'immediate', enabled:true},
  /* 20260910m 新增：課後回饋雙向多輪對話的三個通知事件，示範畫面，資料為模擬數字 */
  {key:'feedback_invite', name:'課後回饋邀請（課後 N 小時，依設定）', recipients:['學生'], channels:['Email','站內'], timing:'immediate', enabled:true},
@@ -332,7 +331,9 @@ var EVENT_NOTIFS = [
  /* 20260910p 新增：會員開通流程三個通知事件，示範畫面，資料為模擬數字 */
  {key:'member_activation', name:'會員開通信（顧問建檔後即時，一次性連結有效期 N 小時，依設定）', recipients:['學生'], channels:['Email'], timing:'immediate', enabled:true},
  {key:'member_activation_reminder', name:'尚未開通提醒（建檔後 N 天，依設定）', recipients:['學生','顧問'], channels:['Email','站內'], timing:'daily', enabled:true},
- {key:'password_changed', name:'密碼已變更通知', recipients:['學生'], channels:['Email','站內'], timing:'immediate', enabled:true}
+ {key:'password_changed', name:'密碼已變更通知', recipients:['學生'], channels:['Email','站內'], timing:'immediate', enabled:true},
+ {key:'account_invite', name:'帳號開通邀請（專案合作成員，一次性連結 7 天內有效）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true},
+ {key:'account_activated', name:'開通完成通知（開通當下寄給本人）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true}
 ];
 function eventByKey(k){ return EVENT_NOTIFS.find(function(e){ return e.key===k; }); }
 /* 20260930：事件與範本名稱英文模式補譯；內部資料值（EVENT_NOTIFS[].name／TEMPLATES[].name）維持中文不變，比對與 toast 組字不受影響 */
@@ -346,9 +347,8 @@ var NOTIF_NAME_EN = {
   '合約到期 90 天':'Contract Expiring in 90 Days',
   '合約到期 60 天':'Contract Expiring in 60 Days',
   '合約到期 30 天':'Contract Expiring in 30 Days',
-  '加盟營收申報待確認':'Franchise Revenue Report Pending Confirmation',
   '機構帳單已開立':'Institution Invoice Issued',
-  '聊天室場次名額將滿':'Chatroom Session Nearly Full',
+  'Mandarin Lounge 場次名額將滿':'Mandarin Lounge Session Nearly Full',
   '連續缺席達門檻':'Consecutive Absences Reached Threshold',
   '課後回饋邀請（課後 N 小時，依設定）':'Post-Class Feedback Invitation (N hours after class, configurable)',
   '回饋有新回覆':'New Reply on Feedback',
@@ -371,6 +371,8 @@ var NOTIF_NAME_EN = {
   '回饋逾期未填提醒':'Feedback Overdue Reminder',
   '排課需求已送出（給顧問）':'Scheduling Request Sent (to Advisor)',
   '會員開通信':'Member Activation Email',
+  '帳號開通邀請':'Account Activation Invitation','開通完成通知':'Activation Completed Notice',
+  '帳號開通邀請（專案合作成員，一次性連結 7 天內有效）':'Account Activation Invitation (project-partnership members; one-time link valid for 7 days)','開通完成通知（開通當下寄給本人）':'Activation Completed Notice (sent to the person right after activation)',
   '尚未開通提醒':'Not-Yet-Activated Reminder'
 };
 function notifNameLabel(zh){ return i18nT(zh, NOTIF_NAME_EN[zh]||zh); }
@@ -449,7 +451,11 @@ var TEMPLATES = [
  {id:'t16', name:'尚未開通提醒', channels:['Email','站內'], enabled:true, vars:['{學生姓名}','{顧問}'],
   content:{tc:'{學生姓名} 您好，您的會員帳號尚未完成開通，請盡速點擊開通信中的連結完成設定，如有問題請聯繫您的顧問 {顧問}。', en:'Dear {Student Name}, your member account has not been activated yet. Please use the link in your activation email to complete setup, or contact your advisor {Advisor} for help.', jp:'{學生姓名} 様、会員アカウントがまだ開通されていません。開通メール内のリンクから設定を完了してください。ご不明点は担当者 {顧問} までご連絡ください。'}},
  {id:'t17', name:'密碼已變更通知', channels:['Email','站內'], enabled:true, vars:['{學生姓名}','{時間}'],
-  content:{tc:'{學生姓名} 您好，您的帳號密碼已於 {時間} 變更完成。如非本人操作，請立即聯繫客服處理。', en:'Dear {Student Name}, your account password was changed at {Time}. If this wasn’t you, please contact support immediately.', jp:'{學生姓名} 様、アカウントのパスワードが {時間} に変更されました。心当たりがない場合は、直ちにサポートまでご連絡ください。'}}
+  content:{tc:'{學生姓名} 您好，您的帳號密碼已於 {時間} 變更完成。如非本人操作，請立即聯繫客服處理。', en:'Dear {Student Name}, your account password was changed at {Time}. If this wasn’t you, please contact support immediately.', jp:'{學生姓名} 様、アカウントのパスワードが {時間} に変更されました。心当たりがない場合は、直ちにサポートまでご連絡ください。'}},
+ {id:'t18', name:'帳號開通邀請', channels:['Email'], enabled:true, vars:['{姓名}','{開通連結}','{到期日}'],
+  content:{tc:'{姓名} 您好，TLI 已為您建立學習帳號。請點選下方連結設定密碼完成開通：{開通連結}。此連結僅能使用一次，{到期日} 前有效；逾期或已作廢請聯絡 TLI 重新寄送。', en:'Hello {Name}, TLI has created a learning account for you. Use the link below to set your password: {Activation Link}. The link can be used only once and is valid until {Expiry Date}. If it has expired or been revoked, contact TLI to have it sent again.', jp:'{姓名} 様、TLI の学習アカウントを作成しました。次のリンクからパスワードを設定してください：{開通連結}。このリンクは 1 回のみ、{到期日} まで有効です。期限切れまたは無効の場合は TLI までご連絡ください。'}},
+ {id:'t19', name:'開通完成通知', channels:['Email'], enabled:true, vars:['{姓名}','{時間}'],
+  content:{tc:'{姓名} 您好，您的 TLI 帳號已於 {時間} 完成開通。如果不是您本人操作，請立即聯絡 TLI。', en:'Hello {Name}, your TLI account was activated at {Time}. If this was not you, contact TLI right away.', jp:'{姓名} 様、TLI アカウントは {時間} に開通されました。ご本人の操作でない場合は、直ちに TLI までご連絡ください。'}}
 ];
 
 var currentTmplId = null;
@@ -491,7 +497,7 @@ function renderTmplEditor(){
     '<div class="editorhead"><h3>'+notifNameLabel(t.name)+'</h3>' +
     '<label class="small">'+i18nT('啟用','Enabled')+' <label class="switch" style="margin-left:6px"><input type="checkbox" '+(t.enabled?'checked':'')+' onchange="onTmplEnableToggle(this)"><span class="slider"></span></label></label></div>' +
     '<div class="formrow"><label>'+i18nT('發送渠道','Delivery Channel')+'</label>'+chBoxes+'</div>' +
-    '<div class="formrow" style="max-width:280px"><label>'+i18nT('寄件署名','Sender Name')+'</label><select id="tmplSenderSel" onchange="onTmplSenderChange(this)"><option value="TLI Connect"'+(t.sender==='TLI Connect'?' selected':'')+'>TLI Connect</option><option value="依專案品牌設定"'+(t.sender==='依專案品牌設定'?' selected':'')+'>'+i18nT('依專案品牌設定','Per-Project Brand Setting')+'</option></select><div class="hint">'+i18nT('選「依專案品牌設定」時，實際寄件署名會依該專案（如加盟／經銷據點）於「基礎資料設定」設定的品牌名稱代入。','When set to “Per-Project Brand Setting”, the actual sender name is taken from the brand name configured for that project (e.g. a franchise/distribution site) under “Master Data Settings”.')+'</div></div>' +
+    '<div class="formrow" style="max-width:280px"><label>'+i18nT('寄件署名','Sender Name')+'</label><select id="tmplSenderSel" onchange="onTmplSenderChange(this)"><option value="TLI Connect"'+(t.sender==='TLI Connect'?' selected':'')+'>TLI Connect</option><option value="依專案品牌設定"'+(t.sender==='依專案品牌設定'?' selected':'')+'>'+i18nT('依專案品牌設定','Per-Project Brand Setting')+'</option></select><div class="hint">'+i18nT('選「依專案品牌設定」時，實際寄件署名會依該專案（如經銷據點）於「基礎資料設定」設定的品牌名稱代入。','When set to “Per-Project Brand Setting”, the actual sender name is taken from the brand name configured for that project (e.g. a distributor site) under “Master Data Settings”.')+'</div></div>' +
     '<div class="formrow"><label>'+i18nT('可插入變數（點擊插入到目前聚焦的欄位，預設插入繁中欄）','Insertable variables (click to insert into the currently focused field; defaults to the Traditional Chinese column)')+'</label><div class="varbtns">'+varBtns+'</div></div>' +
     '<div class="lang3">'+langCols+'</div>' +
     '<div style="margin-top:14px"><button class="btn" onclick="saveTmpl()">'+i18nT('儲存範本','Save Template')+'</button> <button class="btn ghost" onclick="previewTmpl()">'+i18nT('預覽','Preview')+'</button><span class="savedhint" id="tmplSavedHint">'+i18nT('已儲存','Saved')+'</span></div>';
@@ -535,7 +541,7 @@ function saveTmpl(){
 /* 範本預覽（20260910b 新增）：以暫定值替換變數，顯示三語內容 */
 var PREVIEW_SAMPLE_VALUES = {'{學生姓名}':'王小明','{課程}':'中級會話班','{時間}':'2026-09-15 19:00',
   '{員工}':'林佳蓉','{課堂}':'企業英文小組班','{規則判定}':'距上課 18 小時，符合企業合約取消時限，不計入免扣次數',
-  '{收件人姓名}':'王小明'};
+  '{收件人姓名}':'王小明','{姓名}':'Maria Lopez','{Name}':'Maria Lopez','{開通連結}':'https://gateway.tli.com.tw/activate/k1','{Activation Link}':'https://gateway.tli.com.tw/activate/k1','{到期日}':'2027-03-19','{Expiry Date}':'2027-03-19'};
 function fillPreviewVars(text){
   var out = text;
   Object.keys(PREVIEW_SAMPLE_VALUES).forEach(function(k){

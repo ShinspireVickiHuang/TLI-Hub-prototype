@@ -376,7 +376,7 @@ html,body{overflow-x:hidden;}
 /* ================= 產品主檔資料（與 a02 同一份示範清單，供直接以 id 查看單一產品）=================
    產品分類固定五類，改讀共用主檔 TLI_MASTERS.productCategories（來源 a02，分類維護見 a17）；
    20260928y：舊分類與示範 SKU 中不屬於這五類的資料已移除。
-   20260929：拍板不用分級測驗，移除原第 6 類 c_leveltest 與其下 p_level01／p_level02。 */
+   20260929 曾下架分級測驗（2026-10-05 客戶會議已恢復為一階段 B 程度測驗，見 m11／a22）；當時移除原第 6 類 c_leveltest 與其下 p_level01／p_level02。 */
 var CATEGORIES = TLI_MASTERS.productCategories.map(function(c){ return {id:c.id, name:c.name}; });
 /* 依 id 反查共用主檔的產品資料，取得教學語言／排課類型（上課方式）等跨頁一致欄位 */
 function masterProductOf(id){ return TLI_MASTERS.byId('products', id); }
@@ -408,8 +408,8 @@ var PRODUCTS = [
  {id:'sku07', code:'ZH-CUL-TEA', name:'文化體驗活動－茶道體驗', categoryId:'c_event', mode:'實體', classType:'活動', duration:'2 小時／場', levelRange:'不分級', materials:[], desc:'實體文化體驗活動。', status:'啟用', tax:'應稅'},
  {id:'sku13', code:'ZH-EVT-TEA', name:'活動費－結業茶會', categoryId:'c_event', mode:'實體', classType:'活動', duration:'不限', levelRange:'不分級', materials:[], desc:'學期班結業茶會活動。', status:'停用', tax:'應稅'},
 
- {id:'skuC09', code:'CN-CHAT-ZH', name:'中文團體聊天室（會員權益）', categoryId:'c_chat', mode:'線上', classType:'大班', duration:'不限', levelRange:'不分級', materials:[], desc:'會員權益型的團體聊天室，供會員預約加入練習會話。', status:'啟用', tax:'免稅'},
- {id:'p_chat02', code:'CN-CHAT-EN', name:'英語會話預約（15 分鐘／次）', categoryId:'c_chat', mode:'線上', classType:'一對一', duration:'15 分鐘／次', levelRange:'不分級', materials:[], desc:'一對一線上會話預約，供會員單次預約練習口說。', status:'啟用', tax:'免稅'}
+ {id:'skuC09', code:'CN-CHAT-ZH', name:'中文 Mandarin Lounge（會員權益）', categoryId:'c_chat', mode:'線上', classType:'大班', duration:'不限', levelRange:'不分級', materials:[], desc:'會員權益型的 Mandarin Lounge，供會員預約加入練習會話。', status:'啟用', tax:'免稅'},
+ {id:'p_chat02', code:'CN-CHAT-EN', name:'英語 Mandarin Lounge 團體場次（30 分鐘／場）', categoryId:'c_chat', mode:'線上', classType:'小班', duration:'30 分鐘／場', levelRange:'不分級', materials:[], desc:'團體場次，每場 30 分鐘、6–10 人，會員依額度報名練習口說。', status:'啟用', tax:'免稅'}
 
 ];
 
@@ -472,7 +472,7 @@ function passCondLabel(v){
   return v;
 }
 /* 示範：自學影音課程包（中文基礎）8 個 Lesson，單元數與名稱對齊會員區
-   m08b_self_paced_franchise.html 的 UNITS（學員實際看到的清單與時長） */
+   m08_self_paced.html 的 UNITS（學員實際看到的清單與時長） */
 var PRODUCT_UNITS = {
  skuC05: [
   makeUnit(1,'機場入境與問候','cv1',['cm1'],'qz_u1'),

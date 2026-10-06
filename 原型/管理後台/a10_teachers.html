@@ -90,7 +90,7 @@ text-align:center;margin-bottom:5px;color:var(--g500);}
 .sectiontitle:first-child{margin-top:0;}
 .switchrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;}
 .linkbtn{background:none;border:none;color:var(--navy);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline;font-family:inherit;}
-/* ==== 新增：教師分流（中心／在地）與新增教師 modal，20260927e ==== */
+/* ==== 新增教師 modal ==== */
 .modal-mask{display:none;position:fixed;inset:0;background:rgba(16,24,40,.42);z-index:160;align-items:center;justify-content:center;}
 .modal-mask.open{display:flex;}
 .modal{background:#fff;border-radius:10px;width:460px;max-width:90vw;max-height:85vh;overflow:auto;padding:22px;position:relative;}
@@ -100,16 +100,6 @@ text-align:center;margin-bottom:5px;color:var(--g500);}
 .req{color:#C00000;margin-left:2px;}
 .errbox{border-color:#C0392B !important;}
 .errmsg{color:#C0392B;font-size:11.5px;margin-top:3px;display:none;}
-.typegrid{display:flex;gap:12px;}
-.typecard{flex:1;border:1.5px solid var(--g200);border-radius:10px;padding:16px;cursor:pointer;}
-.typecard:hover{border-color:#AFC4DE;}
-.typecard.sel{border-color:var(--navy);background:#F3F7FC;}
-.typecard.disabled{cursor:not-allowed;background:var(--g50);}
-.typecard.disabled:hover{border-color:var(--g200);}
-.typecard.disabled h4{color:var(--g500);}
-.typecard h4{margin:0 0 6px;font-size:14px;}
-.typecard p{margin:0;font-size:12px;color:var(--g500);line-height:1.5;}
-.typecard.disabled .note{margin-top:8px;font-size:11.5px;color:var(--orange);line-height:1.5;}
 .reminder-card{display:flex;align-items:center;gap:10px;background:#FFF4E0;border:1px solid #E8A23D;border-radius:10px;padding:10px 16px;margin-bottom:16px;font-size:13px;color:#8A5A00;}
 .badge.amber{background:#FDEDD9;color:#B35309;}
 
@@ -249,16 +239,14 @@ html,body{overflow-x:hidden;}
 <div class="app">
 <div class="sidebar" id="sidebar"><a class="brand" href="../顧問工作台/c01_today.html"><img class="brand-logo" src="../assets/tli-logo.svg" alt="TLI"><small class="navtext" data-i18n="brand.adminPortal">管理後台</small></a><nav><div class="navgroup" data-group="sales"><div class="sec-label" onclick="toggleNavGroup(event,'sales')"><span class="navtext" data-i18n="nav.group.sales">銷售</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'sales')" aria-label="收合銷售" data-i18n-aria-label="aria.collapseSales"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a21" href="a21_projects.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="14.6" x2="11" y2="14.6"/></svg><span class="navtext" data-i18n="nav.a21">專案設定</span></a><a data-nav="a04" href="a04_packages.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="10" rx="1"/><path d="M3 7l7-4 7 4"/><line x1="10" y1="7" x2="10" y2="17"/></svg><span class="navtext" data-i18n="nav.a04">銷售方案</span></a><a data-nav="a05" href="a05_orders.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10v16l-2-1.3L11 18l-2-1.3L7 18l-2-1.3V2z"/><line x1="7.5" y1="6" x2="12.5" y2="6"/><line x1="7.5" y1="9" x2="12.5" y2="9"/></svg><span class="navtext" data-i18n="nav.a05">訂單</span></a><a data-nav="a20" href="a20_agents.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6" r="2.3"/><path d="M2.5 16c0-2.6 1.8-4.3 4-4.3s4 1.7 4 4.3"/><circle cx="14.5" cy="8.5" r="1.8"/><path d="M17.3 16c0-1.9-1.3-3.4-2.8-3.4"/><path d="M9 6l3-1.5"/></svg><span class="navtext" data-i18n="nav.a20">合作夥伴</span></a></div></div><div class="navgroup" data-group="customer"><div class="sec-label" onclick="toggleNavGroup(event,'customer')"><span class="navtext" data-i18n="nav.group.customer">客戶</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'customer')" aria-label="收合客戶" data-i18n-aria-label="aria.collapseCustomer"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a01" href="a01_member_rules.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg><span class="navtext" data-i18n="nav.a01">會員管理</span></a><a data-nav="a19" href="a19_b2b_enterprise.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="7" height="14" rx="1"/><rect x="10.5" y="7.5" width="6" height="9.5" rx="1"/><line x1="5.5" y1="6" x2="7.5" y2="6"/><line x1="5.5" y1="9" x2="7.5" y2="9"/><line x1="5.5" y1="12" x2="7.5" y2="12"/><line x1="12.5" y1="10.5" x2="14.5" y2="10.5"/><line x1="12.5" y1="13.5" x2="14.5" y2="13.5"/></svg><span class="navtext" data-i18n="nav.a19">組織客戶</span></a><a data-nav="a14" href="a14_feedback.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8l-4 3v-3H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg><span class="navtext" data-i18n="nav.a14">學員回饋</span></a></div></div><div class="navgroup" data-group="teaching"><div class="sec-label" onclick="toggleNavGroup(event,'teaching')"><span class="navtext" data-i18n="nav.group.teaching">教學</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'teaching')" aria-label="收合教學" data-i18n-aria-label="aria.collapseTeaching"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a02" href="a02_products.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l7-3.5L17 6v8l-7 3.5L3 14V6z"/><path d="M3 6l7 3.5L17 6"/><line x1="10" y1="9.5" x2="10" y2="17.5"/></svg><span class="navtext" data-i18n="nav.a02">產品管理</span></a><a data-nav="a10" class="active" href="a10_teachers.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="15" height="9.5" rx="1.5"/><path d="M7 6.5V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="2.5" y1="10.5" x2="17.5" y2="10.5"/></svg><span class="navtext" data-i18n="nav.a10">老師管理</span></a><a data-nav="a18" href="a18_resource_library.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="10" cy="4.5" rx="7" ry="2.5"/><path d="M3 4.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/><path d="M3 9.5v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5"/></svg><span class="navtext" data-i18n="nav.a18">資源庫</span></a><a data-nav="a16" href="a16_events.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="1.5"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="6.5" y1="2" x2="6.5" y2="5.5"/><line x1="13.5" y1="2" x2="13.5" y2="5.5"/><circle cx="10" cy="12.3" r="2"/></svg><span class="navtext" data-i18n="nav.a16">活動管理</span></a><a data-nav="a22" href="a22_quizzes.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="12" height="15" rx="1.5"/><path d="M7 7l1.5 1.5L11 6"/><line x1="12.5" y1="7.5" x2="14" y2="7.5"/><path d="M7 12l1.5 1.5L11 11"/><line x1="12.5" y1="12.5" x2="14" y2="12.5"/></svg><span class="navtext" data-i18n="nav.a22">測驗管理</span></a></div></div><div class="navgroup" data-group="finance"><div class="sec-label" onclick="toggleNavGroup(event,'finance')"><span class="navtext" data-i18n="nav.group.finance">財務</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'finance')" aria-label="收合財務" data-i18n-aria-label="aria.collapseFinance"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a23" href="a23_payment_gateways.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><line x1="2.5" y1="8.5" x2="17.5" y2="8.5"/><circle cx="13.5" cy="12" r="1.2"/></svg><span class="navtext" data-i18n="nav.a23">收款與發票</span></a><a data-nav="a24" href="a24_partner_settlement.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><line x1="6" y1="8" x2="14" y2="8"/><line x1="6" y1="11" x2="11" y2="11"/><path d="M12.5 13.5l1.2 1.2 2.3-2.4"/></svg><span class="navtext" data-i18n="nav.a24">結算與對帳</span></a><a data-nav="a07" href="a07_reports.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="17" x2="4" y2="10"/><line x1="10" y1="17" x2="10" y2="5"/><line x1="16" y1="17" x2="16" y2="12"/></svg><span class="navtext" data-i18n="nav.a07">營運報表</span></a></div></div><div class="navgroup" data-group="system"><div class="sec-label" onclick="toggleNavGroup(event,'system')"><span class="navtext" data-i18n="nav.group.system">系統</span><button type="button" class="sec-toggle navtext" onclick="toggleNavGroup(event,'system')" aria-label="收合系統" data-i18n-aria-label="aria.collapseSystem"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></button></div><div class="navgroup-items"><a data-nav="a17" href="a17_master_data.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="5" x2="16" y2="5"/><circle cx="8" cy="5" r="1.6"/><line x1="4" y1="10" x2="16" y2="10"/><circle cx="13" cy="10" r="1.6"/><line x1="4" y1="15" x2="16" y2="15"/><circle cx="10" cy="15" r="1.6"/></svg><span class="navtext" data-i18n="nav.a17">基礎資料設定</span></a><a data-nav="a09" href="a09_permissions_notify.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l6.5 2.5v5C16.5 14 13.8 17 10 18c-3.8-1-6.5-4-6.5-8.5v-5L10 2z"/></svg><span class="navtext" data-i18n="nav.a09">權限管理</span></a><a data-nav="a15" href="a15_notifications.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="navtext" data-i18n="nav.a15">通知管理</span></a><a data-nav="a08" href="a08_content_cms.html"><svg class="navicon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="15" height="14" rx="1.5"/><line x1="8" y1="3" x2="8" y2="17"/></svg><span class="navtext" data-i18n="nav.a08">內容管理</span></a></div></div></nav><div class="sidebar-user" id="sidebarUser"><div class="su-row" onclick="toggleSuMenu(event)"><span class="su-avatar" id="suAvatar">王</span><span class="navtext su-info"><span class="su-name" id="suName">王大明</span><span class="su-roletag" id="suRoleTag" data-i18n="role.hqAdmin">總公司管理者</span></span><svg class="navtext su-chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg></div><div class="tb-panel su-menu" id="suMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="../顧問工作台/c01_today.html" data-i18n="nav_ext.consultantWorkbench">前往顧問工作台</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="main"><div class="topbar"><button class="hamburger" onclick="toggleSidebar()" aria-label="開啟選單" data-i18n-aria-label="common.openMenu"><svg class="navicon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5.5" x2="17" y2="5.5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14.5" x2="17" y2="14.5"/></svg></button><div class="tb-title" data-i18n="nav.a10">老師管理</div><div class="tb-actions"><div class="tb-search"><svg class="navicon" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg><input type="text" placeholder="搜尋" data-i18n-placeholder="search.genericPlaceholder"></div><button class="tb-bellbtn" onclick="toggleNotif(event)" aria-label="通知" data-i18n-aria-label="common.notifications"><svg class="navicon" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5c-2.2 0-4 1.8-4 4v2.3c0 .6-.2 1.2-.6 1.7L4 12.5h12l-1.4-2c-.4-.5-.6-1.1-.6-1.7V6.5c0-2.2-1.8-4-4-4z"/><path d="M8.2 15.5a1.8 1.8 0 0 0 3.6 0"/></svg><span class="tb-dot" id="tbDot"></span></button><div class="tb-panel tb-notifpanel" id="notifPanel"></div><button class="tb-avatarbtn" onclick="toggleAvatarMenu(event)" aria-label="使用者選單" data-i18n-aria-label="common.userMenu">王</button><div class="tb-panel tb-avatarmenu" id="avatarMenu"><a href="javascript:void(0)" onclick="toast('功能建置中，敬請期待')" data-i18n="common.settings">個人設定</a><a href="../公開網站/p01_home.html" data-i18n="common.gotoWebsite">前往官網</a><a href="javascript:void(0)" onclick="doLogout()" data-i18n="common.logout">登出</a></div></div></div><div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 <div class="pagehead">
-<div><h1 data-i18n="nav.a10">老師管理</h1><div class="desc" data-i18n="page.desc.teachers">中心教師由總部建檔與排程；在地教師由各加盟機構自行建檔，總部在此檢視並管理 TLI 培訓認證狀態。</div></div>
+<div><h1 data-i18n="nav.a10">老師管理</h1><div class="desc" data-i18n="page.desc.teachers">教師由總部建檔、排課與管理薪資級距。</div></div>
 <div class="toolbtns"><button class="btn" onclick="openNewTeacherModal()" data-i18n="btn.addTeacher">＋ 新增教師</button></div>
 </div>
 
-<div class="reminder-card" id="retrainReminder" style="display:none"></div>
 
 <div class="filterpanel" id="listWrap">
 <h2 data-i18n="h2.teacherList">老師列表</h2>
 <div class="filterbar">
-<select id="f_type" onchange="renderTable()"><option value="" data-i18n="filter.allTypes">全部類型</option><option value="center" data-i18n="type.center">中心教師</option><option value="local" data-i18n="type.local">在地教師</option></select>
 <select id="f_campus" onchange="renderTable()"><option value="" data-i18n="filter.allCampusesCenter">全部校區（中心）</option></select>
 <select id="f_status" onchange="renderTable()"><option value="" data-i18n="filter.allStatus">全部狀態</option><option value="在職" data-i18n="status.active">在職</option><option value="留職停薪" data-i18n="status.onLeave">留職停薪</option><option value="離職" data-i18n="status.resigned">離職</option></select>
 <button type="button" class="btn ghost" onclick="toggleMoreFilters()" data-i18n="common.moreFilters">更多篩選</button>
@@ -288,26 +276,13 @@ html,body{overflow-x:hidden;}
 </div>
 </div>
 
-<!-- 新增教師 modal（第一步選類型、第二步依類型填欄位） -->
+<!-- 新增教師 modal：直接填中心教師資料 -->
 <div class="modal-mask" id="newTeacherModal" onclick="if(event.target===this) closeModal('newTeacherModal')">
 <div class="modal wide">
 <button type="button" class="modal-close" onclick="closeModal('newTeacherModal')" aria-label="關閉" data-i18n-aria-label="common.close">×</button>
-<h3 id="ntTitle">新增教師（1／2）：選擇教師類型</h3>
+<h3 id="ntTitle" data-i18n="title.addTeacher">新增教師</h3>
 
-<div class="typegrid" id="ntStep1">
-<div class="typecard" id="ntCardCenter" onclick="selectNewTeacherType('center')">
-<h4 data-i18n="type.center">中心教師</h4>
-<p data-i18n="desc.centerTeacherCard">TLI 自己的教師，服務全球會員；跨國排課、時區、可授課時段與薪資由中心管理。</p>
-</div>
-<div class="typecard disabled" id="ntCardLocal">
-<h4 data-i18n="type.local">在地教師</h4>
-<p data-i18n="desc.localTeacherCard">加盟方在當地的教師，經 TLI 培訓認證後建檔，用中心教材與教學體系，只服務自己機構的學生，排課與薪資都在加盟方那邊。</p>
-<div class="note" data-i18n="note.localTeacherNoAdd">在地教師由加盟機構自行建檔，總部僅檢視與認證，此處無法新增。</div>
-</div>
-</div>
-<div style="text-align:right;margin-top:16px" id="ntStep1Btns"><button class="btn ghost" onclick="closeModal('newTeacherModal')" data-i18n="common.cancel">取消</button></div>
-
-<div id="ntStep2" style="display:none"></div>
+<div id="ntStep2"></div>
 </div>
 </div>
 
@@ -317,9 +292,7 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_i18n.js"></script>
 <script>
 
-/* ==== 教師主檔：type='center'（中心教師）或 'local'（在地教師），共用同一套教師端操作 ====
-   在地教師的所屬加盟機構須與 a20_agents.html 的 PARTNERS 名稱一致（僅列加盟型態，經銷／代理不建教師） */
-var FRANCHISE_PARTNERS = TLI_MASTERS.partners.filter(function(p){ return p.type === 'franchise'; }).map(function(p){ return p.name; });
+/* ==== 教師主檔：TLI 中心教師（海外學校的班級老師不在此維護，見 a20 專案合作「班級與名單」） ==== */
 
 var TEACHERS = TLI_MASTERS.teachers;
 
@@ -347,50 +320,29 @@ function statusBadge(s){
   if (s === '留職停薪') return '<span class="badge grey" data-i18n="status.onLeave">留職停薪</span>';
   return '<span class="badge red" data-i18n="status.resigned">離職</span>';
 }
-function typeBadge(t){
-  return t === 'center' ? '<span class="badge blue" data-i18n="type.center">中心教師</span>' : '<span class="badge orange" data-i18n="type.local">在地教師</span>';
-}
-function certBadge(s){
-  if (s === '已認證') return '<span class="badge green" data-i18n="cert.certified">已認證</span>';
-  if (s === '待回訓') return '<span class="badge amber" data-i18n="cert.pendingRetrain">待回訓</span>';
-  return '<span class="badge grey" data-i18n="cert.notCertified">未認證</span>';
-}
 function orgLabel(x){
-  return x.type === 'center' ? (x.campus + TLI_I18N.t('（中心）',' (Center)')) : x.org;
+  return x.campus + TLI_I18N.t('（中心）',' (Center)');
 }
 /* 20260930：教師等級（資深／中階／初階／高階）英文模式補譯，內部資料值（TEACHERS[].level）維持中文不變 */
 var LEVEL_EN = {'資深':'Senior', '中階':'Mid-level', '初階':'Junior', '高階':'Advanced'};
 function levelLabel(l){ return TLI_I18N.t(l, LEVEL_EN[l]||l); }
 
-function renderRetrainReminder(){
-  var el = document.getElementById('retrainReminder');
-  var n = TEACHERS.filter(function(x){ return x.type==='local' && x.certStatus==='待回訓'; }).length;
-  if (!n){ el.style.display = 'none'; return; }
-  el.style.display = 'flex';
-  el.innerHTML = '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5l8 14H2l8-14z"/><line x1="10" y1="8" x2="10" y2="11.5"/><circle cx="10" cy="14" r="0.9" fill="currentColor" stroke="none"/></svg>' +
-    '<span>' + TLI_I18N.t(n + ' 位在地教師回訓即將到期，請提醒所屬加盟機構安排回訓。', n + ' local teacher(s) are due for retraining soon. Please remind the affiliated franchise partner(s) to schedule retraining.') + '</span>';
-}
-
 /* 20260929 移除欄位顯示切換：表格固定 8 欄（≤8），年資不再進表格 */
 var T_COL_DEFS = [
   {key:'name', label:'姓名', i18nKey:'col.name'},
-  {key:'type', label:'教師類型', i18nKey:'col.teacherType'},
-  {key:'org', label:'所屬機構', i18nKey:'col.org'},
+  {key:'org', label:'所屬單位', i18nKey:'col.org'},
   {key:'langs', label:'語言', i18nKey:'col.langs'},
   {key:'level', label:'等級', i18nKey:'col.level'},
   {key:'totalHours', label:'累積授課時數', i18nKey:'col.totalHours'},
-  {key:'cert', label:'認證狀態', i18nKey:'col.certStatus'},
   {key:'status', label:'狀態', i18nKey:'common.status'}
 ];
 function tActiveCols(){ return T_COL_DEFS; }
 function tCellHtml(key, x){
   if (key==='name') return x.name;
-  if (key==='type') return typeBadge(x.type);
   if (key==='org') return orgLabel(x);
   if (key==='langs') return x.langs.join('、');
   if (key==='level') return '<span class="badge blue">'+levelLabel(x.level)+'</span>';
   if (key==='totalHours') return TLI_I18N.t(x.totalHours.toLocaleString()+' 小時', x.totalHours.toLocaleString()+' hrs');
-  if (key==='cert') return x.type==='local' ? certBadge(x.certStatus) : '<span class="small">－</span>';
   if (key==='status') return statusBadge(x.status);
   return '';
 }
@@ -399,7 +351,6 @@ function toggleMoreFilters(){
   p.style.display = (p.style.display === 'none' || !p.style.display) ? 'flex' : 'none';
 }
 function renderTable(){
-  var type = document.getElementById('f_type').value;
   var campus = document.getElementById('f_campus').value;
   var lang = document.getElementById('f_lang').value;
   var status = document.getElementById('f_status').value;
@@ -407,7 +358,7 @@ function renderTable(){
   var cols = tActiveCols();
   t.innerHTML = '<tr>'+cols.map(function(c){ return '<th data-i18n="'+c.i18nKey+'">'+c.label+'</th>'; }).join('')+'</tr>';
   var rows = TEACHERS.filter(function(x){
-    return (!type || x.type===type) && (!campus || x.campus===campus) && (!lang || langMatches(x.langs, lang)) && (!status || x.status===status);
+    return (!campus || x.campus===campus) && (!lang || langMatches(x.langs, lang)) && (!status || x.status===status);
   });
   rows.forEach(function(x){
     var tr = document.createElement('tr');
@@ -428,24 +379,18 @@ function renderTable(){
   if (sel) sel.insertAdjacentHTML('beforeend', ALL_LANGS.map(function(l){ return '<option>'+l+'</option>'; }).join(''));
 })();
 renderTable();
-renderRetrainReminder();
 
 function byId(id){ return TEACHERS.find(function(x){ return x.id===id; }); }
 
-/* ---- 依教師類型組出分頁清單：中心教師含可授課時段／薪資級距；在地教師改為認證與回訓，不顯示薪資與中心排程 ---- */
-function tabsForType(type){
-  var tabs = [
+/* ---- 詳情分頁：基本與帳號、可授課語言與等級、可授課時段、薪資級距、授課紀錄 ---- */
+function tabsForType(){
+  return [
     {key:'basic', label:'基本與帳號', i18nKey:'tab.teacherBasic'},
-    {key:'lang', label:'可授課語言與等級', i18nKey:'tab.teacherLang'}
+    {key:'lang', label:'可授課語言與等級', i18nKey:'tab.teacherLang'},
+    {key:'slots', label:'可授課時段', i18nKey:'tab.teacherSlots'},
+    {key:'salary', label:'薪資級距設定', i18nKey:'tab.teacherSalary', pill:true},
+    {key:'records', label:'授課紀錄', i18nKey:'tab.teacherRecords'}
   ];
-  if (type === 'center'){
-    tabs.push({key:'slots', label:'可授課時段', i18nKey:'tab.teacherSlots'});
-    tabs.push({key:'salary', label:'薪資級距設定', i18nKey:'tab.teacherSalary', pill:true});
-  } else {
-    tabs.push({key:'certify', label:'認證與回訓', i18nKey:'tab.teacherCertify'});
-  }
-  tabs.push({key:'records', label:'授課紀錄', i18nKey:'tab.teacherRecords'});
-  return tabs;
 }
 
 function openDetail(id){
@@ -456,9 +401,9 @@ function openDetail(id){
   document.getElementById('detailWrap').style.display = '';
   document.getElementById('d_title').textContent = x.name;
   document.getElementById('d_sub').textContent = orgLabel(x) + '｜' + x.langs.join('、') + '｜' + levelLabel(x.level) + '｜' + TLI_I18N.t('年資 ' + x.tenure + ' 年', x.tenure + ' yrs tenure');
-  document.getElementById('d_statusbadge').innerHTML = typeBadge(x.type) + ' ' + statusBadge(x.status);
+  document.getElementById('d_statusbadge').innerHTML = statusBadge(x.status);
 
-  var tabs = tabsForType(x.type);
+  var tabs = tabsForType();
   document.getElementById('d_tabs').innerHTML = tabs.map(function(t,i){
     return '<button class="'+(i===0?'active':'')+'" data-i18n="'+t.i18nKey+'" onclick="dTab(this,\''+t.key+'\')">'+t.label+(t.pill?'<span class="phase2-pill" data-i18n="badge.phase2">二階段</span>':'')+'</button>';
   }).join('');
@@ -468,12 +413,8 @@ function openDetail(id){
 
   document.getElementById('panel-basic').innerHTML = renderBasicPanel(x);
   document.getElementById('panel-lang').innerHTML = renderLangPanel(x);
-  if (x.type === 'center'){
-    document.getElementById('panel-slots').innerHTML = renderSlotsPanel(x);
-    document.getElementById('panel-salary').innerHTML = renderSalaryPanel(x);
-  } else {
-    document.getElementById('panel-certify').innerHTML = renderCertifyPanel(x);
-  }
+  document.getElementById('panel-slots').innerHTML = renderSlotsPanel(x);
+  document.getElementById('panel-salary').innerHTML = renderSalaryPanel(x);
   document.getElementById('panel-records').innerHTML = renderRecordsPanel(x);
   if (window.TLI_I18N) TLI_I18N.refresh();
 }
@@ -486,7 +427,6 @@ function closeDetail(){
   document.getElementById('detailWrap').style.display = 'none';
   currentId = null;
   renderTable();
-  renderRetrainReminder();
 }
 function dTab(btn, name){
   btn.parentNode.querySelectorAll('button').forEach(function(b){b.classList.remove('active');});
@@ -504,22 +444,17 @@ function onCenterScheduleToggle(el){
 }
 
 function renderBasicPanel(x){
-  var scheduleSwitch = x.type === 'center' ?
-    '<div class="switchrow"><div><div style="font-size:13px" data-i18n="label.centerScheduleAuth">中心排程權限</div><div class="hint" style="margin-top:2px" data-i18n="hint.centerScheduleAuthHint">是否列入中心跨國排課指派</div></div><label class="switch"><input type="checkbox" '+(x.centerSchedule?'checked':'')+' onchange="onCenterScheduleToggle(this)"><span class="slider"></span></label></div>' : '';
+  var scheduleSwitch =
+    '<div class="switchrow"><div><div style="font-size:13px" data-i18n="label.centerScheduleAuth">中心排程權限</div><div class="hint" style="margin-top:2px" data-i18n="hint.centerScheduleAuthHint">是否列入中心跨國排課指派</div></div><label class="switch"><input type="checkbox" '+(x.centerSchedule?'checked':'')+' onchange="onCenterScheduleToggle(this)"><span class="slider"></span></label></div>';
   return '<div class="card"><div class="grid2">' +
     '<div class="kv"><span data-i18n="col.name">姓名</span><span>'+x.name+'</span></div>' +
-    (x.type==='center' ? '<div class="kv"><span data-i18n="label.homeCampus">所屬校區</span><span>'+x.campus+'</span></div>' : '') +
+    '<div class="kv"><span data-i18n="label.homeCampus">所屬校區</span><span>'+x.campus+'</span></div>' +
     '<div class="kv"><span data-i18n="label.tenure">年資</span><span>'+TLI_I18N.t(x.tenure+' 年', x.tenure+' yrs')+'</span></div>' +
     '<div class="kv"><span data-i18n="col.totalHours">累積授課時數</span><span>'+TLI_I18N.t(x.totalHours.toLocaleString()+' 小時', x.totalHours.toLocaleString()+' hrs')+'</span></div>' +
-    (x.type==='center' ? '<div class="kv"><span data-i18n="label.timezone">時區</span><span>'+x.timezone+'</span></div>' : '') +
+    '<div class="kv"><span data-i18n="label.timezone">時區</span><span>'+x.timezone+'</span></div>' +
     '</div>' +
-    (x.type==='local' ?
-      '<div class="desc" style="margin-bottom:10px" data-i18n="desc.localTeacherReadonly">在地教師由所屬加盟機構自行建檔，基本資料唯讀，總部僅能於「認證與回訓」分頁更新認證狀態。</div>' +
-      '<div class="formrow" style="max-width:360px"><label data-i18n="label.franchisePartner">所屬加盟機構</label><input type="text" value="'+x.org+'" disabled></div>' +
-      '<div class="kv" style="max-width:360px"><span data-i18n="label.serviceScope">服務範圍</span><span data-i18n="desc.scopeLimitedToOrg">限該機構學生</span></div>' +
-      '<div class="kv" style="max-width:360px"><span data-i18n="label.createdSource">建檔來源</span><span>'+x.org+'・'+(x.createdDate||'－')+'</span></div>' : '') +
-    '<div class="formrow" style="max-width:360px;margin-top:16px"><label data-i18n="label.loginEmail">登入 Email</label><input type="email" value="'+x.email+'" '+(x.type==='local' ? 'disabled' : 'onchange="byId(currentId).email=this.value;toast(TLI_I18N.t(\'已更新登入 Email\',\'Login email updated\'))"')+'></div>' +
-    '<div class="formrow" style="max-width:360px"><label data-i18n="label.phone">電話</label><input type="text" value="'+(x.phone||'')+'" '+(x.type==='local' ? 'disabled' : 'onchange="byId(currentId).phone=this.value;toast(TLI_I18N.t(\'已更新電話\',\'Phone number updated\'))"')+'></div>' +
+    '<div class="formrow" style="max-width:360px;margin-top:16px"><label data-i18n="label.loginEmail">登入 Email</label><input type="email" value="'+x.email+'" onchange="byId(currentId).email=this.value;toast(TLI_I18N.t(\'已更新登入 Email\',\'Login email updated\'))"></div>' +
+    '<div class="formrow" style="max-width:360px"><label data-i18n="label.phone">電話</label><input type="text" value="'+(x.phone||'')+'" onchange="byId(currentId).phone=this.value;toast(TLI_I18N.t(\'已更新電話\',\'Phone number updated\'))"></div>' +
     '<div class="formrow"><label data-i18n="label.accountEnabled">帳號啟用</label><label class="switch"><input type="checkbox" '+(x.active?'checked':'')+' onchange="onActiveToggle(this)"><span class="slider"></span></label></div>' +
     scheduleSwitch +
     '</div>';
@@ -550,55 +485,6 @@ function renderSalaryPanel(x){
     '</div>';
 }
 
-function renderCertifyPanel(x){
-  return '<div class="card"><div class="desc" style="margin-bottom:10px" data-i18n="desc.certifyPanelIntro">此老師由所屬加盟機構自行建檔，只服務所屬機構的學生；總部在此檢視基本資料並管理 TLI 培訓認證狀態，培訓與定期回訓紀錄如下。</div>' +
-    '<div class="grid2">' +
-    '<div class="kv"><span data-i18n="label.franchisePartner">所屬加盟機構</span><span>'+x.org+'</span></div>' +
-    '<div class="kv"><span data-i18n="label.createdSource">建檔來源</span><span>'+x.org+'・'+(x.createdDate||'－')+'</span></div>' +
-    '<div class="kv"><span data-i18n="col.certStatus">認證狀態</span><span>'+certBadge(x.certStatus)+'</span></div>' +
-    '<div class="kv"><span data-i18n="label.certTrainingDate">TLI 培訓認證日期</span><span>'+(x.certDate||TLI_I18N.t('尚未培訓','Not yet trained'))+'</span></div>' +
-    '<div class="kv"><span data-i18n="label.lastRetrainDate">最近回訓日期</span><span>'+(x.lastRetrain||'－')+'</span></div>' +
-    '<div class="kv"><span data-i18n="label.nextRetrainDue">下次回訓到期日</span><span>'+(x.nextRetrainDue||'－')+'</span></div>' +
-    '<div class="kv"><span data-i18n="label.serviceScope">服務範圍</span><span data-i18n="desc.scopeLimitedToOrg">限該機構學生</span></div>' +
-    '</div>' +
-    '<div class="formrow" style="max-width:280px;margin-top:16px"><label data-i18n="label.updateCertStatus">更新認證狀態</label><select id="certStatusSel" onchange="onCertStatusChange(this)">' +
-    ['未認證','已認證','待回訓'].map(function(s){ return '<option'+(s===x.certStatus?' selected':'')+'>'+s+'</option>'; }).join('') +
-    '</select></div>' +
-    (x.certStatus === '待回訓' ?
-      '<div class="formrow" style="max-width:280px"><label data-i18n="label.retrainCompleteDate">回訓完成日期</label><input type="date" id="retrainDateInput" value="'+new Date().toISOString().slice(0,10)+'"></div>' +
-      '<div style="margin-top:8px"><button class="btn ghost sm" onclick="recordRetrain()" data-i18n="btn.recordRetrainComplete">記錄回訓完成</button></div>' : '') +
-    '</div>';
-}
-/* 認證狀態變更：未認證→已認證會補上培訓認證日期與首次回訓到期日；改選待回訓則出現「記錄回訓完成」欄位 */
-function onCertStatusChange(el){
-  var x = byId(currentId);
-  var prev = x.certStatus, next = el.value;
-  x.certStatus = next;
-  if (prev === '未認證' && next === '已認證'){
-    var today = new Date().toISOString().slice(0,10);
-    var due = new Date(); due.setFullYear(due.getFullYear()+1);
-    x.certDate = today;
-    x.lastRetrain = today;
-    x.nextRetrainDue = due.toISOString().slice(0,10);
-  }
-  document.getElementById('panel-certify').innerHTML = renderCertifyPanel(x);
-  renderRetrainReminder();
-  if (window.TLI_I18N) TLI_I18N.refresh();
-  toast(TLI_I18N.t('已更新認證狀態為「'+next+'」','Certification status updated to “'+next+'”'));
-}
-function recordRetrain(){
-  var x = byId(currentId);
-  var dateVal = document.getElementById('retrainDateInput').value || new Date().toISOString().slice(0,10);
-  var due = new Date(dateVal); due.setFullYear(due.getFullYear()+1);
-  x.lastRetrain = dateVal;
-  x.nextRetrainDue = due.toISOString().slice(0,10);
-  x.certStatus = '已認證';
-  document.getElementById('panel-certify').innerHTML = renderCertifyPanel(x);
-  renderRetrainReminder();
-  if (window.TLI_I18N) TLI_I18N.refresh();
-  toast(TLI_I18N.t('已記錄回訓完成，認證狀態更新為「已認證」','Retraining recorded; certification status updated to “Certified”'));
-}
-
 function renderRecordsPanel(x){
   return '<div class="card"><div class="tablewrap"><table><tr><th data-i18n="col.date">日期</th><th data-i18n="col.course">課程</th><th data-i18n="col.studentCount">學生人數</th><th data-i18n="col.hours">時數</th><th data-i18n="label.remarks">備註</th></tr>' +
     (x.records.length ? x.records.map(function(r){ return '<tr><td>'+r.date+'</td><td>'+r.course+'</td><td>'+r.students+'</td><td>'+r.hours+'</td><td>'+(r.note||'<span class="small">－</span>')+'</td></tr>'; }).join('') :
@@ -606,60 +492,28 @@ function renderRecordsPanel(x){
     '</table></div></div>';
 }
 
-/* ==== 新增教師：第一步選類型、第二步依類型顯示欄位 ==== */
+/* ==== 新增教師：直接填中心教師資料 ==== */
 // 校區清單改讀共用主檔 TLI_MASTERS.campuses（含「線上」據點），維護請至 a17；與上面 CAMPUS_ALL 同一份資料
 var CAMPUSES = CAMPUS_ALL;
 /* ALL_LANGS 已於檔案上方（CAMPUS_ALL 旁）改讀 TLI_MASTERS.teachLangs 宣告，此處不再重複寫死 */
-var newTeacherType = null;
 
 function openNewTeacherModal(){
-  newTeacherType = null;
-  document.getElementById('ntTitle').textContent = TLI_I18N.t('新增教師（1／2）：選擇教師類型','Add Teacher (1/2): Select Teacher Type');
-  document.getElementById('ntStep1').style.display = 'flex';
-  document.getElementById('ntStep1Btns').style.display = '';
-  document.getElementById('ntStep2').style.display = 'none';
-  document.getElementById('ntStep2').innerHTML = '';
-  document.getElementById('ntCardCenter').classList.remove('sel');
-  document.getElementById('ntCardLocal').classList.remove('sel');
+  document.getElementById('ntStep2').innerHTML = renderNewTeacherForm();
   document.getElementById('newTeacherModal').classList.add('open');
   if (window.TLI_I18N) TLI_I18N.refresh();
 }
 function closeModal(id){
   document.getElementById(id).classList.remove('open');
 }
-function selectNewTeacherType(type){
-  newTeacherType = type;
-  document.getElementById('ntCardCenter').classList.toggle('sel', type==='center');
-  document.getElementById('ntCardLocal').classList.toggle('sel', type==='local');
-  document.getElementById('ntTitle').textContent = TLI_I18N.t('新增教師（2／2）：' + (type==='center' ? '中心教師' : '在地教師') + '資料', 'Add Teacher (2/2): ' + (type==='center' ? 'Center Teacher' : 'Local Teacher') + ' Details');
-  document.getElementById('ntStep1').style.display = 'none';
-  document.getElementById('ntStep1Btns').style.display = 'none';
-  document.getElementById('ntStep2').style.display = '';
-  document.getElementById('ntStep2').innerHTML = renderNewTeacherForm(type);
-  if (window.TLI_I18N) TLI_I18N.refresh();
-}
-function backToStep1(){
-  newTeacherType = null;
-  document.getElementById('ntTitle').textContent = TLI_I18N.t('新增教師（1／2）：選擇教師類型','Add Teacher (1/2): Select Teacher Type');
-  document.getElementById('ntStep1').style.display = 'flex';
-  document.getElementById('ntStep1Btns').style.display = '';
-  document.getElementById('ntStep2').style.display = 'none';
-  document.getElementById('ntCardCenter').classList.remove('sel');
-  document.getElementById('ntCardLocal').classList.remove('sel');
-  if (window.TLI_I18N) TLI_I18N.refresh();
-}
-function renderNewTeacherForm(type){
-  var typeFields = type === 'center' ?
-    ('<div class="grid2">' +
+function renderNewTeacherForm(){
+  var typeFields =
+    '<div class="grid2">' +
      '<div class="formrow"><label data-i18n="label.homeCampus">所屬校區</label><span class="req">*</span><select id="ntCampus">' + CAMPUSES.map(function(c){ return '<option>'+c+'</option>'; }).join('') + '</select></div>' +
      '<div class="formrow"><label data-i18n="label.timezone">時區</label><input type="text" id="ntTimezone" value="GMT+8（台北）"></div>' +
      '</div>' +
-     '<div class="switchrow"><div><div style="font-size:13px" data-i18n="label.centerScheduleAuth">中心排程權限</div><div class="hint" style="margin-top:2px" data-i18n="hint.centerScheduleAuthHint">是否列入中心跨國排課指派</div></div><label class="switch"><input type="checkbox" id="ntCenterSchedule" checked><span class="slider"></span></label></div>') :
-    ('<div class="formrow"><label data-i18n="label.franchisePartner">所屬加盟機構</label><span class="req">*</span><select id="ntOrg">' + FRANCHISE_PARTNERS.map(function(p){ return '<option>'+p+'</option>'; }).join('') + '</select></div>' +
-     '<div class="formrow"><label data-i18n="col.certStatus">認證狀態</label><select id="ntCertStatus"><option>未認證</option><option>已認證</option></select></div>' +
-     '<div class="kv"><span data-i18n="label.serviceScope">服務範圍</span><span data-i18n="desc.scopeLimitedToOrg">限該機構學生</span></div>');
+     '<div class="switchrow"><div><div style="font-size:13px" data-i18n="label.centerScheduleAuth">中心排程權限</div><div class="hint" style="margin-top:2px" data-i18n="hint.centerScheduleAuthHint">是否列入中心跨國排課指派</div></div><label class="switch"><input type="checkbox" id="ntCenterSchedule" checked><span class="slider"></span></label></div>';
   return (
-    '<div class="hint" style="margin-bottom:10px"><span class="req">*</span> <span data-i18n="common.required">為必填</span></div>' +
+    '<div class="hint" style="margin-bottom:10px"><span class="req">*</span> <span data-i18n="common.required">為必填</span>　<span data-i18n="hint.parkSyncPending">與 TLI Park 教師帳號的同步方式待確認</span></div>' +
     '<div class="grid2">' +
     '<div class="formrow"><label data-i18n="col.name">姓名</label><span class="req">*</span><input type="text" id="ntName"><div class="errmsg" id="ntNameErr" data-i18n="err.enterName">請輸入姓名</div></div>' +
     '<div class="formrow"><label>Email</label><span class="req">*</span><input type="email" id="ntEmail"><div class="errmsg" id="ntEmailErr" data-i18n="err.enterEmail">請輸入 Email</div></div>' +
@@ -672,10 +526,8 @@ function renderNewTeacherForm(type){
     '<div class="formrow"><label data-i18n="label.teachingLang">教學語言</label><span class="req">*</span><select id="ntLang">' + ALL_LANGS.map(function(l){ return '<option>'+l+'</option>'; }).join('') + '</select><div class="errmsg" id="ntLangErr" data-i18n="err.selectLang">請選擇語言</div></div>' +
     '<div class="formrow"><label data-i18n="col.levelRange">可授等級／範圍</label><input type="text" id="ntRange" placeholder="如：Lv.1–3" data-i18n-placeholder="ph.levelRangeExample"></div>' +
     '</div>' +
-    '<div class="sectiontitle" data-i18n="' + (type==='center' ? 'section.centerFieldsOnly' : 'section.localFieldsOnly') + '">' + (type==='center' ? '中心教師專屬欄位' : '在地教師專屬欄位') + '</div>' +
     typeFields +
     '<div style="text-align:right;margin-top:16px">' +
-    '<button class="btn ghost" onclick="backToStep1()" data-i18n="btn.prevStep">上一步</button> ' +
     '<button class="btn ghost" onclick="closeModal(\'newTeacherModal\')" data-i18n="common.cancel">取消</button> ' +
     '<button class="btn" onclick="submitNewTeacher()" data-i18n="common.save">儲存</button>' +
     '</div>'
@@ -690,38 +542,28 @@ function submitNewTeacher(){
   var name = document.getElementById('ntName').value.trim();
   var email = document.getElementById('ntEmail').value.trim();
   var lang = document.getElementById('ntLang').value;
-  var orgSel = newTeacherType==='local' ? document.getElementById('ntOrg') : null;
   var ok = true;
   if (!name){ markErr('ntName','ntNameErr',true); ok = false; } else markErr('ntName','ntNameErr',false);
   if (!email){ markErr('ntEmail','ntEmailErr',true); ok = false; } else markErr('ntEmail','ntEmailErr',false);
   if (!lang){ markErr('ntLang','ntLangErr',true); ok = false; } else markErr('ntLang','ntLangErr',false);
   if (!ok) return;
 
-  var id = (newTeacherType==='center' ? 'tc' : 'tl') + (TEACHERS.length + 1);
+  var id = 'tc' + (TEACHERS.length + 1);
   var base = {
-    id:id, type:newTeacherType, name:name, email:email, phone:document.getElementById('ntPhone').value.trim(),
+    id:id, type:'center', name:name, email:email, phone:document.getElementById('ntPhone').value.trim(),
     langs:[lang], langLevels:[{lang:lang, range: document.getElementById('ntRange').value.trim() || '未設定'}],
     level:'初階', tenure:0, totalHours:0, status:document.getElementById('ntStatus').value,
     active: document.getElementById('ntStatus').value === '在職', records:[]
   };
-  if (newTeacherType === 'center'){
-    base.campus = document.getElementById('ntCampus').value;
-    base.timezone = document.getElementById('ntTimezone').value.trim() || 'GMT+8（台北）';
-    base.centerSchedule = document.getElementById('ntCenterSchedule').checked;
-    base.slotSummary = {'一':[],'二':[],'三':[],'四':[],'五':[],'六':[],'日':[]};
-    base.salary = {t1_2:0,t3_5:0,t6_9:0,t10p:0};
-  } else {
-    base.org = orgSel.value;
-    base.certStatus = document.getElementById('ntCertStatus').value;
-    base.certDate = base.certStatus === '已認證' ? new Date().toISOString().slice(0,10) : null;
-    base.lastRetrain = base.certDate;
-    base.nextRetrainDue = null;
-  }
+  base.campus = document.getElementById('ntCampus').value;
+  base.timezone = document.getElementById('ntTimezone').value.trim() || 'GMT+8（台北）';
+  base.centerSchedule = document.getElementById('ntCenterSchedule').checked;
+  base.slotSummary = {'一':[],'二':[],'三':[],'四':[],'五':[],'六':[],'日':[]};
+  base.salary = {t1_2:0,t3_5:0,t6_9:0,t10p:0};
   TEACHERS.push(base);
   closeModal('newTeacherModal');
   renderTable();
-  renderRetrainReminder();
-  toast(TLI_I18N.t('已新增教師「' + name + '」（' + (newTeacherType==='center'?'中心教師':'在地教師') + '）', 'Teacher “' + name + '” added (' + (newTeacherType==='center'?'Center Teacher':'Local Teacher') + ')'));
+  toast(TLI_I18N.t('已新增教師「' + name + '」', 'Teacher “' + name + '” added'));
 }
 
 var DAY_EN = {'一':'Mon','二':'Tue','三':'Wed','四':'Thu','五':'Fri','六':'Sat','日':'Sun'};
@@ -804,7 +646,7 @@ function toast(msg){
 renderNotifPanel();
 
 /* ================= 初始化 ================= */
-if (window.TLI_I18N) { TLI_I18N.onRefresh(renderTable); TLI_I18N.onRefresh(renderRetrainReminder); TLI_I18N.onRefresh(refreshDetailIfOpen); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
+if (window.TLI_I18N) { TLI_I18N.onRefresh(renderTable); TLI_I18N.onRefresh(refreshDetailIfOpen); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
 </script>
 <script>
 function toggleNavGroup(ev, gid){
