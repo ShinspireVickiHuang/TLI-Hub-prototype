@@ -394,7 +394,7 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_i18n_dict_consultant.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
-/* ===== 程度測驗資料：讀會員測驗 p15 寫入的 localStorage，另含既有學生的歷史紀錄 ===== */
+/* ===== 程度測驗資料：讀會員區 m21 寫入的 localStorage，另含既有學生的歷史紀錄 ===== */
 var PL_KEY='tliPlacementResults_v1';
 var PL_LV=[1,1,2,3,4,5,6,7,8,9,9];
 var PL_SEED=[
@@ -454,7 +454,7 @@ var PL_RANGE_EN={'初級':'Beginner','中級':'Intermediate','中高級':'Upper-
 function plRangeName(n){ return T02(n, PL_RANGE_EN[n]||n); }
 function plCell(p,s){
   if(!p){
-    /* 沒有官網程度測驗紀錄時，沿用該學生既有的測驗等級（例如外部檢定成績） */
+    /* 沒有會員區程度測驗紀錄時，沿用該學生既有的測驗等級（例如外部檢定成績） */
     if(s && s.testLevel && s.testLevel!=='未測驗') return '<b>'+s.testLevel+'</b>';
     return '<span class="badge muted">'+T02('未測驗','Not Tested')+'</span>';
   }

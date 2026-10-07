@@ -654,7 +654,7 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_i18n.js"></script>
 <script>
 function T(zh,en){return window.TLI_I18N?TLI_I18N.t(zh,en):zh;}
-/* ===== 程度測驗資料：讀官網 p15 寫入的 localStorage，另含既有學生的歷史紀錄 ===== */
+/* ===== 程度測驗資料：讀會員區 m21 寫入的 localStorage，另含既有學生的歷史紀錄 ===== */
 var PL_KEY='tliPlacementResults_v1';
 var PL_LV=[1,1,2,3,4,5,6,7,8,9,9];
 var PL_SEED=[
@@ -1246,7 +1246,7 @@ function renderPlacement03(idx){
   var recs=plRecordsOf(S), body=document.getElementById('plBody');
   if(!recs.length){
     document.getElementById('plHeadTag').innerHTML='<span class="badge muted">'+T('未測驗','Not Tested')+'</span>';
-    body.innerHTML='<div class="empty-note">'+T('尚無程度測驗紀錄。學生可在官網「程度測驗」自行測驗，成績報告會送到這裡。','No placement test records yet. Students can take the test on the website under Placement Test, and the score report will arrive here.')+'</div>';
+    body.innerHTML='<div class="empty-note">'+T('尚無程度測驗紀錄。學生可在會員區「程度測驗」自行測驗，成績報告會送到這裡。','No placement test records yet. Students can take the test in the member area under Placement Test, and the score report will arrive here.')+'</div>';
     return;
   }
   idx=idx||0; PL_CUR_IDX=idx; var r=recs[idx];

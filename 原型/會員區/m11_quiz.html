@@ -312,10 +312,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         <div class="list-tools">
           <select id="plLang" onchange="renderPlacement()" aria-label="語言" data-i18n-aria-label="m11.pl.langAria"><option value="">全部語言</option></select>
           <select id="plSort" onchange="renderPlacement()" aria-label="排序" data-i18n-aria-label="m11.sortAria"><option value="new" data-i18n="m11.pl.sortNew">日期新到舊</option><option value="old" data-i18n="m11.pl.sortOld">日期舊到新</option><option value="lv" data-i18n="m11.pl.sortLv">等級高到低</option></select>
-          <a class="btn btn-accent btn-sm" href="../公開網站/p15_placement_test.html" data-en="Start the test">開始測驗</a>
+          <a class="btn btn-accent btn-sm" href="m21_placement_test.html" data-en="Start the test">開始測驗</a>
         </div>
         <div class="stack" id="placementList"></div>
-        <div class="empty-state hidden" id="placementEmpty"><h4 data-i18n="m11.pl.emptyT">還沒有程度測驗紀錄</h4><p data-i18n="m11.pl.emptyD">完成一次程度測驗後，成績會出現在這裡。</p><a class="btn btn-accent btn-sm" style="margin-top:12px" href="../公開網站/p15_placement_test.html" data-i18n="m11.pl.start">開始程度測驗</a></div>
+        <div class="empty-state hidden" id="placementEmpty"><h4 data-i18n="m11.pl.emptyT">還沒有程度測驗紀錄</h4><p data-i18n="m11.pl.emptyD">完成一次程度測驗後，成績會出現在這裡。</p><a class="btn btn-accent btn-sm" style="margin-top:12px" href="m21_placement_test.html" data-i18n="m11.pl.start">開始程度測驗</a></div>
       </div>
     </div>
 
@@ -1042,7 +1042,7 @@ function renderStageList(){
   document.getElementById('stageList').innerHTML=list.map(stageCardHtml).join('');
   document.getElementById('stageEmpty').classList.toggle('hidden',list.length>0);
 }
-/* 程度測驗紀錄：讀 p15 寫入的 localStorage，加上既有一筆歷史紀錄 */
+/* 程度測驗紀錄：讀 m21 寫入的 localStorage，加上既有一筆歷史紀錄 */
 var PL_KEY='tliPlacementResults_v1';
 var PL_SEED=[{id:'pt_seed_emma', studentId:'emma01', lang:'zh', langName:'中文', date:'2026-06-12', listening:2, listeningMax:5, reading:1, readingMax:5, total:3, totalMax:10, level:'Lv.3', levelNum:3, rangeName:'初級', cefr:'A1–A2', status:'顧問已聯絡'}];
 function plRecords(){

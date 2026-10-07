@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TLI Connect 會員區－成績單</title>
+<title>TLI Connect 會員區－程度測驗</title>
 <style>
 :root{
   --c-primary:#1B4E8C;--c-primary-dark:#123A68;--c-accent:#E8792B;--c-accent-dark:#CF691F;--c-secondary:#0F9B79;
@@ -249,6 +249,40 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .pill-p2{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:#FCEBDC;color:#9A4A0F;font-size:11px;font-weight:700;}
 .tr-ok{color:#067647;font-weight:700;}.tr-ng{color:#B42318;font-weight:700;}
 @media print{body *{visibility:hidden;}#trPaper,#trPaper *{visibility:visible;}#trPaper{position:absolute;left:0;top:0;width:100%;border:none;box-shadow:none;}}
+
+/* ---------- 程度測驗專用（搬自官網 p15，只留作答相關樣式） ---------- */
+#ptRoot{max-width:760px;}
+#ptRoot .field{margin:14px 0;}
+#ptRoot .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;}
+#ptRoot .field select{width:100%;border:1px solid var(--c-border);border-radius:8px;padding:11px 12px;font-size:15px;font-family:inherit;background:#fff;color:var(--c-text);min-height:44px;}
+.note{background:#FFF6EC;border:1px solid #F5CBA1;color:#8A4A12;border-radius:8px;padding:10px 12px;font-size:13px;margin:10px 0;}
+.h2{font-size:17px;font-weight:800;margin:0 0 6px;}
+.meta-list{display:grid;gap:8px;margin:16px 0;font-size:13.5px;list-style:none;padding:0;}
+.meta-list li{display:flex;gap:8px;align-items:center;}
+.meta-list svg{width:18px;height:18px;color:var(--c-primary);flex:none;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.actions.center{justify-content:center;}
+.actions .btn{min-height:44px;}
+.q-head{margin-bottom:12px;}
+.q-count{font-size:13px;font-weight:700;color:var(--c-muted);margin-bottom:6px;}
+.pill{display:inline-block;background:#E6EEF8;color:var(--c-primary);font-size:12px;font-weight:700;border-radius:20px;padding:2px 10px;margin-bottom:10px;}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--c-border);border-radius:8px;background:#fff;padding:12px;margin-bottom:8px;font-size:15px;font-family:inherit;cursor:pointer;min-height:48px;}
+.opt:hover{border-color:var(--c-primary);}
+.opt .mk{width:18px;height:18px;border:1.5px solid var(--c-border);border-radius:50%;flex:none;}
+.opt.sel{border-color:var(--c-primary);background:#F7FAFF;}
+.opt.sel .mk{border-color:var(--c-primary);background:radial-gradient(var(--c-primary) 45%,transparent 50%);}
+.q-text{font-size:17px;}
+.result-card{text-align:center;}
+.res-label{font-size:13px;color:var(--c-muted);margin-top:6px;}
+.res-level{font-size:52px;font-weight:800;color:var(--c-primary);line-height:1.15;}
+.res-range{font-size:15px;font-weight:700;}
+.res-ref{font-size:12.5px;color:var(--c-muted);margin:4px 0 18px;}
+.sk-n{width:42px;flex:none;font-size:13px;font-weight:700;text-align:left;}
+.sk-s{width:64px;flex:none;text-align:right;font-size:13px;color:var(--c-muted);font-weight:700;}
+.done-box{background:#E4F5F0;border:1px solid #BEE6D9;color:#0B6B52;border-radius:10px;padding:14px;font-size:14px;display:flex;gap:10px;}
+.done-box svg{width:20px;height:20px;flex:none;margin-top:2px;}
+#ptRoot .card{margin-bottom:16px;}
+@media(max-width:480px){.res-level{font-size:44px;}.q-actions .btn{flex:1;}}
 </style>
 </head>
 <body>
@@ -259,9 +293,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a class="side-link" href="m01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg><span data-i18n="member.nav.home">首頁</span></a>
     <a class="side-link" href="m02_booking.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v6M9 17h6"/></svg><span data-i18n="member.nav.booking">預約與報名</span></a>
     <a class="side-link" href="m03_schedule.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="member.nav.schedule">課表</span></a>
-    <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
+    <a class="side-link active" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
     <a class="side-link" href="m18_learning_dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span data-i18n="m19.nav.dashboard">學習儀表板</span></a>
-    <a class="side-link active" href="m20_transcripts.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
+    <a class="side-link" href="m20_transcripts.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
     <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span data-i18n="m19.title">結業證書</span></a>
     <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
     <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
@@ -271,8 +305,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   <header class="topbar">
     <div class="topbar-left">
       <a class="topbar-logo-wrap" href="../公開網站/p01_home.html" aria-label="TLI 官網" data-i18n-aria-label="member.logoAria"><img src="../assets/tli-logo.svg" alt="TLI"></a>
-      <button class="back-btn" onclick="if(history.length>1){history.back();}else{location.href='m08_self_paced.html';}" aria-label="返回" data-i18n-aria-label="member.back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <div class="topbar-title" data-en="Transcripts">成績單</div>
+      <button class="back-btn" onclick="if(history.length>1){history.back();}else{location.href='m11_quiz.html';}" aria-label="返回" data-i18n-aria-label="member.back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="topbar-title" data-en="Placement Test">程度測驗</div>
     </div>
     <div class="topbar-actions">
       <a class="explore-link" href="../公開網站/p02_courses.html" aria-label="探索課程" title="探索課程" data-i18n-aria-label="member.explore" data-i18n-title="member.explore">
@@ -293,32 +327,87 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   <main class="content">
     <nav class="nav-segment" aria-label="次選單">
       <a class="nav-segment-link" href="m08_self_paced.html" data-i18n="m11.seg.selfpaced">自學課程</a>
-      <a class="nav-segment-link" href="m11_quiz.html" data-i18n="m11.title">線上測驗</a>
-      <a class="nav-segment-link active" href="m20_transcripts.html" data-en="Transcripts">成績單</a>
+      <a class="nav-segment-link active" href="m11_quiz.html" data-i18n="m11.title">線上測驗</a>
+      <a class="nav-segment-link" href="m20_transcripts.html" data-en="Transcripts">成績單</a>
       <a class="nav-segment-link" href="m19_certificates.html" data-i18n="m19.title">結業證書</a>
       <a class="nav-segment-link" href="m17_feedback.html" data-i18n="m11.seg.feedback">課堂回饋</a>
     </nav>
-    <p class="page-h" data-en="Transcripts">成績單</p>
-    <p class="page-sub" data-en="Score records from placement tests and your course quizzes and unit tests. A transcript lists scores only; certificates are issued separately after a final exam.">程度測驗與課程隨堂、單元考的成績紀錄。成績單只列分數；證書另於結業考通過後核發。</p>
+    <div id="ptRoot">
+    <p class="page-h" data-en="Placement Test">程度測驗</p>
+    <p class="page-sub" data-en="10 questions, about 10 minutes, to find the class level that fits you now. Your score report goes to a consultant who will help arrange your courses.">10 題、約 10 分鐘，測出目前適合的班級等級。成績報告會送給顧問參考。</p>
+    <div id="ptClosed" class="empty-state card hidden"><h4 data-en="This feature is not available">此功能未開放</h4><p data-en="Placement tests are not offered for project-partnership accounts. Your class level is arranged by your program.">專案合作帳號不提供程度測驗，班級程度由專案安排。</p><a class="btn btn-outline btn-sm" style="margin-top:12px" href="m01_home.html" data-i18n="member.nav.home">首頁</a></div>
+    <div id="ptMain">
 
-    <div class="tr-tabs" id="trTabs" role="tablist">
-      <button type="button" class="tr-tab active" data-t="placement" role="tab" data-en="Placement test transcripts">程度測驗成績單</button>
-      <button type="button" class="tr-tab" data-t="course" role="tab" data-en="Course transcripts">課程成績單</button>
+  <!-- 步驟 1：選語言 -->
+  <section id="view-start" class="card">
+    <h2 class="h2" data-en="Choose the teaching language to test">選擇要測的教學語言</h2>
+    <p class="muted" data-en="5 listening and 5 reading questions, untimed. You can go back and change an answer at any time.">題目含聽力與閱讀各 5 題，不計時，可隨時回上一題修改答案。</p>
+    <div class="field">
+      <label for="langSel" data-en="Teaching language">教學語言</label>
+      <select id="langSel" onchange="onLangChange()"></select>
     </div>
+    <div id="langNote" class="note hidden"></div>
+    <ul class="meta-list">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-en="About 10 minutes">約 10 分鐘</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-6h3zM3 19a2 2 0 002 2h1v-6H3z"/></svg><span data-en="5 listening questions; please have headphones ready">聽力 5 題，請準備耳機</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12a4 4 0 014 4v12H8a4 4 0 01-4-4z"/><path d="M8 9h8M8 13h6"/></svg><span data-en="5 reading questions">閱讀 5 題</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg><span data-en="Your score report is saved to your member account and is visible to your consultant">成績單會存入你的會員帳號，顧問也能查看</span></li>
+    </ul>
+    <div class="actions">
+      <button class="btn btn-accent" id="startBtn" onclick="startTest()" data-en="Start test">開始測驗</button>
+    </div>
+  </section>
 
-    <div id="trEmpty" class="empty-state hidden card"><h4 id="trEmptyT"></h4><p id="trEmptyD"></p><a class="btn btn-accent btn-sm" style="margin-top:12px" id="trEmptyA" href="#"></a></div>
-
-    <div class="cert-layout" id="trLayout">
-      <div>
-        <div id="trList"></div>
-      </div>
-      <div>
-        <div class="tr-paper" id="trPaper"><div class="tr-sheet" id="trSheet"></div></div>
-        <div class="dl-bar">
-          <button class="btn btn-primary" id="dlBtn" onclick="downloadPdf()" data-en="Download PDF">下載 PDF</button>
-          <button class="btn btn-outline" onclick="copyNo()" data-en="Copy transcript number">複製成績單編號</button>
+  <!-- 步驟 2：作答 -->
+  <section id="view-quiz" class="hidden">
+    <div class="q-head">
+      <div class="q-count" id="qCount">第 1 / 10 題</div>
+      <div class="progress"><div id="qBar"></div></div>
+    </div>
+    <div class="card">
+      <span class="pill" id="qSkill">聽力</span>
+      <div id="listenBox" class="listen-box">
+        <button type="button" class="listen-play" id="listenBtn" onclick="playListen()" aria-label="播放音檔">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="listen-meta">
+          <div class="lm-title" id="listenTitle">點擊播放，每題可重播 2 次</div>
+          <div class="listen-track"><div id="listenFill"></div></div>
         </div>
       </div>
+      <p class="q-text" id="qText"></p>
+      <div id="qOpts"></div>
+      <div class="q-actions">
+        <button type="button" class="btn btn-outline" id="prevBtn" onclick="stepQ(-1)" data-en="Previous">上一題</button>
+        <button type="button" class="btn btn-primary" id="nextBtn" onclick="stepQ(1)">下一題</button>
+      </div>
+    </div>
+    <p class="muted small" style="text-align:center;margin-top:10px" data-en="Leaving midway saves nothing; you can restart at any time.">中途離開不會留下紀錄，可隨時重新開始。</p>
+  </section>
+
+  <!-- 步驟 3：結果 -->
+  <section id="view-result" class="hidden">
+    <div class="card result-card">
+      <div class="muted small" id="resLangLine"></div>
+      <div class="res-label" data-en="Suggested level">建議等級</div>
+      <div class="res-level" id="resLevel">Lv.5</div>
+      <div class="res-range" id="resRange"></div>
+      <div class="res-ref" id="resRef"></div>
+      <div class="skill-row"><span class="sk-n" data-en="Listening">聽力</span><div class="progress"><div id="resBarL"></div></div><span class="sk-s" id="resScoreL"></span></div>
+      <div class="skill-row"><span class="sk-n" data-en="Reading">閱讀</span><div class="progress"><div id="resBarR"></div></div><span class="sk-s" id="resScoreR"></span></div>
+      <div class="muted small" style="margin-top:12px" id="resNote"></div>
+    </div>
+
+    <div class="card" id="sendCard">
+      <div id="sendDone" class="done-box hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg><span id="doneMsg"></span></div>
+    </div>
+
+    <div class="actions center">
+      <button class="btn btn-outline" onclick="resetTest()" data-en="Retake test">重新測驗</button>
+      <a class="btn btn-primary" id="trLink" href="m20_transcripts.html?tab=placement" data-en="View transcript">查看成績單</a>
+    </div>
+  </section>
+</div>
     </div>
   </main>
 
@@ -340,148 +429,215 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="_project_learning.js"></script>
 <script src="../assets/_i18n.js"></script>
 <script>
-var TT=function(zh,en){ return TLI_I18N.t(zh,en); };
-function $(i){return document.getElementById(i);}
-function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
-function showToast(m){var t=$('toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(window._tt);window._tt=setTimeout(function(){t.classList.add('hidden');},2400);}
 function toggleBell(){$('bellPanel').classList.toggle('open');}
-function hashS(s){ var x=7; for(var i=0;i<s.length;i++){ x=(x*31+s.charCodeAt(i))>>>0; } return x; }
-var WHO = window.TLI_PL ? TLI_PL.me() : {mode:'general',name:'Emma Johnson',rid:'gen',email:'emma.johnson@example.com'};
-var IS_PROJ = WHO.mode==='project';
-var CONSULT=new URLSearchParams(location.search).get('consult')?new URLSearchParams(location.search).get('id'):null, CNAME=new URLSearchParams(location.search).get('name');
-var NAME_EN = {'發音基礎 20 講':'Pronunciation Basics (20 lectures)','商務華語情境 16 講':'Business Chinese in Context (16 lectures)','中文一對一－會話進階':'Chinese 1-on-1: Advanced Conversation','旅遊華語會話 12 講':'Travel Chinese Conversation (12 lectures)','商務書信寫作 8 講':'Business Letter Writing (8 lectures)','台灣文化與生活 10 講':'Taiwan Culture and Life (10 lectures)','成語與慣用語 12 講':'Idioms and Expressions (12 lectures)','職場面試會話 10 講':'Job Interview Conversation (10 lectures)','中華文化與歷史 8 講':'Chinese Culture and History (8 lectures)'};
-function NM(zh){ return TT(zh, NAME_EN[zh]||zh); }
+/* ===== 題庫：zh、en 各 10 題（聽力 5＋閱讀 5），難度由低到高 ===== */
+var BANKS = {
+  zh:{ speech:'zh-TW', qs:[
+    {skill:'L', lv:1, say:'你好，我叫小明，我是學生。', text:'說話的人是誰？', opts:['老師','學生','醫生','司機'], ans:1},
+    {skill:'R', lv:1, text:'請選出正確的字：我＿＿咖啡。', opts:['吃','看','喝','走'], ans:2},
+    {skill:'L', lv:2, say:'請問洗手間在哪裡？在二樓，右邊。', text:'洗手間在哪裡？', opts:['一樓左邊','二樓右邊','三樓右邊','二樓左邊'], ans:1},
+    {skill:'R', lv:3, text:'我昨天晚上十二點＿＿睡覺，所以今天很累。', opts:['就','才','都','也'], ans:1},
+    {skill:'L', lv:4, say:'週末我本來想去爬山，可是天氣預報說會下雨，所以我決定在家看電影。', text:'他週末打算做什麼？', opts:['去爬山','去看電影','在家看電影','去朋友家'], ans:2},
+    {skill:'R', lv:5, text:'小王的手機壞了，他把手機拿去修理，師傅說要三天才能修好。這段話的意思是？', opts:['手機今天就能拿回來','手機三天後才修好','手機不能修了','小王買了新手機'], ans:1},
+    {skill:'L', lv:6, say:'這家公司下個月要搬到新大樓，除了行政部門之外，其他部門都得在月底前整理好辦公室。', text:'哪個部門不用在月底前整理辦公室？', opts:['行政部門','業務部門','財務部門','研發部門'], ans:0},
+    {skill:'R', lv:7, text:'儘管天氣不好，比賽＿＿照常舉行。', opts:['因此','於是','仍然','況且'], ans:2},
+    {skill:'L', lv:8, say:'雖然這項計畫的預算被刪減了三成，但經理認為只要調整時程，仍然有機會如期完成。', text:'經理對這項計畫的看法是？', opts:['一定做不完','調整時程後仍有機會完成','應該直接取消','需要增加預算'], ans:1},
+    {skill:'R', lv:9, text:'下列哪一句話的語氣最委婉？', opts:['你的做法不對。','我不同意這個方案。','這個做法恐怕還有可以商榷的地方。','這樣做是錯的。'], ans:2}
+  ]},
+  en:{ speech:'en-US', qs:[
+    {skill:'L', lv:1, say:'Hello, my name is Anna. I am a student.', text:'Who is speaking?', opts:['A teacher','A student','A doctor','A driver'], ans:1},
+    {skill:'R', lv:1, text:'Choose the correct word: She ___ a cup of coffee every morning.', opts:['drink','drinks','drinking','drunk'], ans:1},
+    {skill:'L', lv:2, say:'Excuse me, where is the restroom? It is on the second floor, on the right.', text:'Where is the restroom?', opts:['First floor, left','Second floor, right','Third floor, right','Second floor, left'], ans:1},
+    {skill:'R', lv:3, text:'I ___ dinner when my friend called me last night.', opts:['cook','was cooking','cooked','have cooked'], ans:1},
+    {skill:'L', lv:4, say:'I wanted to go hiking this weekend, but the forecast says it will rain, so I decided to stay home and watch a movie.', text:'What will the speaker do this weekend?', opts:['Go hiking','Go to the cinema','Watch a movie at home','Visit a friend'], ans:2},
+    {skill:'R', lv:5, text:'Tom took his phone to the shop. The technician said it would take three days to repair. What does this mean?', opts:['The phone is ready today','The phone will be ready in three days','The phone cannot be repaired','Tom bought a new phone'], ans:1},
+    {skill:'L', lv:6, say:'The company is moving to a new building next month. Except for administration, every department has to clear out its office by the end of this month.', text:'Which department does not need to clear its office?', opts:['Administration','Sales','Finance','Research'], ans:0},
+    {skill:'R', lv:7, text:'___ the bad weather, the match went ahead as planned.', opts:['Because of','Despite','Therefore','Unless'], ans:1},
+    {skill:'L', lv:8, say:'Although the budget for this project has been cut by thirty percent, the manager believes it can still be finished on time if the schedule is adjusted.', text:'What is the manager\'s view?', opts:['It cannot be finished','It can still be finished if the schedule is adjusted','It should be cancelled','The budget must be increased'], ans:1},
+    {skill:'R', lv:9, text:'Which sentence is the most tactful way to disagree?', opts:['You are wrong.','I do not agree with this plan.','I wonder whether there might be another angle worth considering.','That will not work.'], ans:2}
+  ]}
+};
+var LV_BY_CORRECT=[1,1,2,3,4,5,6,7,8,9,9];   /* 答對題數 → 建議 Lv */
+var M = window.TLI_MASTERS;
+var STORE_KEY='tliPlacementResults_v1';
+var WHO=window.TLI_PL?TLI_PL.me():{mode:'general'};
+var IS_PROJ=WHO.mode==='project';
+var MEMBER={studentId:'emma01', name:'Emma Johnson', email:'emma.johnson@example.com'};
+var st={lang:'zh', idx:0, ans:[], plays:{}, rec:null};
+/* 語系小工具：i18n 腳本在頁面最後才載入，載入前一律回中文；載入後依目前語言取字 */
+function T(zh,en){ return window.TLI_I18N ? TLI_I18N.t(zh,en) : zh; }
+var LANG_EN={zh:'Chinese',en:'English',ja:'Japanese',ko:'Korean',de:'German',fr:'French',tw:'Taiwanese',wu:'Shanghainese',yue:'Cantonese'};
+function langLabel(id){ var l=langObj(id); if(!l) return ''; return T(l.name, LANG_EN[id]||l.name); }
+var RANGE_EN={'初級':'Beginner','中級':'Intermediate','中高級':'Upper-intermediate','高級':'Advanced'};
+var TOCFL_EN={'準備級–入門基礎級':'Prep–Entry Level','基礎級–進階級':'Basic–Advanced Level','高階級':'Higher Level','流利級':'Fluency Level'};
+var PROD_EN={skuC01:'Chinese 1-on-1 online lesson, 50 min, 1 lesson',skuC02:'English 1-on-1 online lesson, 50 min, 1 lesson',sku01:'Chinese 1-on-1, 50 min, 1 lesson',sku06:'Chinese online lesson, 60 min, 1 lesson',sku08:'English 1-on-1, 50 min, 1 lesson',skuC03:'Chinese flexible live group class, 1 term (8 lessons)',skuC04:'English flexible live group class, 1 term (8 lessons)',sku02:'Semester class Lv.5–8, 1 term',sku05:'Small group (4 students), 90 min, 1 lesson',sku09:'Japanese semester class, 1 term',sku12:'Taiwanese conversation, 10 lessons'};
+function levelRangeEn(s){ return String(s).replace('（全級別）',' (all levels)').replace('初級–商務英語','Beginner–Business English').replace('初級–中級','Beginner–Intermediate').replace('初級會話','Beginner conversation').replace('不分級','All levels'); }
 
-/* ---- 資料：程度測驗（m21 寫入的 localStorage ＋ 既有歷史一筆）---- */
-var PL_KEY='tliPlacementResults_v1';
-var PL_SEED=[{id:'pt_seed_emma', studentId:'emma01', lang:'zh', langName:'中文', date:'2026-06-12', listening:2, listeningMax:5, reading:1, readingMax:5, total:3, totalMax:10, level:'Lv.3', levelNum:3, rangeName:'初級', cefr:'A1–A2'}];
-var LANG_EN={'中文':'Chinese','英文':'English','日文':'Japanese','韓文':'Korean','德文':'German','法文':'French'};
-function placementRecords(){
-  var all=[]; try{ all=JSON.parse(localStorage.getItem(PL_KEY))||[]; }catch(e){}
-  if(CONSULT){ try{ var jr=JSON.parse(new URLSearchParams(location.search).get('rec')||'null'); if(jr&&jr.id===CONSULT){ if(CNAME) WHO={mode:'general',name:CNAME,rid:'gen',email:''}; IS_PROJ=false; return [jr]; } }catch(e){} var one=all.concat(PL_SEED).filter(function(r){ return r.id===CONSULT; }); if(one.length){ if(CNAME) WHO={mode:'general',name:CNAME,rid:'gen',email:''}; IS_PROJ=false; return one; } }
-  if(IS_PROJ){ return all.filter(function(r){ return r.email && r.email.toLowerCase()===String(WHO.email||'').toLowerCase(); }).sort(function(a,b){return b.date.localeCompare(a.date);}); }
-  var mine=all.filter(function(r){ return r.studentId==='emma01' || r.email==='emma.johnson@example.com'; });
-  return mine.concat(PL_SEED).sort(function(a,b){return b.date.localeCompare(a.date);});
+function $(id){return document.getElementById(id);}
+function toast(msg){var t=$('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(window._tt);window._tt=setTimeout(function(){t.classList.add('hidden');},2400);}
+function loadStore(){ try{return JSON.parse(localStorage.getItem(STORE_KEY))||[];}catch(e){return [];} }
+function saveStore(a){ try{localStorage.setItem(STORE_KEY,JSON.stringify(a));}catch(e){} }
+function langObj(id){ return M.teachLangs.filter(function(l){return l.id===id;})[0]; }
+function rangeOfLv(lv){ /* lv 為數字 1–9 或 'H' */
+  var key='Lv.'+lv, n=(lv==='H')?99:lv;
+  return M.levelSystems.ranges.filter(function(r){
+    if(!r.enabled) return false;
+    var a=r.levelFrom.replace('Lv.',''), b=r.levelTo.replace('Lv.','');
+    var an=a==='H'?99:+a, bn=b==='H'?99:+b;
+    return n>=an && n<=bn;
+  })[0];
 }
-/* ---- 資料：課程成績（隨堂／單元考）。一般學生取線上測驗頁的已完成紀錄；專案學生由自學單元進度推算 ---- */
-var EMMA_DONE=[
- {code:'c1',course:'發音基礎 20 講',unit:'L05 兒化音',title:'兒化音評量',kind:'單元考',date:'2026-08-20',score:88,pass:60},
- {code:'c2',course:'商務華語情境 16 講',unit:'L03 商務會議開場',title:'商務會議開場評量',kind:'單元考',date:'2026-08-15',score:92,pass:60},
- {code:'c3',course:'中文一對一－會話進階',unit:'第一階',title:'第一階複習評量',kind:'單元考',date:'2026-08-06',score:58,pass:60},
- {code:'c4',course:'發音基礎 20 講',unit:'L20 總複習',title:'總複習評量',kind:'單元考',date:'2026-07-30',score:85,pass:60},
- {code:'c6',course:'旅遊華語會話 12 講',unit:'L08 期末情境',title:'期末情境評量',kind:'單元考',date:'2026-02-01',score:80,pass:70},
- {code:'c7',course:'台灣文化與生活 10 講',unit:'L05',title:'期末評量',kind:'單元考',date:'2025-11-10',score:74,pass:70},
- {code:'c8',course:'商務書信寫作 8 講',unit:'L03',title:'單元評量',kind:'單元考',date:'2025-08-18',score:70,pass:60},
- {code:'c9',course:'成語與慣用語 12 講',unit:'L03',title:'單元評量',kind:'單元考',date:'2025-05-12',score:82,pass:60},
- {code:'c10',course:'職場面試會話 10 講',unit:'L03',title:'單元評量',kind:'單元考',date:'2025-03-02',score:78,pass:60},
- {code:'c11',course:'中華文化與歷史 8 講',unit:'L03',title:'單元評量',kind:'單元考',date:'2024-09-18',score:65,pass:60},
- {code:'c12',course:'發音基礎 20 講',unit:'L01 入門',title:'入門單元評量',kind:'單元考',date:'2024-02-10',score:60,pass:60}
-];
-function courseTranscripts(){
-  var rows=[];
-  if(!IS_PROJ){
-    EMMA_DONE.forEach(function(r){ rows.push({course:r.course,unit:r.unit,kind:r.kind,date:r.date,score:r.score,pass:r.pass,attempts:1+(r.code.charCodeAt(1)%3)}); });
-  } else {
-    var P=TLI_PL.progress(WHO.rid), cname=TLI_PL.courseName();
-    P.units.forEach(function(u,i){
-      if(u.done<=0) return;
-      var done=u.pct>=100;
-      var h=hashS(WHO.rid+':u'+u.id);
-      rows.push({course:cname,unit:(TT('單元 ','Unit ')+(i+1)+' '+TT(u.zh,u.en)),kind:'單元考',date:(done?TLI_PL.addDays(TLI_PL.today,-(3+i*5)):TLI_PL.today),score:done?(62+h%34):null,pass:60,attempts:done?(1+h%3):0,partial:!done});
-    });
-    if(!rows.length) return [];
-  }
-  var by={}, order=[];
-  rows.forEach(function(r){ if(!by[r.course]){ by[r.course]=[]; order.push(r.course);} by[r.course].push(r); });
-  return order.map(function(c,i){
-    var list=by[c].sort(function(a,b){return a.date.localeCompare(b.date);});
-    var sc=list.filter(function(r){return r.score!=null;});
-    var avg=sc.length?Math.round(sc.reduce(function(a,r){return a+r.score;},0)/sc.length*10)/10:null;
-    var last=list[list.length-1].date;
-    return {kind:'course',id:'C'+i,course:c,rows:list,avg:avg,passed:sc.filter(function(r){return r.score>=r.pass;}).length,total:sc.length,date:last,
-      no:'TLI-T-'+last.slice(0,7).replace('-','')+'-'+('0'+(1+hashS(WHO.rid+c)%90)).slice(-2).padStart(4,'0')};
-  }).sort(function(a,b){return b.date.localeCompare(a.date);});
-}
-function placementTranscripts(){
-  return placementRecords().map(function(r){
-    return {kind:'placement',id:r.id,rec:r,date:r.date,no:'TLI-T-'+r.date.slice(0,7).replace('-','')+'-P'+('000'+(hashS(String(r.id))%1000)).slice(-3)};
-  });
-}
-var tab=new URLSearchParams(location.search).get('tab')||'placement';
-if(tab!=='course'&&tab!=='placement') tab='placement';
-if(!new URLSearchParams(location.search).get('tab') && !placementRecords().length) tab='course';
-var wantId=new URLSearchParams(location.search).get('id'), wantCourse=new URLSearchParams(location.search).get('course');
-var sel=null, list=[];
-function listFor(t){ return t==='course'?courseTranscripts():placementTranscripts(); }
-function renderTabs(){
-  document.querySelectorAll('#trTabs .tr-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.t===tab); });
-}
-function render(){
-  renderTabs();
-  list=listFor(tab);
-  if(!list.length){
-    $('trLayout').classList.add('hidden'); $('trEmpty').classList.remove('hidden');
-    if(tab==='placement'){ $('trEmptyT').textContent=TT('尚無程度測驗成績單','No placement test transcripts yet'); $('trEmptyD').textContent=TT('完成程度測驗後，成績單會顯示在這裡。','Complete a placement test and the transcript appears here.'); $('trEmptyA').textContent=TT('前往程度測驗','Take a placement test'); $('trEmptyA').href='m21_placement_test.html'; }
-    else { $('trEmptyT').textContent=TT('尚無課程成績單','No course transcripts yet'); $('trEmptyD').textContent=TT('完成隨堂考或單元考後，課程成績單會顯示在這裡。','Complete a quiz or unit test and the course transcript appears here.'); $('trEmptyA').textContent=TT('前往自學課程','Go to the self-paced course'); $('trEmptyA').href='m08_self_paced.html'; }
-    sel=null; return;
-  }
-  $('trEmpty').classList.add('hidden'); $('trLayout').classList.remove('hidden');
-  if(!sel || !list.some(function(x){return x.kind===sel.kind&&x.id===sel.id;})) sel=list[0];
-  $('trList').innerHTML=list.map(function(x){
-    var on=sel&&x.kind===sel.kind&&x.id===sel.id;
-    var h,p;
-    if(x.kind==='placement'){ var r=x.rec; h=TT(r.langName+'程度測驗成績單',(LANG_EN[r.langName]||r.langName)+' placement test transcript'); p=TT('測驗日期 ','Test date ')+r.date+' · '+TT('建議等級 ','Suggested level ')+r.level; }
-    else { h=NM(x.course)+TT(' 課程成績單',' course transcript'); p=TT('單元考 ','Unit tests ')+x.total+' · '+(x.avg==null?TT('尚無平均','No average yet'):TT('平均 ','Average ')+x.avg); }
-    return '<button type="button" class="cert-item'+(on?' sel':'')+'" data-k="'+x.kind+'" data-i="'+esc(x.id)+'"><span class="badge badge-info">'+esc(x.no)+'</span><h4>'+esc(h)+'</h4><p>'+esc(p)+'</p></button>';
+function today(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+
+/* ===== 初始化 ===== */
+function init(){
+  /* 會員區頁面：專案合作學生不開放此功能，顯示空狀態 */
+  if(IS_PROJ){ $('ptMain').classList.add('hidden'); $('ptClosed').classList.remove('hidden'); return; }
+  var opts=M.teachLangs.filter(function(l){return l.enabled;}).map(function(l){
+    return '<option value="'+l.id+'">'+(T(l.name,LANG_EN[l.id]||l.name)===l.name?l.name+'（'+l.nameMulti.split('／')[0]+'）':LANG_EN[l.id]||l.nameMulti.split('／')[0])+'</option>';
   }).join('');
-  $('trList').querySelectorAll('.cert-item').forEach(function(b){ b.onclick=function(){ sel=list.filter(function(x){return x.kind===b.dataset.k&&x.id===b.dataset.i;})[0]; render(); if(window.innerWidth<1100) $('trPaper').scrollIntoView({behavior:'smooth',block:'start'}); }; });
-  fillSheet();
+  var keep=$('langSel').value;
+  $('langSel').innerHTML=opts; if(keep) $('langSel').value=keep;
+  var q=new URLSearchParams(location.search).get('lang');
+  if(q && BANKS[q]) $('langSel').value=q;
+  onLangChange();
 }
-function metaHtml(x,extra){
-  var cells=[[TT('學生姓名','Student'),WHO.name],[TT('成績單編號','Transcript no.'),x.no],[TT('發出日期','Issued on'),x.date]].concat(extra||[]);
-  if(IS_PROJ) cells.push([TT('所屬','Program'),WHO.partnerName+'・'+WHO.className]);
-  return '<div class="tr-meta">'+cells.map(function(c){ return '<div><span>'+esc(c[0])+'</span><b>'+esc(c[1])+'</b></div>'; }).join('')+'</div>';
+function onLangChange(){
+  var id=$('langSel').value, has=!!BANKS[id];
+  st.lang=id;
+  $('startBtn').classList.toggle('hidden',!has);
+  var n=$('langNote');
+  if(has){ n.classList.add('hidden'); }
+  else { n.classList.remove('hidden'); n.textContent=T(langObj(id).name+'的線上程度測驗尚未開放，請預約顧問諮詢，由顧問安排口試或筆試評估。', 'The online placement test for '+langLabel(id)+' is not available yet. Please book a consultation and a consultant will arrange an oral or written assessment.'); }
 }
-function sheetHead(zh,en){
-  return '<div class="tr-head"><img src="../assets/tli-logo.svg" alt="TLI"><div><div class="t1">'+esc(TT(zh,en))+'</div><div class="t2">Official Score Report</div></div></div>';
+
+/* ===== 作答 ===== */
+function startTest(){
+  st.idx=0; st.ans=[]; st.plays={};
+  $('view-start').classList.add('hidden'); $('view-result').classList.add('hidden'); $('view-quiz').classList.remove('hidden');
+  renderQ(); window.scrollTo(0,0);
 }
-function signHtml(){ return '<div class="tr-sign"><span>'+TT('TLI 中華語文研習所　教務處','TLI Chinese Language Institute, Academic Affairs')+'</span><span class="sg">'+TT('教務處承辦人','Registrar')+'</span></div><div class="tr-note">'+TT('本成績單僅列各項得分，不具證書效力。結業證書於通過結業考後另行核發。','This transcript lists scores only and is not a certificate. A completion certificate is issued separately after a final exam.')+'</div>'; }
-function fillSheet(){
-  if(!sel) return; var x=sel, h='';
-  if(x.kind==='placement'){
-    var r=x.rec, pct=function(a,b){ return b?Math.round(a/b*100):0; };
-    h=sheetHead('程度測驗成績單','Placement Test Transcript')+metaHtml(x,[[TT('測驗日期','Test date'),r.date],[TT('測驗語言','Language'),TT(r.langName,LANG_EN[r.langName]||r.langName)]])+
-      '<table class="tr-tbl"><tr><th>'+TT('項目','Section')+'</th><th class="num">'+TT('得分','Score')+'</th><th class="num">'+TT('滿分','Max')+'</th><th class="num">'+TT('百分比','Percent')+'</th></tr>'+
-      '<tr><td>'+TT('聽力','Listening')+'</td><td class="num">'+r.listening+'</td><td class="num">'+r.listeningMax+'</td><td class="num">'+pct(r.listening,r.listeningMax)+'%</td></tr>'+
-      '<tr><td>'+TT('閱讀','Reading')+'</td><td class="num">'+r.reading+'</td><td class="num">'+r.readingMax+'</td><td class="num">'+pct(r.reading,r.readingMax)+'%</td></tr>'+
-      '<tr><td><b>'+TT('合計','Total')+'</b></td><td class="num"><b>'+r.total+'</b></td><td class="num">'+r.totalMax+'</td><td class="num">'+pct(r.total,r.totalMax)+'%</td></tr></table>'+
-      '<div class="tr-sum"><div>'+TT('建議等級','Suggested level')+' <b>'+esc(r.level)+'</b>（'+esc(r.rangeName||'')+'）</div><div>'+TT('對應 CEFR','CEFR')+' <b>'+esc(r.cefr||'－')+'</b></div></div>'+signHtml();
-  } else {
-    h=sheetHead('課程成績單','Course Transcript')+metaHtml(x,[[TT('課程','Course'),NM(x.course)]])+
-      '<table class="tr-tbl"><tr><th>'+TT('單元','Unit')+'</th><th>'+TT('考試','Test')+'</th><th class="num">'+TT('分數','Score')+'</th><th>'+TT('達標','Result')+'</th><th class="num">'+TT('刷題次數','Attempts')+'</th><th>'+TT('日期','Date')+'</th></tr>'+
-      x.rows.map(function(r){
-        var ok=r.score!=null&&r.score>=r.pass;
-        return '<tr><td>'+esc(r.unit)+'</td><td>'+TT(r.kind,'Unit test')+'</td><td class="num">'+(r.score==null?'－':r.score)+'</td><td>'+(r.score==null?TT('進行中','In progress'):(ok?'<span class="tr-ok">'+TT('達標','Passed')+'</span>':'<span class="tr-ng">'+TT('未達標','Not passed')+'</span>'))+' <span class="small muted">('+TT('門檻 ','pass ')+r.pass+')</span></td><td class="num">'+r.attempts+'</td><td>'+r.date+'</td></tr>';
-      }).join('')+'</table>'+
-      '<div class="tr-sum"><div>'+TT('課程平均','Course average')+' <b>'+(x.avg==null?'－':x.avg)+'</b></div><div>'+TT('達標單元','Units passed')+' <b>'+x.passed+' / '+x.total+'</b></div></div>'+signHtml();
-  }
-  $('trSheet').innerHTML=h;
+function bank(){ return BANKS[st.lang].qs; }
+function renderQ(){
+  var qs=bank(), q=qs[st.idx];
+  $('qCount').textContent=T('第 '+(st.idx+1)+' / '+qs.length+' 題','Question '+(st.idx+1)+' of '+qs.length);
+  $('qBar').style.width=((st.idx+1)/qs.length*100)+'%';
+  $('qSkill').textContent=q.skill==='L'?T('聽力','Listening'):T('閱讀','Reading');
+  $('listenBox').classList.toggle('hidden',q.skill!=='L');
+  resetListen();
+  $('qText').textContent=q.text;
+  $('qOpts').innerHTML=q.opts.map(function(o,i){
+    return '<button type="button" class="opt'+(st.ans[st.idx]===i?' sel':'')+'" onclick="pick('+i+')"><span class="mk"></span><span>'+o+'</span></button>';
+  }).join('');
+  $('prevBtn').disabled=st.idx===0;
+  $('nextBtn').textContent=st.idx===qs.length-1?T('送出答案','Submit answers'):T('下一題','Next');
 }
-function downloadPdf(){ if(!sel) return; showToast(TT('已產生 PDF：','PDF generated: ')+sel.no+'.pdf'); setTimeout(function(){ try{ window.print(); }catch(e){} },350); }
-function copyNo(){ if(!sel) return; try{ navigator.clipboard.writeText(sel.no).then(function(){showToast(TT('已複製成績單編號','Transcript number copied'));},function(){showToast(TT('成績單編號：','Transcript no.: ')+sel.no);}); }catch(e){ showToast(TT('成績單編號：','Transcript no.: ')+sel.no); } }
-document.querySelectorAll('#trTabs .tr-tab').forEach(function(b){
-  b.addEventListener('click',function(){
-    tab=b.dataset.t; sel=null; render();
-  });
-});
-(function(){
-  var l=listFor(tab);
-  if(tab==='placement'&&wantId){ sel=l.filter(function(x){return x.id===wantId;})[0]||null; }
-  if(tab==='course'&&wantCourse){ sel=l.filter(function(x){return x.course===wantCourse;})[0]||null; }
-  render();
-})();
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') $('bellPanel').classList.remove('open'); });
-TLI_I18N.onRefresh(render);
+function pick(i){ st.ans[st.idx]=i; renderQ(); }
+function stepQ(d){
+  if(d>0 && st.ans[st.idx]===undefined){ toast(T('請先選一個答案','Please choose an answer first')); return; }
+  stopListen();
+  var n=bank().length;
+  if(d>0 && st.idx===n-1){ finish(); return; }
+  st.idx=Math.max(0,Math.min(n-1,st.idx+d)); renderQ();
+}
+
+/* ===== 聽力：用瀏覽器語音朗讀講稿；不支援時以進度條模擬 ===== */
+var listenTimer=null;
+function resetListen(){
+  stopListen();
+  var left=2-(st.plays[st.idx]||0);
+  $('listenFill').style.width='0';
+  $('listenBtn').disabled=left<=0;
+  $('listenTitle').textContent=left>0?T('點擊播放，還可播放 '+left+' 次','Tap to play; '+left+' play'+(left>1?'s':'')+' left'):T('已達播放次數上限','Play limit reached');
+}
+function stopListen(){
+  if(listenTimer){clearInterval(listenTimer);listenTimer=null;}
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+}
+function playListen(){
+  var q=bank()[st.idx]; if(listenTimer) return;
+  st.plays[st.idx]=(st.plays[st.idx]||0)+1;
+  var btn=$('listenBtn'); btn.disabled=true; $('listenTitle').textContent=T('播放中…','Playing…');
+  try{
+    if(window.speechSynthesis){
+      var u=new SpeechSynthesisUtterance(q.say); u.lang=BANKS[st.lang].speech; u.rate=.9; speechSynthesis.speak(u);
+    }
+  }catch(e){}
+  var t0=Date.now(), dur=Math.max(3500,q.say.length*110);
+  listenTimer=setInterval(function(){
+    var p=Math.min(1,(Date.now()-t0)/dur); $('listenFill').style.width=(p*100)+'%';
+    if(p>=1){ clearInterval(listenTimer); listenTimer=null; resetListen(); }
+  },100);
+}
+
+/* ===== 結果 ===== */
+function finish(){
+  var qs=bank(), cL=0,cR=0,tL=0,tR=0;
+  qs.forEach(function(q,i){ var ok=st.ans[i]===q.ans; if(q.skill==='L'){tL++;if(ok)cL++;}else{tR++;if(ok)cR++;} });
+  var total=cL+cR, lv=LV_BY_CORRECT[total], r=rangeOfLv(lv);
+  st.rec={ id:'pt_'+Date.now().toString(36), lang:st.lang, langName:langObj(st.lang).name, date:today(),
+    listening:cL, listeningMax:tL, reading:cR, readingMax:tR, total:total, totalMax:qs.length,
+    level:'Lv.'+lv, levelNum:lv, rangeName:r?r.name:'', cefr:r?r.cefr:'', hsk:r?r.hsk:'', tocfl:r?r.tocfl:'',
+    studentId:null, name:'', email:'', status:'已測驗', saved:false };
+  $('view-quiz').classList.add('hidden'); $('view-result').classList.remove('hidden');
+  var x=st.rec;
+  renderResult();
+  x.studentId=MEMBER.studentId; x.name=MEMBER.name; x.email=MEMBER.email; commit();
+  $('trLink').href='m20_transcripts.html?tab=placement&id='+encodeURIComponent(x.id);
+  showDone('done_member');
+  window.scrollTo(0,0);
+}
+/* 結果畫面文字：語言切換時重新套用，不重算成績 */
+function renderResult(){
+  var x=st.rec; if(!x) return;
+  var lv=x.levelNum, rr=rangeOfLv(lv), cL=x.listening, tL=x.listeningMax, cR=x.reading, tR=x.readingMax;
+  $('resLangLine').textContent=T(x.langName+'程度測驗．'+x.date, langLabel(x.lang)+' placement test · '+x.date);
+  $('resLevel').textContent=x.level;
+  var rn=T(x.rangeName, RANGE_EN[x.rangeName]||x.rangeName);
+  $('resRange').textContent=rn+(rr?'（'+rr.levelFrom+(rr.levelFrom!==rr.levelTo?'–'+rr.levelTo.replace('Lv.',''):'')+'）':'');
+  $('resRef').textContent=T('對應 CEFR ','Maps to CEFR ')+x.cefr+(x.lang==='zh'?'．'+x.hsk+'．TOCFL '+T(x.tocfl,TOCFL_EN[x.tocfl]||x.tocfl):'');
+  $('resScoreL').textContent=cL+' / '+tL; $('resScoreR').textContent=cR+' / '+tR;
+  $('resBarL').style.width=(cL/tL*100)+'%'; $('resBarR').style.width=(cR/tR*100)+'%';
+  $('resNote').textContent=T('線上測驗包含聽力與閱讀兩部分。','The online test covers listening and reading.');
+  if(st.doneKey) showDone(st.doneKey);
+}
+function showDone(key){
+  st.doneKey=key;
+  var msg = key==='done_member'
+    ? T('成績報告已送顧問，已存入「'+MEMBER.name+'」的會員帳號，可在會員區「線上測驗」查看。','Your score report has been sent to a consultant and saved to the member account of "'+MEMBER.name+'". You can view it under Online Tests in the member area.')
+    : '';
+  showDoneMsg(msg);
+}
+function showDoneMsg(msg){
+  var d=$('sendDone'); d.classList.remove('hidden');
+  d.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.1V12a10 10 0 11-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg><div id="doneMsg"></div>';
+  $('doneMsg').textContent=msg;
+}
+function commit(){
+  var all=loadStore(); all.unshift(st.rec); saveStore(all); st.rec.saved=true;
+}
+function resetTest(){
+  st.idx=0; st.ans=[]; st.rec=null; st.doneKey=null;
+  $('view-result').classList.add('hidden'); $('view-start').classList.remove('hidden'); window.scrollTo(0,0);
+}
+init();
+
+/* 語言切換時重畫由 JS 組出來的文字（選單、題目、結果） */
+function rerenderLang(){
+  if(IS_PROJ) return;
+  $('listenBtn').setAttribute('aria-label',T('播放音檔','Play audio'));
+  var opts=M.teachLangs.filter(function(l){return l.enabled;});
+  var keep=$('langSel').value;
+  $('langSel').innerHTML=opts.map(function(l){
+    return '<option value="'+l.id+'">'+(T(l.name,LANG_EN[l.id]||l.name)===l.name?l.name+'（'+l.nameMulti.split('／')[0]+'）':LANG_EN[l.id]||l.nameMulti.split('／')[0])+'</option>';
+  }).join('');
+  $('langSel').value=keep||st.lang; onLangChange();
+  if(!$('view-quiz').classList.contains('hidden')){ renderQ(); }
+  if(!$('view-result').classList.contains('hidden')){ renderResult(); }
+}
+</script>
+<script>
+TLI_I18N.onRefresh(rerenderLang);
 TLI_I18N.init();
 if(window.TLI_PL && IS_PROJ) TLI_PL.xl(document);
 </script>
