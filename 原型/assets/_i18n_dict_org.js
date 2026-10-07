@@ -31,6 +31,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "nav_h.h05":"Contract & Hour Pool",
 "nav_h.h06":"Leave & Appeal Review",
 "nav_h.h07":"Teacher Comments",
+"phase2.pill":"Phase 2",
 "nav_h.h04":"Data Integration",
 "role.enterpriseAdmin":"Enterprise Administrator",
 "aria.openMenu":"Open Menu",
@@ -162,7 +163,7 @@ Object.assign(TLI_I18N_DICT.en, {
 
 /* ---- h04 資料串接 ---- */
 "h04.searchPlaceholder":"Search",
-"h04.pageDesc":"Sync learning data with your internal HR system or LMS. Phase 1 provides a standard self-service CSV export; for real-time system-to-system integration, submit a request for the TLI project team to assess and implement.",
+"h04.pageDesc":"Sync learning data with your internal HR system or LMS. The standard CSV export is already available in Learning Reports; for real-time system-to-system integration, submit a request for the TLI project team to assess and implement.",
 "h04.statusTitle":"Integration Status",
 "h04.statusDesc":"Your company has not yet requested system integration; you can use the standard CSV export below in the meantime.",
 "h04.statusNotApplied":"Not Requested",
