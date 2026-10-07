@@ -228,7 +228,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
 
   <main class="content">
-    <p class="page-sub hidden" id="note1a" style="margin:0 0 14px;" data-en="Sessions are set by TLI. You can view rosters and enter the classroom.">場次由 TLI 設定。</p>
+    <p class="page-sub hidden" id="note1a" style="margin:0 0 14px;" data-en="Sessions are set up by TLI. Here you can only see the Gateway (project) sessions you lead, view the roster and enter the classroom.">場次由 TLI 設定。你只能查看自己帶領的專案合作場次，檢視報名名單並進入教室，無法自行開設。</p>
     <div class="page-tabs" role="tablist" aria-label="頁內切換">
       <button type="button" class="page-tab active" id="tabMine" role="tab" aria-selected="true" data-en="My sessions">我的場次</button>
       <button type="button" class="page-tab" id="tabOpen" role="tab" aria-selected="false" data-en="Open a session">開設場次</button>
@@ -262,7 +262,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
           <h2 data-en="Sessions I opened">我開設的場次</h2>
           <button type="button" class="btn btn-primary btn-sm" id="btnNew" data-en="Open a session">開設場次</button>
         </div>
-        <p class="small muted" style="margin:-6px 0 10px;" data-en="30 minutes per session, 6 to 10 learners, led by a TLI teacher. Time slots are in Taipei time.">每場 30 分鐘、6–10 人，TLI 老師帶；時段為台北時間。</p>
+        <p class="small muted" style="margin:-6px 0 10px;" data-en="30 minutes per session, 6 to 10 learners, led by a TLI center teacher. Time slots are in Taipei time.">每場 30 分鐘、6–10 人，TLI 中心教師帶領；時段為台北時間。</p>
         <div id="openWrap"></div>
       </div>
     </section>
@@ -300,9 +300,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div class="sheet-sec">
       <div class="lbl" data-i18n="avail.field.audienceGroup">面向（權益群組）</div>
       <select class="field-select" id="chatFormAudienceGroup" onchange="onChatAudienceGroupChange(this.value)">
-        <option value="all" data-i18n="avail.audience.all">全部（專案合作學生與直營學員）</option>
-        <option value="project" data-en="Project-partnership students only">僅專案合作學生</option>
-        <option value="direct" data-en="Direct students only">僅直營學員</option>
+        <option value="all" data-en="All direct students">全部直營學員</option>
         <option value="enterprise" data-i18n="avail.audience.enterprise">指定企業</option>
         <option value="institution" data-i18n="avail.audience.institution">指定學校</option>
       </select>
@@ -372,6 +370,9 @@ var times = ['09:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00','18
 function tt(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
 if (window.TLI_I18N) TLI_I18N.init();
 var VIEW_1A = /[?&]view=1a\b/.test(location.search);
+/* 1A 檢視＝TLI 中心教師版（一階段 A）：只列專案合作場次、不能開設。
+   班級老師（?rid=）不帶課，此頁不開放，導回「我的班級」 */
+if(/[?&]rid=/.test(location.search)){ location.replace('t08_my_classes.html'+location.search.replace(/[?&]view=1[ab]/,'').replace(/^&/,'?')); }
 var CHAT_TYPE_CAP = 10, CHAT_TYPE_MIN = 6;
 /* 面向＝權益群組（20260910f 改版）：全部有權益者／指定企業／指定學校，取代舊版 general/enterprise/institution/all 四選一。
    企業名單與 a04_packages.html、a19_b2b_enterprise.html 的示範企業名一致，不自創名稱；學校僅一個示範對象。 */
@@ -418,7 +419,7 @@ function chatAudienceLabel(session){
   if (session.audienceGroup === 'institution') return tt('指定學校：','Institution: ')+(session.audienceTarget||tt('（未指定）','(unspecified)'));
   if (session.audienceGroup === 'project') return tt('專案合作學生','Project-partnership students');
   if (session.audienceGroup === 'direct') return tt('直營學員','Direct students');
-  return tt('全部（專案合作與直營）','All (project-partnership and direct)');
+  return tt('全部直營學員','All direct students');
 }
 function chatAudienceBadgeClass(session){
   if (session.audienceGroup === 'enterprise') return 'ent';
@@ -435,14 +436,14 @@ function chatDeptSummary(session){
 }
 function orgDeptCollegeId(id){ var d = ORG_DEPARTMENTS.find(function(x){return x.id===id;}); return d ? d.collegeId : ''; }
 var chatSessions = {
-  '2-6':{topic:'日常對話練習', audienceGroup:'project', audienceTarget:null, registered:4, capacity:8, tool:'teams',
+  '2-6':{topic:'日常對話練習', audienceGroup:'direct', audienceTarget:null, registered:4, capacity:8, tool:'teams',
     summary:'鎖定日常生活情境，透過簡單提問與情境模擬，讓學員練習開口說中文，適合累積基礎會話信心。', level:'初階',
     teacherIntro:CURRENT_TEACHER_INTRO_DEFAULT, points:['分享今天做了哪些事','描述你最喜歡的一餐','練習問路與指路對話'], prep:'請先複習教材第 1–2 課常用句型。', lang:'中文', introStatus:'已發佈',
     deptIds:['d2','d3']},
   '4-2':{topic:'職場情境會話', audienceGroup:'all', audienceTarget:null, registered:0, capacity:10, tool:'zoom',
     summary:'模擬會議、面試等職場情境，訓練學員使用得體的中文表達。', level:'中高階',
     teacherIntro:CURRENT_TEACHER_INTRO_DEFAULT, points:['自我介紹與工作背景說明','模擬一段簡短的會議發言',''], prep:'', lang:'中文', introStatus:'草稿'},
-  '5-3':{topic:'旅遊實用會話', audienceGroup:'project', audienceTarget:null, registered:3, capacity:6, tool:'zoom',
+  '5-3':{topic:'旅遊實用會話', audienceGroup:'direct', audienceTarget:null, registered:3, capacity:6, tool:'zoom',
     summary:'情境設定在機場、飯店、景點，練習旅行中最常用到的華語表達。', level:'初級',
     teacherIntro:CURRENT_TEACHER_INTRO_DEFAULT, points:['詢問交通與方向','在飯店辦理入住的對話','推薦一個你想去的景點'], prep:'', lang:'中文', introStatus:'已發佈',
     deptIds:['d4','d5']}
@@ -633,6 +634,7 @@ var LS_T04_KEY = 'tliT04ChatSessions_v1', TEACHER_ID = 'tc1', PL_PREFIX = 'LS-OP
 /* 時段 key（日-時段索引）對應到下週的實際日期與台北時間，同步到會員區可報名的團體場次 */
 function syncPL(){
   if(!window.TLI_PL) return;
+  if(VIEW_1A){ renderMine(); return; }
   var list = [];
   Object.keys(chatSessions).forEach(function(key){
     var s = chatSessions[key], p = key.split('-').map(Number);
@@ -652,6 +654,7 @@ function syncPL(){
 }
 function syncInstChatSessionsToLocalStorage(){
   syncPL();
+  if(VIEW_1A) return;
   var list = [];
   Object.keys(chatSessions).forEach(function(key){
     var s = chatSessions[key];
@@ -692,7 +695,7 @@ function filtered(){
 }
 function renderMine(){
   if(!window.TLI_PL) return;
-  mineAll = TLI_PL.teacherSessions(TEACHER_ID);
+  mineAll = TLI_PL.teacherSessions(TEACHER_ID).filter(function(x){ return !VIEW_1A || x.audience==='project'; });
   var list = filtered(), shown = list.slice(0, pageN);
   document.getElementById('mineCount').textContent = tt('共 '+list.length+' 場','Total '+list.length+' sessions');
   var h = '<table class="list-tbl"><thead><tr><th>'+tt('日期時間（台北）','Date and time (Taipei)')+'</th><th>'+tt('主題','Topic')+'</th><th>'+tt('面向','Audience')+'</th><th>'+tt('已報名／名額','Enrolled / Cap')+'</th><th>'+tt('視訊工具','Video tool')+'</th><th>'+tt('狀態','Status')+'</th><th></th></tr></thead><tbody>';
@@ -708,14 +711,18 @@ function renderMine(){
 function closeRoster(){ document.getElementById('rosterOv').classList.add('hidden'); }
 function showRoster(id){
   var x = TLI_PL.teacherSessions(TEACHER_ID).filter(function(z){ return z.id===id; })[0]; if(!x) return;
-  var names = []; for(var i=0;i<x.baseTaken;i++){ names.push([tt('學員（已報名）','Student (enrolled)')+' '+(i+1), '']); }
-  x.live.forEach(function(b){ names.push([b.name||b.rid, b.mode==='project'?tt('專案合作','Project'):tt('直營','Direct')]); });
+  var names = [];
+  var cls = x.classId ? TLI_PL.students(x.classId).filter(function(r){ return r.status==='已啟用'; }) : [];
+  var liveRids = x.live.map(function(b){ return b.rid; });
+  cls = cls.filter(function(r){ return liveRids.indexOf(r.id)<0; });
+  for(var i=0;i<x.baseTaken;i++){ names.push(cls[i] ? [cls[i].name, TLI_PL.classById(x.classId).name] : [tt('學員（已報名）','Student (enrolled)')+' '+(i+1), '']); }
+  x.live.forEach(function(b){ names.push([b.name||b.rid, b.mode==='project'?(TLI_PL.classById(b.classId)||{name:tt('專案合作','Project')}).name:tt('直營','Direct')]); });
   document.getElementById('rosterBody').innerHTML = '<h3>'+TLI_PL.esc(x.topic)+'</h3><p class="small muted" style="margin:0 0 12px;">'+TLI_PL.mdLabel(x.tpDate)+' '+x.tpTime+tt('（台北）・已報名 ','（Taipei）・Enrolled ')+x.taken+'／'+x.cap+'</p>'+
     (names.length ? '<ul class="rost">'+names.map(function(n){ return '<li><span>'+TLI_PL.esc(n[0])+'</span><span class="small muted">'+n[1]+'</span></li>'; }).join('')+'</ul>' : '<p class="small muted">'+tt('目前沒有人報名。','No one has enrolled yet.')+'</p>')+
     '<div style="display:flex;gap:8px;"><button type="button" class="btn btn-primary" style="flex:1" onclick="enterLounge(\''+id+'\')">'+tt('進入教室','Enter classroom')+'</button><button type="button" class="btn btn-outline" style="flex:1" onclick="closeRoster()">'+tt('關閉','Close')+'</button></div>';
   document.getElementById('rosterOv').classList.remove('hidden');
 }
-function enterLounge(id){ location.href = '../會員區/m16_classroom.html?lesson=lounge'; }
+function enterLounge(id){ location.href = '../會員區/m16_classroom.html?lesson=lounge&tsid='+encodeURIComponent(id); }
 
 /* ===== 開設場次：我開設的場次（可編輯／取消） ===== */
 function renderOpen(){
@@ -760,6 +767,8 @@ if(window.TLI_I18N) TLI_I18N.onRefresh(function(){ renderAll(); refreshChatFormI
 if(VIEW_1A){
   document.body.classList.add('view-1a');
   document.getElementById('note1a').classList.remove('hidden');
+  /* 中心教師版：側欄與底部導覽只留「Mandarin Lounge 場次」（CSS .view-1a 隱藏其餘） */
+  if(window.TLI_I18N && TLI_PL.xl) TLI_PL.xl(document);
 }
 syncPL(); renderAll(); syncInstChatSessionsToLocalStorage();
 if(!VIEW_1A && location.hash==='#open') setTab('open');

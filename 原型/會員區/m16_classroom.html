@@ -304,7 +304,7 @@ if(!LESSON && window.TLI_PL){
     var _u = TLI_PL.me();
     var _p = _bk.tpTime ? _bk.tpTime : _bk.time;
     var _mins = Math.max(0, Math.round((_bk.utc - TLI_PL.nowUtc)/60000));
-    LESSON = { id:_bk.id, type:'chat', title:'Mandarin Lounge'+'（團體場次）'+(_bk.topic ? '：'+_bk.topic : ''), teacherName:_bk.teacher+'老師（TLI）', teacherIntro:'TLI 中心教師，帶領 30 分鐘口說練習。',
+    LESSON = { id:_bk.id, type:'chat', title:'Mandarin Lounge'+'（團體場次）'+(_bk.topic ? '：'+_bk.topic : ''), teacherName:_bk.teacher+(_bk.mode==='project'?'老師（TLI）':'老師（TLI）'), teacherIntro:'TLI 中心教師，帶領 30 分鐘口說練習。',
       planId:'plan-lounge', planName:_u.mode==='project' ? _u.projectName : 'Mandarin Lounge', payer:_u.mode==='project' ? 'project' : 'self', payerOrg:_u.mode==='project' ? _u.partnerName : '',
       dateLabel:_bk.date.slice(5).replace('-','/'), timeLabel:_bk.time+'–'+(function(t){var p=t.split(':');var m=(+p[0])*60+(+p[1])+30;return ('0'+Math.floor(m/60)%24).slice(-2)+':'+('0'+m%60).slice(-2);})(_bk.time),
       tzLabel:null, material:'Mandarin Lounge 討論題綱（PDF）', countdownMin:_mins, defaultState:'before', replayEligible:false, tool:_bk.tool };
@@ -312,11 +312,13 @@ if(!LESSON && window.TLI_PL){
 }
 if(!LESSON && LESSON_ID==='lounge' && window.TLI_PL){
   var _lu = TLI_PL.me();
-  var _ls = TLI_PL.sessionsFor(_lu).filter(function(x){ return x.type==='group'; })[0];
+  var _tsid = qs('tsid');
+  var _ls = _tsid ? TLI_PL.teacherSessions().filter(function(x){ return x.id===_tsid; })[0] : TLI_PL.sessionsFor(_lu).filter(function(x){ return x.type==='group'; })[0];
+  var _lp = _ls && _ls.audience==='project';
   if(_ls){
     var _lm = Math.max(0, Math.round((_ls.utc - TLI_PL.nowUtc)/60000));
     var _le = (function(t){var p=t.split(':');var m=(+p[0])*60+(+p[1])+30;return ('0'+Math.floor(m/60)%24).slice(-2)+':'+('0'+m%60).slice(-2);})(_ls.tpTime);
-    LESSON = { id:'lounge', type:'chat', title:'Mandarin Lounge（團體）：'+_ls.topic, teacherName:_ls.teacher+'老師（TLI）', teacherIntro:'TLI 中心教師，帶領 30 分鐘口說練習。',
+    LESSON = { id:'lounge', type:'chat', title:'Mandarin Lounge（團體）：'+_ls.topic, teacherName:_ls.teacher+(_lp?'老師（TLI）':'老師（TLI）'), teacherIntro:'TLI 中心教師，帶領 30 分鐘口說練習。',
       planId:'plan-lounge', planName:_lu.mode==='project' ? _lu.projectName : 'Mandarin Lounge', payer:'project', payerOrg:_lu.mode==='project' ? _lu.partnerName : '',
       dateLabel:_ls.tpDate.slice(5).replace('-','/'), timeLabel:_ls.tpTime+'–'+_le, tzLabel:null, material:'Mandarin Lounge 討論題綱（PDF）', countdownMin:_lm, defaultState:'before', replayEligible:false, tool:_lu.tool };
   }

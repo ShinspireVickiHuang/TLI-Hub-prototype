@@ -275,7 +275,7 @@ function render(){
   if(U.mode==='project'){
     ctx.push('<span>'+T('單位：','Institution: ')+'<b>'+PL.esc(U.partnerName)+'</b></span>');
     ctx.push('<span>'+T('班級：','Class: ')+'<b>'+PL.esc(U.className)+'</b></span>');
-    ctx.push('<span>'+T('老師：','Teacher: ')+'<b>'+PL.esc(U.teacherName)+'</b></span>');
+    ctx.push('<span>'+T('班級老師：','Class teacher: ')+'<b>'+PL.esc(U.teacherName)+'</b></span>');
   }
   ctx.push('<span>'+T('課程：','Course: ')+'<b>'+PL.esc(PL.courseName())+'</b></span>');
   $('ctxLine').innerHTML = ctx.join('');

@@ -126,7 +126,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <!-- A：新帳號開通 -->
 <div class="pane" id="paneNew">
   <h1 class="sth" data-en="Activate your account">開通你的帳號</h1>
-  <div class="stdesc" data-en="Set a password to finish. This link can be used only once and is valid for 7 days. Your school and class are shown after activation.">設定密碼即可完成開通。此連結僅能使用一次，7 天內有效；開通完成後會顯示你所屬的學校與班級。</div>
+  <div class="stdesc" data-en="Set a password to finish. The activation link is valid for 14 days. After you finish activation, opening the same link takes you straight to the sign-in page.">設定密碼即可完成開通。開通連結 14 天內有效，完成開通後點同一連結會直接進入登入頁。</div>
   <div class="hint" id="expNote" style="margin:-6px 0 12px;"></div>
   <div class="formrow"><label for="fEmail" data-en="Email (your login ID)">Email（登入帳號）</label><input id="fEmail" type="email" readonly></div>
   <div class="formrow">
@@ -163,13 +163,16 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
   </div>
 </div>
 
-<!-- C：帳號已開通過，直接登入 -->
-<div class="pane" id="paneDone">
-  <h1 class="sth" data-en="This account is already active">此帳號已開通</h1>
-  <div class="stdesc" data-en="This activation link can be used only once and has been used. Sign in with your password.">這個開通連結僅能使用一次，已經使用過，請直接用密碼登入。</div>
-  <div class="formrow"><label for="dEmail" data-en="Email">Email</label><input id="dEmail" type="email" readonly></div>
-  <div class="formrow"><label for="dPw"><span data-en="Password">密碼</span><span class="req-mark">*</span></label><input id="dPw" type="password" autocomplete="current-password"><div class="errmsg" id="errDPw"></div></div>
-  <div class="btnrow" style="justify-content:flex-end;"><button class="btn" id="btnDone" data-en="Sign in">登入</button></div>
+<!-- C：連結已過期，可自行重寄 -->
+<div class="pane" id="paneExpired">
+  <div class="expiredwrap">
+    <div class="expiredicon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 7 12 12 15 14"/></svg></div>
+    <div class="expiredtitle" data-en="This activation link has expired">這個開通連結已過期</div>
+    <div class="expireddesc" id="expDesc" data-en="Request a new activation email. We will send it to the email address on your roster.">按下方按鈕，我們會寄一封新的開通信到名單上的 Email。</div>
+    <div class="resendrow"><button type="button" class="btn orange" id="btnResend" data-en="Resend activation email">重新寄送開通信</button></div>
+    <div class="donedesc" id="resendDone" style="display:none;margin-top:14px;"></div>
+    <div class="hint" id="resendNew" style="display:none;margin-top:8px;"><a href="#" id="openNew" data-en="Open the new activation link (demo)">開啟新的開通連結（示範）</a></div>
+  </div>
 </div>
 
 <!-- D：連結無效 -->
@@ -227,7 +230,7 @@ function closeTerms(){ $('termsModal').classList.remove('show'); }
 
 /* ---- 解析開通信連結：?rid=名單 id（缺省時取第一位已寄開通信、尚非會員的學生）---- */
 var rid = PL.qs('rid');
-var R = rid ? PL.rosterById(rid) : TLI_MASTERS.projectRoster.filter(function(r){ return r.role==='學生' && r.status==='已寄開通信' && !PL.isExistingMember(r.email); })[0];
+var R = rid ? PL.rosterById(rid) : TLI_MASTERS.projectRoster.filter(function(r){ return r.role==='學生' && r.status==='已寄開通信' && !PL.isExistingMember(r.email) && (!r.expiresAt || r.expiresAt >= PL.today); })[0];
 var CLS = R ? PL.classById(R.classId) : null;
 var TEA = CLS ? PL.teacherOfClass(CLS.id) : null;
 var P = PL.partner();
@@ -279,19 +282,39 @@ function finish(kind){
   showPane('paneFin');
 }
 
-function init(){
+function loginUrl(){ return 'p07_login_register.html?email='+encodeURIComponent(R.email); }
+/* 連結狀態：有效／已過期（含被新信取代）／被 TLI 作廢或尚未寄送；開通前可重複開啟，開通後導向登入頁 */
+function linkState(){
   var tok = PL.qs('t');
-  var stale = R && ((PL.qs('state')==='invalid') || R.status==='連結已作廢' || R.status==='未寄送' || (tok && R.linkToken && tok!==R.linkToken) || (R.status==='已寄開通信' && R.expiresAt && R.expiresAt < PL.today));
-  if(!R||!CLS||stale){ showPane('paneBad'); return; }
-  $('fEmail').value=R.email; $('mEmail').value=R.email; $('dEmail').value=R.email;
+  if(!R||!CLS) return 'bad';
+  if(PL.qs('state')==='invalid' || R.status==='連結已作廢' || R.status==='未寄送') return 'bad';
+  if(PL.qs('state')==='expired') return 'expired';
+  if(R.status==='已啟用') return 'done';
+  if((R.expiresAt && R.expiresAt < PL.today) || (tok && R.linkToken && tok!==R.linkToken)) return 'expired';
+  return 'ok';
+}
+function init(){
+  var st = linkState();
+  if(st==='bad'){ showPane('paneBad'); return; }
+  if(st==='done'){ location.replace(loginUrl()); return; }
+  if(st==='expired'){ showPane('paneExpired'); return; }
+  $('fEmail').value=R.email; $('mEmail').value=R.email;
   renderCtx();
   var existing = PL.qs('member')==='1' || (R.role==='學生' && PL.isExistingMember(R.email));
-  if(R.status==='已啟用'){ showPane('paneDone'); }
-  else if(R.status==='未寄送'){ showPane('paneBad'); }
-  else if(existing){ showPane('paneMember'); }
+  if(existing){ showPane('paneMember'); }
   else { showPane('paneNew'); }
   renderMeter();
 }
+/* 重寄：寄到名單原 Email，不需輸入；換發 14 天有效的新連結，舊連結失效 */
+$('btnResend').addEventListener('click', function(){
+  R.status='已寄開通信'; R.sentAt=PL.today; R.expiresAt=PL.addDays(PL.today,14); R.linkToken='k'+Date.now().toString(36)+Math.floor(Math.random()*100);
+  if(typeof TLI_MASTERS.saveProjectData==='function') TLI_MASTERS.saveProjectData();
+  $('resendDone').textContent=T('已寄出新的開通信到 ','A new activation email was sent to ')+R.email+T('，連結 14 天內有效。','. The link is valid for 14 days.');
+  $('resendDone').style.display='block'; $('resendNew').style.display='block';
+  $('openNew').href='p13_activate.html?rid='+encodeURIComponent(R.id)+'&t='+encodeURIComponent(R.linkToken);
+  $('btnResend').disabled=true; $('btnResend').textContent=T('已寄出','Sent');
+  toast(T('已寄出開通信','Activation email sent'));
+});
 
 $('fPw').addEventListener('input', renderMeter);
 wireToggle($('tg1'),$('fPw')); wireToggle($('tg2'),$('fPw2'));
@@ -310,10 +333,6 @@ $('btnMemLogin').addEventListener('click', function(){
 });
 $('forgot').addEventListener('click', function(e){ e.preventDefault(); toast(T('已寄出重設密碼信到 ','A reset email was sent to ')+R.email); });
 $('btnBind').addEventListener('click', function(){ PL.activate(R.id); finish('bind'); });
-$('btnDone').addEventListener('click', function(){
-  if(!$('dPw').value){ setErr('errDPw', T('請輸入密碼。','Enter your password.')); return; }
-  setErr('errDPw',''); finish('login');
-});
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeTerms(); });
 
 if (window.TLI_I18N){ TLI_I18N.onRefresh(function(){ renderCtx(); renderMeter(); }); TLI_I18N.init(); }

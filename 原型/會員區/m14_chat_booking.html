@@ -197,7 +197,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     </nav>
 
     <div class="page-h">Mandarin Lounge</div>
-    <p class="page-sub" data-en="Group speaking sessions of 30 minutes, 6 to 10 learners each, led by a TLI teacher. A monthly quota applies.">團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每月有預約額度。</p>
+    <p class="page-sub" id="subTxt" data-en="Group speaking sessions of 30 minutes, 6 to 10 learners each, led by a TLI teacher. A monthly quota applies.">團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每月有預約額度。</p>
 
     <div class="card quota-card" id="quotaCard"></div>
     <div class="banner banner-warn hidden" id="quotaBanner" style="margin-top:12px;">
@@ -251,6 +251,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="../assets/_i18n.js"></script>
 <script>
 var PL = TLI_PL, T = PL.T, U = PL.me();
+if(U.mode==='project'){ var _st=document.getElementById('subTxt'); _st.textContent='團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每月有預約額度。'; _st.setAttribute('data-en','Group speaking sessions of 30 minutes, 6 to 10 learners each, led by TLI center teachers. A monthly quota applies.'); }
 function $(i){ return document.getElementById(i); }
 function showToast(msg){ var t=$('toast'); t.textContent=msg; t.classList.remove('hidden'); clearTimeout(window._tt); window._tt=setTimeout(function(){ t.classList.add('hidden'); },2600); }
 function toggleBell(){ var b=$('bellPanel'); if(b) b.classList.toggle('open'); }

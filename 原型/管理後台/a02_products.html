@@ -734,7 +734,11 @@ function loadOpenCats(){
 }
 function saveOpenCats(){ try{ localStorage.setItem(TREE_STORE_KEY, JSON.stringify(openCats)); }catch(e){} }
 var openCats = loadOpenCats() || {};
-var sortedCatsInit = CATEGORIES.slice().sort(function(a,b){return a.order-b.order;});
+/* 網址參數 ?cat=c_selfpace（可逗號多值）：預先套用分類篩選，左側樹只列指定分類；不帶參數時行為不變 */
+var CAT_FILTER = (function(){ var m = /[?&]cat=([^&]*)/.exec(location.search); return m ? decodeURIComponent(m[1]).split(',').filter(Boolean) : null; })();
+function catVisible(c){ return !CAT_FILTER || CAT_FILTER.indexOf(c.id) >= 0; }
+var sortedCatsInit = CATEGORIES.slice().sort(function(a,b){return a.order-b.order;}).filter(catVisible);
+if (CAT_FILTER) { openCats = {}; sortedCatsInit.forEach(function(c){ openCats[c.id] = true; }); }
 if (!Object.keys(openCats).length && sortedCatsInit[0]) openCats[sortedCatsInit[0].id] = true;
 
 var selected = {type:'category', id: sortedCatsInit[0] ? sortedCatsInit[0].id : ''};
@@ -783,7 +787,7 @@ function treeBreadcrumbLabel(){
   return prefix+(c2 ? c2.name : '—');
 }
 function buildTree(){
-  var cats = CATEGORIES.slice().sort(function(a,b){return a.order-b.order;});
+  var cats = CATEGORIES.slice().sort(function(a,b){return a.order-b.order;}).filter(catVisible);
   var html = cats.map(function(c){
     var prods = categoryProducts(c.id);
     var isOpen = !!openCats[c.id];

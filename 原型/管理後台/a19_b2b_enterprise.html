@@ -384,7 +384,7 @@ html,body{overflow-x:hidden;}
 </div></div>
 
 <!-- 代為修改廠區 modal（2026-09-10 新增，2026-09-11 修改：廠區改由企業自行維護，
-     後台僅保留「代為修改」單一入口，儲存時於修改紀錄標記由 TLI 代操作） -->
+     後台僅保留「代為修改」單一入口，儲存時於修改紀錄標記由 TLI 代為處理） -->
 <div class="modal-mask" id="campusModal" onclick="if(event.target===this) closeModal('campusModal')"><div class="modal">
 <h3 data-i18n="modal.editCampusOnBehalf">代為修改廠區</h3>
 <div class="formrow"><label data-i18n="label.selectCampus">選擇廠區</label><select id="campusPicker" onchange="onCampusPickerChange(this.value)"></select></div>
@@ -392,18 +392,18 @@ html,body{overflow-x:hidden;}
 <div class="formrow"><label data-i18n="label.countryRegion">國家地區</label><select id="campusCountry"></select></div>
 <div class="formrow"><label data-i18n="label.timezone">時區</label><select id="campusTz"></select></div>
 <div class="formrow"><label data-i18n="common.status">狀態</label><select id="campusStatusSel"><option value="啟用" data-i18n="status.enabled2">啟用</option><option value="停用" data-i18n="status.disabled2">停用</option></select></div>
-<div class="hint" data-i18n="hint.campusEmpCountAuto">員工數依「所屬廠區」自動計算，不需手動輸入；本操作將標記為「由 TLI 代操作」。</div>
+<div class="hint" data-i18n="hint.campusEmpCountAuto">員工數依「所屬廠區」自動計算，不需手動輸入；本操作將標記為「由 TLI 代為處理」。</div>
 <div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('campusModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="saveCampus()" data-i18n="btn.saveCampus">儲存廠區</button></div>
 </div></div>
 
 <!-- 代為修改部門配額 modal（2026-09-11 新增：部門配額改由企業自行維護，
-     後台僅保留「代為修改」單一入口，儲存時於修改紀錄標記由 TLI 代操作） -->
+     後台僅保留「代為修改」單一入口，儲存時於修改紀錄標記由 TLI 代為處理） -->
 <div class="modal-mask" id="deptQuotaEditModal" onclick="if(event.target===this) closeModal('deptQuotaEditModal')"><div class="modal">
 <h3 data-i18n="modal.editDeptQuotaOnBehalf">代為修改部門配額</h3>
 <div class="formrow"><label data-i18n="label.department">部門</label><select id="dqSelect" onchange="onDqSelectChange(this.value)"></select></div>
 <div class="formrow" id="dqNewNameRow"><label data-i18n="label.newDeptName">新部門名稱</label><span class="req">*</span><input type="text" id="dqNewName"placeholder="例：物流部" data-i18n-placeholder="ph.deptNameExample2"></div>
 <div class="formrow"><label data-i18n="label.quotaCapHours">配額上限（小時）</label><input type="number" min="0" id="dqQuotaInput"></div>
-<div class="hint" data-i18n="hint.deptQuotaOnBehalf">本操作將標記為「由 TLI 代操作」，正式環境應提示企業 HR 復核。</div>
+<div class="hint" data-i18n="hint.deptQuotaOnBehalf">本操作將標記為「由 TLI 代為處理」，正式環境應提示企業 HR 復核。</div>
 <div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('deptQuotaEditModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="saveDeptQuotaEdit()" data-i18n="common.save">儲存</button></div>
 </div></div>
 
@@ -455,7 +455,7 @@ function qs(k){ return new URLSearchParams(location.search).get(k); }
    異動一律寫入修改紀錄並標記操作者，供企業事後追溯 */
 function pushEntOrgLog(e, what){
   e.orgChangeLog = e.orgChangeLog || [];
-  e.orgChangeLog.unshift({time: nowStr(), who:'TLI（'+e.advisor+'）代操作', what: what});
+  e.orgChangeLog.unshift({time: nowStr(), who:'TLI（'+e.advisor+'）代為處理', what: what});
   if (e.orgChangeLog.length > 20) e.orgChangeLog.length = 20;
 }
 function renderOrgLogMini(e){
@@ -812,7 +812,7 @@ function makeEnterprise(i){
     /* 功能開關（v43 架構定案）：預設值依客戶類型套用共同＋型別專屬功能，可於「功能設定」分頁編輯 */
     features: defaultFeatures(entType),
     /* 部門與廠區改由企業自行維護後台僅檢視（2026-09-11 修改）：修改紀錄種一筆企業端異動示範，
-       後台之後只會透過「代為修改」寫入標記「由 TLI 代操作」的紀錄 */
+       後台之後只會透過「代為修改」寫入標記「由 TLI 代為處理」的紀錄 */
     orgChangeLog: [
       {time: addDays(start, 40)+' 10:15', who: mgr.name+'（'+mgr.title+'）', what:'更新部門與廠區設定'}
     ]
@@ -1352,7 +1352,7 @@ function saveCampus(){
   pushEntOrgLog(e, label);
   closeModal('campusModal');
   renderEntDrawerBody(e);
-  toast(i18nT('已儲存（由 TLI 代操作）：','Saved (edited on behalf by TLI): ')+label);
+  toast(i18nT('已儲存（由 TLI 代為處理）：','Saved (edited on behalf by TLI): ')+label);
 }
 function statusBadgeEnt(s){ return s==='在學' ? '<span class="badge green">'+i18nT('在學','Active')+'</span>' : '<span class="badge grey">'+i18nT('停用','Disabled')+'</span>'; }
 function transferEmployee(empId){ toast(i18nT('已開啟轉移流程：可將此員工學員轉移至同企業其他部門或子公司','Transfer process started: this employee/student can be moved to another department or subsidiary within the same company')); }
@@ -1608,7 +1608,7 @@ function saveDeptQuotaEdit(){
   pushEntOrgLog(e, label);
   closeModal('deptQuotaEditModal');
   renderEntDrawerBody(e);
-  toast(i18nT('已儲存（由 TLI 代操作）：','Saved (edited on behalf by TLI): ')+label);
+  toast(i18nT('已儲存（由 TLI 代為處理）：','Saved (edited on behalf by TLI): ')+label);
 }
 var RENEWAL_STATUS_EN = {'已核准':'Approved','已婉拒':'Declined','待審核':'Pending Review'};
 function renewalStatusText(s){ return i18nT(s, RENEWAL_STATUS_EN[s] || s); }

@@ -332,7 +332,7 @@ var EVENT_NOTIFS = [
  {key:'member_activation', name:'會員開通信（顧問建檔後即時，一次性連結有效期 N 小時，依設定）', recipients:['學生'], channels:['Email'], timing:'immediate', enabled:true},
  {key:'member_activation_reminder', name:'尚未開通提醒（建檔後 N 天，依設定）', recipients:['學生','顧問'], channels:['Email','站內'], timing:'daily', enabled:true},
  {key:'password_changed', name:'密碼已變更通知', recipients:['學生'], channels:['Email','站內'], timing:'immediate', enabled:true},
- {key:'account_invite', name:'帳號開通邀請（專案合作成員，一次性連結 7 天內有效）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true},
+ {key:'account_invite', name:'帳號開通邀請（專案合作成員，連結 14 天內有效）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true},
  {key:'account_activated', name:'開通完成通知（開通當下寄給本人）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true}
 ];
 function eventByKey(k){ return EVENT_NOTIFS.find(function(e){ return e.key===k; }); }
@@ -372,7 +372,7 @@ var NOTIF_NAME_EN = {
   '排課需求已送出（給顧問）':'Scheduling Request Sent (to Advisor)',
   '會員開通信':'Member Activation Email',
   '帳號開通邀請':'Account Activation Invitation','開通完成通知':'Activation Completed Notice',
-  '帳號開通邀請（專案合作成員，一次性連結 7 天內有效）':'Account Activation Invitation (project-partnership members; one-time link valid for 7 days)','開通完成通知（開通當下寄給本人）':'Activation Completed Notice (sent to the person right after activation)',
+  '帳號開通邀請（專案合作成員，連結 14 天內有效）':'Account Activation Invitation (project-partnership members; link valid for 14 days)','開通完成通知（開通當下寄給本人）':'Activation Completed Notice (sent to the person right after activation)',
   '尚未開通提醒':'Not-Yet-Activated Reminder'
 };
 function notifNameLabel(zh){ return i18nT(zh, NOTIF_NAME_EN[zh]||zh); }
@@ -453,7 +453,7 @@ var TEMPLATES = [
  {id:'t17', name:'密碼已變更通知', channels:['Email','站內'], enabled:true, vars:['{學生姓名}','{時間}'],
   content:{tc:'{學生姓名} 您好，您的帳號密碼已於 {時間} 變更完成。如非本人操作，請立即聯繫客服處理。', en:'Dear {Student Name}, your account password was changed at {Time}. If this wasn’t you, please contact support immediately.', jp:'{學生姓名} 様、アカウントのパスワードが {時間} に変更されました。心当たりがない場合は、直ちにサポートまでご連絡ください。'}},
  {id:'t18', name:'帳號開通邀請', channels:['Email'], enabled:true, vars:['{姓名}','{開通連結}','{到期日}'],
-  content:{tc:'{姓名} 您好，TLI 已為您建立學習帳號。請點選下方連結設定密碼完成開通：{開通連結}。此連結僅能使用一次，{到期日} 前有效；逾期或已作廢請聯絡 TLI 重新寄送。', en:'Hello {Name}, TLI has created a learning account for you. Use the link below to set your password: {Activation Link}. The link can be used only once and is valid until {Expiry Date}. If it has expired or been revoked, contact TLI to have it sent again.', jp:'{姓名} 様、TLI の学習アカウントを作成しました。次のリンクからパスワードを設定してください：{開通連結}。このリンクは 1 回のみ、{到期日} まで有効です。期限切れまたは無効の場合は TLI までご連絡ください。'}},
+  content:{tc:'{姓名} 您好，TLI 已為您建立學習帳號。請點選下方連結設定密碼完成開通：{開通連結}。連結 {到期日} 前有效，開通前可重複開啟，完成開通後點同一連結會直接進入登入頁；逾期可在連結頁自行重新寄送，已作廢請聯絡 TLI。', en:'Hello {Name}, TLI has created a learning account for you. Use the link below to set your password: {Activation Link}. The link is valid until {Expiry Date} and can be opened more than once before you finish; after activation, the same link goes straight to the sign-in page. If it has expired, resend it from the link page; if it has been revoked, contact TLI.', jp:'{姓名} 様、TLI の学習アカウントを作成しました。次のリンクからパスワードを設定してください：{開通連結}。このリンクは {到期日} まで有効で、開通前は繰り返し開けます。期限切れの場合はリンク先ページから再送でき、無効の場合は TLI までご連絡ください。'}},
  {id:'t19', name:'開通完成通知', channels:['Email'], enabled:true, vars:['{姓名}','{時間}'],
   content:{tc:'{姓名} 您好，您的 TLI 帳號已於 {時間} 完成開通。如果不是您本人操作，請立即聯絡 TLI。', en:'Hello {Name}, your TLI account was activated at {Time}. If this was not you, contact TLI right away.', jp:'{姓名} 様、TLI アカウントは {時間} に開通されました。ご本人の操作でない場合は、直ちに TLI までご連絡ください。'}}
 ];

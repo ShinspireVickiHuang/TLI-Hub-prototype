@@ -460,7 +460,7 @@ var learningTopics = {
 
 /* ---- 20. 專案合作班級與名單（20261006 新增；a20 專案合作夥伴「班級與名單」分頁維護，教師端、會員區共用）
    projectClasses：{id, partnerId, projectCode, name, from, to, teacherRid（對應 projectRoster 中 role:'老師' 成員的 id）}
-   projectRoster：{id, classId, name, email, role:'學生'|'老師', status:'未寄送'|'已寄開通信'|'連結已作廢'|'已啟用', sentAt, expiresAt（開通連結 7 天有效）, linkToken（目前有效連結版本）, activatedAt（開通時間）}
+   projectRoster：{id, classId, name, email, role:'學生'|'老師', status:'未寄送'|'已寄開通信'|'連結已作廢'|'已啟用', sentAt, expiresAt（開通連結 14 天有效）, linkToken（目前有效連結版本）, activatedAt（開通時間）}
    頁面存檔至 localStorage（key 見契約檔），本集合為初始值 ---- */
 var projectClasses = [
  {id:'pcl1', partnerId:'p02', projectCode:'PRJ-EDU-AZU', name:'Chinese 101 Section A', from:'2027-02-01', to:'2027-05-31', teacherRid:'pr07'},
@@ -513,9 +513,9 @@ function saveProjectData(){
   } catch(e){}
 }
 loadProjectData();
-/* 開通連結欄位補預設：已寄開通信者補寄送日與 7 天到期日、連結版本；已啟用者補開通時間 */
+/* 開通連結欄位補預設：已寄開通信者補寄送日與 14 天到期日、連結版本（pr04 示範已過期）；已啟用者補開通時間 */
 projectRoster.forEach(function(r){
-  if (r.status === '已寄開通信' && !r.expiresAt){ r.sentAt = '2027-03-12'; r.expiresAt = '2027-03-19'; }
+  if (r.status === '已寄開通信' && !r.expiresAt){ if (r.id === 'pr04'){ r.sentAt = '2027-02-20'; r.expiresAt = '2027-03-06'; } else { r.sentAt = '2027-03-12'; r.expiresAt = '2027-03-26'; } }
   if (!r.linkToken && r.status !== '未寄送'){ r.linkToken = 'k1'; }
   if (r.status === '已啟用' && !r.activatedAt){ r.activatedAt = '2027-02-' + ('0' + (3 + (parseInt(String(r.id).replace(/\D/g, ''), 10) || 0) % 20)).slice(-2) + ' 10:' + ('0' + ((parseInt(String(r.id).replace(/\D/g, ''), 10) || 0) * 7 % 60)).slice(-2); }
 });

@@ -397,7 +397,7 @@ function escHtml(s){ return String(s===undefined||s===null?'':s).replace(/&/g,'&
    查不到對照就照原文顯示（示範資料/未收錄詞彙安全退回原文，不開天窗）。 */
 var A20_EN = {
   '品牌露出':'Brand Exposure','自有網域':'Custom Domain','品牌與前台':'Brand & Frontend','前台入口':'Frontend Entry Points','品牌首頁':'Brand Homepage','課程頁':'Courses Page','學員登入':'Student Login','露出 TLI 授權標示':'Show TLI License Badge','不露出 TLI':'No TLI Branding','依合作條件可調整；「不露出 TLI」代表前台完全以經銷商自有品牌呈現。':'Adjustable per partnership terms; “No TLI Branding” means the frontend appears entirely under the distributor\'s own brand.','例：chinese.globalstudy.com.my':'e.g. chinese.globalstudy.com.my',
-  '連結已作廢':'Link revoked','作廢開通連結':'Revoke activation link','開通連結到期':'Link expires','開通時間':'Activated at','確定作廢這位成員目前的開通連結？作廢後連結立即失效，需重寄開通信才會產生新連結。':'Revoke this member’s current activation link? It stops working immediately; resend the activation email to issue a new one.','已作廢開通連結：':'Activation link revoked: ','已過期':'Expired','到期 ':'Expires ',
+  '連結已作廢':'Link revoked','作廢開通連結':'Revoke activation link','開通連結到期':'Link expires','系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；Email 已是 TLI 會員者不另開帳號，直接加綁。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。':'The activation link is sent by the system and is valid for 14 days. Once the person sets a password, the account is linked to this partner, project and class automatically; an email that is already a TLI member is linked without a new account. Before activation the link can be opened more than once; after activation, the same link goes straight to the sign-in page. When a link expires the person can resend it themselves; only a revoked link needs TLI to step in.','開通時間':'Activated at','確定作廢這位成員目前的開通連結？作廢後連結立即失效，需重寄開通信才會產生新連結。':'Revoke this member’s current activation link? It stops working immediately; resend the activation email to issue a new one.','已作廢開通連結：':'Activation link revoked: ','已過期':'Expired','到期 ':'Expires ',
   '班級老師':'Class Teacher','開通連結':'Activation link','＋ 新增班級老師':'+ Add class teacher','請輸入老師姓名':'Please enter the teacher name','這個 Email 已是班級老師，請從清單挑選':'This email is already a class teacher; pick them from the list',
   '合作夥伴名稱':'Partner Name','聯絡人':'Contact Person','國家／市場':'Country / Market','合作型態':'Partnership Type',
   '合作期間':'Partnership Period','狀態':'Status','可銷售的專案':'Sellable Projects','租戶代碼':'Tenant Code',
@@ -1212,7 +1212,7 @@ function tryClosePartnerDrawer(){
 }
 
 
-/* ================= 專案合作：班級與名單（1A 由 TLI 後台代操，夥伴沒有登入入口）================= */
+/* ================= 專案合作：班級與名單（1A 由 TLI 後台代為匯入，夥伴沒有登入入口）================= */
 function pcClassesOf(pid){ return TLI_MASTERS.projectClasses.filter(function(c){ return c.partnerId === pid; }); }
 function pcRosterOf(cid){ return TLI_MASTERS.projectRoster.filter(function(r){ return r.classId === cid; }); }
 function pcClassById(id){ return TLI_MASTERS.projectClasses.find(function(c){ return c.id === id; }); }
@@ -1230,9 +1230,9 @@ function pcTeachersOf(pid){
 }
 var PC_TODAY = '2027-03-15';
 function pcAddDays(str, n){ var p = str.split('-'); var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n)); return d.getUTCFullYear() + '-' + ('0' + (d.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + d.getUTCDate()).slice(-2); }
-/* 產生新開通連結：舊連結立即失效，新連結 7 天內有效、僅能使用一次 */
+/* 產生新開通連結：舊連結立即失效，新連結 14 天內有效；開通前可重複開啟，開通後再點會導向登入頁 */
 function pcIssue(r){
-  r.status = '已寄開通信'; r.sentAt = PC_TODAY; r.expiresAt = pcAddDays(PC_TODAY, 7);
+  r.status = '已寄開通信'; r.sentAt = PC_TODAY; r.expiresAt = pcAddDays(PC_TODAY, 14);
   r.linkToken = 'k' + Date.now().toString(36) + Math.floor(Math.random() * 100);
 }
 function pcRevoke(id){
@@ -1296,7 +1296,7 @@ function renderClassDetail(o, c){
     }).join('') + '</table></div>';
   }
   if (pdSendNote){
-    h += '<div class="pc-note">' + TT('系統已寄送開通連結。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；Email 已是 TLI 會員者不另開帳號，直接加綁。') + '</div>';
+    h += '<div class="pc-note">' + TT('系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；Email 已是 TLI 會員者不另開帳號，直接加綁。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。') + '</div>';
   }
   return h;
 }

@@ -256,7 +256,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
         <form onsubmit="return fakeLogin(event)">
           <div class="field">
             <label data-i18n="p07_label_email">Email</label>
-            <input type="email" placeholder="請輸入 Email" required data-i18n-placeholder="p07_ph_email">
+            <input type="email" id="loginEmail" placeholder="請輸入 Email" required data-i18n-placeholder="p07_ph_email">
           </div>
           <div class="field">
             <label data-i18n="p07_label_password">密碼</label>
@@ -265,6 +265,16 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
           <div class="helper-link"><a href="#" onclick="showToast(tliDict().p07_toast_forgot_password); return false;" data-i18n="p07_forgot_password">忘記密碼？</a></div>
           <button type="submit" class="btn btn-primary btn-block"><span class="social-badge badge-mail" style="margin-right:4px;">@</span><span data-i18n="p07_btn_submit_login">登入</span></button>
         </form>
+        <div class="switch-note" style="margin-top:10px;"><a href="#" id="resendLink" onclick="toggleResendP07();return false;" data-en="Not activated yet? Resend the activation email">還沒開通？重新寄送開通信</a></div>
+        <div id="resendBoxP07" style="display:none;margin-top:12px;padding:14px;border:1px solid var(--c-border);border-radius:10px;background:var(--c-bg);">
+          <div class="field" style="margin-bottom:10px;">
+            <label for="resendEmailP07" data-en="Email on your school or program roster">名單上的 Email</label>
+            <input type="email" id="resendEmailP07" autocomplete="email" placeholder="you@example-state.edu">
+            <div class="field-error" id="err_resendP07"></div>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" onclick="submitResendP07()" data-en="Send activation email">寄送開通信</button>
+          <div id="resendMsgP07" style="display:none;margin-top:10px;font-size:13px;color:#067647;line-height:1.6;"></div>
+        </div>
         <div class="switch-note"><span data-i18n="p07_switch_to_register_text">還沒有帳號？</span><a href="#" onclick="switchTab('register');return false;" data-i18n="p07_switch_to_register_link">立即註冊</a></div>
         <!-- 機構／經銷／專案合作建立的會員不必自行註冊，導引至開通頁 -->
         <div class="switch-note" style="margin-top:6px;"><a href="p14_partner_login.html" data-i18n="p07_partner_student_login">機構學員登入</a>／<a href="p13_activate.html" data-i18n="p07_partner_activate_link">前往帳號開通</a></div>
@@ -1075,8 +1085,35 @@ document.querySelectorAll('#registerForm input, #registerForm select, #socialCom
 <script src="../assets/_i18n_dict_public_ja.js"></script>
 <script src="../assets/_i18n_dict_public_de.js"></script>
 <script src="../assets/_i18n.js"></script>
+<script src="../assets/_shared_masters.js"></script>
+<script src="../會員區/_project_learning.js"></script>
 <script>
 function T(zh,obj){ return TLI_I18N.t(zh,obj); }
+/* 開通信重寄：一律顯示同一句，不揭露 Email 是否在名單內；在名單且尚未開通者，換發 14 天有效的新連結 */
+function toggleResendP07(){
+  var box=document.getElementById('resendBoxP07'), open=box.style.display==='none';
+  box.style.display=open?'block':'none';
+  if(open){ var le=document.getElementById('loginEmail'); var ri=document.getElementById('resendEmailP07'); if(le&&le.value&&!ri.value) ri.value=le.value; try{ ri.focus(); }catch(e){} }
+}
+function submitResendP07(){
+  var v=document.getElementById('resendEmailP07').value.trim();
+  var err=document.getElementById('err_resendP07'), msg=document.getElementById('resendMsgP07');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+    err.textContent=T('請輸入正確的 Email 格式',{en:'Please enter a valid email address'}); err.classList.add('show'); msg.style.display='none'; return;
+  }
+  err.classList.remove('show'); err.textContent='';
+  try{
+    var PL=window.TLI_PL, r=PL&&PL.rosterByEmail(v);
+    if(r && r.status!=='已啟用' && r.status!=='連結已作廢'){
+      r.status='已寄開通信'; r.sentAt=PL.today; r.expiresAt=PL.addDays(PL.today,14); r.linkToken='k'+Date.now().toString(36)+Math.floor(Math.random()*100);
+      TLI_MASTERS.saveProjectData();
+    }
+  }catch(e){}
+  msg.textContent=T('若此 Email 在名單內，我們會重新寄送開通信',{en:'If this email is on the roster, we will send the activation email again.'});
+  msg.style.display='block';
+  showToast(T('已送出',{en:'Submitted'}));
+}
+(function(){ try{ var em=new URLSearchParams(location.search).get('email'); if(em){ var i=document.getElementById('loginEmail'); if(i) i.value=em; } }catch(e){} })();
 
 
 var TLI_AVATAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg>';

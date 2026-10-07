@@ -216,7 +216,7 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
         <span class="pb-who connect" data-i18n="p11_program3_who">Connect 平台</span>
         <div class="pb-icon" style="background:#FCEBDC;color:var(--c-accent-dark);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
         <h3 data-i18n="p11_program3_h">自學資源＋Mandarin Lounge</h3>
-        <p data-i18n="p11_program3_p">提供影片、音檔、測驗自主練習；Mandarin Lounge 口說練習由 TLI 老師帶領，每月有預約額度，報名團體場次。</p>
+        <p data-i18n="p11_program3_p">提供影片、音檔、測驗自主練習；Mandarin Lounge 口說練習由 TLI 中心教師帶領，每月有預約額度，報名團體場次。</p>
       </div>
     </div>
     <div class="period-strip">
@@ -233,7 +233,7 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
     <div class="program-grid">
       <div class="program-box"><span class="pb-who uni" data-en="Step 1">第 1 步</span><h3 data-en="The school sends TLI the roster">學校提供名單給 TLI</h3><p data-en="Your school contacts TLI with the class roster. TLI sets up the accounts.">學校把班級名單交給 TLI，由 TLI 建立你的帳號。</p></div>
       <div class="program-box"><span class="pb-who tli" data-en="Step 2">第 2 步</span><h3 data-en="You receive an activation email from TLI">你會收到 TLI 寄出的開通信</h3><p data-en="The email goes to the address on the roster. Check your spam folder if you cannot find it.">信件寄到名單上的 Email，找不到時請看垃圾信件匣。</p></div>
-      <div class="program-box"><span class="pb-who connect" data-en="Step 3">第 3 步</span><h3 data-en="Click the link and set your password">點信中連結設定密碼</h3><p data-en="The link is valid for 7 days and can be used only once. After that you can start learning.">連結 7 天內有效、僅能使用一次，設定完成即可開始使用。</p></div>
+      <div class="program-box"><span class="pb-who connect" data-en="Step 3">第 3 步</span><h3 data-en="Click the link and set your password">點信中連結設定密碼</h3><p data-en="The link is valid for 14 days. After you finish activation, opening the same link takes you straight to the sign-in page.">開通連結 14 天內有效，完成開通後點同一連結會直接進入登入頁。</p></div>
     </div>
     <div class="verify-card" style="margin-top:20px;">
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -276,7 +276,7 @@ main{max-width:1040px;margin:0 auto;padding:0 24px;}
         </div>
         <div class="plan-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          <div><div class="pi-name"><span data-i18n="p11_plan4_name">Mandarin Lounge</span><span class="pending-tag" style="background:#E4F5F0;color:#0B6B52;" data-i18n="p11_plan4_tag">每月有預約額度</span></div><div class="pi-desc" data-i18n="p11_plan4_desc">每場 30 分鐘，由 TLI 老師帶領，6–10 人團體場次</div></div>
+          <div><div class="pi-name"><span data-i18n="p11_plan4_name">Mandarin Lounge</span><span class="pending-tag" style="background:#E4F5F0;color:#0B6B52;" data-i18n="p11_plan4_tag">每月有預約額度</span></div><div class="pi-desc" data-i18n="p11_plan4_desc">每場 30 分鐘，由 TLI 中心教師帶領，6–10 人團體場次</div></div>
         </div>
       </div>
     </div>
@@ -355,7 +355,7 @@ function submitResend(){
   }
   err.classList.remove('show'); err.textContent='';
   msg.className='verify-msg show ok';
-  msg.textContent=T('若此 Email 在學校名單內，我們會重新寄送開通信；仍未收到請洽學校窗口或 TLI 客服。',{en:'If this email is on your school roster, we will send the activation email again. If you still do not receive it, please contact your school or TLI support.'});
+  msg.textContent=T('若此 Email 在名單內，我們會重新寄送開通信；仍未收到請洽學校窗口或 TLI 客服。',{en:'If this email is on the roster, we will send the activation email again. If you still do not receive it, please contact your school or TLI support.'});
   showToast(T('已送出',{en:'Submitted'}));
 }
 

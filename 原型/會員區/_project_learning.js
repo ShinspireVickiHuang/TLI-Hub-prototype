@@ -12,7 +12,7 @@
   var NOW_UTC = Date.UTC(2027, 2, 15, 16, 0);     /* 2027-03-15 09:00 亞利桑那時間（UTC-7） */
   var MONTH = TODAY.slice(0, 7);
   var BK_KEY = 'tliLoungeBookings_v1';
-  var OPEN_KEY = 'tliLoungeOpened_v1';             /* 中心教師開設的團體場次 */
+  var OPEN_KEY = 'tliLoungeOpened_v1';             /* 中心教師開設的團體場次（直營）；專案合作場次由 TLI 中心教師帶，一階段 A 由新達於資料庫設定 */
   var FRESH_KEY = 'tliPLFreshActivated_v1';       /* 由開通頁剛啟用、尚無學習紀錄的名單 id */
   var SS_KEY = 'tliPLSession_v1';
   var EXISTING_MEMBERS = ['m.lopez@students.sample-u.example']; /* 已是 TLI 會員的 Email（加綁分支用） */
@@ -148,7 +148,7 @@
     var n = seedUsed(rid), out = [];
     for (var i = 0; i < n; i++) {
       var gp = (hash(rid + ':h' + i) % 2) === 0;
-      out.push({ id: 'LH-' + rid + '-' + i, rid: rid, type: 'group', date: addDays(TODAY, -(2 + i * 4)), time: '19:30', status: 'done', teacher: (centerTeachers()[i % 3] || { name: '林俊傑' }).name, tool: partner().videoTool, topic: '日常對話：自我介紹' });
+      out.push({ id: 'LH-' + rid + '-' + i, rid: rid, type: 'group', date: addDays(TODAY, -(2 + i * 4)), time: '19:30', status: 'done', teacher: (function(){ return (centerTeachers()[i % 3] || { name: '林俊傑' }).name; })(), tool: partner().videoTool, topic: '日常對話：自我介紹' });
     }
     return out;
   }
@@ -175,14 +175,22 @@
         var ti = TOPICS[hash(id) % TOPICS.length];
         var cap = 6 + hash(id + 'c') % 5;
         out.push({ id: id, type: 'group', utc: utc, tpDate: tp, tpTime: t, minutes: 30, teacher: th.name, teacherId: th.id, topic: ti[0], topicEn: ti[1], cap: cap,
-          tool: ((hash(id + 't') >>> 5) % 2) ? 'zoom' : 'teams', audience: 'all', baseTaken: (hash(id) % 7 === 0) ? cap : 2 + (hash(id) % 4), opened: false });
+          tool: ((hash(id + 't') >>> 5) % 2) ? 'zoom' : 'teams', audience: 'direct', baseTaken: (hash(id) % 7 === 0) ? cap : 2 + (hash(id) % 4), opened: false });
+        /* 專案合作場次：由 TLI 中心教師帶領，只給該班學生；與直營場次共用同一套場次機制 */
+        classes().forEach(function (c) {
+          var ct = tchs.length ? tchs[hash(id + c.id) % tchs.length] : { id: 'tc1', name: '林俊傑' }, pid = id.replace(/g$/, 'p') + '-' + c.id;
+          if (hash(pid) % 2 !== 0) { return; }
+          var pcap = 6 + hash(pid + 'c') % 5, pti = TOPICS[hash(pid) % TOPICS.length];
+          out.push({ id: pid, type: 'group', utc: utc, tpDate: tp, tpTime: t, minutes: 30, teacher: ct.name, teacherId: ct.id, topic: pti[0], topicEn: pti[1], cap: pcap,
+            tool: partner().videoTool || 'teams', audience: 'project', classId: c.id, baseTaken: hash(pid) % 4 === 0 ? 0 : 1 + (hash(pid) % 3), opened: false });
+        });
       });
     }
     openedSessions().forEach(function (o) {
       var hm = o.tpTime.split(':'), p = o.tpDate.split('-');
       var utc = Date.UTC(+p[0], +p[1] - 1, +p[2], +hm[0] - 8, +hm[1]);
       if (utc <= NOW_UTC) { return; }
-      out.push({ id: o.id, type: 'group', utc: utc, tpDate: o.tpDate, tpTime: o.tpTime, minutes: 30, teacher: o.teacher, teacherId: o.teacherId, topic: o.topic, topicEn: o.topicEn || o.topic, cap: o.cap, tool: o.tool, audience: o.audience || 'all', baseTaken: o.baseTaken || 0, opened: true });
+      out.push({ id: o.id, type: 'group', utc: utc, tpDate: o.tpDate, tpTime: o.tpTime, minutes: 30, teacher: o.teacher, teacherId: o.teacherId, topic: o.topic, topicEn: o.topicEn || o.topic, cap: o.cap, tool: o.tool, audience: 'direct', baseTaken: o.baseTaken || 0, opened: true });
     });
     out.sort(function (a, b) { return a.utc - b.utc; });
     var bs = bookings();
@@ -197,7 +205,7 @@
   }
   function sessionsFor(user) {
     var out = allSessions(user.tzOffset).filter(function (s) {
-      return s.audience === 'all' || (s.audience === 'project' && user.mode === 'project') || (s.audience === 'direct' && user.mode !== 'project');
+      return (s.audience === 'project' && user.mode === 'project' && s.classId === user.classId) || ((s.audience === 'direct' || s.audience === 'all') && user.mode !== 'project');
     });
     out.forEach(function (s) {
       var TP = fmtLocal(s.utc, 8); s.tpDate = TP.date; s.tpTime = TP.time;
@@ -326,7 +334,7 @@
       });
       h += '</div>';
     } else if (kind === 'm02') {
-      h += pjHead(T('預約 Mandarin Lounge', 'Book Mandarin Lounge'), T('每月可預約的口說練習場次，由 TLI 中心教師帶領。', 'Monthly speaking practice sessions led by TLI teachers.'));
+      h += pjHead(T('預約 Mandarin Lounge', 'Book Mandarin Lounge'), T('每月可預約的口說練習場次，由 TLI 中心教師帶領。', 'Monthly speaking practice sessions led by TLI center teachers.'));
       h += '<div class="card"><div class="pj-row"><span>' + T('本月剩餘', 'Left this month') + '</span><b>' + LG.remaining + '／' + LG.quota + T(' 次', '') + '</b></div>' +
         '<div class="progress" style="margin:4px 0 12px"><div style="width:' + Math.round(LG.used / Math.max(1, LG.quota) * 100) + '%"></div></div>' +
         '<a class="btn btn-primary" href="m14_chat_booking.html">' + T('預約場次', 'Book a session') + '</a></div>';
