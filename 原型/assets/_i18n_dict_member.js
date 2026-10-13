@@ -618,6 +618,10 @@ Object.assign(TLI_I18N_DICT.en,{
 "m06.text.stripeNote2":"). You can change the currency from the top-right menu.",
 /* ---- m07_profile ---- */
 "m07.title":"Profile",
+"m07.card.title":"Digital Member Card",
+"m07.card.zoom":"Enlarge",
+"m07.card.memberNo":"Member No.",
+"m07.card.close":"Close",
 "m07.notif.tzUpdated":"Your class timezone setting has been updated",
 "m07.pageTitle":"Account & Settings",
 "m07.pageSub":"Personal info, class timezone & language, notification preferences, login security, and payment methods",

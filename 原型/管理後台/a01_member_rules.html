@@ -305,7 +305,7 @@ html,body{overflow-x:hidden;}
 <div class="gearmenu" id="gearMenu">
 <a href="a11_categories.html" data-i18n="gear.categorySettings">會員分類設定</a>
 <a href="javascript:void(0)" onclick="closeGearMenu();document.getElementById('activationModal').classList.add('open')" data-i18n="gear.activationMethod">會員開通方式</a>
-<a href="javascript:void(0)" onclick="closeGearMenu();document.getElementById('dupModal').classList.add('open')" data-i18n="gear.dupCheck">同來源單位內重複檢查</a>
+<a href="javascript:void(0)" onclick="closeGearMenu();document.getElementById('dupModal').classList.add('open')" data-i18n="gear.dupCheck">重複帳號檢查</a>
 </div>
 </div>
 <button class="btn ghost" onclick="openImportWizard()" data-i18n="btn.batchImport">批次匯入</button>
@@ -435,7 +435,7 @@ html,body{overflow-x:hidden;}
 
 <!-- 同租戶內疑似重複 modal -->
 <div class="modal-mask" id="dupModal" onclick="if(event.target===this) closeModal('dupModal')"><div class="modal wide">
-<h3 data-i18n="modal.dupTitle">同來源單位內重複檢查</h3>
+<h3 data-i18n="modal.dupTitle">重複帳號檢查</h3>
 <div class="desc" style="margin-bottom:12px" data-i18n="desc.dupCheck">Email 全系統唯一，Email 相同的帳號一律列出；員工編號只在同一家企業內比對。同一個人從不同來源進來要用不同 Email，兩筆會員不合併。</div>
 <div id="dupList"></div>
 <div style="text-align:right;margin-top:10px"><button class="btn ghost" onclick="closeModal('dupModal')" data-i18n="common.close">關閉</button></div>
@@ -457,7 +457,7 @@ html,body{overflow-x:hidden;}
 /* 20261013 本頁新增詞條（不動共用詞典檔，只在本頁補英文） */
 (function(){ var d = window.TLI_I18N_DICT && TLI_I18N_DICT.en; if (!d) return;
   var add = {
-    'a01.desc':'Members are "person x source": the same person from two sources is two members; duplicate checks run within one source unit only.',
+    'a01.desc':'Members are "person x source": the same person from two sources is two members; email must be unique across the whole system, and employee no. is checked within one company only.',
     'a01.rulesTitle':'Member Rules',
     'a01.rule1':'One member = one person + one source unit (TLI Direct, an agent, a project partner, a distributor, or a company).',
     'a01.rule2':'The same person coming from different sources is two members with two accounts using different emails, each with its own password, plans and hours. They are never merged.',
@@ -465,8 +465,8 @@ html,body{overflow-x:hidden;}
     'a01.rule4':'Company members also record their company; each company is marked as brought in by direct, agent, project partner or distributor.',
     'a01.searchPlaceholder':'Search name / email / phone / member no. / employee no.',
     'a01.actDesc':'Set the default activation method for new members; existing members are not affected. Members with email get an activation email; company employees without email are exported as a list with activation codes for the company to hand out.',
-    'gear.dupCheck':'Duplicate Check (Same Source Unit)',
-    'modal.dupTitle':'Duplicate Check (Same Source Unit)',
+    'gear.dupCheck':'Duplicate Account Check',
+    'modal.dupTitle':'Duplicate Account Check',
     'desc.dupCheck':'Accounts with the same email are always listed because email is unique across the system; employee no. is compared only within one company. The same person from a different source must use a different email; the two members are never merged.',
     'filter.sourceType':'Source type:', 'filter.sourceUnit':'Source unit:', 'filter.orgOnly':'Company:',
     'col.sourceType':'Source Type', 'col.sourceUnit':'Source Unit', 'col.orgOnly':'Company', 'col.activation':'Activation',
@@ -700,12 +700,15 @@ function buildProjectMembers(){
     out.push(m);
   });
   if (out.length){
-    /* 同一來源單位內的重複建檔示範（同一 Email 在同一個專案合作夥伴內建了兩筆），供「同來源單位內重複檢查」檢視 */
+    /* 重複帳號示範（匯入的一筆直營帳號，Email 已被專案合作帳號使用，標待處理），供「重複帳號檢查」檢視 */
     var o = out[0];
     var d = JSON.parse(JSON.stringify(o));
     d.id = 'taz'+(seq+1); d.memberNo = 'SU-'+padNum(seq+1,6); d.joined = addDays(o.joined, 40);
+    d.sourceType = 'direct'; d.sourceUnitId = UNIT_ID_TLI; d.sourceProject = ''; d.sourceCountry = '台灣';
+    d.pool = 'official'; d.poolTenant = ''; d.campus = '線上'; d.className = ''; d.classPeriod = ''; d.projectCode = '';
+    d.courses = []; d.ownership = ['self']; d.ownershipKey = 'self';
     setActivation(d, '未啟用'); d.activationSentAt = d.joined+' 09:30';
-    d.notes = ['與 '+o.memberNo+' 在同一來源單位內 Email 重複，待處理。'];
+    d.notes = ['匯入資料的 Email 已被 '+o.memberNo+' 使用（Email 全系統唯一），待處理：請改用另一個 Email。'];
     out.push(d);
   }
   return out;
@@ -770,7 +773,7 @@ function activationBadge(m){
   return '<span class="badge '+cls+'">'+actLabel(m.activationStatus)+'</span>';
 }
 
-/* ================= 同來源單位內重複檢查（只比對同一來源單位內，跨來源的同一個人是兩筆會員，不比對、不合併） ================= */
+/* ================= 重複帳號檢查（10/13 定案：Email 全系統比對；員工編號只在同一家企業內比對。同一人從不同來源進來仍是兩筆帳號、不合併，第二筆須改用另一個 Email） ================= */
 function findDuplicateGroups(){
   var by = {};
   MEMBERS.forEach(function(m){
@@ -790,7 +793,7 @@ function renderDuplicatesCard(){
   if (!wrap) return;
   var groups = findDuplicateGroups();
   if (!groups.length){
-    wrap.innerHTML = '<div class="small">'+TLI_I18N.t('目前沒有偵測到同一來源單位內的重複帳號。','No duplicate accounts found inside any single source unit.')+'</div>';
+    wrap.innerHTML = '<div class="small">'+TLI_I18N.t('目前沒有偵測到重複的 Email 或同企業內重複的員工編號。','No duplicate emails, or duplicate employee numbers within one company, found.')+'</div>';
     return;
   }
   wrap.innerHTML = groups.map(function(g){
@@ -1520,7 +1523,7 @@ function doWizImport(){
     var org = r.org || '';
     var oo = org ? orgByName(org) : null;
     var empNo = oo ? (oo.code.slice(0,2)+'-IMP'+padNum(nextNewId,4)) : '';
-    /* 同一來源單位內 Email 重複才略過 */
+    /* Email 已被任何帳號使用就略過（全系統比對）；匯入不帶員工編號，不查員編 */
     if (dupInScope(oo ? oo.id : UNIT_ID_TLI, r.email, '', null)){ dupSkipped++; return; }
     var ownership = org ? ['enterprise'] : ['self'];
     var m = {

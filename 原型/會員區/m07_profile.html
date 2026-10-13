@@ -126,6 +126,25 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .explore-link{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--c-primary);white-space:nowrap;padding:4px 2px;flex:none;}
 .explore-link svg{width:15px;height:15px;flex:none;}
 @media(max-width:639px){.explore-link-text{display:none;}}
+/* ---------- 數位會員卡（只放姓名、單位、會員編號、條碼） ---------- */
+#card{scroll-margin-top:calc(var(--topbar-h) + 12px);}
+.mcard-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.mcard-head .section-title{margin:0;}
+.mcard-body{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.mcard-name{font-size:17px;font-weight:700;overflow-wrap:anywhere;}
+.mcard-unit{font-size:12.5px;color:var(--c-muted);overflow-wrap:anywhere;}
+.mcard-no{font-size:13px;margin-top:6px;color:var(--c-muted);}
+.mcard-no b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;letter-spacing:.06em;color:var(--c-text);}
+.mcard-bars{margin-top:10px;padding:10px 8px;border:1px solid var(--c-border);border-radius:var(--radius-sm);background:#fff;}
+.mcard-bars svg{width:100%;height:76px;}
+.bar-full{position:fixed;inset:0;z-index:200;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;gap:16px;}
+.bar-full.hidden{display:none;}
+.bar-full .bf-name{font-size:18px;font-weight:700;text-align:center;overflow-wrap:anywhere;}
+.bar-full .bf-svg{width:100%;max-width:900px;}
+.bar-full .bf-svg svg{width:100%;height:46vh;max-height:340px;}
+.bar-full .bf-no{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:24px;letter-spacing:.16em;font-weight:700;}
+@media(max-width:480px){.bar-full .bf-no{font-size:19px;}}
+@media(orientation:landscape) and (max-height:480px){.bar-full{gap:8px;padding:10px 16px;}.bar-full .bf-svg svg{height:50vh;}}
 /* ---------- B2B 所屬組織卡／顯示時區偏好（v2 新增） ---------- */
 .demo-tag{font-size:10.5px;color:#98A2B3;font-weight:400;}
 .seg{display:inline-flex;border:1px solid var(--c-border);border-radius:20px;overflow:hidden;flex:none;}
@@ -184,6 +203,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   <main class="content">
     <p class="page-h" data-i18n="m07.pageTitle">帳號與設定</p>
     <p class="page-sub" data-i18n="m07.pageSub">個人資料、上課時區與語言、通知偏好、登入安全與付款方式管理</p>
+
+    <div class="card" id="card" aria-labelledby="mcardTitle">
+      <div class="mcard-head">
+        <div class="section-title" id="mcardTitle" data-i18n="m07.card.title">數位會員卡</div>
+        <button type="button" class="btn btn-outline btn-sm" id="mcardZoomBtn" onclick="openBarFull()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          <span data-i18n="m07.card.zoom">放大顯示</span>
+        </button>
+      </div>
+      <div class="mcard-body">
+        <div class="mcard-name" id="mcardName"></div>
+        <div class="mcard-unit" id="mcardUnit"></div>
+        <div class="mcard-no"><span data-i18n="m07.card.memberNo">會員編號</span>：<b id="mcardNo"></b></div>
+      </div>
+      <div class="mcard-bars" id="mcardBars" role="img"></div>
+    </div>
 
     <div class="card" id="profileCard">
       <div class="flex-between">
@@ -290,6 +325,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
     <a href="m07_profile.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
   </nav>
+</div>
+
+<div class="bar-full hidden" id="barFull" role="dialog" aria-modal="true" aria-label="數位會員卡" data-i18n-aria-label="m07.card.title" onclick="closeBarFull()">
+  <div class="bf-name" id="bfName"></div>
+  <div class="bf-svg" id="bfSvg"></div>
+  <div class="bf-no" id="bfNo"></div>
+  <button type="button" class="btn btn-outline" id="barFullClose" onclick="event.stopPropagation();closeBarFull()">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <span data-i18n="m07.card.close">關閉</span>
+  </button>
 </div>
 
 <div class="sheet-overlay hidden" id="logoutOverlay" onclick="if(event.target===this) this.classList.add('hidden')">
@@ -639,6 +684,45 @@ document.addEventListener('keydown', function(e){
     el.classList.add('hidden');
   });
 });
+
+/* ---------- 數位會員卡：Code 128（Code Set B），以會員編號 memberNo 產生條碼，純 inline SVG ---------- */
+var C128 = ["212222","222122","222221","121223","121322","131222","122213","122312","132212","221213","221312","231212","112232","122132","122231","113222","123122","123221","223211","221132","221231","213212","223112","312131","311222","321122","321221","312212","322112","322211","212123","212321","232121","111323","131123","131321","112313","132113","132311","211313","231113","231311","112133","112331","132131","113123","113321","133121","313121","211331","231131","213113","213311","213131","311123","311321","331121","312113","312311","332111","314111","221411","431111","111224","111422","121124","121421","141122","141221","112214","112412","122114","122411","142112","142211","241211","221114","413111","241112","134111","111242","121142","121241","114212","124112","124211","411212","421112","421211","212141","214121","412121","111143","111341","131141","114113","114311","411113","411311","113141","114131","311141","411131","211412","211214","211232","2331112"];
+function code128Svg(text){
+  var codes=[104], sum=104, i, v;
+  for(i=0;i<text.length;i++){ v=text.charCodeAt(i)-32; if(v<0||v>95) v=0; codes.push(v); sum+=v*(i+1); }
+  codes.push(sum%103); codes.push(106);
+  var x=10, rects='', k, w;
+  codes.forEach(function(c){
+    var pat=C128[c];
+    for(k=0;k<pat.length;k++){
+      w=+pat.charAt(k);
+      if(k%2===0) rects+='<rect x="'+x+'" y="0" width="'+w+'" height="50"/>';
+      x+=w;
+    }
+  });
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+(x+10)+' 50" preserveAspectRatio="none" shape-rendering="crispEdges" fill="#000" aria-hidden="true">'+rects+'</svg>';
+}
+function memberUnitLabel(a){
+  if(a.sourceType==='direct' && !a.orgId) return (window.TLI_I18N && TLI_I18N.t) ? TLI_I18N.t('TLI 直營','TLI Direct') : 'TLI 直營';
+  return TLI_MASTERS.sourceUnitName(a);
+}
+function renderMemberCard(){
+  var a=TLI_MASTERS.currentAccount(), no=a.memberNo||'';
+  document.getElementById('mcardName').textContent=a.name;
+  document.getElementById('mcardUnit').textContent=memberUnitLabel(a);
+  document.getElementById('mcardNo').textContent=no;
+  var svg=code128Svg(no);
+  document.getElementById('mcardBars').innerHTML=svg;
+  document.getElementById('mcardBars').setAttribute('aria-label', no);
+  document.getElementById('bfName').textContent=a.name;
+  document.getElementById('bfSvg').innerHTML=svg;
+  document.getElementById('bfNo').textContent=no;
+}
+function openBarFull(){ document.getElementById('barFull').classList.remove('hidden'); document.getElementById('barFullClose').focus(); }
+function closeBarFull(){ document.getElementById('barFull').classList.add('hidden'); }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeBarFull(); });
+renderMemberCard();
+if(window.TLI_I18N && TLI_I18N.onRefresh) TLI_I18N.onRefresh(renderMemberCard);
 </script>
 </body>
 </html>

@@ -27,7 +27,7 @@
      orderId       經銷訂單編號（經銷匯入者才有，對應 TLI_MASTERS.distOrders 的 id）
      createdAt     建立日期 'YYYY-MM-DD'
      plans         方案與課時（選填；各帳號各自一份，不跨來源合併）：[{name, hoursLeft}]
-   重複檢查範圍（scope）＝ orgId || sourceUnitId：只有「同一來源單位內」（同一家企業／同一夥伴）Email 或員工編號重複才擋。
+   重複檢查（10/13 定案）：Email 全系統唯一，一個 Email 只能是一個帳號的登入 Email；員工編號只在同一家企業內檢查。同一人從不同來源進來仍是不同帳號、不合併，第二個帳號須用另一個 Email。
    登入規則：Email＋密碼，一個 Email 只對應一個帳號、不用選單位；無 Email 者用 企業代碼(orgCustomers.code)＋員工編號。
    TLI_MASTERS.orgCustomers 新增欄位：code 企業代碼、sourceType 帶來這家企業的來源型態、sourceUnitId 帶來的夥伴 id（直營＝'tli'）。
    TLI_MASTERS.distOrders（經銷訂單，TLI 後台建立）：{id, partnerId, planId(packages), seats, kind:'individual'非企業|'enterprise'企業會員, orgId, createdAt, status}
@@ -786,6 +786,7 @@ function renderAccountChrome(){
   var h = '<button type="button" id="acctBtn" aria-label="' + escM(memT('帳號選單','Account menu')) + '" style="width:32px;height:32px;border-radius:50%;border:1px solid #E4E7EC;background:#1B4E8C;color:#fff;font-size:13px;font-weight:700;cursor:pointer">' + escM(a.name.charAt(0).toUpperCase()) + '</button>' +
     '<div id="acctPanel" style="display:none;position:absolute;right:0;top:40px;width:250px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;box-shadow:0 8px 24px rgba(16,24,40,.16);padding:6px 0;z-index:80;font-size:13px;color:#101828;text-align:left">' +
     '<div style="padding:8px 14px;border-bottom:1px solid #E4E7EC"><div style="font-weight:700">' + escM(a.name) + '</div><div style="font-size:12px;color:#667085">' + escM(unit) + (a.email ? '｜' + escM(a.email) : '') + '</div></div>';
+  h += '<a href="' + (onProfile ? '#card' : 'm07_profile.html#card') + '" onclick="document.getElementById(\'acctPanel\').style.display=\'none\'" style="display:block;padding:7px 14px;color:#101828;text-decoration:none;border-top:1px solid #E4E7EC">' + escM(memT('數位會員卡','Digital member card')) + '</a>';
   h += (onProfile ? '<a href="javascript:void(0)" onclick="openPasswordSheet()"' : '<a href="m07_profile.html?pw=1"') + ' style="display:block;padding:7px 14px;color:#101828;text-decoration:none;border-top:1px solid #E4E7EC">' + escM(memT('改密碼','Change password')) + '</a></div>';
   wrap.innerHTML = h;
   doc.getElementById('acctBtn').onclick = function(e){ e.stopPropagation(); var p = doc.getElementById('acctPanel'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; };
