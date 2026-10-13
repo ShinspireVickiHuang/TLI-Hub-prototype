@@ -577,7 +577,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "type.pkg":"Sales Plan",
 "bizsource.agent":"Agent",
 "bizsource.direct":"Direct",
-"bizsource.distributorProject":"Distributor Project",
+"bizsource.distributorProject":"Distributor Order",
 "bizsource.enterpriseContract":"Enterprise Contract",
 "btn.acceptDispute":"Accept Dispute",
 "btn.addEnterpriseOrder":"＋ Add Enterprise Order",
@@ -727,5 +727,9 @@ Object.assign(TLI_I18N_DICT.en, {
 "type.project":"Project Partnership","type.distributor":"Distributor","type.agent":"Agent",
 "status.enabled":"Enabled","status.disabled":"Disabled",
 "hint.noPartnerMatch":"No partners match the selected criteria.",
+"a05.nd.btn":"＋ Add Distributor Order","a05.nd.modalTitle":"Add Distributor Order",
+"a05.nd.modal":"Add Distributor Order","a05.nd.hint":"Created by TLI staff; the distributor has no login. Individual students: after creating, import the roster and send activation emails in the Partners page, distributor tab. Company members: the company HR imports the roster in the organization portal.",
+"a05.nd.distributor":"Distributor","a05.nd.salesPlan":"Sales plan","a05.nd.seats":"Seats","a05.nd.studentType":"Student type","a05.nd.kindIndividual":"Individual students","a05.nd.kindEnterprise":"Company members","a05.nd.company":"Company",
+"a05.nd.manage":"Import roster and send activation emails",
 "h2.recentChanges":"Recent Changes"
 });

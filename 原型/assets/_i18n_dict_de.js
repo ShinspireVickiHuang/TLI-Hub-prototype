@@ -781,7 +781,7 @@ Object.assign(TLI_I18N_DICT.de,{
 "m13.ref.label":"Rabatt- oder Empfehlungscode (optional)",
 "m13.ref.hint":"Wird beim Zugriff über einen Partner-Empfehlungslink automatisch ausgefüllt; manuelle Eingabe ist ebenfalls möglich",
 "m13.ref.autoHint":"Code automatisch aus Empfehlungslink übernommen",
-"m13.ref.placeholder":"z. B. AGENT2026",
+"m13.ref.placeholder":"Rabatt- oder Empfehlungscode eingeben",
 "m13.ref.tagPrefix":"Empfohlen von: ",
 "m13.pay.title":"Zahlungsmethode",
 "m13.pay.newebpay":"Kreditkarte (NewebPay)",

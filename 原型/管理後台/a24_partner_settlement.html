@@ -643,7 +643,7 @@ function calcRowsHtml(row){
       '<div class="kv"><span>'+t('單價','Unit Price')+'</span><span>'+money(c.unitPrice)+'</span></div>' +
       '<div class="kv"><span>'+t('尾款（開課量 × 單價 － 訂金）','Balance (Enrollment × Unit Price − Deposit)')+'</span><span>'+money(c.balanceAmount)+'</span></div>' +
       '<div class="kv" style="font-weight:600"><span>'+t('合計（應收）','Total (Receivable)')+'</span><span>'+money(c.total)+'</span></div>' +
-      '<div class="hint">'+t('已收訂金 ＋ 實際開課量 × 單價的尾款；訂購單明細見夥伴端訂購單頁面。','Deposit received + the balance from actual enrollment × unit price; see the partner order page for order details.')+'</div>';
+      '<div class="hint">'+t('已收訂金 ＋ 實際開課量 × 單價的尾款；經銷訂單明細見訂單管理（a05）或合作夥伴管理的經銷訂單分頁（a20）。','Deposit received + the balance from actual enrollment × unit price; see Orders (a05) or the distributor order tab in Partner Management (a20) for details.')+'</div>';
   }
   if (c.kind==='rebate'){
     return '<div class="kv"><span>'+t('年度業績','Annual Revenue')+'</span><span>'+money(c.annualRevenue)+'</span></div>' +

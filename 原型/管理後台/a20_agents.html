@@ -356,6 +356,15 @@ html,body{overflow-x:hidden;}
 <div class="drawer-body" id="pdBody"></div>
 </div>
 
+<div class="modal-mask" id="doImportModal" onclick="if(event.target===this) closeModal('doImportModal')"><div class="modal wide">
+<h3 data-i18n="a20.importTitle">匯入學員名單</h3>
+<div class="hint" id="doImpInfo" style="margin-bottom:10px"></div>
+<div class="formrow"><label data-i18n="a20.chooseCsv">選擇 CSV 檔</label><input type="file" id="doImpFile" accept=".csv,text/csv,text/plain" onchange="doImpLoadFile(this)"></div>
+<div class="formrow"><label data-i18n="a20.orPaste">或直接貼上內容</label><textarea id="doImpText" rows="8"></textarea>
+<div style="margin-top:6px;display:flex;gap:12px"><button type="button" class="linkbtn" onclick="doImpSample()" data-i18n="a20.fillSample">填入範例名單</button><button type="button" class="linkbtn" onclick="doImpTemplate()" data-i18n="a20.downloadTemplate">下載範本檔案</button></div></div>
+<div class="rowerr" id="doImpErr" style="display:none;color:#C0392B;font-size:12px;margin-bottom:8px"></div>
+<div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost" onclick="closeModal('doImportModal')" data-i18n="common.cancel">取消</button><button type="button" class="btn" onclick="doRunImport()" data-i18n="a20.runImport">匯入</button></div>
+</div></div>
 <div class="modal-mask" id="pcClassModal" onclick="if(event.target===this) closeModal('pcClassModal')"><div class="modal">
 <h3 id="pcClassTitle">新增班級</h3>
 <div class="formrow"><label>班名</label><input type="text" id="pcClassName" placeholder="例：Chinese 101 Section A"></div>
@@ -388,6 +397,20 @@ html,body{overflow-x:hidden;}
 <script src="../assets/_shared_masters.js"></script>
 <script src="../assets/_i18n_dict.js"></script>
 <script src="../assets/_i18n_dict_admin.js"></script>
+<script>
+/* 20261013 本頁新增詞條（不動共用詞典檔，只在本頁補英文） */
+(function(){ var d = window.TLI_I18N_DICT && TLI_I18N_DICT.en; if (!d) return;
+  var add = {
+    'a20.newOrder':'Create Distributor Order','a20.orderPartner':'Distributor','a20.orderPlan':'Sales plan','a20.managePlans':'Manage plans →',
+    'a20.orderSeats':'Student seats','a20.orderKind':'Student type','a20.kindIndividual':'Individual students (no tax ID or employee no.; email required)',
+    'a20.kindEnterprise':'Company members (pick a company; the company HR imports the whitelist)','a20.orderOrg':'Company',
+    'a20.orderOrgHint':'Only companies brought in by this distributor are listed; the company master is maintained in Organizations.',
+    'a20.createOrder':'Create order','a20.importTitle':'Import Student Roster','a20.chooseCsv':'Choose CSV file','a20.orPaste':'Or paste the content',
+    'a20.fillSample':'Fill sample roster','a20.downloadTemplate':'Download template','a20.runImport':'Import'
+  };
+  for (var k in add) d[k] = add[k];
+})();
+</script>
 <script src="../assets/_i18n.js"></script>
 <script>
 /* ================= 合作夥伴管理（20260928x 重做：檢視／編輯合併為單一抽屜，同一組欄位）================= */
@@ -397,7 +420,7 @@ function escHtml(s){ return String(s===undefined||s===null?'':s).replace(/&/g,'&
    查不到對照就照原文顯示（示範資料/未收錄詞彙安全退回原文，不開天窗）。 */
 var A20_EN = {
   '前台入口':'Frontend Entry Points','品牌首頁':'Brand Homepage','課程頁':'Courses Page','學員登入':'Student Login',
-  '連結已作廢':'Link revoked','作廢開通連結':'Revoke activation link','開通連結到期':'Link expires','系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；Email 已是 TLI 會員者不另開帳號，直接加綁。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。':'The activation link is sent by the system and is valid for 14 days. Once the person sets a password, the account is linked to this partner, project and class automatically; an email that is already a TLI member is linked without a new account. Before activation the link can be opened more than once; after activation, the same link goes straight to the sign-in page. When a link expires the person can resend it themselves; only a revoked link needs TLI to step in.','開通時間':'Activated at','確定作廢這位成員目前的開通連結？作廢後連結立即失效，需重寄開通信才會產生新連結。':'Revoke this member’s current activation link? It stops working immediately; resend the activation email to issue a new one.','已作廢開通連結：':'Activation link revoked: ','已過期':'Expired','到期 ':'Expires ',
+  '連結已作廢':'Link revoked','作廢開通連結':'Revoke activation link','開通連結到期':'Link expires','系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；同一人若已用其他來源（直營、企業或其他夥伴）註冊，這裡另建一個帳號，不合併。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。':'The activation link is sent by the system and is valid for 14 days. Once the person sets a password, the account is linked to this partner, project and class automatically; if the same person already has an account from another source (direct, a company or another partner), a separate account is created here and the two are never merged. Before activation the link can be opened more than once; after activation, the same link goes straight to the sign-in page. When a link expires the person can resend it themselves; only a revoked link needs TLI to step in.','開通時間':'Activated at','確定作廢這位成員目前的開通連結？作廢後連結立即失效，需重寄開通信才會產生新連結。':'Revoke this member’s current activation link? It stops working immediately; resend the activation email to issue a new one.','已作廢開通連結：':'Activation link revoked: ','已過期':'Expired','到期 ':'Expires ',
   '班級老師':'Class Teacher','開通連結':'Activation link','＋ 新增班級老師':'+ Add class teacher','請輸入老師姓名':'Please enter the teacher name','這個 Email 已是班級老師，請從清單挑選':'This email is already a class teacher; pick them from the list',
   '合作夥伴名稱':'Partner Name','聯絡人':'Contact Person','國家／市場':'Country / Market','合作型態':'Partnership Type',
   '合作期間':'Partnership Period','狀態':'Status','可銷售的專案':'Sellable Projects',
@@ -623,11 +646,16 @@ function projectStudentStats(p){
   var act = stu.filter(function(r){ return r.status === '已啟用'; }).length;
   return {total:stu.length, activeRatio: stu.length ? Math.round(act * 100 / stu.length) : 0, classes:cls.length};
 }
+function distStudentStats(p){
+  var acc = TLI_MASTERS.memberAccounts.filter(function(a){ return a.sourceType === 'distributor' && a.sourceUnitId === p.id; });
+  var act = acc.filter(function(a){ return a.activationStatus === '已啟用'; }).length;
+  return {total:acc.length, activeRatio: acc.length ? Math.round(act * 100 / acc.length) : 0, orders:TLI_MASTERS.distOrders.filter(function(o){ return o.partnerId === p.id; }).length};
+}
 function renderStudentPanel(p){
   if (p.type === 'agent'){
     return '<div class="note" style="margin-top:8px">' + TT('代理介紹來的學生進 TLI 官方會員池，不提供獨立學員名單；如需查詢個別學生歸屬，請至') + '<a href="a01_member_rules.html">' + TT('會員管理') + '</a>' + TT('用 Email 或姓名搜尋。') + '</div>';
   }
-  var s = (p.type === 'project') ? projectStudentStats(p) : demoStudentStats(p);
+  var s = (p.type === 'project') ? projectStudentStats(p) : (p.type === 'distributor' ? distStudentStats(p) : demoStudentStats(p));
   if (p.type === 'project'){
     return '<div class="statgrid">' +
       '<div class="statbox"><div class="num">' + s.total + '</div><div class="lbl">' + TT('學員人數') + '</div></div>' +
@@ -638,9 +666,9 @@ function renderStudentPanel(p){
   return '<div class="statgrid">' +
     '<div class="statbox"><div class="num">' + s.total + '</div><div class="lbl">' + TT('學員人數') + '</div></div>' +
     '<div class="statbox"><div class="num">' + s.activeRatio + '%</div><div class="lbl">' + TT('已啟用帳號比例') + '</div></div>' +
-    '<div class="statbox"><div class="num">' + s.logins + '</div><div class="lbl">' + TT('近 30 天登入數') + '</div></div>' +
+    '<div class="statbox"><div class="num">' + (p.type === 'distributor' ? s.orders : s.logins) + '</div><div class="lbl">' + (p.type === 'distributor' ? TLI_I18N.t('經銷訂單數','Distributor orders') : TT('近 30 天登入數')) + '</div></div>' +
     '</div>' +
-    '<div style="margin-top:12px"><a class="btn" href="a01_member_rules.html?source=' + encodeURIComponent(p.id) + '">' + TT('查看學員名單') + '</a></div>' +
+    '<div style="margin-top:12px"><a class="btn" href="a01_member_rules.html?source=' + encodeURIComponent(p.id) + '">' + TT('查看學員名單') + '</a>' + (p.type === 'distributor' ? ' <button type="button" class="btn ghost" onclick="pdSwitchTab(\'orders\')">' + TLI_I18N.t('經銷訂單與匯入名單','Orders & Roster Import') + '</button>' : '') + '</div>' +
     '<div class="hint" style="margin-top:8px">' + TLI_I18N.t('學員是 TLI 會員，此數字依來源標記為「'+p.name+'」的會員資料計算。', 'Students are TLI members; figures are calculated from member data whose source is marked as "'+p.name+'".') + '</div>';
 }
 
@@ -837,6 +865,7 @@ var pdDraft = null;
 var pdTab = 'info';       // 專案合作夥伴抽屜的分頁：info 夥伴資料／classes 班級與名單
 var pdClassId = null;     // 班級與名單分頁目前點入的班級
 var pdSendNote = false;   // 寄出開通信後顯示說明文字
+var pdOrderId = null;     // 經銷夥伴「經銷訂單」分頁目前點入的訂單
 
 function renderDrawerHeader(){
   var titleEl = document.getElementById('pdTitle');
@@ -855,7 +884,7 @@ function renderDrawerHeader(){
     if (!p) return;
     titleEl.textContent = p.name;
     metaEl.innerHTML = typeBadge(p.type) + ' ' + escHtml(countryLabel(p.country)) + '｜' + escHtml(p.contact);
-    editBtn.style.display = (p.type === 'project' && pdTab === 'classes') ? 'none' : '';
+    editBtn.style.display = ((p.type === 'project' && pdTab === 'classes') || (p.type === 'distributor' && pdTab === 'orders')) ? 'none' : '';
     saveBtn.style.display = 'none';
     cancelBtn.style.display = 'none';
   }
@@ -865,13 +894,19 @@ function renderDrawerBody(){
   if (!o) return;
   var html = '';
   var isProj = (o.type === 'project');
-  var showTabs = isProj && !pdIsNew && pdMode === 'view';
-  document.getElementById('pdDrawer').classList.toggle('wide', showTabs && pdTab === 'classes');
+  var isDist = (o.type === 'distributor');
+  var showTabs = (isProj || isDist) && !pdIsNew && pdMode === 'view';
+  document.getElementById('pdDrawer').classList.toggle('wide', showTabs && (pdTab === 'classes' || pdTab === 'orders'));
   if (showTabs){
     html += '<div class="tabs"><button type="button" class="' + (pdTab === 'info' ? 'active' : '') + '" onclick="pdSwitchTab(\'info\')">' + TT('夥伴資料') + '</button>' +
-      '<button type="button" class="' + (pdTab === 'classes' ? 'active' : '') + '" onclick="pdSwitchTab(\'classes\')">' + TT('班級與名單') + '</button></div>';
-    if (pdTab === 'classes'){
+      (isProj ? '<button type="button" class="' + (pdTab === 'classes' ? 'active' : '') + '" onclick="pdSwitchTab(\'classes\')">' + TT('班級與名單') + '</button>'
+              : '<button type="button" class="' + (pdTab === 'orders' ? 'active' : '') + '" onclick="pdSwitchTab(\'orders\')">' + TLI_I18N.t('經銷訂單與學員','Orders & Students') + '</button>') + '</div>';
+    if (isProj && pdTab === 'classes'){
       document.getElementById('pdBody').innerHTML = html + renderClassesTab(o);
+      return;
+    }
+    if (isDist && pdTab === 'orders'){
+      document.getElementById('pdBody').innerHTML = html + renderOrdersTab(o);
       return;
     }
   }
@@ -899,7 +934,7 @@ function openPartnerDetail(id){
   var p = partnerById(id);
   if (!p) return;
   ensurePartnerDefaults(p);
-  pdTab = 'info'; pdClassId = null; pdSendNote = false;
+  pdTab = 'info'; pdClassId = null; pdOrderId = null; pdSendNote = false;
   pdCurrentId = id;
   pdIsNew = false;
   pdMode = 'view';
@@ -1142,7 +1177,7 @@ function pcStatusBadge(st){
   if (st === '連結已作廢') return '<span class="badge red">' + TT('連結已作廢') + '</span>';
   return '<span class="badge grey">' + TT('未寄送') + '</span>';
 }
-function pdSwitchTab(t){ pdTab = t; pdClassId = null; pdSendNote = false; renderPartnerDrawer(); }
+function pdSwitchTab(t){ pdTab = t; pdClassId = null; pdOrderId = null; pdSendNote = false; renderPartnerDrawer(); }
 function renderClassesTab(o){
   if (pdClassId && pcClassById(pdClassId)) return renderClassDetail(o, pcClassById(pdClassId));
   var cls = pcClassesOf(o.id);
@@ -1188,7 +1223,7 @@ function renderClassDetail(o, c){
     }).join('') + '</table></div>';
   }
   if (pdSendNote){
-    h += '<div class="pc-note">' + TT('系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；Email 已是 TLI 會員者不另開帳號，直接加綁。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。') + '</div>';
+    h += '<div class="pc-note">' + TT('系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；同一人若已用其他來源（直營、企業或其他夥伴）註冊，這裡另建一個帳號，不合併。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。') + '</div>';
   }
   return h;
 }
@@ -1361,6 +1396,233 @@ function pcDoImport(){
   toast(TLI_I18N.t('成功 ' + ok + ' 筆，略過 ' + (dup + bad) + ' 筆' + (zhP.length ? '（' + zhP.join('；') + '）' : ''), ok + ' imported, ' + (dup + bad) + ' skipped' + (enP.length ? ' (' + enP.join('; ') + ')' : '')));
 }
 
+/* ================= 經銷訂單與匯入學員名單（20261013）=================
+   流程：TLI 管理者建立經銷訂單 → 匯入學員名單 → 寄啟用信（批次／單筆）。經銷商本身沒有入口。
+   非企業學員：姓名、Email 必填，沒有統編與員工編號；企業會員：選企業，走企業白名單（員工編號、姓名、Email 可空、部門），
+   沒 Email 者匯出「名單＋啟用碼」由企業自行發給員工。重複檢查只在同一來源單位內（同一經銷商／同一企業）。
+   匯入的帳號寫進主檔 TLI_MASTERS.memberAccounts，a01 會員管理讀同一份。 */
+function doToday(){ return new Date().toISOString().slice(0,10); }
+function doNow(){ return doToday() + ' ' + new Date().toTimeString().slice(0,5); }
+function doOrdersOf(pid){ return TLI_MASTERS.distOrders.filter(function(o){ return o.partnerId === pid; }); }
+function doOrderById(id){ return TLI_MASTERS.distOrders.filter(function(o){ return o.id === id; })[0] || null; }
+function doOrgName(id){ var o = TLI_MASTERS.byId('orgCustomers', id); return o ? o.name : ''; }
+function doPlanName(id){ var k = TLI_MASTERS.byId('packages', id); return k ? k.name : id; }
+function doAccounts(oid){ return TLI_MASTERS.accountsOfOrder(oid); }
+/* 企業型訂單：名單由企業 HR 在組織端匯入（帳號帶 orgId、不一定帶 orderId），統計改讀該企業在主檔的帳號 */
+function doAccountsOfOrder(o){ return o.kind === 'enterprise' && o.orgId ? TLI_MASTERS.memberAccounts.filter(function(a){ return a.orgId === o.orgId; }) : doAccounts(o.id); }
+function doStat(o){
+  var acc = doAccountsOfOrder(o);
+  return {imported:acc.length, sent:acc.filter(function(a){ return a.activationStatus !== '未啟用'; }).length, active:acc.filter(function(a){ return a.activationStatus === '已啟用'; }).length};
+}
+function doStatusLabel(o){
+  var st = doStat(o);
+  if (!st.imported) return TLI_I18N.t('待匯入名單','Awaiting roster');
+  if (st.imported < o.seats) return TLI_I18N.t('匯入中','Importing');
+  return st.sent >= st.imported ? TLI_I18N.t('已寄啟用信','Activation sent') : TLI_I18N.t('已匯入名單','Roster imported');
+}
+function doActBadge(st){
+  var cls = st === '已啟用' ? 'green' : (st === '已寄通知' ? 'amber' : 'grey');
+  var a = TLI_MASTERS.activationStates.filter(function(x){ return x.id === st; })[0];
+  return '<span class="badge ' + cls + '">' + escHtml(a ? TLI_I18N.t(a.name, a.en) : st) + '</span>';
+}
+function renderOrdersTab(o){
+  if (pdOrderId && doOrderById(pdOrderId)) return renderOrderDetail(o, doOrderById(pdOrderId));
+  var list = doOrdersOf(o.id);
+  var h = '<div class="pc-bar"><div class="small">' + TLI_I18N.t('訂單本身在訂單頁建立，付款與開票也在那裡；這裡負責非企業學員的匯入名單與寄啟用信；企業型訂單的名單由企業 HR 於組織端匯入。經銷商沒有登入入口。請至','Orders are created, paid and invoiced in Orders; this tab imports the roster and sends activation emails for individual students; for company orders the roster is imported by the company HR in the organization portal. The distributor has no login. Go to ') + '<a href="a05_orders.html">' + TLI_I18N.t('訂單','Orders') + '</a>' + TLI_I18N.t('。','.') + '</div>' +
+    '<div class="btns"><a class="btn ghost" href="a01_member_rules.html?source=' + encodeURIComponent(o.id) + '">' + TT('查看學員名單') + '</a>' +
+    '<a class="btn" href="a05_orders.html?new=dist&partner=' + encodeURIComponent(o.id) + '">' + TLI_I18N.t('＋ 到訂單建立經銷訂單','+ Create in Orders') + '</a></div></div>';
+  if (!list.length) return h + '<div class="hint">' + TLI_I18N.t('尚未建立經銷訂單。','No distributor orders yet.') + '</div>';
+  h += '<div class="tablewrap"><table><tr><th>' + TLI_I18N.t('訂單編號','Order No.') + '</th><th>' + TLI_I18N.t('銷售方案','Sales plan') + '</th><th>' + TLI_I18N.t('學員類型','Student type') + '</th><th>' + TLI_I18N.t('名額','Seats') + '</th><th>' + TLI_I18N.t('已匯入','Imported') + '</th><th>' + TLI_I18N.t('已寄信','Sent') + '</th><th>' + TT('狀態') + '</th><th></th></tr>';
+  h += list.map(function(x){
+    var st = doStat(x);
+    var kind = x.kind === 'enterprise' ? TLI_I18N.t('企業會員：','Company: ') + escHtml(doOrgName(x.orgId)) : TLI_I18N.t('非企業學員','Individual');
+    return '<tr class="rowlink" onclick="doOpenOrder(\'' + x.id + '\')"><td>' + escHtml(x.id) + '<div class="small">' + escHtml(x.createdAt) + '</div></td><td>' + escHtml(doPlanName(x.planId)) + '</td><td>' + kind + '</td><td>' + x.seats + '</td><td>' + st.imported + '</td><td>' + st.sent + '</td><td>' + doStatusLabel(x) + '</td>' +
+      '<td style="white-space:nowrap"><button type="button" class="linkbtn" onclick="event.stopPropagation();doOpenOrder(\'' + x.id + '\')">' + (x.kind === 'enterprise' ? TLI_I18N.t('啟用統計','Activation stats') : TLI_I18N.t('名單與啟用','Roster & activation')) + '</button></td></tr>';
+  }).join('');
+  return h + '</table></div>';
+}
+function doOpenOrder(id){ pdOrderId = id; pdSendNote = false; renderPartnerDrawer(); }
+function doBackToList(){ pdOrderId = null; pdSendNote = false; renderPartnerDrawer(); }
+/* 企業型經銷訂單：不由 TLI 匯入名單、不寄啟用信；只顯示企業 HR 匯入後的啟用統計（讀主檔），並連到組織客戶 */
+function renderEnterpriseOrderDetail(o, x, acc, st){
+  var org = TLI_MASTERS.byId('orgCustomers', x.orgId) || {}, nm = escHtml(org.name || x.orgId);
+  var notStarted = acc.filter(function(a){ return a.activationStatus === '未啟用'; }).length;
+  var sentOnly = acc.filter(function(a){ return a.activationStatus === '已寄通知'; }).length;
+  var h = '<button type="button" class="pc-back" onclick="doBackToList()">&larr; ' + TLI_I18N.t('返回經銷訂單','Back to orders') + '</button>' +
+    '<div class="pc-bar"><div><div style="font-size:15px;font-weight:600">' + escHtml(x.id) + '｜' + escHtml(doPlanName(x.planId)) + '</div>' +
+    '<div class="small">' + TLI_I18N.t('企業會員：','Company: ') + nm + '（' + TLI_I18N.t('企業代碼','code') + ' ' + escHtml(org.code || '') + '）｜' + TLI_I18N.t('名額 ' + x.seats, 'Seats ' + x.seats) + '</div></div>' +
+    '<div class="btns"><a class="btn ghost" href="a05_orders.html?q=' + encodeURIComponent(x.id) + '">' + TLI_I18N.t('到訂單看付款與發票','Payment and invoice in Orders') + '</a>' +
+    '<a class="btn" id="doOpenOrgBtn" href="a19_b2b_enterprise.html?org=' + encodeURIComponent(x.orgId) + '">' + TLI_I18N.t('前往組織客戶：','Go to organization: ') + nm + '</a></div></div>' +
+    '<div class="pc-note" id="doEntNote">' + TLI_I18N.t('此訂單的員工名單由 ' + nm + ' 企業 HR 於組織端匯入，TLI 不代匯名單、也不在這裡寄啟用信。','The employee roster for this order is imported by the HR of ' + nm + ' in the organization portal. TLI does not import the roster or send activation emails here.') + '</div>' +
+    '<div class="tablewrap"><table id="doEntStats"><tr><th>' + TLI_I18N.t('名額','Seats') + '</th><th>' + TLI_I18N.t('已匯入','Imported') + '</th><th>' + TLI_I18N.t('未啟用','Not activated') + '</th><th>' + TLI_I18N.t('已寄通知','Notice sent') + '</th><th>' + TLI_I18N.t('已啟用','Activated') + '</th></tr>' +
+    '<tr><td>' + x.seats + '</td><td>' + st.imported + '</td><td>' + notStarted + '</td><td>' + sentOnly + '</td><td>' + st.active + '</td></tr></table></div>';
+  return h;
+}
+function renderOrderDetail(o, x){
+  var acc = doAccountsOfOrder(x), st = doStat(x), ent = x.kind === 'enterprise';
+  if (ent) return renderEnterpriseOrderDetail(o, x, acc, st);
+  var noMail = acc.filter(function(a){ return a.activationMethod === '啟用碼'; }).length;
+  var pending = acc.filter(function(a){ return a.activationMethod === 'Email 通知' && a.activationStatus === '未啟用'; }).length;
+  var h = '<button type="button" class="pc-back" onclick="doBackToList()">&larr; ' + TLI_I18N.t('返回經銷訂單','Back to orders') + '</button>' +
+    '<div class="pc-bar"><div><div style="font-size:15px;font-weight:600">' + escHtml(x.id) + '｜' + escHtml(doPlanName(x.planId)) + '</div>' +
+    '<div class="small">' + (ent ? TLI_I18N.t('企業會員：','Company: ') + escHtml(doOrgName(x.orgId)) + '（' + TLI_I18N.t('企業代碼','code') + ' ' + escHtml((TLI_MASTERS.byId('orgCustomers', x.orgId) || {}).code || '') + '）' : TLI_I18N.t('非企業學員（Email 必填，沒有統編與員工編號）','Individual students (email required; no tax ID or employee no.)')) +
+    '｜' + TLI_I18N.t('名額 ' + x.seats + '，已匯入 ' + st.imported + '，已寄信 ' + st.sent + '，已啟用 ' + st.active, 'Seats ' + x.seats + ', imported ' + st.imported + ', sent ' + st.sent + ', activated ' + st.active) + '</div></div>' +
+    '<div class="btns"><a class="btn ghost" href="a05_orders.html?q=' + encodeURIComponent(x.id) + '">' + TLI_I18N.t('到訂單看付款與發票','Payment and invoice in Orders') + '</a><button type="button" class="btn ghost" onclick="doOpenImport()">' + TLI_I18N.t('匯入學員名單','Import roster') + '</button>' +
+    (ent ? '<button type="button" class="btn ghost" onclick="doExportCodes()">' + TLI_I18N.t('匯出名單＋啟用碼','Export list + codes') + '</button>' : '') +
+    '<button type="button" class="btn" onclick="doSendBatch()">' + TLI_I18N.t('批次寄啟用信（' + pending + '）','Send activation emails (' + pending + ')') + '</button></div></div>';
+  if (!acc.length){
+    h += '<div class="hint">' + TLI_I18N.t('名單是空的，請匯入學員名單。','The roster is empty. Import a student roster.') + '</div>';
+  } else {
+    h += '<div class="tablewrap"><table><tr>' + (ent ? '<th>' + TLI_I18N.t('員工編號','Employee No.') + '</th>' : '') + '<th>' + TT('姓名') + '</th><th>Email</th>' + (ent ? '<th>' + TLI_I18N.t('部門','Dept.') + '</th>' : '') + '<th>' + TLI_I18N.t('啟用方式','Method') + '</th><th>' + TLI_I18N.t('啟用狀態','Status') + '</th><th>' + TLI_I18N.t('啟用碼','Code') + '</th><th></th></tr>';
+    h += acc.map(function(a){
+      var act = '';
+      if (a.activationMethod === 'Email 通知' && a.activationStatus !== '已啟用') act = '<button type="button" class="linkbtn" onclick="doSendOne(\'' + a.id + '\')">' + TLI_I18N.t(a.activationStatus === '未啟用' ? '寄啟用信' : '重寄啟用信', a.activationStatus === '未啟用' ? 'Send activation email' : 'Resend') + '</button>';
+      else if (a.activationMethod === '啟用碼' && a.activationStatus !== '已啟用') act = '<button type="button" class="linkbtn" onclick="doCopyCode(\'' + a.id + '\')">' + TLI_I18N.t('複製啟用碼','Copy code') + '</button>';
+      if (a.activationMethod === 'Email 通知' && a.activationStatus === '已寄通知') act += ' <a class="linkbtn" target="_blank" rel="noopener" href="' + escHtml(TLI_MASTERS.activationLinkOf(a, '../公開網站/')) + '">' + TLI_I18N.t('啟用信連結','Activation link') + '</a>';
+      var mth = TLI_MASTERS.activationMethods.filter(function(m){ return m.id === a.activationMethod; })[0];
+      return '<tr>' + (ent ? '<td>' + escHtml(a.employeeNo) + '</td>' : '') + '<td>' + escHtml(a.name) + '</td><td>' + (a.email ? escHtml(a.email) : '<span class="small">－</span>') + '</td>' + (ent ? '<td>' + escHtml(a.department || '－') + '</td>' : '') +
+        '<td>' + escHtml(mth ? TLI_I18N.t(mth.name, mth.en) : a.activationMethod) + '</td><td>' + doActBadge(a.activationStatus) + '</td><td>' + escHtml(a.activationMethod === '啟用碼' ? TLI_MASTERS.activationCodeOf(a) : '－') + '</td><td style="white-space:nowrap">' + act + '</td></tr>';
+    }).join('') + '</table></div>';
+  }
+  if (noMail) h += '<div class="hint" style="margin-top:8px">' + TLI_I18N.t('沒有 Email 的 ' + noMail + ' 位員工用啟用碼：匯出名單由企業自行發給員工，員工第一次登入輸入啟用碼後設定密碼，之後用「企業代碼＋員工編號＋密碼」登入。','The ' + noMail + ' employee(s) without email use activation codes: export the list for the company to hand out; the employee enters the code at first login and sets a password, then logs in with company code + employee no. + password.') + '</div>';
+  if (pdSendNote) h += '<div class="pc-note">' + TLI_I18N.t('啟用信已寄出。學員點信中連結（或輸入啟用碼）設定密碼後帳號啟用；此帳號只屬於這個來源單位，與同一人在其他來源的帳號各自獨立。','Activation emails sent. The student sets a password via the link (or activation code) to activate. This account belongs to this source unit only and is independent from the same person\'s accounts elsewhere.') + '</div>';
+  return h;
+}
+function doSendOne(id){
+  var a = TLI_MASTERS.memberAccounts.filter(function(x){ return x.id === id; })[0];
+  if (!a) return;
+  a.activationStatus = a.activationStatus === '已啟用' ? a.activationStatus : '已寄通知'; a.sentAt = doNow(); TLI_MASTERS.ensureActivationCode(a);
+  TLI_MASTERS.saveMemberData(); pdSendNote = true; renderPartnerDrawer();
+  toast(TLI_I18N.t('已寄出啟用信：' + a.email, 'Activation email sent: ' + a.email));
+}
+function doSendBatch(){
+  var list = doAccounts(pdOrderId).filter(function(a){ return a.activationMethod === 'Email 通知' && a.activationStatus === '未啟用'; });
+  if (!list.length){ toast(TLI_I18N.t('沒有待寄啟用信的學員','No students are waiting for an activation email')); return; }
+  list.forEach(function(a){ a.activationStatus = '已寄通知'; a.sentAt = doNow(); TLI_MASTERS.ensureActivationCode(a); });
+  TLI_MASTERS.saveMemberData(); pdSendNote = true; renderPartnerDrawer();
+  toast(TLI_I18N.t('已寄出 ' + list.length + ' 封啟用信', list.length + ' activation email(s) sent'));
+}
+function doCopyCode(id){
+  var a = TLI_MASTERS.memberAccounts.filter(function(x){ return x.id === id; })[0];
+  var c = a ? TLI_MASTERS.activationCodeOf(a) : '';
+  toast(TLI_I18N.t('啟用碼已複製：' + c, 'Activation code copied: ' + c));
+}
+function doExportCodes(){
+  var acc = doAccounts(pdOrderId).filter(function(a){ return a.activationMethod === '啟用碼'; });
+  var csv = '\ufeff員工編號,姓名,部門,啟用碼\n' + acc.map(function(a){ return [a.employeeNo, a.name, a.department, TLI_MASTERS.activationCodeOf(a)].join(','); }).join('\n');
+  try {
+    var url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+    var el = document.createElement('a'); el.href = url; el.download = pdOrderId + '_activation_codes.csv'; document.body.appendChild(el); el.click(); document.body.removeChild(el);
+  } catch(e){}
+  toast(TLI_I18N.t('已匯出名單與啟用碼，共 ' + acc.length + ' 筆', 'List with activation codes exported: ' + acc.length + ' row(s)'));
+}
+/* ---- 建立經銷訂單 ---- */
+function doOpenOrderModal(){
+  var p = partnerById(pdCurrentId);
+  if (!p) return;
+  document.getElementById('doPartnerName').value = p.name;
+  document.getElementById('doPlan').innerHTML = TLI_MASTERS.packages.filter(function(k){ return k.type === 'pkg'; }).map(function(k){ return '<option value="' + k.id + '">' + escHtml(k.name) + '</option>'; }).join('');
+  var orgs = TLI_MASTERS.orgCustomers.filter(function(g){ return g.sourceType === 'distributor' && g.sourceUnitId === p.id; });
+  document.getElementById('doOrg').innerHTML = orgs.length ? orgs.map(function(g){ return '<option value="' + g.id + '">' + escHtml(g.name) + '</option>'; }).join('') : '<option value="">' + TLI_I18N.t('此經銷商尚無帶來的企業','No companies brought in by this distributor') + '</option>';
+  document.getElementById('doSeats').value = 10;
+  document.querySelector('input[name="doKind"][value="individual"]').checked = true;
+  document.getElementById('doOrgWrap').style.display = 'none';
+  document.getElementById('doOrderErr').style.display = 'none';
+  document.getElementById('doOrderModal').classList.add('open');
+}
+function doKindChange(){ document.getElementById('doOrgWrap').style.display = document.querySelector('input[name="doKind"]:checked').value === 'enterprise' ? '' : 'none'; }
+function doNextOrderId(){
+  var y = new Date().getFullYear(), mx = 0;
+  TLI_MASTERS.distOrders.forEach(function(x){ var n = parseInt(String(x.id).split('-').pop(), 10) || 0; if (n > mx) mx = n; });
+  return 'DO-' + y + '-' + ('0000' + (mx + 1)).slice(-4);
+}
+function doSaveOrder(){
+  var err = document.getElementById('doOrderErr');
+  var seats = parseInt(document.getElementById('doSeats').value, 10);
+  var kind = document.querySelector('input[name="doKind"]:checked').value;
+  var org = document.getElementById('doOrg').value;
+  var msg = '';
+  if (!seats || seats < 1) msg = TLI_I18N.t('學員名額請填 1 以上的數字','Enter a seat count of 1 or more');
+  else if (kind === 'enterprise' && !org) msg = TLI_I18N.t('請選擇企業','Select a company');
+  if (msg){ err.textContent = msg; err.style.display = ''; return; }
+  var x = {id:doNextOrderId(), partnerId:pdCurrentId, planId:document.getElementById('doPlan').value, seats:seats, kind:kind, orgId:kind === 'enterprise' ? org : '', createdAt:doToday(), status:'待匯入名單'};
+  TLI_MASTERS.distOrders.unshift(x);
+  TLI_MASTERS.saveMemberData();
+  closeModal('doOrderModal');
+  pdOrderId = x.id; renderPartnerDrawer();
+  toast(TLI_I18N.t('已建立經銷訂單 ' + x.id + '，請匯入學員名單', 'Distributor order ' + x.id + ' created. Import the student roster next.'));
+}
+/* ---- 匯入學員名單 ---- */
+function doOpenImport(){
+  var x = doOrderById(pdOrderId); if (!x) return;
+  var ent = x.kind === 'enterprise';
+  document.getElementById('doImpInfo').innerHTML = ent
+    ? TLI_I18N.t('企業會員（' + escHtml(doOrgName(x.orgId)) + '）走企業白名單。欄位依序：員工編號、姓名、Email（可空）、部門；第一列可放欄位名稱。沒有 Email 者會產生啟用碼。','Company members (' + escHtml(doOrgName(x.orgId)) + ') use the company whitelist. Columns: Employee No., Name, Email (optional), Department; the first row may be headers. Rows without email get an activation code.')
+    : TLI_I18N.t('非企業學員：姓名、Email 必填，沒有統編與員工編號。欄位依序：姓名、Email；第一列可放欄位名稱。','Individual students: name and email are required; no tax ID or employee no. Columns: Name, Email; the first row may be headers.');
+  document.getElementById('doImpText').placeholder = ent ? '員工編號,姓名,Email,部門\nAT-1005,王小明,xm.wang@antai.example,業務一部' : '姓名,Email\n王小明,xm.wang@example.com';
+  document.getElementById('doImpFile').value = '';
+  document.getElementById('doImpText').value = '';
+  document.getElementById('doImpErr').style.display = 'none';
+  document.getElementById('doImportModal').classList.add('open');
+}
+function doImpLoadFile(inp){
+  var f = inp.files && inp.files[0]; if (!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){ document.getElementById('doImpText').value = String(rd.result || '').replace(/^\ufeff/, ''); };
+  rd.readAsText(f, 'utf-8');
+}
+function doImpSample(){
+  var x = doOrderById(pdOrderId); if (!x) return;
+  var n = doAccounts(x.id).length;
+  document.getElementById('doImpText').value = x.kind === 'enterprise'
+    ? (function(){ var pf = ((TLI_MASTERS.byId('orgCustomers', x.orgId) || {}).code || 'EM').slice(0, 2); return '員工編號,姓名,Email,部門\n' + pf + '-2' + (n + 1) + '01,林宜庭,yiting.lin' + (n + 1) + '@corp.example,理賠部\n' + pf + '-2' + (n + 1) + '02,陳柏宇,,客服部\n' + pf + '-2' + (n + 1) + '03,郭怡婷,yiting.kuo' + (n + 1) + '@corp.example,業務二部'; })()
+    : '姓名,Email\n王小明,xm.wang' + (n + 1) + '@example.com\n李美玲,meiling.li' + (n + 1) + '@example.com\n陳大文,dawen.chen' + (n + 1) + '@example.com';
+}
+function doImpTemplate(){ toast(TLI_I18N.t('已下載匯入範本檔案','Import template downloaded')); }
+function doEmailOk(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+function doNewAccId(){
+  var mx = 0; TLI_MASTERS.memberAccounts.forEach(function(a){ var n = parseInt(String(a.id).replace(/\D/g, ''), 10) || 0; if (n > mx) mx = n; });
+  return 'ma' + (mx + 1);
+}
+function doRunImport(){
+  var x = doOrderById(pdOrderId); if (!x) return;
+  var ent = x.kind === 'enterprise', p = partnerById(x.partnerId);
+  var err = document.getElementById('doImpErr');
+  var lines = document.getElementById('doImpText').value.split(/\r?\n/).map(function(l){ return l.trim(); }).filter(function(l){ return l; });
+  if (!lines.length){ err.textContent = TLI_I18N.t('請選擇 CSV 檔，或把內容貼在下方','Choose a CSV file or paste the content below'); err.style.display = ''; return; }
+  var scope = ent ? x.orgId : x.partnerId;
+  var seatsLeft = x.seats - doAccounts(x.id).length;
+  var ok = 0, bad = [], dup = [], over = 0, added = [];
+  lines.forEach(function(line, i){
+    var c = line.split(/[,，\t]/).map(function(v){ return v.trim().replace(/^"|"$/g, ''); });
+    if (i === 0 && /^(姓名|員工編號|name|employee)/i.test(c[0])) return;
+    var empNo = ent ? (c[0] || '') : '', name = ent ? (c[1] || '') : (c[0] || ''), email = ent ? (c[2] || '') : (c[1] || ''), dept = ent ? (c[3] || '') : '';
+    if (!name || (ent && !empNo) || (!ent && !email) || (email && !doEmailOk(email))){ bad.push(i + 1); return; }
+    var all = TLI_MASTERS.memberAccounts;
+    var same = all.filter(function(a){ return TLI_MASTERS.memberScope(a) === scope && ((email && (a.email || '').toLowerCase() === email.toLowerCase()) || (ent && a.employeeNo === empNo)); })[0];
+    if (same){ dup.push(i + 1); return; }
+    if (ok >= seatsLeft){ over++; return; }
+    var hasMail = !!email, id = doNewAccId();
+    var acct = {id:id, memberNo:'MA-' + ('000000' + id.replace(/\D/g, '')).slice(-6), name:name, email:email, phone:'', sourceType:'distributor', sourceUnitId:x.partnerId,
+      orgId:ent ? x.orgId : '', employeeNo:empNo, department:dept, activationStatus:'未啟用', activationMethod:hasMail ? 'Email 通知' : '啟用碼',
+      activationCode:hasMail ? '' : TLI_MASTERS.newActivationCode(), sentAt:'', activatedAt:'', orderId:x.id, createdAt:doToday(), plans:[{name:doPlanName(x.planId), hoursLeft:'依方案'}]};
+    all.push(acct); added.push(acct); ok++;
+  });
+  if (!ok){
+    err.textContent = TLI_I18N.t('沒有可匯入的資料（格式不符 ' + bad.length + ' 筆' + (bad.length ? '，列號 ' + bad.join('、') : '') + '；同一' + (ent ? '企業' : '經銷商') + '內重複 ' + dup.length + ' 筆；超過名額 ' + over + ' 筆）。' + (ent ? '欄位順序：員工編號、姓名、Email、部門。' : '欄位順序：姓名、Email（兩者必填）。'),
+      'Nothing to import (' + bad.length + ' invalid' + (bad.length ? ', row ' + bad.join(', ') : '') + '; ' + dup.length + ' duplicate within this ' + (ent ? 'company' : 'distributor') + '; ' + over + ' over the seat limit). ' + (ent ? 'Column order: Employee No., Name, Email, Department.' : 'Column order: Name, Email (both required).'));
+    err.style.display = '';
+    return;
+  }
+  x.status = doAccounts(x.id).length >= x.seats ? '已匯入名單' : '匯入中';
+  TLI_MASTERS.saveMemberData(); closeModal('doImportModal'); renderPartnerDrawer();
+  var parts = [], partsEn = [];
+  if (bad.length){ parts.push('格式不符：列號 ' + bad.join('、')); partsEn.push('invalid: row ' + bad.join(', ')); }
+  if (dup.length){ parts.push('同一' + (ent ? '企業' : '經銷商') + '內重複：列號 ' + dup.join('、')); partsEn.push('duplicate: row ' + dup.join(', ')); }
+  if (over){ parts.push('超過名額 ' + over + ' 筆'); partsEn.push(over + ' over seat limit'); }
+  toast(TLI_I18N.t('成功匯入 ' + ok + ' 筆，略過 ' + (bad.length + dup.length + over) + ' 筆' + (parts.length ? '（' + parts.join('；') + '）' : '') + '。請接著寄啟用信。', ok + ' imported, ' + (bad.length + dup.length + over) + ' skipped' + (partsEn.length ? ' (' + partsEn.join('; ') + ')' : '') + '. Send activation emails next.'));
+}
+
 function partnerFiltered(){
   var q = (document.getElementById('partnerSearch').value || '').trim().toLowerCase();
   var ty = document.getElementById('f_type').value;
@@ -1400,11 +1662,12 @@ function renderPartnerTable(){
     tr.innerHTML = '<td>' + escHtml(p.name) + '</td><td>' + escHtml(p.contact) + '</td><td>' + escHtml(countryLabel(p.country)) + '</td>' +
       '<td>' + typeBadge(p.type) + '</td>' +
       '<td>' + statusBadge(p.status) + '</td>' +
-      '<td><button class="linkbtn" onclick="event.stopPropagation();togglePartnerStatus(\'' + p.id + '\')">' + TT(p.status === '啟用' ? '停用' : '啟用') + '</button></td>';
+      '<td style="white-space:nowrap">' + (p.type === 'distributor' ? '<button class="linkbtn" onclick="event.stopPropagation();openPartnerOrders(\'' + p.id + '\')">' + TLI_I18N.t('經銷訂單','Orders') + '</button> ' : '') + '<button class="linkbtn" onclick="event.stopPropagation();togglePartnerStatus(\'' + p.id + '\')">' + TT(p.status === '啟用' ? '停用' : '啟用') + '</button></td>';
     t.appendChild(tr);
   });
   document.getElementById('partnerEmpty').style.display = rows.length ? 'none' : '';
 }
+function openPartnerOrders(id){ openPartnerDetail(id); pdTab = 'orders'; pdOrderId = null; renderPartnerDrawer(); }
 function togglePartnerStatus(id){
   var p = partnerById(id);
   if (!p) return;
@@ -1440,6 +1703,7 @@ function refreshCountryFilter(){ fillCountryOptions(document.getElementById('f_c
 refreshCountryFilter();
 renderPartnerTable();
 renderPartnerLog();
+(function(){ var q = new URLSearchParams(location.search), pid = q.get('partner'); if (pid && partnerById(pid)){ openPartnerOrders(pid); if (q.get('order') && doOrderById(q.get('order'))) doOpenOrder(q.get('order')); } })();
 if (window.TLI_I18N) {
   TLI_I18N.onRefresh(refreshCountryFilter);
   TLI_I18N.onRefresh(renderPartnerTable);

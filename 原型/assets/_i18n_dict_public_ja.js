@@ -455,7 +455,6 @@ Object.assign(TLI_I18N_DICT.ja,{
 "p07_next_target_checkout":"決済ページ",
 "p07_next_target_myevents":"マイイベント",
 "p07_next_target_generic":"以前ご覧になっていたページ",
-"p07_partner_student_login":"提携機関の学生ログイン",
 "p07_partner_activate_link":"アカウント開通へ",
 "p07_marketing_consent":"TLIが学習データをコース推薦やマーケティングに利用することに同意します（いつでも解除できます）。",
 /* ---- p10_enterprise ---- */

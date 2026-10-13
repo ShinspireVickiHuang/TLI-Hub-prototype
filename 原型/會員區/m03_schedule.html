@@ -403,10 +403,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <div class="more-filter-panel" id="moreFilterPanel">
         <select class="tool-select" id="planFilterSel" aria-label="依方案" onchange="setPlanFilter(this.value)" data-i18n-aria-label="m03.planFilterAria">
           <option value="all" data-i18n="m03.planFilterAllOpt">依方案：全部</option>
-          <option value="plan-a" data-i18n="m03.planA">自費一對一</option>
-          <option value="plan-b" data-i18n="m03.planB">自費團體直播</option>
-          <option value="plan-c" data-i18n="m03.planC">企業合約</option>
-          <option value="plan-d" data-i18n="m03.planD">專案合作</option>
+          <option value="plan-a" data-plan-id="plan-a" data-i18n="m03.planA">自費一對一</option>
+          <option value="plan-b" data-plan-id="plan-b" data-i18n="m03.planB">自費團體直播</option>
+          <option value="plan-c" data-plan-id="plan-c" data-i18n="m03.planC">企業合約</option>
+          <option value="plan-d" data-plan-id="plan-d" data-i18n="m03.planD">專案合作</option>
         </select>
       </div>
     </div>
@@ -652,6 +652,8 @@ var SESSIONS = [
   {id:'e5',type:'chat',status:'upcoming',start:new Date(2026,8,9,20,0),end:new Date(2026,8,9,20,30),teacher:'杜老師',mode:'Mandarin Lounge 線上會話',material:'《生活會話》Unit 7',title:'Mandarin Lounge－生活會話',planId:'plan-d'},
   {id:'e6',type:'event',status:'upcoming',start:new Date(2026,8,20,14,0),end:new Date(2026,8,20,16,0),teacher:'TLI 活動組',mode:'線上直播',material:'活動講義 PDF',title:'活動：中秋茶會',planId:'plan-a'}
 ];
+/* 目前帳號只看自己的課（無 planId 的歷史課視為直營方案） */
+SESSIONS = SESSIONS.filter(function(s){ return TLI_MASTERS.planAllowed(s.planId||'plan-a'); });
 var SESSIONS_BY_ID={};
 SESSIONS.forEach(function(s){ SESSIONS_BY_ID[s.id]=s; });
 
@@ -743,19 +745,20 @@ function renderAll(){
 /* ================= 一對一排課：方案選擇（無法指定老師，由顧問依提出的時段安排） ================= */
 var selectedReqPlanId=null;
 function renderReqPlanPicker(){
-  var wrap=document.getElementById('reqPlanPicker');
-  var planA=PLAN_META['plan-a'], planC=PLAN_META['plan-c'];
-  wrap.innerHTML=
-    '<div class="pick-card'+(selectedReqPlanId==='plan-a'?' selected':'')+'" onclick="selectReqPlan(\'plan-a\')">'+
-      '<div class="avatar">A</div>'+
-      '<div class="body"><h4>'+planA.name+'</h4><p class="small muted">'+payerLabelT('self')+'</p></div>'+
-      '<div class="radio-dot"></div>'+
-    '</div>'+
-    '<div class="pick-card'+(selectedReqPlanId==='plan-c'?' selected':'')+'" onclick="selectReqPlan(\'plan-c\')">'+
-      '<div class="avatar">C</div>'+
-      '<div class="body"><h4>'+planC.name+'</h4><p class="small muted">'+T('企業合約・公司提供',{en:'Corporate Contract · Company-provided',ja:'企業契約・企業提供',de:'Firmenvertrag · vom Unternehmen bereitgestellt'})+'</p></div>'+
-      '<div class="radio-dot"></div>'+
-    '</div>';
+  var wrap=document.getElementById('reqPlanPicker'), h='';
+  function card(id,letter,name,sub){
+    return '<div class="pick-card'+(selectedReqPlanId===id?' selected':'')+'" onclick="selectReqPlan(\''+id+'\')">'+
+      '<div class="avatar">'+letter+'</div><div class="body"><h4>'+name+'</h4><p class="small muted">'+sub+'</p></div><div class="radio-dot"></div></div>';
+  }
+  /* 只列目前帳號自己的方案；非示範帳號（經銷、其他企業）列帳號自己 plans 欄的方案 */
+  if(TLI_MASTERS.planAllowed('plan-a')) h+=card('plan-a','A',PLAN_META['plan-a'].name,payerLabelT('self'));
+  if(TLI_MASTERS.planAllowed('plan-c')) h+=card('plan-c','C',PLAN_META['plan-c'].name,T('企業合約・公司提供',{en:'Corporate Contract · Company-provided',ja:'企業契約・企業提供',de:'Firmenvertrag · vom Unternehmen bereitgestellt'}));
+  if(!TLI_MASTERS.isDemoAccount()){
+    var acct=TLI_MASTERS.currentAccount(), unit=TLI_MASTERS.sourceUnitName(acct);
+    (acct.plans||[]).forEach(function(pl,i){ PLAN_META['acct-'+i]={name:pl.name,payer:'company'}; h+=card('acct-'+i,String(i+1),pl.name,unit); });
+    if(!(acct.plans||[]).length) h='<p class="small muted">'+T('此帳號目前沒有可排課的方案。','This account has no plan to schedule yet.')+'</p>';
+  }
+  wrap.innerHTML=h;
 }
 function selectReqPlan(planId){
   selectedReqPlanId=planId;
@@ -905,6 +908,7 @@ var SCHEDULING_REQUESTS=[
   {id:'req-seed-2', planId:'plan-a', weekly:[], specific:[{label:'8/20（四）',times:['14:00']}], note:'want-improve-listening', status:'arranged', submittedAt:new Date(2026,7,18,9,0), arrangedTeacher:'陳美惠老師', arrangedTime:'8/21（五）14:00'},
   {id:'req-seed-3', planId:'plan-c', weekly:['週二晚'], specific:[], note:'prefer-female-teacher', status:'needs_adjust', submittedAt:new Date(2026,7,15,11,0), advisorNote:'slot-full-advisor-note'}
 ];
+SCHEDULING_REQUESTS = SCHEDULING_REQUESTS.filter(function(r){ return TLI_MASTERS.planAllowed(r.planId); });
 function reqPrefText(r){
   var parts=[];
   if(r.weekly && r.weekly.length) parts.push(T('每週：',{en:'Weekly: ',ja:'毎週：',de:'Wöchentlich: '})+r.weekly.map(seedWdT).join('、'));

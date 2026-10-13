@@ -781,7 +781,7 @@ Object.assign(TLI_I18N_DICT.ja,{
 "m13.ref.label":"割引コードまたは紹介コード（任意）",
 "m13.ref.hint":"提携パートナーの紹介リンクから入場した場合は自動入力されます。手動入力も可能です",
 "m13.ref.autoHint":"紹介リンクからコードが自動入力されました",
-"m13.ref.placeholder":"例：AGENT2026",
+"m13.ref.placeholder":"割引コードまたは紹介コードを入力",
 "m13.ref.tagPrefix":"紹介元代理店：",
 "m13.pay.title":"お支払い方法",
 "m13.pay.newebpay":"クレジットカード（藍新金流）",

@@ -5,6 +5,37 @@
    建立全域物件 window.TLI_MASTERS。管理頁（見各清單對應的 manageLink）可直接
    push／splice／修改欄位，因為其他頁拿到的是同一個陣列參照，不是複製本。
    ================================================================== */
+/* ------------------------------------------------------------------
+   20261013 會員結構（契約：原型2 根目錄 _契約_會員結構與啟用_20261013.md）新欄位定義，後續登入頁、組織端、經銷學員入口都讀這些：
+   一筆會員＝一個人＋一個來源單位（人 × 來源）。同一人（同 Email）從不同來源進來＝兩筆、兩個帳號，不合併、不跨來源比對。
+   TLI_MASTERS.memberAccounts（會員帳號，一行一筆）：
+     id            帳號 ID（'ma01'…）
+     memberNo      會員編號（'MA-000001'）
+     name          姓名
+     email         Email；企業員工可為空字串（此時用「企業代碼＋員工編號」登入）；非企業經銷學員必填
+     phone         手機（可空）
+     sourceType    來源型態：'direct'直營／'agent'代理／'project'專案合作／'distributor'經銷（見 TLI_MASTERS.sourceTypes）
+     sourceUnitId  來源單位 ID：直營＝'tli'；其餘＝partners 的 id（p02、p05…）。企業會員＝該企業是由哪個單位帶來的（同 orgCustomers.sourceUnitId）
+     orgId         所屬企業 ID（orgCustomers 的 id），非企業會員為空字串
+     employeeNo    員工編號（企業會員才有；非企業經銷學員沒有）
+     department    部門（企業會員，可空）
+     activationStatus  啟用狀態：'未啟用'／'已寄通知'／'已啟用'（見 TLI_MASTERS.activationStates）
+     activationMethod  啟用方式：'Email 通知'／'啟用碼'（見 TLI_MASTERS.activationMethods）
+     activationCode    啟用碼（啟用方式為「啟用碼」者才有，例：'TLI-K7M2Q9'）；已啟用後仍保留作紀錄
+     sentAt        啟用信寄出時間（'YYYY-MM-DD HH:mm'，可空）
+     activatedAt   啟用時間（可空）
+     orderId       經銷訂單編號（經銷匯入者才有，對應 TLI_MASTERS.distOrders 的 id）
+     createdAt     建立日期 'YYYY-MM-DD'
+     plans         方案與課時（選填；各帳號各自一份，不跨來源合併）：[{name, hoursLeft}]
+   重複檢查範圍（scope）＝ orgId || sourceUnitId：只有「同一來源單位內」（同一家企業／同一夥伴）Email 或員工編號重複才擋。
+   登入規則：Email 對應多個帳號時先選單位（企業名稱／夥伴名稱，直營顯示「TLI 直營」）；無 Email 者用 企業代碼(orgCustomers.code)＋員工編號。
+   TLI_MASTERS.orgCustomers 新增欄位：code 企業代碼、sourceType 帶來這家企業的來源型態、sourceUnitId 帶來的夥伴 id（直營＝'tli'）。
+   TLI_MASTERS.distOrders（經銷訂單，TLI 後台建立）：{id, partnerId, planId(packages), seats, kind:'individual'非企業|'enterprise'企業會員, orgId, createdAt, status}
+   代理來源帳號（20261013）：註冊時輸入代理優惠碼（＝partners.code，type 'agent'）→ 帳號 sourceType 'agent'、sourceUnitId＝該代理 id；已有其他來源帳號者另建一筆。agentByCode(code)、agentById(id)。
+   工具函式：memberScope(a)、sourceUnitName(a)、sourceTypeName(id)、accountsByEmail(email)、accountsOfOrder(orderId)、
+            findOrgByCode(code)、newActivationCode()、activationCodeOf(a)、ensureActivationCode(a)、activationLinkOf(a, prefix)、saveMemberData()（寫入 localStorage，key 見下方）。
+   a20 經銷「匯入學員名單」會把新帳號 push 進 memberAccounts 並存檔，a01 會員管理讀同一份。
+   ------------------------------------------------------------------ */
 (function(global){
 
 /* ---- 1. 校區與線上據點（來源 a17「校區與線上據點」） ---- */
@@ -251,20 +282,20 @@ var partners = [
 /* ---- 12. 組織客戶（來源 a19「組織客戶」；只收企業，type 一律 'general'。
    學校類夥伴走 a20「合作夥伴管理」的專案合作型態，不放在這裡）---- */
 var orgCustomers = [
- {id:'ent0', name:'和霖科技股份有限公司', type:'general'},
- {id:'ent1', name:'北辰精密工業股份有限公司', type:'general'},
- {id:'ent2', name:'裕發國際貿易有限公司', type:'general'},
- {id:'ent3', name:'安泰保經股份有限公司', type:'general'},
- {id:'ent4', name:'瑞新金融顧問股份有限公司', type:'general'},
- {id:'ent6', name:'東岳生技股份有限公司', type:'general'},
- {id:'ent7', name:'大西華國際物流股份有限公司', type:'general'},
- {id:'ent8', name:'崇信會計師事務所', type:'general'},
- {id:'ent10', name:'立準工程顧問股份有限公司', type:'general'},
- {id:'ent11', name:'翔宇航運股份有限公司', type:'general'},
+ {id:'ent0', name:'和霖科技股份有限公司', type:'general', code:'HELIN', sourceType:'direct', sourceUnitId:'tli'},
+ {id:'ent1', name:'北辰精密工業股份有限公司', type:'general', code:'BEICHEN', sourceType:'agent', sourceUnitId:'p08'},
+ {id:'ent2', name:'裕發國際貿易有限公司', type:'general', code:'YUFA', sourceType:'agent', sourceUnitId:'p12'},
+ {id:'ent3', name:'安泰保經股份有限公司', type:'general', code:'ANTAI', sourceType:'distributor', sourceUnitId:'p05'},
+ {id:'ent4', name:'瑞新金融顧問股份有限公司', type:'general', code:'RUIXIN', sourceType:'distributor', sourceUnitId:'p07'},
+ {id:'ent6', name:'東岳生技股份有限公司', type:'general', code:'DONGYUE', sourceType:'direct', sourceUnitId:'tli'},
+ {id:'ent7', name:'大西華國際物流股份有限公司', type:'general', code:'DAXIHUA', sourceType:'distributor', sourceUnitId:'p06'},
+ {id:'ent8', name:'崇信會計師事務所', type:'general', code:'CHONGXIN', sourceType:'direct', sourceUnitId:'tli'},
+ {id:'ent10', name:'立準工程顧問股份有限公司', type:'general', code:'LIZHUN', sourceType:'agent', sourceUnitId:'p08'},
+ {id:'ent11', name:'翔宇航運股份有限公司', type:'general', code:'XIANGYU', sourceType:'project', sourceUnitId:'p02'},
  /* 20260928：移除原 ent12 學校類單位——它是合作夥伴（見 partners 的 p02），不該同時是組織客戶，
     合作資訊統一在「合作夥伴管理」a20 維護；原索引改補企業管理者角色（h00–h07，陳雅婷）示範租戶，
     合約明細（方案／期間／6,000 小時時數池／月結／負責顧問王大明）見 a19 該筆 ENT_TYPE_OVERRIDE 覆寫 */
- {id:'ent12', name:'範例半導體股份有限公司', type:'general'}
+ {id:'ent12', name:'範例半導體股份有限公司', type:'general', code:'FANLI', sourceType:'direct', sourceUnitId:'tli'}
 ];
 
 /* ---- 13. 銷售方案（來源 a04「銷售方案設定」，直接沿用原始欄位，包含折扣、優惠碼、班表、專案報價等） ---- */
@@ -519,6 +550,140 @@ projectRoster.forEach(function(r){
   if (r.status === '已啟用' && !r.activatedAt){ r.activatedAt = '2027-02-' + ('0' + (3 + (parseInt(String(r.id).replace(/\D/g, ''), 10) || 0) % 20)).slice(-2) + ' 10:' + ('0' + ((parseInt(String(r.id).replace(/\D/g, ''), 10) || 0) * 7 % 60)).slice(-2); }
 });
 
+/* ---- 21. 會員結構：人 × 來源（20261013 新增，欄位定義見檔頭註解；契約檔 _契約_會員結構與啟用_20261013.md） ---- */
+var sourceTypes = [
+ {id:'direct', name:'直營', en:'Direct'},
+ {id:'agent', name:'代理', en:'Agent'},
+ {id:'project', name:'專案合作', en:'Project Partnership'},
+ {id:'distributor', name:'經銷', en:'Distributor'}
+];
+var activationStates = [
+ {id:'未啟用', name:'未啟用', en:'Not Activated'},
+ {id:'已寄通知', name:'已寄通知', en:'Notice Sent'},
+ {id:'已啟用', name:'已啟用', en:'Activated'}
+];
+var activationMethods = [
+ {id:'Email 通知', name:'Email 通知', en:'Email notice'},
+ {id:'啟用碼', name:'啟用碼', en:'Activation code'}
+];
+function acc(id, name, email, o){
+  var a = {id:id, memberNo:'MA-'+('000000'+id.replace(/\D/g,'')).slice(-6), name:name, email:email, phone:'', sourceType:'direct', sourceUnitId:'tli',
+    orgId:'', employeeNo:'', department:'', activationStatus:'已啟用', activationMethod:'Email 通知', activationCode:'', sentAt:'', activatedAt:'',
+    orderId:'', createdAt:'2026-09-15', plans:[]};
+  for (var k in o) a[k] = o[k];
+  if (a.activationMethod === '啟用碼' && !a.activationCode) a.activationCode = 'TLI-' + (id.replace(/\D/g,'') + 'K7M2Q9X4').slice(0,6).toUpperCase();
+  if (a.activationStatus === '已啟用' && !a.activatedAt) a.activatedAt = a.createdAt + ' 11:00';
+  if (a.activationStatus !== '未啟用' && !a.sentAt) a.sentAt = a.createdAt + ' 09:30';
+  return a;
+}
+var memberAccounts = [
+ /* 同一人（同 Email）在三個來源各一筆＝三個帳號：直營／和霖科技（企業，直營帶來）／範例州立大學（專案合作），各自方案與課時 */
+ acc('ma01','Emma Johnson','emma.johnson@example.com',{phone:'0912-345-678', createdAt:'2024-08-20', plans:[{name:'中文一對一 20 堂課程包', hoursLeft:'12 堂'},{name:'彈性團體直播・中級會話 B1 班', hoursLeft:'8 堂'}]}),
+ acc('ma02','Emma Johnson','emma.johnson@example.com',{sourceType:'direct', sourceUnitId:'tli', orgId:'ent0', employeeNo:'HL-0231', department:'海外業務部', createdAt:'2026-03-02', plans:[{name:'商務華語企業培訓（公司提供）', hoursLeft:'36 小時'}]}),
+ acc('ma03','Emma Johnson','emma.johnson@example.com',{sourceType:'project', sourceUnitId:'p02', createdAt:'2026-08-20', plans:[{name:'華語會話學期方案（專案合作）', hoursLeft:'依班級課表'}]}),
+ /* 同一人在直營、代理、經銷各一筆（代理來源帳號：註冊時輸入代理優惠碼建立，不把代理訂單掛在直營帳號） */
+ acc('ma04','林佩瑜','peiyu.lin@example.com',{phone:'0938-200-201', createdAt:'2026-07-12', plans:[{name:'中文一對一 20 堂課程包', hoursLeft:'15 堂'}]}),
+ acc('ma05','林佩瑜','peiyu.lin@example.com',{sourceType:'agent', sourceUnitId:'p12', createdAt:'2026-09-12', phone:'0938-200-201', plans:[{name:'日常會話 10 堂（代理來源）', hoursLeft:'10 堂'}]}),
+ /* 經銷非企業學員：Email 必填、無統編員編；DO-2026-0001（大馬旅遊教育集團） */
+ acc('ma10','林佩瑜','peiyu.lin@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-01', phone:'0938-200-201', plans:[{name:'日常會話套裝行程（經銷包裝）', hoursLeft:'20 堂'}]}),
+ acc('ma11','蔡明哲','tsai.mingzhe@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-02', phone:'0938-200-202', plans:[{name:'日常會話套裝行程（經銷包裝）', hoursLeft:'20 堂'}]}),
+ acc('ma12','楊雅雯','yang.yawen@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-03', phone:'0938-200-203', activationStatus:'已寄通知'}),
+ acc('ma13','許家瑋','hsu.jiawei@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-04', phone:'0938-200-204'}),
+ acc('ma14','周思穎','chou.siying@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-05', phone:'0938-200-205'}),
+ acc('ma15','羅冠霖','luo.guanlin@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-06', phone:'0938-200-206', activationStatus:'未啟用'}),
+ acc('ma16','Nguyen Minh Anh','minhanh.nguyen@example.com',{sourceType:'distributor', sourceUnitId:'p06', orderId:'DO-2026-0002', createdAt:'2026-09-10', plans:[{name:'商務華語入門包（經銷包裝）', hoursLeft:'16 堂'}]}),
+ acc('ma17','Tran Quoc Bao','bao.tran@example.com',{sourceType:'distributor', sourceUnitId:'p06', orderId:'DO-2026-0002', createdAt:'2026-09-10', activationStatus:'已寄通知'}),
+ acc('ma18','김서연','seoyeon.kim@example.com',{sourceType:'distributor', sourceUnitId:'p07', orderId:'DO-2026-0003', createdAt:'2026-09-18', plans:[{name:'日常會話套裝行程（經銷包裝）', hoursLeft:'20 堂'}]}),
+ acc('ma19','이도윤','doyoon.lee@example.com',{sourceType:'distributor', sourceUnitId:'p07', orderId:'DO-2026-0003', createdAt:'2026-09-18', activationStatus:'未啟用'}),
+ /* 經銷帶來的企業員工（企業白名單：有 Email 走啟用信；無 Email 走啟用碼，登入用企業代碼＋員編） */
+ acc('ma20','黃怡君','yichun.huang@antai.example',{sourceType:'distributor', sourceUnitId:'p05', orgId:'ent3', employeeNo:'AT-1001', department:'業務一部', orderId:'DO-2026-0004', createdAt:'2026-09-20', plans:[{name:'商務華語企業培訓（經銷包裝）', hoursLeft:'30 小時'}]}),
+ acc('ma21','張志豪','chihhao.chang@antai.example',{sourceType:'distributor', sourceUnitId:'p05', orgId:'ent3', employeeNo:'AT-1002', department:'業務一部', orderId:'DO-2026-0004', createdAt:'2026-09-20', activationStatus:'已寄通知'}),
+ acc('ma22','吳淑芬','shufen.wu@antai.example',{sourceType:'distributor', sourceUnitId:'p05', orgId:'ent3', employeeNo:'AT-1003', department:'理賠部', orderId:'DO-2026-0004', createdAt:'2026-09-20', activationStatus:'未啟用'}),
+ acc('ma23','劉建國','',{sourceType:'distributor', sourceUnitId:'p05', orgId:'ent3', employeeNo:'AT-1004', department:'客服部', orderId:'DO-2026-0004', createdAt:'2026-09-20', activationMethod:'啟用碼', activationStatus:'已寄通知'}),
+ acc('ma24','鄭雅婷','yating.cheng@ruixin.example',{sourceType:'distributor', sourceUnitId:'p07', orgId:'ent4', employeeNo:'RX-0310', department:'投資部', createdAt:'2026-09-25'}),
+ acc('ma25','謝宗翰','',{sourceType:'distributor', sourceUnitId:'p06', orgId:'ent7', employeeNo:'DX-2207', department:'倉儲部', orderId:'DO-2026-0005', createdAt:'2026-09-28', activationMethod:'啟用碼', activationStatus:'未啟用'}),
+ acc('ma26','蘇美惠','',{sourceType:'distributor', sourceUnitId:'p06', orgId:'ent7', employeeNo:'DX-2208', department:'報關部', orderId:'DO-2026-0005', createdAt:'2026-09-28', activationMethod:'啟用碼', activationStatus:'已啟用'}),
+ /* 其他企業員工：直營、代理、專案合作帶來 */
+ acc('ma30','陳雅萍','yaping.chen@helin.example',{sourceType:'direct', sourceUnitId:'tli', orgId:'ent0', employeeNo:'HL-0232', department:'海外業務部', createdAt:'2026-03-02'}),
+ acc('ma31','周柏廷','boting.chou@helin.example',{sourceType:'direct', sourceUnitId:'tli', orgId:'ent0', employeeNo:'HL-0305', department:'研發部', createdAt:'2026-03-02', activationStatus:'已寄通知'}),
+ acc('ma32','賴冠廷','guanting.lai@beichen.example',{sourceType:'agent', sourceUnitId:'p08', orgId:'ent1', employeeNo:'BC-0771', department:'採購部', createdAt:'2026-05-11'}),
+ acc('ma33','徐佳蓉','jiarong.hsu@beichen.example',{sourceType:'agent', sourceUnitId:'p08', orgId:'ent1', employeeNo:'BC-0772', department:'採購部', createdAt:'2026-05-11', activationStatus:'未啟用'}),
+ acc('ma34','洪志遠','',{sourceType:'agent', sourceUnitId:'p08', orgId:'ent1', employeeNo:'BC-0773', department:'生產部', createdAt:'2026-05-11', activationMethod:'啟用碼', activationStatus:'已寄通知'}),
+ acc('ma35','葉宇軒','yuhsuan.yeh@xiangyu.example',{sourceType:'project', sourceUnitId:'p02', orgId:'ent11', employeeNo:'XY-0412', department:'船務部', createdAt:'2026-08-30'})
+];
+/* 經銷訂單（TLI 後台建立；a20 經銷夥伴「經銷訂單」分頁）；planId 對應 packages 的 id */
+var distOrders = [
+ {id:'DO-2026-0001', partnerId:'p05', planId:'pk1', seats:6, kind:'individual', orgId:'', createdAt:'2026-08-28', status:'已匯入名單'},
+ {id:'DO-2026-0002', partnerId:'p06', planId:'pk2', seats:4, kind:'individual', orgId:'', createdAt:'2026-09-08', status:'匯入中'},
+ {id:'DO-2026-0003', partnerId:'p07', planId:'pk1', seats:3, kind:'individual', orgId:'', createdAt:'2026-09-15', status:'匯入中'},
+ {id:'DO-2026-0004', partnerId:'p05', planId:'pk4', seats:10, kind:'enterprise', orgId:'ent3', createdAt:'2026-09-18', status:'匯入中'},
+ {id:'DO-2026-0005', partnerId:'p06', planId:'pk4', seats:5, kind:'enterprise', orgId:'ent7', createdAt:'2026-09-26', status:'匯入中'},
+ {id:'DO-2026-0006', partnerId:'p07', planId:'pk2', seats:8, kind:'individual', orgId:'', createdAt:'2026-10-09', status:'待匯入名單'},
+ {id:'DO-2026-0007', partnerId:'p11', planId:'pk2', seats:6, kind:'individual', orgId:'', createdAt:'2026-07-28', status:'待匯入名單'}
+];
+var MA_KEY = 'tliMemberAccounts_v1', DO_KEY = 'tliDistOrders_v1';
+function loadMemberData(){
+  try {
+    var a = JSON.parse(global.localStorage.getItem(MA_KEY) || 'null');
+    var b = JSON.parse(global.localStorage.getItem(DO_KEY) || 'null');
+    if (Array.isArray(a) && Array.isArray(b)){
+      memberAccounts.length = 0; a.forEach(function(x){ memberAccounts.push(x); });
+      distOrders.length = 0; b.forEach(function(x){ distOrders.push(x); });
+    }
+  } catch(e){}
+}
+function saveMemberData(){
+  try {
+    global.localStorage.setItem(MA_KEY, JSON.stringify(memberAccounts));
+    global.localStorage.setItem(DO_KEY, JSON.stringify(distOrders));
+  } catch(e){}
+}
+loadMemberData();
+function memberScope(a){ return a.orgId || a.sourceUnitId || 'tli'; }
+function sourceTypeName(id){ var t = sourceTypes.filter(function(x){ return x.id === id; })[0]; return t ? t.name : id; }
+function sourceUnitName(a){
+  if (a.orgId){ var o = orgCustomers.filter(function(x){ return x.id === a.orgId; })[0]; return o ? o.name : a.orgId; }
+  if (!a.sourceUnitId || a.sourceUnitId === 'tli') return 'TLI 直營';
+  var p = partners.filter(function(x){ return x.id === a.sourceUnitId; })[0];
+  return p ? p.name : a.sourceUnitId;
+}
+function accountsByEmail(email){
+  var e = String(email || '').trim().toLowerCase();
+  if (!e) return [];
+  return memberAccounts.filter(function(a){ return (a.email || '').toLowerCase() === e; });
+}
+/* 代理優惠碼＝partners 裡 type 'agent' 的 code（a20 的折扣碼欄）；p07 註冊輸入後建立該代理來源帳號，m13 結帳用它判斷帳號是否屬於該代理 */
+function agentByCode(code){
+  var c = String(code || '').trim().toUpperCase();
+  return c ? (partners.filter(function(p){ return p.type === 'agent' && p.status === '啟用' && String(p.code).toUpperCase() === c; })[0] || null) : null;
+}
+function agentById(id){ return partners.filter(function(p){ return p.type === 'agent' && p.id === id; })[0] || null; }
+function accountsOfOrder(orderId){ return memberAccounts.filter(function(a){ return a.orderId === orderId; }); }
+function findOrgByCode(code){
+  var c = String(code || '').trim().toUpperCase();
+  return orgCustomers.filter(function(o){ return o.code === c; })[0] || null;
+}
+/* 啟用碼單一來源（p13 驗證、h02 匯出與寄信、a20 寄信與匯出都用這支）：
+   重寄後的新碼（linkToken）優先；其次主檔 activationCode；都沒有就照舊規則由帳號 id 派生。 */
+function activationCodeOf(a){
+  return String(a.linkToken || a.activationCode || ('TLI-' + ((String(a.id || '').replace(/\D/g, '') + 'K7M2Q9X4').slice(0, 6).toUpperCase()))).toUpperCase();
+}
+/* 寄信或匯出前呼叫：把目前有效的碼寫回帳號，之後各頁讀到同一個值 */
+function ensureActivationCode(a){ if (!a.activationCode && !a.linkToken) a.activationCode = activationCodeOf(a); return activationCodeOf(a); }
+/* 啟用信連結（p13 支援的格式）：有 Email 用 ?email=&code=；無 Email 的企業員工用 ?org=&emp=&code=。
+   prefix 是從呼叫頁到 公開網站/ 的相對路徑，例：'../公開網站/'。 */
+function activationLinkOf(a, prefix){
+  var code = encodeURIComponent(activationCodeOf(a)), base = (prefix || '') + 'p13_activate.html';
+  if (a.email) return base + '?email=' + encodeURIComponent(a.email) + '&code=' + code;
+  var o = a.orgId ? orgCustomers.filter(function(x){ return x.id === a.orgId; })[0] : null;
+  return base + '?org=' + encodeURIComponent(o ? o.code : '') + '&emp=' + encodeURIComponent(a.employeeNo || '') + '&code=' + code;
+}
+function newActivationCode(){
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s = '';
+  for (var i = 0; i < 6; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
+  return 'TLI-' + s;
+}
+
 /* ================= 工具函式 ================= */
 function options(listName, opts){
   opts = opts || {};
@@ -549,6 +714,8 @@ var MANAGE_LINKS = {
   partners:'a20_agents.html',
   projectClasses:'a20_agents.html',
   projectRoster:'a20_agents.html',
+  memberAccounts:'a01_member_rules.html',
+  distOrders:'a20_agents.html',
   packages:'a04_packages.html',
   projects:'a21_projects.html',
   videoLibrary:'a18_resource_library.html',
@@ -562,7 +729,89 @@ function manageLink(listName){
   return '<a class="manage-link" href="'+href+'">管理選項 →</a>';
 }
 
+/* ---- 20261013 會員區「目前帳號」：一次只看一個帳號（人 × 來源），切換＝換帳號，不是合併檢視 ----
+   currentAccount()    依網址 ?acct=、其次 sessionStorage、預設 ma01（Emma 直營帳號）
+   accountPlanIds(a)   示範頁面用 plan-a…plan-e 等方案代碼；依帳號來源對應：
+                       直營（無企業）→ 自費方案；和霖科技（ent0）→ plan-c；專案合作（p02）→ plan-d；
+                       其他帳號（經銷、其他企業…）沒有示範方案代碼，改用帳號自己的 plans 欄
+   planAllowed(id)     頁面資料依 planId 過濾用；沒有 planId 的資料視為通過
+   applyMemberAccount() 會員區頁面載入後自動執行：側欄身分、隱藏不屬於此帳號的方案區塊、帳號選單（切換帳號／改密碼） */
+var DEMO_DIRECT_PLANS = ['plan-a','plan-b','plan-e','plan-adv','plan-culture'];
+function currentAccount(){
+  var id = '';
+  try { id = new URLSearchParams(global.location.search).get('acct') || ''; } catch(e){}
+  try { if (id) global.sessionStorage.setItem('tliAcct', id); else id = global.sessionStorage.getItem('tliAcct') || ''; } catch(e){}
+  var a = memberAccounts.filter(function(x){ return x.id === id; })[0] || memberAccounts.filter(function(x){ return x.id === 'ma01'; })[0] || memberAccounts[0];
+  return a;
+}
+function accountPlanIds(a){
+  a = a || currentAccount();
+  if (a.id === 'ma01' || (a.sourceType === 'direct' && !a.orgId && a.sourceUnitId === 'tli' && a.id === 'ma01')) return DEMO_DIRECT_PLANS.slice();
+  if (a.orgId === 'ent0' && a.id === 'ma02') return ['plan-c'];
+  if (a.id === 'ma03') return ['plan-d'];
+  return [];
+}
+function planAllowed(id){
+  if (!id || id === 'plan-lounge') return true;
+  return accountPlanIds().indexOf(id) >= 0;
+}
+function isDemoAccount(a){ a = a || currentAccount(); return ['ma01','ma02','ma03'].indexOf(a.id) >= 0; }
+function memT(zh, en){ return global.TLI_I18N && global.TLI_I18N.t ? global.TLI_I18N.t(zh, en) : zh; }
+function accountSourceLabel(a){
+  var typ = a.orgId ? memT('企業','Company') : (a.sourceType === 'direct' ? '' : sourceTypeName(a.sourceType));
+  var nm = sourceUnitName(a);
+  return a.sourceType === 'direct' && !a.orgId ? memT('TLI 直營','TLI Direct') : nm;
+}
+function escM(x){ return String(x == null ? '' : x).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function renderAccountChrome(){
+  var doc = global.document, a = currentAccount();
+  var unit = a.sourceType === 'direct' && !a.orgId ? memT('TLI 直營','TLI Direct') : sourceUnitName(a);
+  var roleZh = memT('學員','Student');
+  Array.prototype.forEach.call(doc.querySelectorAll('.side-identity'), function(el){
+    el.innerHTML = escM(a.name) + '｜' + escM(roleZh) + '<div style="font-size:12px;font-weight:400;opacity:.75;margin-top:2px">' + escM(unit) + '</div>';
+  });
+  Array.prototype.forEach.call(doc.querySelectorAll('[data-plan-id]'), function(el){
+    el.style.display = el.getAttribute('data-plan-id').split(/\s+/).some(planAllowed) ? '' : 'none';
+  });
+  /* 帳號選單 */
+  var bar = doc.querySelector('.topbar-actions');
+  if (!bar) return;
+  var wrap = doc.getElementById('acctMenuWrap');
+  if (!wrap){
+    wrap = doc.createElement('div'); wrap.id = 'acctMenuWrap'; wrap.style.cssText = 'position:relative;display:inline-block';
+    bar.appendChild(wrap);
+    doc.addEventListener('click', function(e){ var p = doc.getElementById('acctPanel'); if (p && !wrap.contains(e.target)) p.style.display = 'none'; });
+  }
+  var others = accountsByEmail(a.email).filter(function(x){ return x.id !== a.id; });
+  var onProfile = /m07_profile/.test(global.location.pathname);
+  var h = '<button type="button" id="acctBtn" aria-label="' + escM(memT('帳號選單','Account menu')) + '" style="width:32px;height:32px;border-radius:50%;border:1px solid #E4E7EC;background:#1B4E8C;color:#fff;font-size:13px;font-weight:700;cursor:pointer">' + escM(a.name.charAt(0).toUpperCase()) + '</button>' +
+    '<div id="acctPanel" style="display:none;position:absolute;right:0;top:40px;width:250px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;box-shadow:0 8px 24px rgba(16,24,40,.16);padding:6px 0;z-index:80;font-size:13px;color:#101828;text-align:left">' +
+    '<div style="padding:8px 14px;border-bottom:1px solid #E4E7EC"><div style="font-weight:700">' + escM(a.name) + '</div><div style="font-size:12px;color:#667085">' + escM(unit) + (a.email ? '｜' + escM(a.email) : '') + '</div></div>';
+  if (others.length){
+    h += '<div style="padding:8px 14px 2px;font-size:12px;color:#667085">' + escM(memT('切換帳號（各帳號各自的方案與課時）','Switch account (each has its own plans and hours)')) + '</div>';
+    others.forEach(function(o){
+      var ou = o.sourceType === 'direct' && !o.orgId ? memT('TLI 直營','TLI Direct') : sourceUnitName(o);
+      h += '<a href="' + global.location.pathname.split('/').pop() + '?acct=' + o.id + '" style="display:block;padding:7px 14px;color:#1B4E8C;text-decoration:none">' + escM(ou) + '</a>';
+    });
+  }
+  h += (onProfile ? '<a href="javascript:void(0)" onclick="openPasswordSheet()"' : '<a href="m07_profile.html?pw=1"') + ' style="display:block;padding:7px 14px;color:#101828;text-decoration:none;border-top:1px solid #E4E7EC">' + escM(memT('改密碼','Change password')) + '</a></div>';
+  wrap.innerHTML = h;
+  doc.getElementById('acctBtn').onclick = function(e){ e.stopPropagation(); var p = doc.getElementById('acctPanel'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; };
+}
+function applyMemberAccount(){
+  renderAccountChrome();
+  if (global.TLI_I18N && global.TLI_I18N.onRefresh) global.TLI_I18N.onRefresh(renderAccountChrome);
+}
+if (global.document && /\/會員區\/|%E6%9C%83%E5%93%A1%E5%8D%80/.test(global.location.pathname)){
+  global.document.addEventListener('DOMContentLoaded', applyMemberAccount);
+}
+
 global.TLI_MASTERS = {
+  currentAccount: currentAccount,
+  accountPlanIds: accountPlanIds,
+  planAllowed: planAllowed,
+  isDemoAccount: isDemoAccount,
+  applyMemberAccount: applyMemberAccount,
   campuses: campuses,
   deliveryModes: deliveryModes,
   teachLangs: teachLangs,
@@ -584,6 +833,25 @@ global.TLI_MASTERS = {
   projectClasses: projectClasses,
   projectRoster: projectRoster,
   orgCustomers: orgCustomers,
+  sourceTypes: sourceTypes,
+  activationStates: activationStates,
+  activationMethods: activationMethods,
+  memberAccounts: memberAccounts,
+  distOrders: distOrders,
+  memberScope: memberScope,
+  sourceTypeName: sourceTypeName,
+  sourceUnitName: sourceUnitName,
+  accountsByEmail: accountsByEmail,
+  accountsOfOrder: accountsOfOrder,
+  agentByCode: agentByCode,
+  agentById: agentById,
+  findOrgByCode: findOrgByCode,
+  newActivationCode: newActivationCode,
+  activationCodeOf: activationCodeOf,
+  ensureActivationCode: ensureActivationCode,
+  activationLinkOf: activationLinkOf,
+  saveMemberData: saveMemberData,
+  reloadMemberData: loadMemberData,
   packages: packages,
   projects: projects,
   videoLibrary: videoLibrary,

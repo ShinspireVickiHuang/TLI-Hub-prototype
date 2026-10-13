@@ -477,7 +477,6 @@ Object.assign(TLI_I18N_DICT.en,{
 "p07_next_target_checkout":"Checkout",
 "p07_next_target_myevents":"My Events",
 "p07_next_target_generic":"the page you were on",
-"p07_partner_student_login":"Institutional Student Login",
 "p07_partner_activate_link":"Activate Your Account",
 "p07_marketing_consent":"I agree to let TLI use my learning data for course recommendations and marketing (you can opt out anytime).",
 /* ---- p10_enterprise ---- */

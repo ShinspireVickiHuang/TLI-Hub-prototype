@@ -455,7 +455,6 @@ Object.assign(TLI_I18N_DICT.de,{
 "p07_next_target_checkout":"Kasse",
 "p07_next_target_myevents":"Meine Veranstaltungen",
 "p07_next_target_generic":"die Seite, die Sie zuvor angesehen haben",
-"p07_partner_student_login":"Anmeldung für Studierende von Partnereinrichtungen",
 "p07_partner_activate_link":"Konto aktivieren",
 "p07_marketing_consent":"Ich stimme zu, dass TLI meine Lerndaten für Kursempfehlungen und Marketing nutzt (jederzeit widerrufbar).",
 /* ---- p10_enterprise ---- */

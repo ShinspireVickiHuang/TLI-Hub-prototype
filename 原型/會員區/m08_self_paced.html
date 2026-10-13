@@ -514,6 +514,7 @@ var COURSE_DATA_ROWS = [
   ['c24','文化與藝術賞析 10 講','文化',10,'2024-07-11','2024-06-01','plan-culture'],
   ['c25','職場溝通與應對 8 講','商務',3,'2024-03-19','2024-02-01','plan-adv']
 ];
+COURSE_DATA_ROWS = COURSE_DATA_ROWS.filter(function(r){ return TLI_MASTERS.planAllowed(r[6]); });
 function buildCourses(){
   COURSES = {};
   COURSE_DATA_ROWS.forEach(function(row){

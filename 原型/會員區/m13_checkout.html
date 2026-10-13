@@ -228,9 +228,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <div class="card">
         <div class="field" style="margin-bottom:0;">
           <label for="refCode" data-i18n="m13.ref.label">折扣碼或轉介碼（選填）</label>
-          <input type="text" id="refCode" data-i18n-placeholder="m13.ref.placeholder" placeholder="例如：AGENT2026" oninput="checkRefCode()">
+          <input type="text" id="refCode" data-i18n-placeholder="m13.ref.placeholder" placeholder="請輸入折扣碼或轉介碼" oninput="checkRefCode()">
           <div class="hint" data-i18n="m13.ref.hint">由合作夥伴招募連結進入時會自動帶入轉介碼，也可手動輸入</div>
           <div class="hint" id="refAutoHint" style="display:none;color:var(--c-primary);font-weight:700;" data-i18n="m13.ref.autoHint">代碼由推薦連結自動帶入</div>
+        </div>
+        <div class="hint" id="refAgentWarn" style="display:none;margin-top:10px;color:#B54708;">
+          <div id="refAgentMsg"></div>
+          <a class="btn btn-outline btn-sm" id="refAgentBtn" href="#" style="margin-top:8px;display:inline-block;"></a>
         </div>
         <div class="ref-tag" id="refTag"><span data-i18n="m13.ref.tagPrefix">歸屬代理商：</span><span>環宇教育顧問（東南亞地區）</span></div>
       </div>
@@ -613,8 +617,25 @@ var referrerApplied = false;
 function checkRefCode(){
   var v = document.getElementById('refCode').value.trim().toUpperCase();
   var tag = document.getElementById('refTag');
-  /* 沿用既有 5% 轉介折扣機制：手動示範碼 AGENT2026，或由推薦連結帶入的示範碼 REF-SEA07 皆適用 */
-  if(v === 'AGENT2026' || v === 'REF-SEA07'){
+  /* 20261013：代理優惠碼（主檔代理的 code）只能在註冊時輸入；目前帳號不是該代理來源時，不套用代理歸屬，改提示並導向代理註冊 */
+  var warn = document.getElementById('refAgentWarn'), ag = null;
+  try{ ag = TLI_MASTERS.agentByCode(v); }catch(e){}
+  warn.style.display = 'none';
+  if(ag){
+    var cur = TLI_MASTERS.currentAccount();
+    if(!(cur && cur.sourceType === 'agent' && cur.sourceUnitId === ag.id && !cur.orgId)){
+      referrerApplied = false;
+      tag.classList.remove('show');
+      document.getElementById('refAgentMsg').textContent = TLI_I18N.t('代理優惠碼需在註冊時輸入，將另建代理帳號（'+ag.name+'），密碼與方案與目前帳號各自獨立。',{en:'An agent promo code must be entered at registration. A separate agent account ('+ag.name+') will be created, with its own password and plans.',ja:'代理店コードは登録時に入力する必要があります。別の代理店アカウント（'+ag.name+'）を作成します。',de:'Der Agenten-Code muss bei der Registrierung eingegeben werden. Es wird ein separates Agenten-Konto ('+ag.name+') angelegt.'});
+      var b = document.getElementById('refAgentBtn');
+      b.textContent = TLI_I18N.t('以代理帳號購買',{en:'Buy with an agent account',ja:'代理店アカウントで購入',de:'Mit Agenten-Konto kaufen'});
+      b.href = '../公開網站/p07_login_register.html?agent=' + encodeURIComponent(ag.id) + '&mode=register&email=' + encodeURIComponent((cur && cur.email) || '');
+      warn.style.display = 'block';
+      renderOrder();
+      return;
+    }
+  }
+  if(ag){
     referrerApplied = true;
     tag.classList.add('show');
   } else {

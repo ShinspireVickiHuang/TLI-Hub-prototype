@@ -558,6 +558,7 @@ var ALL_CLASSES=[
   {id:'d1', planId:'plan-d', title:'Mandarin Lounge－生活會話', time:'08/25（二）今天 20:00–20:40', start:new Date(2026,7,25,20,0), mode:'Mandarin Lounge 線上會話'},
   {id:'d2', planId:'plan-d', title:'Mandarin Lounge－時事討論', time:'08/27（四）10:00–10:40', start:new Date(2026,7,27,10,0), mode:'Mandarin Lounge 線上會話'}
 ];
+ALL_CLASSES = ALL_CLASSES.filter(function(c){ return TLI_MASTERS.planAllowed(c.planId); });
 function findClass(id){ return ALL_CLASSES.filter(function(c){return c.id===id;})[0]; }
 function firstClassIdForPlan(planId){
   var found=ALL_CLASSES.filter(function(c){return c.planId===planId;})[0];
@@ -604,6 +605,7 @@ var RECORDS=[
   mkRec('plan-d',18,'Mandarin Lounge－生活會話','改期','已改期至 08/07（五）20:00–20:40','ok'),
   mkRec('plan-d',29,'Mandarin Lounge－時事討論','取消','不影響本週次數','ok')
 ];
+RECORDS = RECORDS.filter(function(r){ return TLI_MASTERS.planAllowed(r.planId); });
 function addRecord(cls,action,result,badgeKind,note){
   var rec=mkRec(cls.planId,0,cls.title,action,result,badgeKind,note);
   rec.date=new Date(NOW);

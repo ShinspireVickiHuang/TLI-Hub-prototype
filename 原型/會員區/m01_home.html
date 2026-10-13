@@ -317,7 +317,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
   <main class="content">
   <div id="viewDefault">
-    <p class="page-sub" style="margin-top:2px;" data-i18n="m01.greetingDefault">早安，Emma，這是妳今天的學習概況。</p>
+    <p class="page-sub" style="margin-top:2px;" id="greetDefault">早安，Emma，這是妳今天的學習概況。</p>
 
     <div class="section-title first" style="display:flex;align-items:center;gap:6px;">
       <span data-i18n="m01.todoTitle">待辦</span>
@@ -339,7 +339,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </div>
     </div>
 
-    <div class="card next-class-card" style="margin-top:12px;">
+    <div class="card next-class-card" data-plan-id="plan-a" style="margin-top:12px;">
       <div class="nc-top">
         <div>
           <span class="badge badge-info" data-i18n="m01.badgeNextClass">下一堂課</span>
@@ -365,22 +365,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         <h3 style="margin:0;font-size:15px;" data-i18n="m01.myPlansTitle">我的方案</h3>
         <a href="m04_course_detail.html" class="small muted" data-i18n="m01.btnSeeAllPlans">查看全部方案 ›</a>
       </div>
-      <div class="home-plan-list">
-        <div class="home-plan-card">
+      <div class="home-plan-list" id="homePlanList">
+        <div class="home-plan-card" data-plan-id="plan-a">
           <div class="home-plan-badges"><span class="badge badge-payer-self" data-i18n="m01.payerSelf">自費</span><span class="badge badge-ok" data-i18n="m01.badgeActive">生效中</span></div>
           <h4>中文一對一 20 堂課程包</h4>
           <p class="pm-meta"><span data-i18n="m01.expiresLabel">到期</span> 2026-12-31</p>
           <div class="home-plan-chips"><span class="chip" data-i18n="m01.chip1">一對一 20 堂・剩 12</span></div>
           <button class="btn btn-outline btn-sm btn-block" onclick="location.href='m03_schedule.html#request'" data-i18n="m01.btnSubmitAvailability">提出有空時間，請顧問排課</button>
         </div>
-        <div class="home-plan-card">
+        <div class="home-plan-card" data-plan-id="plan-c">
           <div class="home-plan-badges"><span class="badge badge-payer-company"><span data-i18n="m01.payerCompanyPrefix">公司提供・</span>和霖科技股份有限公司</span><span class="badge badge-ok" data-i18n="m01.badgeActive">生效中</span></div>
           <h4>商務華語企業培訓</h4>
           <p class="pm-meta"><span data-i18n="m01.contractUntilLabel">合約至</span> 2026-12-31</p>
           <div class="home-plan-chips"><span class="chip" data-i18n="m01.chip2a">一對一時數池</span><span class="chip" data-i18n="m01.chip2b">Mandarin Lounge・白名單</span></div>
           <button class="btn btn-outline btn-sm btn-block" onclick="location.href='m03_schedule.html#request'" data-i18n="m01.btnSubmitAvailability">提出有空時間，請顧問排課</button>
         </div>
-        <div class="home-plan-card">
+        <div class="home-plan-card" data-plan-id="plan-d">
           <div class="home-plan-badges"><span class="badge badge-payer-school"><span data-i18n="m01.payerSchoolPrefix">學校提供・</span>北方州立大學</span><span class="badge badge-ok" data-i18n="m01.badgeActive">生效中</span></div>
           <h4>華語會話學期方案</h4>
           <p class="pm-meta"><span data-i18n="m01.expiresLabel">到期</span> 2026-11-30</p>
@@ -390,7 +390,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </div>
     </div>
 
-    <div class="card" style="margin-top:12px;">
+    <div class="card" data-plan-id="plan-e" style="margin-top:12px;">
       <div class="flex-between">
         <h3 style="margin:0;font-size:15px;" data-i18n="m01.continueLearningTitle">繼續學習</h3>
         <a href="m08_self_paced.html" class="small muted" data-i18n="m01.btnGoSelfStudy">前往自學課程 ›</a>
@@ -1007,7 +1007,7 @@ function renderTodoDrawerList(type){
 
 function initTodos(state){
   if(state==='default'){
-    var role = (getDemoRole()==='enterprise') ? 'enterprise' : 'default';
+    var role = getDemoRole();
     var raw = getTodosByRole(role);
     renderTodoRows(buildTodoRows(raw), {list:'todoList',empty:'todoEmptyState',moreWrap:'todoMoreWrap',moreCount:'todoMoreCount'});
     _todoDrawerRaw = raw;
@@ -1026,7 +1026,12 @@ function getMemberState(){
 // 身分角色（僅影響待辦資料）：一般會員／企業員工，機構學生已由 getMemberState 的 university 狀態涵蓋
 function getDemoRole(){
   var params = new URLSearchParams(window.location.search);
-  return params.get('role')==='b2b' ? 'enterprise' : 'default';
+  if(params.get('role')==='b2b') return 'enterprise';
+  /* 依目前帳號：直營示範帳號＝一般待辦；和霖科技企業帳號＝企業待辦；其餘帳號沒有示範待辦 */
+  var acct = TLI_MASTERS.currentAccount();
+  if(acct.id==='ma01') return 'default';
+  if(acct.id==='ma02') return 'enterprise';
+  return 'none';
 }
 function renderMemberState(state){
   var views={default:'viewDefault',new:'viewNew',project:'viewProject'};
@@ -1080,6 +1085,28 @@ document.addEventListener('keydown', function(e){
   });
 });
 
+/* 目前帳號：問候語與「我的方案」只顯示此帳號自己的方案與課時（不跨來源合併） */
+function renderAccountHome(){
+  var a = TLI_MASTERS.currentAccount(), first = a.name.split(' ')[0];
+  document.getElementById('greetDefault').textContent = T('早安，'+first+'，這是妳今天的學習概況。','Good morning, '+first+'. Here’s today’s overview.');
+  var list = document.getElementById('homePlanList');
+  Array.prototype.forEach.call(list.querySelectorAll('[data-generated]'), function(n){ n.parentNode.removeChild(n); });
+  if(TLI_MASTERS.isDemoAccount(a)) return;
+  var unit = TLI_MASTERS.sourceUnitName(a), plans = a.plans || [];
+  var html = '';
+  if(!plans.length){
+    html = '<p class="small muted" data-generated="1" style="margin:8px 0 0;">'+T('此帳號（'+unit+'）目前沒有已啟用的方案。','This account ('+unit+') has no active plan yet.')+'</p>';
+  } else {
+    plans.forEach(function(pl){
+      html += '<div class="home-plan-card" data-generated="1"><div class="home-plan-badges"><span class="badge badge-payer-company">'+unit+'</span><span class="badge badge-ok">'+T('生效中','Active')+'</span></div>'+
+        '<h4>'+pl.name+'</h4><div class="home-plan-chips"><span class="chip">'+T('剩餘 ','Left: ')+pl.hoursLeft+'</span></div>'+
+        '<button class="btn btn-outline btn-sm btn-block" onclick="location.href=\'m03_schedule.html#request\'">'+T('提出有空時間，請顧問排課','Submit availability for scheduling')+'</button></div>';
+    });
+  }
+  list.insertAdjacentHTML('beforeend', html);
+}
+renderAccountHome();
+TLI_I18N.onRefresh(renderAccountHome);
 TLI_I18N.init();
 document.querySelectorAll('.tli-i18n-opt').forEach(function(b){
   b.addEventListener('click', function(){

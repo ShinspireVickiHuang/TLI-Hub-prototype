@@ -312,6 +312,7 @@ html,body{overflow-x:hidden;}
 <div class="toolbtns" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
 <a class="btn" href="../顧問工作台/c04_new_order.html?from=orders" data-i18n="btn.addOrder">＋ 新增訂單</a>
 <button class="btn orange" onclick="openNewEntOrderWizard()" data-i18n="btn.addEnterpriseOrder">＋ 新增企業訂單</button>
+<button class="btn ghost" onclick="openNewDistOrder()" data-i18n="a05.nd.btn">＋ 新增經銷訂單</button>
 <div style="position:relative">
 <button class="btn ghost" onclick="toggleOrdersSettingsMenu(event)" ><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span data-i18n="btn.settingsGear">設定</span></button>
 <div class="tb-panel tb-avatarmenu" id="ordersSettingsMenu" style="width:168px">
@@ -339,7 +340,7 @@ html,body{overflow-x:hidden;}
 </div>
 
 <div class="filterbar" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
-<select id="f_bizsource" onchange="onSelFilterChange('bizSource', this.value)"><option value="" data-i18n="filter.allBizSource">全部訂單來源</option><option value="直營" data-i18n="bizsource.direct">直營</option><option value="代理" data-i18n="bizsource.agent">代理</option><option value="企業合約" data-i18n="bizsource.enterpriseContract">企業合約</option><option value="經銷專案訂單" data-i18n="bizsource.distributorProject">經銷專案訂單</option></select>
+<select id="f_bizsource" onchange="onSelFilterChange('bizSource', this.value)"><option value="" data-i18n="filter.allBizSource">全部訂單來源</option><option value="直營" data-i18n="bizsource.direct">直營</option><option value="代理" data-i18n="bizsource.agent">代理</option><option value="企業合約" data-i18n="bizsource.enterpriseContract">企業合約</option><option value="經銷訂單" data-i18n="bizsource.distributorProject">經銷訂單</option></select>
 <select id="f_partner" onchange="onSelFilterChange('partner', this.value)" aria-label="來源夥伴"><option value="">全部來源夥伴</option></select>
 <select id="f_status" onchange="onSelFilterChange('status', this.value)"><option value="">全部狀態</option></select>
 <select id="f_campus" onchange="onSelFilterChange('campus', this.value)"><option value="">全部校區</option></select>
@@ -442,6 +443,19 @@ html,body{overflow-x:hidden;}
 <div style="text-align:right"><button class="btn ghost" onclick="closeModal('remindModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doBatchRemind()" data-i18n="common.submit">送出</button></div>
 </div></div>
 
+<div class="modal-mask" id="newDistModal" onclick="if(event.target===this) closeModal('newDistModal')"><div class="modal">
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="a05.nd.modal">新增經銷訂單</h3><button type="button" class="drawer-close" onclick="closeModal('newDistModal')" aria-label="關閉" data-i18n-aria-label="common.close">&times;</button></div>
+<div class="hint" style="margin-bottom:10px" data-i18n="a05.nd.hint">由 TLI 後台建立，經銷商沒有入口。非企業學員：建單後到合作夥伴的經銷分頁匯入學員名單、寄啟用信；企業會員：名單由企業 HR 於組織端匯入。</div>
+<div class="formrow"><label data-i18n="a05.nd.distributor">經銷商</label><select id="ndPartner" onchange="ndPartnerChange()"></select></div>
+<div class="formrow"><label data-i18n="a05.nd.salesPlan">銷售方案</label><select id="ndPlan"></select></div>
+<div class="formrow"><label data-i18n="a05.nd.seats">學員名額</label><input type="number" id="ndSeats" min="1" value="10"></div>
+<div class="formrow"><label data-i18n="a05.nd.studentType">學員類型</label><label style="margin-right:14px"><input type="radio" name="ndKind" value="individual" checked onchange="ndKindChange()"> <span data-i18n="a05.nd.kindIndividual">非企業學員</span></label><label><input type="radio" name="ndKind" value="enterprise" onchange="ndKindChange()"> <span data-i18n="a05.nd.kindEnterprise">企業會員</span></label></div>
+<div class="formrow" id="ndOrgWrap" style="display:none"><label data-i18n="a05.nd.company">企業</label><select id="ndOrg" onchange="ndOrgNoteUpdate()"></select></div>
+<div class="hint" id="ndOrgNote" style="display:none;margin:-4px 0 10px"></div>
+<div class="hint" id="ndErr" style="display:none;color:var(--red)"></div>
+<div style="text-align:right"><button class="btn ghost" onclick="closeModal('newDistModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="saveNewDistOrder()" data-i18n="common.submit">送出</button></div>
+</div></div>
+
 <!-- 20260927j 新增：歸屬異議審核 modal -->
 <div class="modal-mask" id="disputeReviewModal" onclick="if(event.target===this) closeModal('disputeReviewModal')"><div class="modal wide">
 <div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="modal.disputeReview">歸屬異議審核</h3><button class="drawer-close" onclick="closeModal('disputeReviewModal')" aria-label="關閉" data-i18n-aria-label="common.close"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4.5" y1="4.5" x2="15.5" y2="15.5"/><line x1="15.5" y1="4.5" x2="4.5" y2="15.5"/></svg></button></div>
@@ -535,7 +549,7 @@ var CURRENT_STAFF = '王大明';
 var ORD_I18N_MAP = {
   '待收款':'Pending Payment','分期中':'In Installments','已完成':'Completed','已取消':'Cancelled',
   '一次付清':'Lump Sum','訂金＋尾款':'Deposit + Balance','分期':'Installments','月結':'Monthly Billing','預付款倒扣':'Prepaid Deduction',
-  '直營':'Direct','代理':'Agent','企業合約':'Enterprise Contract','經銷專案訂單':'Distributor Project',
+  '直營':'Direct','代理':'Agent','企業合約':'Enterprise Contract','經銷訂單':'Distributor Order',
   '線上收款':'Online Payment','線下匯款':'Offline Transfer',
   '個人訂單':'Individual Order','企業訂單':'Enterprise Order',
   '正式訂單':'Formal Order','續約／加購':'Renewal / Add-on',
@@ -795,31 +809,85 @@ function latestCreated(){ return ORDERS.reduce(function(m,o){ return o.created>m
   });
 })();
 
-/* 20260928y 新增：經銷專案訂單示範（大馬旅遊教育集團／越南遊學顧問公司／韓國語言留學社／環球遊學顧問，
-   對應夥伴端 d02「訂購單」；付款一律線下匯款，開票對象為海外經銷商本身，示範畫面，資料為模擬數字） */
-(function addDistributorProjectDemoOrders(){
-  var seeds = [
-    {id:'ORD-2026-D301', distributor:'大馬旅遊教育集團', amount:560000, status:'分期中'},
-    {id:'ORD-2026-D302', distributor:'越南遊學顧問公司', amount:600000, status:'已完成'},
-    {id:'ORD-2026-D303', distributor:'韓國語言留學社', amount:600000, status:'待收款'},
-    {id:'ORD-2026-D304', distributor:'環球遊學顧問', amount:920000, status:'已完成'}
-  ];
-  seeds.forEach(function(s, idx){
-    var baseDate = latestCreated();
-    var items = [{name:s.distributor+' 專案訂單（依專案折讓價，梯次採購）', amount:s.amount, tax:'免稅'}];
-    ORDERS.unshift({
-      id:s.id, student:s.distributor, studentId:'', campus:'（經銷商所在地）', tier:'ENT',
-      status:s.status, amount:s.amount, payMode:'月結', entChannel:'匯款', source:'顧問建訂單', builder:'顧問 A',
-      created:baseDate, items:items,
-      payments: buildPaymentsFor('月結', s.amount, baseDate, s.status),
-      invoices: buildInvoicesFor(items, s.amount, s.status),
-      benefits: items.map(function(it,idx2){ return {id:'bn'+idx2, item:it.name, qty:'依採購數量', granted: s.status!=='待收款', grantedAt: s.status!=='待收款' ? addDays(baseDate,1) : ''}; }),
-      history:[{t:baseDate+' 10:00', who:'顧問 A', what:'經銷專案訂單建立（來源：夥伴端 d02 採購需求確認後建單，經銷商：'+s.distributor+'）'}],
-      nextPayId:100, nextInvId:100,
-      orderType:'個人', currency:'USD', distributorProject:true, overseasBuyer:true
-    });
+/* 20261013 改版：經銷訂單單一來源＝TLI_MASTERS.distOrders（TLI 後台建立，經銷商沒有入口）。
+   本頁負責列出與建立訂單、付款與開票；a20 合作夥伴的經銷分頁負責匯入名單與寄啟用信。
+   付款一律線下匯款，開票對象為經銷商本身。 */
+var DIST_PAY_SEED = {'DO-2026-0001':'已完成','DO-2026-0002':'分期中','DO-2026-0003':'待收款','DO-2026-0004':'已完成','DO-2026-0005':'待收款','DO-2026-0006':'待收款'};
+function distOrderAmount(x){
+  var k = TLI_MASTERS.byId('packages', x.planId), pr = k && k.prices ? k.prices : {};
+  var unit = pr.BIP || pr.C || pr.B || pr[Object.keys(pr)[0]] || 0;
+  return unit * x.seats;
+}
+function buildDistOrderEntry(x, status){
+  var p = TLI_MASTERS.byId('partners', x.partnerId), k = TLI_MASTERS.byId('packages', x.planId);
+  var name = p ? p.name : x.partnerId, amount = distOrderAmount(x), base = x.createdAt;
+  var items = [{name:(k ? k.name : x.planId)+' × '+x.seats+'（經銷訂單）', amount:amount, tax:'免稅'}];
+  return {
+    id:x.id, student:name, studentId:'', campus:'（經銷商所在地）', tier:'ENT',
+    status:status, amount:amount, payMode:'月結', entChannel:'匯款', source:'顧問建訂單', builder:'顧問 A',
+    created:base, items:items,
+    payments: buildPaymentsFor('月結', amount, base, status),
+    invoices: buildInvoicesFor(items, amount, status),
+    benefits: items.map(function(it,idx2){ return {id:'bn'+idx2, item:it.name, qty:x.seats+' 個名額', granted: status!=='待收款', grantedAt: status!=='待收款' ? addDays(base,1) : ''}; }),
+    history:[{t:base+' 10:00', who:'顧問 A', what:'經銷訂單建立（TLI 後台建單，經銷商：'+name+'）'}],
+    nextPayId:100, nextInvId:100,
+    orderType:'個人', currency:'TWD', distributorProject:true, overseasBuyer:true, distOrderId:x.id
+  };
+}
+(function syncDistOrders(){
+  TLI_MASTERS.distOrders.slice().reverse().forEach(function(x){
+    if (ORDERS.some(function(o){ return o.id===x.id; })) return;
+    ORDERS.unshift(buildDistOrderEntry(x, DIST_PAY_SEED[x.id] || '待收款'));
   });
 })();
+function distManageHref(o){ return 'a20_agents.html?partner='+encodeURIComponent((TLI_MASTERS.byId('distOrders', o.id)||{}).partnerId || '')+'&order='+encodeURIComponent(o.id); }
+
+/* ---- 新增經銷訂單 ---- */
+function openNewDistOrder(pid){
+  var ds = TLI_MASTERS.partners.filter(function(p){ return p.type==='distributor'; });
+  document.getElementById('ndPartner').innerHTML = ds.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join('');
+  if (pid) document.getElementById('ndPartner').value = pid;
+  document.getElementById('ndPlan').innerHTML = TLI_MASTERS.packages.filter(function(k){ return k.type==='pkg'; }).map(function(k){ return '<option value="'+k.id+'">'+k.name+'</option>'; }).join('');
+  document.getElementById('ndSeats').value = 10;
+  document.querySelector('input[name="ndKind"][value="individual"]').checked = true;
+  document.getElementById('ndErr').style.display = 'none';
+  ndPartnerChange();
+  document.getElementById('newDistModal').classList.add('open');
+}
+function ndKindChange(){ document.getElementById('ndOrgWrap').style.display = document.querySelector('input[name="ndKind"]:checked').value==='enterprise' ? '' : 'none'; ndOrgNoteUpdate(); }
+/* 經銷帶來的企業：白名單由企業 HR 在組織端匯入，TLI 管理者不代匯 */
+function ndOrgNoteUpdate(){
+  var box = document.getElementById('ndOrgNote'); if (!box) return;
+  var ent = document.querySelector('input[name="ndKind"]:checked').value==='enterprise', id = document.getElementById('ndOrg').value;
+  var o = ent && id ? TLI_MASTERS.byId('orgCustomers', id) : null;
+  if (!o){ box.style.display = 'none'; box.textContent = ''; return; }
+  box.textContent = tr2('此訂單的員工名單由 '+o.name+' 企業 HR 於組織端匯入，TLI 不代匯名單。','The employee roster for this order is imported by the HR of '+o.name+' in the organization portal. TLI does not import it on their behalf.');
+  box.style.display = '';
+}
+function ndPartnerChange(){
+  var pid = document.getElementById('ndPartner').value;
+  var orgs = TLI_MASTERS.orgCustomers.filter(function(g){ return g.sourceType==='distributor' && g.sourceUnitId===pid; });
+  document.getElementById('ndOrg').innerHTML = orgs.length ? orgs.map(function(g){ return '<option value="'+g.id+'">'+g.name+'</option>'; }).join('') : '<option value="">'+tr2('此經銷商尚無帶來的企業','No companies brought in by this distributor')+'</option>';
+  ndKindChange();
+}
+function saveNewDistOrder(){
+  var err = document.getElementById('ndErr'), msg = '';
+  var seats = parseInt(document.getElementById('ndSeats').value, 10);
+  var kind = document.querySelector('input[name="ndKind"]:checked').value, org = document.getElementById('ndOrg').value;
+  if (!document.getElementById('ndPartner').value) msg = tr2('請選擇經銷商','Select a distributor');
+  else if (!seats || seats<1) msg = tr2('學員名額請填 1 以上的數字','Enter a seat count of 1 or more');
+  else if (kind==='enterprise' && !org) msg = tr2('請選擇企業','Select a company');
+  if (msg){ err.textContent = msg; err.style.display = ''; return; }
+  var mx = 0, y = new Date().getFullYear();
+  TLI_MASTERS.distOrders.forEach(function(x){ var n = parseInt(String(x.id).split('-').pop(),10)||0; if (n>mx) mx=n; });
+  var x = {id:'DO-'+y+'-'+('0000'+(mx+1)).slice(-4), partnerId:document.getElementById('ndPartner').value, planId:document.getElementById('ndPlan').value, seats:seats, kind:kind, orgId:kind==='enterprise'?org:'', createdAt:new Date().toISOString().slice(0,10), status:'待匯入名單'};
+  TLI_MASTERS.distOrders.unshift(x);
+  TLI_MASTERS.saveMemberData();
+  ORDERS.unshift(buildDistOrderEntry(x, '待收款'));
+  closeModal('newDistModal');
+  currentPage = 1; renderTable();
+  toast(kind==='enterprise' ? tr2('已建立經銷訂單 '+x.id+'，員工名單由企業 HR 於組織端匯入','Distributor order '+x.id+' created. The company HR imports the roster in the organization portal.') : tr2('已建立經銷訂單 '+x.id+'，請到合作夥伴匯入學員名單','Distributor order '+x.id+' created. Import the roster in Partners.'));
+}
 
 function statusBadgeOrd(s){
   if (s === '已完成') return '<span class="badge green">'+tr('已完成')+'</span>';
@@ -831,13 +899,13 @@ function sourceBadge(s){ return s==='顧問建訂單' ? '<span class="badge blue
 /* 20260927j 新增：訂單經歸屬異議覆核接受後，來源欄改顯示歸屬代理商 */
 function sourceCellOrd(o){ return o.attributedAgent ? '<span class="badge blue">'+tr2('代理商：','Agent: ')+o.attributedAgent+'</span>' : sourceBadge(o.source); }
 
-/* 20260928y 新增：「訂單來源」＝業務分類（直營／代理／企業合約／經銷專案訂單），
+/* 20260928y 新增：「訂單來源」＝業務分類（直營／代理／企業合約／經銷訂單），
    與上面 o.source（建立方式：Connect 自助下單／顧問建訂單）是兩個不同維度，不要混用。
    對應 vicki 提問「a05 訂單是指直營跟代理的嗎」：本頁只收「向 TLI 付款」的訂單，
    專案合作不在此列。 */
 function bizSourceOf(o){
   if (o.orderType && o.orderType!=='個人') return '企業合約';
-  if (o.distributorProject) return '經銷專案訂單';
+  if (o.distributorProject) return '經銷訂單';
   if (o.attributedAgent || o.demoAgentName) return '代理';
   return '直營';
 }
@@ -848,7 +916,7 @@ function masterPartnerByName(n){ return TLI_MASTERS.partners.filter(function(p){
 function sourcePartnerOf(o){
   var b = bizSourceOf(o);
   if (b==='代理'){ return masterPartnerByName(o.attributedAgent || o.demoAgentName); }
-  if (b==='經銷專案訂單'){ return masterPartnerByName(o.student); }
+  if (b==='經銷訂單'){ return masterPartnerByName(o.student); }
   return null;
 }
 function sourcePartnerLabel(o){
@@ -860,13 +928,13 @@ function bizSourceCell(o){
   var cls = b==='直營' ? 'grey' : b==='代理' ? 'blue' : b==='企業合約' ? 'orange' : 'green';
   var p = sourcePartnerOf(o);
   var who = p ? sourcePartnerLabel(o) : (o.attributedAgent || o.demoAgentName);
-  var lbl = b==='經銷專案訂單' ? tr2('經銷','Distributor') : tr(b);
+  var lbl = b==='經銷訂單' ? tr2('經銷','Distributor') : tr(b);
   if (b==='企業合約') who = o.student;
   return '<span class="badge '+cls+'" style="white-space:normal;display:inline-block;width:200px;max-width:100%;line-height:1.4;text-align:left">'+lbl+(who?'：'+who:'')+'</span>';
 }
-/* 付款方式（線上收款／線下匯款）：經銷專案訂單一律線下；月結／預付款倒扣視為線下匯款，其餘視為線上收款 */
+/* 付款方式（線上收款／線下匯款）：經銷訂單一律線下；月結／預付款倒扣視為線下匯款，其餘視為線上收款 */
 function payChannelTypeOf(o){
-  if (bizSourceOf(o)==='經銷專案訂單') return '線下匯款';
+  if (bizSourceOf(o)==='經銷訂單') return '線下匯款';
   if (o.payMode==='月結' || o.payMode==='預付款倒扣') return '線下匯款';
   return '線上收款';
 }
@@ -1164,6 +1232,7 @@ function openOrderDrawer(id){
   var campusLabel = (o.orderType && o.orderType!=='個人') ? o.campus : (o.campus+tr2('校',''));
   document.getElementById('od_sub').textContent = campusLabel+'｜'+o.tier+tr2(' 類',' Category')+'｜'+tr2('建立方式：','Created via: ')+tr(o.source)+(o.source==='顧問建訂單'?tr2('（建訂單人：','(Created by: ')+o.builder+tr2('）',')'):'')+'｜'+tr2('建立於 ','Created on ')+o.created+'｜'+tr2('幣別：','Currency: ')+currencyLabelForOrder(o);
   document.getElementById('od_statusrow').innerHTML = statusBadgeOrd(o.status)+' '+bizSourceCell(o)+' '+sourceBadge(o.source)+' '+orderTypeBadge(o);
+  if (o.distributorProject) document.getElementById('od_statusrow').innerHTML += ' <a class="btn ghost" style="padding:2px 10px" href="'+distManageHref(o)+'">'+tr2('匯入名單與寄啟用信','Import roster and send activation emails')+'</a>';
   renderOdEntityRow(o);
   var i18n = window.TLI_I18N;
   var tabs = odTabsFor(o);
@@ -1840,6 +1909,7 @@ function submitDisputeReview(decision){
 /* ================= 初始化 ================= */
 renderChipBars();
 renderTable();
+(function(){ var q = new URLSearchParams(location.search); if (q.get('new')==='dist') openNewDistOrder(q.get('partner')||''); if (q.get('q')){ searchTerm = q.get('q'); var si = document.getElementById('searchInput'); if (si) si.value = searchTerm; renderTable(); } })();
 renderDisputeTable();
 if (window.TLI_I18N) { TLI_I18N.onRefresh(renderChipBars); TLI_I18N.onRefresh(renderTable); TLI_I18N.onRefresh(renderDisputeTable); TLI_I18N.onRefresh(renderNotifPanel); TLI_I18N.init(); }
 

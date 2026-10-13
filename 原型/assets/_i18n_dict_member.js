@@ -841,7 +841,7 @@ Object.assign(TLI_I18N_DICT.en,{
 "m13.ref.label":"Discount or Referral Code (optional)",
 "m13.ref.hint":"Automatically filled in when entering via a partner referral link; you can also enter it manually",
 "m13.ref.autoHint":"Code auto-filled from a referral link",
-"m13.ref.placeholder":"e.g. AGENT2026",
+"m13.ref.placeholder":"Enter a discount or referral code",
 "m13.ref.tagPrefix":"Referred by: ",
 "m13.pay.title":"Payment Method",
 "m13.pay.newebpay":"Credit Card (NewebPay)",

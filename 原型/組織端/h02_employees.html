@@ -132,6 +132,21 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 .wl-list{max-height:280px;overflow-y:auto;border:1px solid var(--g200);border-radius:8px;padding:4px 10px;}
 .wl-row{display:flex;align-items:center;gap:10px;padding:7px 2px;border-bottom:1px dashed var(--g200);font-size:13px;}
 .wl-row:last-child{border-bottom:none;}
+/* ---- 20261013 啟用流程 ---- */
+.orgcode{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:#fff;border:1px solid var(--g200);border-radius:12px;padding:14px 18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(16,24,40,.06);}
+.orgcode .oc-code{display:flex;align-items:center;gap:10px;padding-right:18px;border-right:1px solid var(--g200);}
+.orgcode .oc-ico{width:34px;height:34px;border-radius:8px;background:#E6EEF8;color:var(--navy);display:flex;align-items:center;justify-content:center;}
+.orgcode .oc-val{font-size:18px;font-weight:700;letter-spacing:.08em;color:var(--navy);}
+.orgcode .oc-text{flex:1;min-width:260px;font-size:12.5px;line-height:1.7;color:var(--g500);}
+.orgcode .oc-stat{display:flex;gap:6px;flex-wrap:wrap;}
+td .small{white-space:nowrap;}
+.toolrow select{padding:8px 10px;border:1px solid var(--g200);border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:var(--g900);}
+.filterband{padding-bottom:6px;}
+#empTable td,#empTable th{padding-left:8px;padding-right:8px;}
+#empTable td .btn{padding:6px 10px;font-size:12.5px;}
+input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--navy);}
+input[type=checkbox]:disabled{cursor:not-allowed;}
+.modal.xl{width:760px;}
 .wl-row .wl-name{flex:1;}
 @media (max-width:1023px){
 .hamburger{display:inline-flex;}
@@ -183,26 +198,19 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 
 <div class="pagehead">
 <div><h1 data-i18n="nav_h.h02">員工管理</h1><div class="desc" data-i18n="h02.pageDesc">邀請員工加入企業帳號、查看在學狀態與累計時數。停用帳號後該員工無法再登入預約課程，已使用時數不會退回。</div></div>
+<div class="tr-right" id="toolRight" style="display:flex;gap:8px;flex-wrap:wrap"></div>
 </div>
+
+<div class="orgcode" id="orgCodeBox"></div>
 
 <div class="filterband">
 <div class="toolrow">
 <div class="tr-left">
-<div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="empSearch" placeholder="搜尋姓名或 Email" oninput="onEmpSearch(this.value)" data-i18n-placeholder="h02.searchPlaceholder"></div>
+<div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="empSearch" placeholder="搜尋員編、姓名或 Email" oninput="onEmpSearch(this.value)"></div>
 <select id="deptFilterSel" onchange="onDeptFilterSelect(this.value)"></select>
 <select id="statusFilterSel" onchange="onStatusFilterSelect(this.value)"></select>
+<select id="actFilterSel" onchange="onActFilterSelect(this.value)"></select>
 </div>
-<div class="tr-right">
-<button class="btn ghost" onclick="toggleCsvPanel()" data-i18n="h02.btnCsvImport">批次匯入 CSV</button>
-<button class="btn" onclick="openInviteModal()" data-i18n="h02.btnInvite">＋ 邀請員工</button>
-</div>
-</div>
-<div class="csvpanel" id="csvPanel">
-<strong data-i18n="h02.csvTitle">批次匯入格式說明</strong><br>
-<span data-i18n="h02.csvDesc1">上傳 UTF-8 編碼的 CSV 檔，第一列為欄位標題，欄位順序如下：</span><br>
-<code data-i18n="field.empName">員工姓名</code>、<code>Email</code>、<code data-i18n="field.dept">部門</code>、<code data-i18n="h02.lblSite">所屬廠區</code><span data-i18n="h02.csvDesc2">（填入現有廠區名稱，系統會依廠區自動帶出時區；廠區清單請至</span><a href="h05_contract.html#org" target="_blank" rel="noopener" data-i18n="h02.csvOrgLink">合約與時數池 → 廠區與時區</a><span data-i18n="h02.csvDesc3">查看）</span><br>
-<span data-i18n="h02.csvDesc4">每次匯入上限 500 筆，Email 重複的資料列會被略過並列在匯入結果中。</span>
-<div style="margin-top:10px"><button class="btn ghost" onclick="simulateCsvImport()" data-i18n="h02.btnCsvChoose">選擇檔案並匯入</button></div>
 </div>
 </div>
 
@@ -227,28 +235,20 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 </div>
 </div>
 
-<!-- 邀請員工 modal -->
-<div class="modal-mask" id="inviteModal" onclick="if(event.target===this) closeModal('inviteModal')"><div class="modal">
-<h3 data-i18n="h02.inviteTitle">邀請員工</h3>
-<div class="formrow"><label data-i18n="h02.lblEmail">員工 Email</label><input type="email" id="inviteEmail" placeholder="name@company.com"></div>
-<div class="formrow"><label data-i18n="h02.lblName">姓名</label><input type="text" id="inviteName" placeholder="員工姓名" data-i18n-placeholder="h02.namePlaceholder"></div>
-<div class="formrow"><label data-i18n="h01.lblDept">部門</label><select id="inviteDept"></select></div>
-<div class="formrow"><label data-i18n="h02.lblSite">所屬廠區</label><select id="inviteSite" onchange="onInviteSiteChange(this)"></select><div class="hint" id="inviteSiteTz" style="margin-top:4px"></div></div>
-<div class="hint"><a href="h05_contract.html#org" target="_blank" rel="noopener" data-i18n="h01.manageOrgLink">管理部門與廠區</a></div>
-<div class="hint" data-i18n="h02.inviteHint">邀請送出後，系統會寄送開通連結至員工 Email，員工完成密碼設定後即可登入預約課程；送出後該員工狀態會先顯示「待開通」。</div>
-<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('inviteModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doInviteEmployee()" data-i18n="h02.btnSendInvite">送出邀請</button></div>
-</div></div>
+<!-- 邀請員工 modal（內容由 JS 依語言產生） -->
+<div class="modal-mask" id="inviteModal" onclick="if(event.target===this) closeModal('inviteModal')"><div class="modal" id="inviteBody"></div></div>
 
-<!-- 編輯員工資料 modal -->
-<div class="modal-mask" id="editModal" onclick="if(event.target===this) closeModal('editModal')"><div class="modal">
-<h3 data-i18n="h02.editTitle">編輯員工資料</h3>
-<div class="formrow"><label data-i18n="h02.lblName">姓名</label><input type="text" id="editName" placeholder="員工姓名" data-i18n-placeholder="h02.namePlaceholder"></div>
-<div class="formrow"><label data-i18n="h02.lblEmail">員工 Email</label><input type="email" id="editEmail" placeholder="name@company.com"><div class="hint" id="editEmailHint" style="margin-top:4px"></div></div>
-<div class="formrow"><label data-i18n="h01.lblDept">部門</label><select id="editDept"></select></div>
-<div class="formrow"><label data-i18n="h02.lblSite">所屬廠區</label><select id="editSite" onchange="onEditSiteChange(this)"></select><div class="hint" id="editSiteTz" style="margin-top:4px"></div></div>
-<div class="hint"><a href="h05_contract.html#org" target="_blank" rel="noopener" data-i18n="h01.manageOrgLink">管理部門與廠區</a></div>
-<div class="hint" data-i18n="h02.editHint">狀態、累計時數與出勤率由系統依上課紀錄產生，不在此編輯；停用帳號請用列表上的「停用」。</div>
-<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('editModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doSaveEmployee()" data-i18n="common.save">儲存</button></div>
+<!-- 編輯員工資料 modal（內容由 JS 依語言產生） -->
+<div class="modal-mask" id="editModal" onclick="if(event.target===this) closeModal('editModal')"><div class="modal" id="editBody"></div></div>
+
+<!-- 匯入白名單 modal -->
+<div class="modal-mask" id="importModal" onclick="if(event.target===this) closeModal('importModal')"><div class="modal xl" id="importBody"></div></div>
+
+<!-- 寄送／匯出確認 modal -->
+<div class="modal-mask" id="actModal" onclick="if(event.target===this) closeModal('actModal')"><div class="modal">
+<h3 id="actModalTitle"></h3>
+<div id="actModalBody" style="font-size:13.5px;line-height:1.7"></div>
+<div style="text-align:right;margin-top:14px"><button class="btn ghost" id="actModalCancel" onclick="closeModal('actModal')"></button> <button class="btn" id="actModalOk" onclick="doActConfirm()"></button></div>
 </div></div>
 
 <!-- 停用確認 modal -->
@@ -258,6 +258,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal('disableModal')" data-i18n="common.cancel">取消</button> <button class="btn danger" onclick="confirmDisable()" data-i18n="h02.btnConfirmDisable">確認停用</button></div>
 </div></div>
 
+<script src="../assets/_shared_masters.js"></script>
 <script src="../assets/_i18n_dict.js"></script>
 <script src="../assets/_i18n_dict_org.js"></script>
 <script src="../assets/_i18n.js"></script>
@@ -345,11 +346,352 @@ var EMP_COUNT = 26;
 var EMPLOYEES = []; for (var ii=0; ii<EMP_COUNT; ii++) EMPLOYEES.push(makeEmployee(ii));
 var nextEmpSeq = EMP_COUNT;
 
+/* ==================================================================
+   20261013 員工白名單匯入與啟用（契約：原型2 根目錄 _契約_會員結構與啟用_20261013.md）
+   資料來源：TLI_MASTERS.memberAccounts（orgId = 本企業），匯入與寄送結果用 saveMemberData() 寫回，a01 讀同一份。
+   本頁示範租戶＝範例半導體（ent12，企業代碼 FANLI）；重複檢查只在本企業內（同員編或同 Email）。
+   ================================================================== */
+var MM = window.TLI_MASTERS;
+var ORG_ID = 'ent12';
+var ORG = (MM.orgCustomers.filter(function(o){ return o.id===ORG_ID; })[0]) || {id:ORG_ID, name:'範例半導體股份有限公司', code:'FANLI', sourceType:'direct', sourceUnitId:'tli'};
+function pad(n,l){ var s=String(n); while(s.length<l) s='0'+s; return s; }
+function nowStr(){ var d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1,2)+'-'+pad(d.getDate(),2)+' '+pad(d.getHours(),2)+':'+pad(d.getMinutes(),2); }
+function todayStr(){ return nowStr().slice(0,10); }
+function esc(x){ return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function nextAccSeq(){
+  var mx = 0;
+  MM.memberAccounts.forEach(function(a){ var n = parseInt(String(a.id).replace(/\D/g,''),10); if (n>mx) mx=n; });
+  return mx+1;
+}
+function makeAccount(o){
+  var n = nextAccSeq();
+  var a = {id:'ma'+n, memberNo:'MA-'+pad(n,6), name:'', email:'', phone:'', sourceType:ORG.sourceType, sourceUnitId:ORG.sourceUnitId,
+    orgId:ORG_ID, employeeNo:'', department:'', activationStatus:'未啟用', activationMethod:'Email 通知', activationCode:'',
+    sentAt:'', activatedAt:'', orderId:'', createdAt:todayStr(), plans:[]};
+  for (var k in o) a[k] = o[k];
+  if (!a.email) a.activationMethod = '啟用碼';
+  if (a.activationMethod==='啟用碼' && !a.activationCode) a.activationCode = MM.newActivationCode();
+  return a;
+}
+function orgAccounts(){ return MM.memberAccounts.filter(function(a){ return a.orgId===ORG_ID; }); }
+
+/* 既有 26 位示範員工：對應到主檔帳號（找不到就補一筆）。啟用狀態：在學者少數未啟用／已寄通知，部分無 Email 走啟用碼 */
+function syncLegacyToMasters(){
+  var added = false;
+  EMPLOYEES.forEach(function(e, i){
+    var empNo = 'FL-'+(1001+i);
+    var acct = orgAccounts().filter(function(a){ return a.employeeNo===empNo; })[0];
+    if (!acct){
+      var act = '已啟用';
+      if (e.status==='在學'){ if (i%8===2) act='已寄通知'; else if (i%8===5) act='未啟用'; }
+      var noEmail = (e.status==='在學' && i%9===4);
+      acct = makeAccount({name:e.name, email:noEmail?'':e.email, employeeNo:empNo, department:e.dept, activationStatus:act,
+        createdAt:e.joined, activationMethod:noEmail?'啟用碼':'Email 通知'});
+      if (act==='已啟用'){ acct.sentAt = e.joined+' 09:30'; acct.activatedAt = e.joined+' 10:00'; }
+      else if (act==='已寄通知'){ acct.sentAt = e.joined+' 09:30'; }
+      MM.memberAccounts.push(acct); added = true;
+    }
+    e.ma = acct; e.empNo = empNo;
+    e.name = acct.name; e.email = acct.email; e.dept = acct.department || e.dept;
+  });
+  /* 先前匯入、存在主檔但不屬於這 26 位的帳號 */
+  var known = {}; EMPLOYEES.forEach(function(e){ known[e.ma.id] = true; });
+  orgAccounts().forEach(function(a){ if (!known[a.id]) EMPLOYEES.unshift(rowFromAccount(a)); });
+  if (added) MM.saveMemberData();
+}
+function rowFromAccount(a){
+  var site = SITE_LIST[0];
+  return {id:'emp'+(nextEmpSeq++), name:a.name, email:a.email, dept:a.department, site:site.name, tz:site.tz,
+    status:'在學', activation:'', hours:0, attendance:0, joined:a.createdAt,
+    skills:{listen:0,speak:0,read:0,write:0}, score:0, feedback:'', empNo:a.employeeNo, ma:a};
+}
+syncLegacyToMasters();
+
+/* ===== 啟用狀態：標籤、篩選、選取 ===== */
+var ACT_EN = {}; MM.activationStates.forEach(function(s){ ACT_EN[s.id] = s.en; });
+function actText(id){ return T(id, ACT_EN[id] || id); }
+function actBadge(e){
+  var cls = {'未啟用':'grey','已寄通知':'orange','已啟用':'green'}[e.ma.activationStatus] || 'grey';
+  return '<span class="badge '+cls+'">'+actText(e.ma.activationStatus)+'</span>';
+}
+var selected = {};
+function selectedRows(){ return EMPLOYEES.filter(function(e){ return selected[e.id]; }); }
+function toggleSel(id, on){ if (on) selected[id]=true; else delete selected[id]; renderActBar(); syncSelAll(); }
+function syncSelAll(){
+  var box = document.getElementById('selAll'); if (!box) return;
+  var rows = pageRowsNow().filter(function(e){ return e.ma.activationStatus!=='已啟用'; });
+  box.checked = rows.length>0 && rows.every(function(e){ return selected[e.id]; });
+}
+function toggleSelAll(on){
+  pageRowsNow().forEach(function(e){ if (e.ma.activationStatus!=='已啟用'){ if (on) selected[e.id]=true; else delete selected[e.id]; } });
+  renderEmpTable(); renderActBar();
+}
+function pageRowsNow(){
+  var f = empFiltered(), s = (empState.page-1)*empState.pageSize;
+  return f.slice(s, s+empState.pageSize);
+}
+function onActFilterSelect(v){ empState.act = v; empState.page = 1; renderEmpTable(); }
+function renderActFilter(){
+  var sel = document.getElementById('actFilterSel');
+  sel.innerHTML = '<option value="">'+T('全部啟用狀態','All Activation Statuses')+'</option>' + MM.activationStates.map(function(s){
+    return '<option value="'+s.id+'">'+actText(s.id)+'</option>'; }).join('');
+  sel.value = empState.act;
+}
+
+/* ===== 上方資訊列：企業代碼、啟用進度、批次動作 ===== */
+var ICO = {
+  upload:'<svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M10 13V3"/><polyline points="6 7 10 3 14 7"/><path d="M3 13v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg>',
+  mail:'<svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><rect x="2.5" y="4.5" width="15" height="11" rx="1.5"/><polyline points="3 6 10 11 17 6"/></svg>',
+  down:'<svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M10 3v10"/><polyline points="6 9 10 13 14 9"/><path d="M3 13v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg>',
+  key:'<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="3.5"/><path d="M9.5 9.5 16 3"/><path d="M13.5 5.5 16 8"/></svg>'
+};
+function actCounts(){
+  var c = {'未啟用':0,'已寄通知':0,'已啟用':0};
+  EMPLOYEES.forEach(function(e){ if (e.status==='在學') c[e.ma.activationStatus]++; });
+  return c;
+}
+function renderActBar(){
+  var c = actCounts(), n = selectedRows().length;
+  var box = document.getElementById('orgCodeBox');
+  box.innerHTML =
+    '<div class="oc-code"><span class="oc-ico">'+ICO.key+'</span><div><div class="small">'+T('企業代碼','Organization Code')+'</div><div class="oc-val">'+esc(ORG.code)+'</div></div></div>'+
+    '<div class="oc-text">'+T('沒有 Email 的員工：匯出「名單＋啟用碼」自行發給員工，員工用「企業代碼＋員工編號」與啟用碼首次登入，設定密碼後即可使用。有 Email 的員工：寄啟用通知，由信中連結啟用。','Employees without an Email: export the “list + activation codes” and hand them out yourself. They sign in the first time with “Organization Code + Employee No.” and the activation code, then set a password. Employees with an Email: send the activation notice and they activate from the link.')+'</div>'+
+    '<div class="oc-stat"><span class="badge green">'+actText('已啟用')+' '+c['已啟用']+'</span> <span class="badge orange">'+actText('已寄通知')+' '+c['已寄通知']+'</span> <span class="badge grey">'+actText('未啟用')+' '+c['未啟用']+'</span></div>';
+  var right = document.getElementById('toolRight');
+  right.innerHTML =
+    '<button class="btn ghost" onclick="openImportModal()">'+ICO.upload+T('匯入員工名單','Import Employee List')+'</button>'+
+    '<button class="btn ghost" id="btnBatchSend" onclick="openBatchSend()"'+(n?'':' disabled')+'>'+ICO.mail+T('批次寄啟用通知','Send Activation Notices')+(n?'（'+n+'）':'')+'</button>'+
+    '<button class="btn ghost" onclick="openExportCodes()">'+ICO.down+T('匯出名單＋啟用碼','Export List + Codes')+'</button>'+
+    '<button class="btn" onclick="openInviteModal()">'+T('＋ 邀請員工','+ Invite Employee')+'</button>';
+}
+
+/* ===== 寄啟用通知（示範：不真的寄信，只寫回狀態與時間） ===== */
+function sendNoticeTo(e){
+  var a = e.ma;
+  a.activationMethod = 'Email 通知';
+  a.activationStatus = '已寄通知';
+  a.sentAt = nowStr();
+  MM.ensureActivationCode(a);
+}
+function sendOne(id){
+  var e = EMPLOYEES.find(function(x){ return x.id===id; });
+  if (!e || !e.email) return;
+  var resend = e.ma.activationStatus==='已寄通知';
+  sendNoticeTo(e);
+  MM.saveMemberData();
+  renderEmpTable(); renderActBar();
+  toast((resend ? T('已重寄啟用通知至 ','Activation notice resent to ') : T('已寄出啟用通知至 ','Activation notice sent to '))+e.email);
+}
+function eligibleForMail(rows){ return rows.filter(function(e){ return e.email && e.ma.activationStatus!=='已啟用'; }); }
+var actConfirmFn = null;
+function openActModal(title, bodyHtml, confirmLabel, fn){
+  document.getElementById('actModalTitle').textContent = title;
+  document.getElementById('actModalBody').innerHTML = bodyHtml;
+  var b = document.getElementById('actModalOk'); b.textContent = confirmLabel; b.disabled = !fn;
+  actConfirmFn = fn;
+  document.getElementById('actModalCancel').textContent = T('取消','Cancel');
+  document.getElementById('actModal').classList.add('open');
+}
+function doActConfirm(){ var f = actConfirmFn; closeModal('actModal'); if (f) f(); }
+function openBatchSend(){
+  var rows = selectedRows(), ok = eligibleForMail(rows);
+  var noMail = rows.filter(function(e){ return !e.email; }).length;
+  var done = rows.filter(function(e){ return e.ma.activationStatus==='已啟用'; }).length;
+  var again = ok.filter(function(e){ return e.ma.activationStatus==='已寄通知'; }).length;
+  var html = '<p style="margin:0 0 8px">'+T('將寄出啟用通知給 ','Activation notices will be sent to ')+'<strong>'+ok.length+'</strong>'+T(' 位員工（其中 ',' employees (')+again+T(' 位為重寄）。',' of them are resends).')+'</p>'+
+    ((noMail||done) ? '<p class="small" style="margin:0">'+T('略過：','Skipped: ')+(noMail?noMail+T(' 位沒有 Email（請改用「匯出名單＋啟用碼」）',' without an Email (use “Export List + Codes” instead)'):'')+(noMail&&done?'；':'')+(done?done+T(' 位已啟用',' already activated'):'')+'</p>' : '');
+  openActModal(T('批次寄啟用通知','Send Activation Notices'), html, T('確認寄出','Send'), ok.length ? function(){
+    ok.forEach(sendNoticeTo); selected = {};
+    MM.saveMemberData(); renderEmpTable(); renderActBar();
+    toast(T('已寄出啟用通知 ','Activation notices sent: ')+ok.length+T(' 封',''));
+  } : null);
+}
+
+/* ===== 匯出名單＋啟用碼（無 Email 員工） ===== */
+function csvCell(v){ v = String(v==null?'':v); return /[",\r\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
+function downloadCsv(filename, rows){
+  var text = '﻿' + rows.map(function(r){ return r.map(csvCell).join(','); }).join('\r\n');
+  var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+  var url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+function codeTargets(){
+  var sel = selectedRows().filter(function(e){ return !e.email && e.ma.activationStatus!=='已啟用'; });
+  if (sel.length) return sel;
+  return EMPLOYEES.filter(function(e){ return !e.email && e.status==='在學' && e.ma.activationStatus!=='已啟用'; });
+}
+function openExportCodes(){
+  var rows = codeTargets();
+  var html = '<p style="margin:0 0 8px">'+T('將匯出 ','Will export ')+'<strong>'+rows.length+'</strong>'+T(' 位沒有 Email、尚未啟用的員工（已勾選時只匯出勾選者）。',' employees without an Email who have not activated yet (only the ticked ones if any are ticked).')+'</p>'+
+    '<p class="small" style="margin:0 0 6px">'+T('檔案欄位：企業代碼、員工編號、姓名、部門、啟用碼。','Columns: Organization Code, Employee No., Name, Department, Activation Code.')+'</p>'+
+    '<p class="small" style="margin:0">'+T('員工首次登入：輸入企業代碼「','First sign-in: enter the organization code “')+esc(ORG.code)+T('」＋員工編號＋啟用碼，再設定密碼。','” + employee number + activation code, then set a password.')+'</p>';
+  openActModal(T('匯出名單＋啟用碼','Export List + Activation Codes'), html, T('下載 CSV','Download CSV'), rows.length ? function(){
+    var out = [[T('企業代碼','Organization Code'), T('員工編號','Employee No.'), T('姓名','Name'), T('部門','Department'), T('啟用碼','Activation Code')]];
+    rows.forEach(function(e){
+      var a = e.ma; a.activationMethod = '啟用碼';
+      MM.ensureActivationCode(a);
+      if (a.activationStatus==='未啟用'){ a.activationStatus = '已寄通知'; a.sentAt = nowStr(); }
+      out.push([ORG.code, e.empNo, e.name, e.dept, MM.activationCodeOf(a)]);
+    });
+    downloadCsv(ORG.code+'_activation_codes_'+todayStr().replace(/-/g,'')+'.csv', out);
+    selected = {}; MM.saveMemberData(); renderEmpTable(); renderActBar();
+    toast(T('已匯出 ','Exported ')+rows.length+T(' 筆名單與啟用碼，請自行發給員工',' rows with activation codes; hand them out to your employees'));
+  } : null);
+}
+
+/* ===== 匯入白名單：CSV 範本、上傳預覽、確認匯入 ===== */
+var IMP_COLS = ['員工編號','姓名','Email','部門'];
+var imp = {rows:[], fname:''};
+function downloadTemplate(){
+  downloadCsv('employee_whitelist_template.csv', [
+    [T('員工編號','Employee No.'), T('姓名','Name'), 'Email', T('部門','Department')],
+    ['FL-2001','王小明','xiaoming.wang@example-semi.com','業務部'],
+    ['FL-2002','林小華','','製造部']
+  ]);
+  toast(T('已下載 CSV 範本（Email 可留空）','CSV template downloaded (Email may be left blank)'));
+}
+function parseCsv(text){
+  text = text.replace(/^﻿/, '');
+  var rows = [], row = [], cur = '', q = false;
+  for (var i=0;i<text.length;i++){
+    var ch = text.charAt(i);
+    if (q){
+      if (ch==='"'){ if (text.charAt(i+1)==='"'){ cur+='"'; i++; } else q=false; } else cur+=ch;
+    } else if (ch==='"') q = true;
+    else if (ch===','){ row.push(cur); cur=''; }
+    else if (ch==='\n' || ch==='\r'){ if (ch==='\r' && text.charAt(i+1)==='\n') i++; row.push(cur); cur=''; if (row.some(function(x){return x.trim()!=='';})) rows.push(row); row=[]; }
+    else cur+=ch;
+  }
+  row.push(cur); if (row.some(function(x){return x.trim()!=='';})) rows.push(row);
+  return rows;
+}
+function mapCsvRows(rows){
+  var idx = {no:0, name:1, email:2, dept:3}, start = 0;
+  if (rows.length){
+    var h = rows[0].map(function(x){ return x.trim().toLowerCase(); });
+    var isHead = h.some(function(x){ return /員工編號|員編|employee|姓名|name|email/.test(x); });
+    if (isHead){
+      start = 1;
+      h.forEach(function(x,i){
+        if (/員工編號|員編|employee/.test(x)) idx.no = i;
+        else if (/姓名|^name/.test(x)) idx.name = i;
+        else if (/email|e-mail|信箱/.test(x)) idx.email = i;
+        else if (/部門|dept/.test(x)) idx.dept = i;
+      });
+    }
+  }
+  return rows.slice(start).map(function(r){
+    return {no:(r[idx.no]||'').trim(), name:(r[idx.name]||'').trim(), email:(r[idx.email]||'').trim(), dept:(r[idx.dept]||'').trim()};
+  });
+}
+function checkImportRows(list){
+  var seenNo = {}, seenMail = {};
+  EMPLOYEES.forEach(function(e){ seenNo[e.empNo.toLowerCase()] = 'exist'; if (e.email) seenMail[e.email.toLowerCase()] = 'exist'; });
+  var deptNames = DEPTS_ALL.map(function(d){ return d.name; });
+  return list.slice(0,500).map(function(r){
+    var res = {r:r, ok:true, msg:T('可匯入','Ready'), cls:'green', note:''};
+    var no = r.no.toLowerCase(), mail = r.email.toLowerCase();
+    if (!r.no || !r.name){ res.ok=false; res.msg=T('略過：缺員工編號或姓名','Skipped: missing employee no. or name'); }
+    else if (r.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r.email)){ res.ok=false; res.msg=T('略過：Email 格式不符','Skipped: invalid Email'); }
+    else if (seenNo[no]){ res.ok=false; res.msg = seenNo[no]==='exist' ? T('略過：員工編號已在名單中','Skipped: employee no. already on the list') : T('略過：檔內員工編號重複','Skipped: duplicate employee no. in file'); }
+    else if (mail && seenMail[mail]){ res.ok=false; res.msg = seenMail[mail]==='exist' ? T('略過：Email 已在名單中','Skipped: Email already on the list') : T('略過：檔內 Email 重複','Skipped: duplicate Email in file'); }
+    if (res.ok){
+      seenNo[no] = 'file'; if (mail) seenMail[mail] = 'file';
+      if (!r.email) res.note = T('無 Email，將產生啟用碼','No Email; an activation code will be generated');
+      if (r.dept && deptNames.indexOf(r.dept)===-1) res.note += (res.note?'；':'')+T('部門不在現有清單','Department not in current list');
+    } else res.cls = 'red';
+    return res;
+  });
+}
+function sampleImportRows(){
+  return [
+    {no:'FL-2001',name:'王柏丞',email:'boching.wang@example-semi.com',dept:'業務部'},
+    {no:'FL-2002',name:'林語婷',email:'yuting.lin@example-semi.com',dept:'研發部'},
+    {no:'FL-2003',name:'張家豪',email:'',dept:'製造部'},
+    {no:'FL-2004',name:'李美琪',email:'meichi.li@example-semi.com',dept:'人資部'},
+    {no:'FL-2005',name:'陳冠宇',email:'',dept:'製造部'},
+    {no:'FL-2006',name:'黃子瑜',email:'tzuyu.huang@example-semi.com',dept:'廠務部'},
+    {no:'FL-1001',name:'重複員編示範',email:'dup.no@example-semi.com',dept:'業務部'},
+    {no:'FL-2008',name:'吳承恩',email:'boching.wang@example-semi.com',dept:'研發部'},
+    {no:'FL-2009',name:'周怡君',email:'yijun.chou@example-semi.com',dept:'研發部'},
+    {no:'FL-2010',name:'蔡明哲',email:'',dept:'廠務部'},
+    {no:'FL-2011',name:'許雅惠',email:'yahui.hsu@example-semi.com',dept:'品保部'},
+    {no:'FL-2012',name:'劉建國',email:'chienkuo.liu@example-semi.com',dept:'製造部'}
+  ];
+}
+function openImportModal(){
+  imp = {rows:[], fname:''};
+  renderImportModal();
+  document.getElementById('importModal').classList.add('open');
+}
+function renderImportModal(){
+  var box = document.getElementById('importBody');
+  var okN = imp.rows.filter(function(x){ return x.ok; }).length;
+  var noMailN = imp.rows.filter(function(x){ return x.ok && !x.r.email; }).length;
+  var skipN = imp.rows.length - okN;
+  var h = '<h3>'+T('匯入員工名單（白名單）','Import Employee List (Whitelist)')+'</h3>'+
+    '<div class="small" style="line-height:1.7;margin-bottom:10px">'+T('欄位：員工編號、姓名、Email（可空）、部門。每次上限 500 筆；重複只在本企業內檢查，同員工編號或同 Email 會被略過。匯入後員工狀態為「未啟用」，再寄啟用通知或匯出啟用碼。','Columns: Employee No., Name, Email (optional), Department. Up to 500 rows per import. Duplicates are checked within your organization only: the same employee number or Email is skipped. Imported employees start as “Not Activated”; then send notices or export codes.')+'</div>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">'+
+    '<button class="btn ghost" onclick="downloadTemplate()">'+ICO.down+T('下載 CSV 範本','Download CSV Template')+'</button>'+
+    '<label class="btn ghost" style="margin:0">'+ICO.upload+T('選擇 CSV 檔','Choose CSV File')+'<input type="file" id="impFile" accept=".csv,text/csv" style="display:none" onchange="onImportFile(this)"></label>'+
+    '<button class="btn ghost" onclick="loadSampleImport()">'+T('使用範例名單','Use Sample List')+'</button>'+
+    (imp.fname?'<span class="small" style="align-self:center">'+esc(imp.fname)+'</span>':'')+'</div>';
+  if (imp.rows.length){
+    h += '<div class="wl-list" style="max-height:300px;padding:0"><table style="font-size:12.5px"><tr><th>#</th><th>'+T('員工編號','Employee No.')+'</th><th>'+T('姓名','Name')+'</th><th>Email</th><th>'+T('部門','Department')+'</th><th>'+T('檢查結果','Result')+'</th></tr>'+
+      imp.rows.map(function(x,i){
+        return '<tr><td>'+(i+1)+'</td><td>'+esc(x.r.no)+'</td><td>'+esc(x.r.name)+'</td><td>'+(esc(x.r.email)||'<span class="small">—</span>')+'</td><td>'+esc(x.r.dept)+'</td>'+
+          '<td><span class="badge '+x.cls+'">'+x.msg+'</span>'+(x.note?'<div class="small" style="white-space:normal">'+x.note+'</div>':'')+'</td></tr>';
+      }).join('')+'</table></div>'+
+      '<div style="margin-top:10px;font-size:13px">'+T('可匯入 ','Ready to import: ')+'<strong>'+okN+'</strong>'+T(' 筆（其中 ',' (')+noMailN+T(' 筆無 Email，將產生啟用碼）；略過 ',' without Email get activation codes); skipped: ')+'<strong>'+skipN+'</strong>'+T(' 筆。','.')+'</div>';
+  } else {
+    h += '<div class="emptylist" style="border:1px dashed var(--g200);border-radius:8px">'+T('尚未選擇檔案。可先下載範本，或用範例名單看匯入流程。','No file chosen yet. Download the template first, or use the sample list to see the flow.')+'</div>';
+  }
+  h += '<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal(\'importModal\')">'+T('取消','Cancel')+'</button> '+
+    '<button class="btn" id="impConfirm" onclick="confirmImport()"'+(okN?'':' disabled')+'>'+T('確認匯入','Confirm Import')+(okN?'（'+okN+'）':'')+'</button></div>';
+  box.innerHTML = h;
+}
+function onImportFile(input){
+  var f = input.files && input.files[0]; if (!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    var list = mapCsvRows(parseCsv(String(rd.result||'')));
+    imp = {rows:checkImportRows(list), fname:f.name};
+    if (list.length>500) toast(T('超過 500 筆，只處理前 500 筆','Over 500 rows; only the first 500 are processed'));
+    renderImportModal();
+  };
+  rd.readAsText(f, 'utf-8');
+}
+function loadSampleImport(){
+  imp = {rows:checkImportRows(sampleImportRows()), fname:T('範例名單','Sample list')};
+  renderImportModal();
+}
+function confirmImport(){
+  var oks = imp.rows.filter(function(x){ return x.ok; });
+  if (!oks.length) return;
+  var created = [];
+  oks.forEach(function(x){
+    var a = makeAccount({name:x.r.name, email:x.r.email, employeeNo:x.r.no, department:x.r.dept});
+    MM.memberAccounts.push(a);
+    created.push(rowFromAccount(a));
+  });
+  created.reverse().forEach(function(row){ EMPLOYEES.unshift(row); });
+  MM.saveMemberData();
+  var skip = imp.rows.length - oks.length;
+  closeModal('importModal');
+  empState.status = ''; empState.act = '未啟用'; empState.page = 1; empState.search = '';
+  document.getElementById('empSearch').value = '';
+  renderStatusChips(); renderActFilter(); renderDeptChips(); renderEmpTable(); renderActBar();
+  toast(T('已匯入 ','Imported ')+oks.length+T(' 筆，略過 ',' rows, skipped ')+skip+T(' 筆；請勾選後批次寄啟用通知，或匯出啟用碼','; tick them to send activation notices, or export the codes'));
+}
+
 /* ===== 部門／狀態篩選 chip ===== */
-var empState = {search:'', dept:'', status:'在學', page:1, pageSize:10};
+var empState = {search:'', dept:'', status:'在學', act:'', page:1, pageSize:10};
 function renderDeptChips(){
   var sel = document.getElementById('deptFilterSel');
-  sel.innerHTML = '<option value="">'+T('全部部門','All Departments')+'</option>' + activeDepts().map(function(d){
+  var dl = activeDepts().slice();
+  EMPLOYEES.forEach(function(e){ if (e.dept && dl.indexOf(e.dept)===-1) dl.push(e.dept); });
+  sel.innerHTML = '<option value="">'+T('全部部門','All Departments')+'</option>' + dl.map(function(d){
     return '<option value="'+d+'"'+(empState.dept===d?' selected':'')+'>'+d+'</option>';
   }).join('');
   sel.value = empState.dept;
@@ -378,7 +720,8 @@ function onEmpPageSizeChange(el){ empState.pageSize = Number(el.value); empState
 function empFiltered(){
   var term = empState.search.trim().toLowerCase();
   return EMPLOYEES.filter(function(e){
-    if (term && e.name.toLowerCase().indexOf(term)===-1 && e.email.toLowerCase().indexOf(term)===-1) return false;
+    if (term && e.name.toLowerCase().indexOf(term)===-1 && (e.email||'').toLowerCase().indexOf(term)===-1 && (e.empNo||'').toLowerCase().indexOf(term)===-1) return false;
+    if (empState.act && e.ma.activationStatus!==empState.act) return false;
     if (empState.dept && e.dept!==empState.dept) return false;
     if (empState.status && e.status!==empState.status) return false;
     return true;
@@ -388,7 +731,6 @@ function empMaxPage(){ return Math.max(1, Math.ceil(empFiltered().length/empStat
 function empGotoPage(p){ var max=empMaxPage(); if (p<1) p=1; if (p>max) p=max; empState.page=p; renderEmpTable(); }
 function empGotoPageRel(delta){ empGotoPage(empState.page+delta); }
 function statusBadge(e){
-  if (e.activation==='pending') return '<span class="badge orange">'+T('待開通','Not Activated')+'</span>';
   return e.status==='在學' ? '<span class="badge green">'+T('在學','Active')+'</span>' : '<span class="badge grey">'+T('停用','Deactivated')+'</span>';
 }
 function renderEmpTable(){
@@ -399,24 +741,36 @@ function renderEmpTable(){
   var startIdx = (empState.page-1)*empState.pageSize;
   var pageRows = filtered.slice(startIdx, startIdx+empState.pageSize);
   var t = document.getElementById('empTable');
-  t.innerHTML = '<tr><th>'+T('姓名','Name')+'</th><th>Email</th><th>'+T('部門','Department')+'</th><th>'+T('所屬廠區（時區）','Site (Time Zone)')+'</th><th>'+T('狀態','Status')+'</th><th>'+T('累計時數','Hours Accrued')+'</th><th>'+T('出勤率','Attendance')+'</th><th></th></tr>';
+  t.innerHTML = '<tr><th style="width:34px"><input type="checkbox" id="selAll" onchange="toggleSelAll(this.checked)" aria-label="'+T('全選本頁','Select this page')+'"></th>'+
+    '<th>'+T('員工編號','Employee No.')+'</th><th>'+T('姓名／Email','Name / Email')+'</th><th>'+T('部門','Department')+'</th><th>'+T('所屬廠區','Site')+'</th>'+
+    '<th>'+T('啟用狀態','Activation')+'</th><th>'+T('在學狀態','Status')+'</th><th>'+T('累計時數／出勤率','Hours / Attendance')+'</th><th></th></tr>';
   pageRows.forEach(function(e){
+    var a = e.ma, act = a.activationStatus;
     var tr = document.createElement('tr');
-    var actionBtn = '<button class="btn ghost" onclick="openEditModal(\''+e.id+'\')">'+T('編輯','Edit')+'</button> ';
-    if (e.activation==='pending'){
-      actionBtn += '<button class="btn ghost" onclick="resendActivation(\''+e.id+'\')">'+T('重寄開通信','Resend Activation Email')+'</button>';
-    } else if (e.status==='在學'){
-      actionBtn += '<button class="btn ghost" onclick="openDisableModal(\''+e.id+'\')">'+T('停用','Deactivate')+'</button>';
-    } else {
-      actionBtn += '<span class="small">'+T('已停用','Deactivated')+'</span>';
-    }
-    tr.innerHTML = '<td>'+e.name+'</td><td>'+e.email+'</td><td>'+e.dept+'</td><td>'+e.site+'（'+e.tz+'）</td>'+
-      '<td>'+statusBadge(e)+'</td><td>'+e.hours+' '+T('小時','hrs')+'</td><td>'+e.attendance+'%</td><td>'+actionBtn+'</td>';
+    var btns = '<button class="btn ghost" onclick="openEditModal(\''+e.id+'\')">'+T('編輯','Edit')+'</button> ';
+    if (e.email && act==='未啟用') btns += '<button class="btn ghost" onclick="sendOne(\''+e.id+'\')">'+T('寄啟用通知','Send Notice')+'</button> ';
+    else if (e.email && act==='已寄通知') btns += '<button class="btn ghost" onclick="sendOne(\''+e.id+'\')">'+T('重寄啟用通知','Resend Notice')+'</button> ';
+    if (e.status==='在學') btns += '<button class="btn ghost" onclick="openDisableModal(\''+e.id+'\')">'+T('停用','Deactivate')+'</button>';
+    else btns += '<span class="small">'+T('已停用','Deactivated')+'</span>';
+    var sub = '';
+    if (act==='已啟用') sub = T('啟用於 ','Activated ')+esc((a.activatedAt||'').slice(0,10));
+    else if (act==='已寄通知') sub = (e.email ? T('通知寄出 ','Notice sent ') : T('啟用碼已匯出 ','Code exported '))+esc((a.sentAt||'').slice(0,10));
+    if (!e.email && act!=='已啟用' && (a.activationCode||a.linkToken)) sub += (sub?'｜':'')+T('啟用碼 ','Code ')+esc(MM.activationCodeOf(a));
+    if (e.email && act==='已寄通知') sub += (sub?'｜':'')+'<a href="'+esc(MM.activationLinkOf(a,'../公開網站/'))+'" target="_blank" rel="noopener">'+T('啟用信連結','Activation link')+'</a>';
+    var canSel = act!=='已啟用';
+    var live = act==='已啟用';
+    tr.innerHTML = '<td><input type="checkbox"'+(canSel?'':' disabled')+(selected[e.id]?' checked':'')+' onchange="toggleSel(\''+e.id+'\',this.checked)" aria-label="'+T('選取','Select')+'"></td>'+
+      '<td>'+esc(e.empNo)+'</td>'+
+      '<td>'+esc(e.name)+'<div class="small">'+(e.email?esc(e.email):T('（無 Email）','(no Email)'))+'</div></td>'+
+      '<td>'+esc(e.dept)+'</td><td title="'+esc(e.tz)+'">'+esc(e.site)+'</td>'+
+      '<td>'+actBadge(e)+(sub?'<div class="small">'+sub+'</div>':'')+'</td>'+
+      '<td>'+statusBadge(e)+'</td>'+
+      '<td>'+(live ? e.hours+' '+T('小時','hrs')+' ／ '+e.attendance+'%' : '<span class="small">—</span>')+'</td><td>'+btns+'</td>';
     t.appendChild(tr);
   });
   if (total===0){
     var etr = document.createElement('tr');
-    etr.innerHTML = '<td colspan="8" class="emptylist">'+T('找不到符合條件的員工。','No employees match the filters.')+'</td>';
+    etr.innerHTML = '<td colspan="9" class="emptylist">'+T('找不到符合條件的員工。','No employees match the filters.')+'</td>';
     t.appendChild(etr);
   }
   var startLabel = total===0 ? 0 : startIdx+1;
@@ -428,6 +782,7 @@ function renderEmpTable(){
   document.getElementById('empBtnNext').disabled = empState.page>=maxPage;
   document.getElementById('empBtnLast').disabled = empState.page>=maxPage;
   document.getElementById('empPageSizeSel').value = String(empState.pageSize);
+  syncSelAll();
 }
 
 /* ===== 邀請紀錄橋接（比照 p10→c08 做法，寫入 localStorage 供其他頁面/未來情境讀取，此原型內部未串接讀取端）===== */
@@ -437,74 +792,90 @@ function pushEmployeeInviteRecord(emp, sentAt){
     var raw = localStorage.getItem(LS_INVITE_KEY);
     var arr = raw ? JSON.parse(raw) : [];
     if (!Array.isArray(arr)) arr = [];
-    arr.unshift({ name:emp.name, email:emp.email, dept:emp.dept, sentAt:sentAt, status:'待開通' });
+    arr.unshift({ name:emp.name, email:emp.email, dept:emp.dept, sentAt:sentAt, status:'已寄通知' });
     localStorage.setItem(LS_INVITE_KEY, JSON.stringify(arr));
   }catch(err){}
 }
 
-/* ===== 邀請員工 ===== */
+/* ===== 邀請員工（單筆加入白名單；有 Email 直接寄啟用通知，沒有 Email 產生啟用碼） ===== */
+function dupInOrg(empNo, email, exceptId){
+  var no = String(empNo||'').trim().toLowerCase(), mail = String(email||'').trim().toLowerCase();
+  var hit = EMPLOYEES.filter(function(x){ return x.id!==exceptId && ((no && x.empNo.toLowerCase()===no) || (mail && x.email && x.email.toLowerCase()===mail)); })[0];
+  if (!hit) return '';
+  return (no && hit.empNo.toLowerCase()===no) ? 'no' : 'mail';
+}
 function openInviteModal(){
-  document.getElementById('inviteEmail').value = '';
-  document.getElementById('inviteName').value = '';
-  var dsel = document.getElementById('inviteDept');
-  dsel.innerHTML = activeDepts().map(function(d){ return '<option>'+d+'</option>'; }).join('');
-  var ssel = document.getElementById('inviteSite');
-  ssel.innerHTML = activeSites().map(function(s){ return '<option value="'+s.id+'">'+s.name+'</option>'; }).join('');
+  var box = document.getElementById('inviteBody');
+  box.innerHTML = '<h3>'+T('邀請員工','Invite Employee')+'</h3>'+
+    '<div class="formrow"><label>'+T('員工編號','Employee No.')+'</label><input type="text" id="inviteNo" placeholder="FL-2101"></div>'+
+    '<div class="formrow"><label>'+T('姓名','Name')+'</label><input type="text" id="inviteName" placeholder="'+T('員工姓名','Employee name')+'"></div>'+
+    '<div class="formrow"><label>'+T('員工 Email（可空）','Employee Email (optional)')+'</label><input type="email" id="inviteEmail" placeholder="name@company.com"></div>'+
+    '<div class="formrow"><label>'+T('部門','Department')+'</label><select id="inviteDept">'+activeDepts().map(function(d){ return '<option>'+esc(d)+'</option>'; }).join('')+'</select></div>'+
+    '<div class="formrow"><label>'+T('所屬廠區','Site')+'</label><select id="inviteSite" onchange="onInviteSiteChange(this)">'+activeSites().map(function(s){ return '<option value="'+s.id+'">'+esc(s.name)+'</option>'; }).join('')+'</select><div class="hint" id="inviteSiteTz" style="margin-top:4px"></div></div>'+
+    '<div class="hint"><a href="h05_contract.html#org" target="_blank" rel="noopener">'+T('管理部門與廠區','Manage departments and sites')+'</a></div>'+
+    '<div class="hint">'+T('有 Email：送出後系統寄啟用通知，狀態顯示「已寄通知」。沒有 Email：狀態為「未啟用」，用「匯出名單＋啟用碼」發給員工。','With an Email: the activation notice is sent right away and the status becomes “Notice Sent”. Without an Email: the status stays “Not Activated”; hand out the code via “Export List + Codes”.')+'</div>'+
+    '<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal(\'inviteModal\')">'+T('取消','Cancel')+'</button> <button class="btn" onclick="doInviteEmployee()">'+T('加入並處理啟用','Add and Handle Activation')+'</button></div>';
   document.getElementById('inviteModal').classList.add('open');
-  onInviteSiteChange(ssel);
+  onInviteSiteChange(document.getElementById('inviteSite'));
 }
 function onInviteSiteChange(sel){
   var site = SITE_LIST.find(function(s){ return s.id===sel.value; });
   document.getElementById('inviteSiteTz').textContent = site ? T('時區：','Time Zone: ')+site.tz+T('（自動帶出，不可編輯）',' (auto-filled, not editable)') : '';
 }
 function doInviteEmployee(){
+  var no = document.getElementById('inviteNo').value.trim();
   var email = document.getElementById('inviteEmail').value.trim();
   var name = document.getElementById('inviteName').value.trim();
-  if (!email || !name){ toast(T('請填寫 Email 與姓名','Please fill in both Email and name')); return; }
+  if (!no || !name){ toast(T('請填寫員工編號與姓名','Please fill in employee number and name')); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast(T('Email 格式不正確','The Email format is invalid')); return; }
+  var dup = dupInOrg(no, email, '');
+  if (dup==='no'){ toast(T('這個員工編號已在名單中','This employee number is already on the list')); return; }
+  if (dup==='mail'){ toast(T('這個 Email 已被本企業其他員工使用','This Email is already used by another employee in your organization')); return; }
   var dept = document.getElementById('inviteDept').value;
   var siteId = document.getElementById('inviteSite').value;
   var site = SITE_LIST.find(function(s){ return s.id===siteId; });
-  var newEmp = {
-    id:'emp'+(nextEmpSeq++), name:name, email:email, dept:dept, site:site.name, tz:site.tz,
-    status:'在學', activation:'pending', hours:0, attendance:0, joined:new Date().toISOString().slice(0,10),
-    skills:{listen:0,speak:0,read:0,write:0}, score:0, feedback:''
-  };
-  EMPLOYEES.unshift(newEmp);
-  pushEmployeeInviteRecord(newEmp, new Date().toISOString());
+  var acct = makeAccount({name:name, email:email, employeeNo:no, department:dept});
+  MM.memberAccounts.push(acct);
+  var row = rowFromAccount(acct); row.site = site.name; row.tz = site.tz;
+  EMPLOYEES.unshift(row);
+  if (email){ sendNoticeTo(row); pushEmployeeInviteRecord(row, new Date().toISOString()); }
+  MM.saveMemberData();
   empState.page = 1;
-  renderEmpTable();
+  renderEmpTable(); renderActBar();
   closeModal('inviteModal');
-  toast(T('已邀請「','Invited “')+name+T('」，開通連結已寄至 ','”; the activation link has been sent to ')+email);
+  toast(email ? T('已加入「','Added “')+name+T('」並寄出啟用通知至 ','” and sent the activation notice to ')+email
+              : T('已加入「','Added “')+name+T('」，沒有 Email，請匯出名單＋啟用碼發給員工','” without an Email; export the list + codes and hand the code over'));
 }
 
 /* ===== 編輯員工資料 =====
-   可改：姓名、Email、部門、所屬廠區（廠區決定時區，時區自動帶出不可手改）；
-   不可改：狀態、累計時數、出勤率——由上課紀錄產生。
-   Email 為會員主鍵，改動時檢查不可與其他員工重複。 */
+   可改：員工編號、姓名、Email（可空）、部門、所屬廠區；重複只在本企業內檢查。
+   不可改：狀態、累計時數、出勤率——由上課紀錄產生。 */
 var pendingEditId = null;
 function openEditModal(id){
   var e = EMPLOYEES.find(function(x){ return x.id===id; });
   if (!e) return;
   pendingEditId = id;
-  document.getElementById('editName').value = e.name;
-  document.getElementById('editEmail').value = e.email;
-  document.getElementById('editEmailHint').textContent =
-    e.activation==='pending' ? T('此員工尚未開通，改 Email 後需重寄開通信。','This employee has not activated yet; if you change the Email you will need to resend the activation email.') : '';
-  var dsel = document.getElementById('editDept');
   var deptOpts = activeDepts().slice();
   if (deptOpts.indexOf(e.dept) === -1) deptOpts.unshift(e.dept); /* 原部門已停用時仍要列出 */
-  dsel.innerHTML = deptOpts.map(function(d){
-    return '<option'+(d===e.dept?' selected':'')+'>'+d+'</option>'; }).join('');
-  var ssel = document.getElementById('editSite');
   var siteOpts = activeSites().slice();
   if (!siteOpts.some(function(s){ return s.name===e.site; })){
     var own = SITE_LIST.find(function(s){ return s.name===e.site; });
     if (own) siteOpts.unshift(own);
   }
-  ssel.innerHTML = siteOpts.map(function(s){
-    return '<option value="'+s.id+'"'+(s.name===e.site?' selected':'')+'>'+s.name+'</option>'; }).join('');
+  var act = e.ma.activationStatus;
+  document.getElementById('editBody').innerHTML = '<h3>'+T('編輯員工資料','Edit Employee')+'</h3>'+
+    '<div class="formrow"><label>'+T('員工編號','Employee No.')+'</label><input type="text" id="editNo" value="'+esc(e.empNo)+'"></div>'+
+    '<div class="formrow"><label>'+T('姓名','Name')+'</label><input type="text" id="editName" value="'+esc(e.name)+'"></div>'+
+    '<div class="formrow"><label>'+T('員工 Email（可空）','Employee Email (optional)')+'</label><input type="email" id="editEmail" value="'+esc(e.email)+'"><div class="hint" style="margin-top:4px">'+
+      (act==='已啟用' ? T('此員工已啟用；改 Email 後，下次請用新 Email 登入。','This employee has activated; after changing the Email they sign in with the new one.')
+                      : T('此員工尚未啟用；改 Email 後請重新寄啟用通知。','This employee has not activated yet; resend the activation notice after changing the Email.'))+'</div></div>'+
+    '<div class="formrow"><label>'+T('部門','Department')+'</label><select id="editDept">'+deptOpts.map(function(d){ return '<option'+(d===e.dept?' selected':'')+'>'+esc(d)+'</option>'; }).join('')+'</select></div>'+
+    '<div class="formrow"><label>'+T('所屬廠區','Site')+'</label><select id="editSite" onchange="onEditSiteChange(this)">'+siteOpts.map(function(s){ return '<option value="'+s.id+'"'+(s.name===e.site?' selected':'')+'>'+esc(s.name)+'</option>'; }).join('')+'</select><div class="hint" id="editSiteTz" style="margin-top:4px"></div></div>'+
+    '<div class="hint"><a href="h05_contract.html#org" target="_blank" rel="noopener">'+T('管理部門與廠區','Manage departments and sites')+'</a></div>'+
+    '<div class="hint">'+T('狀態、累計時數與出勤率由系統依上課紀錄產生，不在此編輯；停用帳號請用列表上的「停用」。','Status, accrued hours and attendance come from class records and are not edited here; use “Deactivate” on the list to disable an account.')+'</div>'+
+    '<div style="text-align:right;margin-top:14px"><button class="btn ghost" onclick="closeModal(\'editModal\')">'+T('取消','Cancel')+'</button> <button class="btn" onclick="doSaveEmployee()">'+T('儲存','Save')+'</button></div>';
   document.getElementById('editModal').classList.add('open');
-  onEditSiteChange(ssel);
+  onEditSiteChange(document.getElementById('editSite'));
 }
 function onEditSiteChange(sel){
   var site = SITE_LIST.find(function(s){ return s.id===sel.value; });
@@ -513,32 +884,36 @@ function onEditSiteChange(sel){
 function doSaveEmployee(){
   var e = EMPLOYEES.find(function(x){ return x.id===pendingEditId; });
   if (!e) return;
+  var no = document.getElementById('editNo').value.trim();
   var name = document.getElementById('editName').value.trim();
   var email = document.getElementById('editEmail').value.trim();
-  if (!name || !email){ toast(T('請填寫姓名與 Email','Please fill in both name and Email')); return; }
-  var dup = EMPLOYEES.some(function(x){ return x.id!==e.id && x.email.toLowerCase()===email.toLowerCase(); });
-  if (dup){ toast(T('這個 Email 已被其他員工使用，請改用別的','This Email is already used by another employee; please use a different one')); return; }
+  if (!no || !name){ toast(T('請填寫員工編號與姓名','Please fill in employee number and name')); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast(T('Email 格式不正確','The Email format is invalid')); return; }
+  var dup = dupInOrg(no, email, e.id);
+  if (dup==='no'){ toast(T('這個員工編號已被其他員工使用','This employee number is used by another employee')); return; }
+  if (dup==='mail'){ toast(T('這個 Email 已被其他員工使用，請改用別的','This Email is already used by another employee; please use a different one')); return; }
   var siteId = document.getElementById('editSite').value;
   var site = SITE_LIST.find(function(s){ return s.id===siteId; });
-  var emailChanged = (email.toLowerCase() !== e.email.toLowerCase());
+  var emailChanged = (email.toLowerCase() !== (e.email||'').toLowerCase());
   var siteChanged = (site && site.name !== e.site);
-  e.name = name; e.email = email;
+  e.name = name; e.email = email; e.empNo = no;
   e.dept = document.getElementById('editDept').value;
   if (site){ e.site = site.name; e.tz = site.tz; }
-  renderEmpTable();
+  var a = e.ma;
+  a.name = e.name; a.email = email; a.employeeNo = no; a.department = e.dept;
+  if (a.activationStatus!=='已啟用'){
+    a.activationMethod = email ? 'Email 通知' : '啟用碼';
+    if (!email && !a.activationCode) a.activationCode = MM.newActivationCode();
+    if (emailChanged && a.activationStatus==='已寄通知' && email) a.activationStatus = '未啟用';
+  }
+  MM.saveMemberData();
+  renderEmpTable(); renderActBar();
   closeModal('editModal');
   var extra = '';
-  if (emailChanged && e.activation==='pending') extra = T('；Email 已變更，記得重寄開通信','; the Email has changed — remember to resend the activation email');
+  if (emailChanged && a.activationStatus!=='已啟用') extra = T('；Email 已變更，記得重寄啟用通知','; the Email has changed — remember to resend the activation notice');
   else if (emailChanged) extra = T('；Email 已變更，該員工下次請用新 Email 登入','; the Email has changed — this employee should log in with the new Email next time');
   if (siteChanged) extra += T('；時區已改為 ','; time zone changed to ')+e.tz;
   toast(T('已更新「','Updated “')+e.name+T('」的資料','”')+extra);
-}
-
-/* ===== 重寄開通信（純示意，不做完整 token 機制）===== */
-function resendActivation(id){
-  var e = EMPLOYEES.find(function(x){ return x.id===id; });
-  if (!e) return;
-  toast(T('已重新寄出開通信至 ','Activation email resent to ')+e.email+T('（開通連結：','(activation link: ')+'../公開網站/p13_activate.html?token=Tn7Qx2mVb9Lk4RaE&source=hr&mode=link&state=ok）');
 }
 
 /* ===== 停用員工 ===== */
@@ -564,14 +939,13 @@ document.addEventListener('keydown', function(e){
   if (opens.length) opens[opens.length-1].classList.remove('open');
 });
 
-/* ===== 批次匯入 CSV 說明面板 ===== */
-function toggleCsvPanel(){ document.getElementById('csvPanel').classList.toggle('open'); }
-function simulateCsvImport(){ toast(T('已收到檔案，實際上線後將解析 CSV 並批次建立員工帳號','File received; once live, the system will parse the CSV and batch-create employee accounts')); }
-
 /* Mandarin Lounge 報名設定已於 2026-09-17 搬到 h05_contract.html#modes（上課型態與可用對象），此頁不再重複。 */
 function initEmpTable(){
   renderDeptChips();
   renderStatusChips();
+  renderActFilter();
+  renderActBar();
+  document.getElementById('empSearch').placeholder = T('搜尋員編、姓名或 Email','Search by employee no., name or Email');
   renderEmpTable();
 }
 if (window.TLI_I18N) TLI_I18N.onRefresh(initEmpTable);
@@ -607,10 +981,11 @@ function toast(msg){
 if (window.TLI_I18N){
   TLI_I18N.onRefresh(renderNotifPanel);
   TLI_I18N.init();
-} else {
-  initEmpTable();
-  renderNotifPanel();
 }
+/* 預設繁中時 TLI_I18N.init() 不會觸發 onRefresh，這裡一律渲染一次 */
+initEmpTable();
+renderNotifPanel();
+if (window.TLI_I18N) TLI_I18N.refresh && TLI_I18N.refresh();
 </script>
 </body>
 </html>

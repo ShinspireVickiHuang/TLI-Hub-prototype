@@ -540,6 +540,14 @@ var ONE_TO_ONE_UPCOMING=[
   {dateLabel:'8/25（二）', time:'18:00–18:50', teacher:'杜老師', mode:'線上教室'},
   {dateLabel:'8/26（三）', time:'14:00–14:50', teacher:'杜老師', mode:'線上教室'}
 ];
+if(!TLI_MASTERS.planAllowed('plan-a')){
+  /* 非直營示範帳號：一對一區塊只顯示此帳號自己方案的名稱與剩餘堂數 */
+  var _ap=(TLI_MASTERS.currentAccount().plans||[])[0];
+  ONE_TO_ONE_PLAN.name=_ap ? _ap.name : ONE_TO_ONE_PLAN.name;
+  ONE_TO_ONE_PLAN.remainLessons=_ap ? (parseInt(_ap.hoursLeft,10)||0) : 0;
+  ONE_TO_ONE_UPCOMING.length=0;
+}
+FLEX_PROGRAMS = FLEX_PROGRAMS.filter(function(f){ return TLI_MASTERS.planAllowed(f.planId); });
 function renderOneToOneSummary(){
   var wrap=document.getElementById('oneToOneSummary');
   var remainHtml = T('還有 <b style="color:var(--c-text)">'+ONE_TO_ONE_PLAN.remainLessons+'</b> 堂未排',{

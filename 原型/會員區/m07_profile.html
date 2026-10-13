@@ -428,6 +428,14 @@ function doLogout(){
 /* 20260930：語言偏好改用語系代碼（對齊 window.TLI_I18N_PAGE_LANGS／主檔 uiLocales），
    原本存中文顯示字串（'中文'）改存代碼 'zh-TW'，僅示範資料的表示法改變，語意不變 */
 var PROFILE={name:'Emma Johnson',email:'emma.johnson@example.com',phone:'+886 912-345-678',lang:'zh-TW',tz:'Asia/Taipei（UTC+8）',avatarStyle:0};
+/* 20261013 依目前帳號帶入姓名、Email、手機（各帳號各自一份，不合併） */
+(function(){
+  var acct = TLI_MASTERS.currentAccount();
+  PROFILE.name = acct.name;
+  PROFILE.email = acct.email || '';
+  if(acct.phone) PROFILE.phone = acct.phone.replace(/^0/, '+886 ');
+  else if(acct.id !== 'ma01') PROFILE.phone = '';
+})();
 /* 直營頁支援 5 語（見本頁宣告的 TLI_I18N_PAGE_LANGS），主檔 uiLocales 固定只有 3 語，
    ja／de 沒有主檔可查，這裡只補這兩語的顯示名稱，其餘一律以主檔 name 為準 */
 var PROFILE_LANG_EXTRA_NAMES = {ja:'日本語', de:'Deutsch'};
@@ -611,6 +619,7 @@ renderZoomBindStatus();
 TLI_I18N.onRefresh(recalcMoney);
 TLI_I18N.onRefresh(renderInvoiceDefault);
 TLI_I18N.onRefresh(renderZoomBindStatus);
+if(/[?&]pw=1/.test(location.search)) openPasswordSheet();
 TLI_I18N.init();
 recalcMoney();
 document.addEventListener('DOMContentLoaded', function(){

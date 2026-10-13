@@ -213,6 +213,22 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
 .ai-tl-step .dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--c-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:transparent;margin-top:1px;}
 .ai-tl-step.done .dot{background:var(--c-secondary);border-color:var(--c-secondary);color:#fff;}
 </style>
+<style>
+.login-seg{display:flex;gap:0;border:1px solid var(--c-border);border-radius:8px;overflow:hidden;margin-bottom:16px;}
+.login-seg .seg{flex:1;padding:9px 6px;font-size:13.5px;font-weight:700;background:#fff;color:var(--c-muted);border:none;cursor:pointer;font-family:inherit;}
+.login-seg .seg+.seg{border-left:1px solid var(--c-border);}
+.login-seg .seg.on{background:var(--c-primary);color:#fff;}
+.pick-title{font-size:13px;font-weight:600;margin-bottom:8px;}
+.acct-card{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--c-border);border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;background:#fff;}
+.acct-card input{margin-top:4px;flex:none;}
+.acct-card.sel{border-color:var(--c-primary);background:#EAF1F9;}
+.acct-card .an{font-weight:700;font-size:14px;}
+.acct-card .as{font-size:12px;color:var(--c-muted);line-height:1.5;}
+.acct-card .tag{display:inline-block;font-size:11px;color:#B54708;background:#FEF0C7;border-radius:4px;padding:0 6px;margin-left:6px;font-weight:600;}
+.acct-note{font-size:12.5px;line-height:1.7;background:var(--c-bg);border:1px solid var(--c-border);border-radius:8px;padding:10px 12px;margin-bottom:14px;}
+.acct-note a{color:var(--c-primary);font-weight:700;text-decoration:underline;}
+.org-intro{font-size:12.5px;color:var(--c-muted);margin-bottom:14px;line-height:1.7;}
+</style>
 </head>
 <body>
 
@@ -253,18 +269,55 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
           <button class="social-btn" onclick="fakeLogin()"><span class="social-badge badge-line">L</span><span data-i18n="p07_social_line_login">使用 LINE 繼續</span></button>
         </div>
         <div class="divider" data-i18n="p07_divider_email_login">或使用 Email 登入</div>
-        <form onsubmit="return fakeLogin(event)">
-          <div class="field">
-            <label data-i18n="p07_label_email">Email</label>
-            <input type="email" id="loginEmail" placeholder="請輸入 Email" required data-i18n-placeholder="p07_ph_email">
-          </div>
-          <div class="field">
-            <label data-i18n="p07_label_password">密碼</label>
-            <input type="password" placeholder="請輸入密碼" required data-i18n-placeholder="p07_ph_password">
-          </div>
-          <div class="helper-link"><a href="#" onclick="showToast(tliDict().p07_toast_forgot_password); return false;" data-i18n="p07_forgot_password">忘記密碼？</a></div>
-          <button type="submit" class="btn btn-primary btn-block"><span class="social-badge badge-mail" style="margin-right:4px;">@</span><span data-i18n="p07_btn_submit_login">登入</span></button>
-        </form>
+        <div class="login-seg" role="tablist">
+          <button type="button" class="seg on" id="lmEmail" onclick="setLoginMode('email')" data-en="Sign in with Email">Email 登入</button>
+          <button type="button" class="seg" id="lmOrg" onclick="setLoginMode('org')" data-en="Sign in with company code">企業代碼登入</button>
+        </div>
+        <div id="loginEmailBox">
+          <form id="emailForm" onsubmit="return emailSubmit(event)" novalidate>
+            <div class="field">
+              <label for="loginEmail" data-i18n="p07_label_email">Email</label>
+              <input type="email" id="loginEmail" autocomplete="username" placeholder="請輸入 Email" data-i18n-placeholder="p07_ph_email">
+              <div class="field-error" id="err_loginEmail"></div>
+            </div>
+            <div id="acctPickWrap" style="display:none;">
+              <div class="pick-title" data-en="This email has more than one account. Choose where to sign in.">此 Email 有多個帳號，請選擇要進入的單位</div>
+              <div id="acctPick"></div>
+              <div class="field-error" id="err_acctPick"></div>
+            </div>
+            <div id="acctNote" class="acct-note" style="display:none;"></div>
+            <div class="field" id="emailPwField" style="display:none;">
+              <label for="loginPw" data-i18n="p07_label_password">密碼</label>
+              <input type="password" id="loginPw" autocomplete="current-password" placeholder="請輸入密碼" data-i18n-placeholder="p07_ph_password">
+              <div class="field-error" id="err_loginPw"></div>
+            </div>
+            <div class="helper-link" id="emailHelper" style="display:none;"><a href="#" onclick="resetEmailLogin();return false;" data-en="Use a different email">更換 Email</a> ・ <a href="#" onclick="showToast(tliDict().p07_toast_forgot_password); return false;" data-i18n="p07_forgot_password">忘記密碼？</a></div>
+            <button type="submit" class="btn btn-primary btn-block" id="emailBtn"><span class="social-badge badge-mail" style="margin-right:4px;">@</span><span id="emailBtnText" data-en="Continue">繼續</span></button>
+          </form>
+        </div>
+        <div id="loginOrgBox" style="display:none;">
+          <form id="orgForm" onsubmit="return orgSubmit(event)" novalidate>
+            <div class="org-intro" data-en="For company employees without an email on the roster. Use the company code and employee ID given by your HR.">給名單上沒有 Email 的企業員工，請輸入公司人資提供的企業代碼與員工編號。</div>
+            <div class="field">
+              <label for="orgCode" data-en="Company code">企業代碼</label>
+              <input type="text" id="orgCode" autocomplete="off" placeholder="例：HELIN" data-en-ph="e.g. HELIN">
+              <div class="field-error" id="err_orgCode"></div>
+            </div>
+            <div class="field">
+              <label for="empNo" data-en="Employee ID">員工編號</label>
+              <input type="text" id="empNo" autocomplete="off" placeholder="例：HL-0231" data-en-ph="e.g. HL-0231">
+              <div class="field-error" id="err_empNo"></div>
+            </div>
+            <div class="field">
+              <label for="orgPw" data-i18n="p07_label_password">密碼</label>
+              <input type="password" id="orgPw" autocomplete="current-password" placeholder="請輸入密碼" data-i18n-placeholder="p07_ph_password">
+              <div class="field-error" id="err_orgPw"></div>
+            </div>
+            <div class="acct-note" id="orgNote" style="display:none;"></div>
+            <div class="helper-link"><a href="#" onclick="showToast(tliDict().p07_toast_forgot_password); return false;" data-i18n="p07_forgot_password">忘記密碼？</a></div>
+            <button type="submit" class="btn btn-primary btn-block" data-en="Sign in">登入</button>
+          </form>
+        </div>
         <div class="switch-note" style="margin-top:10px;"><a href="#" id="resendLink" onclick="toggleResendP07();return false;" data-en="Not activated yet? Resend the activation email">還沒開通？重新寄送開通信</a></div>
         <div id="resendBoxP07" style="display:none;margin-top:12px;padding:14px;border:1px solid var(--c-border);border-radius:10px;background:var(--c-bg);">
           <div class="field" style="margin-bottom:10px;">
@@ -277,7 +330,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
         </div>
         <div class="switch-note"><span data-i18n="p07_switch_to_register_text">還沒有帳號？</span><a href="#" onclick="switchTab('register');return false;" data-i18n="p07_switch_to_register_link">立即註冊</a></div>
         <!-- 機構／專案合作建立的會員不必自行註冊，導引至開通頁 -->
-        <div class="switch-note" style="margin-top:6px;"><a href="p13_activate.html" data-i18n="p07_partner_activate_link">前往帳號開通</a></div>
+        <div class="switch-note" style="margin-top:6px;"><a href="p13_activate.html" data-en="First sign-in or have an activation code?">首次登入／有啟用碼？前往帳號開通</a></div>
       </div>
 
       <div class="panel" id="panelRegister">
@@ -353,6 +406,19 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
               </div>
               <div class="refcode-note" id="refCodeMsg"></div>
             </div>
+          </div>
+          <div class="field" id="agentCodeField">
+            <label id="agentCodeLabel">代理優惠碼<span class="opt-mark">（選填）</span></label>
+            <div class="refcode-row" id="agentCodeRow">
+              <input type="text" id="agentCodeInput" class="refcode-input" placeholder="如：REF-SEA07" autocomplete="off">
+              <button type="button" class="btn btn-outline btn-sm" id="agentCodeApplyBtn" onclick="applyAgentCode()">套用</button>
+            </div>
+            <div class="refcode-row" id="agentCodeApplied" style="display:none">
+              <input type="text" id="agentCodeDisplay" class="refcode-input" readonly>
+              <button type="button" class="btn btn-outline btn-sm" id="agentCodeClearBtn" onclick="clearAgentCode()">清除</button>
+            </div>
+            <div class="refcode-note" id="agentCodeMsg"></div>
+            <div class="refcode-note" id="agentSepNote" style="display:none;color:#B54708"></div>
           </div>
           <div class="field field-checkbox">
             <label class="checkbox-label">
@@ -721,6 +787,7 @@ function showAuthSuccess(e, isRegisterFlow){
   if(!isTeacher){
     try{ sessionStorage.setItem('tliLoggedIn', '1'); }catch(err){}
   }
+  if(isRegisterFlow && AG && AG.unit && pendingRegistrant && pendingRegistrant.src==='email'){ agCreateAccount(pendingRegistrant); }
   /* 註冊流程且當下帶有推薦碼時，寫入轉介歸屬橋接資料（見 pushReferralAttribution 說明） */
   if(isRegisterFlow && referralCode && pendingRegistrant){
     pushReferralAttribution(pendingRegistrant.name, pendingRegistrant.email, referralCode);
@@ -744,6 +811,10 @@ function showAuthSuccess(e, isRegisterFlow){
     successLink.href = '../會員區/m01_home.html?new=1';
   } else {
     successLink.href = '../會員區/m01_home.html';
+  }
+  /* 20261013：以帳號登入者，導向一律帶 ?acct=帳號id（經銷帳號與一般學員同一個入口 m01_home） */
+  if(!isTeacher && !isRegisterFlow && window.TLI_ACCT){
+    var h=successLink.getAttribute('href'); successLink.setAttribute('href', h+(h.indexOf('?')>-1?'&':'?')+'acct='+encodeURIComponent(window.TLI_ACCT));
   }
   document.getElementById('successCardText').textContent = isTeacher ? dict.p07_success_text_teacher : dict.p07_success_text_student;
   document.getElementById('successCardBtnText').textContent = isTeacher ? dict.p07_success_btn_teacher : dict.p07_success_btn_student;
@@ -927,11 +998,12 @@ function submitRegister(e){
   e.preventDefault();
   pendingRegistrant = {
     name: document.getElementById('regName').value.trim(),
-    email: document.getElementById('regEmail').value.trim()
+    email: document.getElementById('regEmail').value.trim(), src:'email'
   };
   return runChecksAndSubmit([
     {input:'regName', fn:validateName},
     {input:'regEmail', fn:validateEmail},
+    {input:'regEmail', fn:function(){ if(agDuplicate()){ agSepNoteUpdate(); return false; } return true; }},
     {input:'regPhone', fn:validatePhone},
     {input:'regPassword', fn:validatePassword},
     {input:'regTimezone', fn:validateTimezone},
@@ -1114,6 +1186,180 @@ function submitResendP07(){
   showToast(T('已送出',{en:'Submitted'}));
 }
 (function(){ try{ var em=new URLSearchParams(location.search).get('email'); if(em){ var i=document.getElementById('loginEmail'); if(i) i.value=em; } }catch(e){} })();
+
+/* ===================== 20261013 登入：同一人不同來源＝不同帳號（契約：_契約_會員結構與啟用_20261013.md） ===================== */
+var LG = { mode:'email', accts:[], chosen:'', step:'email' };
+function lgId(i){ return document.getElementById(i); }
+function lgErr(id,msg){ var e=lgId(id); if(!e) return; if(msg){ e.textContent=msg; e.classList.add('show'); } else { e.textContent=''; e.classList.remove('show'); } }
+function lgEsc(x){ return String(x==null?'':x).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function setLoginMode(m){
+  LG.mode=m;
+  lgId('lmEmail').classList.toggle('on',m==='email'); lgId('lmOrg').classList.toggle('on',m==='org');
+  lgId('loginEmailBox').style.display = m==='email'?'block':'none';
+  lgId('loginOrgBox').style.display = m==='org'?'block':'none';
+}
+var SRC_TYPES=[{id:'direct',name:'直營',en:'Direct'},{id:'agent',name:'代理',en:'Agent'},{id:'project',name:'專案合作',en:'Project Partnership'},{id:'distributor',name:'經銷',en:'Distributor'}];
+function unitLabel(a){
+  var n=TLI_MASTERS.sourceUnitName(a);
+  return (n==='TLI 直營') ? T('TLI 直營',{en:'TLI Direct'}) : n;
+}
+function sourceLabel(a){
+  var st=SRC_TYPES.filter(function(x){ return x.id===a.sourceType; })[0]||{name:a.sourceType,en:a.sourceType};
+  return a.orgId ? T('企業會員・來源：'+st.name,{en:'Corporate member, via '+st.en}) : T('個人會員・來源：'+st.name,{en:'Individual member, via '+st.en});
+}
+function isActive(a){ return a.activationStatus==='已啟用'; }
+function activateUrl(a,viaOrg){
+  if(viaOrg){ var o=TLI_MASTERS.orgCustomers.filter(function(x){ return x.id===a.orgId; })[0]; return 'p13_activate.html?org='+encodeURIComponent(o?o.code:'')+'&emp='+encodeURIComponent(a.employeeNo); }
+  return 'p13_activate.html?email='+encodeURIComponent(a.email);
+}
+function renderPick(){
+  var box=lgId('acctPick'); if(!box) return;
+  box.innerHTML = LG.accts.map(function(a){
+    return '<label class="acct-card'+(LG.chosen===a.id?' sel':'')+'"><input type="radio" name="acctSel" value="'+a.id+'"'+(LG.chosen===a.id?' checked':'')+'><span><span class="an">'+lgEsc(unitLabel(a))+(isActive(a)?'':'<span class="tag">'+lgEsc(T('尚未啟用',{en:'Not activated'}))+'</span>')+'</span><br><span class="as">'+lgEsc(sourceLabel(a))+'</span></span></label>';
+  }).join('');
+  box.querySelectorAll('input').forEach(function(r){ r.addEventListener('change',function(){ LG.chosen=r.value; lgErr('err_acctPick',''); pickChanged(); }); });
+}
+function showNotActivated(a,viaOrg,noteId){
+  var n=lgId(noteId);
+  n.innerHTML = lgEsc(T('這個帳號尚未啟用，請先用啟用碼或啟用信完成開通。',{en:'This account is not activated yet. Activate it with your activation code or email first.'}))+' <a href="'+activateUrl(a,viaOrg)+'">'+lgEsc(T('前往帳號開通',{en:'Go to activation'}))+'</a>';
+  n.style.display='block';
+}
+function pickChanged(){
+  var a=TLI_MASTERS.memberAccounts.filter(function(x){ return x.id===LG.chosen; })[0];
+  lgId('acctNote').style.display='none';
+  if(!a) return;
+  if(!isActive(a)){ lgId('emailPwField').style.display='none'; showNotActivated(a,false,'acctNote'); }
+  else { lgId('emailPwField').style.display='block'; try{ lgId('loginPw').focus(); }catch(e){} }
+  renderPick();
+}
+function setBtn(zh,en){ var b=lgId('emailBtnText'); b.textContent=T(zh,{en:en}); b.setAttribute('data-en',en); b.dataset.zh=zh; }
+function resetEmailLogin(){
+  LG.accts=[]; LG.chosen=''; LG.step='email';
+  lgId('loginEmail').readOnly=false; lgId('loginPw').value='';
+  ['acctPickWrap','acctNote','emailPwField','emailHelper'].forEach(function(i){ lgId(i).style.display='none'; });
+  setBtn('繼續','Continue');
+  lgErr('err_loginEmail',''); lgErr('err_loginPw','');
+}
+function goDest(a){
+  window.TLI_ACCT=a.id;
+  try{ sessionStorage.setItem('tliAcct',a.id); }catch(e){}
+  return showAuthSuccess(null,false);
+}
+function emailSubmit(e){
+  if(e&&e.preventDefault) e.preventDefault();
+  var v=lgId('loginEmail').value.trim();
+  if(LG.step==='email'){
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ lgErr('err_loginEmail',T('請輸入正確的 Email 格式',{en:'Please enter a valid email address'})); return false; }
+    lgErr('err_loginEmail','');
+    if(authRole==='teacher'){ LG.step='pw'; lgId('loginEmail').readOnly=true; lgId('emailPwField').style.display='block'; lgId('emailHelper').style.display='block'; setBtn('登入','Sign in'); return false; }
+    var list=TLI_MASTERS.accountsByEmail(v);
+    if(!list.length){ lgErr('err_loginEmail',T('找不到這個 Email 的帳號。如果你是企業員工且名單上沒有 Email，請改用「企業代碼登入」；還沒有帳號請先註冊。',{en:'No account found for this email. Company employees without an email on the roster should use company code sign-in. Otherwise, register first.'})); return false; }
+    LG.accts=list; lgId('loginEmail').readOnly=true; lgId('emailHelper').style.display='block'; LG.step='pw'; setBtn('登入','Sign in');
+    if(list.length>1){ LG.chosen=''; lgId('acctPickWrap').style.display='block'; renderPick(); }
+    else { LG.chosen=list[0].id; pickChanged(); }
+    return false;
+  }
+  if(authRole==='teacher'){
+    if(!lgId('loginPw').value){ lgErr('err_loginPw',T('請輸入密碼',{en:'Enter your password'})); return false; }
+    return showAuthSuccess(null,false);
+  }
+  if(!LG.chosen){ lgErr('err_acctPick',T('請先選擇要進入的單位',{en:'Choose an account first'})); return false; }
+  var a=LG.accts.filter(function(x){ return x.id===LG.chosen; })[0];
+  if(!isActive(a)){ showNotActivated(a,false,'acctNote'); return false; }
+  if(!lgId('loginPw').value){ lgErr('err_loginPw',T('請輸入密碼',{en:'Enter your password'})); return false; }
+  lgErr('err_loginPw','');
+  return goDest(a);
+}
+function orgSubmit(e){
+  if(e&&e.preventDefault) e.preventDefault();
+  var code=lgId('orgCode').value.trim(), emp=lgId('empNo').value.trim(), pw=lgId('orgPw').value, ok=true;
+  lgId('orgNote').style.display='none';
+  lgErr('err_orgCode', code?'':T('請輸入企業代碼',{en:'Enter the company code'})); if(!code) ok=false;
+  lgErr('err_empNo', emp?'':T('請輸入員工編號',{en:'Enter your employee ID'})); if(!emp) ok=false;
+  lgErr('err_orgPw', pw?'':T('請輸入密碼',{en:'Enter your password'})); if(!pw) ok=false;
+  if(!ok) return false;
+  var org=TLI_MASTERS.findOrgByCode(code);
+  var a=org && TLI_MASTERS.memberAccounts.filter(function(x){ return x.orgId===org.id && String(x.employeeNo).toUpperCase()===emp.toUpperCase(); })[0];
+  if(!a){ lgErr('err_empNo',T('企業代碼或員工編號不正確，請向公司人資確認。',{en:'The company code or employee ID is incorrect. Please check with your HR.'})); return false; }
+  if(!isActive(a)){ showNotActivated(a,true,'orgNote'); return false; }
+  return goDest(a);
+}
+(function(){ try{
+  var q=new URLSearchParams(location.search);
+  if(q.get('org')||q.get('emp')){ setLoginMode('org'); if(q.get('org')) lgId('orgCode').value=q.get('org'); if(q.get('emp')) lgId('empNo').value=q.get('emp'); }
+}catch(e){} })();
+if(window.TLI_I18N) TLI_I18N.onRefresh(function(){ renderPick(); });
+
+/* ===================== 20261013 代理來源帳號：註冊時輸入代理優惠碼（契約第 5 節） =====================
+   優惠碼＝主檔 partners 內代理（type 'agent'）的 code；有效碼建立 sourceType 'agent'、sourceUnitId＝該代理的帳號。
+   已有其他來源帳號的 Email 也可註冊：另建一個代理來源帳號，密碼與方案各自獨立。同一代理內同 Email 才擋。 */
+var AG = { unit:null };
+function agT(zh,en){ return T(zh,{en:en}); }
+function agEl(i){ return document.getElementById(i); }
+function agRender(){
+  if(!agEl('agentCodeLabel')) return;
+  agEl('agentCodeLabel').innerHTML = lgEsc(agT('代理優惠碼','Agent promo code')) + ' <span class="opt-mark">' + lgEsc(agT('（選填）','(optional)')) + '</span>';
+  agEl('agentCodeApplyBtn').textContent = agT('套用','Apply');
+  agEl('agentCodeClearBtn').textContent = agT('清除','Clear');
+  agEl('agentCodeInput').placeholder = agT('如：REF-SEA07','e.g. REF-SEA07');
+  if(AG.unit){
+    agEl('agentCodeDisplay').value = agT('透過 '+AG.unit.name+' 代理註冊（代理優惠碼 '+AG.unit.code+'）','Registering via agent '+AG.unit.name+' (promo code '+AG.unit.code+')');
+    agEl('agentCodeRow').style.display='none'; agEl('agentCodeApplied').style.display='flex';
+  } else { agEl('agentCodeRow').style.display='flex'; agEl('agentCodeApplied').style.display='none'; }
+  agSepNoteUpdate();
+}
+function agSepNoteUpdate(){
+  var box = agEl('agentSepNote'); if(!box) return;
+  var email = (agEl('regEmail').value||'').trim(), msg = '';
+  if(AG.unit && email && window.TLI_MASTERS){
+    var list = TLI_MASTERS.accountsByEmail(email);
+    if(list.some(function(a){ return !a.orgId && a.sourceType==='agent' && a.sourceUnitId===AG.unit.id; })) msg = agT('此 Email 在 '+AG.unit.name+' 已有代理來源帳號，請直接登入。','This email already has an account with '+AG.unit.name+'. Please sign in instead.');
+    else if(list.length) msg = agT('此 Email 已有其他來源帳號，將另建一個代理來源帳號，密碼與方案各自獨立。','This email already has an account from another source. A separate agent-source account will be created; password and plans are independent.');
+  }
+  box.textContent = msg; box.style.display = msg ? 'block' : 'none';
+}
+function agDuplicate(){
+  if(!AG.unit) return false;
+  var email = (agEl('regEmail').value||'').trim();
+  return TLI_MASTERS.accountsByEmail(email).some(function(a){ return !a.orgId && a.sourceType==='agent' && a.sourceUnitId===AG.unit.id; });
+}
+function applyAgentCode(){
+  var inp = agEl('agentCodeInput'), msg = agEl('agentCodeMsg'), code = (inp.value||'').trim().toUpperCase();
+  if(!code){ msg.textContent = agT('請先輸入代理優惠碼','Enter an agent promo code first'); inp.classList.add('invalid'); return; }
+  var u = TLI_MASTERS.agentByCode(code);
+  if(!u){ msg.textContent = agT('查不到這組代理優惠碼，或該代理合約已停用，請向代理確認後再輸入。','This agent promo code was not found or the agent is inactive. Please check with your agent.'); inp.classList.add('invalid'); return; }
+  inp.classList.remove('invalid'); msg.textContent=''; AG.unit = u; agRender();
+  showToast(agT('已套用代理優惠碼：'+u.code+'（'+u.name+'）','Agent promo code applied: '+u.code+' ('+u.name+')'));
+}
+function clearAgentCode(){ AG.unit = null; agEl('agentCodeInput').value=''; agEl('agentCodeMsg').textContent=''; agRender(); showToast(agT('已清除代理優惠碼','Agent promo code cleared')); }
+/* 註冊成功後建立帳號（示範：寫進主檔 memberAccounts，a01 會員管理讀同一份） */
+function agCreateAccount(reg){
+  var M = TLI_MASTERS, mx = 0;
+  M.memberAccounts.forEach(function(a){ var n = parseInt(String(a.id).replace(/\D/g,''),10); if(n>mx) mx=n; });
+  var n = mx+1, now = new Date(), d = now.toISOString().slice(0,10);
+  var a = {id:'ma'+n, memberNo:'MA-'+('000000'+n).slice(-6), name:reg.name, email:reg.email, phone:'', sourceType:'agent', sourceUnitId:AG.unit.id,
+    orgId:'', employeeNo:'', department:'', activationStatus:'已啟用', activationMethod:'Email 通知', activationCode:'', sentAt:'', activatedAt:d+' '+now.toTimeString().slice(0,5),
+    orderId:'', createdAt:d, plans:[]};
+  M.memberAccounts.push(a); M.saveMemberData();
+  window.TLI_ACCT = a.id; try{ sessionStorage.setItem('tliAcct', a.id); }catch(e){}
+}
+(function(){ try{
+  agRender();
+  var q = new URLSearchParams(location.search), ag = q.get('agent');
+  if(ag){
+    var u = TLI_MASTERS.agentById(ag) || TLI_MASTERS.agentByCode(ag);
+    if(u){ agEl('agentCodeInput').value = u.code; AG.unit = u; }
+  }
+  if(q.get('mode')==='register'){
+    switchTab('register');
+    if(q.get('email')) agEl('regEmail').value = q.get('email');
+  }
+  agRender();
+  agEl('regEmail').addEventListener('input', agSepNoteUpdate);
+  agEl('regEmail').addEventListener('blur', agSepNoteUpdate);
+  agEl('agentCodeInput').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); applyAgentCode(); } });
+  if(window.TLI_I18N) TLI_I18N.onRefresh(agRender);
+}catch(e){ if(window.console) console.warn(e); } })();
 
 
 var TLI_AVATAR_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/></svg>';

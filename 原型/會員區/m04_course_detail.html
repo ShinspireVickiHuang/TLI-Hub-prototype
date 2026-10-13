@@ -1011,6 +1011,7 @@ var BILLING_LIST=[
   {plan:'other', planLabel:'其他歷史訂單', title:'ORD-2025-1115', date:'2025-11-15', item:'中文一對一 25 分・20 堂方案（已結束）', amountTWD:15000, status:'paid', detail:'發票 AB-12344711・2025-11-15'},
   {plan:'other', planLabel:'其他歷史訂單', title:'ORD-2025-0108', date:'2025-01-08', item:'入學手續費', amountTWD:500, status:'paid', detail:'發票 AB-12343102・2025-01-08'}
 ];
+BILLING_LIST = BILLING_LIST.filter(function(b){ return TLI_MASTERS.planAllowed(b.plan); });
 var BILLING_PAGE_SIZE=10;
 var billingFilter={plan:'all', status:'all'};
 var billingShown=BILLING_PAGE_SIZE;
@@ -1188,6 +1189,22 @@ TLI_I18N.onRefresh(renderGroupMakeup);
 TLI_I18N.onRefresh(renderEnterRows);
 TLI_I18N.onRefresh(refreshMoneyByLang);
 TLI_I18N.onRefresh(function(){ if(document.getElementById('m04panel-billing').classList.contains('active')) renderBillingList(); });
+/* 目前帳號為非示範帳號（經銷、其他企業等）：只列出此帳號自己的方案與剩餘課時 */
+function renderAccountPlans(){
+  var old=document.getElementById('acctPlansGen'); if(old) old.parentNode.removeChild(old);
+  var a=TLI_MASTERS.currentAccount();
+  if(TLI_MASTERS.isDemoAccount(a)) return;
+  var unit=TLI_MASTERS.sourceUnitName(a), plans=a.plans||[], h='';
+  if(!plans.length) h='<p class="small muted">'+T('此帳號（'+unit+'）目前沒有已啟用的方案。','This account ('+unit+') has no active plan yet.')+'</p>';
+  plans.forEach(function(pl){
+    h+='<div class="card" style="margin-bottom:10px;"><div class="small muted">'+unit+'</div><h3 style="margin:2px 0 6px;font-size:16px;">'+pl.name+'</h3><div class="entitlement-chip-row"><span class="chip static">'+T('剩餘 ','Left: ')+pl.hoursLeft+'</span></div></div>';
+  });
+  var first=document.querySelector('.plan-card-outer'); if(!first) return;
+  var box=document.createElement('div'); box.id='acctPlansGen'; box.innerHTML=h;
+  first.parentNode.insertBefore(box, first);
+}
+renderAccountPlans();
+TLI_I18N.onRefresh(renderAccountPlans);
 TLI_I18N.init();
 document.querySelectorAll('.tli-i18n-opt').forEach(function(b){
   b.addEventListener('click', function(){
