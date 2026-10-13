@@ -1351,7 +1351,7 @@ function aiHelperPickGoal(id, target){
   var div = aiAppendBot(target, T('目前程度大概落在哪個範圍？', {en:'Roughly what’s your current level?', ja:'現在のレベルはどのくらいですか？', de:'Wie schätzen Sie Ihr aktuelles Niveau ein?'}));
   var items = AI_HELPER_LEVEL_IDS.map(function(lid){ return {id:lid, label:levelLabel(lid)}; });
   var wrap = aiRenderQuizChoices(items, function(lid){ aiHelperPickLevel(lid, target); });
-  /* 20260930 vicki 拍板：拿掉 30 秒程度快測，只保留直接選程度 */
+  /* 20260930 新達 拍板：拿掉 30 秒程度快測，只保留直接選程度 */
   div.appendChild(wrap);
 }
 function aiHelperPickLevel(id, target){

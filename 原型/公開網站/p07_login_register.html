@@ -950,7 +950,7 @@ function goToLoginWithEmail(){
   var loginEmailInput = document.querySelector('#panelLogin input[type=email]');
   if(loginEmailInput) loginEmailInput.value = email;
 }
-/* 手機一律選填（vicki 2026-09-17 拍板：台灣與海外都沒有實際用到手機，
+/* 手機一律選填（新達 2026-09-17 拍板：台灣與海外都沒有實際用到手機，
    開通信、課表通知、Zoom 連結與繳費提醒全走 Email，會員主鍵也是 Email）。
    留著欄位是為了日後 WhatsApp／LINE 的課前異動通知，所以有填仍檢查格式，沒填直接放行。 */
 function validatePhoneOptional(inputId, errId){

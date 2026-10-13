@@ -593,7 +593,7 @@ var OVERSEAS_INVOICE_LABEL = 'Invoice（海外）';
 function entityLabel(e){ return e.taxId ? (e.name+'（統編'+e.taxId+'）') : e.name; }
 var INVOICE_ENTITIES = ENTITIES_SOURCE.map(entityLabel);
 function entityByName(name){ return ENTITIES_SOURCE.find(function(e){ return e.name===name; }); }
-/* 20260928y 新增：各校區開票法人不同（vicki 確認），依上課校區自動帶預設開票法人；
+/* 20260928y 新增：各校區開票法人不同（新達 確認），依上課校區自動帶預設開票法人；
    線上課程無實體校區，比照總部法人「中華語文」開票 */
 var CAMPUS_ENTITY_MAP = {'羅斯福校區':'中華語文','士林校區':'世華','台中校區':'大西華','高雄校區':'南華','線上課程':'中華語文'};
 function entityNameForCampus(campus){ return CAMPUS_ENTITY_MAP[campus] || '中華語文'; }
@@ -901,7 +901,7 @@ function sourceCellOrd(o){ return o.attributedAgent ? '<span class="badge blue">
 
 /* 20260928y 新增：「訂單來源」＝業務分類（直營／代理／企業合約／經銷訂單），
    與上面 o.source（建立方式：Connect 自助下單／顧問建訂單）是兩個不同維度，不要混用。
-   對應 vicki 提問「a05 訂單是指直營跟代理的嗎」：本頁只收「向 TLI 付款」的訂單，
+   對應 新達 提問「a05 訂單是指直營跟代理的嗎」：本頁只收「向 TLI 付款」的訂單，
    專案合作不在此列。 */
 function bizSourceOf(o){
   if (o.orderType && o.orderType!=='個人') return '企業合約';
@@ -954,7 +954,7 @@ function invoiceCell(o){
   if (overseas) return issued ? '<span class="badge blue">'+tr2('Invoice 已出','Invoice Issued')+'</span>' : '<span class="badge grey">'+tr2('Invoice 待出','Invoice Pending')+'</span>';
   return issued ? '<span class="badge blue">'+tr2('電子發票已開','e-Invoice Issued')+'</span>' : '<span class="badge grey">'+tr2('電子發票待開','e-Invoice Pending')+'</span>';
 }
-/* 20260928y 新增：開票法人欄（vicki 確認各校區開票法人不同）。
+/* 20260928y 新增：開票法人欄（新達 確認各校區開票法人不同）。
    台灣買家依上課校區自動帶預設法人（可於訂單詳情改選）；海外買家一律顯示「－」。 */
 function entityShortName(fullLabel){
   if (!fullLabel) return '－';
