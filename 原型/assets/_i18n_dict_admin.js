@@ -289,7 +289,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "label.tenure":"Tenure",
 "label.projectPartner":"Affiliated Project Partnership Partner",
 "filter.source":"Source:",
-"hint.parkSyncPending":"How teacher accounts sync with TLI Park is still to be confirmed.",
+"hint.parkSyncOneWay":"Teacher accounts are created in TLI Hub and synced one way to TLI Park after saving.",
 "label.serviceScope":"Service Scope",
 "desc.scopeLimitedToOrg":"Limited to this institution's students",
 "label.createdSource":"Created By",

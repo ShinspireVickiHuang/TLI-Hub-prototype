@@ -63,7 +63,16 @@
       '<div class="s-last"><span class="lab">'+T('最後學習','Last study')+'</span><b>'+lastTxt(x.p)+'</b></div>'+
       '<div class="s-lg"><span class="lab">Lounge</span><b>'+x.lg.used+'／'+x.lg.quota+'</b></div></div>';
   }
+  /* 側欄「階段考」連結：只給 TLI 中心教師。判斷方式與 t11 相同——網址帶 ?rid= 的是班級老師（Gateway 學校老師）檢視，不顯示 */
+  function addStageNav(){
+    if(/[?&]rid=/.test(location.search) || (ME && ME.classes && ME.classes.length)) return; /* 班級老師（有帶班級）不顯示 */
+    var nav = document.querySelector('.side-nav'); if(!nav || nav.querySelector('a[href="t12_stage_exams.html"]')) return;
+    var a = document.createElement('a'); a.className = 'side-link'; a.href = 't12_stage_exams.html';
+    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg><span>'+T('階段考','Stage Exams')+'</span>';
+    var last = nav.querySelector('a[style*="margin-top:auto"]'); nav.insertBefore(a, last || null);
+  }
   function init(){
+    addStageNav();
     var sr = document.querySelector('.side-role'); if(sr){ sr.innerHTML = '<strong>'+PL.esc(ME.name)+T(' 老師',' (Teacher)')+'</strong><span>'+T('班級老師','Class Teacher')+'｜'+PL.esc(PL.partner().name)+'</span>'; }
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDrawer(); });
     document.addEventListener('click', function(e){ if(!e.target.closest('.bell-btn')&&!e.target.closest('.bell-panel')){ var b=$('bellPanel'); if(b) b.classList.remove('open'); } });

@@ -19,6 +19,17 @@ Object.assign(TLI_I18N_DICT.en, {
 "nav_d.performance":"Performance & Rebates",
 "nav_r.overview":"Overview",
 "nav_r.orders":"Order Attribution",
+"nav_r.students":"Student List",
+"ph.searchStudent":"Search student name",
+"desc.r04Students":"Hours and expiry status of students referred by this agent. When hours run low, the TLI advisor notifies the agent, who then encourages the student to renew. This page is view-only; hour adjustments and renewals are handled by the advisor or the student.",
+"label.planCourse":"Plan / Course",
+"label.sortBy":"Sort by",
+"btn.clearFilters":"Clear Filters",
+"empty.students":"No students match the filters.",
+"hint.r04Expiring":"Expiring soon means 3 or fewer lessons left, or expiry within 30 days. Click a row to see the student's details on the right.",
+"h2.expiring":"Hours Expiring Soon",
+"desc.expiring":"Students your TLI advisor has flagged as running low on hours; please encourage them to renew. Renewal is handled by the advisor or the student.",
+"empty.expiring":"No students with hours expiring soon.",
 "nav_r.performance":"Performance & Commission",
 
 /* ---- 共用小元件 ---- */

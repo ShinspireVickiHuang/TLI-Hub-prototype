@@ -857,7 +857,7 @@ function renderRightPanel(){
     var p = findProduct(selected.id);
     if (!p){ el.innerHTML = '<div class="note">'+TLI_I18N.t('找不到這筆產品，可能已被移除。','This product could not be found; it may have been removed.')+'</div>'; if (window.TLI_I18N) TLI_I18N.refresh(); return; }
     var cat = findCategory(p.categoryId);
-    /* ⚠️ 同步提醒（20260929fix4）：本表單與 a03_product_detail.html 的「編輯產品」抽屜是同一組產品欄位，
+    /* 同步提醒（20260929fix4）：本表單與 a03_product_detail.html 的「編輯產品」抽屜是同一組產品欄位，
        任一邊調整欄位時兩邊都要一起改，否則會重演「改一邊另一邊不會動」的問題。需要同步的欄位：
        代碼（唯讀，系統自動編號）／名稱／所屬分類／狀態／上課方式／班型／稅別／預設時長／
        對應等級範圍（下拉，來源 TLI_MASTERS.levelSystems.ranges）／使用資源（可勾選清單，來源 RESOURCE_LIBRARY 全類型）／簡介。

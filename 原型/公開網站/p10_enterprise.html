@@ -259,12 +259,6 @@ main{max-width:1080px;}
 .dash-table th,.dash-table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--c-border);white-space:nowrap;}
 .dash-table th{color:var(--c-muted);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;}
 
-/* 資料串接 */
-.integ-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-@media(max-width:700px){.integ-row{grid-template-columns:1fr;}}
-.integ-card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:24px;}
-.integ-card h3{font-size:15.5px;font-weight:800;margin-bottom:8px;}
-.integ-card p{font-size:13.5px;color:var(--c-muted);}
 
 /* 階梯計費說明 */
 .pricing-note{background:var(--c-bg);border:1px solid var(--c-border);border-radius:var(--radius);padding:32px;text-align:center;}
@@ -427,19 +421,7 @@ main{max-width:1080px;}
   </section>
 
   <section class="home-section" style="padding-top:0;">
-    <div class="section-head2">
-      <h2 data-i18n="p10_integ_head">資料串接</h2>
-    </div>
-    <div class="integ-row">
-      <div class="integ-card">
-        <h3 data-i18n="p10_integ1_title">開放 API</h3>
-        <p data-i18n="p10_integ1_desc">出勤、學習時數與進度資料可透過 API 即時同步至企業內部系統，納入既有的訓練或人資報表。</p>
-      </div>
-      <div class="integ-card">
-        <h3 data-i18n="p10_integ2_title">標準 CSV 匯出</h3>
-        <p data-i18n="p10_integ2_desc">不需技術串接，HR 可直接於後台下載報表，匯入企業既有的學習平台或內部系統。</p>
-      </div>
-    </div>
+    <p class="small" style="text-align:center;color:var(--c-muted);font-size:13.5px;" data-i18n="p10_integ_note">預留系統串接接口，依需求另案評估。</p>
   </section>
 
   <section class="home-section" style="padding-top:0;">

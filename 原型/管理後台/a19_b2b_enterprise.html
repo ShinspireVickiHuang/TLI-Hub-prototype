@@ -423,13 +423,6 @@ html,body{overflow-x:hidden;}
 </div>
 </div></div>
 
-<!-- 串接需求單備註 modal（v2 修改：原稽核用二次確認 modal 改為備註編輯） -->
-<div class="modal-mask" id="connReqNoteModal" onclick="if(event.target===this) closeModal('connReqNoteModal')"><div class="modal">
-<h3 data-i18n="modal.editNote">編輯備註</h3>
-<div class="formrow"><label id="connReqNoteLabel"></label><textarea id="connReqNoteInput" placeholder="輸入本次追蹤備註" data-i18n-placeholder="ph.trackingNote"></textarea></div>
-<div style="text-align:right;margin-top:16px"><button class="btn ghost" onclick="closeModal('connReqNoteModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doSaveConnReqNote()" data-i18n="btn.saveNote">儲存備註</button></div>
-</div></div>
-
 <!-- 新增組織客戶 抽屜表單（沿用主抽屜） -->
 
 <script src="../assets/_shared_masters.js"></script>
@@ -508,7 +501,7 @@ var ENT_TYPE_LABELS = {general:'企業'};
 var ENT_TYPE_LABELS_EN = {general:'Enterprise'};
 function entTypeLabelText(t){ return i18nT(ENT_TYPE_LABELS[t], ENT_TYPE_LABELS_EN[t]); }
 /* 功能開關：本頁組織客戶只剩企業一種型態。合約與時數池、成員名單、使用報表每一家都一樣、預設恆為開啟；
-   HR 儀表板／部門管理／請假與申訴審核／老師評語／資料串接為可個別開關的企業功能。 */
+   HR 儀表板／部門管理／請假與申訴審核／老師評語為可個別開關的企業功能。 */
 var FEATURE_DEFS = {
   common: [
     {key:'contractPool', label:'合約與時數池', en:'Contract & Hour Pool'},
@@ -519,14 +512,13 @@ var FEATURE_DEFS = {
     {key:'hrDashboard', label:'HR 儀表板', en:'HR Dashboard'},
     {key:'deptMgmt', label:'部門管理', en:'Department Management'},
     {key:'leaveApproval', label:'請假與申訴審核', en:'Leave & Appeal Review'},
-    {key:'teacherComments', label:'老師評語', en:'Teacher Comments'},
-    {key:'dataIntegration', label:'資料串接', en:'Data Integration'}
+    {key:'teacherComments', label:'老師評語', en:'Teacher Comments'}
   ]
 };
 function defaultFeatures(entType){
   var f = {contractPool:true, memberList:true, usageReport:true,
-    hrDashboard:false, deptMgmt:false, leaveApproval:false, teacherComments:false, dataIntegration:false};
-  if (entType==='general'){ f.hrDashboard=true; f.deptMgmt=true; f.leaveApproval=true; f.teacherComments=true; f.dataIntegration=true; }
+    hrDashboard:false, deptMgmt:false, leaveApproval:false, teacherComments:false};
+  if (entType==='general'){ f.hrDashboard=true; f.deptMgmt=true; f.leaveApproval=true; f.teacherComments=true; }
   return f;
 }
 /* activeFeatureDraft：目前可編輯的功能開關草稿指標，新增組織客戶表單與功能開關編輯 modal 共用同一個 checkbox 渲染函式，
@@ -589,33 +581,7 @@ function makeCampuses(i){
   ];
 }
 
-var CONNREQ_SYSTEM_NAMES = ['人資資訊系統（HRIS）','差勤系統','薪資系統','教育訓練管理系統（LMS）','單一登入（SSO）系統'];
-var CONNREQ_SYNC_DATA = ['出勤紀錄','學習時數','課程進度','部門異動','帳號異動'];
-var CONNREQ_STATUS_LIST = ['新進','評估中','已排入二階','串接中','已上線'];
 var IT_TITLES = ['IT 專員','IT 主管','系統管理師','資訊部經理'];
-function makeConnReq(entIdx, ci){
-  var r = seededRand(entIdx*211+ci*7+51), r2 = seededRand(entIdx*223+ci*11+53), r3 = seededRand(entIdx*227+ci*13+55), r4 = seededRand(entIdx*229+ci*17+57);
-  var submitted = addDays('2026-02-01', Math.floor(r*180));
-  var statusIdx = Math.min(CONNREQ_STATUS_LIST.length-1, Math.floor(r2*CONNREQ_STATUS_LIST.length));
-  var sn = EMP_SURNAMES[(entIdx+ci)%EMP_SURNAMES.length], gv = EMP_GIVENS[(entIdx+ci*3)%EMP_GIVENS.length];
-  var syncCount = 1 + Math.floor(r4*2);
-  var syncData = [];
-  for (var s=0; s<syncCount; s++){
-    var d = CONNREQ_SYNC_DATA[(entIdx+ci+s) % CONNREQ_SYNC_DATA.length];
-    if (syncData.indexOf(d)===-1) syncData.push(d);
-  }
-  return {
-    id:'connreq'+entIdx+'_'+ci,
-    itContact: sn+gv+'（'+IT_TITLES[(entIdx+ci)%IT_TITLES.length]+'）',
-    systemName: CONNREQ_SYSTEM_NAMES[(entIdx+ci*2) % CONNREQ_SYSTEM_NAMES.length],
-    syncData: syncData.join('、'),
-    submitted: submitted,
-    expectedLaunch: addDays(submitted, 30+Math.floor(r3*90)),
-    status: CONNREQ_STATUS_LIST[statusIdx],
-    advisor: ENT_ADVISORS[(entIdx+ci) % ENT_ADVISORS.length],
-    note: ''
-  };
-}
 var RENEWAL_REASONS = ['企業內部年度預算尚未核准，需要延長採購決議時間','人資單位仍在盤點下年度受訓名額，先申請展延銜接','企業教育訓練承辦人異動，需要時間交接後續事宜'];
 function makeRenewalRequests(entIdx, contractEnd){
   var r = seededRand(entIdx*331+71), r2 = seededRand(entIdx*337+73), r3 = seededRand(entIdx*341+79);
@@ -745,8 +711,7 @@ function makeEnterprise(i){
     });
   }
   var contractParamsSet = r6 > 0.35;
-  var connReqCount = 1 + Math.floor(r4*3);
-  var connectionRequests = []; for (var ci=0; ci<connReqCount; ci++) connectionRequests.push(makeConnReq(i, ci));
+  var connectionRequests = [];
   var pricingUnit = isRefSemi ? 'hourpool' : (seededRand(i*409+211) > 0.5 ? 'hourpool' : 'prepaidpool');
   var prepaidAmount = 50000 + Math.floor(seededRand(i*419+223)*150000);
   var contractParams = {
@@ -1078,21 +1043,6 @@ function contractExpiryCell(e){
 /* 組織客戶狀態：依合約到期日判斷是否仍在有效期內；成交前的洽談一律在「企業諮詢」分頁處理，這裡不再另分兩種客戶型態 */
 function entIsActive(e){ return new Date(e.contractEnd+'T00:00:00') >= new Date(); }
 function entStatusBadge(e){ return entIsActive(e) ? '<span class="badge green">'+i18nT('合約有效','Contract Active')+'</span>' : '<span class="badge grey">'+i18nT('已到期','Expired')+'</span>'; }
-var CONNREQ_STATUS_EN = {'已上線':'Live','串接中':'Integrating','已排入二階':'Tier-2 Queued','評估中':'Evaluating','新進':'New'};
-function connReqStatusText(s){ return i18nT(s||'新進', CONNREQ_STATUS_EN[s||'新進']); }
-function connReqStatusBadge(s){
-  if (s==='已上線') return '<span class="badge green">'+connReqStatusText(s)+'</span>';
-  if (s==='串接中') return '<span class="badge orange">'+connReqStatusText(s)+'</span>';
-  if (s==='已排入二階') return '<span class="badge blue">'+connReqStatusText(s)+'</span>';
-  if (s==='評估中') return '<span class="badge blue">'+connReqStatusText(s)+'</span>';
-  return '<span class="badge grey">'+connReqStatusText('新進')+'</span>';
-}
-var CONNREQ_STATUS_RANK = {'新進':0,'評估中':1,'已排入二階':2,'串接中':3,'已上線':4};
-function connReqSummary(e){
-  if (!e.connectionRequests.length) return '<span class="badge grey">'+i18nT('尚未提出','Not Submitted')+'</span>';
-  var top = e.connectionRequests.reduce(function(a,b){ return CONNREQ_STATUS_RANK[b.status]>CONNREQ_STATUS_RANK[a.status] ? b : a; });
-  return connReqStatusBadge(top.status) + (e.connectionRequests.length>1 ? '<span class="small">（'+e.connectionRequests.length+' '+i18nT('筆','requests')+'）</span>' : '');
-}
 
 /* ================= 主頁籤 ================= */
 var MAIN_TABS = [{key:'trial', label:'企業諮詢', en:'Corporate Inquiries'}, {key:'list', label:'組織客戶列表', en:'Organization Customer List'}];
@@ -1766,7 +1716,6 @@ function renderUsageTab(e){
   var html = '';
   html += '<div class="sectiontitle">'+i18nT('學習報告','Learning Report')+'</div>' + renderReportTab(e);
   html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('請款','Billing')+'</div>' + renderInvoiceTab(e);
-  html += renderConnReqTab(e);
   html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('使用規則','Usage Rules')+'</div>' + renderUsageRulesBlock(e);
   if (window.TLI_I18N) TLI_I18N.refresh();
   return html;
@@ -1978,49 +1927,6 @@ function renderContractDetail(e, c){
   }
   if (window.TLI_I18N) TLI_I18N.refresh();
   return html;
-}
-
-/* ================= 串接需求單（v2 修改：API 本體移至二階，一階段僅承接串接需求，示範畫面，資料為模擬數字） ================= */
-function renderConnReqTab(e){
-  var reqRows = e.connectionRequests.map(function(c){
-    var statusOptions = CONNREQ_STATUS_LIST.map(function(s){
-      return '<option value="'+s+'"'+(c.status===s?' selected':'')+'>'+connReqStatusText(s)+'</option>';
-    }).join('');
-    return '<tr><td>'+e.name+'</td><td>'+c.itContact+'</td><td>'+c.systemName+'</td><td>'+c.syncData+'</td><td>'+c.expectedLaunch+'</td>' +
-      '<td>'+connReqStatusBadge(c.status)+'</td><td>'+c.advisor+'</td>' +
-      '<td><select style="width:auto" onchange="updateConnReqStatus(\''+c.id+'\',this.value)">'+statusOptions+'</select> ' +
-      '<button class="btn ghost" onclick="openConnReqNote(\''+c.id+'\')">'+i18nT('備註','Note')+'</button></td></tr>';
-  }).join('');
-  return '<div class="note">'+i18nT('系統對接屬導入服務，二階段由 TLI 專案團隊執行；一階段企業以標準 CSV 匯出為主。','System integration is an onboarding service; Tier-2 is handled by the TLI project team, while Tier-1 relies mainly on standard CSV export by the enterprise.')+'</div>' +
-   '<div class="sectiontitle">'+i18nT('串接需求單列表','Integration Request List')+'</div>' +
-   '<div class="tablewrap"><table><tr><th data-i18n="label.enterprise">企業</th><th data-i18n="label.itContact">IT 聯絡人</th><th data-i18n="label.systemName">系統名稱</th><th data-i18n="label.syncData">要同步的資料</th><th data-i18n="label.expectedLaunch">期望上線</th><th data-i18n="common.status">狀態</th><th data-i18n="col.assignedAdvisor">負責顧問</th><th data-i18n="label.action">動作</th></tr>' +
-   (reqRows || '<tr><td colspan="8" class="small" style="white-space:normal;padding:14px 12px">'+i18nT('此企業尚未提出串接需求單。','This enterprise has not submitted an integration request yet.')+'</td></tr>') +
-   '</table></div>';
-}
-function updateConnReqStatus(reqId, val){
-  var e = entById(currentEntId);
-  var c = e.connectionRequests.find(function(x){ return x.id===reqId; });
-  if (!c) return;
-  c.status = val;
-  renderEntDrawerBody(e);
-  renderEntTable();
-  toast(i18nT('已將「'+c.systemName+'」串接需求單狀態更新為「'+val+'」','Integration request status for “'+c.systemName+'” updated to “'+connReqStatusText(val)+'”'));
-}
-function openConnReqNote(reqId){
-  window.__connReqNoteId = reqId;
-  var e = entById(currentEntId);
-  var c = e.connectionRequests.find(function(x){ return x.id===reqId; });
-  document.getElementById('connReqNoteLabel').textContent = c.systemName+'（'+c.itContact+'）'+i18nT('備註','Note');
-  document.getElementById('connReqNoteInput').value = c.note || '';
-  document.getElementById('connReqNoteModal').classList.add('open');
-}
-function doSaveConnReqNote(){
-  var e = entById(currentEntId);
-  var c = e.connectionRequests.find(function(x){ return x.id===window.__connReqNoteId; });
-  if (c) c.note = document.getElementById('connReqNoteInput').value;
-  closeModal('connReqNoteModal');
-  renderEntDrawerBody(e);
-  toast(i18nT('已儲存備註','Note saved'));
 }
 
 /* ================= 代理商型詳情（v2 新增：摘要卡＋連結至代理商詳細管理，示範畫面，資料為模擬數字） ================= */

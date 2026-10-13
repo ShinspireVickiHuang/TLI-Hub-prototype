@@ -564,10 +564,6 @@ function applyGenericFrontendDefaults(o){
     o.videoLicenseTool = (o.videoLicense === 'own') ? {name:''} : null;
   }
 }
-function frontPreviewHref(p, key){
-  var slug = p.slug || PARTNER_SLUG[p.id] || p.id;
-  return '../公開網站/p14_partner_login.html?tenant=' + encodeURIComponent(slug);
-}
 function dnsStatusBadge(s){
   if (s === 'live') return '<span class="badge green">'+TT('已生效')+'</span>';
   if (s === 'verifying') return '<span class="badge amber">'+TT('驗證中')+'</span>';
@@ -580,16 +576,6 @@ function copyPartnerUrl(encoded){
   } else {
     toast(TLI_I18N.t('複製失敗，請手動複製','Copy failed; please copy manually'));
   }
-}
-function renderFrontUrlRow(p, key, label){
-  var url = p.frontUrls[key];
-  return '<div style="margin-bottom:10px">' +
-    '<div class="small" style="margin-bottom:3px">' + label + '</div>' +
-    '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
-    '<code style="flex:1;min-width:180px;font-size:12.5px;background:var(--g50);padding:6px 9px;border-radius:6px;border:1px solid var(--g200);word-break:break-all">' + escHtml(url) + '</code>' +
-    '<button type="button" class="btn ghost" style="padding:5px 10px;font-size:12px" onclick="copyPartnerUrl(\'' + encodeURIComponent(url) + '\')">' + TT('複製') + '</button>' +
-    '<a class="btn ghost" style="padding:5px 10px;font-size:12px" target="_blank" rel="noopener" href="' + frontPreviewHref(p, key) + '">' + TT('預覽') + '</a>' +
-    '</div></div>';
 }
 /* 既有資料的補值（含 20260927 定案的 12 家）：套一次性預設，之後同一物件不重算 */
 function ensurePartnerDefaults(p){
@@ -859,10 +845,6 @@ function sectionBrandFrontend(mode, o){
     TT(BRAND_MODE_LABEL[o.brandMode] || ''),
     brandRadios);
 
-  html += '<div class="sectiontitle" style="margin-top:18px">' + TT('前台入口') + '</div>';
-  html += renderFrontUrlRow(o, 'home', TT('品牌首頁'));
-  html += renderFrontUrlRow(o, 'courses', TT('課程頁'));
-  html += renderFrontUrlRow(o, 'login', TT('學員登入'));
   html += fieldRow(mode, '自有網域',
     (o.customDomain.domain ? escHtml(o.customDomain.domain) : TT('未設定')) + ' ' + dnsStatusBadge(o.customDomain.dnsStatus),
     '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input type="text" id="pe_customDomain" value="' + escHtml(o.customDomain.domain) + '" placeholder="' + TT('例：chinese.globalstudy.com.my') + '" style="flex:1;min-width:180px" onchange="pdSetCustomDomain(this.value)"><span id="pe_customDomainDnsBadge">' + dnsStatusBadge(o.customDomain.dnsStatus) + '</span></div><div class="hint">' + TLI_I18N.t('請將此網域的 CNAME 指向 '+(o.slug || PARTNER_SLUG[o.id] || o.id || '')+'.tliconnect.com，TLI 驗證通過後自動切換為「已生效」。', 'Point this domain\'s CNAME to '+(o.slug || PARTNER_SLUG[o.id] || o.id || '')+'.tliconnect.com; it switches to \u201cLive\u201d automatically once TLI verifies it.') + '</div>');

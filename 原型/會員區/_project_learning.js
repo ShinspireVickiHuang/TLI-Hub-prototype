@@ -360,7 +360,7 @@
         '<div class="pj-row"><span>' + T('自學課程', 'Self-paced course') + '</span><b>' + esc(courseName()) + '</b></div>' +
         '<div class="pj-row"><span>Mandarin Lounge</span><b>' + T('每月 ', '') + u.perMonth + T(' 次，團體場次', ' group sessions per month') + '</b></div>' +
         '<div class="pj-row"><span>' + T('學習儀表板', 'Learning dashboard') + '</span><b>' + T('進度與學習時數', 'Progress and study time') + '</b></div>' +
-        '<div class="pj-row"><span>' + T('結業證書', 'Certificate') + '</span><b>' + T('完成課程後核發', 'Issued on completion') + '</b></div>' +
+        '<div class="pj-row"><span>' + T('證書', 'Certificate') + '</span><b>' + T('完成課程後核發', 'Issued on completion') + '</b></div>' +
         '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-primary btn-sm" href="m08_self_paced.html">' + T('前往自學課程', 'Self-paced course') + '</a><a class="btn btn-outline btn-sm" href="m14_chat_booking.html">' + T('預約 Lounge', 'Book Lounge') + '</a><a class="btn btn-outline btn-sm" href="m18_learning_dashboard.html">' + T('學習儀表板', 'Dashboard') + '</a></div></div>';
     } else if (kind === 'm07') {
       h += pjHead(T('我的', 'Me'), T('基本資料由學校名單帶入，如需更正請洽班級老師。', 'Basic details come from your school roster. Contact your teacher to correct them.'));

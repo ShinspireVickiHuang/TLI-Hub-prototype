@@ -262,7 +262,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a class="side-link" href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
     <a class="side-link" href="m18_learning_dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span data-i18n="m19.nav.dashboard">學習儀表板</span></a>
     <a class="side-link active" href="m20_transcripts.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg><span data-en="Transcripts">成績單</span></a>
-    <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span data-i18n="m19.title">結業證書</span></a>
+    <a class="side-link" href="m19_certificates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span data-i18n="m19.title">證書</span></a>
     <a class="side-link" href="m04_course_detail.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg><span data-i18n="member.nav.myPlan">我的方案</span></a>
     <a class="side-link" href="m07_profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
     <a class="side-link" href="../公開網站/p01_home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="member.nav.backToSite">回官網</span></a>
@@ -295,11 +295,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <a class="nav-segment-link" href="m08_self_paced.html" data-i18n="m11.seg.selfpaced">自學課程</a>
       <a class="nav-segment-link" href="m11_quiz.html" data-i18n="m11.title">線上測驗</a>
       <a class="nav-segment-link active" href="m20_transcripts.html" data-en="Transcripts">成績單</a>
-      <a class="nav-segment-link" href="m19_certificates.html" data-i18n="m19.title">結業證書</a>
+      <a class="nav-segment-link" href="m19_certificates.html" data-i18n="m19.title">證書</a>
       <a class="nav-segment-link" href="m17_feedback.html" data-i18n="m11.seg.feedback">課堂回饋</a>
     </nav>
     <p class="page-h" data-en="Transcripts">成績單</p>
-    <p class="page-sub" data-en="Score records from placement tests and your course quizzes and unit tests. A transcript lists scores only; certificates are issued separately after a final exam.">程度測驗與課程隨堂、單元考的成績紀錄。成績單只列分數；證書另於結業考通過後核發。</p>
+    <p class="page-sub" data-en="Score records from placement tests and your course quizzes, unit tests and stage exams (including stage exams you did not take). A transcript lists scores only; a certificate is issued separately for every 12 lessons completed, regardless of stage exam results.">程度測驗與課程隨堂、單元考、階段考的成績紀錄（階段考含未參加的紀錄）。成績單只列分數；證書每完成 12 課另行核發，與階段考成績無關。</p>
 
     <div class="tr-tabs" id="trTabs" role="tablist">
       <button type="button" class="tr-tab active" data-t="placement" role="tab" data-en="Placement test transcripts">程度測驗成績單</button>
@@ -349,7 +349,7 @@ function hashS(s){ var x=7; for(var i=0;i<s.length;i++){ x=(x*31+s.charCodeAt(i)
 var WHO = window.TLI_PL ? TLI_PL.me() : {mode:'general',name:'Emma Johnson',rid:'gen',email:'emma.johnson@example.com'};
 var IS_PROJ = WHO.mode==='project';
 var CONSULT=new URLSearchParams(location.search).get('consult')?new URLSearchParams(location.search).get('id'):null, CNAME=new URLSearchParams(location.search).get('name');
-var NAME_EN = {'發音基礎 20 講':'Pronunciation Basics (20 lectures)','商務華語情境 16 講':'Business Chinese in Context (16 lectures)','中文一對一－會話進階':'Chinese 1-on-1: Advanced Conversation','旅遊華語會話 12 講':'Travel Chinese Conversation (12 lectures)','商務書信寫作 8 講':'Business Letter Writing (8 lectures)','台灣文化與生活 10 講':'Taiwan Culture and Life (10 lectures)','成語與慣用語 12 講':'Idioms and Expressions (12 lectures)','職場面試會話 10 講':'Job Interview Conversation (10 lectures)','中華文化與歷史 8 講':'Chinese Culture and History (8 lectures)'};
+var NAME_EN = {'發音基礎 20 講':'Pronunciation Basics (20 lectures)','商務華語情境 16 講':'Business Chinese in Context (16 lectures)','中文一對一－會話進階':'Chinese 1-on-1: Advanced Conversation','旅遊華語會話 12 講':'Travel Chinese Conversation (12 lectures)','商務書信寫作 8 講':'Business Letter Writing (8 lectures)','台灣文化與生活 10 講':'Taiwan Culture and Life (10 lectures)','成語與慣用語 12 講':'Idioms and Expressions (12 lectures)','職場面試會話 10 講':'Job Interview Conversation (10 lectures)','中華文化與歷史 8 講':'Chinese Culture and History (8 lectures)','企業華語線上培訓（團體班）':'Corporate Chinese Online Training (Group Class)'};
 function NM(zh){ return TT(zh, NAME_EN[zh]||zh); }
 
 /* ---- 資料：程度測驗（m21 寫入的 localStorage ＋ 既有歷史一筆）---- */
@@ -377,10 +377,21 @@ var EMMA_DONE=[
  {code:'c11',course:'中華文化與歷史 8 講',unit:'L03',title:'單元評量',kind:'單元考',date:'2024-09-18',score:65,pass:60},
  {code:'c12',course:'發音基礎 20 講',unit:'L01 入門',title:'入門單元評量',kind:'單元考',date:'2024-02-10',score:60,pass:60}
 ];
+/* 階段考紀錄（與線上測驗頁同一份示範資料）：status 為 taken 已作答／absent 未參加／pending 待作答 */
+var EMMA_STAGE=[
+ {course:'中文一對一－會話進階',unit:'第 1–12 課',unitEn:'Lessons 1-12',src:'tli',status:'taken',date:'2026-03-18',score:88,pass:70},
+ {course:'中文一對一－會話進階',unit:'第 13–24 課',unitEn:'Lessons 13-24',src:'tli',status:'taken',date:'2026-08-20',score:91,pass:70},
+ {course:'中文一對一－會話進階',unit:'第 25–36 課',unitEn:'Lessons 25-36',src:'tli',status:'pending',date:'2026-10-30',score:null,pass:70},
+ {course:'商務華語情境 16 講',unit:'第 1–12 課',unitEn:'Lessons 1-12',src:'tli',status:'taken',date:'2026-09-12',score:58,pass:70},
+ {course:'企業華語線上培訓（團體班）',unit:'客製課程階段考（一）',unitEn:'Custom course stage exam (1)',src:'custom',status:'taken',date:'2026-08-28',score:84,pass:70},
+ {course:'企業華語線上培訓（團體班）',unit:'客製課程階段考（二）',unitEn:'Custom course stage exam (2)',src:'custom',status:'pending',date:'2026-10-18',score:null,pass:70},
+ {course:'發音基礎 20 講',unit:'第 1–12 課',unitEn:'Lessons 1-12',src:'tli',status:'absent',date:'2026-09-30',score:null,pass:70}
+];
 function courseTranscripts(){
   var rows=[];
   if(!IS_PROJ){
     EMMA_DONE.forEach(function(r){ rows.push({course:r.course,unit:r.unit,kind:r.kind,date:r.date,score:r.score,pass:r.pass,attempts:1+(r.code.charCodeAt(1)%3)}); });
+    EMMA_STAGE.forEach(function(r){ rows.push({course:r.course,unit:TT(r.unit,r.unitEn),kind:'階段考',stage:r.status,src:r.src,date:r.date,score:r.score,pass:r.pass,attempts:r.status==='taken'?1:0}); });
   } else {
     var P=TLI_PL.progress(WHO.rid), cname=TLI_PL.courseName();
     P.units.forEach(function(u,i){
@@ -395,10 +406,11 @@ function courseTranscripts(){
   rows.forEach(function(r){ if(!by[r.course]){ by[r.course]=[]; order.push(r.course);} by[r.course].push(r); });
   return order.map(function(c,i){
     var list=by[c].sort(function(a,b){return a.date.localeCompare(b.date);});
-    var sc=list.filter(function(r){return r.score!=null;});
+    var sc=list.filter(function(r){return r.score!=null && r.kind!=='階段考';});
+    var stg=list.filter(function(r){return r.kind==='階段考';});
     var avg=sc.length?Math.round(sc.reduce(function(a,r){return a+r.score;},0)/sc.length*10)/10:null;
-    var last=list[list.length-1].date;
-    return {kind:'course',id:'C'+i,course:c,rows:list,avg:avg,passed:sc.filter(function(r){return r.score>=r.pass;}).length,total:sc.length,date:last,
+    var dn=list.filter(function(r){return r.stage!=='pending';}); var last=(dn.length?dn[dn.length-1]:list[list.length-1]).date;
+    return {kind:'course',id:'C'+i,course:c,rows:list,avg:avg,passed:sc.filter(function(r){return r.score>=r.pass;}).length,total:sc.length,stageTaken:stg.filter(function(r){return r.stage==='taken';}).length,stageAbsent:stg.filter(function(r){return r.stage==='absent';}).length,stageAll:stg.length,date:last,
       no:'TLI-T-'+last.slice(0,7).replace('-','')+'-'+('0'+(1+hashS(WHO.rid+c)%90)).slice(-2).padStart(4,'0')};
   }).sort(function(a,b){return b.date.localeCompare(a.date);});
 }
@@ -431,7 +443,7 @@ function render(){
     var on=sel&&x.kind===sel.kind&&x.id===sel.id;
     var h,p;
     if(x.kind==='placement'){ var r=x.rec; h=TT(r.langName+'程度測驗成績單',(LANG_EN[r.langName]||r.langName)+' placement test transcript'); p=TT('測驗日期 ','Test date ')+r.date+' · '+TT('建議等級 ','Suggested level ')+r.level; }
-    else { h=NM(x.course)+TT(' 課程成績單',' course transcript'); p=TT('單元考 ','Unit tests ')+x.total+' · '+(x.avg==null?TT('尚無平均','No average yet'):TT('平均 ','Average ')+x.avg); }
+    else { h=NM(x.course)+TT(' 課程成績單',' course transcript'); p=TT('單元考 ','Unit tests ')+x.total+(x.stageAll?' · '+TT('階段考 ','Stage exams ')+x.stageAll:'')+' · '+(x.avg==null?TT('尚無平均','No average yet'):TT('平均 ','Average ')+x.avg); }
     return '<button type="button" class="cert-item'+(on?' sel':'')+'" data-k="'+x.kind+'" data-i="'+esc(x.id)+'"><span class="badge badge-info">'+esc(x.no)+'</span><h4>'+esc(h)+'</h4><p>'+esc(p)+'</p></button>';
   }).join('');
   $('trList').querySelectorAll('.cert-item').forEach(function(b){ b.onclick=function(){ sel=list.filter(function(x){return x.kind===b.dataset.k&&x.id===b.dataset.i;})[0]; render(); if(window.innerWidth<1100) $('trPaper').scrollIntoView({behavior:'smooth',block:'start'}); }; });
@@ -445,7 +457,7 @@ function metaHtml(x,extra){
 function sheetHead(zh,en){
   return '<div class="tr-head"><img src="../assets/tli-logo.svg" alt="TLI"><div><div class="t1">'+esc(TT(zh,en))+'</div><div class="t2">Official Score Report</div></div></div>';
 }
-function signHtml(){ return '<div class="tr-sign"><span>'+TT('TLI 中華語文研習所　教務處','TLI Chinese Language Institute, Academic Affairs')+'</span><span class="sg">'+TT('教務處承辦人','Registrar')+'</span></div><div class="tr-note">'+TT('本成績單僅列各項得分，不具證書效力。結業證書於通過結業考後另行核發。','This transcript lists scores only and is not a certificate. A completion certificate is issued separately after a final exam.')+'</div>'; }
+function signHtml(){ return '<div class="tr-sign"><span>'+TT('TLI 中華語文研習所　教務處','TLI Chinese Language Institute, Academic Affairs')+'</span><span class="sg">'+TT('教務處承辦人','Registrar')+'</span></div><div class="tr-note">'+TT('本成績單僅列各項得分，不具證書效力。證書於每完成 12 課後另行核發，與階段考成績無關。','This transcript lists scores only and is not a certificate. A certificate is issued separately for every 12 lessons completed, regardless of stage exam results.')+'</div>'; }
 function fillSheet(){
   if(!sel) return; var x=sel, h='';
   if(x.kind==='placement'){
@@ -461,9 +473,9 @@ function fillSheet(){
       '<table class="tr-tbl"><tr><th>'+TT('單元','Unit')+'</th><th>'+TT('考試','Test')+'</th><th class="num">'+TT('分數','Score')+'</th><th>'+TT('達標','Result')+'</th><th class="num">'+TT('刷題次數','Attempts')+'</th><th>'+TT('日期','Date')+'</th></tr>'+
       x.rows.map(function(r){
         var ok=r.score!=null&&r.score>=r.pass;
-        return '<tr><td>'+esc(r.unit)+'</td><td>'+TT(r.kind,'Unit test')+'</td><td class="num">'+(r.score==null?'－':r.score)+'</td><td>'+(r.score==null?TT('進行中','In progress'):(ok?'<span class="tr-ok">'+TT('達標','Passed')+'</span>':'<span class="tr-ng">'+TT('未達標','Not passed')+'</span>'))+' <span class="small muted">('+TT('門檻 ','pass ')+r.pass+')</span></td><td class="num">'+r.attempts+'</td><td>'+r.date+'</td></tr>';
+        return '<tr><td>'+esc(r.unit)+'</td><td>'+TT(r.kind,r.kind==='階段考'?'Stage exam':'Unit test')+'</td><td class="num">'+(r.score==null?'－':r.score)+'</td><td>'+(r.stage==='absent'?'<span class="tr-ng">'+TT('未參加','Did not take')+'</span> <span class="small muted">('+TT('非強制，已留紀錄','optional, recorded')+')</span>':r.stage==='pending'?TT('已指派待作答','Assigned, not yet taken')+' <span class="small muted">('+TT('期限 ','due ')+r.date+')</span>':r.score==null?TT('進行中','In progress'):(ok?'<span class="tr-ok">'+TT('達標','Passed')+'</span>':'<span class="tr-ng">'+TT('未達標','Not passed')+'</span>'))+' <span class="small muted">('+TT('門檻 ','pass ')+r.pass+')</span>'+'</td><td class="num">'+r.attempts+'</td><td>'+r.date+'</td></tr>';
       }).join('')+'</table>'+
-      '<div class="tr-sum"><div>'+TT('課程平均','Course average')+' <b>'+(x.avg==null?'－':x.avg)+'</b></div><div>'+TT('達標單元','Units passed')+' <b>'+x.passed+' / '+x.total+'</b></div></div>'+signHtml();
+      '<div class="tr-sum"><div>'+TT('課程平均','Course average')+' <b>'+(x.avg==null?'－':x.avg)+'</b></div><div>'+TT('達標單元','Units passed')+' <b>'+x.passed+' / '+x.total+'</b></div>'+(x.stageAll?'<div>'+TT('階段考','Stage exams')+' <b>'+TT('已作答 '+x.stageTaken+'・未參加 '+x.stageAbsent,'Taken '+x.stageTaken+' · Did not take '+x.stageAbsent)+'</b></div>':'')+'</div>'+signHtml();
   }
   $('trSheet').innerHTML=h;
 }
