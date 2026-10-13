@@ -246,6 +246,7 @@ align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-sh
   .statgrid{grid-template-columns:1fr;}
   .pagerbtns{flex-wrap:wrap;justify-content:flex-end;}
 }
+.phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 <style>
 /* ==== 側欄改版 20260826f：呼吸感間距／分段收合／底部卡收攏（覆寫舊樣式，回應主管截圖回饋） ==== */
@@ -629,7 +630,7 @@ function makeAgentInfo(i){
   var referralCode = (i===1) ? 'REF-SEA07' : 'REF-'+padNum(i+1,5);
   return {
     referralCode: referralCode,
-    attributionRule: '以優惠碼綁定成交名單（歸屬有效期由 TLI 拍板，待定）',
+    attributionRule: '以優惠碼綁定成交名單（歸屬有效期依後台設定）',
     commissionRate: '', // 佣金比例待定，由 TLI 拍板
     settlementCycle: r > 0.5 ? '月結' : '季結'
   };
@@ -1400,7 +1401,7 @@ function renderInvoiceTab(e){
     '<div class="tablewrap"><table><tr><th data-i18n="label.period">期間</th><th data-i18n="label.amount">金額</th><th data-i18n="common.status">狀態</th></tr>' +
     e.invoices.map(function(inv){ return '<tr><td>'+inv.period+'</td><td>NT$ '+inv.amount.toLocaleString()+'</td><td>'+invoiceBadge(inv.status)+'</td></tr>'; }).join('') +
     '</table></div>' +
-    '<div class="sectiontitle">'+i18nT('月結對帳表','Monthly Statement')+'</div>' +
+    '<div class="sectiontitle">'+i18nT('月結對帳表','Monthly Statement')+'<span class="phase2-pill" data-i18n="badge.phase2">第二階段</span></div>' +
     '<div class="kv"><span>'+i18nT('付款方式','Payment Method')+'</span><span>'+e.payMethod+'</span></div>' +
     '<div class="kv"><span>'+i18nT('累計應收','Total Receivable')+'</span><span>NT$ '+e.invoices.reduce(function(s,i){return s+i.amount;},0).toLocaleString()+'</span></div>' +
     '<div class="kv"><span>'+i18nT('已收款','Received')+'</span><span>NT$ '+e.invoices.filter(function(i){return i.status==='已收款';}).reduce(function(s,i){return s+i.amount;},0).toLocaleString()+'</span></div>' +
@@ -1523,7 +1524,7 @@ function renderUsageRulesBlock(e){
    '</select><div class="hint" style="margin-top:4px">'+i18nT('企業合約下員工的取消／請假是否需 HR 審核，避免員工自行取消影響企業已付費之學習成效。','Whether employee cancellations/leave under this enterprise contract require HR review, to prevent self-service cancellations from affecting the enterprise’s paid learning outcomes.')+'</div>'+cpBadgeHtml('reviewMode')+'</div>' +
    '<div class="switchrow"><span class="small">'+i18nT('成效紀錄：將取消／請假／缺席／遲到記入員工學習成效報表，供 HR 掌握出勤狀況','Performance record: logs cancellations/leave/absence/lateness into the employee learning outcome report so HR can track attendance')+'</span><label class="switch"><input type="checkbox" '+(cp.recordEnabled?'checked':'')+' onchange="onCpBadgeToggle(\'recordEnabled\',this)"><span class="slider"></span></label></div>' +
    cpBadgeHtml('recordEnabled') +
-   '<div class="formrow" style="margin-top:10px"><label>'+i18nT('連續缺席／取消達 N 次通知 HR 與顧問','Notify HR & advisor after N consecutive absences/cancellations')+'</label><input type="number" min="0" value="'+cp.consecutiveAbsentNotifyN+'" placeholder="待定" onchange="onCpField(\'consecutiveAbsentNotifyN\',this.value)"><div class="hint" style="margin-top:4px">'+i18nT('達門檻時觸發','When the threshold is reached, this triggers the ')+'<a href="a15_notifications.html">'+i18nT('通知管理 → 事件通知設定','Notification Management → Event Notification Settings')+'</a>'+i18nT('「連續缺席達門檻」事件，即時通知 HR 與顧問。','“Consecutive absences reach threshold” event, notifying HR and the advisor immediately.')+'</div></div>' +
+   '<div class="formrow" style="margin-top:10px"><label>'+i18nT('連續缺席／取消達 N 次通知 HR 與顧問','Notify HR & advisor after N consecutive absences/cancellations')+'</label><input type="number" min="0" value="'+cp.consecutiveAbsentNotifyN+'" placeholder="請輸入" onchange="onCpField(\'consecutiveAbsentNotifyN\',this.value)"><div class="hint" style="margin-top:4px">'+i18nT('達門檻時觸發','When the threshold is reached, this triggers the ')+'<a href="a15_notifications.html">'+i18nT('通知管理 → 事件通知設定','Notification Management → Event Notification Settings')+'</a>'+i18nT('「連續缺席達門檻」事件，即時通知 HR 與顧問。','“Consecutive absences reach threshold” event, notifying HR and the advisor immediately.')+'</div></div>' +
    '<div class="sectiontitle">'+i18nT('部門配額','Department Quota')+'</div>' +
    '<div class="hint" style="margin-bottom:6px">'+i18nT('部門配額（子帳號依部門配額領用時數池；由企業自行維護，最後更新：','Department quota (sub-accounts draw from the hour pool by department quota; self-maintained by the enterprise, last updated: ')+
      ((e.orgChangeLog && e.orgChangeLog.length) ? e.orgChangeLog[0].time.slice(0,10) : e.contractStart) + i18nT('）：',')：') +'</div>' +
@@ -1774,7 +1775,7 @@ function savePeopleSection(){
 function renderUsageTab(e){
   var html = '';
   html += '<div class="sectiontitle">'+i18nT('學習報告','Learning Report')+'</div>' + renderReportTab(e);
-  html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('請款','Billing')+'</div>' + renderInvoiceTab(e);
+  html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('請款','Billing')+'<span class="phase2-pill" data-i18n="badge.phase2">第二階段</span></div>' + renderInvoiceTab(e);
   html += '<div class="sectiontitle" style="margin-top:16px">'+i18nT('使用規則','Usage Rules')+'</div>' + renderUsageRulesBlock(e);
   if (window.TLI_I18N) TLI_I18N.refresh();
   return html;
@@ -1994,7 +1995,7 @@ function renderAgentInfoTab(e){
   var out = '<div class="card" style="margin-top:10px">' +
    '<div class="kv"><span>'+i18nT('優惠碼','Promo Code')+'</span><span>'+info.referralCode+'</span></div>' +
    '<div class="kv"><span>'+i18nT('名單歸屬規則','Lead Attribution Rule')+'</span><span>'+info.attributionRule+'</span></div>' +
-   '<div class="kv"><span>'+i18nT('佣金比例','Commission Rate')+'</span><span class="small">'+i18nT('待定','TBD')+'</span></div>' +
+   '<div class="kv"><span>'+i18nT('佣金比例','Commission Rate')+'</span><span class="small">'+i18nT('依合約設定','Per contract')+'</span></div>' +
    '<div class="formrow" style="margin-top:10px"><label>'+i18nT('結算週期','Settlement Cycle')+'</label><select onchange="onAgentSettlementChange(this.value)">' +
    '<option value="月結"'+(info.settlementCycle==='月結'?' selected':'')+'>'+payTermText('月結')+'</option>' +
    '<option value="季結"'+(info.settlementCycle==='季結'?' selected':'')+'>'+payTermText('季結')+'</option>' +

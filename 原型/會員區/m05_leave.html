@@ -702,7 +702,7 @@ function renderRuleCard(planId){
       '<ul class="rule-list">'+
         '<li>'+t('課前 12 小時以上取消，堂數退回。',{en:'Cancel 12+ hours before class to have the session refunded.',ja:'開始12時間以上前のキャンセルはコマ数が返却されます。',de:'Bei Stornierung 12+ Stunden vorher wird die Stunde erstattet.'})+'</li>'+
         '<li>'+t('12 小時內請假，堂數不退，老師會收到通知（可填寫原因）。',{en:'Leave within 12 hours is not refunded; the teacher will be notified (reason optional).',ja:'12時間以内の欠席連絡はコマ数が返却されず、講師に通知されます（理由は任意）。',de:'Abwesenheit innerhalb von 12 Stunden wird nicht erstattet; die Lehrkraft wird benachrichtigt (Grund optional).'})+'</li>'+
-        '<li>'+t('改期需在課前 12 小時以上，每堂上限次數待定。',{en:'Reschedule requests must be made 12+ hours before class; the per-class limit is TBD.',ja:'振替は開始12時間以上前に必要です。1コマあたりの上限回数は未定です。',de:'Umbuchungen müssen 12+ Stunden vorher erfolgen; das Limit pro Stunde ist noch offen.'})+'</li>'+
+        '<li>'+t('改期需在課前 12 小時以上，每堂上限次數依後台設定。',{en:'Reschedule requests must be made 12+ hours before class; the per-class limit follows the back-office settings.',ja:'振替は開始12時間以上前に必要です。1コマあたりの上限回数はバックオフィスの設定に従います。',de:'Umbuchungen müssen 12+ Stunden vorher erfolgen; das Limit pro Stunde richtet sich nach den Einstellungen im Backoffice.'})+'</li>'+
       '</ul>';
   }else if(plan.ruleGroup==='group-live'){
     el.className='card';
@@ -1156,7 +1156,7 @@ function openRescheduleSheet(id){
   var group=PLAN_META[cls.planId].ruleGroup;
   if((group==='general'||group==='group-live') && typeof cls.rescheduleRemain==='number'){
     limitLine.classList.remove('hidden');
-    limitLine.textContent=TLI_I18N.t('本堂可改期次數剩 '+cls.rescheduleRemain+'（待定）',{en:cls.rescheduleRemain+' reschedule(s) left for this class (subject to change)',ja:'このコマの振替可能回数は残り'+cls.rescheduleRemain+'回です（未定）',de:'Noch '+cls.rescheduleRemain+' Umbuchung(en) für diese Stunde möglich (vorläufig)'});
+    limitLine.textContent=TLI_I18N.t('本堂可改期次數剩 '+cls.rescheduleRemain+'',{en:cls.rescheduleRemain+' reschedule(s) left for this class',ja:'このコマの振替可能回数は残り'+cls.rescheduleRemain+'回です',de:'Noch '+cls.rescheduleRemain+' Umbuchung(en) für diese Stunde möglich'});
   }else{
     limitLine.classList.add('hidden');
   }

@@ -582,7 +582,7 @@ Object.assign(TLI_I18N_DICT.de,{
 "p12_ref_badge":"Empfehlungsquelle bestätigt",
 "p12_ref_code_label":"Promo-Code: ",
 "p12_ref_register_btn":"Registrierung starten",
-"p12_ref_note":"Zuordnungszeitraum: wird von TLI noch festgelegt. Schließen Sie Registrierung und Kursbezahlung innerhalb dieses Zeitraums ab, damit Ihre Bestellung diesem Partner zugeordnet wird. Der Partner übernimmt nur die Empfehlung und hat keinen Zugriff auf Ihre Zahlung.",
+"p12_ref_note":"Zuordnungszeitraum: gemäß der bestätigten Spezifikation festgelegt. Schließen Sie Registrierung und Kursbezahlung innerhalb dieses Zeitraums ab, damit Ihre Bestellung diesem Partner zugeordnet wird. Der Partner übernimmt nur die Empfehlung und hat keinen Zugriff auf Ihre Zahlung.",
 "p12_flow_title":"So funktioniert der Empfehlungsprozess",
 "p12_flow_sub":"Partner vermitteln nur und nehmen kein Geld entgegen – Studierende zahlen stets direkt an TLI.",
 "p12_step1_title":"Über den Partnerlink einsteigen",

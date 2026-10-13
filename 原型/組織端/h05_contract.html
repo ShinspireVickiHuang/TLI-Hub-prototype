@@ -228,7 +228,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <div class="small" data-i18n="h05.prepayDesc">每堂課依合約單價從預付金額扣除；餘額低於門檻時系統通知 HR 加值。</div>
 <div class="kv" style="margin-top:8px"><span data-i18n="h05.kvBalance">餘額</span><span id="prepayBalanceTxt">—</span></div>
 <div class="kv"><span data-i18n="h05.kvMonthDeduct">本月倒扣</span><span id="prepayMonthTxt">—</span></div>
-<div class="kv"><span data-i18n="h05.kvEstClasses">預估可用堂數</span><span data-i18n="h05.kvEstClassesVal">餘額 ÷ 合約單價（單價依合約，待定）</span></div>
+<div class="kv"><span data-i18n="h05.kvEstClasses">預估可用堂數</span><span data-i18n="h05.kvEstClassesVal">餘額 ÷ 合約單價（單價依合約設定）</span></div>
 </div>
 
 <details class="card">
@@ -301,7 +301,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
 <div class="selfnote" data-i18n="h05.selfManageNote">此設定由貴公司自行維護，TLI 後台僅檢視。</div>
 <div class="card">
 <h2 data-i18n="h05.tabAlerts">關注規則</h2>
-<div class="cardesc" data-i18n="h05.alertsDesc">命中任一開啟的規則，員工會出現在學習報告的「需關注」清單，並標示命中原因。參數欄留白時採 TLI 預設值（待定）；貴公司填寫後以貴公司設定的數值為準。</div>
+<div class="cardesc" data-i18n="h05.alertsDesc">命中任一開啟的規則，員工會出現在學習報告的「需關注」清單，並標示命中原因。參數欄留白時採 TLI 預設值；貴公司填寫後以貴公司設定的數值為準。</div>
 <div class="tablewrap"><table id="alertRuleTable" class="mgmttable"></table></div>
 <div class="actionrow"><button class="btn" onclick="saveAlertRules()" data-i18n="h05.btnSaveAlerts">儲存關注規則</button></div>
 <div class="loglist" id="orgLogListAlerts"></div>
@@ -686,7 +686,7 @@ function renderAlertRuleTable(){
   t.innerHTML = '<tr><th>'+T('開關','On/Off')+'</th><th>'+T('規則','Rule')+'</th><th>'+T('門檻','Threshold')+'</th><th>'+T('說明','Description')+'</th></tr>' + ALERT_RULES.map(function(r){
     return '<tr><td><input type="checkbox" '+(r.enabled?'checked':'')+' onchange="onAlertRuleToggle(\''+r.id+'\',this.checked)"></td>'+
       '<td>'+T(r.labelZh, r.labelEn)+'</td>'+
-      '<td><input type="number" min="0" class="quotainput" style="width:80px" value="'+r.param+'" placeholder="'+T('TLI 預設值待定','TLI default TBD')+'" onchange="onAlertRuleParam(\''+r.id+'\',this.value)">'+T(r.unit, r.unitEn||r.unit)+'</td>'+
+      '<td><input type="number" min="0" class="quotainput" style="width:80px" value="'+r.param+'" placeholder="'+T('TLI 預設值','TLI default')+'" onchange="onAlertRuleParam(\''+r.id+'\',this.value)">'+T(r.unit, r.unitEn||r.unit)+'</td>'+
       '<td class="small">'+T(r.descZh, r.descEn)+'</td></tr>';
   }).join('');
   renderOrgLog();

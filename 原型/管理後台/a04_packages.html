@@ -185,6 +185,7 @@ align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-sh
   .tb-search{display:none;}
   .drawer{width:100%;max-width:100%;}
 }
+.phase1-pill{display:inline-block;background:#E6F4EE;border:1px solid #0F9B79;color:#0B6B53;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 </style>
 <style>
 /* ==== 側欄改版 20260826f：呼吸感間距／分段收合／底部卡收攏（覆寫舊樣式，回應主管截圖回饋） ==== */
@@ -454,7 +455,7 @@ function openPkgDetail(id){
       '<button class="active" onclick="pkgTab(this,\'basic\')" data-i18n="tab.pkgBasic">基本資料</button>' +
       '<button onclick="pkgTab(this,\'items\')" data-i18n="tab.pkgItems">組成課程</button>' +
       '<button onclick="pkgTab(this,\'priceaud\')" data-i18n="tab.pkgPrice">定價</button>' +
-      '<button onclick="pkgTab(this,\'discount\')" data-i18n="tab.pkgDiscount">折扣與折價券</button>' +
+      '<button onclick="pkgTab(this,\'discount\')"><span data-i18n="tab.pkgDiscount">折扣與折價券</span><span class="phase1-pill" data-i18n="badge.phase1c">一階段 C</span></button>' +
       '<button onclick="pkgTab(this,\'period\')" data-i18n="tab.pkgPeriod">銷售期間與渠道</button>' +
       '<button onclick="pkgTab(this,\'onoff\'); renderPkgOnOffPanel(pkgById(\''+p.id+'\'))" data-i18n="tab.pkgOnOff">上下架</button>' +
     '</div>' +

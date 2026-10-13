@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>建訂單 v2｜TLI Hub 管理後台</title>
+<title>建訂單｜TLI Hub 管理後台</title>
 <style>
 :root{
   --primary:#1B4E8C;--primary-light:#e8f0fa;--accent:#E8792B;--accent-light:#fdf0e6;
@@ -524,7 +524,7 @@ html,body{overflow-x:hidden;}
           </div>
 
           <div class="card section-panel open">
-            <div class="sec-head-l" style="margin-bottom:14px;"><span class="step-badge">3</span><h2><span data-i18n="c04.ent.step3Title">付款方式</span><span class="hint" style="font-weight:400;" data-i18n="c04.ent.step3TitleNote">（合約層，20260909 拍板改為三選一）</span></h2></div>
+            <div class="sec-head-l" style="margin-bottom:14px;"><span class="step-badge">3</span><h2><span data-i18n="c04.ent.step3Title">付款方式</span><span class="hint" style="font-weight:400;" data-i18n="c04.ent.step3TitleNote">（合約層，三選一）</span></h2></div>
             <div class="radio-group" id="entPaymentGroup">
               <label class="radio-opt"><input type="radio" name="entPayment" value="installment" onchange="tliOnEntPaymentChange()"><span><span class="t" data-i18n="c04.ent.paymentInstallment.t">分期</span><span class="d" data-i18n="c04.ent.paymentInstallment.d">依合約約定期數分期請款</span></span></label>
               <label class="radio-opt"><input type="radio" name="entPayment" value="monthly" checked onchange="tliOnEntPaymentChange()"><span><span class="t" data-i18n="c04.ent.paymentMonthly.t">月結</span><span class="d" data-i18n="c04.ent.paymentMonthly.d">依約定天數週期請款，對應現行月結（填天數）付款方式</span></span></label>
@@ -550,8 +550,8 @@ html,body{overflow-x:hidden;}
             <div class="sec-head-l" style="margin-bottom:14px;"><span class="step-badge">5</span><h2 data-i18n="c04.ent.step5Title">合約價</h2></div>
             <div class="field">
               <label data-i18n="c04.ent.contractPriceLabel">合約價（NT$）</label>
-              <input type="number" id="entContractPrice" min="0" step="1000" placeholder="依階梯規則由顧問填入，級距由 TLI 拍板" data-i18n-placeholder="c04.ent.contractPricePlaceholder" oninput="tliRecalcEnt()">
-              <div class="ent-blank-hint" data-i18n="c04.ent.contractPriceHint">此欄位刻意留白，需依企業合約階梯計價規則由顧問填入；級距與折扣數字一律由 TLI 拍板</div>
+              <input type="number" id="entContractPrice" min="0" step="1000" placeholder="依階梯規則由顧問填入，級距由 TLI 於後台設定" data-i18n-placeholder="c04.ent.contractPricePlaceholder" oninput="tliRecalcEnt()">
+              <div class="ent-blank-hint" data-i18n="c04.ent.contractPriceHint">此欄位刻意留白，需依企業合約階梯計價規則由顧問填入；級距與折扣數字一律由 TLI 於後台設定</div>
             </div>
           </div>
         </div>
@@ -1002,11 +1002,11 @@ function tliOnEntClientChange(){
   var box=document.getElementById('entContractParams');
   if(!c){ box.style.display='none'; tliRecalcEnt(); return; }
   box.style.display='block';
-  document.getElementById('entPricingType').textContent=c.ruleTypeKey==='accounts'?T('依帳號數分級（級距由 TLI 拍板）','By number of accounts (tiers set by TLI)'):T('依總時數分級（級距由 TLI 拍板）','By total hours (tiers set by TLI)');
+  document.getElementById('entPricingType').textContent=c.ruleTypeKey==='accounts'?T('依帳號數分級（級距由 TLI 於後台設定）','By number of accounts (tiers set by TLI)'):T('依總時數分級（級距由 TLI 於後台設定）','By total hours (tiers set by TLI)');
   document.getElementById('entHourPool').textContent=c.hourPoolNum+T(' 小時（企業共用時數池）',' hrs (enterprise shared hour pool)');
   document.getElementById('entCurrency').textContent=c.currency;
   document.getElementById('entInvoiceEntity').textContent=T('中華語文（企業合作）','Zhonghua Language (Enterprise Partnership)');
-  document.getElementById('entLadderRuleType').textContent=(c.ruleType==='accounts'?T('依帳號數分級','By number of accounts'):T('依總時數分級','By total hours'))+T('（門檻待定，由 TLI 拍板）',' (threshold TBD, set by TLI)');
+  document.getElementById('entLadderRuleType').textContent=(c.ruleType==='accounts'?T('依帳號數分級','By number of accounts'):T('依總時數分級','By total hours'))+T('（門檻由 TLI 於後台設定）',' (threshold set by TLI in the back office)');
   document.getElementById('entLadderAccounts').value='';
   document.getElementById('entLadderHours').value='';
   tliRecalcLadder();
@@ -1029,7 +1029,7 @@ function tliRecalcLadder(){
     resultEl.textContent=T('請輸入'+(c.ruleType==='accounts'?'目前帳號數':'本次總時數')+'，系統將依合約設定的規則類型試算級距','Please enter the '+(c.ruleType==='accounts'?'current number of accounts':'total hours for this order')+'; the system will calculate the tier based on the contract rule type');
     resultEl.classList.add('empty');
   }else{
-    resultEl.textContent=T('系統試算：落在第 '+tier+' 級（門檻待定，級距與單價由 TLI 拍板），請依此級距填入下方合約價','System estimate: Tier '+tier+' (thresholds and unit price set by TLI); enter the contract price below based on this tier');
+    resultEl.textContent=T('系統試算：落在第 '+tier+' 級（級距與單價由 TLI 於後台設定），請依此級距填入下方合約價','System estimate: Tier '+tier+' (thresholds and unit price set by TLI); enter the contract price below based on this tier');
     resultEl.classList.remove('empty');
   }
 }
@@ -1060,7 +1060,7 @@ function tliRecalcEnt(){
   if(!c)missing.push(T('尚未選擇企業客戶','Enterprise client not yet selected'));
   var total=0;
   priceInput.disabled=false;
-  priceInput.placeholder=T('依階梯規則由顧問填入，級距由 TLI 拍板','Entered by advisor per tier rule; tiers set by TLI');
+  priceInput.placeholder=T('依階梯規則由顧問填入，級距由 TLI 於後台設定','Entered by advisor per tier rule; tiers set by TLI');
   if(isNaN(priceVal)||priceVal<=0){ missing.push(T('尚未填入合約價','Contract price not yet entered')); document.getElementById('entSumNote').textContent=''; }
   else{ total=priceVal; document.getElementById('entSumNote').textContent=T('依顧問填入之合約價計算，未套用自動折扣','Calculated from the contract price entered by the advisor; no automatic discount applied'); }
   /* 20260909 修正：選預付款倒扣時，預付金額欄位為必填，空值擋下送出 */
