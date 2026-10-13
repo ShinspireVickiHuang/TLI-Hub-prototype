@@ -498,27 +498,32 @@ function computeOwnership(i, tier, org){
 }
 function ownershipKeyOf(types){ return types.length>1 ? 'multi' : types[0]; }
 
-/* ================= 會員池（v43 架構定案）：不是全球單一會員池 =================
-   TLI 官方會員（直營與代理帶進來，一個帳號跟人走）／租戶獨立會員（經銷與專案合作的學生，掛在各自租戶下，
-   主鍵是租戶 ID＝partnerId＋Email）。租戶清單直接讀共用主檔 TLI_MASTERS.partners（見 a20 合作夥伴管理），
-   涵蓋全部經銷／專案合作夥伴，確保跨頁一致；限制的是行銷、不是資料——總部看得到全部，但不得拿去對夥伴的
-   客戶行銷。共同行銷要過兩道開關：總部先開放該夥伴（tenant.comarketingOpen，來源 partner.coMarketing），
-   學員再自己同意（member.coMarketing.memberConsent），兩道都過才貼共用行銷標籤。
-   支援網址參數 ?tenant=<partnerId>：只看該夥伴租戶的會員，見下方 initTenantFilter()。 */
+/* ================= 會員池與來源標記（20261013 改）=================
+   經銷學員就是 TLI 會員，資料由 TLI 持有，只標記經銷來源（sourceDist＝經銷夥伴 ID），供篩選與返佣計算。
+   經銷學員只從 TLI 官網登入，不另設經銷會員池。專案合作（範例州立大學）的學生仍掛在專案合作租戶下，不在這次調整範圍。
+   夥伴清單直接讀共用主檔 TLI_MASTERS.partners（見 a20 合作夥伴管理），確保跨頁一致。
+   支援網址參數 ?source=<partnerId>：只看該夥伴來源的會員，見下方 initSourceFilter()。 */
 var TENANTS = [{id:'official', name:'TLI 官方', kind:'official'}].concat(
-  TLI_MASTERS.partners.filter(function(p){ return p.type==='project' || p.type==='distributor'; }).map(function(p){
-    return {id:p.id, name:p.name, kind:p.type, country:p.country, comarketingOpen:!!p.coMarketing};
+  TLI_MASTERS.partners.filter(function(p){ return p.type==='project'; }).map(function(p){
+    return {id:p.id, name:p.name, kind:p.type, country:p.country};
   })
 );
+var DISTRIBUTORS = TLI_MASTERS.partners.filter(function(p){ return p.type==='distributor'; }).map(function(p){
+  return {id:p.id, name:p.name, country:p.country};
+});
+function distById(id){ return DISTRIBUTORS.find(function(d){ return d.id===id; }); }
 function tenantById(id){ return TENANTS.find(function(t){ return t.id===id; }); }
 /* 來源：直營（官網自助註冊）／代理名稱／經銷名稱／專案合作名稱。資料取自主檔夥伴 */
 function sourceKeyOf(m){
+  if (m.sourceDist) return m.sourceDist;
   if (m.pool && m.pool !== 'official') return m.pool;
   return m.sourceType==='agent' ? 'agent:'+m.sourceAgent : 'direct';
 }
 function sourceLabelOf(key){
   if (key==='direct') return TLI_I18N.t('直營','Direct');
   if (key.indexOf('agent:')===0) return key.slice(6)+TLI_I18N.t('（代理）',' (Agent)');
+  var d = distById(key);
+  if (d) return d.name+TLI_I18N.t('（經銷）',' (Distributor)');
   var t = tenantById(key);
   if (!t) return key;
   return t.name+(t.kind==='project' ? TLI_I18N.t('（專案合作）',' (Project Partnership)') : TLI_I18N.t('（經銷）',' (Distributor)'));
@@ -526,6 +531,7 @@ function sourceLabelOf(key){
 function sourceOptions(){
   var list = [{value:'direct', label:sourceLabelOf('direct')}];
   OFFICIAL_AGENTS.forEach(function(a){ list.push({value:'agent:'+a.name, label:sourceLabelOf('agent:'+a.name)}); });
+  DISTRIBUTORS.forEach(function(d){ list.push({value:d.id, label:sourceLabelOf(d.id)}); });
   TENANTS.forEach(function(t){ if (t.kind!=='official') list.push({value:t.id, label:sourceLabelOf(t.id)}); });
   return list;
 }
@@ -540,10 +546,9 @@ function poolBadge(pool){
   var t = tenantById(pool);
   if (!t) return '<span class="badge grey">－</span>';
   if (t.kind==='official') return '<span class="badge blue">'+t.name+'</span>';
-  if (t.kind==='project') return '<span class="badge orange">'+t.name+TLI_I18N.t('（專案合作）',' (Project Partnership)')+'</span>';
-  return '<span class="badge teal">'+t.name+TLI_I18N.t('（經銷）',' (Distributor)')+'</span>';
+  return '<span class="badge orange">'+t.name+TLI_I18N.t('（專案合作）',' (Project Partnership)')+'</span>';
 }
-/* 20260930：線上（專案合作）／線上（經銷）為專案合作／經銷租戶會員的合成校區值（非共用主檔真實校區），英文模式需翻譯 */
+/* 20260930：線上（專案合作）／線上（經銷）為專案合作學生／經銷來源學員的合成校區值（非共用主檔真實校區），英文模式需翻譯 */
 function campusDisplayLabel(c){
   if (c==='線上（專案合作）') return TLI_I18N.t(c,'Online (Project Partnership)');
   if (c==='線上（經銷）') return TLI_I18N.t(c,'Online (Distributor)');
@@ -660,13 +665,14 @@ var EMMA_MEMBER = {
 };
 MEMBERS.unshift(EMMA_MEMBER);
 
-/* ================= 租戶獨立會員資料 =================
-   經銷與專案合作的學生掛在各自租戶下，主鍵是（租戶 ID＋Email）；同租戶內才比對重複，跨租戶不比對不合併。
+/* ================= 專案合作租戶會員與經銷來源會員資料 =================
+   專案合作的學生掛在專案合作租戶下，主鍵是（租戶 ID＋Email）；同租戶內才比對重複，跨租戶不比對不合併。
+   經銷學員屬 TLI 官方會員（pool:'official'），以 sourceDist 標記經銷來源。
    專案合作會員（範例州立大學，p02）一律由主檔 projectRoster 的學生帶出：已啟用＝已開通帳號、已寄開通信＝未開通，
    尚未寄送開通信者還沒有帳號，不列入；所屬班級取自主檔 projectClasses（會員抽屜與來源欄顯示班級）。
    另有一組同租戶內疑似重複（同一 Email 重複建檔）供「人工確認合併」操作。
    建立日期集中在 2026-08～09，排在列表最前面。 */
-// 專案合作與經銷租戶的學生由夥伴自行服務，advisor 欄位一律標「—」，避免暗示 TLI 顧問（c01–c09）要服務他們
+// 專案合作學生由夥伴自行服務，advisor 欄位一律標「—」，避免暗示 TLI 顧問（c01–c09）要服務他們
 function buildProjectMembers(){
   var out = [], seq = 0, p = TLI_MASTERS.byId('partners','p02'), proj = TLI_MASTERS.projects.filter(function(x){ return x.code==='PRJ-EDU-AZU'; })[0];
   if (!p) return out;
@@ -684,7 +690,7 @@ function buildProjectMembers(){
       ownership:['institution'], ownershipKey:'institution', instOrg:'',
       className: cls ? cls.name : '', classPeriod: cls ? (cls.from+' ～ '+cls.to) : '', projectCode:'PRJ-EDU-AZU',
       pool:p.id, poolTenant:p.id, sourceType:'tenant', sourceAgent:'', sourceCountry:p.country,
-      sourceProject:projName, coMarketing:{memberConsent:(seq%2===0)}});
+      sourceProject:projName, coMarketing:null});
   });
   if (out.length){
     var o = out[0];
@@ -697,56 +703,56 @@ function buildProjectMembers(){
   return out;
 }
 var TENANT_AZ_MEMBERS = buildProjectMembers();
-var TENANT_DIST_MEMBERS = [
+var DIST_SOURCE_MEMBERS = [
   {id:'tdi1', memberNo:'DIST-000001', name:'林佩瑜', gender:'女', tier:'C', campus:'線上（經銷）', status:'在學', advisor:'—',
     org:'', taxId:'', phone:'0938-200-201', email:'peiyu.lin@example.com', joined:'2026-09-01',
     activated:true, activationKey:'activated', activationSentAt:'2026-09-01 10:00',
     tags:[], notes:[], consultLog:[],
     courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:'p05', poolTenant:'p05', sourceType:'tenant', sourceAgent:'', sourceCountry:'馬來西亞',
-    sourceProject:'大馬旅遊教育集團・9 月遊學團訂購單', coMarketing:{memberConsent:true}},
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:'p05', sourceAgent:'', sourceCountry:'馬來西亞',
+    sourceProject:'大馬旅遊教育集團・經銷來源批次建檔', coMarketing:null},
   {id:'tdi2', memberNo:'DIST-000002', name:'蔡明哲', gender:'男', tier:'C', campus:'線上（經銷）', status:'在學', advisor:'—',
     org:'', taxId:'', phone:'0938-200-202', email:'tsai.mingzhe@example.com', joined:'2026-09-02',
     activated:true, activationKey:'activated', activationSentAt:'2026-09-02 10:10',
     tags:[], notes:[], consultLog:[], courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:'p05', poolTenant:'p05', sourceType:'tenant', sourceAgent:'', sourceCountry:'馬來西亞',
-    sourceProject:'大馬旅遊教育集團・9 月遊學團訂購單', coMarketing:{memberConsent:false}},
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:'p05', sourceAgent:'', sourceCountry:'馬來西亞',
+    sourceProject:'大馬旅遊教育集團・經銷來源批次建檔', coMarketing:null},
   {id:'tdi3', memberNo:'DIST-000003', name:'楊雅雯', gender:'女', tier:'C', campus:'線上（經銷）', status:'在學', advisor:'—',
     org:'', taxId:'', phone:'0938-200-203', email:'yang.yawen@example.com', joined:'2026-09-03',
     activated:false, activationKey:'unactivated', activationSentAt:'2026-09-03 10:20',
     tags:[], notes:[], consultLog:[], courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:'p05', poolTenant:'p05', sourceType:'tenant', sourceAgent:'', sourceCountry:'馬來西亞',
-    sourceProject:'大馬旅遊教育集團・9 月遊學團訂購單', coMarketing:{memberConsent:true}},
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:'p05', sourceAgent:'', sourceCountry:'馬來西亞',
+    sourceProject:'大馬旅遊教育集團・經銷來源批次建檔', coMarketing:null},
   {id:'tdi4', memberNo:'DIST-000004', name:'許家瑋', gender:'男', tier:'C', campus:'線上（經銷）', status:'在學', advisor:'—',
     org:'', taxId:'', phone:'0938-200-204', email:'hsu.jiawei@example.com', joined:'2026-09-04',
     activated:true, activationKey:'activated', activationSentAt:'2026-09-04 10:30',
     tags:[], notes:[], consultLog:[], courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:'p05', poolTenant:'p05', sourceType:'tenant', sourceAgent:'', sourceCountry:'馬來西亞',
-    sourceProject:'大馬旅遊教育集團・9 月遊學團訂購單', coMarketing:{memberConsent:false}},
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:'p05', sourceAgent:'', sourceCountry:'馬來西亞',
+    sourceProject:'大馬旅遊教育集團・經銷來源批次建檔', coMarketing:null},
   {id:'tdi5', memberNo:'DIST-000005', name:'周思穎', gender:'女', tier:'C', campus:'線上（經銷）', status:'在學', advisor:'—',
     org:'', taxId:'', phone:'0938-200-205', email:'chou.siying@example.com', joined:'2026-09-05',
     activated:true, activationKey:'activated', activationSentAt:'2026-09-05 10:40',
     tags:[], notes:[], consultLog:[], courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:'p05', poolTenant:'p05', sourceType:'tenant', sourceAgent:'', sourceCountry:'馬來西亞',
-    sourceProject:'大馬旅遊教育集團・9 月遊學團訂購單', coMarketing:{memberConsent:false}},
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:'p05', sourceAgent:'', sourceCountry:'馬來西亞',
+    sourceProject:'大馬旅遊教育集團・經銷來源批次建檔', coMarketing:null},
   {id:'tdi6', memberNo:'DIST-000006', name:'羅冠霖', gender:'男', tier:'C', campus:'線上（經銷）', status:'休學', advisor:'—',
     org:'', taxId:'', phone:'0938-200-206', email:'luo.guanlin@example.com', joined:'2026-09-06',
     activated:true, activationKey:'activated', activationSentAt:'2026-09-06 10:50',
     tags:[], notes:[], consultLog:[], courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:'p05', poolTenant:'p05', sourceType:'tenant', sourceAgent:'', sourceCountry:'馬來西亞',
-    sourceProject:'大馬旅遊教育集團・9 月遊學團訂購單', coMarketing:{memberConsent:true}}
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:'p05', sourceAgent:'', sourceCountry:'馬來西亞',
+    sourceProject:'大馬旅遊教育集團・經銷來源批次建檔', coMarketing:null}
 ];
-MEMBERS = MEMBERS.concat(TENANT_AZ_MEMBERS, TENANT_DIST_MEMBERS);
+MEMBERS = MEMBERS.concat(TENANT_AZ_MEMBERS, DIST_SOURCE_MEMBERS);
 
-/* ================= 其餘經銷租戶會員（每家至少 2 位，供 ?tenant= 篩選用）=================
+/* ================= 其餘經銷來源會員（每家至少 2 位，供 ?source= 篩選用）=================
    專案合作（p02）與經銷 p05 已有完整資料在上方；其餘經銷（p06、p07）用同一套規則批次生成 2 位會員。 */
-function makeTenantPartnerMember(partner, seq){
+function makeDistributorMember(partner, seq){
   var kind = partner.type;
   var campusLabel = '線上（經銷）';
   var surname = SURNAMES[(seq*7+3) % SURNAMES.length];
@@ -762,17 +768,17 @@ function makeTenantPartnerMember(partner, seq){
     tags:[], notes:[], consultLog:[],
     courses:['日常會話套裝行程（經銷包裝，不對學生顯示 TLI 單價）'],
     ownership:['self'], ownershipKey:'self', instOrg:'',
-    pool:partner.id, poolTenant:partner.id, sourceType:'tenant', sourceAgent:'', sourceCountry:partner.country,
-    sourceProject:partner.name+'・學員批次建檔', coMarketing:{memberConsent:(seq%2===0)}
+    pool:'official', poolTenant:'', sourceType:'distributor', sourceDist:partner.id, sourceAgent:'', sourceCountry:partner.country,
+    sourceProject:partner.name+'・學員批次建檔', coMarketing:null
   };
 }
 ['p06','p07'].forEach(function(pid){
   var partner = TLI_MASTERS.byId('partners', pid);
   if (!partner) return;
-  MEMBERS.push(makeTenantPartnerMember(partner,1));
-  MEMBERS.push(makeTenantPartnerMember(partner,2));
+  MEMBERS.push(makeDistributorMember(partner,1));
+  MEMBERS.push(makeDistributorMember(partner,2));
 });
-/* 每筆會員都補上 tenantId（official 池無租戶，值為 null），供 ?tenant=<partnerId> 篩選使用 */
+/* 每筆會員都補上 tenantId（official 池無租戶，值為 null；僅專案合作學生有值） */
 MEMBERS.forEach(function(m){ m.tenantId = (m.pool && m.pool!=='official') ? m.pool : null; });
 
 /* ================= 狀態 ================= */
@@ -965,7 +971,7 @@ function clearOneFilter(kind){
     document.getElementById('dateFrom').value=''; document.getElementById('dateTo').value='';
   } else {
     filters[kind] = '';
-    if (kind==='source'){ tenantFilterParam = null; try{ history.replaceState(null,'',location.pathname); }catch(e){} }
+    if (kind==='source'){ sourceFilterParam = null; try{ history.replaceState(null,'',location.pathname); }catch(e){} }
   }
   currentPage = 1;
   renderFilterControls();
@@ -973,7 +979,7 @@ function clearOneFilter(kind){
 }
 function onFilterSelectChange(kind, value){
   filters[kind] = value;
-  if (kind==='source') tenantFilterParam = null;
+  if (kind==='source') sourceFilterParam = null;
   currentPage = 1;
   renderActiveTags();
   renderTable();
@@ -995,20 +1001,20 @@ function clearAllFilters(){
   searchTerm=''; document.getElementById('searchInput').value='';
   filters = {tier:'', campus:'', status:'', org:'', ownership:'', activation:'', source:''};
   dateFrom=''; dateTo='';
-  tenantFilterParam = null;
+  sourceFilterParam = null;
   currentPage = 1;
   renderFilterControls();
   renderTable();
   try{ history.replaceState(null,'',location.pathname); }catch(e){}
 }
 
-/* ================= ?tenant=<partnerId> 網址參數：只看該夥伴租戶的會員 ================= */
-var tenantFilterParam = null;
-function initTenantFilter(){
+/* ================= ?source=<partnerId> 網址參數：只看該夥伴來源的會員 ================= */
+var sourceFilterParam = null;
+function initSourceFilter(){
   var params = new URLSearchParams(location.search);
-  var t = params.get('tenant');
-  if (t && tenantById(t)){
-    tenantFilterParam = t;
+  var t = params.get('source');
+  if (t && (distById(t) || tenantById(t))){
+    sourceFilterParam = t;
     filters.source = t;
   }
 }
@@ -1234,28 +1240,20 @@ function resendActivation(){
   drawerTab('basic');
 }
 function copyActivationLink(){ toast('開通連結已複製到剪貼簿'); }
-/* 會員池／來源歸屬／共同行銷同意狀態：不分頁籤、固定顯示在抽屜最上方（v43 架構定案） */
+/* 會員池／來源歸屬：不分頁籤、固定顯示在抽屜最上方。經銷學員是 TLI 官方會員，來源歸屬標記經銷 */
 function memberPoolInfoHtml(m){
   var tenant = tenantById(m.pool);
   var poolLine = '<div class="kv"><span>所屬會員池</span><span>'+poolBadge(m.pool)+'</span></div>' +
     (m.className ? '<div class="kv"><span>所屬班級</span><span>'+m.className+'（'+m.classPeriod+'）</span></div>' : '');
   var sourceLine;
   if (m.pool === 'official'){
-    sourceLine = m.sourceType==='agent'
-      ? '<div class="kv"><span>來源歸屬</span><span>'+m.sourceCountry+'／代理商「'+m.sourceAgent+'」／'+m.sourceProject+'</span></div>'
-      : '<div class="kv"><span>來源歸屬</span><span>'+m.sourceCountry+'／直營註冊／'+m.sourceProject+'</span></div>';
+    if (m.sourceType==='agent') sourceLine = '<div class="kv"><span>來源歸屬</span><span>'+m.sourceCountry+'／代理商「'+m.sourceAgent+'」／'+m.sourceProject+'</span></div>';
+    else if (m.sourceType==='distributor') sourceLine = '<div class="kv"><span>來源歸屬</span><span>'+m.sourceCountry+'／經銷商「'+(distById(m.sourceDist)||{name:''}).name+'」／'+m.sourceProject+'</span></div>';
+    else sourceLine = '<div class="kv"><span>來源歸屬</span><span>'+m.sourceCountry+'／直營註冊／'+m.sourceProject+'</span></div>';
   } else {
     sourceLine = '<div class="kv"><span>來源歸屬</span><span>'+(tenant?tenant.name:'')+'／'+m.sourceProject+'</span></div>';
   }
-  var comLine;
-  if (m.pool === 'official'){
-    comLine = '<div class="kv"><span>共同行銷同意狀態</span><span class="small">－（不適用，本身即為 TLI 官方會員）</span></div>';
-  } else {
-    var status = !tenant.comarketingOpen ? '該夥伴未開放' : ((m.coMarketing && m.coMarketing.memberConsent) ? '已同意' : '未同意');
-    var cls = status==='已同意' ? 'green' : (status==='未同意' ? 'grey' : 'red');
-    comLine = '<div class="kv"><span>共同行銷同意狀態</span><span><span class="badge '+cls+'">'+status+'</span></span></div>';
-  }
-  return '<div class="card" style="margin:0 0 14px;padding:14px;background:var(--g50)">' + poolLine + sourceLine + comLine + '</div>';
+  return '<div class="card" style="margin:0 0 14px;padding:14px;background:var(--g50)">' + poolLine + sourceLine + '</div>';
 }
 function renderDrawerBody(m){
   var tabs = ['basic','class','ownership','orders','courses','consult','notes'];
@@ -1354,8 +1352,7 @@ function addNote(){
   drawerTab('notes');
   toast('已新增備註');
 }
-/* 20260929 改版（客戶方主管拍板）：新增會員表單不設「來源」欄——專案合作學生由班級名單開通、經銷學生由經銷商
-   訂購單補入，總部不在這裡建；列表另有「來源」欄與篩選供查看；自費／企業與「會員分類」重複。改為：會員分類決定要不要填企業／機構名稱
+/* 20260929 改版（客戶方主管拍板）：新增會員表單不設「來源」欄——專案合作學生由班級名單開通、經銷學生由經銷來源批次建檔，總部不在這裡建；列表另有「來源」欄與篩選供查看；自費／企業與「會員分類」重複。改為：會員分類決定要不要填企業／機構名稱
    （needOrg，讀主檔 TLI_MASTERS.memberTiers），另加選填的「轉介代理」欄取代原本綁在「來源＝代理轉介」
    下才出現的代理商欄位。 */
 function renderNewMemberForm(){
@@ -1618,7 +1615,7 @@ function toast(msg){
 renderNotifPanel();
 
 /* ================= 初始化 ================= */
-initTenantFilter();
+initSourceFilter();
 renderFilterControls();
 renderTable();
 renderDuplicatesCard();

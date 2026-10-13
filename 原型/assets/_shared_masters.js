@@ -209,7 +209,6 @@ var teachers = [
 ];
 
 /* ---- 11. 合作夥伴（來源 a20「合作夥伴管理」）
-   uiLocales：對外開放的介面語系（id 對照 uiLocales 清單）；代理型態不經手租戶無需設定，留空陣列
    videoLicense：'tli' 使用 TLI 授權額度／'own' 使用自有視訊授權，僅經銷型態適用
    type 只有三種：'agent' 代理／'distributor' 經銷／'project' 專案合作；
    專案合作不經手任何金流（無分潤、費率、結算、發票），只記基本資料、合作期間、Mandarin Lounge 額度、視訊工具；
@@ -218,35 +217,35 @@ var partners = [
  {id:'p02', name:'範例州立大學', contact:'Dr. Chen', country:'美國', type:'project',
   tenant:'TENANT-US-AZU', status:'啟用', from:'2027-02-01', to:'2027-05-31', createdAt:'2026-09-05',
   loungeQuota:{perStudentPerMonth:4, groupCap:8},
-  videoTool:'teams', langs:['en','zh-TW'], uiLocales:['zh-TW','en']},
+  videoTool:'teams', langs:['en','zh-TW']},
  {id:'p05', code:'DST-MY05', name:'大馬旅遊教育集團', contact:'Ahmad Faisal', country:'馬來西亞', type:'distributor',
-  tenant:'TENANT-MY-TRAVEL', status:'啟用', from:'2025-06-01', to:'2027-05-31',
+  status:'啟用', from:'2025-06-01', to:'2027-05-31',
   depositRate:20, distSettleCycle:'每季',
   rebateTiers:[{min:'0',max:'500,000',rate:'2'},{min:'500,001',max:'1,500,000',rate:'4'},{min:'1,500,001',max:'',rate:'6'}],
-  coMarketing:true, langs:['en','zh-TW'], uiLocales:['en','zh-TW'], videoLicense:'tli'},
+  langs:['en','zh-TW'], videoLicense:'tli'},
  {id:'p06', code:'DST-VN06', name:'越南遊學顧問公司', contact:'Nguyen Thi Lan', country:'越南', type:'distributor',
-  tenant:'TENANT-VN-STUDY', status:'啟用', from:'2025-08-01', to:'2027-07-31',
+  status:'啟用', from:'2025-08-01', to:'2027-07-31',
   depositRate:15, distSettleCycle:'每年',
   rebateTiers:[{min:'0',max:'300,000',rate:'1.5'},{min:'300,001',max:'1,000,000',rate:'3'},{min:'1,000,001',max:'',rate:'5'}],
-  coMarketing:false, langs:['en'], uiLocales:['en'], videoLicense:'tli'},
+  langs:['en'], videoLicense:'tli'},
  {id:'p07', code:'DST-KR07', name:'韓國語言留學社', contact:'김민준', country:'韓國', type:'distributor',
-  tenant:'TENANT-KR-LANG', status:'啟用', from:'2026-01-01', to:'2027-12-31',
+  status:'啟用', from:'2026-01-01', to:'2027-12-31',
   depositRate:25, distSettleCycle:'每月',
   rebateTiers:[{min:'0',max:'400,000',rate:'2'},{min:'400,001',max:'',rate:'4.5'}],
-  coMarketing:true, langs:['en','zh-TW'], uiLocales:['en','zh-TW'], videoLicense:'tli'},
+  langs:['en','zh-TW'], videoLicense:'tli'},
  {id:'p08', code:'REF-MEA08', name:'中東教育顧問公司', contact:'Fatima Al-Sayed', country:'阿聯', type:'agent',
-  tenant:null, status:'啟用', from:'2025-03-01', to:'2027-02-28', commRate:10, validDays:60, langs:[], uiLocales:[], videoLicense:'tli'},
+  status:'啟用', from:'2025-03-01', to:'2027-02-28', commRate:10, validDays:60, langs:[], videoLicense:'tli'},
  {id:'p09', code:'REF-HKB09', name:'香港教育橋樑', contact:'陳曉明', country:'香港', type:'agent',
-  tenant:null, status:'啟用', from:'2025-01-01', to:'2026-12-31', commRate:8, validDays:45, langs:[], uiLocales:[], videoLicense:'tli'},
+  status:'啟用', from:'2025-01-01', to:'2026-12-31', commRate:8, validDays:45, langs:[], videoLicense:'tli'},
  {id:'p10', code:'REF-EUR10', name:'歐洲文化交流協會', contact:'Hans Müller', country:'德國', type:'agent',
-  tenant:null, status:'停用', from:'2024-10-01', to:'2026-09-30', commRate:12, validDays:90, langs:[], uiLocales:[], videoLicense:'tli'},
+  status:'停用', from:'2024-10-01', to:'2026-09-30', commRate:12, validDays:90, langs:[], videoLicense:'tli'},
  {id:'p11', code:'DST-JP11', name:'環球遊學顧問', contact:'山田花子', country:'日本', type:'distributor',
-  tenant:'TENANT-JP-GLOBALSTUDY', slug:'global-study', status:'啟用', from:'2026-01-01', to:'2028-12-31',
+  slug:'global-study', status:'啟用', from:'2026-01-01', to:'2028-12-31',
   depositRate:30, distSettleCycle:'年度',
   rebateTiers:[{min:'0',max:'1,000,000',rate:'3'},{min:'1,000,001',max:'3,000,000',rate:'5'},{min:'3,000,001',max:'',rate:'8'}],
-  brandExposure:'露出授權標示', coMarketing:true, langs:['ja','zh-TW'], uiLocales:['en','zh-TW'], videoLicense:'tli'},
+  langs:['ja','zh-TW'], videoLicense:'tli'},
  {id:'p12', code:'REF-SEA07', name:'環宇教育顧問', contact:'張家瑜', country:'台灣', type:'agent',
-  tenant:null, status:'啟用', from:'2026-01-01', to:'2027-12-31', commRate:10, validDays:90, langs:[], uiLocales:[], videoLicense:'tli'},
+  status:'啟用', from:'2026-01-01', to:'2027-12-31', commRate:10, validDays:90, langs:[], videoLicense:'tli'},
 ];
 
 /* ---- 12. 組織客戶（來源 a19「組織客戶」；只收企業，type 一律 'general'。

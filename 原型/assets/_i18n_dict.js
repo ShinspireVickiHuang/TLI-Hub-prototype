@@ -137,7 +137,6 @@ en: {
 "label.tierCode":"Category Code",
 "label.source":"Source",
 "label.agent":"Agent",
-"label.tenantPool":"Tenant (Member Pool)",
 "label.orgName":"Company/Institution Name",
 "label.taxId":"Tax ID",
 "label.newNote":"Add Note",

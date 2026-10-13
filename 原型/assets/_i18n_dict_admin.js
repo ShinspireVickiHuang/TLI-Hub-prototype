@@ -722,7 +722,7 @@ Object.assign(TLI_I18N_DICT.en, {
 /* a20_agents */
 "page.desc.partners":"Manage agent / distributor / project partnership partners across all three partnership types",
 "btn.addPartner":"＋ Add Partner",
-"search.partnerPlaceholder":"Search name / contact / tenant code",
+"search.partnerPlaceholder":"Search name / contact",
 "filter.allTypes":"All Types",
 "type.project":"Project Partnership","type.distributor":"Distributor","type.agent":"Agent",
 "status.enabled":"Enabled","status.disabled":"Disabled",

@@ -320,7 +320,7 @@ html,body{overflow-x:hidden;}
 
 <div class="filterpanel">
 <div class="toolrow">
-<div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="partnerSearch" placeholder="搜尋名稱／聯絡人／租戶代碼" data-i18n-placeholder="search.partnerPlaceholder" oninput="renderPartnerTable()"></div>
+<div class="searchbox"><span class="sicon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="16.5" y1="16.5" x2="12.6" y2="12.6"/></svg></span><input type="text" id="partnerSearch" placeholder="搜尋名稱／聯絡人" data-i18n-placeholder="search.partnerPlaceholder" oninput="renderPartnerTable()"></div>
 <button class="btn ghost" onclick="partnerExport()" data-i18n="btn.export">匯出</button>
 </div>
 <div class="filterbar">
@@ -396,19 +396,19 @@ function escHtml(s){ return String(s===undefined||s===null?'':s).replace(/&/g,'&
 /* 20260929 i18n：欄位標籤／區塊標題／狀態值多由函式動態產生，用單一對照表 A20_EN + TT() 小工具，
    查不到對照就照原文顯示（示範資料/未收錄詞彙安全退回原文，不開天窗）。 */
 var A20_EN = {
-  '品牌露出':'Brand Exposure','自有網域':'Custom Domain','品牌與前台':'Brand & Frontend','前台入口':'Frontend Entry Points','品牌首頁':'Brand Homepage','課程頁':'Courses Page','學員登入':'Student Login','露出 TLI 授權標示':'Show TLI License Badge','不露出 TLI':'No TLI Branding','依合作條件可調整；「不露出 TLI」代表前台完全以經銷商自有品牌呈現。':'Adjustable per partnership terms; “No TLI Branding” means the frontend appears entirely under the distributor\'s own brand.','例：chinese.globalstudy.com.my':'e.g. chinese.globalstudy.com.my',
+  '前台入口':'Frontend Entry Points','品牌首頁':'Brand Homepage','課程頁':'Courses Page','學員登入':'Student Login',
   '連結已作廢':'Link revoked','作廢開通連結':'Revoke activation link','開通連結到期':'Link expires','系統已寄送開通連結，14 天內有效。對方點連結設定密碼後，帳號會自動綁定此夥伴、專案與班級；Email 已是 TLI 會員者不另開帳號，直接加綁。開通前連結可重複打開，開通後再點同一連結會直接進入登入頁；連結過期時對方可自行按「重新寄送開通信」，被作廢的連結才需聯絡 TLI。':'The activation link is sent by the system and is valid for 14 days. Once the person sets a password, the account is linked to this partner, project and class automatically; an email that is already a TLI member is linked without a new account. Before activation the link can be opened more than once; after activation, the same link goes straight to the sign-in page. When a link expires the person can resend it themselves; only a revoked link needs TLI to step in.','開通時間':'Activated at','確定作廢這位成員目前的開通連結？作廢後連結立即失效，需重寄開通信才會產生新連結。':'Revoke this member’s current activation link? It stops working immediately; resend the activation email to issue a new one.','已作廢開通連結：':'Activation link revoked: ','已過期':'Expired','到期 ':'Expires ',
   '班級老師':'Class Teacher','開通連結':'Activation link','＋ 新增班級老師':'+ Add class teacher','請輸入老師姓名':'Please enter the teacher name','這個 Email 已是班級老師，請從清單挑選':'This email is already a class teacher; pick them from the list',
   '合作夥伴名稱':'Partner Name','聯絡人':'Contact Person','國家／市場':'Country / Market','合作型態':'Partnership Type',
-  '合作期間':'Partnership Period','狀態':'Status','可銷售的專案':'Sellable Projects','租戶代碼':'Tenant Code',
+  '合作期間':'Partnership Period','狀態':'Status','可銷售的專案':'Sellable Projects',
   '基本資料':'Basic Information','合約與費率':'Contract & Fee Terms','通知信署名':'Notification Email Signature','視訊授權':'Video License',
   '介面語系':'Interface Languages','學員':'Students','系統資訊':'System Info',
   '結算週期':'Settlement Cycle',
   '訂金（Deposit）比例（%）':'Deposit Rate (%)','尾款計價':'Balance Pricing','方案批發價':'Plan Wholesale Price',
   '折扣碼（識別碼）':'Discount Code (ID)','必填，且不可與其他夥伴重複':'Required and must be unique','佣金比例（%）':'Commission Rate (%)','歸屬有效期（天）':'Attribution Validity (days)',
-  '學生資料保存年限':'Student Data Retention Period','租戶資料保存年限（年）':'Tenant Data Retention (years)','共同行銷':'Co-Marketing',
+  '學生資料保存年限':'Student Data Retention Period','學生資料保存年限（年）':'Student Data Retention (years)',
   '寄件人名稱':'Sender Name','回覆信箱':'Reply-To Email',
-  '信尾署名文字':'Email Footer Text','開放介面語系':'Enabled Interface Languages',
+  '信尾署名文字':'Email Footer Text',
   '建立日期':'Created Date','最後修改':'Last Modified',
   '啟用':'Enabled','停用':'Disabled','不適用':'N/A','未設定':'Not Set','尚未指定':'Not Yet Assigned',
   '已生效':'Live','驗證中':'Verifying','已開放':'Enabled','未開放':'Disabled',
@@ -429,7 +429,7 @@ var A20_EN = {
   '工具名稱':'Tool Name','自填工具名稱':'Custom Tool Name',
   '使用 TLI 授權時，排課會檢查 TLI 的授權餘量；自有授權由夥伴自行控管，排課不檢查。':'When using a TLI license, scheduling checks TLI\'s remaining license quota; an own license is self-managed by the partner and is not checked when scheduling.',
   '共用 TLI 授權池，實際扣抵依教室排課系統即時計算，此處為總量參考。':'Shared TLI license pool; actual deductions are calculated live by the classroom scheduling system — the figures here are for total-quantity reference only.',
-  '代理沒有獨立租戶，介紹來的學生進 TLI 官方會員池，不提供獨立學員名單；如需查詢個別學生歸屬，請至':'Agents do not have an independent tenant; referred students go into the TLI official member pool and no separate student list is provided. To look up an individual student\'s attribution, go to ',
+  '代理介紹來的學生進 TLI 官方會員池，不提供獨立學員名單；如需查詢個別學生歸屬，請至':'Students referred by agents go into the TLI official member pool and no separate student list is provided. To look up an individual student\'s attribution, go to ',
   '會員管理':'Member Management',
   '用 Email 或姓名搜尋。':' and search by email or name.',
   '學員人數':'Number of Students','已啟用帳號比例':'Activated Account Rate','近 30 天登入數':'Logins in Last 30 Days',
@@ -441,11 +441,10 @@ var A20_EN = {
   '依經銷商年度累積採購或開課量分級距；至少要有一列完整級距':'Tiered by the distributor\'s annual cumulative purchase or class volume; at least one complete tier row is required',
   '半年結算一次，TLI 將佣金匯款給代理商':'Settled every half year; TLI remits commission to the agent',
   '學生資料保存年限':'Student Data Retention Period','允許':'Allowed','不允許':'Not Allowed',
-  '總部先開放此開關，學員還要在註冊或登入時自己勾選同意，兩道都過才會被納入跨租戶行銷分析。':'Headquarters must first enable this switch, and the student must also opt in when registering or logging in — both must pass for inclusion in cross-tenant marketing analysis.',
   '通知信署名':'Notification Email Signature',
   '使用 TLI 授權':'Use TLI License','自有授權':'Own License',
   '型態':'Type',
-  '代理沒有獨立租戶，不提供學員登入介面，不適用介面語系設定。':'Agents do not have an independent tenant, do not provide a student login interface, and interface language settings do not apply.',
+  '代理不提供學員登入介面，不適用介面語系設定。':'Agents do not provide a student login interface, and interface language settings do not apply.',
   '夥伴的學員登入後只能在這裡開放的語系中切換介面語言；至少開放一種':'After logging in, this partner\'s students can only switch the interface language among the languages enabled here; at least one must be enabled.',
   '新增合作夥伴':'Add Partner',
   '(未命名)':'(Unnamed)',
@@ -507,10 +506,6 @@ function typeBadge(t){
   return '<span class="badge green">'+TT('代理')+'</span>';
 }
 function statusBadge(s){ return s === '啟用' ? '<span class="badge green">'+TT('啟用')+'</span>' : '<span class="badge grey">'+TT('停用')+'</span>'; }
-function coMarketingBadge(p){
-  if (p.type === 'agent' || p.type === 'project') return '<span class="small">'+TT('不適用')+'</span>';
-  return p.coMarketing ? '<span class="badge blue">'+TT('已開放')+'</span>' : '<span class="badge grey">'+TT('未開放')+'</span>';
-}
 
 /* 資料來源：共用主檔 partners，本頁新增／編輯會直接寫回同一參照 */
 var PARTNERS = TLI_MASTERS.partners;
@@ -526,8 +521,6 @@ function partnerById(id){ return PARTNERS.find(function(x){ return x.id === id; 
 
 /* ---- 通知信署名等欄位若共用主檔缺值，只在記憶體補預設，不改 _shared_masters.js ---- */
 var PARTNER_SLUG = {p02:'az', p05:'mytravel', p06:'vnstudy', p07:'krlang'};
-var PARTNER_CUSTOM_DOMAIN_DEFAULT = {};
-var BRAND_MODE_LABEL = {tli_badge:'露出 TLI 授權標示', none:'不露出 TLI'};
 var PARTNER_OWN_VIDEO_DEFAULT = {};
 /* 20260929oneway：改版前「開放給誰賣」留在專案端的夥伴名單（project.partners），改版後專案不再管理
    這份關聯，只在此把舊示範資料一次性轉成夥伴端的「可銷售的專案」種子值，避免關聯遺失；之後全部
@@ -547,12 +540,6 @@ function applyGenericFrontendDefaults(o){
       login: 'https://' + slug + '.tliconnect.com/login'
     };
   }
-  if (!o.brandMode){
-    o.brandMode = o.coMarketing ? 'tli_badge' : 'none';
-  }
-  if (!o.customDomain){
-    o.customDomain = {domain:'', dnsStatus:'unset'};
-  }
   if (!o.mailSignature){
     o.mailSignature = {
       fromName: o.name || '',
@@ -563,11 +550,6 @@ function applyGenericFrontendDefaults(o){
   if (o.videoLicenseTool === undefined){
     o.videoLicenseTool = (o.videoLicense === 'own') ? {name:''} : null;
   }
-}
-function dnsStatusBadge(s){
-  if (s === 'live') return '<span class="badge green">'+TT('已生效')+'</span>';
-  if (s === 'verifying') return '<span class="badge amber">'+TT('驗證中')+'</span>';
-  return '<span class="badge grey">'+TT('未設定')+'</span>';
 }
 function copyPartnerUrl(encoded){
   var url = decodeURIComponent(encoded);
@@ -583,9 +565,6 @@ function ensurePartnerDefaults(p){
   p._fdApplied = true;
   if (p.type !== 'agent'){
     applyGenericFrontendDefaults(p);
-    if (PARTNER_CUSTOM_DOMAIN_DEFAULT[p.id] && !p.customDomain.domain){
-      p.customDomain = Object.assign({domain:'', dnsStatus:'unset'}, PARTNER_CUSTOM_DOMAIN_DEFAULT[p.id]);
-    }
     if (PARTNER_OWN_VIDEO_DEFAULT[p.id] && p.videoLicense === 'own' && (!p.videoLicenseTool || !p.videoLicenseTool.name)){
       p.videoLicenseTool = PARTNER_OWN_VIDEO_DEFAULT[p.id];
     }
@@ -646,7 +625,7 @@ function projectStudentStats(p){
 }
 function renderStudentPanel(p){
   if (p.type === 'agent'){
-    return '<div class="note" style="margin-top:8px">' + TT('代理沒有獨立租戶，介紹來的學生進 TLI 官方會員池，不提供獨立學員名單；如需查詢個別學生歸屬，請至') + '<a href="a01_member_rules.html">' + TT('會員管理') + '</a>' + TT('用 Email 或姓名搜尋。') + '</div>';
+    return '<div class="note" style="margin-top:8px">' + TT('代理介紹來的學生進 TLI 官方會員池，不提供獨立學員名單；如需查詢個別學生歸屬，請至') + '<a href="a01_member_rules.html">' + TT('會員管理') + '</a>' + TT('用 Email 或姓名搜尋。') + '</div>';
   }
   var s = (p.type === 'project') ? projectStudentStats(p) : demoStudentStats(p);
   if (p.type === 'project'){
@@ -661,8 +640,8 @@ function renderStudentPanel(p){
     '<div class="statbox"><div class="num">' + s.activeRatio + '%</div><div class="lbl">' + TT('已啟用帳號比例') + '</div></div>' +
     '<div class="statbox"><div class="num">' + s.logins + '</div><div class="lbl">' + TT('近 30 天登入數') + '</div></div>' +
     '</div>' +
-    '<div style="margin-top:12px"><a class="btn" href="a01_member_rules.html?tenant=' + encodeURIComponent(p.id) + '">' + TT('查看學員名單') + '</a></div>' +
-    '<div class="hint" style="margin-top:8px">' + TLI_I18N.t('此數字依租戶（'+p.tenant+'）實際會員資料計算。', 'Figures are calculated from the actual member data of tenant ('+p.tenant+').') + '</div>';
+    '<div style="margin-top:12px"><a class="btn" href="a01_member_rules.html?source=' + encodeURIComponent(p.id) + '">' + TT('查看學員名單') + '</a></div>' +
+    '<div class="hint" style="margin-top:8px">' + TLI_I18N.t('學員是 TLI 會員，此數字依來源標記為「'+p.name+'」的會員資料計算。', 'Students are TLI members; figures are calculated from member data whose source is marked as "'+p.name+'".') + '</div>';
 }
 
 /* ================= 檢視／編輯共用欄位渲染：view 模式輸出 kv 唯讀列，edit 模式輸出可輸入的 formrow ================= */
@@ -740,18 +719,6 @@ function sectionBasic(mode, o){
   } else {
     h += fieldRow(mode, '可銷售的專案', sellableProjectsViewHtml(o), sellableProjectsEditHtml(o));
   }
-  if (o.type === 'project'){
-    /* 專案合作不開獨立租戶，不顯示租戶代碼 */
-  } else if (o.type === 'agent'){
-    h += '<div class="kv"><span>' + TT('租戶代碼') + '</span><span>' + TLI_I18N.t('不適用（介紹學生進 TLI 官方會員池）','N/A (referred students go into the TLI official member pool)') + '</span></div>';
-  } else if (mode === 'view'){
-    h += '<div class="kv"><span>' + TT('租戶代碼') + '</span><span>' + escHtml(o.tenant || '') + '</span></div>';
-  } else {
-    var showRegen = pdIsNew || !o.tenant;
-    h += '<div class="formrow"><label>' + TT('租戶代碼') + '</label><div style="display:flex;gap:8px;align-items:center"><input type="text" id="pe_tenant" readonly value="' + escHtml(o.tenant || '') + '" style="background:var(--g50)">' +
-      (showRegen ? '<button type="button" class="btn ghost" onclick="pdRegenTenant()">' + TLI_I18N.t('重新產生','Regenerate') + '</button>' : '') +
-      '</div><div class="hint">' + TLI_I18N.t('此夥伴的學生會員掛在此租戶下，主鍵為（租戶代碼＋Email）','This partner\'s student members are attached to this tenant; the primary key is (tenant code + email)') + '</div></div>';
-  }
   return h;
 }
 
@@ -819,37 +786,18 @@ function sectionContract(mode, o){
   }
 
   html += '<div class="small" style="margin:14px 0 4px;font-weight:600;color:var(--g900)">' + TLI_I18N.t('資料與合規','Data & Compliance') + '</div>';
-  if (o.type === 'agent'){
+  if (o.type === 'agent' || o.type === 'distributor'){
     html += '<div class="kv"><span>' + TT('學生資料保存年限') + '</span><span>' + TLI_I18N.t('不適用（學生進 TLI 官方會員池，依 TLI 官方保存政策）','N/A (students go into the TLI official member pool, per TLI\'s official retention policy)') + '</span></div>';
   } else {
-    html += fieldRow(mode, '租戶資料保存年限（年）', (o.dataRetentionYears != null ? o.dataRetentionYears : 7) + TLI_I18N.t(' 年',' years'),
+    html += fieldRow(mode, '學生資料保存年限（年）', (o.dataRetentionYears != null ? o.dataRetentionYears : 7) + TLI_I18N.t(' 年',' years'),
       '<input type="text" id="pe_dataRetentionYears" value="' + escHtml(o.dataRetentionYears != null ? o.dataRetentionYears : '') + '" onchange="pdSet(\'dataRetentionYears\',this.value)">');
-    html += fieldRow(mode, '共同行銷',
-      (o.coMarketing ? '<span class="badge blue">' + TT('允許') + '</span>' : '<span class="badge grey">' + TT('不允許') + '</span>'),
-      '<label class="switch"><input type="checkbox" id="pe_coMarketing"' + (o.coMarketing ? ' checked' : '') + ' onchange="pdSet(\'coMarketing\',this.checked)"><span class="slider"></span></label>');
-    html += '<div class="hint">' + TT('總部先開放此開關，學員還要在註冊或登入時自己勾選同意，兩道都過才會被納入跨租戶行銷分析。') + '</div>';
   }
   return html;
 }
 
 function sectionBrandFrontend(mode, o){
   if (o.type === 'agent' || o.type === 'project') return '';
-  var html = '<div class="sectiontitle">' + TLI_I18N.t('品牌與前台','Brand & Frontend') + '<span class="phase2-pill">' + TLI_I18N.t('第二階段','Phase 2') + '</span></div>';
-  var brandRadios = ['tli_badge','none'].map(function(v){
-      var checked = o.brandMode === v ? ' checked' : '';
-      return '<label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;margin-bottom:6px">' +
-        '<input type="radio" class="pe-radiocheck" name="pe_brandMode" value="' + v + '"' + checked +
-        ' onchange="pdSet(\'brandMode\',this.value)"> ' + TT(BRAND_MODE_LABEL[v]) + '</label>';
-    }).join('') + '<div class="hint">' + TT('依合作條件可調整；「不露出 TLI」代表前台完全以經銷商自有品牌呈現。') + '</div>';
-  html += fieldRow(mode, '品牌露出',
-    TT(BRAND_MODE_LABEL[o.brandMode] || ''),
-    brandRadios);
-
-  html += fieldRow(mode, '自有網域',
-    (o.customDomain.domain ? escHtml(o.customDomain.domain) : TT('未設定')) + ' ' + dnsStatusBadge(o.customDomain.dnsStatus),
-    '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input type="text" id="pe_customDomain" value="' + escHtml(o.customDomain.domain) + '" placeholder="' + TT('例：chinese.globalstudy.com.my') + '" style="flex:1;min-width:180px" onchange="pdSetCustomDomain(this.value)"><span id="pe_customDomainDnsBadge">' + dnsStatusBadge(o.customDomain.dnsStatus) + '</span></div><div class="hint">' + TLI_I18N.t('請將此網域的 CNAME 指向 '+(o.slug || PARTNER_SLUG[o.id] || o.id || '')+'.tliconnect.com，TLI 驗證通過後自動切換為「已生效」。', 'Point this domain\'s CNAME to '+(o.slug || PARTNER_SLUG[o.id] || o.id || '')+'.tliconnect.com; it switches to \u201cLive\u201d automatically once TLI verifies it.') + '</div>');
-
-  html += '<div class="sectiontitle" style="margin-top:18px">' + TT('通知信署名') + '</div>';
+  var html = '<div class="sectiontitle">' + TT('通知信署名') + '</div>';
   html += fieldRow(mode, '寄件人名稱', escHtml(o.mailSignature.fromName),
     '<input type="text" id="pe_mailFromName" value="' + escHtml(o.mailSignature.fromName) + '" onchange="pdSetMailSig(\'fromName\',this.value)">');
   html += fieldRow(mode, '回覆信箱', escHtml(o.mailSignature.replyTo),
@@ -869,20 +817,8 @@ function sectionBrandFrontend(mode, o){
 }
 
 function sectionLocales(mode, o){
-  var html = '<div class="sectiontitle">' + TT('介面語系') + '</div>';
-  if (o.type === 'project') return '';
-  if (o.type === 'agent'){
-    html += '<div class="small">' + TT('代理沒有獨立租戶，不提供學員登入介面，不適用介面語系設定。') + '</div>';
-    return html;
-  }
-  var checkboxesHtml = LANG_OPTIONS.map(function(opt){
-    var checked = (o.uiLocales || []).indexOf(opt.code) >= 0 ? ' checked' : '';
-    return '<label style="display:inline-flex;align-items:center;gap:5px;margin:0 14px 8px 0;font-size:13px;font-weight:400">' +
-      '<input type="checkbox" class="pe-radiocheck peLangChk" value="' + opt.code + '"' + checked + ' onchange="pdToggleLocale(\'' + opt.code + '\',this.checked)"> ' + escHtml(langName(opt.code)) + '</label>';
-  }).join('') + '<div class="hint">' + TT('夥伴的學員登入後只能在這裡開放的語系中切換介面語言；至少開放一種') + '</div>';
-  html += fieldRow(mode, '開放介面語系', langsDisplay(o.uiLocales), checkboxesHtml,
-    {id:'pf_locales', required:true, errMsg:'必填，請至少勾選一種介面語系'});
-  return html;
+  if (o.type !== 'agent') return '';
+  return '<div class="sectiontitle">' + TT('介面語系') + '</div><div class="small">' + TT('代理不提供學員登入介面，不適用介面語系設定。') + '</div>';
 }
 function sectionStudents(o){
   return '<div class="sectiontitle">' + TT('學員') + '</div>' + renderStudentPanel(o);
@@ -980,7 +916,7 @@ function openNewPartner(){
   pdDraft = {
     type:'distributor', name:'', contact:'', country:COUNTRIES[0],
     from:'2026-10-01', to:'2029-09-30', status:'啟用',
-    uiLocales:[], rebateTiers:[], coMarketing:false, videoLicense:'tli', sellableProjects:[]
+    uiLocales:[], rebateTiers:[], videoLicense:'tli', sellableProjects:[]
   };
   applyTypeDefaults(pdDraft);
   renderPartnerDrawer();
@@ -1004,23 +940,10 @@ function cancelPartnerEdit(){
   pdDraft = null;
   renderPartnerDrawer();
 }
-function pdAssignTenantCode(o){
-  var map = {'台灣':'TW','日本':'JP','美國':'US','新加坡':'SG','馬來西亞':'MY','越南':'VN','韓國':'KR','阿聯':'AE','香港':'HK','德國':'DE'};
-  var country = o.country || COUNTRIES[0];
-  o.tenant = 'TENANT-' + (map[country] || 'XX') + '-' + String(100 + partnerSeq + 1);
-}
-function pdRegenTenant(){
-  if (!pdDraft) return;
-  pdAssignTenantCode(pdDraft);
-  renderDrawerBody();
-}
 function applyTypeDefaults(o){
   if (o.type !== 'agent'){
     applyGenericFrontendDefaults(o);
-    if (!o.tenant) pdAssignTenantCode(o);
     if (o.videoLicense === undefined) o.videoLicense = 'tli';
-  } else {
-    o.tenant = null;
   }
   if (!o.uiLocales) o.uiLocales = [];
   if (!o.sellableProjects) o.sellableProjects = [];
@@ -1036,19 +959,7 @@ function pdChangeType(newType){
   renderPartnerDrawer();
 }
 function pdSet(field, value){ if (pdDraft) pdDraft[field] = value; }
-function pdSetCustomDomain(v){
-  pdDraft.customDomain.domain = v.trim();
-  pdDraft.customDomain.dnsStatus = v.trim() ? 'verifying' : 'unset';
-  var badgeHost = document.getElementById('pe_customDomainDnsBadge');
-  if (badgeHost) badgeHost.innerHTML = dnsStatusBadge(pdDraft.customDomain.dnsStatus);
-}
 function pdSetMailSig(field, v){ pdDraft.mailSignature[field] = v; }
-function pdToggleLocale(code, checked){
-  pdDraft.uiLocales = pdDraft.uiLocales || [];
-  var idx = pdDraft.uiLocales.indexOf(code);
-  if (checked && idx < 0) pdDraft.uiLocales.push(code);
-  if (!checked && idx >= 0) pdDraft.uiLocales.splice(idx, 1);
-}
 function pdToggleProject(code, checked){
   pdDraft.sellableProjects = pdDraft.sellableProjects || [];
   var idx = pdDraft.sellableProjects.indexOf(code);
@@ -1122,7 +1033,6 @@ function validatePartnerDraft(){
     if (!String(pdDraft.commRate == null ? '' : pdDraft.commRate).trim()){ pdMarkReqError('pf_commRate'); ok = false; }
     if (!String(pdDraft.validDays == null ? '' : pdDraft.validDays).trim()){ pdMarkReqError('pf_validDays'); ok = false; }
   }
-  if (type !== 'agent' && type !== 'project' && !(pdDraft.uiLocales || []).length){ pdMarkReqError('pf_locales'); ok = false; }
   return ok;
 }
 function pdNormalizeNumbers(o){
@@ -1457,7 +1367,7 @@ function partnerFiltered(){
   var co = document.getElementById('f_country').value;
   var st = document.getElementById('f_status').value;
   return PARTNERS.filter(function(p){
-    if (q && (p.name + p.contact + (p.tenant||'')).toLowerCase().indexOf(q) < 0) return false;
+    if (q && (p.name + p.contact).toLowerCase().indexOf(q) < 0) return false;
     if (ty && p.type !== ty) return false;
     if (co && p.country !== co) return false;
     if (st && p.status !== st) return false;
@@ -1475,13 +1385,13 @@ function partnerExport(){
   var n = partnerFiltered().length;
   toast(TLI_I18N.t('已產生匯出檔案，共 ' + n + ' 筆，請至下載中心取得', 'Export file generated, ' + n + ' record(s) in total; please retrieve it from the Download Center'));
 }
-/* 20260929 移除欄位顯示切換：表格固定 8 欄（≤8），租戶／合作期間不再進表格 */
+/* 20260929 移除欄位顯示切換：表格固定欄位，合作期間不進表格；20261013 再拿掉共同行銷欄 */
 function closeModal(id){ var el = document.getElementById(id); if (el) el.classList.remove('open'); }
 function renderPartnerTable(){
   var t = document.getElementById('partnerTable');
   var rows = partnerFiltered();
   t.innerHTML = '<tr><th>' + TT('合作夥伴名稱') + '</th><th>' + TT('聯絡人') + '</th><th>' + TT('國家／市場') + '</th><th>' + TT('型態') + '</th>' +
-    '<th>' + TT('介面語系') + '</th><th>' + TT('共同行銷') + '</th><th>' + TT('狀態') + '</th>' +
+    '<th>' + TT('狀態') + '</th>' +
     '<th></th></tr>';
   rows.forEach(function(p){
     var tr = document.createElement('tr');
@@ -1489,8 +1399,7 @@ function renderPartnerTable(){
     tr.setAttribute('onclick', "openPartnerDetail('" + p.id + "')");
     tr.innerHTML = '<td>' + escHtml(p.name) + '</td><td>' + escHtml(p.contact) + '</td><td>' + escHtml(countryLabel(p.country)) + '</td>' +
       '<td>' + typeBadge(p.type) + '</td>' +
-      '<td>' + (p.type === 'agent' || p.type === 'project' ? '<span class="small">' + TT('不適用') + '</span>' : langsDisplay(p.uiLocales)) + '</td>' +
-      '<td>' + coMarketingBadge(p) + '</td><td>' + statusBadge(p.status) + '</td>' +
+      '<td>' + statusBadge(p.status) + '</td>' +
       '<td><button class="linkbtn" onclick="event.stopPropagation();togglePartnerStatus(\'' + p.id + '\')">' + TT(p.status === '啟用' ? '停用' : '啟用') + '</button></td>';
     t.appendChild(tr);
   });

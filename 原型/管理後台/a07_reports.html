@@ -377,7 +377,7 @@ function toggleNavGroup(ev, gid){
 <script src="../assets/_i18n.js"></script>
 <script>
 /* ================================================================
-   20260927r 報表全面重建：對齊四種合作型態／專案／多租戶會員架構
+   20260927r 報表全面重建：對齊四種合作型態／專案／會員來源標記架構
    資料源對齊：a21（4 個專案）、a20（10 家合作夥伴）、a19（組織客戶）、a02（6 個產品分類）
    五群：銷售／合作夥伴／組織客戶／教學／財務
 ================================================================ */
@@ -404,7 +404,7 @@ function showDetailModal(title, kvPairs){
 /* 報表名稱中文常數固定當內部索引用（onclick 參數／篩選比對），顯示與 toast 一律另外經 TLI_I18N.t() 轉語言 */
 var REPORT_NAME_EN = {
   '依專案':'By Project', '依合作模式':'By Cooperation Mode', '依產品分類':'By Product Category', '依市場':'By Market',
-  '夥伴業績總表':'Partner Performance Summary', '代理銷售報表':'Agent Sales Report', '經銷返傭試算':'Distributor Rebate Estimate',
+  '夥伴業績總表':'Partner Performance Summary', '代理銷售報表':'Agent Sales Report', '經銷返佣試算':'Distributor Rebate Estimate',
   '企業使用狀況':'Enterprise Usage', '專案合作使用狀況':'Project Partnership Usage',
   '教師授課統計':'Teacher Teaching Stats', '學員學習進度':'Student Learning Progress', '出席與請假':'Attendance & Leave',
   '收款彙總':'Collection Summary', '開票統計':'Invoice Stats', '應收帳齡':'Receivables Aging'
@@ -584,7 +584,7 @@ function render_partner_performance(){
   if (mode==='直營'){
     html += '<div class="note">'+TLI_I18N.t('直營是 TLI 自己經營，不是合作夥伴，本表不列示。','Direct is operated by TLI itself, not a partner, so it is not listed in this table.')+'</div>';
   } else {
-    html += tableHtml(trH([['夥伴','Partner'],['型態','Type'],['本期成交','Deals This Period'],['訂單數','Orders'],['應付佣金／返傭','Commission / Rebate Payable']]), rows.map(function(p){
+    html += tableHtml(trH([['夥伴','Partner'],['型態','Type'],['本期成交','Deals This Period'],['訂單數','Orders'],['應付佣金／返佣','Commission / Rebate Payable']]), rows.map(function(p){
       var m = TLI_MASTERS.byId('partners', p.id), from='2026-07-01', to='2026-09-30', deal, cnt, pay;
       if (p.type==='agent'){
         var os = AGENT_ORDERS.filter(function(o){ return o.pid===p.id && o.status==='已完成' && inRange(o.date,from,to); });
@@ -593,15 +593,15 @@ function render_partner_performance(){
       } else {
         var ds = DIST_ORDERS.filter(function(o){ return o.pid===p.id && inRange(o.date,from,to); });
         var tot = ds.reduce(function(a,o){ return a+o.amount; },0);
-        deal = fmtUSD(tot); cnt = ds.length; pay = TLI_I18N.t('應付返傭','Rebate Payable')+'　'+fmtUSD(Math.round(tot*Number(pickTier(m,tot).rate)/100));
+        deal = fmtUSD(tot); cnt = ds.length; pay = TLI_I18N.t('應付返佣','Rebate Payable')+'　'+fmtUSD(Math.round(tot*Number(pickTier(m,tot).rate)/100));
       }
       return [p.name, TLI_I18N.t(PARTNER_TYPE_LABEL[p.type], MODE_EN[PARTNER_TYPE_LABEL[p.type]]), deal, cnt+' '+TLI_I18N.t('筆','orders'), pay];
     }));
   }
   document.getElementById('reportContent').innerHTML = html;
 }
-/* ================= 代理銷售報表／經銷返傭試算 =================
-   夥伴名稱、型態、佣金比例（commRate）、返傭級距（rebateTiers）一律讀主檔 TLI_MASTERS.partners；
+/* ================= 代理銷售報表／經銷返佣試算 =================
+   夥伴名稱、型態、佣金比例（commRate）、返佣級距（rebateTiers）一律讀主檔 TLI_MASTERS.partners；
    識別碼讀主檔 partners.code（代理沿用夥伴端轉介碼 REF-…）。專案合作不經手金流，不列入本區任何報表。 */
 var AGENT_ORDERS = [
  {id:'ORD-2026-A301', date:'2026-07-05', pid:'p08', amount:15800, status:'已完成'},
@@ -708,7 +708,7 @@ function exportAgentReport(){
   toast(TLI_I18N.t('已匯出「代理銷售報表」報表 CSV','Exported “Agent Sales Report” as CSV'));
 }
 
-/* 返傭級距取主檔 rebateTiers：依經銷商期間內累計採購額落在哪一級距，整筆適用該級距比例，各來源標籤按金額分攤 */
+/* 返佣級距取主檔 rebateTiers：依經銷商期間內累計採購額落在哪一級距，整筆適用該級距比例，各來源標籤按金額分攤 */
 function tierNum(s){ return s==='' || s==null ? Infinity : Number(String(s).replace(/,/g,'')); }
 function pickTier(p, total){
   var tiers = p.rebateTiers || [];
@@ -748,9 +748,9 @@ function render_partner_rebate(){
     '<input type="date" id="rb_from" value="2026-07-01" onchange="updateRebateReport()"> <span class="small">～</span> <input type="date" id="rb_to" value="2026-09-30" onchange="updateRebateReport()">'+
     '<select id="rb_p" onchange="updateRebateReport()"><option value="">'+TLI_I18N.t('全部經銷商','All Distributors')+'</option>'+dists.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join('')+'</select>'+
     '<select id="rb_tag" onchange="updateRebateReport()"><option value="">'+TLI_I18N.t('全部來源標籤','All Source Tags')+'</option>'+tags.map(function(t){ return '<option>'+t+'</option>'; }).join('')+'</select>'+
-    '<select id="rb_sort" onchange="updateRebateReport()"><option value="rebate">'+TLI_I18N.t('依返傭金額','By Rebate')+'</option><option value="total">'+TLI_I18N.t('依採購額','By Purchase')+'</option><option value="name">'+TLI_I18N.t('依名稱','By Name')+'</option></select>'+
+    '<select id="rb_sort" onchange="updateRebateReport()"><option value="rebate">'+TLI_I18N.t('依返佣金額','By Rebate')+'</option><option value="total">'+TLI_I18N.t('依採購額','By Purchase')+'</option><option value="name">'+TLI_I18N.t('依名稱','By Name')+'</option></select>'+
     '<button class="btn ghost" onclick="exportRebateReport()">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('依來源標籤統計經銷商的採購額，返傭比例取經銷商期間內累計採購額所在的級距（級距取自合作夥伴管理），整筆適用該比例，各標籤按金額分攤。含待收款訂單，僅供試算，實際返傭以收款對帳為準。','Purchases are grouped by source tag. The rebate rate is the tier that the distributor’s cumulative purchases fall into (tiers from Partner Management), applied to the whole amount and allocated to tags pro rata. Includes unpaid orders; for estimation only, actual rebates follow payment reconciliation.')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
+  html += '<div class="subhint">'+TLI_I18N.t('依來源標籤統計經銷商的採購額，返佣比例取經銷商期間內累計採購額所在的級距（級距取自合作夥伴管理），整筆適用該比例，各標籤按金額分攤。含待收款訂單，僅供試算，實際返佣以收款對帳為準。','Purchases are grouped by source tag. The rebate rate is the tier that the distributor’s cumulative purchases fall into (tiers from Partner Management), applied to the whole amount and allocated to tags pro rata. Includes unpaid orders; for estimation only, actual rebates follow payment reconciliation.')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
   html += '<div class="sectiontitle">'+TLI_I18N.t('依經銷商','By Distributor')+'</div><div id="rbSum"></div>';
   html += '<div class="sectiontitle">'+TLI_I18N.t('依來源標籤','By Source Tag')+'</div><div id="rbTag"></div>';
   document.getElementById('reportContent').innerHTML = html;
@@ -761,19 +761,19 @@ function updateRebateReport(){
   var sumEl = document.getElementById('rbSum'), tagEl = document.getElementById('rbTag'); if (!sumEl) return;
   var tt=0, tr_=0, tc=0;
   d.sums.forEach(function(r){ tt+=r.total; tr_+=r.rebate; tc+=r.count; });
-  sumEl.innerHTML = tableHtml(trH([['經銷商','Distributor'],['訂單數','Orders'],['期間採購額','Purchases'],['適用級距','Tier'],['返傭比例','Rebate Rate'],['返傭金額','Rebate']]),
+  sumEl.innerHTML = tableHtml(trH([['經銷商','Distributor'],['訂單數','Orders'],['期間採購額','Purchases'],['適用級距','Tier'],['返佣比例','Rebate Rate'],['返佣金額','Rebate']]),
     d.sums.map(function(r){ return [r.p.name, r.count, fmtUSD(r.total), tierText(r.tier), r.rate+'%', fmtUSD(r.rebate)]; }),
     [TLI_I18N.t('合計','Total'), tc, fmtUSD(tt), '', '', fmtUSD(tr_)]);
   var tt2=0, tr2=0, tc2=0;
   d.tagRows.forEach(function(r){ tt2+=r.amount; tr2+=r.rebate; tc2+=r.count; });
-  tagEl.innerHTML = d.tagRows.length ? tableHtml(trH([['經銷商','Distributor'],['來源標籤','Source Tag'],['訂單數','Orders'],['採購額','Purchases'],['返傭比例','Rebate Rate'],['返傭金額','Rebate']]),
+  tagEl.innerHTML = d.tagRows.length ? tableHtml(trH([['經銷商','Distributor'],['來源標籤','Source Tag'],['訂單數','Orders'],['採購額','Purchases'],['返佣比例','Rebate Rate'],['返佣金額','Rebate']]),
     d.tagRows.map(function(r){ return [r.p.name, r.tag, r.count, fmtUSD(r.amount), r.rate+'%', fmtUSD(r.rebate)]; }),
     [TLI_I18N.t('合計','Total'),'',tc2,fmtUSD(tt2),'',fmtUSD(tr2)]) : '<div class="note">'+TLI_I18N.t('沒有符合條件的訂單。','No orders match the filters.')+'</div>';
 }
 function exportRebateReport(){
   var d = rebateData();
-  downloadCsv('經銷返傭試算', [['經銷商','來源標籤','訂單數','採購額','返傭比例','返傭金額']].concat(d.tagRows.map(function(r){ return [r.p.name,r.tag,r.count,r.amount,r.rate+'%',r.rebate]; })));
-  toast(TLI_I18N.t('已匯出「經銷返傭試算」報表 CSV','Exported “Distributor Rebate Estimate” as CSV'));
+  downloadCsv('經銷返佣試算', [['經銷商','來源標籤','訂單數','採購額','返佣比例','返佣金額']].concat(d.tagRows.map(function(r){ return [r.p.name,r.tag,r.count,r.amount,r.rate+'%',r.rebate]; })));
+  toast(TLI_I18N.t('已匯出「經銷返佣試算」報表 CSV','Exported “Distributor Rebate Estimate” as CSV'));
 }
 
 /* ================= 組織客戶群 ================= */
@@ -1108,7 +1108,7 @@ var REPORT_GROUPS = {
   partner: {label:'合作夥伴', reports:[
     {id:'partner_performance', name:'夥伴業績總表', render:render_partner_performance},
     {id:'partner_agent', name:'代理銷售報表', render:render_partner_agent},
-    {id:'partner_rebate', name:'經銷返傭試算', render:render_partner_rebate}
+    {id:'partner_rebate', name:'經銷返佣試算', render:render_partner_rebate}
   ]},
   org: {label:'組織客戶', reports:[
     {id:'org_enterprise', name:'企業使用狀況', render:render_org_enterprise},
