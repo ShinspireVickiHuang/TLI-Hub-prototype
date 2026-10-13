@@ -136,7 +136,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
   <h1 class="sth" data-en="Activate your account">開通你的帳號</h1>
   <div class="stdesc" data-en="Set a password to finish. The activation link is valid for 14 days. After you finish activation, opening the same link takes you straight to the sign-in page.">設定密碼即可完成開通。開通連結 14 天內有效，完成開通後點同一連結會直接進入登入頁。</div>
   <div class="hint" id="expNote" style="margin:-6px 0 12px;"></div>
-  <div class="callout" id="sepNote" style="display:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span data-en="This email already has a TLI account elsewhere. This activation creates a separate new account with its own password and plans. Accounts are not merged.">此 Email 在其他單位已有 TLI 帳號。這次開通會另建一個新帳號，密碼與方案各自獨立，不與原帳號合併。</span></div>
+  <div class="callout" id="sepNote" style="display:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span data-en="This email is already used by another account and cannot be activated as a project-partnership account. Ask your school contact to use a different email and resend the activation email.">此 Email 已被其他帳號使用，不能再開通為專案合作帳號。請向學校窗口改用另一個 Email 後重新發送開通信。</span></div>
   <div class="formrow"><label for="fEmail" data-en="Email (your login ID)">Email（登入帳號）</label><input id="fEmail" type="email" readonly></div>
   <div class="formrow">
     <label for="fPw"><span data-en="Password">設定密碼</span><span class="req-mark">*</span></label>
@@ -346,8 +346,9 @@ function init(){
   $('fEmail').value=R.email;
   renderCtx();
   var existing = PL.qs('member')==='1' || (R.role==='學生' && PL.isExistingMember(R.email));
-  /* 同一 Email 在其他單位已有帳號：另建一個帳號，不合併 */
+  /* Email 全系統唯一：已被其他帳號使用就不能開通，需改用另一個 Email */
   $('sepNote').style.display = existing ? 'flex' : 'none';
+  if(existing){ $('btnActivate').disabled = true; $('btnActivate').style.opacity = '.5'; $('btnActivate').style.cursor = 'not-allowed'; }
   showPane('paneNew');
   renderMeter();
 }

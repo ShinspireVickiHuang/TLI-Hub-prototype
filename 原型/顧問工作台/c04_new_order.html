@@ -1525,7 +1525,7 @@ function renderOrderLines(){
         '<option value="amount"'+(line.discountType==='amount'?' selected':'')+'>'+T('折抵金額','Deduct Amount')+'</option>'+
       '</select>'+
       (line.discountType!=='none'?'<input type="number" min="0" class="line-disc-val" value="'+(line.discountValue||0)+'" oninput="onOrderLineDiscountValueChange('+i+',this.value)">':'')+
-      '<div class="promo-note">'+T('折價券代碼（促銷機制規劃中）','Coupon code (promo mechanism in planning)')+'</div>';
+      '<div class="promo-note">'+T('折價券代碼（機制規劃中）','Coupon code (mechanism in planning)')+'</div>';
     return '<tr><td>'+line.name+'<div class="hint">'+courseSummary+'</div>'+quoteCell+'</td>'+
       '<td class="num">'+qtyCell+'</td>'+
       '<td>'+termCell+'</td>'+

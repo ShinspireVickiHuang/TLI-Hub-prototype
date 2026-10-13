@@ -77,6 +77,8 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
 .refcode-note{font-size:12px;color:var(--c-muted);margin-top:6px;}
 .refcode-toggle{font-size:13px;color:var(--c-primary,#1B4E8C);text-decoration:underline;cursor:pointer;}
 .refcode-input.invalid{border-color:#C0392B;}
+.agent-code-input{flex:1;min-width:0;}
+.agent-code-input.invalid{border-color:#C0392B;}
 
 /* 必填標示與欄位驗證 */
 .req-mark{color:#D92D20;margin-left:2px;}
@@ -280,11 +282,6 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
               <input type="email" id="loginEmail" autocomplete="username" placeholder="請輸入 Email" data-i18n-placeholder="p07_ph_email">
               <div class="field-error" id="err_loginEmail"></div>
             </div>
-            <div id="acctPickWrap" style="display:none;">
-              <div class="pick-title" data-en="This email has more than one account. Choose where to sign in.">此 Email 有多個帳號，請選擇要進入的單位</div>
-              <div id="acctPick"></div>
-              <div class="field-error" id="err_acctPick"></div>
-            </div>
             <div id="acctNote" class="acct-note" style="display:none;"></div>
             <div class="field" id="emailPwField" style="display:none;">
               <label for="loginPw" data-i18n="p07_label_password">密碼</label>
@@ -351,7 +348,7 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
             <input type="email" id="regEmail" placeholder="請輸入 Email" data-i18n-placeholder="p07_ph_email" onblur="validateEmail()">
             <div class="field-error" id="err_regEmail"></div>
             <div class="email-dup-note" id="regEmailDupNote">
-              <div data-i18n="p07_email_dup_msg">此 Email 已有帳號，請直接登入</div>
+              <div id="regEmailDupMsg">此 Email 已被使用。一個 Email 只能對應一個帳號，請改用其他 Email 註冊。</div>
               <button type="button" class="btn btn-outline btn-sm" onclick="goToLoginWithEmail()" data-i18n="p07_email_dup_gotologin">前往登入</button>
             </div>
             <div class="refcode-note" data-i18n="p07_email_helper">Email 是你的帳號，之後登入與通知都用它</div>
@@ -392,30 +389,12 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
             <label data-i18n="p07_label_nativelang">母語／介面語言</label>
             <select id="regNativeLang"></select>
           </div>
-          <div class="field" id="refCodeField">
-            <label id="refCodeLabel" data-i18n="p07_label_refcode" style="display:none">推薦代碼</label>
-            <div class="refcode-row" id="refCodeApplied" style="display:none">
-              <input type="text" id="refCodeDisplay" class="refcode-input" readonly>
-              <button type="button" class="btn btn-outline btn-sm" onclick="clearRefCode()" data-i18n="p07_refcode_clear">清除</button>
-            </div>
-            <div id="refCodeManualWrap">
-              <a href="#" class="refcode-toggle" onclick="toggleRefCodeInput('reg');return false;" data-i18n="p07_refcode_have">有推薦代碼？</a>
-              <div class="refcode-row" id="refCodeManualRow" style="display:none;margin-top:6px">
-                <input type="text" id="refCodeInput" class="refcode-input" placeholder="如：REF-SEA07" data-i18n-placeholder="p07_refcode_ph" autocomplete="off">
-                <button type="button" class="btn btn-outline btn-sm" onclick="applyRefCodeManual('reg')" data-i18n="p07_refcode_apply">套用</button>
-              </div>
-              <div class="refcode-note" id="refCodeMsg"></div>
-            </div>
-          </div>
           <div class="field" id="agentCodeField">
-            <label id="agentCodeLabel">代理優惠碼<span class="opt-mark">（選填）</span></label>
+            <label id="agentCodeLabel" for="agentCodeInput">優惠碼<span class="opt-mark">（選填）</span></label>
             <div class="refcode-row" id="agentCodeRow">
-              <input type="text" id="agentCodeInput" class="refcode-input" placeholder="如：REF-SEA07" autocomplete="off">
+              <input type="text" id="agentCodeInput" class="agent-code-input" placeholder="如：REF-SEA07" autocomplete="off">
               <button type="button" class="btn btn-outline btn-sm" id="agentCodeApplyBtn" onclick="applyAgentCode()">套用</button>
-            </div>
-            <div class="refcode-row" id="agentCodeApplied" style="display:none">
-              <input type="text" id="agentCodeDisplay" class="refcode-input" readonly>
-              <button type="button" class="btn btn-outline btn-sm" id="agentCodeClearBtn" onclick="clearAgentCode()">清除</button>
+              <button type="button" class="btn btn-outline btn-sm" id="agentCodeClearBtn" onclick="clearAgentCode()" style="display:none">清除</button>
             </div>
             <div class="refcode-note" id="agentCodeMsg"></div>
             <div class="refcode-note" id="agentSepNote" style="display:none;color:#B54708"></div>
@@ -480,20 +459,14 @@ main{max-width:1120px;margin:0 auto;padding:44px 20px 60px;display:flex;justify-
             </select>
             <div class="field-error" id="err_regGoalSocial"></div>
           </div>
-          <div class="field" id="refCodeFieldSocial">
-            <label id="refCodeLabelSocial" data-i18n="p07_label_refcode" style="display:none">推薦代碼</label>
-            <div class="refcode-row" id="refCodeAppliedSocial" style="display:none">
-              <input type="text" id="refCodeDisplaySocial" class="refcode-input" readonly>
-              <button type="button" class="btn btn-outline btn-sm" onclick="clearRefCode()" data-i18n="p07_refcode_clear">清除</button>
+          <div class="field" id="agentCodeFieldSocial">
+            <label id="agentCodeLabelSocial" for="agentCodeInputSocial">優惠碼<span class="opt-mark">（選填）</span></label>
+            <div class="refcode-row">
+              <input type="text" id="agentCodeInputSocial" class="agent-code-input" placeholder="如：REF-SEA07" autocomplete="off">
+              <button type="button" class="btn btn-outline btn-sm" id="agentCodeApplyBtnSocial" onclick="agSocialApply()">套用</button>
+              <button type="button" class="btn btn-outline btn-sm" id="agentCodeClearBtnSocial" onclick="clearAgentCode()" style="display:none">清除</button>
             </div>
-            <div id="refCodeManualWrapSocial">
-              <a href="#" class="refcode-toggle" onclick="toggleRefCodeInput('social');return false;" data-i18n="p07_refcode_have">有推薦代碼？</a>
-              <div class="refcode-row" id="refCodeManualRowSocial" style="display:none;margin-top:6px">
-                <input type="text" id="refCodeInputSocial" class="refcode-input" placeholder="如：REF-SEA07" data-i18n-placeholder="p07_refcode_ph" autocomplete="off">
-                <button type="button" class="btn btn-outline btn-sm" onclick="applyRefCodeManual('social')" data-i18n="p07_refcode_apply">套用</button>
-              </div>
-              <div class="refcode-note" id="refCodeMsgSocial"></div>
-            </div>
+            <div class="refcode-note" id="agentCodeMsgSocial"></div>
           </div>
           <div class="field field-checkbox">
             <label class="checkbox-label">
@@ -601,71 +574,13 @@ try{
   var __refParam = new URLSearchParams(window.location.search).get('ref');
   if(__refParam) referralCode = __refParam.trim().toUpperCase();
 }catch(e){}
-var REFERRAL_AGENT_NAME = '環宇教育顧問（東南亞地區）';  /* 帶碼進來時會依名冊覆寫 */
+var REFERRAL_AGENT_NAME = '';  /* 帶碼進來時依主檔覆寫 */
 
-/* 代理商名冊：與 p12_referral.html 同一份示範資料。
-   帶 ?ref= 進來時直接套用並唯讀顯示；沒帶的人可用「有推薦代碼？」自己輸入。
-   兩個註冊表單（Email／社群）共用同一個 referralCode 狀態，套用一邊另一邊同步。 */
-var AGENT_DIRECTORY = {
-  'REF-SEA07': '環宇教育顧問（東南亞地區）',
-  'REF-JP10': '環宇教育顧問（日本地區）',
-  'REF-US12': '範例語言顧問（歐美地區）'
-};
-function agentNameFor(code){ return AGENT_DIRECTORY[(code||'').trim().toUpperCase()] || null; }
-function refSfx(which){ return which === 'social' ? 'Social' : ''; }
-function updateRefCodeUiOne(sfx){
-  var field = document.getElementById('refCodeField' + sfx);
-  if(!field) return;
-  var label = document.getElementById('refCodeLabel' + sfx);
-  var applied = document.getElementById('refCodeApplied' + sfx);
-  var manual = document.getElementById('refCodeManualWrap' + sfx);
-  if(referralCode){
-    document.getElementById('refCodeDisplay' + sfx).value =
-      '推薦代碼：' + referralCode + '（由 ' + (agentNameFor(referralCode) || REFERRAL_AGENT_NAME) + ' 推薦）';
-    label.style.display = ''; applied.style.display = 'flex'; manual.style.display = 'none';
-  } else {
-    label.style.display = 'none'; applied.style.display = 'none'; manual.style.display = '';
-    var row = document.getElementById('refCodeManualRow' + sfx);
-    var inp = document.getElementById('refCodeInput' + sfx);
-    var msg = document.getElementById('refCodeMsg' + sfx);
-    if(row) row.style.display = 'none';
-    if(inp){ inp.value = ''; inp.classList.remove('invalid'); }
-    if(msg) msg.textContent = '';
-  }
-  field.style.display = 'block';
-}
-function updateRefCodeUi(){ updateRefCodeUiOne(''); updateRefCodeUiOne('Social'); }
-function toggleRefCodeInput(which){
-  var sfx = refSfx(which);
-  var row = document.getElementById('refCodeManualRow' + sfx);
-  if(!row) return;
-  var opened = row.style.display !== 'none';
-  row.style.display = opened ? 'none' : 'flex';
-  if(!opened){ document.getElementById('refCodeInput' + sfx).focus(); }
-}
-function applyRefCodeManual(which){
-  var sfx = refSfx(which);
-  var inp = document.getElementById('refCodeInput' + sfx);
-  var msg = document.getElementById('refCodeMsg' + sfx);
-  var code = (inp.value || '').trim().toUpperCase();
-  if(!code){ msg.textContent = '請先輸入推薦代碼'; inp.classList.add('invalid'); return; }
-  var name = agentNameFor(code);
-  if(!name){ msg.textContent = '查不到這組推薦代碼，請向推薦人確認後再輸入'; inp.classList.add('invalid'); return; }
-  inp.classList.remove('invalid'); msg.textContent = '';
-  referralCode = code; REFERRAL_AGENT_NAME = name;
-  updateRefCodeUi();
-  showToast('已套用推薦代碼：' + code + '（' + name + '）');
-}
-function clearRefCode(){
-  referralCode = null;
-  updateRefCodeUi();
-  showToast('已清除推薦代碼，將以一般會員身分註冊');
-}
-
+/* 兩個註冊表單（Email／社群）各有一個優惠碼欄，共用 AG.unit 與 referralCode 狀態，代碼以 _shared_masters.js 主檔驗證（見下方 20261013 區塊） */
 /* ===================== 轉介歸屬橋接（承接代理商轉介連結帶入的 ?ref= 參數，比照 p10→c08 的 localStorage 橋接做法）=====================
-   示範用：本頁沒有真正後端，註冊成功且當下帶有推薦碼時，把這筆歸屬寫入 localStorage，
+   示範用：本頁沒有真正後端，註冊成功且當下帶有優惠碼時，把這筆歸屬寫入 localStorage，
    讓「管理後台 → 合作夥伴管理 → 名單歸屬檢視」(a20_agents.html) 能讀到同一筆歸屬並示範串接。
-   本頁只存轉介碼本身，不需要知道代理商全名，由 a20 端依轉介碼查表轉換成代理商名稱。
+   本頁只存優惠碼本身，不需要知道代理商全名，由 a20 端依優惠碼查表轉換成代理商名稱。
    直接開啟本頁（無 ?ref=）不寫入任何歸屬資料。正式版改由後端 API 寫入中台資料庫，本段橋接邏輯屆時移除。 */
 var TLI_REF_ATTR_KEY = 'tliDemoReferralAttributions';
 function pushReferralAttribution(name, email, refCode){
@@ -764,7 +679,6 @@ function switchTab(name){
   /* 離開註冊分頁時一併收起「補齊必要資訊」步驟，回到一般 Email 註冊表單 */
   document.getElementById('panelSocialComplete').classList.remove('active');
   document.getElementById('panelSocialComplete').style.display = 'none';
-  if(showRegisterForm) updateRefCodeUi();
 }
 /* 登入／註冊共用的成功流程；isRegisterFlow 用來區分導向規則（見 showAuthSuccess 內註解） */
 function fakeLogin(e){
@@ -787,8 +701,8 @@ function showAuthSuccess(e, isRegisterFlow){
   if(!isTeacher){
     try{ sessionStorage.setItem('tliLoggedIn', '1'); }catch(err){}
   }
-  if(isRegisterFlow && AG && AG.unit && pendingRegistrant && pendingRegistrant.src==='email'){ agCreateAccount(pendingRegistrant); }
-  /* 註冊流程且當下帶有推薦碼時，寫入轉介歸屬橋接資料（見 pushReferralAttribution 說明） */
+  if(isRegisterFlow && AG && AG.unit && pendingRegistrant && (pendingRegistrant.src==='email' || pendingRegistrant.src==='social')){ agCreateAccount(pendingRegistrant); }
+  /* 註冊流程且當下帶有優惠碼時，寫入轉介歸屬橋接資料（見 pushReferralAttribution 說明） */
   if(isRegisterFlow && referralCode && pendingRegistrant){
     pushReferralAttribution(pendingRegistrant.name, pendingRegistrant.email, referralCode);
     pendingRegistrant = null;
@@ -796,23 +710,23 @@ function showAuthSuccess(e, isRegisterFlow){
   if(isTeacher){
     successLink.href = '../教師端/t01_today.html';
   } else if(nextParam && isSafeNextUrl(nextParam)){
-    /* next 優先於 ref／new 規則：有帶推薦碼時仍附加在 next 網址上，讓轉介歸屬延續 */
+    /* next 優先於 ref／new 規則：有帶優惠碼時仍附加在 next 網址上，讓轉介歸屬延續 */
     var nextHref = nextParam;
     if(referralCode){
       nextHref += (nextHref.indexOf('?') > -1 ? '&' : '?') + 'ref=' + encodeURIComponent(referralCode);
     }
     successLink.href = nextHref;
   } else if(referralCode){
-    /* 有推薦碼時，帶著實際讀到的 ref 值導向會員區結帳頁，讓轉介歸屬自動延續（登入與註冊皆同） */
+    /* 有優惠碼時，帶著實際讀到的 ref 值導向會員區結帳頁，讓轉介歸屬自動延續（登入與註冊皆同） */
     successLink.href = '../會員區/m13_checkout.html?ref=' + encodeURIComponent(referralCode);
   } else if(isRegisterFlow){
-    /* 一般註冊成功、無推薦碼時，導向新學員空狀態首頁（m01_home.html?new=1，該畫面由其他同事製作中）；
+    /* 一般註冊成功、無優惠碼時，導向新學員空狀態首頁（m01_home.html?new=1，該畫面由其他同事製作中）；
        登入（既有會員）成功則維持進一般會員首頁，不帶 new=1。機構學生走 p11，不經過本頁。 */
     successLink.href = '../會員區/m01_home.html?new=1';
   } else {
     successLink.href = '../會員區/m01_home.html';
   }
-  /* 20261013：以帳號登入者，導向一律帶 ?acct=帳號id（經銷帳號與一般學員同一個入口 m01_home） */
+  /* 20261013：以帳號登入者，導向一律帶 ?acct=帳號id（啟用後各來源帳號都導向 m01_home） */
   if(!isTeacher && !isRegisterFlow && window.TLI_ACCT){
     var h=successLink.getAttribute('href'); successLink.setAttribute('href', h+(h.indexOf('?')>-1?'&':'?')+'acct='+encodeURIComponent(window.TLI_ACCT));
   }
@@ -928,17 +842,29 @@ function validateRequiredCheckbox(inputId, errId){
   fieldClearError(errId); return true;
 }
 function validateName(){ return validateRequiredText('regName','err_regName'); }
+/* Email 全系統唯一：主檔任何帳號用過（或示範已用 Email）都算已被使用 */
+function emailTaken(v){
+  v = String(v||'').trim().toLowerCase();
+  return v === DEMO_TAKEN_EMAIL || (window.TLI_MASTERS && TLI_MASTERS.accountsByEmail(v).length > 0);
+}
+function dupText(){
+  return (window.AG && AG.unit)
+    ? T('此 Email 已被其他帳號使用。已有帳號者需用另一個 Email 另建代理帳號，請改用其他 Email。',{en:'This email is already used by another account. To create an agent account you need a different email. Please use another email.'})
+    : T('此 Email 已被使用。一個 Email 只能對應一個帳號，請改用其他 Email 註冊。',{en:'This email is already in use. One email can belong to only one account. Please register with another email.'});
+}
 function validateEmail(){
   var input = document.getElementById('regEmail');
   var dup = document.getElementById('regEmailDupNote');
+  var dupMsg = document.getElementById('regEmailDupMsg');
   var v = input.value.trim();
   dup.classList.remove('show');
   if(!v){ fieldSetError('err_regEmail','p07_err_required'); markInvalid(input,true); return false; }
   if(!EMAIL_RE.test(v)){ fieldSetError('err_regEmail','p07_err_email_format'); markInvalid(input,true); return false; }
-  if(v.toLowerCase() === DEMO_TAKEN_EMAIL){
-    /* Email 為帳號主鍵：示範一組已被使用的 Email，導引直接去登入而非重複註冊 */
+  if(emailTaken(v)){
+    /* Email 全系統唯一：已被任何帳號使用就擋下，提示改用其他 Email */
     fieldClearError('err_regEmail');
     markInvalid(input,true);
+    dupMsg.textContent = dupText();
     dup.classList.add('show');
     return false;
   }
@@ -1004,6 +930,7 @@ function submitRegister(e){
     {input:'regName', fn:validateName},
     {input:'regEmail', fn:validateEmail},
     {input:'regEmail', fn:function(){ if(agDuplicate()){ agSepNoteUpdate(); return false; } return true; }},
+    {input:'agentCodeInput', fn:function(){ var v = agEl('agentCodeInput').value.trim(); if(v && !AG.unit){ applyAgentCode(); return false; } return true; }},
     {input:'regPhone', fn:validatePhone},
     {input:'regPassword', fn:validatePassword},
     {input:'regTimezone', fn:validateTimezone},
@@ -1015,9 +942,10 @@ function submitSocialRegister(e){
   e.preventDefault();
   pendingRegistrant = {
     name: document.getElementById('socialName').value.trim(),
-    email: document.getElementById('socialEmail').value.trim()
+    email: document.getElementById('socialEmail').value.trim(), src:'social'
   };
   return runChecksAndSubmit([
+    {input:'agentCodeInputSocial', fn:function(){ var v = agEl('agentCodeInputSocial').value.trim(); if(v && !AG.unit){ agSocialApply(); return false; } return true; }},
     {input:'regPhoneSocial', fn:validatePhoneSocial},
     {input:'regTimezoneSocial', fn:validateTimezoneSocial},
     {input:'regGoalSocial', fn:validateGoalSocial},
@@ -1212,13 +1140,6 @@ function activateUrl(a,viaOrg){
   if(viaOrg){ var o=TLI_MASTERS.orgCustomers.filter(function(x){ return x.id===a.orgId; })[0]; return 'p13_activate.html?org='+encodeURIComponent(o?o.code:'')+'&emp='+encodeURIComponent(a.employeeNo); }
   return 'p13_activate.html?email='+encodeURIComponent(a.email);
 }
-function renderPick(){
-  var box=lgId('acctPick'); if(!box) return;
-  box.innerHTML = LG.accts.map(function(a){
-    return '<label class="acct-card'+(LG.chosen===a.id?' sel':'')+'"><input type="radio" name="acctSel" value="'+a.id+'"'+(LG.chosen===a.id?' checked':'')+'><span><span class="an">'+lgEsc(unitLabel(a))+(isActive(a)?'':'<span class="tag">'+lgEsc(T('尚未啟用',{en:'Not activated'}))+'</span>')+'</span><br><span class="as">'+lgEsc(sourceLabel(a))+'</span></span></label>';
-  }).join('');
-  box.querySelectorAll('input').forEach(function(r){ r.addEventListener('change',function(){ LG.chosen=r.value; lgErr('err_acctPick',''); pickChanged(); }); });
-}
 function showNotActivated(a,viaOrg,noteId){
   var n=lgId(noteId);
   n.innerHTML = lgEsc(T('這個帳號尚未啟用，請先用啟用碼或啟用信完成開通。',{en:'This account is not activated yet. Activate it with your activation code or email first.'}))+' <a href="'+activateUrl(a,viaOrg)+'">'+lgEsc(T('前往帳號開通',{en:'Go to activation'}))+'</a>';
@@ -1230,13 +1151,12 @@ function pickChanged(){
   if(!a) return;
   if(!isActive(a)){ lgId('emailPwField').style.display='none'; showNotActivated(a,false,'acctNote'); }
   else { lgId('emailPwField').style.display='block'; try{ lgId('loginPw').focus(); }catch(e){} }
-  renderPick();
 }
 function setBtn(zh,en){ var b=lgId('emailBtnText'); b.textContent=T(zh,{en:en}); b.setAttribute('data-en',en); b.dataset.zh=zh; }
 function resetEmailLogin(){
   LG.accts=[]; LG.chosen=''; LG.step='email';
   lgId('loginEmail').readOnly=false; lgId('loginPw').value='';
-  ['acctPickWrap','acctNote','emailPwField','emailHelper'].forEach(function(i){ lgId(i).style.display='none'; });
+  ['acctNote','emailPwField','emailHelper'].forEach(function(i){ lgId(i).style.display='none'; });
   setBtn('繼續','Continue');
   lgErr('err_loginEmail',''); lgErr('err_loginPw','');
 }
@@ -1255,15 +1175,13 @@ function emailSubmit(e){
     var list=TLI_MASTERS.accountsByEmail(v);
     if(!list.length){ lgErr('err_loginEmail',T('找不到這個 Email 的帳號。如果你是企業員工且名單上沒有 Email，請改用「企業代碼登入」；還沒有帳號請先註冊。',{en:'No account found for this email. Company employees without an email on the roster should use company code sign-in. Otherwise, register first.'})); return false; }
     LG.accts=list; lgId('loginEmail').readOnly=true; lgId('emailHelper').style.display='block'; LG.step='pw'; setBtn('登入','Sign in');
-    if(list.length>1){ LG.chosen=''; lgId('acctPickWrap').style.display='block'; renderPick(); }
-    else { LG.chosen=list[0].id; pickChanged(); }
+    LG.chosen=list[0].id; pickChanged();
     return false;
   }
   if(authRole==='teacher'){
     if(!lgId('loginPw').value){ lgErr('err_loginPw',T('請輸入密碼',{en:'Enter your password'})); return false; }
     return showAuthSuccess(null,false);
   }
-  if(!LG.chosen){ lgErr('err_acctPick',T('請先選擇要進入的單位',{en:'Choose an account first'})); return false; }
   var a=LG.accts.filter(function(x){ return x.id===LG.chosen; })[0];
   if(!isActive(a)){ showNotActivated(a,false,'acctNote'); return false; }
   if(!lgId('loginPw').value){ lgErr('err_loginPw',T('請輸入密碼',{en:'Enter your password'})); return false; }
@@ -1288,50 +1206,80 @@ function orgSubmit(e){
   var q=new URLSearchParams(location.search);
   if(q.get('org')||q.get('emp')){ setLoginMode('org'); if(q.get('org')) lgId('orgCode').value=q.get('org'); if(q.get('emp')) lgId('empNo').value=q.get('emp'); }
 }catch(e){} })();
-if(window.TLI_I18N) TLI_I18N.onRefresh(function(){ renderPick(); });
 
-/* ===================== 20261013 代理來源帳號：註冊時輸入代理優惠碼（契約第 5 節） =====================
+/* ===================== 20261013 代理來源帳號：註冊時輸入優惠碼（契約第 5 節） =====================
    優惠碼＝主檔 partners 內代理（type 'agent'）的 code；有效碼建立 sourceType 'agent'、sourceUnitId＝該代理的帳號。
-   已有其他來源帳號的 Email 也可註冊：另建一個代理來源帳號，密碼與方案各自獨立。同一代理內同 Email 才擋。 */
+   Email 全系統唯一：已有帳號者要另建代理來源帳號，需改用另一個 Email；Email 已被任何帳號使用就擋下。 */
 var AG = { unit:null };
 function agT(zh,en){ return T(zh,{en:en}); }
 function agEl(i){ return document.getElementById(i); }
+function agSyncRef(){
+  /* 單一優惠碼欄的狀態同步到橋接用的 referralCode（結帳連結、名單歸屬），社群註冊區塊一併更新 */
+  referralCode = AG.unit ? AG.unit.code : null;
+  if(AG.unit) REFERRAL_AGENT_NAME = AG.unit.name;
+}
 function agRender(){
   if(!agEl('agentCodeLabel')) return;
-  agEl('agentCodeLabel').innerHTML = lgEsc(agT('代理優惠碼','Agent promo code')) + ' <span class="opt-mark">' + lgEsc(agT('（選填）','(optional)')) + '</span>';
+  agEl('agentCodeLabel').innerHTML = lgEsc(agT('優惠碼','Promo code')) + ' <span class="opt-mark">' + lgEsc(agT('（選填）','(optional)')) + '</span>';
   agEl('agentCodeApplyBtn').textContent = agT('套用','Apply');
   agEl('agentCodeClearBtn').textContent = agT('清除','Clear');
   agEl('agentCodeInput').placeholder = agT('如：REF-SEA07','e.g. REF-SEA07');
+  var inp = agEl('agentCodeInput'), msg = agEl('agentCodeMsg');
   if(AG.unit){
-    agEl('agentCodeDisplay').value = agT('透過 '+AG.unit.name+' 代理註冊（代理優惠碼 '+AG.unit.code+'）','Registering via agent '+AG.unit.name+' (promo code '+AG.unit.code+')');
-    agEl('agentCodeRow').style.display='none'; agEl('agentCodeApplied').style.display='flex';
-  } else { agEl('agentCodeRow').style.display='flex'; agEl('agentCodeApplied').style.display='none'; }
+    if(inp.value.trim().toUpperCase() !== AG.unit.code.toUpperCase()) inp.value = AG.unit.code;
+    inp.classList.remove('invalid');
+    msg.style.color = 'var(--c-primary)';
+    msg.dataset.applied = '1';
+    msg.textContent = agT('透過 '+AG.unit.name+' 代理註冊（優惠碼 '+AG.unit.code+'）','Registering via agent '+AG.unit.name+' (promo code '+AG.unit.code+')');
+  } else if(msg.dataset.applied === '1'){
+    msg.dataset.applied = ''; msg.textContent = ''; msg.style.color = '';
+  }
+  agEl('agentCodeClearBtn').style.display = (AG.unit || inp.value.trim()) ? '' : 'none';
+  agRenderSocial(inp, msg);
   agSepNoteUpdate();
 }
+function agRenderSocial(inp, msg){
+  var si = agEl('agentCodeInputSocial'); if(!si) return;
+  agEl('agentCodeLabelSocial').innerHTML = lgEsc(agT('優惠碼','Promo code')) + ' <span class="opt-mark">' + lgEsc(agT('（選填）','(optional)')) + '</span>';
+  agEl('agentCodeApplyBtnSocial').textContent = agT('套用','Apply');
+  agEl('agentCodeClearBtnSocial').textContent = agT('清除','Clear');
+  si.placeholder = agT('如：REF-SEA07','e.g. REF-SEA07');
+  si.value = inp.value;
+  si.classList.toggle('invalid', inp.classList.contains('invalid'));
+  var sm = agEl('agentCodeMsgSocial'); sm.textContent = msg.textContent; sm.style.color = msg.style.color;
+  agEl('agentCodeClearBtnSocial').style.display = (AG.unit || si.value.trim()) ? '' : 'none';
+}
+function agSocialApply(){ agEl('agentCodeInput').value = agEl('agentCodeInputSocial').value; applyAgentCode(); }
 function agSepNoteUpdate(){
-  var box = agEl('agentSepNote'); if(!box) return;
-  var email = (agEl('regEmail').value||'').trim(), msg = '';
-  if(AG.unit && email && window.TLI_MASTERS){
-    var list = TLI_MASTERS.accountsByEmail(email);
-    if(list.some(function(a){ return !a.orgId && a.sourceType==='agent' && a.sourceUnitId===AG.unit.id; })) msg = agT('此 Email 在 '+AG.unit.name+' 已有代理來源帳號，請直接登入。','This email already has an account with '+AG.unit.name+'. Please sign in instead.');
-    else if(list.length) msg = agT('此 Email 已有其他來源帳號，將另建一個代理來源帳號，密碼與方案各自獨立。','This email already has an account from another source. A separate agent-source account will be created; password and plans are independent.');
-  }
-  box.textContent = msg; box.style.display = msg ? 'block' : 'none';
+  /* 套用或清除優惠碼後，已顯示的「Email 已被使用」提示文字跟著換成對應說法 */
+  var box = agEl('agentSepNote'); if(box) box.style.display = 'none';
+  var dup = agEl('regEmailDupNote'), m = agEl('regEmailDupMsg');
+  if(dup && m && dup.classList.contains('show')) m.textContent = dupText();
 }
 function agDuplicate(){
   if(!AG.unit) return false;
-  var email = (agEl('regEmail').value||'').trim();
-  return TLI_MASTERS.accountsByEmail(email).some(function(a){ return !a.orgId && a.sourceType==='agent' && a.sourceUnitId===AG.unit.id; });
+  return emailTaken((agEl('regEmail').value||'').trim());
 }
 function applyAgentCode(){
   var inp = agEl('agentCodeInput'), msg = agEl('agentCodeMsg'), code = (inp.value||'').trim().toUpperCase();
-  if(!code){ msg.textContent = agT('請先輸入代理優惠碼','Enter an agent promo code first'); inp.classList.add('invalid'); return; }
+  msg.dataset.applied = ''; msg.style.color = '#C0392B';
+  if(!code){ msg.textContent = agT('請先輸入優惠碼','Enter a promo code first'); inp.classList.add('invalid'); return false; }
   var u = TLI_MASTERS.agentByCode(code);
-  if(!u){ msg.textContent = agT('查不到這組代理優惠碼，或該代理合約已停用，請向代理確認後再輸入。','This agent promo code was not found or the agent is inactive. Please check with your agent.'); inp.classList.add('invalid'); return; }
-  inp.classList.remove('invalid'); msg.textContent=''; AG.unit = u; agRender();
-  showToast(agT('已套用代理優惠碼：'+u.code+'（'+u.name+'）','Agent promo code applied: '+u.code+' ('+u.name+')'));
+  if(!u){ AG.unit = null; msg.textContent = agT('查不到這組優惠碼，或該代理合約已停用，請向代理確認後再輸入。','This promo code was not found or the agent is inactive. Please check with your agent.'); inp.classList.add('invalid'); agSyncRef(); agRender(); return false; }
+  inp.classList.remove('invalid'); msg.textContent=''; AG.unit = u; agSyncRef(); agRender();
+  showToast(agT('已套用優惠碼：'+u.code+'（'+u.name+'）','Promo code applied: '+u.code+' ('+u.name+')'));
+  return true;
 }
-function clearAgentCode(){ AG.unit = null; agEl('agentCodeInput').value=''; agEl('agentCodeMsg').textContent=''; agRender(); showToast(agT('已清除代理優惠碼','Agent promo code cleared')); }
+function clearAgentCode(){ AG.unit = null; var inp = agEl('agentCodeInput'); inp.value=''; inp.classList.remove('invalid'); var m = agEl('agentCodeMsg'); m.textContent=''; m.dataset.applied=''; m.style.color=''; agSyncRef(); agRender(); showToast(agT('已清除優惠碼','Promo code cleared')); }
+/* 學員自行輸入或修改時，即時比對代理碼；比對不到就視為未套用 */
+function agOnInput(){
+  var inp = agEl('agentCodeInput'), msg = agEl('agentCodeMsg');
+  inp.classList.remove('invalid');
+  var u = TLI_MASTERS.agentByCode(inp.value);
+  if(u){ AG.unit = u; }
+  else { AG.unit = null; msg.dataset.applied = ''; msg.textContent = ''; msg.style.color = ''; }
+  agSyncRef(); agRender();
+}
 /* 註冊成功後建立帳號（示範：寫進主檔 memberAccounts，a01 會員管理讀同一份） */
 function agCreateAccount(reg){
   var M = TLI_MASTERS, mx = 0;
@@ -1350,6 +1298,18 @@ function agCreateAccount(reg){
     var u = TLI_MASTERS.agentById(ag) || TLI_MASTERS.agentByCode(ag);
     if(u){ agEl('agentCodeInput').value = u.code; AG.unit = u; }
   }
+  /* 網址 ?ref= 預先帶入同一個優惠碼欄；代理碼有效就直接套用，學員仍可修改 */
+  if(!AG.unit && referralCode){
+    var ru = TLI_MASTERS.agentByCode(referralCode);
+    agEl('agentCodeInput').value = referralCode;
+    if(ru){ AG.unit = ru; }
+    else {
+      agEl('agentCodeInput').classList.add('invalid');
+      agEl('agentCodeMsg').style.color = '#C0392B';
+      agEl('agentCodeMsg').textContent = agT('查不到這組優惠碼，或該代理合約已停用，請向代理確認後再輸入。','This promo code was not found or the agent is inactive. Please check with your agent.');
+    }
+  }
+  if(AG.unit) agSyncRef();
   if(q.get('mode')==='register'){
     switchTab('register');
     if(q.get('email')) agEl('regEmail').value = q.get('email');
@@ -1357,6 +1317,9 @@ function agCreateAccount(reg){
   agRender();
   agEl('regEmail').addEventListener('input', agSepNoteUpdate);
   agEl('regEmail').addEventListener('blur', agSepNoteUpdate);
+  agEl('agentCodeInput').addEventListener('input', agOnInput);
+  agEl('agentCodeInputSocial').addEventListener('input', function(){ agEl('agentCodeInput').value = this.value; agOnInput(); });
+  agEl('agentCodeInputSocial').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); agSocialApply(); } });
   agEl('agentCodeInput').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); applyAgentCode(); } });
   if(window.TLI_I18N) TLI_I18N.onRefresh(agRender);
 }catch(e){ if(window.console) console.warn(e); } })();

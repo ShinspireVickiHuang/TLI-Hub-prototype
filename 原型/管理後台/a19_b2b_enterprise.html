@@ -621,15 +621,15 @@ function makeContractHistory(i, currentPlanName, currentDiscountRate, currentSta
   versions.push({version:'v'+(histCount+1)+'.0', effectiveDate:currentStart, planSummary: currentPlanName+'／折扣 '+currentDiscountRate+'%', status:'生效中'});
   return versions;
 }
-/* 代理商型專屬資料（v2 新增：轉介碼、名單歸屬規則、結算週期，示範畫面） */
+/* 代理商型專屬資料（v2 新增：優惠碼、名單歸屬規則、結算週期，示範畫面） */
 function makeAgentInfo(i){
   var r = seededRand(i*457+263);
   /* i===1（環宇教育顧問（東南亞地區）」）需與 a20 合作夥伴管理／夥伴端 r01 的示範代理商資料對齊，
-     固定使用同一組轉介碼 REF-SEA07，確保跨頁資料一致；其餘索引沿用原本的流水號規則 */
+     固定使用同一組優惠碼 REF-SEA07，確保跨頁資料一致；其餘索引沿用原本的流水號規則 */
   var referralCode = (i===1) ? 'REF-SEA07' : 'REF-'+padNum(i+1,5);
   return {
     referralCode: referralCode,
-    attributionRule: '以轉介碼綁定成交名單（歸屬有效期由 TLI 拍板，待定）',
+    attributionRule: '以優惠碼綁定成交名單（歸屬有效期由 TLI 拍板，待定）',
     commissionRate: '', // 佣金比例待定，由 TLI 拍板
     settlementCycle: r > 0.5 ? '月結' : '季結'
   };
@@ -1992,7 +1992,7 @@ function renderContractDetail(e, c){
 function renderAgentInfoTab(e){
   var info = e.agentInfo;
   var out = '<div class="card" style="margin-top:10px">' +
-   '<div class="kv"><span>'+i18nT('轉介碼','Referral Code')+'</span><span>'+info.referralCode+'</span></div>' +
+   '<div class="kv"><span>'+i18nT('優惠碼','Promo Code')+'</span><span>'+info.referralCode+'</span></div>' +
    '<div class="kv"><span>'+i18nT('名單歸屬規則','Lead Attribution Rule')+'</span><span>'+info.attributionRule+'</span></div>' +
    '<div class="kv"><span>'+i18nT('佣金比例','Commission Rate')+'</span><span class="small">'+i18nT('待定','TBD')+'</span></div>' +
    '<div class="formrow" style="margin-top:10px"><label>'+i18nT('結算週期','Settlement Cycle')+'</label><select onchange="onAgentSettlementChange(this.value)">' +

@@ -15,7 +15,7 @@
   var OPEN_KEY = 'tliLoungeOpened_v1';             /* 中心教師開設的團體場次（直營）；專案合作場次由 TLI 中心教師帶，一階段 A 由新達於資料庫設定 */
   var FRESH_KEY = 'tliPLFreshActivated_v1';       /* 由開通頁剛啟用、尚無學習紀錄的名單 id */
   var SS_KEY = 'tliPLSession_v1';
-  var EXISTING_MEMBERS = ['m.lopez@students.sample-u.example']; /* 已有 TLI 帳號的 Email（仍另建專案合作帳號，不合併） */
+  var EXISTING_MEMBERS = ['m.lopez@students.sample-u.example']; /* 已有 TLI 帳號的 Email（Email 全系統唯一，不能再開通專案合作帳號） */
 
   function T(zh, en) { return g.TLI_I18N ? g.TLI_I18N.t(zh, en) : zh; }
 

@@ -454,7 +454,7 @@ function openPkgDetail(id){
       '<button class="active" onclick="pkgTab(this,\'basic\')" data-i18n="tab.pkgBasic">基本資料</button>' +
       '<button onclick="pkgTab(this,\'items\')" data-i18n="tab.pkgItems">組成課程</button>' +
       '<button onclick="pkgTab(this,\'priceaud\')" data-i18n="tab.pkgPrice">定價</button>' +
-      '<button onclick="pkgTab(this,\'discount\')" data-i18n="tab.pkgDiscount">折扣與折扣碼</button>' +
+      '<button onclick="pkgTab(this,\'discount\')" data-i18n="tab.pkgDiscount">折扣與折價券</button>' +
       '<button onclick="pkgTab(this,\'period\')" data-i18n="tab.pkgPeriod">銷售期間與渠道</button>' +
       '<button onclick="pkgTab(this,\'onoff\'); renderPkgOnOffPanel(pkgById(\''+p.id+'\'))" data-i18n="tab.pkgOnOff">上下架</button>' +
     '</div>' +
@@ -727,7 +727,7 @@ function renderPkgPriceAudPanel(p){
     (chatCapHtml ? '<div class="card"><h3 style="margin-top:0" data-i18n="h3.creditRule">堂數規則</h3>'+chatCapHtml+'</div>' : '');
 
   var priceHint = '<div class="hint" style="margin-top:8px">' +
-    '<span data-i18n="hint.pricingMechanismA">一個方案一個售價，會員類別不影響價格；差異定價一律走既有機制——一般折扣請至本頁「折扣與折扣碼」分頁設定，經銷走</span>' +
+    '<span data-i18n="hint.pricingMechanismA">一個方案一個售價，會員類別不影響價格；差異定價一律走既有機制——一般折扣請至本頁「折扣與折價券」分頁設定，經銷走</span>' +
     '<a href="a21_projects.html" data-i18n="nav.a21">專案設定</a>' +
     '<span data-i18n="hint.pricingMechanismB">的專案折讓價，企業走</span>' +
     '<a href="a19_b2b_enterprise.html" data-i18n="nav.a19">組織客戶</a>' +
@@ -794,7 +794,7 @@ function renderPkgDiscountPanel(p){
       '<td>'+discKindLabel(r.kind)+'</td>' +
       '<td>'+discValueSummary(r)+'</td>' +
       '<td class="small">'+(r.periodStart&&r.periodEnd?(r.periodStart+' ～ '+r.periodEnd):TLI_I18N.t('不限','Unlimited'))+'</td>' +
-      '<td>'+(r.stackable?'<span class="badge grey">'+TLI_I18N.t('可疊加折扣碼','Stackable with Promo Code')+'</span>':'<span class="badge grey">'+TLI_I18N.t('不可疊加','Not Stackable')+'</span>')+'</td>' +
+      '<td>'+(r.stackable?'<span class="badge grey">'+TLI_I18N.t('可疊加折價券','Stackable with Coupon')+'</span>':'<span class="badge grey">'+TLI_I18N.t('不可疊加','Not Stackable')+'</span>')+'</td>' +
       '<td>'+statusBadge(r.status)+'</td></tr>';
   }).join('');
   var ruleTable = '<div class="tablewrap"><table>' +
@@ -813,8 +813,8 @@ function renderPkgDiscountPanel(p){
       '<td>'+statusBadge(c.status)+'</td></tr>';
   }).join('');
   var codeTable = '<div class="tablewrap"><table>' +
-    '<tr><th data-i18n="col.promoCode">代碼</th><th data-i18n="col.discount">折扣</th><th data-i18n="col.applicablePlans">適用方案</th><th data-i18n="col.period">期間</th><th data-i18n="col.usageStatus">使用狀況</th><th data-i18n="common.status">狀態</th></tr>' +
-    (p.promoCodes.length ? codeRows : '<tr><td colspan="6" class="small" style="white-space:normal;padding:16px 12px" data-i18n="empty.noPromoCodes">尚未設定折扣碼，點右上角「＋ 新增折扣碼」開始設定。</td></tr>') +
+    '<tr><th data-i18n="col.promoCode">折價券代碼</th><th data-i18n="col.discount">折扣</th><th data-i18n="col.applicablePlans">適用方案</th><th data-i18n="col.period">期間</th><th data-i18n="col.usageStatus">使用狀況</th><th data-i18n="common.status">狀態</th></tr>' +
+    (p.promoCodes.length ? codeRows : '<tr><td colspan="6" class="small" style="white-space:normal;padding:16px 12px" data-i18n="empty.noPromoCodes">尚未設定折價券，點右上角「＋ 新增折價券」開始設定。</td></tr>') +
     '</table></div>';
 
   p.tieredPricing = p.tieredPricing || {type:'accounts', tiers:[{from:'',to:''}]};
@@ -841,7 +841,7 @@ function renderPkgDiscountPanel(p){
     '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0" data-i18n="h3.pkgDiscountRules">方案折扣規則</h3><button class="btn ghost" onclick="openDiscountRuleDrawer(\''+p.id+'\',null)" data-i18n="btn.addDiscountRule">＋ 新增折扣規則</button></div>' +
     ruleTable + '</div>' +
     '<div class="card">' +
-    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0" data-i18n="h3.promoCodes">折扣碼</h3><button class="btn ghost" onclick="openPromoCodeDrawer(\''+p.id+'\',null)" data-i18n="btn.addPromoCode">＋ 新增折扣碼</button></div>' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><h3 style="margin:0" data-i18n="h3.promoCodes">折價券</h3><button class="btn ghost" onclick="openPromoCodeDrawer(\''+p.id+'\',null)" data-i18n="btn.addPromoCode">＋ 新增折價券</button></div>' +
     codeTable + '</div>' +
     tieredHtml;
   if (window.TLI_I18N) TLI_I18N.refresh();
@@ -896,7 +896,7 @@ function renderDiscountRuleDrawer(){
     '<div class="formrow"><label data-i18n="label.startDate">起始日</label><input type="date" value="'+(r.periodStart||'')+'" onchange="onDrawerRuleField(\'periodStart\',this.value)"></div>' +
     '<div class="formrow"><label data-i18n="label.endDate">結束日</label><input type="date" value="'+(r.periodEnd||'')+'" onchange="onDrawerRuleField(\'periodEnd\',this.value)"></div>' +
     '</div>' +
-    '<div class="formrow"><label><input type="checkbox" class="chk" style="transform:scale(1)" '+(r.stackable?'checked':'')+' onchange="onDrawerRuleField(\'stackable\',this.checked)"> <span data-i18n="label.stackWithPromoCode">可與折扣碼並用（疊加）</span></label></div>' +
+    '<div class="formrow"><label><input type="checkbox" class="chk" style="transform:scale(1)" '+(r.stackable?'checked':'')+' onchange="onDrawerRuleField(\'stackable\',this.checked)"> <span data-i18n="label.stackWithPromoCode">可與折價券並用（疊加）</span></label></div>' +
     '<div class="formrow"><label data-i18n="common.status">狀態</label><select onchange="onDrawerRuleField(\'status\',this.value)">' +
       statusOptionsHtml(r.status) +
     '</select></div>' +
@@ -935,7 +935,7 @@ function deleteDiscountRule(){
   toast(TLI_I18N.t('已刪除折扣規則','Discount rule deleted'));
 }
 
-/* ---- 折扣碼抽屜 ---- */
+/* ---- 折價券抽屜 ---- */
 function openPromoCodeDrawer(pid, codeId){
   var p = pkgById(pid);
   var editing = codeId ? p.promoCodes.find(function(c){return c.id===codeId;}) : null;
@@ -953,9 +953,9 @@ function renderPromoCodeDrawer(){
   var ctx = window.__editingPromoCode;
   var c = ctx.data;
   var body =
-    '<h3>'+(ctx.codeId?TLI_I18N.t('編輯折扣碼','Edit Promo Code'):TLI_I18N.t('新增折扣碼','Add Promo Code'))+'</h3>' +
+    '<h3>'+(ctx.codeId?TLI_I18N.t('編輯折價券','Edit Coupon'):TLI_I18N.t('新增折價券','Add Coupon'))+'</h3>' +
     '<div class="hint" style="margin-bottom:10px"><span class="req">*</span> <span data-i18n="common.required">為必填</span></div>' +
-    '<div class="formrow"><label><span data-i18n="col.promoCode">代碼</span><span class="req">*</span></label><div style="display:flex;gap:8px"><input type="text" style="flex:1" value="'+c.code+'" oninput="onDrawerCodeField(\'code\',this.value.toUpperCase())"><button type="button" class="btn ghost" onclick="genPromoCode()" data-i18n="btn.autoGenerate">自動產生</button></div></div>' +
+    '<div class="formrow"><label><span data-i18n="col.promoCode">折價券代碼</span><span class="req">*</span></label><div style="display:flex;gap:8px"><input type="text" style="flex:1" value="'+c.code+'" oninput="onDrawerCodeField(\'code\',this.value.toUpperCase())"><button type="button" class="btn ghost" onclick="genPromoCode()" data-i18n="btn.autoGenerate">自動產生</button></div></div>' +
     '<div class="formrow"><label data-i18n="col.discountType">折扣類型</label><select onchange="onDrawerCodeField(\'kind\',this.value)">' +
       ['pct','fixed','per_unit'].map(function(k){ return '<option value="'+k+'"'+(c.kind===k?' selected':'')+'>'+discKindLabel(k)+'</option>'; }).join('') +
     '</select></div>' +
@@ -995,7 +995,7 @@ function onDrawerCodeField(field, val){
 function savePromoCode(){
   var ctx = window.__editingPromoCode;
   var p = pkgById(ctx.pid);
-  if (!ctx.data.code){ toast(TLI_I18N.t('請先輸入或產生折扣碼','Please enter or generate a promo code first')); return; }
+  if (!ctx.data.code){ toast(TLI_I18N.t('請先輸入或產生折價券','Please enter or generate a coupon first')); return; }
   if (ctx.codeId){
     var idx = p.promoCodes.findIndex(function(c){return c.id===ctx.codeId;});
     p.promoCodes[idx] = ctx.data;
@@ -1004,7 +1004,7 @@ function savePromoCode(){
   }
   closeDrawer();
   renderPkgDiscountPanel(p);
-  toast(TLI_I18N.t('已儲存折扣碼「'+ctx.data.code+'」','Promo code "'+ctx.data.code+'" saved'));
+  toast(TLI_I18N.t('已儲存折價券「'+ctx.data.code+'」','Coupon "'+ctx.data.code+'" saved'));
 }
 function deletePromoCode(){
   var ctx = window.__editingPromoCode;
@@ -1012,7 +1012,7 @@ function deletePromoCode(){
   p.promoCodes = p.promoCodes.filter(function(c){return c.id!==ctx.codeId;});
   closeDrawer();
   renderPkgDiscountPanel(p);
-  toast(TLI_I18N.t('已刪除折扣碼','Promo code deleted'));
+  toast(TLI_I18N.t('已刪除折價券','Coupon deleted'));
 }
 function closeDrawer(){
   document.getElementById('drawerMask').classList.remove('open');

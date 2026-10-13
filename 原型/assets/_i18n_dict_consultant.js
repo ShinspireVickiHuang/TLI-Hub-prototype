@@ -396,6 +396,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "c02.aiQ1":"Which students have hours expiring within 30 days?",
 "c02.aiQ2":"Which students have 0 hours remaining?",
 "c09.pageTitle":"Appeal Review",
+"badge.phase1b":"Phase 1 B",
 "c09.pageSub":"Handles employees’ excess-leave appeals (submitted directly by employees or forwarded by HR); after review, the record is changed to leave or kept as absence, and the result syncs to both the employee and corporate sides.",
 "c09.searchPlaceholder":"Search company / employee name",
 "c09.clearFilters":"Clear Filters",

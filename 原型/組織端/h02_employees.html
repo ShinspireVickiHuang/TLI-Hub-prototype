@@ -349,7 +349,7 @@ var nextEmpSeq = EMP_COUNT;
 /* ==================================================================
    20261013 員工白名單匯入與啟用（契約：原型2 根目錄 _契約_會員結構與啟用_20261013.md）
    資料來源：TLI_MASTERS.memberAccounts（orgId = 本企業），匯入與寄送結果用 saveMemberData() 寫回，a01 讀同一份。
-   本頁示範租戶＝範例半導體（ent12，企業代碼 FANLI）；重複檢查只在本企業內（同員編或同 Email）。
+   本頁示範租戶＝範例半導體（ent12，企業代碼 FANLI）；員編重複只在本企業內檢查；Email 全系統唯一，已被其他帳號用過的列不建立。
    ================================================================== */
 var MM = window.TLI_MASTERS;
 var ORG_ID = 'ent12';
@@ -596,6 +596,11 @@ function checkImportRows(list){
     else if (r.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r.email)){ res.ok=false; res.msg=T('略過：Email 格式不符','Skipped: invalid Email'); }
     else if (seenNo[no]){ res.ok=false; res.msg = seenNo[no]==='exist' ? T('略過：員工編號已在名單中','Skipped: employee no. already on the list') : T('略過：檔內員工編號重複','Skipped: duplicate employee no. in file'); }
     else if (mail && seenMail[mail]){ res.ok=false; res.msg = seenMail[mail]==='exist' ? T('略過：Email 已在名單中','Skipped: Email already on the list') : T('略過：檔內 Email 重複','Skipped: duplicate Email in file'); }
+    else if (mail && !seenMail[mail] && MM.accountsByEmail(r.email).length){
+      /* Email 全系統唯一：已被其他帳號（任何來源）用過，這一列不建立 */
+      res.ok=false; res.msg=T('略過：Email 已被其他帳號使用，這一列不會建立','Skipped: Email already used by another account; this row will not be created');
+      res.note=T('可把這位員工的 Email 留空，改用員工編號加啟用碼，修正後再匯入。','Leave this employee’s Email blank and use employee no. plus an activation code, then import again.');
+    }
     if (res.ok){
       seenNo[no] = 'file'; if (mail) seenMail[mail] = 'file';
       if (!r.email) res.note = T('無 Email，將產生啟用碼','No Email; an activation code will be generated');
@@ -617,7 +622,8 @@ function sampleImportRows(){
     {no:'FL-2009',name:'周怡君',email:'yijun.chou@example-semi.com',dept:'研發部'},
     {no:'FL-2010',name:'蔡明哲',email:'',dept:'廠務部'},
     {no:'FL-2011',name:'許雅惠',email:'yahui.hsu@example-semi.com',dept:'品保部'},
-    {no:'FL-2012',name:'劉建國',email:'chienkuo.liu@example-semi.com',dept:'製造部'}
+    {no:'FL-2012',name:'劉建國',email:'chienkuo.liu@example-semi.com',dept:'製造部'},
+    {no:'FL-2013',name:'蔡明哲',email:'tsai.mingzhe@example.com',dept:'廠務部'}
   ];
 }
 function openImportModal(){
@@ -631,7 +637,7 @@ function renderImportModal(){
   var noMailN = imp.rows.filter(function(x){ return x.ok && !x.r.email; }).length;
   var skipN = imp.rows.length - okN;
   var h = '<h3>'+T('匯入員工名單（白名單）','Import Employee List (Whitelist)')+'</h3>'+
-    '<div class="small" style="line-height:1.7;margin-bottom:10px">'+T('欄位：員工編號、姓名、Email（可空）、部門。每次上限 500 筆；重複只在本企業內檢查，同員工編號或同 Email 會被略過。匯入後員工狀態為「未啟用」，再寄啟用通知或匯出啟用碼。','Columns: Employee No., Name, Email (optional), Department. Up to 500 rows per import. Duplicates are checked within your organization only: the same employee number or Email is skipped. Imported employees start as “Not Activated”; then send notices or export codes.')+'</div>'+
+    '<div class="small" style="line-height:1.7;margin-bottom:10px">'+T('欄位：員工編號、姓名、Email（可空）、部門。每次上限 500 筆；員工編號只在本企業內檢查；Email 全系統唯一，已被其他帳號用過的列會被略過、不會建立（可改成不填 Email，用員編加啟用碼）。匯入後員工狀態為「未啟用」，再寄啟用通知或匯出啟用碼。','Columns: Employee No., Name, Email (optional), Department. Up to 500 rows per import. Employee numbers are checked within your organization only. Email is unique across the whole system: a row whose Email is already used by another account is skipped and not created (leave Email blank and use employee no. plus an activation code instead). Imported employees start as “Not Activated”; then send notices or export codes.')+'</div>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">'+
     '<button class="btn ghost" onclick="downloadTemplate()">'+ICO.down+T('下載 CSV 範本','Download CSV Template')+'</button>'+
     '<label class="btn ghost" style="margin:0">'+ICO.upload+T('選擇 CSV 檔','Choose CSV File')+'<input type="file" id="impFile" accept=".csv,text/csv" style="display:none" onchange="onImportFile(this)"></label>'+
@@ -801,8 +807,11 @@ function pushEmployeeInviteRecord(emp, sentAt){
 function dupInOrg(empNo, email, exceptId){
   var no = String(empNo||'').trim().toLowerCase(), mail = String(email||'').trim().toLowerCase();
   var hit = EMPLOYEES.filter(function(x){ return x.id!==exceptId && ((no && x.empNo.toLowerCase()===no) || (mail && x.email && x.email.toLowerCase()===mail)); })[0];
-  if (!hit) return '';
-  return (no && hit.empNo.toLowerCase()===no) ? 'no' : 'mail';
+  if (hit) return (no && hit.empNo.toLowerCase()===no) ? 'no' : 'mail';
+  /* Email 全系統唯一：其他來源或其他企業已用過的 Email 也算重複（編輯自己時排除自己的帳號） */
+  var self = exceptId ? EMPLOYEES.filter(function(x){ return x.id===exceptId; })[0] : null;
+  if (mail && MM.accountsByEmail(mail).filter(function(a){ return !(self && self.ma && self.ma.id===a.id); }).length) return 'mail';
+  return '';
 }
 function openInviteModal(){
   var box = document.getElementById('inviteBody');
@@ -830,7 +839,7 @@ function doInviteEmployee(){
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast(T('Email 格式不正確','The Email format is invalid')); return; }
   var dup = dupInOrg(no, email, '');
   if (dup==='no'){ toast(T('這個員工編號已在名單中','This employee number is already on the list')); return; }
-  if (dup==='mail'){ toast(T('這個 Email 已被本企業其他員工使用','This Email is already used by another employee in your organization')); return; }
+  if (dup==='mail'){ toast(T('這個 Email 已被其他帳號使用，請改用其他 Email；沒有專屬 Email 的員工可留空，改用員編加啟用碼','This Email is already used by another account. Use a different Email, or leave it blank and use employee no. plus an activation code')); return; }
   var dept = document.getElementById('inviteDept').value;
   var siteId = document.getElementById('inviteSite').value;
   var site = SITE_LIST.find(function(s){ return s.id===siteId; });
@@ -848,7 +857,7 @@ function doInviteEmployee(){
 }
 
 /* ===== 編輯員工資料 =====
-   可改：員工編號、姓名、Email（可空）、部門、所屬廠區；重複只在本企業內檢查。
+   可改：員工編號、姓名、Email（可空）、部門、所屬廠區；員編重複只在本企業內檢查，Email 全系統唯一。
    不可改：狀態、累計時數、出勤率——由上課紀錄產生。 */
 var pendingEditId = null;
 function openEditModal(id){
@@ -891,7 +900,7 @@ function doSaveEmployee(){
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast(T('Email 格式不正確','The Email format is invalid')); return; }
   var dup = dupInOrg(no, email, e.id);
   if (dup==='no'){ toast(T('這個員工編號已被其他員工使用','This employee number is used by another employee')); return; }
-  if (dup==='mail'){ toast(T('這個 Email 已被其他員工使用，請改用別的','This Email is already used by another employee; please use a different one')); return; }
+  if (dup==='mail'){ toast(T('這個 Email 已被其他帳號使用，請改用其他 Email；也可清空，改用員編加啟用碼','This Email is already used by another account. Use a different Email, or clear it and use employee no. plus an activation code')); return; }
   var siteId = document.getElementById('editSite').value;
   var site = SITE_LIST.find(function(s){ return s.id===siteId; });
   var emailChanged = (email.toLowerCase() !== (e.email||'').toLowerCase());

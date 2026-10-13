@@ -602,7 +602,7 @@ function render_partner_performance(){
 }
 /* ================= 代理銷售報表／經銷返佣試算 =================
    夥伴名稱、型態、佣金比例（commRate）、返佣級距（rebateTiers）一律讀主檔 TLI_MASTERS.partners；
-   識別碼讀主檔 partners.code（代理沿用夥伴端轉介碼 REF-…）。專案合作不經手金流，不列入本區任何報表。 */
+   識別碼讀主檔 partners.code（代理沿用夥伴端優惠碼 REF-…）。專案合作不經手金流，不列入本區任何報表。 */
 var AGENT_ORDERS = [
  {id:'ORD-2026-A301', date:'2026-07-05', pid:'p08', amount:15800, status:'已完成'},
  {id:'ORD-2026-A302', date:'2026-07-19', pid:'p08', amount:12800, status:'已完成'},
@@ -673,10 +673,10 @@ function render_partner_agent(){
   var html = '<div class="filterbar">'+
     '<input type="date" id="ag_from" value="2026-07-01" onchange="updateAgentReport()"> <span class="small">～</span> <input type="date" id="ag_to" value="2026-09-30" onchange="updateAgentReport()">'+
     '<select id="ag_p" onchange="updateAgentReport()"><option value="">'+TLI_I18N.t('全部代理商','All Agents')+'</option>'+agents.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join('')+'</select>'+
-    '<input type="text" id="ag_q" placeholder="'+TLI_I18N.t('搜尋代理商或折扣碼','Search agent or code')+'" oninput="updateAgentReport()" style="min-width:180px">'+
+    '<input type="text" id="ag_q" placeholder="'+TLI_I18N.t('搜尋代理商或優惠碼','Search agent or code')+'" oninput="updateAgentReport()" style="min-width:180px">'+
     '<select id="ag_sort" onchange="updateAgentReport()"><option value="amount">'+TLI_I18N.t('依成交金額','By Deal Amount')+'</option><option value="count">'+TLI_I18N.t('依訂單數','By Orders')+'</option><option value="commission">'+TLI_I18N.t('依佣金金額','By Commission')+'</option><option value="name">'+TLI_I18N.t('依名稱','By Name')+'</option></select>'+
     '<button class="btn ghost" onclick="exportAgentReport()">'+TLI_I18N.t('匯出 CSV','Export CSV')+'</button></div>';
-  html += '<div class="subhint">'+TLI_I18N.t('依折扣碼（識別碼）統計各代理商帶來的訂單；成交金額只計「已完成」訂單，待收款與已取消不計入。佣金＝成交金額 × 該代理商佣金比例（取自合作夥伴管理）。','Orders are grouped by discount code (identifier). Deal amount counts completed orders only; pending and cancelled orders are excluded. Commission = deal amount × the agent commission rate (from Partner Management).')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
+  html += '<div class="subhint">'+TLI_I18N.t('依優惠碼（識別碼）統計各代理商帶來的訂單；成交金額只計「已完成」訂單，待收款與已取消不計入。佣金＝成交金額 × 該代理商佣金比例（取自合作夥伴管理）。','Orders are grouped by promo code (identifier). Deal amount counts completed orders only; pending and cancelled orders are excluded. Commission = deal amount × the agent commission rate (from Partner Management).')+' <a class="manage-link" href="a20_agents.html">'+TLI_I18N.t('前往設定 →','Go to Settings →')+'</a></div>';
   html += '<div id="agArea"></div>';
   document.getElementById('reportContent').innerHTML = html;
   updateAgentReport();
@@ -688,7 +688,7 @@ function updateAgentReport(){
   var area = document.getElementById('agArea'); if (!area) return;
   if (!rows.length){ area.innerHTML = '<div class="note">'+TLI_I18N.t('沒有符合條件的代理商。','No agents match the filters.')+'</div>'; return; }
   area.innerHTML = tableHtml(
-    trH([['代理商','Agent'],['折扣碼／識別碼','Discount Code'],['訂單數','Orders'],['成交金額','Deal Amount'],['佣金比例','Commission Rate'],['佣金金額','Commission'],['','']]),
+    trH([['代理商','Agent'],['優惠碼／識別碼','Promo Code'],['訂單數','Orders'],['成交金額','Deal Amount'],['佣金比例','Commission Rate'],['佣金金額','Commission'],['','']]),
     rows.map(function(r){
       return [r.p.name+(r.p.status==='停用'?' <span class="badge grey">'+TLI_I18N.t('停用','Inactive')+'</span>':''), r.code, r.count+(r.pending?' <span class="small">（'+TLI_I18N.t('另有待收款 ','Pending: ')+r.pending+'）</span>':''), fmtNT(r.amount), r.rate+'%', fmtNT(r.commission),
         '<span class="linklike" onclick="showAgentDetail(\''+r.p.id+'\')">'+TLI_I18N.t('訂單明細','Order Details')+'</span>'];
@@ -704,7 +704,7 @@ function showAgentDetail(pid){
 }
 function exportAgentReport(){
   var rows = agentRows();
-  downloadCsv('代理銷售報表', [['代理商','折扣碼','訂單數','成交金額','佣金比例','佣金金額']].concat(rows.map(function(r){ return [r.p.name,r.code,r.count,r.amount,r.rate+'%',r.commission]; })));
+  downloadCsv('代理銷售報表', [['代理商','優惠碼','訂單數','成交金額','佣金比例','佣金金額']].concat(rows.map(function(r){ return [r.p.name,r.code,r.count,r.amount,r.rate+'%',r.commission]; })));
   toast(TLI_I18N.t('已匯出「代理銷售報表」報表 CSV','Exported “Agent Sales Report” as CSV'));
 }
 

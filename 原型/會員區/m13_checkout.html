@@ -224,12 +224,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         </div>
       </div>
 
-      <div class="section-title" data-i18n="m13.ref.title">折扣碼／轉介碼</div>
+      <div class="section-title" data-i18n="m13.ref.title">優惠碼</div>
       <div class="card">
         <div class="field" style="margin-bottom:0;">
-          <label for="refCode" data-i18n="m13.ref.label">折扣碼或轉介碼（選填）</label>
-          <input type="text" id="refCode" data-i18n-placeholder="m13.ref.placeholder" placeholder="請輸入折扣碼或轉介碼" oninput="checkRefCode()">
-          <div class="hint" data-i18n="m13.ref.hint">由合作夥伴招募連結進入時會自動帶入轉介碼，也可手動輸入</div>
+          <label for="refCode" data-i18n="m13.ref.label">優惠碼（選填）</label>
+          <input type="text" id="refCode" data-i18n-placeholder="m13.ref.placeholder" placeholder="請輸入優惠碼" oninput="checkRefCode()">
+          <div class="hint" data-i18n="m13.ref.hint">由合作夥伴招募連結進入時會自動帶入優惠碼，也可手動輸入</div>
           <div class="hint" id="refAutoHint" style="display:none;color:var(--c-primary);font-weight:700;" data-i18n="m13.ref.autoHint">代碼由推薦連結自動帶入</div>
         </div>
         <div class="hint" id="refAgentWarn" style="display:none;margin-top:10px;color:#B54708;">
@@ -617,7 +617,7 @@ var referrerApplied = false;
 function checkRefCode(){
   var v = document.getElementById('refCode').value.trim().toUpperCase();
   var tag = document.getElementById('refTag');
-  /* 20261013：代理優惠碼（主檔代理的 code）只能在註冊時輸入；目前帳號不是該代理來源時，不套用代理歸屬，改提示並導向代理註冊 */
+  /* 20261013：優惠碼（主檔代理的 code）只能在註冊時輸入；目前帳號不是該代理來源時，不套用代理歸屬，改提示並導向代理註冊 */
   var warn = document.getElementById('refAgentWarn'), ag = null;
   try{ ag = TLI_MASTERS.agentByCode(v); }catch(e){}
   warn.style.display = 'none';
@@ -626,10 +626,10 @@ function checkRefCode(){
     if(!(cur && cur.sourceType === 'agent' && cur.sourceUnitId === ag.id && !cur.orgId)){
       referrerApplied = false;
       tag.classList.remove('show');
-      document.getElementById('refAgentMsg').textContent = TLI_I18N.t('代理優惠碼需在註冊時輸入，將另建代理帳號（'+ag.name+'），密碼與方案與目前帳號各自獨立。',{en:'An agent promo code must be entered at registration. A separate agent account ('+ag.name+') will be created, with its own password and plans.',ja:'代理店コードは登録時に入力する必要があります。別の代理店アカウント（'+ag.name+'）を作成します。',de:'Der Agenten-Code muss bei der Registrierung eingegeben werden. Es wird ein separates Agenten-Konto ('+ag.name+') angelegt.'});
+      document.getElementById('refAgentMsg').textContent = TLI_I18N.t('優惠碼需在註冊時輸入。已有帳號者需用另一個 Email 另建代理帳號（'+ag.name+'），密碼與方案與目前帳號各自獨立。',{en:'An agent promo code must be entered at registration. If you already have an account, create a separate agent account ('+ag.name+') with a different email; it has its own password and plans.',ja:'代理店コードは登録時に入力する必要があります。すでにアカウントをお持ちの場合は、別のメールアドレスで代理店アカウント（'+ag.name+'）を作成してください。',de:'Der Agenten-Code muss bei der Registrierung eingegeben werden. Wer bereits ein Konto hat, legt mit einer anderen E-Mail-Adresse ein separates Agenten-Konto ('+ag.name+') an.'});
       var b = document.getElementById('refAgentBtn');
       b.textContent = TLI_I18N.t('以代理帳號購買',{en:'Buy with an agent account',ja:'代理店アカウントで購入',de:'Mit Agenten-Konto kaufen'});
-      b.href = '../公開網站/p07_login_register.html?agent=' + encodeURIComponent(ag.id) + '&mode=register&email=' + encodeURIComponent((cur && cur.email) || '');
+      b.href = '../公開網站/p07_login_register.html?agent=' + encodeURIComponent(ag.id) + '&mode=register';
       warn.style.display = 'block';
       renderOrder();
       return;
@@ -644,7 +644,7 @@ function checkRefCode(){
   }
   renderOrder();
 }
-/* 讀取網址 ?ref= 參數，若有值自動帶入折扣碼欄位並套用既有轉介折扣邏輯 */
+/* 讀取網址 ?ref= 參數，若有值自動帶入優惠碼欄位並套用既有優惠碼折扣邏輯 */
 function applyRefFromUrl(){
   var refFromUrl = getParam('ref');
   if(refFromUrl){
@@ -831,7 +831,7 @@ function initEventCard(){
 function priceUnavailableLabel(){ return TLI_I18N.t('價格未定',{en:'Price to be announced',ja:'価格未定',de:'Preis noch offen'}); }
 function priceTbdLabel(){ return TLI_I18N.t('待定',{en:'TBD',ja:'未定',de:'TBD'}); }
 function renderOrder(){
-  var referralLabel = TLI_I18N.t('轉介折扣（5%）',{en:'Referral Discount (5%)',ja:'紹介割引（5%）',de:'Empfehlungsrabatt (5 %)'});
+  var referralLabel = TLI_I18N.t('優惠碼折扣（5%）',{en:'Promo Code Discount (5%)',ja:'プロモコード割引（5%）',de:'Promo-Code-Rabatt (5 %)'});
   var payableLabel = TLI_I18N.t('應付金額',{en:'Amount Due',ja:'お支払い金額',de:'Zu zahlender Betrag'});
   var estimateNote = TLI_I18N.t('此金額僅供試算，不代表實際應付金額。',{en:'This amount is an estimate only and may not reflect the final amount due.',ja:'この金額は試算であり、実際のお支払い金額とは異なる場合があります。',de:'Dieser Betrag ist nur eine Schätzung und entspricht möglicherweise nicht dem tatsächlich fälligen Betrag.'});
   if(isEventOrder){

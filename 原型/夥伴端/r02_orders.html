@@ -217,7 +217,7 @@ padding:0 10px;background:#fff;min-width:220px;flex:1;}
 <div class="tablewrap"><table id="orderTable"></table></div>
 <p class="emptylist hidden" id="orderEmpty" data-i18n="empty.r02NoMatch">找不到符合條件的訂單或合約。</p>
 <div class="loadmore-row hidden" id="loadMoreRow"><button class="btn ghost" onclick="loadMore()" id="loadMoreBtn" data-i18n="btn.loadMore">載入更多</button></div>
-<div class="hint"><span data-i18n="hint.r02ValidityPrefix">歸屬依會員轉介碼或顧問建單指定，效期 </span><span id="hintValidDays"></span><span data-i18n="hint.r02ValiditySuffix"> 天（依總部 P47 參數計算）。</span></div>
+<div class="hint"><span data-i18n="hint.r02ValidityPrefix">歸屬依會員優惠碼或顧問建單指定，效期 </span><span id="hintValidDays"></span><span data-i18n="hint.r02ValiditySuffix"> 天（依總部 P47 參數計算）。</span></div>
 </div>
 
 <div class="modal-mask" id="disputeModal" onclick="if(event.target===this) closeModal('disputeModal')"><div class="modal">
@@ -256,26 +256,26 @@ var P48_RATE = (AGENT_MASTER ? Number(AGENT_MASTER.commRate) : 10) / 100;
 var ATTR_VALID_DAYS = AGENT_MASTER ? Number(AGENT_MASTER.validDays) : 90;
 /* 平台收款狀態四種：已收款／部分收款／未收款／退款；夥伴端唯讀，無任何收款操作 */
 var ORDERS = [
- {id:'ORD-26090031', date:'2026-09-12', type:'b2c', cust:'學生 A18', plan:'一對一課程包 20 堂', amount:48000, paid:0,     pay:'未收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26090028', date:'2026-09-10', type:'b2c', cust:'學生 A16', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26090031', date:'2026-09-12', type:'b2c', cust:'學生 A18', plan:'一對一課程包 20 堂', amount:48000, paid:0,     pay:'未收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26090028', date:'2026-09-10', type:'b2c', cust:'學生 A16', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
  {id:'CTR-26090004', date:'2026-09-08', type:'b2b', cust:'電子零組件製造商（員工約 120 人）', plan:'企業培訓合約・時數池 300 小時', amount:720000, paid:360000, pay:'部分收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
- {id:'ORD-26090019', date:'2026-09-05', type:'b2c', cust:'學生 B07', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'爭議中', channel:'Stripe'},
- {id:'ORD-26090008', date:'2026-09-02', type:'b2c', cust:'學生 A12', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26080042', date:'2026-08-28', type:'b2c', cust:'學生 C03', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26080035', date:'2026-08-24', type:'b2c', cust:'學生 B11', plan:'一對一課程包 20 堂', amount:48000, paid:0,     pay:'退款',     basis:'轉介碼', attr:'已解除', channel:'藍新金流'},
+ {id:'ORD-26090019', date:'2026-09-05', type:'b2c', cust:'學生 B07', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'優惠碼', attr:'爭議中', channel:'Stripe'},
+ {id:'ORD-26090008', date:'2026-09-02', type:'b2c', cust:'學生 A12', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26080042', date:'2026-08-28', type:'b2c', cust:'學生 C03', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26080035', date:'2026-08-24', type:'b2c', cust:'學生 B11', plan:'一對一課程包 20 堂', amount:48000, paid:0,     pay:'退款',     basis:'優惠碼', attr:'已解除', channel:'藍新金流'},
  {id:'CTR-26080006', date:'2026-08-20', type:'b2b', cust:'精密機械製造商（員工約 340 人）', plan:'企業培訓合約・預付款倒扣制', amount:1200000, paid:1200000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
- {id:'ORD-26080021', date:'2026-08-15', type:'b2c', cust:'學生 A09', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
- {id:'ORD-26080014', date:'2026-08-11', type:'b2c', cust:'學生 D02', plan:'一對一課程包 20 堂', amount:48000, paid:24000, pay:'部分收款', basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26080005', date:'2026-08-05', type:'b2c', cust:'學生 C08', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26080021', date:'2026-08-15', type:'b2c', cust:'學生 A09', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'Stripe'},
+ {id:'ORD-26080014', date:'2026-08-11', type:'b2c', cust:'學生 D02', plan:'一對一課程包 20 堂', amount:48000, paid:24000, pay:'部分收款', basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26080005', date:'2026-08-05', type:'b2c', cust:'學生 C08', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
  {id:'CTR-26070003', date:'2026-07-29', type:'b2b', cust:'物流服務業者（員工約 90 人）', plan:'企業培訓合約・時數池 150 小時', amount:380000, paid:380000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
- {id:'ORD-26070033', date:'2026-07-22', type:'b2c', cust:'學生 B04', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26070027', date:'2026-07-18', type:'b2c', cust:'學生 A05', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
- {id:'ORD-26070011', date:'2026-07-09', type:'b2c', cust:'學生 D06', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26060019', date:'2026-06-16', type:'b2c', cust:'學生 C11', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26060007', date:'2026-06-04', type:'b2c', cust:'學生 A21', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'},
- {id:'ORD-26050024', date:'2026-05-20', type:'b2c', cust:'學生 B15', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'Stripe'},
+ {id:'ORD-26070033', date:'2026-07-22', type:'b2c', cust:'學生 B04', plan:'一對一課程包 40 堂', amount:92000, paid:92000, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26070027', date:'2026-07-18', type:'b2c', cust:'學生 A05', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'Stripe'},
+ {id:'ORD-26070011', date:'2026-07-09', type:'b2c', cust:'學生 D06', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26060019', date:'2026-06-16', type:'b2c', cust:'學生 C11', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26060007', date:'2026-06-04', type:'b2c', cust:'學生 A21', plan:'團體直播班・季方案', amount:18600, paid:18600, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'},
+ {id:'ORD-26050024', date:'2026-05-20', type:'b2c', cust:'學生 B15', plan:'自學課程年方案', amount:12800, paid:12800, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'Stripe'},
  {id:'CTR-26050001', date:'2026-05-12', type:'b2b', cust:'金融服務業者（員工約 210 人）', plan:'企業培訓合約・時數池 200 小時', amount:500000, paid:500000, pay:'已收款', basis:'顧問指定', attr:'有效', channel:'銀行匯款（平台帳戶）'},
- {id:'ORD-26040016', date:'2026-04-18', type:'b2c', cust:'學生 D09', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'轉介碼', attr:'有效', channel:'藍新金流'}
+ {id:'ORD-26040016', date:'2026-04-18', type:'b2c', cust:'學生 D09', plan:'一對一課程包 20 堂', amount:48000, paid:48000, pay:'已收款',   basis:'優惠碼', attr:'有效', channel:'藍新金流'}
 ];
 var TYPE_LABEL = {b2c:'B2C 訂單', b2b:'B2B 企業合約'};
 var TYPE_LABEL_EN = {b2c:'B2C Order', b2b:'B2B Corporate Contract'};
@@ -464,7 +464,7 @@ function detailHtml(o){
     '<span class="small">'+T('佣金以平台實收金額為計算基礎，結算由總部產生。','Commission is calculated from the amount received by the platform; settlement is generated by HQ.')+'</span></div>';
 }
 function basisText(o){
-  return o.basis === '轉介碼' ? T('轉介碼 ' + MY_AGENT_CODE, 'Referral code ' + MY_AGENT_CODE) : T('顧問建單時指定歸屬','Attributed by advisor at order creation');
+  return o.basis === '優惠碼' ? T('優惠碼 ' + MY_AGENT_CODE, 'Promo code ' + MY_AGENT_CODE) : T('顧問建單時指定歸屬','Attributed by advisor at order creation');
 }
 function render(){
   renderActiveFilters();

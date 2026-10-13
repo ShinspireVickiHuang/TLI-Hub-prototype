@@ -363,7 +363,8 @@ html,body{overflow-x:hidden;}
 <div class="formrow"><label data-i18n="a20.orPaste">或直接貼上內容</label><textarea id="doImpText" rows="8"></textarea>
 <div style="margin-top:6px;display:flex;gap:12px"><button type="button" class="linkbtn" onclick="doImpSample()" data-i18n="a20.fillSample">填入範例名單</button><button type="button" class="linkbtn" onclick="doImpTemplate()" data-i18n="a20.downloadTemplate">下載範本檔案</button></div></div>
 <div class="rowerr" id="doImpErr" style="display:none;color:#C0392B;font-size:12px;margin-bottom:8px"></div>
-<div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost" onclick="closeModal('doImportModal')" data-i18n="common.cancel">取消</button><button type="button" class="btn" onclick="doRunImport()" data-i18n="a20.runImport">匯入</button></div>
+<div id="doImpResult" style="display:none;margin-bottom:10px"></div>
+<div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn ghost" id="doImpCancelBtn" onclick="closeModal('doImportModal')" data-i18n="common.cancel">取消</button><button type="button" class="btn" id="doImpRunBtn" onclick="doRunImport()" data-i18n="a20.runImport">匯入</button></div>
 </div></div>
 <div class="modal-mask" id="pcClassModal" onclick="if(event.target===this) closeModal('pcClassModal')"><div class="modal">
 <h3 id="pcClassTitle">新增班級</h3>
@@ -428,7 +429,7 @@ var A20_EN = {
   '介面語系':'Interface Languages','學員':'Students','系統資訊':'System Info',
   '結算週期':'Settlement Cycle',
   '訂金（Deposit）比例（%）':'Deposit Rate (%)','尾款計價':'Balance Pricing','方案批發價':'Plan Wholesale Price',
-  '折扣碼（識別碼）':'Discount Code (ID)','必填，且不可與其他夥伴重複':'Required and must be unique','佣金比例（%）':'Commission Rate (%)','歸屬有效期（天）':'Attribution Validity (days)',
+  '優惠碼（識別碼）':'Promo Code (ID)','必填，且不可與其他夥伴重複':'Required and must be unique','佣金比例（%）':'Commission Rate (%)','歸屬有效期（天）':'Attribution Validity (days)',
   '學生資料保存年限':'Student Data Retention Period','學生資料保存年限（年）':'Student Data Retention (years)',
   '寄件人名稱':'Sender Name','回覆信箱':'Reply-To Email',
   '信尾署名文字':'Email Footer Text',
@@ -801,7 +802,7 @@ function sectionContract(mode, o){
       html += '<div class="formrow" id="pf_rebateTiers"><label>' + TT('返佣（Rebate）級距表') + '<span class="req">*</span></label><div id="pdRebateTiersWrap"></div><button type="button" class="linkbtn" onclick="pdAddRebateTier()">' + TLI_I18N.t('＋ 新增級距','＋ Add Tier') + '</button><div class="hint">' + TT('依經銷商年度累積採購或開課量分級距；至少要有一列完整級距') + '</div><div class="rowerr" style="display:none">' + TT('必填，請至少新增一列返佣級距並填寫上下限與比例') + '</div></div>';
     }
   } else if (o.type === 'agent'){
-    html += fieldRow(mode, '折扣碼（識別碼）', '<b>' + escHtml(o.code || '－') + '</b>',
+    html += fieldRow(mode, '優惠碼（識別碼）', '<b>' + escHtml(o.code || '－') + '</b>',
       '<input type="text" id="pe_code" value="' + escHtml(o.code || '') + '" placeholder="' + TLI_I18N.t('例：REF-XXX01，學生註冊或下單時輸入','e.g. REF-XXX01, entered by students at sign-up or checkout') + '" onchange="pdSet(\'code\',this.value.trim().toUpperCase());this.value=this.value.trim().toUpperCase()">',
       {id:'pf_code', required:true, errMsg:'必填，且不可與其他夥伴重複'});
     html += fieldRow(mode, '佣金比例（%）', (o.commRate != null ? o.commRate : 10) + '%',
@@ -1399,7 +1400,7 @@ function pcDoImport(){
 /* ================= 經銷訂單與匯入學員名單（20261013）=================
    流程：TLI 管理者建立經銷訂單 → 匯入學員名單 → 寄啟用信（批次／單筆）。經銷商本身沒有入口。
    非企業學員：姓名、Email 必填，沒有統編與員工編號；企業會員：選企業，走企業白名單（員工編號、姓名、Email 可空、部門），
-   沒 Email 者匯出「名單＋啟用碼」由企業自行發給員工。重複檢查只在同一來源單位內（同一經銷商／同一企業）。
+   沒 Email 者匯出「名單＋啟用碼」由企業自行發給員工。Email 全系統唯一（已被其他帳號用過的列不建立），員工編號只在同一企業內檢查。
    匯入的帳號寫進主檔 TLI_MASTERS.memberAccounts，a01 會員管理讀同一份。 */
 function doToday(){ return new Date().toISOString().slice(0,10); }
 function doNow(){ return doToday() + ' ' + new Date().toTimeString().slice(0,5); }
@@ -1563,6 +1564,9 @@ function doOpenImport(){
   document.getElementById('doImpFile').value = '';
   document.getElementById('doImpText').value = '';
   document.getElementById('doImpErr').style.display = 'none';
+  document.getElementById('doImpResult').style.display = 'none';
+  document.getElementById('doImpRunBtn').disabled = false;
+  document.getElementById('doImpCancelBtn').textContent = TLI_I18N.t('取消','Cancel');
   document.getElementById('doImportModal').classList.add('open');
 }
 function doImpLoadFile(inp){
@@ -1575,14 +1579,26 @@ function doImpSample(){
   var x = doOrderById(pdOrderId); if (!x) return;
   var n = doAccounts(x.id).length;
   document.getElementById('doImpText').value = x.kind === 'enterprise'
-    ? (function(){ var pf = ((TLI_MASTERS.byId('orgCustomers', x.orgId) || {}).code || 'EM').slice(0, 2); return '員工編號,姓名,Email,部門\n' + pf + '-2' + (n + 1) + '01,林宜庭,yiting.lin' + (n + 1) + '@corp.example,理賠部\n' + pf + '-2' + (n + 1) + '02,陳柏宇,,客服部\n' + pf + '-2' + (n + 1) + '03,郭怡婷,yiting.kuo' + (n + 1) + '@corp.example,業務二部'; })()
-    : '姓名,Email\n王小明,xm.wang' + (n + 1) + '@example.com\n李美玲,meiling.li' + (n + 1) + '@example.com\n陳大文,dawen.chen' + (n + 1) + '@example.com';
+    ? (function(){ var pf = ((TLI_MASTERS.byId('orgCustomers', x.orgId) || {}).code || 'EM').slice(0, 2); return '員工編號,姓名,Email,部門\n' + pf + '-2' + (n + 1) + '01,林宜庭,yiting.lin' + (n + 1) + '@corp.example,理賠部\n' + pf + '-2' + (n + 1) + '02,陳柏宇,,客服部\n' + pf + '-2' + (n + 1) + '03,郭怡婷,yiting.kuo' + (n + 1) + '@corp.example,業務二部\n' + pf + '-2' + (n + 1) + '04,黃怡君,yichun.huang@antai.example,理賠部'; })()
+    : '姓名,Email\n王小明,xm.wang' + (n + 1) + '@example.com\n李美玲,meiling.li' + (n + 1) + '@example.com\n陳大文,dawen.chen' + (n + 1) + '@example.com\nEmma Johnson,emma.johnson@example.com';
 }
 function doImpTemplate(){ toast(TLI_I18N.t('已下載匯入範本檔案','Import template downloaded')); }
 function doEmailOk(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 function doNewAccId(){
   var mx = 0; TLI_MASTERS.memberAccounts.forEach(function(a){ var n = parseInt(String(a.id).replace(/\D/g, ''), 10) || 0; if (n > mx) mx = n; });
   return 'ma' + (mx + 1);
+}
+function doShowImpResult(list, ent){
+  var box = document.getElementById('doImpResult');
+  if (!list.length){ box.style.display = 'none'; return; }
+  box.innerHTML = '<div style="border:1px solid #F5C6C2;background:#FEF3F2;border-radius:6px;padding:10px 12px;font-size:12.5px;line-height:1.7">' +
+    '<div style="font-weight:700;color:#B42318;margin-bottom:6px">' + TLI_I18N.t('以下 ' + list.length + ' 列的 Email 已被其他帳號使用，這些列不會建立', list.length + ' row(s) use an email already used by another account; these rows will not be created') + '</div>' +
+    '<table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left">' + TLI_I18N.t('列號','Row') + '</th><th style="text-align:left">' + TLI_I18N.t('姓名','Name') + '</th><th style="text-align:left">Email</th><th style="text-align:left">' + TLI_I18N.t('處理','Result') + '</th></tr>' +
+    list.map(function(m){ return '<tr><td>' + m.row + '</td><td>' + escHtml(m.name) + '</td><td>' + escHtml(m.email) + '</td><td>' + TLI_I18N.t('Email 已被其他帳號使用，不建立','Email already used by another account; not created') + '</td></tr>'; }).join('') + '</table>' +
+    '<div style="margin-top:6px;color:#475467">' + (ent
+      ? TLI_I18N.t('一個 Email 只能對應一個帳號。這些員工可把 Email 欄留空，改用員工編號加啟用碼，修正後再匯入。','One email can belong to only one account. Leave the email blank for these employees and use employee no. plus an activation code, then import again.')
+      : TLI_I18N.t('一個 Email 只能對應一個帳號。請向學員取得另一個 Email，修正後再匯入。','One email can belong to only one account. Get a different email from the student, fix the list and import again.')) + '</div></div>';
+  box.style.display = '';
 }
 function doRunImport(){
   var x = doOrderById(pdOrderId); if (!x) return;
@@ -1592,14 +1608,17 @@ function doRunImport(){
   if (!lines.length){ err.textContent = TLI_I18N.t('請選擇 CSV 檔，或把內容貼在下方','Choose a CSV file or paste the content below'); err.style.display = ''; return; }
   var scope = ent ? x.orgId : x.partnerId;
   var seatsLeft = x.seats - doAccounts(x.id).length;
-  var ok = 0, bad = [], dup = [], over = 0, added = [];
+  var ok = 0, bad = [], dup = [], over = 0, added = [], mailUsed = [];
+  document.getElementById('doImpResult').style.display = 'none';
   lines.forEach(function(line, i){
     var c = line.split(/[,，\t]/).map(function(v){ return v.trim().replace(/^"|"$/g, ''); });
     if (i === 0 && /^(姓名|員工編號|name|employee)/i.test(c[0])) return;
     var empNo = ent ? (c[0] || '') : '', name = ent ? (c[1] || '') : (c[0] || ''), email = ent ? (c[2] || '') : (c[1] || ''), dept = ent ? (c[3] || '') : '';
     if (!name || (ent && !empNo) || (!ent && !email) || (email && !doEmailOk(email))){ bad.push(i + 1); return; }
     var all = TLI_MASTERS.memberAccounts;
-    var same = all.filter(function(a){ return TLI_MASTERS.memberScope(a) === scope && ((email && (a.email || '').toLowerCase() === email.toLowerCase()) || (ent && a.employeeNo === empNo)); })[0];
+    /* Email 全系統唯一：已被任何帳號用過的 Email，這一列不建立 */
+    if (email && TLI_MASTERS.accountsByEmail(email).length){ mailUsed.push({row:i + 1, name:name, email:email, empNo:empNo}); return; }
+    var same = all.filter(function(a){ return ent && TLI_MASTERS.memberScope(a) === scope && a.employeeNo === empNo; })[0];
     if (same){ dup.push(i + 1); return; }
     if (ok >= seatsLeft){ over++; return; }
     var hasMail = !!email, id = doNewAccId();
@@ -1608,19 +1627,26 @@ function doRunImport(){
       activationCode:hasMail ? '' : TLI_MASTERS.newActivationCode(), sentAt:'', activatedAt:'', orderId:x.id, createdAt:doToday(), plans:[{name:doPlanName(x.planId), hoursLeft:'依方案'}]};
     all.push(acct); added.push(acct); ok++;
   });
+  doShowImpResult(mailUsed, ent);
   if (!ok){
-    err.textContent = TLI_I18N.t('沒有可匯入的資料（格式不符 ' + bad.length + ' 筆' + (bad.length ? '，列號 ' + bad.join('、') : '') + '；同一' + (ent ? '企業' : '經銷商') + '內重複 ' + dup.length + ' 筆；超過名額 ' + over + ' 筆）。' + (ent ? '欄位順序：員工編號、姓名、Email、部門。' : '欄位順序：姓名、Email（兩者必填）。'),
-      'Nothing to import (' + bad.length + ' invalid' + (bad.length ? ', row ' + bad.join(', ') : '') + '; ' + dup.length + ' duplicate within this ' + (ent ? 'company' : 'distributor') + '; ' + over + ' over the seat limit). ' + (ent ? 'Column order: Employee No., Name, Email, Department.' : 'Column order: Name, Email (both required).'));
+    err.textContent = TLI_I18N.t('沒有可匯入的資料（格式不符 ' + bad.length + ' 筆' + (bad.length ? '，列號 ' + bad.join('、') : '') + '；Email 已被其他帳號使用 ' + mailUsed.length + ' 筆；' + (ent ? '同一企業內員工編號重複 ' : '其他重複 ') + dup.length + ' 筆；超過名額 ' + over + ' 筆）。' + (ent ? '欄位順序：員工編號、姓名、Email、部門。' : '欄位順序：姓名、Email（兩者必填）。'),
+      'Nothing to import (' + bad.length + ' invalid' + (bad.length ? ', row ' + bad.join(', ') : '') + '; ' + mailUsed.length + ' email already used by another account; ' + dup.length + (ent ? ' duplicate employee no. within this company; ' : ' other duplicate; ') + over + ' over the seat limit). ' + (ent ? 'Column order: Employee No., Name, Email, Department.' : 'Column order: Name, Email (both required).'));
     err.style.display = '';
     return;
   }
   x.status = doAccounts(x.id).length >= x.seats ? '已匯入名單' : '匯入中';
-  TLI_MASTERS.saveMemberData(); closeModal('doImportModal'); renderPartnerDrawer();
+  TLI_MASTERS.saveMemberData(); renderPartnerDrawer();
+  if (mailUsed.length){
+    /* 有 Email 被擋的列：不關視窗，讓管理者看到是哪幾列、為什麼不會建立 */
+    document.getElementById('doImpRunBtn').disabled = true;
+    document.getElementById('doImpCancelBtn').textContent = TLI_I18N.t('關閉','Close');
+  } else closeModal('doImportModal');
   var parts = [], partsEn = [];
   if (bad.length){ parts.push('格式不符：列號 ' + bad.join('、')); partsEn.push('invalid: row ' + bad.join(', ')); }
-  if (dup.length){ parts.push('同一' + (ent ? '企業' : '經銷商') + '內重複：列號 ' + dup.join('、')); partsEn.push('duplicate: row ' + dup.join(', ')); }
+  if (mailUsed.length){ var mr = mailUsed.map(function(m){ return m.row; }); parts.push('Email 已被其他帳號使用：列號 ' + mr.join('、')); partsEn.push('email already used: row ' + mr.join(', ')); }
+  if (dup.length){ parts.push('同一企業內員工編號重複：列號 ' + dup.join('、')); partsEn.push('duplicate employee no.: row ' + dup.join(', ')); }
   if (over){ parts.push('超過名額 ' + over + ' 筆'); partsEn.push(over + ' over seat limit'); }
-  toast(TLI_I18N.t('成功匯入 ' + ok + ' 筆，略過 ' + (bad.length + dup.length + over) + ' 筆' + (parts.length ? '（' + parts.join('；') + '）' : '') + '。請接著寄啟用信。', ok + ' imported, ' + (bad.length + dup.length + over) + ' skipped' + (partsEn.length ? ' (' + partsEn.join('; ') + ')' : '') + '. Send activation emails next.'));
+  toast(TLI_I18N.t('成功匯入 ' + ok + ' 筆，略過 ' + (bad.length + dup.length + mailUsed.length + over) + ' 筆' + (parts.length ? '（' + parts.join('；') + '）' : '') + '。請接著寄啟用信。', ok + ' imported, ' + (bad.length + dup.length + mailUsed.length + over) + ' skipped' + (partsEn.length ? ' (' + partsEn.join('; ') + ')' : '') + '. Send activation emails next.'));
 }
 
 function partnerFiltered(){

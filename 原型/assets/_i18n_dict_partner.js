@@ -120,17 +120,17 @@ Object.assign(TLI_I18N_DICT.en, {
 
 /* ---- r01 總覽（代理商） ---- */
 "desc.r01Overview":"This period's attribution results, pending tasks and recent attributed orders. Payment is always collected by the Connect platform — the agent never handles funds; commission is credited after HQ settles it per the P48 parameter.",
-"label.referralCode":"Referral Code: ",
+"label.referralCode":"Promo Code: ",
 "label.attrValidity":"Attribution Validity ",
 "label.attrValiditySuffix":" days (per the P47 parameter, set by HQ)",
 "h2.recentAttrOrders":"Recent Attributed Orders",
 "hint.r01RecentRow":"Click any row to expand its full details and the dispute entry point on the Order Attribution page.",
-"h2.myReferral":"My Referral Code & Link",
+"h2.myReferral":"My Promo Code & Link",
 "desc.myReferral":"Share this with prospective members — anyone who registers or checks out through this link is attributed to this agent.",
 "label.referralLink":"Referral Link",
 "btn.copyLink":"Copy Link",
 "btn.openReferralPage":"Open Referral Page",
-"label.referralCodeLabel":"Referral Code",
+"label.referralCodeLabel":"Promo Code",
 "btn.copyCode":"Copy Code",
 
 /* ---- r02 訂單歸屬 ---- */
@@ -165,7 +165,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "opt.amtAsc":"Amount (Low to High)",
 "empty.r02NoMatch":"No matching orders or contracts found.",
 "btn.loadMore":"Load More",
-"hint.r02ValidityPrefix":"Attribution is by member referral code or advisor designation, valid for ",
+"hint.r02ValidityPrefix":"Attribution is by member promo code or advisor designation, valid for ",
 "hint.r02ValiditySuffix":" days (per the P47 parameter set by HQ).",
 "h2.raiseDispute":"Raise Attribution Dispute",
 "label.orderOrContractNo":"Order/Contract No.",

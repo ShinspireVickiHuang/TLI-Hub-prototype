@@ -7,7 +7,7 @@
    ================================================================== */
 /* ------------------------------------------------------------------
    20261013 會員結構（契約：原型2 根目錄 _契約_會員結構與啟用_20261013.md）新欄位定義，後續登入頁、組織端、經銷學員入口都讀這些：
-   一筆會員＝一個人＋一個來源單位（人 × 來源）。同一人（同 Email）從不同來源進來＝兩筆、兩個帳號，不合併、不跨來源比對。
+   一筆會員＝一個人＋一個來源單位（人 × 來源）。同一人從不同來源進來＝兩筆、兩個帳號（各用不同 Email），不合併。Email 全系統唯一，同一 Email 不會對應兩個帳號。
    TLI_MASTERS.memberAccounts（會員帳號，一行一筆）：
      id            帳號 ID（'ma01'…）
      memberNo      會員編號（'MA-000001'）
@@ -28,10 +28,10 @@
      createdAt     建立日期 'YYYY-MM-DD'
      plans         方案與課時（選填；各帳號各自一份，不跨來源合併）：[{name, hoursLeft}]
    重複檢查範圍（scope）＝ orgId || sourceUnitId：只有「同一來源單位內」（同一家企業／同一夥伴）Email 或員工編號重複才擋。
-   登入規則：Email 對應多個帳號時先選單位（企業名稱／夥伴名稱，直營顯示「TLI 直營」）；無 Email 者用 企業代碼(orgCustomers.code)＋員工編號。
+   登入規則：Email＋密碼，一個 Email 只對應一個帳號、不用選單位；無 Email 者用 企業代碼(orgCustomers.code)＋員工編號。
    TLI_MASTERS.orgCustomers 新增欄位：code 企業代碼、sourceType 帶來這家企業的來源型態、sourceUnitId 帶來的夥伴 id（直營＝'tli'）。
    TLI_MASTERS.distOrders（經銷訂單，TLI 後台建立）：{id, partnerId, planId(packages), seats, kind:'individual'非企業|'enterprise'企業會員, orgId, createdAt, status}
-   代理來源帳號（20261013）：註冊時輸入代理優惠碼（＝partners.code，type 'agent'）→ 帳號 sourceType 'agent'、sourceUnitId＝該代理 id；已有其他來源帳號者另建一筆。agentByCode(code)、agentById(id)。
+   代理來源帳號（20261013）：註冊時輸入優惠碼（＝partners.code，type 'agent'）→ 帳號 sourceType 'agent'、sourceUnitId＝該代理 id；已有其他來源帳號者另建一筆。agentByCode(code)、agentById(id)。
    工具函式：memberScope(a)、sourceUnitName(a)、sourceTypeName(id)、accountsByEmail(email)、accountsOfOrder(orderId)、
             findOrgByCode(code)、newActivationCode()、activationCodeOf(a)、ensureActivationCode(a)、activationLinkOf(a, prefix)、saveMemberData()（寫入 localStorage，key 見下方）。
    a20 經銷「匯入學員名單」會把新帳號 push 進 memberAccounts 並存檔，a01 會員管理讀同一份。
@@ -577,15 +577,15 @@ function acc(id, name, email, o){
   return a;
 }
 var memberAccounts = [
- /* 同一人（同 Email）在三個來源各一筆＝三個帳號：直營／和霖科技（企業，直營帶來）／範例州立大學（專案合作），各自方案與課時 */
+ /* Emma 在三個來源各一筆＝三個帳號：直營／和霖科技（企業，直營帶來）／範例州立大學（專案合作），各自用不同 Email，各自方案與課時 */
  acc('ma01','Emma Johnson','emma.johnson@example.com',{phone:'0912-345-678', createdAt:'2024-08-20', plans:[{name:'中文一對一 20 堂課程包', hoursLeft:'12 堂'},{name:'彈性團體直播・中級會話 B1 班', hoursLeft:'8 堂'}]}),
- acc('ma02','Emma Johnson','emma.johnson@example.com',{sourceType:'direct', sourceUnitId:'tli', orgId:'ent0', employeeNo:'HL-0231', department:'海外業務部', createdAt:'2026-03-02', plans:[{name:'商務華語企業培訓（公司提供）', hoursLeft:'36 小時'}]}),
- acc('ma03','Emma Johnson','emma.johnson@example.com',{sourceType:'project', sourceUnitId:'p02', createdAt:'2026-08-20', plans:[{name:'華語會話學期方案（專案合作）', hoursLeft:'依班級課表'}]}),
- /* 同一人在直營、代理、經銷各一筆（代理來源帳號：註冊時輸入代理優惠碼建立，不把代理訂單掛在直營帳號） */
+ acc('ma02','Emma Johnson','emma.johnson@helin.example',{sourceType:'direct', sourceUnitId:'tli', orgId:'ent0', employeeNo:'HL-0231', department:'海外業務部', createdAt:'2026-03-02', plans:[{name:'商務華語企業培訓（公司提供）', hoursLeft:'36 小時'}]}),
+ acc('ma03','Emma Johnson','emma.johnson@sample-u.example',{sourceType:'project', sourceUnitId:'p02', createdAt:'2026-08-20', plans:[{name:'華語會話學期方案（專案合作）', hoursLeft:'依班級課表'}]}),
+ /* 林佩瑜在直營、代理、經銷各一筆，各用不同 Email（代理來源帳號：註冊時輸入優惠碼建立，不把代理訂單掛在直營帳號） */
  acc('ma04','林佩瑜','peiyu.lin@example.com',{phone:'0938-200-201', createdAt:'2026-07-12', plans:[{name:'中文一對一 20 堂課程包', hoursLeft:'15 堂'}]}),
- acc('ma05','林佩瑜','peiyu.lin@example.com',{sourceType:'agent', sourceUnitId:'p12', createdAt:'2026-09-12', phone:'0938-200-201', plans:[{name:'日常會話 10 堂（代理來源）', hoursLeft:'10 堂'}]}),
+ acc('ma05','林佩瑜','peiyu.lin.agent@example.com',{sourceType:'agent', sourceUnitId:'p12', createdAt:'2026-09-12', phone:'0938-200-201', plans:[{name:'日常會話 10 堂（代理來源）', hoursLeft:'10 堂'}]}),
  /* 經銷非企業學員：Email 必填、無統編員編；DO-2026-0001（大馬旅遊教育集團） */
- acc('ma10','林佩瑜','peiyu.lin@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-01', phone:'0938-200-201', plans:[{name:'日常會話套裝行程（經銷包裝）', hoursLeft:'20 堂'}]}),
+ acc('ma10','林佩瑜','peiyu.lin.edu@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-01', phone:'0938-200-201', plans:[{name:'日常會話套裝行程（經銷包裝）', hoursLeft:'20 堂'}]}),
  acc('ma11','蔡明哲','tsai.mingzhe@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-02', phone:'0938-200-202', plans:[{name:'日常會話套裝行程（經銷包裝）', hoursLeft:'20 堂'}]}),
  acc('ma12','楊雅雯','yang.yawen@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-03', phone:'0938-200-203', activationStatus:'已寄通知'}),
  acc('ma13','許家瑋','hsu.jiawei@example.com',{sourceType:'distributor', sourceUnitId:'p05', orderId:'DO-2026-0001', createdAt:'2026-09-04', phone:'0938-200-204'}),
@@ -621,7 +621,7 @@ var distOrders = [
  {id:'DO-2026-0006', partnerId:'p07', planId:'pk2', seats:8, kind:'individual', orgId:'', createdAt:'2026-10-09', status:'待匯入名單'},
  {id:'DO-2026-0007', partnerId:'p11', planId:'pk2', seats:6, kind:'individual', orgId:'', createdAt:'2026-07-28', status:'待匯入名單'}
 ];
-var MA_KEY = 'tliMemberAccounts_v1', DO_KEY = 'tliDistOrders_v1';
+var MA_KEY = 'tliMemberAccounts_v2', DO_KEY = 'tliDistOrders_v1';
 function loadMemberData(){
   try {
     var a = JSON.parse(global.localStorage.getItem(MA_KEY) || 'null');
@@ -652,7 +652,7 @@ function accountsByEmail(email){
   if (!e) return [];
   return memberAccounts.filter(function(a){ return (a.email || '').toLowerCase() === e; });
 }
-/* 代理優惠碼＝partners 裡 type 'agent' 的 code（a20 的折扣碼欄）；p07 註冊輸入後建立該代理來源帳號，m13 結帳用它判斷帳號是否屬於該代理 */
+/* 優惠碼＝partners 裡 type 'agent' 的 code（a20 的優惠碼欄）；p07 註冊輸入後建立該代理來源帳號，m13 結帳用它判斷帳號是否屬於該代理 */
 function agentByCode(code){
   var c = String(code || '').trim().toUpperCase();
   return c ? (partners.filter(function(p){ return p.type === 'agent' && p.status === '啟用' && String(p.code).toUpperCase() === c; })[0] || null) : null;
@@ -735,7 +735,7 @@ function manageLink(listName){
                        直營（無企業）→ 自費方案；和霖科技（ent0）→ plan-c；專案合作（p02）→ plan-d；
                        其他帳號（經銷、其他企業…）沒有示範方案代碼，改用帳號自己的 plans 欄
    planAllowed(id)     頁面資料依 planId 過濾用；沒有 planId 的資料視為通過
-   applyMemberAccount() 會員區頁面載入後自動執行：側欄身分、隱藏不屬於此帳號的方案區塊、帳號選單（切換帳號／改密碼） */
+   applyMemberAccount() 會員區頁面載入後自動執行：側欄身分、隱藏不屬於此帳號的方案區塊、帳號選單（所屬單位／改密碼） */
 var DEMO_DIRECT_PLANS = ['plan-a','plan-b','plan-e','plan-adv','plan-culture'];
 function currentAccount(){
   var id = '';
@@ -782,18 +782,10 @@ function renderAccountChrome(){
     bar.appendChild(wrap);
     doc.addEventListener('click', function(e){ var p = doc.getElementById('acctPanel'); if (p && !wrap.contains(e.target)) p.style.display = 'none'; });
   }
-  var others = accountsByEmail(a.email).filter(function(x){ return x.id !== a.id; });
   var onProfile = /m07_profile/.test(global.location.pathname);
   var h = '<button type="button" id="acctBtn" aria-label="' + escM(memT('帳號選單','Account menu')) + '" style="width:32px;height:32px;border-radius:50%;border:1px solid #E4E7EC;background:#1B4E8C;color:#fff;font-size:13px;font-weight:700;cursor:pointer">' + escM(a.name.charAt(0).toUpperCase()) + '</button>' +
     '<div id="acctPanel" style="display:none;position:absolute;right:0;top:40px;width:250px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;box-shadow:0 8px 24px rgba(16,24,40,.16);padding:6px 0;z-index:80;font-size:13px;color:#101828;text-align:left">' +
     '<div style="padding:8px 14px;border-bottom:1px solid #E4E7EC"><div style="font-weight:700">' + escM(a.name) + '</div><div style="font-size:12px;color:#667085">' + escM(unit) + (a.email ? '｜' + escM(a.email) : '') + '</div></div>';
-  if (others.length){
-    h += '<div style="padding:8px 14px 2px;font-size:12px;color:#667085">' + escM(memT('切換帳號（各帳號各自的方案與課時）','Switch account (each has its own plans and hours)')) + '</div>';
-    others.forEach(function(o){
-      var ou = o.sourceType === 'direct' && !o.orgId ? memT('TLI 直營','TLI Direct') : sourceUnitName(o);
-      h += '<a href="' + global.location.pathname.split('/').pop() + '?acct=' + o.id + '" style="display:block;padding:7px 14px;color:#1B4E8C;text-decoration:none">' + escM(ou) + '</a>';
-    });
-  }
   h += (onProfile ? '<a href="javascript:void(0)" onclick="openPasswordSheet()"' : '<a href="m07_profile.html?pw=1"') + ' style="display:block;padding:7px 14px;color:#101828;text-decoration:none;border-top:1px solid #E4E7EC">' + escM(memT('改密碼','Change password')) + '</a></div>';
   wrap.innerHTML = h;
   doc.getElementById('acctBtn').onclick = function(e){ e.stopPropagation(); var p = doc.getElementById('acctPanel'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; };

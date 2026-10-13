@@ -464,8 +464,8 @@ html,body{overflow-x:hidden;}
 <div>
 <div class="sectiontitle" data-i18n="section.agentClaim">代理商主張</div>
 <div class="kv"><span data-i18n="label.submittingAgent">提出代理商</span><span id="drm_agent"></span></div>
-<div class="kv"><span data-i18n="label.referralCode">轉介碼</span><span id="drm_code"></span></div>
-<div class="kv"><span data-i18n="label.referralCodeUsedAt">轉介碼使用時間</span><span id="drm_usedat"></span></div>
+<div class="kv"><span data-i18n="label.referralCode">優惠碼</span><span id="drm_code"></span></div>
+<div class="kv"><span data-i18n="label.referralCodeUsedAt">優惠碼使用時間</span><span id="drm_usedat"></span></div>
 <div class="kv"><span data-i18n="label.listProvidedAt">名單提供日期</span><span id="drm_listat"></span></div>
 <div class="kv" style="border-bottom:none"><span data-i18n="label.claimNote">主張說明</span><span id="drm_claimnote"></span></div>
 </div>
@@ -561,8 +561,8 @@ var ORD_I18N_MAP = {
   '已入帳':'Credited','未入帳':'Not Credited',
   '個人':'Individual',
   '查無點擊紀錄':'No click record found',
-  '（未使用轉介碼）':'(referral code not used)',
-  '直營（Connect 官網自助下單，未帶轉介碼）':'Direct (Connect website self-checkout, no referral code)',
+  '（未使用優惠碼）':'(promo code not used)',
+  '直營（Connect 官網自助下單，未帶優惠碼）':'Direct (Connect website self-checkout, no promo code)',
   '顧問建訂單（校區顧問現場建單，未指定代理歸屬）':'Advisor-Created Order (created on-site by campus advisor, no agent attribution specified)',
   '依帳號數':'By Account Count','依總時數':'By Total Hours',
   '全額':'Full Amount','訂金':'Deposit','尾款':'Balance','預付入帳':'Prepaid Credit',
@@ -802,7 +802,7 @@ function latestCreated(){ return ORDERS.reduce(function(m,o){ return o.created>m
       payments: buildPaymentsFor('一次付清', s.amount, baseDate, '已完成'),
       invoices: buildInvoicesFor(items, s.amount, '已完成', s.campus),
       benefits: items.map(function(it,idx2){ return {id:'bn'+idx2, item:it.name, qty:'依方案堂數', granted:true, grantedAt: addDays(baseDate,1)}; }),
-      history:[{t:baseDate+' 10:00', who:'系統', what:'訂單建立（來源：Connect 線上自助下單，帶入代理商轉介碼），付款方式選擇「一次付清」'}],
+      history:[{t:baseDate+' 10:00', who:'系統', what:'訂單建立（來源：Connect 線上自助下單，帶入代理商優惠碼），付款方式選擇「一次付清」'}],
       nextPayId:100, nextInvId:100,
       orderType:'個人', currency:'TWD', demoAgentName:s.agent, overseasBuyer:s.overseas
     });
@@ -909,7 +909,7 @@ function bizSourceOf(o){
   if (o.attributedAgent || o.demoAgentName) return '代理';
   return '直營';
 }
-/* 夥伴識別碼：讀主檔 partners.code（代理沿用夥伴端轉介碼 REF-…）；代理依名稱對到主檔夥伴 */
+/* 夥伴識別碼：讀主檔 partners.code（代理沿用夥伴端優惠碼 REF-…）；代理依名稱對到主檔夥伴 */
 var PARTNER_CODES = {};
 TLI_MASTERS.partners.forEach(function(p){ if (p.code) PARTNER_CODES[p.id] = p.code; });
 function masterPartnerByName(n){ return TLI_MASTERS.partners.filter(function(p){ return p.name===n; })[0] || null; }
@@ -921,7 +921,7 @@ function sourcePartnerOf(o){
 }
 function sourcePartnerLabel(o){
   var p = sourcePartnerOf(o); if (!p) return '';
-  return p.name + (PARTNER_CODES[p.id] ? '（'+(p.type==='agent' ? tr2('折扣碼','Discount code')+' ' : tr2('來源標籤','Source tag')+' ')+PARTNER_CODES[p.id]+'）' : '');
+  return p.name + (PARTNER_CODES[p.id] ? '（'+(p.type==='agent' ? tr2('優惠碼','Promo code')+' ' : tr2('來源標籤','Source tag')+' ')+PARTNER_CODES[p.id]+'）' : '');
 }
 function bizSourceCell(o){
   var b = bizSourceOf(o);
@@ -1029,7 +1029,7 @@ function renderChipBars(){
   document.getElementById('f_paymode').innerHTML = '<option value="">'+allPaymodeLabel+'</option>' + allPaymodes.map(function(p){ return '<option value="'+p+'"'+(filters.payMode===p?' selected':'')+'>'+tr(p)+'</option>'; }).join('');
   document.getElementById('f_partner').innerHTML = '<option value="">'+(i18n?i18n.t('全部來源夥伴','All Source Partners'):'全部來源夥伴')+'</option><option value="__direct"'+(filters.partner==='__direct'?' selected':'')+'>'+(i18n?i18n.t('直營（無夥伴）','Direct (no partner)'):'直營（無夥伴）')+'</option>' +
     TLI_MASTERS.partners.filter(function(p){ return p.type==='agent' || p.type==='distributor'; }).map(function(p){
-      var lab = (p.type==='agent' ? (i18n?i18n.t('代理：','Agent: '):'代理：') : (i18n?i18n.t('經銷：','Distributor: '):'經銷：')) + p.name + (PARTNER_CODES[p.id] ? '（'+(p.type==='agent' ? tr2('折扣碼','Discount code')+' ' : '')+PARTNER_CODES[p.id]+'）' : '');
+      var lab = (p.type==='agent' ? (i18n?i18n.t('代理：','Agent: '):'代理：') : (i18n?i18n.t('經銷：','Distributor: '):'經銷：')) + p.name + (PARTNER_CODES[p.id] ? '（'+(p.type==='agent' ? tr2('優惠碼','Promo code')+' ' : '')+PARTNER_CODES[p.id]+'）' : '');
       return '<option value="'+p.id+'"'+(filters.partner===p.id?' selected':'')+'>'+lab+'</option>';
     }).join('');
   document.getElementById('f_bizsource').value = filters.bizSource;
@@ -1753,16 +1753,16 @@ renderNotifPanel();
 /* ================= 20260927j 新增：歸屬異議（代理商端 r02「提出異議」的總部覆核畫面） =================
    代理商在夥伴端 r02 對訂單提出異議、主張某筆應歸屬自己；此處為總部覆核清單。
    接受後訂單「來源」欄同步顯示新歸屬代理商，並寫入該筆訂單的異動歷程；佣金於下期結算重新計算（示範不做實際結算連動）。
-   代理商名稱與轉介碼示範對齊 a20 合作夥伴管理（代理型態）與夥伴端 r02 的示範資料。 */
+   代理商名稱與優惠碼示範對齊 a20 合作夥伴管理（代理型態）與夥伴端 r02 的示範資料。 */
 var DISPUTES = [
   {
     /* 20260928u：代理商名稱改為 TLI_MASTERS.partners 內既有的代理型夥伴（原名稱不在主檔內，查無此夥伴） */
     id:'DIS-2026-004', orderId:'ORD-26090019', student:'學生 B07',
     agentName:'環宇教育顧問', agentCode:'REF-MEA07',
     claimUsedAt:'2026-09-01', claimListAt:'2026-08-28',
-    claimNote:'學員為代理商說明會帶來的名單，主張於 9/1 使用轉介碼完成結帳',
-    sysSource:'直營（Connect 官網自助下單，未帶轉介碼）', sysClickAt:'查無點擊紀錄',
-    sysNote:'學員以個人帳號於官網自行下單，系統未記錄轉介碼帶入',
+    claimNote:'學員為代理商說明會帶來的名單，主張於 9/1 使用優惠碼完成結帳',
+    sysSource:'直營（Connect 官網自助下單，未帶優惠碼）', sysClickAt:'查無點擊紀錄',
+    sysNote:'學員以個人帳號於官網自行下單，系統未記錄優惠碼帶入',
     submittedAt:'2026-09-14', status:'待審核',
     pendingNote:'尚待代理商補件：待提供轉介連結點擊紀錄或說明會簽到紀錄佐證',
     reviewedAt:'', reviewNote:'', reviewedBy:''
@@ -1773,7 +1773,7 @@ var DISPUTES = [
     claimUsedAt:'2026-06-05', claimListAt:'2026-05-30',
     claimNote:'學員經代理商招生說明會報名，提供報名表為佐證',
     sysSource:'顧問建訂單（校區顧問現場建單，未指定代理歸屬）', sysClickAt:'查無點擊紀錄',
-    sysNote:'訂單由校區顧問現場建立，未帶入任何代理商轉介碼',
+    sysNote:'訂單由校區顧問現場建立，未帶入任何代理商優惠碼',
     submittedAt:'2026-06-12', status:'待審核',
     pendingNote:'',
     reviewedAt:'', reviewNote:'', reviewedBy:''
@@ -1783,7 +1783,7 @@ var DISPUTES = [
     agentName:'香港教育橋樑', agentCode:'REF-HKB09',
     claimUsedAt:'2026-01-19', claimListAt:'2026-01-10',
     claimNote:'學員透過代理商轉介連結完成註冊，提供申請表單截圖為佐證',
-    sysSource:'直營（Connect 官網自助下單，未帶轉介碼）', sysClickAt:'2026-01-19 14:22（與結帳時間吻合）',
+    sysSource:'直營（Connect 官網自助下單，未帶優惠碼）', sysClickAt:'2026-01-19 14:22（與結帳時間吻合）',
     sysNote:'',
     submittedAt:'2026-01-22', status:'已接受',
     pendingNote:'',
@@ -1792,16 +1792,16 @@ var DISPUTES = [
   {
     id:'DIS-2026-007', orderId:'ORD-2026-1001', student:'陳雅婷',
     agentName:'歐洲文化交流協會', agentCode:'REF-EUR10',
-    claimUsedAt:'（未使用轉介碼）', claimListAt:'2026-02-10',
-    claimNote:'主張學員為代理商說明會帶來的名單，但學員下單時未使用轉介碼',
-    sysSource:'直營（Connect 官網自助下單，未帶轉介碼）', sysClickAt:'查無點擊紀錄',
+    claimUsedAt:'（未使用優惠碼）', claimListAt:'2026-02-10',
+    claimNote:'主張學員為代理商說明會帶來的名單，但學員下單時未使用優惠碼',
+    sysSource:'直營（Connect 官網自助下單，未帶優惠碼）', sysClickAt:'查無點擊紀錄',
     sysNote:'代理商提供名單日期晚於學員下單日期，且查無轉介連結點擊紀錄',
     submittedAt:'2026-02-05', status:'已駁回',
     pendingNote:'',
-    reviewedAt:'2026-02-08', reviewNote:'代理商提供名單日期（2026-02-10）晚於學員下單日期（2026-02-02），且未使用轉介碼、查無點擊紀錄，證據不足，予以駁回', reviewedBy:'王大明'
+    reviewedAt:'2026-02-08', reviewNote:'代理商提供名單日期（2026-02-10）晚於學員下單日期（2026-02-02），且未使用優惠碼、查無點擊紀錄，證據不足，予以駁回', reviewedBy:'王大明'
   }
 ];
-/* 申訴單的代理轉介碼一律依代理名稱讀主檔 partners.code，不在頁內寫死 */
+/* 申訴單的優惠碼一律依代理名稱讀主檔 partners.code，不在頁內寫死 */
 DISPUTES.forEach(function(d){ var pp = masterPartnerByName(d.agentName); if (pp && pp.code) d.agentCode = pp.code; });
 function findDispute(id){ return DISPUTES.find(function(x){ return x.id===id; }); }
 function disputeStatusBadge(s){
@@ -1820,7 +1820,7 @@ function renderDisputeTable(){
   DISPUTES.forEach(function(d){
     var trEl = document.createElement('tr');
     trEl.className = 'rowlink';
-    var claimCell = tr2('轉介碼 ','Referral code ')+d.agentCode+tr2(' 於 ',' used on ')+tr(d.claimUsedAt)+tr2(' 使用；學員名單提供於 ','; student list provided on ')+d.claimListAt
+    var claimCell = tr2('優惠碼 ','Promo code ')+d.agentCode+tr2(' 於 ',' used on ')+tr(d.claimUsedAt)+tr2(' 使用；學員名單提供於 ','; student list provided on ')+d.claimListAt
       + (d.pendingNote ? '<div class="hint" style="color:var(--orange)">'+d.pendingNote+'</div>' : '');
     var sysCell = tr(d.sysSource) + (d.sysClickAt ? '<div class="hint">'+tr2('轉介連結點擊：','Referral link clicks: ')+tr(d.sysClickAt)+'</div>' : '');
     trEl.innerHTML = '<td>'+d.id+'</td>' +
