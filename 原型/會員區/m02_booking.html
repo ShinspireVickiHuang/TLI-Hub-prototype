@@ -297,7 +297,9 @@ button.pick-card{width:100%;text-align:left;margin:0;font:inherit;}
       </div>
       <p class="small muted" style="margin:6px 0 10px;" data-i18n="m02.oneToOneDesc">一對一課程由顧問依你提出的有空時間安排老師與時間，這裡只顯示顧問已排好的時段，無法自行預約或指定老師。</p>
       <div id="oneToOneSummary" class="stack" style="gap:8px;"></div>
-      <button type="button" class="btn btn-outline btn-block" style="margin-top:12px;" onclick="openAdvisorRequestSheet()" data-i18n="m02.btnRequestAdvisor">向顧問提出需求</button>
+      <!-- 20261014：一對一排課的主入口，與 m01、m04 同一顆按鈕，直達 m03 提出有空時間表單 -->
+      <button type="button" class="btn btn-primary btn-block" style="margin-top:12px;" onclick="location.href='m03_schedule.html#request'" data-i18n="m01.btnSubmitAvailability">提出有空時間，請顧問排課</button>
+      <button type="button" class="btn btn-outline btn-block" style="margin-top:8px;" onclick="openAdvisorRequestSheet()" data-i18n="m02.btnRequestAdvisor">向顧問提出需求</button>
     </div>
 
     <div id="flexSection">
