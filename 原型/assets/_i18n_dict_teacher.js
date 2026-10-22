@@ -203,6 +203,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "hourspay.monthHoursLabel":"Hours This Month",
 "hourspay.phase2":"Phase 2",
 "badge.phase1b":"Phase 1 B",
+"badge.phase1c":"Phase 1 C",
 "hourspay.tierBreakdown":"Breakdown by Class Size Tier",
 "hourspay.tierNote":"Hourly rate tier is determined by the number of students per class.",
 "hourspay.col.tierRange":"Size Tier",

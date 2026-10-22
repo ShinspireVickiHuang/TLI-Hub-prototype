@@ -89,6 +89,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .countdown{font-size:12.5px;color:var(--c-accent-dark);font-weight:700;background:#FCEBDC;padding:3px 9px;border-radius:20px;white-space:nowrap;font-variant-numeric:tabular-nums;}
 .nc-meta{display:flex;flex-direction:column;gap:4px;margin:10px 0 14px;font-size:13px;color:var(--c-muted);}
 .nc-meta strong{color:var(--c-text);}
+/* 20261022 學員回饋屬一階段 C，區塊標題旁加階段標籤（樣式同 t06 頁內 phase1-pill） */
+.phase1-pill{display:inline-block;background:#E6F4EE;border:1px solid #0F9B79;color:#0B6B53;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 /* ---------- 今日時間軸（教師端專用，沿用共用色票／圓角） ---------- */
 .timeline{display:flex;flex-direction:column;gap:0;}
 .tl-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--c-border);}
@@ -242,7 +244,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <div class="card" id="feedbackPendingCard" style="cursor:pointer;margin-top:12px;" onclick="goFeedbackPending()">
       <div class="flex-between">
         <div>
-          <div style="font-size:14px;font-weight:700;"><span data-i18n="section.feedbackPending">學員回饋待回應</span> <span id="feedbackPendingCount">1</span><span data-i18n="today.unit.count"> 筆</span></div>
+          <div style="font-size:14px;font-weight:700;"><span data-i18n="section.feedbackPending">學員回饋待回應</span><span class="phase1-pill" data-i18n="badge.phase1c">一階段 C</span> <span id="feedbackPendingCount">1</span><span data-i18n="today.unit.count"> 筆</span></div>
           <div class="small muted" style="margin-top:2px;" data-i18n="desc.feedbackPending">學員已在課後回饋留言，尚待你回覆</div>
         </div>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--c-muted);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>

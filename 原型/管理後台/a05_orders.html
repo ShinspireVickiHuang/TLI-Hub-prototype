@@ -813,15 +813,20 @@ function latestCreated(){ return ORDERS.reduce(function(m,o){ return o.created>m
    本頁負責列出與建立訂單、付款與開票；a20 合作夥伴的經銷分頁負責匯入名單與寄啟用信。
    付款一律線下匯款，開票對象為經銷商本身。 */
 var DIST_PAY_SEED = {'DO-2026-0001':'已完成','DO-2026-0002':'分期中','DO-2026-0003':'待收款','DO-2026-0004':'已完成','DO-2026-0005':'待收款','DO-2026-0006':'待收款'};
-function distOrderAmount(x){
+/* 20261022 經銷訂單單價：先讀該經銷商在 a20 設定的專案折讓價（partner.discountPrices[方案id]），沒設才用標準售價 */
+function distUnitInfo(x){
   var k = TLI_MASTERS.byId('packages', x.planId), pr = k && k.prices ? k.prices : {};
-  var unit = pr.BIP || pr.C || pr.B || pr[Object.keys(pr)[0]] || 0;
-  return unit * x.seats;
+  var std = pr.BIP || pr.C || pr.B || pr[Object.keys(pr)[0]] || 0;
+  var p = TLI_MASTERS.byId('partners', x.partnerId), dp = p && p.discountPrices ? p.discountPrices[x.planId] : undefined;
+  var has = dp !== undefined && dp !== null && dp !== '';
+  return {unit: has ? Number(dp) : std, discounted: has};
 }
+function distOrderAmount(x){ return distUnitInfo(x).unit * x.seats; }
 function buildDistOrderEntry(x, status){
   var p = TLI_MASTERS.byId('partners', x.partnerId), k = TLI_MASTERS.byId('packages', x.planId);
   var name = p ? p.name : x.partnerId, amount = distOrderAmount(x), base = x.createdAt;
-  var items = [{name:(k ? k.name : x.planId)+' × '+x.seats+'（經銷訂單）', amount:amount, tax:'免稅'}];
+  var ui = distUnitInfo(x);
+  var items = [{name:(k ? k.name : x.planId)+' × '+x.seats+tr2('（經銷訂單・單價 NT$','（Distributor order, unit price NT$')+ui.unit.toLocaleString('en-US')+' '+(ui.discounted ? tr2('專案折讓價）','project discount price)') : tr2('標準售價）','standard price)')), amount:amount, tax:'免稅'}];
   return {
     id:x.id, student:name, studentId:'', campus:'（經銷商所在地）', tier:'ENT',
     status:status, amount:amount, payMode:'月結', entChannel:'匯款', source:'顧問建訂單', builder:'顧問 A',

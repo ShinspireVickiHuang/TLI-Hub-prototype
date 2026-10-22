@@ -89,6 +89,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .hero .num{font-size:40px;font-weight:700;color:var(--c-primary);}
 .hero .lbl{font-size:12.5px;color:var(--c-muted);margin-top:2px;}
 .phase1-pill{display:inline-block;background:#E6F4EE;border:1px solid #0F9B79;color:#0B6B53;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
+/* 20261022 時數統計屬一階段 B；薪資級距與金額屬二階段，標籤改貼在級距卡與逐堂明細（含金額欄）；學員回饋屬一階段 C */
 .phase2-pill{display:inline-block;background:#FFF4E0;border:1px solid #E8A23D;color:#8A5A00;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;white-space:nowrap;}
 .tier-note{font-size:11.5px;color:var(--c-muted);margin-bottom:10px;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -190,7 +191,7 @@ tbody tr.row-detail.hidden{display:none;}
 
     <div class="card" style="cursor:pointer;" onclick="location.href='t07_students.html'">
       <div class="flex-between">
-        <div class="section-title" style="margin:0;" data-i18n="hourspay.studentFeedbackTitle">學生對我的回饋</div>
+        <div class="section-title" style="margin:0;"><span data-i18n="hourspay.studentFeedbackTitle">學生對我的回饋</span><span class="phase1-pill" data-i18n="badge.phase1c">一階段 C</span></div>
         <span class="small muted">›</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px;">
@@ -213,13 +214,13 @@ tbody tr.row-detail.hidden{display:none;}
       </div>
       <div class="hero">
         <div class="num" id="totalHours">38.5</div>
-        <div class="lbl"><span data-i18n="hourspay.monthHoursLabel">本月時數（小時）</span><span class="phase2-pill" data-i18n="hourspay.phase2">二階段</span></div>
+        <div class="lbl"><span data-i18n="hourspay.monthHoursLabel">本月時數（小時）</span></div>
         <span class="badge" id="settlePill">待結算</span>
       </div>
     </div>
 
     <div class="card">
-      <div class="section-title" style="margin-top:0;" data-i18n="hourspay.tierBreakdown">依人數級距拆解</div>
+      <div class="section-title" style="margin-top:0;"><span data-i18n="hourspay.tierBreakdown">依人數級距拆解</span><span class="phase2-pill" data-i18n="hourspay.phase2">二階段</span></div>
       <div class="tier-note" data-i18n="hourspay.tierNote">依課堂學生人數對應不同時薪級距核算。</div>
       <div class="table-scroll">
         <table>
@@ -231,7 +232,7 @@ tbody tr.row-detail.hidden{display:none;}
     </div>
 
     <div class="card">
-      <div class="section-title" style="margin-top:0;" data-i18n="hourspay.lessonDetail">逐堂明細</div>
+      <div class="section-title" style="margin-top:0;"><span data-i18n="hourspay.lessonDetail">逐堂明細</span><span class="phase2-pill" data-i18n="hourspay.phase2">二階段</span></div>
       <div class="table-scroll">
         <table>
           <thead><tr><th data-i18n="hourspay.col.date">日期</th><th data-i18n="hourspay.col.time">時間</th><th data-i18n="hourspay.col.classType">班型</th><th data-i18n="hourspay.col.headcount">人數</th><th data-i18n="hourspay.col.material">教材</th><th data-i18n="hourspay.col.tier">級距</th><th data-i18n="hourspay.col.amount">金額</th></tr></thead>

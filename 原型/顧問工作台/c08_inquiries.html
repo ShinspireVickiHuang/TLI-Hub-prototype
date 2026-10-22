@@ -483,7 +483,7 @@ function buildTrialFeedback(o){
 function buildTimeline(o){
   var tl=[];
   if(o.isSelfBooked){
-    tl.push({t:o.submittedAt,label:T('學員於官網自助選擇老師與時段並完成付款（試聽費 NT$390，同官網 p06 頁）','Student self-selected a teacher and time slot on the website and completed payment (trial fee NT$390, same as website p06)')});
+    tl.push({t:o.submittedAt,label:T('學員於官網選擇時段偏好並完成付款，由顧問安排老師與時段（試聽費 NT$390，同官網 p06 頁）','Student chose preferred time slots on the website and completed payment; the advisor arranges the teacher and time slot (trial fee NT$390, same as website p06)')});
     tl.push({t:o.submittedAt,label:T('系統自動指派顧問（用於試聽後跟進）：','System auto-assigned advisor (for post-trial follow-up): ')+(o.advisor||T('待指派','Unassigned'))});
     tl.push({t:o.submittedAt,label:T('已加入顧問「試聽後跟進」待辦清單','Added to advisor\'s "Post-Trial Follow-up" to-do list')});
     if(['已上試聽','已購買','未購買待跟進'].indexOf(o.status)>-1){
@@ -710,7 +710,8 @@ var SELF_STATUS_GROUPS=[
         campus:'線上',
         slotText:fmtDT(trialDate),
         advisor:ADVISORS[k%ADVISORS.length],
-        note:'透過官網自助選擇老師與時段完成試聽預約與付款',
+        /* 20261022 與 p06 一致：學員只選時段偏好，老師由顧問安排 */
+        note:'透過官網選擇時段偏好並付款，由顧問安排老師與時段',
         isSelfBooked:true,
         trialTeacher:teacher,
         trialSlot:fmtDT(trialDate)+'・'+teacher
