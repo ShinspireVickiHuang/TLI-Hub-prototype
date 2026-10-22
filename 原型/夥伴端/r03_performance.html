@@ -312,13 +312,12 @@ var TYPE_LABEL = {b2c:'B2C 訂單', b2b:'B2B 企業合約'};
 var TYPE_LABEL_EN = {b2c:'B2C Order', b2b:'B2B Corporate Contract'};
 var TYPE_SHORT = {b2c:'B2C', b2b:'B2B 企業'};
 var TYPE_SHORT_EN = {b2c:'B2C', b2b:'B2B Corp'};
+/* 20261022 拍板：代理佣金半年結算一次（上半年、下半年各一期），結算紀錄改半年一期；與 a20、a24 說法一致 */
 /* 結算紀錄由總部 a20 產生並標記，夥伴端唯讀 */
 /* 金額＝原始成交已收款金額 × P48_RATE（10%），與 a20 p12 commRate 定案一致重算 */
 var SETTLEMENTS = [
- {period:'2026-08', amount:159600, status:'已結算', settledAt:'2026-09-05'},
- {period:'2026-07', amount:50540,  status:'已結算', settledAt:'2026-08-05'},
- {period:'2026-06', amount:38660,  status:'已結算', settledAt:'2026-07-06'},
- {period:'2026-05', amount:51280,  status:'已結算', settledAt:'2026-06-05'}
+ {period:['2026 上半年','2026 H1'], amount:300080, status:'已結算', settledAt:'2026-07-10'},
+ {period:['2025 下半年','2025 H2'], amount:218450, status:'已結算', settledAt:'2026-01-12'}
 ];
 
 /* ===== 異議紀錄：寫入 localStorage，讓總部 a20「訂單歸屬」分頁能讀到（正式版改走後端 API） ===== */
@@ -374,7 +373,7 @@ function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 var NOTIFS = [
   {t:['「學生 A18」的一對一課程包訂單已成立，平台尚未收款','"Student A18" 1-on-1 course package order created — payment not yet received by the platform'], time:['2 小時前','2 hours ago'], unread:true},
-  {t:['2026-08 期佣金已由總部標記為已結算','The 2026-08 commission has been marked as settled by HQ'], time:['昨天','Yesterday'], unread:true},
+  {t:['2026 上半年佣金已由總部標記為已結算','The 2026 H1 commission has been marked as settled by HQ'], time:['昨天','Yesterday'], unread:true},
   {t:['「學生 B07」訂單歸屬進入爭議中，請補件說明','"Student B07" order attribution is now disputed — please provide supporting documents'], time:['3 天前','3 days ago'], unread:false}
 ];
 function renderNotifPanel(){
@@ -574,7 +573,7 @@ function renderSettleTable(rows){
   var r = currentRange();
   var s = sums(rows);
   var cur = {period: periodLabel(r), amount: s.comm, status: scenSettled ? '已結算' : '待結算', settledAt: scenSettled ? '2026-09-14' : '－'};
-  var all = [cur].concat(SETTLEMENTS.map(function(x){ return {period:x.period, amount:x.amount, status:x.status, settledAt:x.settledAt}; }));
+  var all = [cur].concat(SETTLEMENTS.map(function(x){ return {period:T(x.period[0],x.period[1]), amount:x.amount, status:x.status, settledAt:x.settledAt}; }));
   var t = document.getElementById('settleTable');
   t.innerHTML = '<tr><th>'+T('期別','Period')+'</th><th class="num">' + M().settleCol + '</th><th>'+T('狀態','Status')+'</th><th>'+T('總部結算日','HQ Settlement Date')+'</th></tr>';
   all.forEach(function(x){

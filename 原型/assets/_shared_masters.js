@@ -240,7 +240,7 @@ var teachers = [
 ];
 
 /* ---- 11. 合作夥伴（來源 a20「合作夥伴管理」）
-   videoLicense：'tli' 使用 TLI 授權額度／'own' 使用自有視訊授權，僅經銷型態適用
+   videoLicense：經銷一律 'tli'（使用 TLI 授權額度，排課檢查 TLI 授權餘量）；20261022 拍板只用 TLI 授權
    type 只有三種：'agent' 代理／'distributor' 經銷／'project' 專案合作；
    專案合作不經手任何金流（無分潤、費率、結算、發票），只記基本資料、合作期間、Mandarin Lounge 額度、視訊工具；
    欄位契約見原型2 根目錄 _契約_專案合作主檔_20261006.md ---- */

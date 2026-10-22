@@ -428,7 +428,7 @@ var A20_EN = {
   '基本資料':'Basic Information','合約與費率':'Contract & Fee Terms','通知信署名':'Notification Email Signature','視訊授權':'Video License',
   '介面語系':'Interface Languages','學員':'Students','系統資訊':'System Info',
   '結算週期':'Settlement Cycle',
-  '訂金（Deposit）比例（%）':'Deposit Rate (%)','尾款計價':'Balance Pricing','方案批發價':'Plan Wholesale Price',
+  '訂金（Deposit）比例（%）':'Deposit Rate (%)','尾款計價':'Balance Pricing','專案折讓價':'Project Discount Price','標準售價':'Standard Price','未設定（依標準售價）':'Not set (standard price applies)','專案折讓價依各經銷商個別議定，只對此經銷商生效；留白的方案依標準售價。':'Project discount prices are negotiated per distributor and apply only to this distributor; plans left blank use the standard price.',
   '優惠碼（識別碼）':'Promo Code (ID)','必填，且不可與其他夥伴重複':'Required and must be unique','佣金比例（%）':'Commission Rate (%)','歸屬有效期（天）':'Attribution Validity (days)',
   '學生資料保存年限':'Student Data Retention Period','學生資料保存年限（年）':'Student Data Retention (years)',
   '寄件人名稱':'Sender Name','回覆信箱':'Reply-To Email',
@@ -450,8 +450,8 @@ var A20_EN = {
   '必填，請輸入佣金比例':'Required, please enter the commission rate',
   '必填，請輸入歸屬有效期天數':'Required, please enter the attribution validity in days',
   '必填，請至少勾選一種介面語系':'Required, please select at least one interface language',
-  '工具名稱':'Tool Name','自填工具名稱':'Custom Tool Name',
-  '使用 TLI 授權時，排課會檢查 TLI 的授權餘量；自有授權由夥伴自行控管，排課不檢查。':'When using a TLI license, scheduling checks TLI\'s remaining license quota; an own license is self-managed by the partner and is not checked when scheduling.',
+
+  '使用 TLI 授權，排課會檢查 TLI 的授權餘量。':'Using the TLI license; scheduling checks TLI\'s remaining license quota.',
   '共用 TLI 授權池，實際扣抵依教室排課系統即時計算，此處為總量參考。':'Shared TLI license pool; actual deductions are calculated live by the classroom scheduling system — the figures here are for total-quantity reference only.',
   '代理介紹來的學生進 TLI 官方會員池，不提供獨立學員名單；如需查詢個別學生歸屬，請至':'Students referred by agents go into the TLI official member pool and no separate student list is provided. To look up an individual student\'s attribution, go to ',
   '會員管理':'Member Management',
@@ -460,13 +460,12 @@ var A20_EN = {
   '查看學員名單':'View Student List',
   '半年結算一次':'Settled every half year',
   '依實際開課量 × 單價計價，開課後產生尾款帳單，線下匯款':'Priced by actual class volume × unit price; a balance invoice is issued after classes start, paid via offline transfer',
-  '依銷售方案設定之經銷底價表，不在此重複設定':'Per the distributor floor-price table in Sales Plan Settings; not duplicated here',
   '返佣（Rebate）級距表':'Rebate Tier Table','無上限':'No limit',
   '依經銷商年度累積採購或開課量分級距；至少要有一列完整級距':'Tiered by the distributor\'s annual cumulative purchase or class volume; at least one complete tier row is required',
   '半年結算一次，TLI 將佣金匯款給代理商':'Settled every half year; TLI remits commission to the agent',
   '學生資料保存年限':'Student Data Retention Period','允許':'Allowed','不允許':'Not Allowed',
   '通知信署名':'Notification Email Signature',
-  '使用 TLI 授權':'Use TLI License','自有授權':'Own License',
+  '使用 TLI 授權':'Use TLI License',
   '型態':'Type',
   '代理不提供學員登入介面，不適用介面語系設定。':'Agents do not provide a student login interface, and interface language settings do not apply.',
   '夥伴的學員登入後只能在這裡開放的語系中切換介面語言；至少開放一種':'After logging in, this partner\'s students can only switch the interface language among the languages enabled here; at least one must be enabled.',
@@ -545,7 +544,6 @@ function partnerById(id){ return PARTNERS.find(function(x){ return x.id === id; 
 
 /* ---- 通知信署名等欄位若共用主檔缺值，只在記憶體補預設，不改 _shared_masters.js ---- */
 var PARTNER_SLUG = {p02:'az', p05:'mytravel', p06:'vnstudy', p07:'krlang'};
-var PARTNER_OWN_VIDEO_DEFAULT = {};
 /* 20260929oneway：改版前「開放給誰賣」留在專案端的夥伴名單（project.partners），改版後專案不再管理
    這份關聯，只在此把舊示範資料一次性轉成夥伴端的「可銷售的專案」種子值，避免關聯遺失；之後全部
    以 partner.sellableProjects 為準，不回寫專案端。 */
@@ -571,9 +569,6 @@ function applyGenericFrontendDefaults(o){
       footerText: '本信件由「' + (o.name || '') + '」透過 TLI Connect 系統發送'
     };
   }
-  if (o.videoLicenseTool === undefined){
-    o.videoLicenseTool = (o.videoLicense === 'own') ? {name:''} : null;
-  }
 }
 function copyPartnerUrl(encoded){
   var url = decodeURIComponent(encoded);
@@ -589,10 +584,8 @@ function ensurePartnerDefaults(p){
   p._fdApplied = true;
   if (p.type !== 'agent'){
     applyGenericFrontendDefaults(p);
-    if (PARTNER_OWN_VIDEO_DEFAULT[p.id] && p.videoLicense === 'own' && (!p.videoLicenseTool || !p.videoLicenseTool.name)){
-      p.videoLicenseTool = PARTNER_OWN_VIDEO_DEFAULT[p.id];
-    }
   }
+  if (p.type === 'distributor' && !p.discountPrices) p.discountPrices = JSON.parse(JSON.stringify(DISCOUNT_PRICE_SEED[p.id] || {}));
   if (!p.uiLocales) p.uiLocales = [];
   if (!p.sellableProjects) p.sellableProjects = (PARTNER_SELLABLE_PROJECTS_SEED[p.id] || []).slice();
   if (!p.createdAt) p.createdAt = p.from;
@@ -608,33 +601,10 @@ function demoStudentStats(p){
   var logins = Math.round(total * (0.1 + (h % 40) / 100));
   return {total:total, activeRatio:activeRatio, logins:logins};
 }
-/* 20260929fix2 拍板：自有授權只登記「工具名稱」（下拉 Zoom／Microsoft Teams／其他，選其他才出現自填欄），
-   拿掉「授權數」——夥伴自己的授權額度不歸 TLI 管，排課也不檢查 */
-// 20260930：改讀共用主檔 TLI_MASTERS.videoTools 的工具名稱，不再自己寫死同一份清單（維護入口在 a17）
-var OWN_VIDEO_TOOL_OPTIONS = TLI_MASTERS.videoTools.map(function(v){ return v.name; });
-/* 20260930i18n：改成函式而非固定字串——固定字串只會在腳本第一次執行時（TLI_I18N.init() 之前，
-   語言必為預設值）算好並定死，之後切語言不會再重算，英文模式會漏翻。 */
-function VIDEO_SYNC_NOTE(){ return '<div class="hint">' + TT('使用 TLI 授權時，排課會檢查 TLI 的授權餘量；自有授權由夥伴自行控管，排課不檢查。') + '</div>'; }
+/* 20261022 拍板：經銷視訊授權只用 TLI 授權，拿掉授權來源選項（原 20260929fix2 夥伴自備工具登記一併移除） */
+/* 20260930i18n：改成函式而非固定字串——固定字串只會在腳本第一次執行時算好並定死，英文模式會漏翻。 */
+function VIDEO_SYNC_NOTE(){ return '<div class="hint">' + TT('使用 TLI 授權，排課會檢查 TLI 的授權餘量。') + '</div>'; }
 function renderVideoDetail(mode, o){
-  if (o.videoLicense === 'own'){
-    var t = o.videoLicenseTool || {name:''};
-    var isCustom = !!(t.name && OWN_VIDEO_TOOL_OPTIONS.indexOf(t.name) < 0);
-    var selVal = isCustom ? '其他' : (t.name || '');
-    if (mode === 'view'){
-      return VIDEO_SYNC_NOTE() + '<div class="kv"><span>' + TT('工具名稱') + '</span><span>' + escHtml(t.name || TT('未設定')) + '</span></div>';
-    }
-    var selectHtml = '<select id="pe_videoNameSel" onchange="pdSetVideoToolSelect(this.value)">' +
-      '<option value=""' + (selVal === '' ? ' selected' : '') + '>' + TT('請選擇') + '</option>' +
-      OWN_VIDEO_TOOL_OPTIONS.map(function(opt){
-        return '<option value="' + opt + '"' + (selVal === opt ? ' selected' : '') + '>' + opt + '</option>';
-      }).join('') +
-      '<option value="其他"' + (selVal === '其他' ? ' selected' : '') + '>' + TT('其他') + '</option>' +
-      '</select>';
-    var customRow = (selVal === '其他')
-      ? '<div class="formrow" id="pf_videoCustomName" style="margin-top:8px"><label>' + TT('自填工具名稱') + '</label><input type="text" id="pe_videoCustomName" value="' + escHtml(isCustom ? t.name : '') + '" placeholder="' + TLI_I18N.t('請輸入自有視訊工具名稱','Enter your own video tool name') + '" onchange="pdSetVideoTool(\'name\',this.value)"></div>'
-      : '';
-    return VIDEO_SYNC_NOTE() + '<div class="formrow" style="margin-top:8px"><label>' + TT('工具名稱') + '</label>' + selectHtml + '</div>' + customRow;
-  }
   var rows = TLI_MASTERS.videoTools.map(function(v){
     return '<div class="kv"><span>' + escHtml(v.name) + '</span><span>' + TLI_I18N.t('剩 '+(v.licenses - v.inUse)+'／共 '+v.licenses, 'Remaining '+(v.licenses - v.inUse)+' / Total '+v.licenses) + '</span></div>';
   }).join('');
@@ -781,6 +751,34 @@ function pdSetLounge(field, v){
   pdDraft.loungeQuota[field] = v;
 }
 
+/* 20261022 拍板：經銷價＝專案折讓價，每家經銷商不同，設在本頁該經銷商詳情（取代原依銷售方案統一設定的經銷價表）。
+   資料存 partner.discountPrices = {銷售方案id: 折讓價}；未填的方案走標準售價。示範只列前 3 個直營銷售方案。 */
+var DISCOUNT_PRICE_SEED = {
+  p05:{pk1:17500, pk2:8800, pk3:2000},
+  p06:{pk1:18000, pk2:9000},
+  p07:{pk1:17000, pk3:1950}
+};
+function discountPricePackages(){
+  return (TLI_MASTERS.packages || []).filter(function(k){ return k.type === 'pkg' && k.salesMode === 'direct' && k.prices && k.prices.C; }).slice(0, 3);
+}
+function discountPriceHtml(mode, o){
+  var dp = o.discountPrices || {};
+  var rows = discountPricePackages().map(function(k){
+    var list = k.prices.C, v = dp[k.id];
+    var nm = escHtml(k.name);
+    var listTxt = TT('標準售價') + ' ' + fmtNT(list);
+    if (mode === 'view'){
+      return '<div class="kv"><span>' + nm + '</span><span>' + ((v === undefined || v === '' ) ? '<span style="color:var(--g500)">' + TT('未設定（依標準售價）') + '</span>' : fmtNT(v)) + '<span class="small" style="color:var(--g500);margin-left:8px">' + listTxt + '</span></span></div>';
+    }
+    return '<div class="formrow"><label>' + nm + '</label><input type="number" min="0" id="pe_dp_' + k.id + '" value="' + escHtml(v === undefined ? '' : v) + '" placeholder="' + TLI_I18N.t('留白＝依標準售價','Blank = standard price') + '" onchange="pdSetDiscountPrice(\'' + k.id + '\',this.value)"><div class="hint">' + listTxt + '</div></div>';
+  }).join('');
+  return rows + '<div class="hint">' + TT('專案折讓價依各經銷商個別議定，只對此經銷商生效；留白的方案依標準售價。') + '</div>';
+}
+function pdSetDiscountPrice(id, v){
+  if (!pdDraft) return;
+  pdDraft.discountPrices = pdDraft.discountPrices || {};
+  if (v === '' || v === null) delete pdDraft.discountPrices[id]; else pdDraft.discountPrices[id] = Number(v);
+}
 function sectionContract(mode, o){
   if (o.type === 'project') return '';
   var html = '<div class="sectiontitle">' + TT('合約與費率') + '</div>';
@@ -791,7 +789,7 @@ function sectionContract(mode, o){
     html += fieldRow(mode, '尾款計價', TT('依實際開課量 × 單價計價，開課後產生尾款帳單，線下匯款'), '<div class="static">' + TT('依實際開課量 × 單價計價，開課後產生尾款帳單，線下匯款') + '</div>');
     html += fieldRow(mode, '結算週期', settleCycleLabel(o.distSettleCycle || '每季'),
       '<select id="pe_distSettleCycle" onchange="pdSet(\'distSettleCycle\',this.value)">' + distSettleOptions(o.distSettleCycle) + '</select>');
-    html += fieldRow(mode, '方案批發價', TT('依銷售方案設定之經銷底價表，不在此重複設定'), '<div class="static">' + TLI_I18N.t('依<a href="a04_packages.html">銷售方案設定</a>之經銷底價表，不在此重複設定','Per the distributor floor-price table in <a href="a04_packages.html">Sales Plan Settings</a>; not duplicated here') + '</div>');
+    html += '<div class="small" style="margin:10px 0 4px;font-weight:600;color:var(--g900)">' + TT('專案折讓價') + '</div>' + discountPriceHtml(mode, o);
     if (mode === 'view'){
       html += '<div class="small" style="margin:10px 0 4px;font-weight:600;color:var(--g900)">' + TT('返佣（Rebate）級距表') + '</div>';
       var tiers = (o.rebateTiers && o.rebateTiers.length) ? o.rebateTiers : [{min:'0',max:'',rate:'2'}];
@@ -835,12 +833,7 @@ function sectionBrandFrontend(mode, o){
     '<textarea id="pe_mailFooter" onchange="pdSetMailSig(\'footerText\',this.value)">' + escHtml(o.mailSignature.footerText) + '</textarea>');
 
   html += '<div class="sectiontitle" style="margin-top:18px">' + TT('視訊授權') + '</div>';
-  var videoRadios = ['tli','own'].map(function(v){
-      var checked = o.videoLicense === v ? ' checked' : '';
-      return '<label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:400;margin-bottom:6px">' +
-        '<input type="radio" class="pe-radiocheck" name="pe_videoLic" value="' + v + '"' + checked + ' onchange="pdSetVideoLicense(this.value)"> ' + (v === 'tli' ? TT('使用 TLI 授權') : TT('自有授權')) + '</label>';
-    }).join('');
-  html += fieldRow(mode, '視訊授權', (o.videoLicense === 'tli' ? TT('使用 TLI 授權') : TT('自有授權')), videoRadios);
+  html += '<div class="kv"><span>' + TT('視訊授權') + '</span><span>' + TT('使用 TLI 授權') + '</span></div>';
   html += '<div id="pdVideoDetailWrap">' + renderVideoDetail(mode, o) + '</div>';
   return html;
 }
@@ -979,11 +972,12 @@ function cancelPartnerEdit(){
 function applyTypeDefaults(o){
   if (o.type !== 'agent'){
     applyGenericFrontendDefaults(o);
-    if (o.videoLicense === undefined) o.videoLicense = 'tli';
+    o.videoLicense = 'tli'; /* 20261022：經銷一律使用 TLI 授權 */
   }
   if (!o.uiLocales) o.uiLocales = [];
   if (!o.sellableProjects) o.sellableProjects = [];
   if (o.type === 'distributor' && !o.rebateTiers) o.rebateTiers = [];
+  if (o.type === 'distributor' && !o.discountPrices) o.discountPrices = {};
   if (o.type === 'project'){
     if (!o.loungeQuota) o.loungeQuota = {perStudentPerMonth:4, groupCap:8};
     if (!o.videoTool) o.videoTool = 'teams';
@@ -1001,20 +995,6 @@ function pdToggleProject(code, checked){
   var idx = pdDraft.sellableProjects.indexOf(code);
   if (checked && idx < 0) pdDraft.sellableProjects.push(code);
   if (!checked && idx >= 0) pdDraft.sellableProjects.splice(idx, 1);
-}
-function pdSetVideoLicense(v){
-  pdDraft.videoLicense = v;
-  if (v === 'own' && !pdDraft.videoLicenseTool) pdDraft.videoLicenseTool = {name:''};
-  var wrap = document.getElementById('pdVideoDetailWrap');
-  if (wrap) wrap.innerHTML = renderVideoDetail('edit', pdDraft);
-}
-function pdSetVideoTool(field, v){ if (pdDraft.videoLicenseTool) pdDraft.videoLicenseTool[field] = v; }
-function pdSetVideoToolSelect(v){
-  if (!pdDraft.videoLicenseTool) pdDraft.videoLicenseTool = {name:''};
-  if (v !== '其他'){ pdDraft.videoLicenseTool.name = v; }
-  else if (OWN_VIDEO_TOOL_OPTIONS.indexOf(pdDraft.videoLicenseTool.name) >= 0){ pdDraft.videoLicenseTool.name = ''; }
-  var wrap = document.getElementById('pdVideoDetailWrap');
-  if (wrap) wrap.innerHTML = renderVideoDetail('edit', pdDraft);
 }
 function pdRenderRebateTiersWrap(){
   var wrap = document.getElementById('pdRebateTiersWrap');

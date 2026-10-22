@@ -341,7 +341,7 @@ html,body{overflow-x:hidden;}
 <h2 data-i18n="h2.videoTools">線上據點（視訊教室）</h2>
 <div class="tablewrap"><table id="videoToolsTable"></table></div>
 <div style="text-align:right;margin-top:10px"><button class="btn ghost small2" onclick="addVideoTool()" data-i18n="btn.addVideoTool">＋ 新增視訊工具</button></div>
-<div class="hint" data-i18n="hint.videoTools">可直接調整授權數或新增工具；專案合作夥伴自有的視訊授權在合作夥伴設定。</div>
+<div class="hint" data-i18n="hint.videoTools">可直接調整授權數或新增工具；經銷商與專案合作夥伴一律共用此處 TLI 授權額度。</div>
 </div>
 
 <div class="card" id="paramsCard" style="display:none">
@@ -975,7 +975,7 @@ function renderModLog(){
   }).join('');
 }
 /* 線上據點（視訊教室）：來源共用主檔 TLI_MASTERS.videoTools（同一參照），併入左側「校區與線上據點」主檔分頁；
-   上課方式只留「是否需要視訊教室」布林，不寫死用哪套工具——實際用哪套由此處授權額度與各合作夥伴自有授權決定 */
+   上課方式只留「是否需要視訊教室」布林，不寫死用哪套工具——實際用哪套由此處 TLI 授權額度決定 */
 function renderVideoToolsTable(){
   var tbl = document.getElementById('videoToolsTable');
   if (!tbl) return;

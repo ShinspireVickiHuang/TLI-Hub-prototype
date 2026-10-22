@@ -475,7 +475,7 @@ document.addEventListener('keydown', function(e){
   if (document.getElementById('evDrawerMask').classList.contains('open')) closeEvDrawer();
 });
 
-/* 20260930：活動 SKU 清單改讀共用主檔 TLI_MASTERS.products（分類「活動」c_event），不再各自寫死同名清單；
+/* 20260930：活動課程清單改讀共用主檔 TLI_MASTERS.products（分類「活動」c_event），不再各自寫死同名清單；
    price（活動報名費）主檔沒有這個欄位，仍留在本頁當報表示範用途 */
 var ACTIVITY_SKU_PRICES = {sku07:1200, skuC06:1000, sku13:800};
 var ACTIVITY_SKUS = TLI_MASTERS.products.filter(function(p){ return p.categoryId==='c_event'; }).map(function(p){
@@ -792,8 +792,8 @@ function onNeFeeChange(el){
   var wrap = document.getElementById('ne_feeFields');
   if (el && el.value === '付費'){
     var skuOptions = ACTIVITY_SKUS.map(function(s){ return '<option value="'+s.id+'">'+s.name+'（'+fmtMoney(s.price)+'）</option>'; }).join('');
-    wrap.innerHTML = '<div class="formrow"><label>'+TLI_I18N.t('對應活動 SKU','Linked Event SKU')+'</label><select id="ne_sku">'+skuOptions+'</select></div>' +
-      '<div class="hint">'+TLI_I18N.t('收費類目自動帶入「活動」，稅別自動為應稅；如需新增其他活動 SKU 請至「產品管理」建立。','The billing category is automatically set to "Event" and the tax type to taxable; to add other Event SKUs, create them in Product Management.')+'</div>';
+    wrap.innerHTML = '<div class="formrow"><label>'+TLI_I18N.t('對應活動課程','Linked Event Course')+'</label><select id="ne_sku">'+skuOptions+'</select></div>' +
+      '<div class="hint">'+TLI_I18N.t('收費類目自動帶入「活動」，稅別自動為應稅；如需新增其他活動課程請至「產品管理」建立。','The billing category is automatically set to "Event" and the tax type to taxable; to add other event courses, create them in Product Management.')+'</div>';
   } else {
     wrap.innerHTML = '';
   }
