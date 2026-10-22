@@ -364,7 +364,7 @@ Object.assign(TLI_I18N_DICT.en, {
 "c08.filterOriginAll":"Source: All",
 "c08.pageSize100":"100 per page",
 "c08.pageSize50":"50 per page",
-"c08.pageSub":"Consolidates inquiries and trial requests submitted via the website form, AI inquiry assistant, online consultation panel and event sign-up, as well as trial bookings where the student self-selected a preferred time and completed payment on the website (teacher assigned by the advisor); the former are contacted and scheduled by the advisor, the latter are already arranged by the student — the advisor only needs to follow up after the trial and convert it into an order.",
+"c08.pageSub":"Consolidates inquiries and trial requests submitted via the website form, AI inquiry assistant, online consultation panel and event sign-up, as well as trial bookings where the student self-selected a preferred time and completed payment on the website (teacher assigned by the advisor); the former are contacted and scheduled by the advisor, for the latter the student has chosen preferred time slots and paid, the advisor arranges the teacher and time slot, then follows up after the trial and converts it into an order.",
 "c08.pageTitle":"Inquiries & Trial Booking",
 "c08.searchPlaceholder":"Search name / email / phone",
 "c08.sortName":"Sort: Name",

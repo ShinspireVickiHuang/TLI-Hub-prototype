@@ -585,7 +585,7 @@ function ensurePartnerDefaults(p){
   if (p.type !== 'agent'){
     applyGenericFrontendDefaults(p);
   }
-  if (p.type === 'distributor' && !p.discountPrices) p.discountPrices = JSON.parse(JSON.stringify(DISCOUNT_PRICE_SEED[p.id] || {}));
+  if (p.type === 'distributor' && !p.discountPrices) p.discountPrices = {};
   if (!p.uiLocales) p.uiLocales = [];
   if (!p.sellableProjects) p.sellableProjects = (PARTNER_SELLABLE_PROJECTS_SEED[p.id] || []).slice();
   if (!p.createdAt) p.createdAt = p.from;
@@ -753,11 +753,7 @@ function pdSetLounge(field, v){
 
 /* 20261022 拍板：經銷價＝專案折讓價，每家經銷商不同，設在本頁該經銷商詳情（取代原依銷售方案統一設定的經銷價表）。
    資料存 partner.discountPrices = {銷售方案id: 折讓價}；未填的方案走標準售價。示範只列前 3 個直營銷售方案。 */
-var DISCOUNT_PRICE_SEED = {
-  p05:{pk1:17500, pk2:8800, pk3:2000},
-  p06:{pk1:18000, pk2:9000},
-  p07:{pk1:17000, pk3:1950}
-};
+/* 20261022c 折讓價種子資料已移到共用主檔 TLI_MASTERS.partners[].discountPrices，改價只改主檔一處 */
 function discountPricePackages(){
   return (TLI_MASTERS.packages || []).filter(function(k){ return k.type === 'pkg' && k.salesMode === 'direct' && k.prices && k.prices.C; }).slice(0, 3);
 }

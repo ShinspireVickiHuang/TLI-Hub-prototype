@@ -252,13 +252,14 @@ var partners = [
  {id:'p05', code:'DST-MY05', name:'大馬旅遊教育集團', contact:'Ahmad Faisal', country:'馬來西亞', type:'distributor',
   status:'啟用', from:'2025-06-01', to:'2027-05-31',
   /* 20261022 專案折讓價（方案id→價）放共用主檔，a05 建經銷訂單與 a20 經銷詳情讀同一份 */
-  discountPrices:{pk1:17500, pk2:8800, pk3:2000},
+  /* pk4 企業專案為顧問報價，經銷商議定每席價（20261022c 補，避免經銷訂單金額為 0） */
+  discountPrices:{pk1:17500, pk2:8800, pk3:2000, pk4:12000},
   depositRate:20, distSettleCycle:'每季',
   rebateTiers:[{min:'0',max:'500,000',rate:'2'},{min:'500,001',max:'1,500,000',rate:'4'},{min:'1,500,001',max:'',rate:'6'}],
   langs:['en','zh-TW'], videoLicense:'tli'},
  {id:'p06', code:'DST-VN06', name:'越南遊學顧問公司', contact:'Nguyen Thi Lan', country:'越南', type:'distributor',
   status:'啟用', from:'2025-08-01', to:'2027-07-31',
-  discountPrices:{pk1:18000, pk2:9000},
+  discountPrices:{pk1:18000, pk2:9000, pk4:11000},
   depositRate:15, distSettleCycle:'每年',
   rebateTiers:[{min:'0',max:'300,000',rate:'1.5'},{min:'300,001',max:'1,000,000',rate:'3'},{min:'1,000,001',max:'',rate:'5'}],
   langs:['en'], videoLicense:'tli'},
