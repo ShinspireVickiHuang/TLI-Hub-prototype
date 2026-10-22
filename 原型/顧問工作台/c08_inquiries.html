@@ -442,14 +442,15 @@ var NAME_POOL=['林思妤','黃冠霖','張雅婷','陳建宏','王大同','Emma
 var SLA_ACTIVE=['新進','已聯繫'];
 function isSlaActive(o){return SLA_ACTIVE.indexOf(o.status)>-1;}
 
-/* ================= 來源分流：區分「自助預約（官網 p06 自助選時段偏好並付款）」與「舊制顧問安排」 ================= */
-var SOURCE_SELF='自助預約（網站）';
-var ORIGIN_ALL=['自助預約（網站）','顧問安排','活動報名','轉介','企業諮詢'];
-var ORIGIN_BADGE_CLASS={'自助預約（網站）':'origin-self','顧問安排':'origin-advisor','活動報名':'origin-event','轉介':'origin-referral','企業諮詢':'b2b'};
-var ORIGIN_EN_C08={'自助預約（網站）':'Self-Booked (Website)','企業諮詢':'Corporate Inquiry','活動報名':'Event Registration','轉介':'Referral','顧問安排':'Advisor Arranged'};
+/* 20261022d 標籤由「自助預約（網站）」改「官網試聽申請」（學員只申請，老師由顧問安排） */
+/* ================= 來源分流：區分「官網試聽申請（官網 p06 選時段偏好並付款）」與「舊制顧問安排」 ================= */
+var SOURCE_SELF='官網試聽申請';
+var ORIGIN_ALL=['官網試聽申請','顧問安排','活動報名','轉介','企業諮詢'];
+var ORIGIN_BADGE_CLASS={'官網試聽申請':'origin-self','顧問安排':'origin-advisor','活動報名':'origin-event','轉介':'origin-referral','企業諮詢':'b2b'};
+var ORIGIN_EN_C08={'官網試聽申請':'Website Trial Request','企業諮詢':'Corporate Inquiry','活動報名':'Event Registration','轉介':'Referral','顧問安排':'Advisor Arranged'};
 var CONTACT_METHOD_EN_C08={'電話':'Phone','Email':'Email','LINE':'LINE','企業窗口聯繫':'Enterprise Contact Channel','其他':'Other'};
 function mapOriginCat(o){
-  if(o.isSelfBooked)return '自助預約（網站）';
+  if(o.isSelfBooked)return '官網試聽申請';
   if(o.isEnterprise)return '企業諮詢';
   if(o.source==='活動報名')return '活動報名';
   if(o.source==='LINE')return '轉介';
@@ -742,7 +743,7 @@ function renderKPIs(){
     '<div class="kpi-card"><div class="kpi-label">'+T('新進未聯繫','New, Not Contacted')+'</div><div class="kpi-value">'+newCnt+'</div><div class="kpi-sub">'+T('尚未由顧問聯繫的新進諮詢／試聽單','New inquiries/trial requests not yet contacted by an advisor')+'</div></div>'+
     '<div class="kpi-card"><div class="kpi-label">'+T('今日待聯繫（SLA 1 個工作日倒數）','Due Today (SLA 1 Business Day)')+'</div><div class="kpi-value'+(dueTodayCnt>0?' danger':'')+'">'+dueTodayCnt+'</div><div class="kpi-sub">'+T('含已逾期未聯繫','Includes overdue, not yet contacted')+'</div></div>'+
     '<div class="kpi-card"><div class="kpi-label">'+T('待安排試聽','Trial Pending Arrangement')+'</div><div class="kpi-value">'+pendingTrialCnt+'</div><div class="kpi-sub">'+T('已聯繫但尚未排定試聽老師與時段（顧問安排流程）','Contacted but no trial teacher/time slot arranged yet (advisor-arranged flow)')+'</div></div>'+
-    '<div class="kpi-card"><div class="kpi-label">'+T('自助預約試聽待跟進','Self-Booked Trials to Follow Up')+'</div><div class="kpi-value">'+selfFollowupCnt+'</div><div class="kpi-sub">'+T('學員已自助預約並上完試聽，待顧問跟進購買意願','Student self-booked and completed the trial; awaiting advisor follow-up on purchase intent')+'</div></div>'+
+    '<div class="kpi-card"><div class="kpi-label">'+T('官網試聽申請待跟進','Website Trial Requests to Follow Up')+'</div><div class="kpi-value">'+selfFollowupCnt+'</div><div class="kpi-sub">'+T('學員已申請並上完試聽，待顧問跟進購買意願','Student requested and completed the trial; awaiting advisor follow-up on purchase intent')+'</div></div>'+
     '<div class="kpi-card"><div class="kpi-label">'+T('本週轉訂單數','Converted to Orders This Week')+'</div><div class="kpi-value">'+convertedWeekCnt+'</div><div class="kpi-sub">'+T('近 7 天由諮詢／試聽轉為正式訂單','Converted from inquiry/trial to a formal order in the past 7 days')+'</div></div>'+
     '<div class="kpi-card"><div class="kpi-label">'+T('企業諮詢洽談中','Enterprise Inquiries In Progress')+'</div><div class="kpi-value">'+entOpenCnt+'</div><div class="kpi-sub">'+T('尚未成交或標記未成交的企業諮詢','Enterprise inquiries not yet marked as won or lost')+'</div></div>';
 }
@@ -997,9 +998,9 @@ function tliOpenDrawer(id){
     html+='<div class="dsection"><h3>'+T('AI 諮詢摘要','AI Inquiry Summary')+'</h3><div class="ai-summary-box">'+o.aiSummary+'</div></div>';
   }
   if(o.isSelfBooked){
-    html+='<div class="dsection"><h3>'+T('自助預約資訊','Self-Booking Info')+'</h3>'+
-      '<div class="dfield"><span class="dl">'+T('預約方式','Booking Method')+'</span><span class="dv">'+T('學員於官網自助選時段偏好並完成付款，由顧問安排老師','Student self-selected preferred time slot and completed payment on the website; advisor arranges the teacher')+'</span></div>'+
-      '<div class="dfield"><span class="dl">'+T('試聽費用','Trial Fee')+'</span><span class="dv">NT$390'+T('（同官網 p06 自助試聽預約頁）',' (same as website p06 self-booking page)')+'</span></div>'+
+    html+='<div class="dsection"><h3>'+T('官網試聽申請資訊','Website Trial Request Info')+'</h3>'+
+      '<div class="dfield"><span class="dl">'+T('申請方式','Request Method')+'</span><span class="dv">'+T('學員於官網選時段偏好並完成付款，由顧問安排老師','Student chose preferred time slots and completed payment on the website; advisor arranges the teacher')+'</span></div>'+
+      '<div class="dfield"><span class="dl">'+T('試聽費用','Trial Fee')+'</span><span class="dv">NT$390'+T('（同官網 p06 試聽申請頁）',' (same as website p06 trial request page)')+'</span></div>'+
       (o.status==='已購買'?'<div class="dfield"><span class="dl">'+T('後續購買','Subsequent Purchase')+'</span><span class="dv">'+o.purchasedPlan+'</span></div>':'')+
       (o.status==='未購買待跟進'?'<div class="dfield"><span class="dl">'+T('未購買原因','Reason Not Purchased')+'</span><span class="dv">'+o.followupReason+'</span></div>':'')+
     '</div>';

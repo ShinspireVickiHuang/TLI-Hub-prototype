@@ -428,7 +428,7 @@ var A20_EN = {
   '基本資料':'Basic Information','合約與費率':'Contract & Fee Terms','通知信署名':'Notification Email Signature','視訊授權':'Video License',
   '介面語系':'Interface Languages','學員':'Students','系統資訊':'System Info',
   '結算週期':'Settlement Cycle',
-  '訂金（Deposit）比例（%）':'Deposit Rate (%)','尾款計價':'Balance Pricing','專案折讓價':'Project Discount Price','標準售價':'Standard Price','未設定（依標準售價）':'Not set (standard price applies)','專案折讓價依各經銷商個別議定，只對此經銷商生效；留白的方案依標準售價。':'Project discount prices are negotiated per distributor and apply only to this distributor; plans left blank use the standard price.',
+  '訂金（Deposit）比例（%）':'Deposit Rate (%)','尾款計價':'Balance Pricing','專案折讓價':'Project Discount Price','夥伴資料':'Partner Details','顧問報價':'Advisor quote','標準售價':'Standard Price','未設定（依標準售價）':'Not set (standard price applies)','專案折讓價依各經銷商個別議定，只對此經銷商生效；留白的方案依標準售價。':'Project discount prices are negotiated per distributor and apply only to this distributor; plans left blank use the standard price.',
   '優惠碼（識別碼）':'Promo Code (ID)','必填，且不可與其他夥伴重複':'Required and must be unique','佣金比例（%）':'Commission Rate (%)','歸屬有效期（天）':'Attribution Validity (days)',
   '學生資料保存年限':'Student Data Retention Period','學生資料保存年限（年）':'Student Data Retention (years)',
   '寄件人名稱':'Sender Name','回覆信箱':'Reply-To Email',
@@ -754,15 +754,21 @@ function pdSetLounge(field, v){
 /* 20261022 拍板：經銷價＝專案折讓價，每家經銷商不同，設在本頁該經銷商詳情（取代原依銷售方案統一設定的經銷價表）。
    資料存 partner.discountPrices = {銷售方案id: 折讓價}；未填的方案走標準售價。示範只列前 3 個直營銷售方案。 */
 /* 20261022c 折讓價種子資料已移到共用主檔 TLI_MASTERS.partners[].discountPrices，改價只改主檔一處 */
-function discountPricePackages(){
-  return (TLI_MASTERS.packages || []).filter(function(k){ return k.type === 'pkg' && k.salesMode === 'direct' && k.prices && k.prices.C; }).slice(0, 3);
+/* 20261022d 除了前 3 個直營銷售方案，該經銷商在共用主檔 discountPrices 有的方案（如企業專案）也要列出，讓 a05 用到的價格在這裡看得到、改得到 */
+function discountPricePackages(o){
+  var pks = TLI_MASTERS.packages || [];
+  var list = pks.filter(function(k){ return k.type === 'pkg' && k.salesMode === 'direct' && k.prices && k.prices.C; }).slice(0, 3);
+  Object.keys((o && o.discountPrices) || {}).forEach(function(id){
+    if (!list.some(function(k){ return k.id === id; })){ var k = pks.filter(function(x){ return x.id === id; })[0]; if (k) list.push(k); }
+  });
+  return list;
 }
 function discountPriceHtml(mode, o){
   var dp = o.discountPrices || {};
-  var rows = discountPricePackages().map(function(k){
-    var list = k.prices.C, v = dp[k.id];
+  var rows = discountPricePackages(o).map(function(k){
+    var list = k.prices && k.prices.C, v = dp[k.id];
     var nm = escHtml(k.name);
-    var listTxt = TT('標準售價') + ' ' + fmtNT(list);
+    var listTxt = list ? TT('標準售價') + ' ' + fmtNT(list) : TT('顧問報價');
     if (mode === 'view'){
       return '<div class="kv"><span>' + nm + '</span><span>' + ((v === undefined || v === '' ) ? '<span style="color:var(--g500)">' + TT('未設定（依標準售價）') + '</span>' : fmtNT(v)) + '<span class="small" style="color:var(--g500);margin-left:8px">' + listTxt + '</span></span></div>';
     }
@@ -1310,6 +1316,12 @@ function pcEmailOk(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 function pcHasEmail(cid, email){
   return pcRosterOf(cid).some(function(r){ return r.email.toLowerCase() === email.toLowerCase(); });
 }
+/* 20261022d Email 全系統唯一（比照 h02）：其他來源帳號、其他班級（其他企業）名單已用過的 Email 也算重複 */
+function pcEmailUsedElsewhere(cid, email){
+  var e = String(email || '').toLowerCase();
+  if (TLI_MASTERS.accountsByEmail(e).length) return true;
+  return TLI_MASTERS.projectRoster.some(function(r){ return r.classId !== cid && String(r.email || '').toLowerCase() === e; });
+}
 function pcNewMemberId(){ return 'pr' + Date.now().toString(36) + Math.floor(Math.random() * 1000); }
 function pcSaveMember(){
   var name = document.getElementById('pcMemName').value.trim();
@@ -1346,7 +1358,7 @@ function pcDoImport(){
   var err = document.getElementById('pcImpErr');
   var lines = text.split(/\r?\n/).map(function(l){ return l.trim(); }).filter(function(l){ return l; });
   if (!lines.length){ err.textContent = TT('請選擇 CSV 檔，或把內容貼在下方'); err.style.display = ''; return; }
-  var ok = 0, dup = 0, bad = 0, badEmailRows = [], dupRows = [], otherRows = [];
+  var ok = 0, dup = 0, bad = 0, badEmailRows = [], dupRows = [], otherRows = [], usedRows = [];
   lines.forEach(function(line, i){
     var c = line.split(/[,，\t]/).map(function(x){ return x.trim().replace(/^"|"$/g, ''); });
     if (i === 0 && /^(姓名|name)$/i.test(c[0])) return;
@@ -1355,6 +1367,7 @@ function pcDoImport(){
     if (!pcEmailOk(email)){ bad++; badEmailRows.push(i + 1); return; }
     if (!name || !role){ bad++; otherRows.push(i + 1); return; }
     if (pcHasEmail(pdClassId, email)){ dup++; dupRows.push(i + 1); return; }
+    if (pcEmailUsedElsewhere(pdClassId, email)){ dup++; usedRows.push(i + 1); return; }
     var im = {id:pcNewMemberId(), classId:pdClassId, name:name, email:email, role:role, status:'未寄送'};
     TLI_MASTERS.projectRoster.push(im);
     var icl = pcClassById(pdClassId); if (role === '老師' && icl && !icl.teacherRid) icl.teacherRid = im.id;
@@ -1370,6 +1383,7 @@ function pcDoImport(){
   if (badEmailRows.length){ zhP.push('Email 格式錯誤：列號 ' + badEmailRows.join('、')); enP.push('invalid email: row ' + badEmailRows.join(', ')); }
   if (otherRows.length){ zhP.push('姓名或角色不符：列號 ' + otherRows.join('、')); enP.push('invalid name or role: row ' + otherRows.join(', ')); }
   if (dupRows.length){ zhP.push('Email 重複：列號 ' + dupRows.join('、')); enP.push('duplicate email: row ' + dupRows.join(', ')); }
+  if (usedRows.length){ zhP.push('Email 已被其他帳號使用，這一列不會建立：列號 ' + usedRows.join('、')); enP.push('Email already used by another account; row not created: row ' + usedRows.join(', ')); }
   toast(TLI_I18N.t('成功 ' + ok + ' 筆，略過 ' + (dup + bad) + ' 筆' + (zhP.length ? '（' + zhP.join('；') + '）' : ''), ok + ' imported, ' + (dup + bad) + ' skipped' + (enP.length ? ' (' + enP.join('; ') + ')' : '')));
 }
 
