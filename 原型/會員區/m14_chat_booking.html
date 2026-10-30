@@ -156,21 +156,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .dl dt{color:var(--c-muted);}
 .dl dd{margin:0;font-weight:600;}
 .empty-box{text-align:center;padding:22px 12px;color:var(--c-muted);font-size:13px;}
-/* 檢視版本切換（給執行團隊對照 1A 專案合作學生／1B 直營學生） */
-.phase-sw{position:fixed;right:12px;left:12px;bottom:calc(var(--bottomnav-h) + 12px);z-index:80;background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:10px 12px;font-size:13px;}
-@media(min-width:640px){.phase-sw{left:auto;width:340px;}}
-@media(min-width:1024px){.phase-sw{right:24px;bottom:24px;}}
-.phase-sw-head{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.phase-sw-head b{font-size:12px;color:var(--c-muted);}
-.phase-sw-tg{border:none;background:none;padding:4px;cursor:pointer;color:var(--c-muted);border-radius:6px;}
-.phase-sw-tg svg{width:16px;height:16px;transition:transform .15s;}
-.phase-sw.collapsed .phase-sw-tg svg{transform:rotate(180deg);}
-.phase-sw-seg{display:flex;background:var(--c-bg);border-radius:var(--radius-sm);padding:3px;margin-top:8px;}
-.phase-sw-seg a{flex:1;text-align:center;padding:7px 6px;border-radius:6px;font-weight:600;color:var(--c-muted);}
-.phase-sw-seg a.on{background:var(--c-primary);color:#fff;}
-.phase-sw ul{margin:10px 0 0;padding-left:18px;color:var(--c-text);line-height:1.6;}
-.phase-sw.collapsed ul{display:none;}
-.content{padding-bottom:200px!important;}
 </style>
 </head>
 <body>
@@ -253,27 +238,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <a href="m08_self_paced.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span data-i18n="member.nav.learning">學習</span></a>
     <a href="m07_profile.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span data-i18n="member.nav.me">我的</span></a>
   </nav>
-</div>
-
-<div class="phase-sw" id="phaseSw">
-  <div class="phase-sw-head"><b data-en="View as">檢視版本</b>
-    <button type="button" class="phase-sw-tg" id="phaseSwTg" aria-label="收合說明"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg></button>
-  </div>
-  <div class="phase-sw-seg">
-    <a href="m14_chat_booking.html?sid=pr12&acct=ma03" id="phaseSw1a" data-en="1A Project student">1A 專案合作學生</a>
-    <a href="m14_chat_booking.html?mode=general&acct=ma01" id="phaseSw1b" data-en="1B Direct student">1B 直營學生</a>
-  </div>
-  <ul id="phaseSw1aNote" class="hidden">
-    <li data-en="Only sessions for the student's own class are listed. Sessions are set up by Shinda in the database; 1A has no admin screen for creating sessions.">只列出自己班級的場次；場次由新達在資料庫設定，1A 沒有後台開場次畫面</li>
-    <li data-en="Times shown in the school's local time zone, with Taipei time alongside.">時間以學校當地時區顯示，並附台北時間</li>
-    <li data-en="Monthly quota follows the project setting; booking deducts one, cancelling returns it.">每月額度依專案設定；預約扣 1 次、取消退回</li>
-    <li data-en="Video tool follows the partner setting.">視訊工具依合作夥伴設定</li>
-  </ul>
-  <ul id="phaseSw1bNote" class="hidden">
-    <li data-en="Lists public sessions TLI opens for direct students (sessions created in the admin from 1B).">列出 TLI 開給直營學生的公開場次（1B 起由後台開場次）</li>
-    <li data-en="Times shown in Taipei time.">時間以台北時間顯示</li>
-    <li data-en="Same booking, quota and cancellation rules as 1A.">預約、額度、取消規則與 1A 同一套</li>
-  </ul>
 </div>
 
 <div class="toast hidden" id="toast"></div>
@@ -437,19 +401,13 @@ $('onlyOpen').addEventListener('change', function(){ state.open=this.checked; st
 $('moreBtn').addEventListener('click', function(){ state.shown+=12; renderList(); });
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSheet(); });
 document.addEventListener('click', function(e){ if(!e.target.closest('.bell-btn')&&!e.target.closest('.bell-panel')){ var b=$('bellPanel'); if(b) b.classList.remove('open'); } });
-/* 檢視版本切換：依目前身分標示選中項與對應範圍說明；手機預設收合 */
-(function(){
-  var is1a = U.mode==='project';
-  $(is1a?'phaseSw1a':'phaseSw1b').classList.add('on');
-  $(is1a?'phaseSw1aNote':'phaseSw1bNote').classList.remove('hidden');
-  if(window.innerWidth<640) $('phaseSw').classList.add('collapsed');
-  $('phaseSwTg').onclick=function(){ $('phaseSw').classList.toggle('collapsed'); };
-})();
 TLI_I18N.onRefresh(renderAll);
 renderAll();
 TLI_I18N.init();
 PL.xl(document);
 
 </script>
+<script src="../assets/_phase_map.js"></script>
+<script src="../assets/_phase_switch.js"></script>
 </body>
 </html>
