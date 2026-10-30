@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>通知管理｜TLI Hub 管理後台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -335,6 +336,7 @@ var EVENT_NOTIFS = [
  {key:'account_invite', name:'帳號開通邀請（專案合作成員，連結 14 天內有效）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true},
  {key:'account_activated', name:'開通完成通知（開通當下寄給本人）', recipients:['學生','老師'], channels:['Email'], timing:'immediate', enabled:true}
 ];
+if (!TLI_PHASE.atLeast('1C')) { EVENT_NOTIFS = EVENT_NOTIFS.filter(function(e){ return e.key.indexOf('feedback_') !== 0; }); }
 function eventByKey(k){ return EVENT_NOTIFS.find(function(e){ return e.key===k; }); }
 /* 20260930：事件與範本名稱英文模式補譯；內部資料值（EVENT_NOTIFS[].name／TEMPLATES[].name）維持中文不變，比對與 toast 組字不受影響 */
 var NOTIF_NAME_EN = {
@@ -420,7 +422,8 @@ function onEventEnabledToggle(evKey, el){
   toast(el.checked ? i18nT('「'+ev.name+'」通知已啟用','Notification “'+ev.name+'” enabled') : i18nT('「'+ev.name+'」通知已停用','Notification “'+ev.name+'” disabled'));
 }
 
-var TEMPLATES = [
+/* 檢視階段：課後回饋相關通知事件與範本屬 1C */
+var TEMPLATES_ALL = [
  {id:'t1', name:'訂單成立', channels:['Email','站內'], enabled:true, content:{tc:'{學生姓名} 您好，您的訂單已成立，請於期限內完成付款。', en:'Dear {Student Name}, your order has been created. Please complete payment before the deadline.', jp:'{學生姓名} 様、ご注文が成立しました。期限内にお支払いください。'}},
  {id:'t2', name:'付款提醒', channels:['Email','LINE'], enabled:true, content:{tc:'{學生姓名} 您好，提醒您的訂單即將到期，請儘速完成付款。', en:'Dear {Student Name}, your payment deadline is approaching. Please complete payment soon.', jp:'{學生姓名} 様、お支払い期限が近づいています。お早めにお手続きください。'}},
  {id:'t3', name:'預約成功', channels:['LINE','站內'], enabled:true, content:{tc:'{學生姓名} 您好，已成功預約 {課程}，上課時間為 {時間}。', en:'Dear {Student Name}, your booking for {Course} at {Time} is confirmed.', jp:'{學生姓名} 様、{課程}（{時間}）のご予約が確定しました。'}},
@@ -457,6 +460,7 @@ var TEMPLATES = [
  {id:'t19', name:'開通完成通知', channels:['Email'], enabled:true, vars:['{姓名}','{時間}'],
   content:{tc:'{姓名} 您好，您的 TLI 帳號已於 {時間} 完成開通。如果不是您本人操作，請立即聯絡 TLI。', en:'Hello {Name}, your TLI account was activated at {Time}. If this was not you, contact TLI right away.', jp:'{姓名} 様、TLI アカウントは {時間} に開通されました。ご本人の操作でない場合は、直ちに TLI までご連絡ください。'}}
 ];
+var TEMPLATES = TLI_PHASE.atLeast('1C') ? TEMPLATES_ALL : TEMPLATES_ALL.filter(function(t){ return t.id !== 't9' && t.id !== 't10' && t.id !== 't11'; });
 
 var currentTmplId = null;
 
@@ -590,12 +594,14 @@ function closeSidebar(){
   document.getElementById('sidebarBackdrop').classList.remove('open');
 }
 /* ---- 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ---- */
-var NOTIFS = [
+/* 檢視階段：內容管理通知（校區主管發佈）與訂單逾期通知屬第二階段、銷售方案下架通知屬 1B */
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = NOTIFS_ALL.filter(function(n){ var p = n.t.indexOf('內容管理') === 0 ? '2' : (n.t.indexOf('訂單') === 0 && n.t.indexOf('逾期') > 0) ? '2' : (n.t.indexOf('方案') >= 0 && n.t.indexOf('下架') > 0) ? '1B' : '1A'; return TLI_PHASE.atLeast(p); });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;

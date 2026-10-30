@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>學生詳情｜TLI Hub 管理後台</title>
@@ -488,7 +489,7 @@ html,body{overflow-x:hidden;}
       <div class="panel">
         <div class="tabs" id="tabs">
           <button class="tabbtn active" data-tab="orders" onclick="tliShowTab('orders',this)" data-i18n="c03.tabOrders">訂單與付款</button>
-          <button class="tabbtn" data-tab="timeline" onclick="tliShowTab('timeline',this)"><span data-i18n="c03.tabTimeline">互動歷程</span><span class="phase2-pill" data-i18n="c03.phase2Badge">二階段</span></button>
+          <button class="tabbtn" data-phase="2" data-tab="timeline" onclick="tliShowTab('timeline',this)"><span data-i18n="c03.tabTimeline">互動歷程</span><span class="phase2-pill" data-i18n="c03.phase2Badge">二階段</span></button>
           <button class="tabbtn" data-tab="courses" onclick="tliShowTab('courses',this)" data-i18n="c03.tabCourses">課程與課時</button>
           <button class="tabbtn" data-tab="lessons" onclick="tliShowTab('lessons',this)" data-i18n="c03.tabLessons">上課紀錄</button>
           <button class="tabbtn" data-tab="contacts" onclick="tliShowTab('contacts',this)" data-i18n="c03.tabContacts">聯絡紀錄</button>
@@ -505,7 +506,7 @@ html,body{overflow-x:hidden;}
           </table>
         </div>
 
-        <div class="tabpanel" data-tab="timeline">
+        <div class="tabpanel" data-phase="2" data-tab="timeline">
           <div class="note" data-i18n="c03.noteTimeline">互動歷程整合 CDP（官網與行銷行為）與文字客服平台（AI／真人對話），對話內容支援 AI 自動貼標與人工貼標</div>
           <div class="tl-toolbar">
             <div class="tl-group">
@@ -822,7 +823,13 @@ document.getElementById('pName').textContent=S.name;
 var cb=document.getElementById('pClassBadge');cb.textContent=S.cls;cb.className=classBadge(S.cls);
 var STU_STATUS_EN={'學習中':'Active','停止中':'Paused','已流失':'Churned'};
 var CAMPUS_EN_C03={'羅斯福':'Roosevelt','士林':'Shilin','台中':'Taichung','高雄':'Kaohsiung'};
-var ORDER_STATUS_EN={'分期進行中（第 3 期逾期）':'Installment in Progress (Period 3 Overdue)','分期進行中（第 2 期逾期）':'Installment in Progress (Period 2 Overdue)','待開票':'Pending Invoice','已結清':'Settled','發票開立失敗':'Invoice Failed','3 天內到期':'Due Within 3 Days'};
+/* 檢視階段：Excel 一階段已有應收分期畫面（分期進行中照常顯示）；逾期狀態與催收屬第二階段，1B～1C 原逾期那筆改顯示「分期進行中」 */
+if(!TLI_PHASE.atLeast('2')){
+  Object.keys(STUDENTS).forEach(function(k){ (STUDENTS[k].orders||[]).forEach(function(o){
+    if(o.status.indexOf('分期進行中')>-1){ o.status='分期進行中'; }
+  }); });
+}
+var ORDER_STATUS_EN={'分期進行中':'Installment in Progress','分期進行中（第 3 期逾期）':'Installment in Progress (Period 3 Overdue)','分期進行中（第 2 期逾期）':'Installment in Progress (Period 2 Overdue)','待開票':'Pending Invoice','已結清':'Settled','發票開立失敗':'Invoice Failed','3 天內到期':'Due Within 3 Days'};
 var PAY_MODE_EN={'課前頭款加自訂分期':'Deposit Before Class + Custom Installments','全額付清':'Paid in Full','先上課後月結固定金額':'Class First, Fixed Monthly Billing','訂金加尾款':'Deposit + Balance','暫收款後開發票':'Provisional Payment, Invoice Later','先上課後月結實支實付':'Class First, Monthly Billing by Actual Usage','開課後自訂分期':'Custom Installments After Class Starts'};
 function renderStatusBadge(S){
   var sb=document.getElementById('pStatusBadge');
@@ -1382,12 +1389,13 @@ function closeSidebar(){
   document.getElementById('sidebarBackdrop').classList.remove('open');
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
-var NOTIFS = [
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = TLI_PHASE.atLeast('2') ? NOTIFS_ALL : NOTIFS_ALL.filter(function(n){ return n.t.indexOf('逾期') < 0; });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;

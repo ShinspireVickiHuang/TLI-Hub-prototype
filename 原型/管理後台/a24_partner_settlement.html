@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>結算與對帳｜TLI Hub 管理後台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -396,11 +397,13 @@ function toggleSuMenu(ev){ ev.stopPropagation(); document.getElementById('suMenu
 document.addEventListener('click', function(){ var m=document.getElementById('suMenu'); if(m) m.classList.remove('open'); });
 
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
-var NOTIFS = [
+/* 檢視階段：內容管理通知（校區主管發佈）與訂單逾期通知屬第二階段、銷售方案下架通知屬 1B */
+var NOTIFS_ALL = [
   {t:'夥伴「大馬旅遊教育集團」尾款已逾期，請確認匯款', en:'Partner \u201c大馬旅遊教育集團\u201d balance payment is overdue \u2014 please confirm the transfer', time:'20 分鐘前', timeEn:'20 minutes ago', unread:true},
   {t:'香港教育橋樑 2026 H2 佣金結算單已寄出', en:'香港教育橋樑 2026 H2 commission statement has been sent', time:'今天 09:40', timeEn:'Today 09:40', unread:true},
   {t:'崇信會計師事務所本期對帳有差異，待確認原因', en:'崇信會計師事務所 reconciliation discrepancy this period \u2014 reason pending confirmation', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = NOTIFS_ALL.filter(function(n){ var p = n.t.indexOf('內容管理') === 0 ? '2' : (n.t.indexOf('訂單') === 0 && n.t.indexOf('逾期') > 0) ? '2' : (n.t.indexOf('方案') >= 0 && n.t.indexOf('下架') > 0) ? '1B' : '1A'; return TLI_PHASE.atLeast(p); });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel'); if (!panel) return;
   var unread = NOTIFS.filter(function(n){return n.unread;}).length;

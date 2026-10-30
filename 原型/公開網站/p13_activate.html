@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>帳號開通｜TLI Connect</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -184,12 +185,12 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
   <div class="stdesc" data-en="Enter the activation code from your activation email or from your company. Before you finish, you can open the same link or code as many times as you need. The link is valid for 14 days.">請輸入啟用信或公司提供的啟用碼。完成開通前，同一個連結或啟用碼可以重複使用；啟用信連結 14 天內有效。</div>
   <div class="seg2" role="tablist">
     <button type="button" class="on" id="emEmail" data-en="Email">Email</button>
-    <button type="button" id="emOrg" data-en="Company code + employee ID">企業代碼＋員工編號</button>
+    <button type="button" id="emOrg" data-phase="1B" data-en="Company code + employee ID">企業代碼＋員工編號</button>
   </div>
   <div id="entEmailRows">
     <div class="formrow"><label for="eEmail" data-en="Email">Email</label><input id="eEmail" type="email" autocomplete="off"><div class="errmsg" id="errEEmail"></div></div>
   </div>
-  <div id="entOrgRows" style="display:none;">
+  <div id="entOrgRows" data-phase="1B" style="display:none;">
     <div class="formrow"><label for="eOrg" data-en="Company code">企業代碼</label><input id="eOrg" type="text" autocomplete="off" placeholder="例：HELIN" data-en-ph="e.g. HELIN"><div class="errmsg" id="errEOrg"></div></div>
     <div class="formrow"><label for="eEmp" data-en="Employee ID">員工編號</label><input id="eEmp" type="text" autocomplete="off" placeholder="例：HL-0231" data-en-ph="e.g. HL-0231"><div class="errmsg" id="errEEmp"></div></div>
   </div>
@@ -199,7 +200,7 @@ opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:80vw;text-ali
   <div class="demobox">
     <div class="demotitle" data-en="Demo shortcuts">示範用快速帶入</div>
     <a href="#" data-demo="a">吳淑芬（有 Email，啟用信）</a>
-    <a href="#" data-demo="b">劉建國（無 Email，啟用碼）</a>
+    <a href="#" data-demo="b" data-phase="1B">劉建國（無 Email，啟用碼）</a>
     <a href="#" data-demo="c">楊雅雯（啟用信已過期）</a>
   </div>
 </div>
@@ -418,7 +419,7 @@ function resolve(q){
 function acctCtxHtml(a){
   var o=orgOf(a);
   var rows=[[T('所屬單位','Organization'), unitName(a)],[T('姓名','Name'), a.name]];
-  if(o){ rows.push([T('企業','Company'), o.name]); rows.push([T('員工編號','Employee ID'), a.employeeNo]); }
+  if(o && TLI_PHASE.atLeast('1B')){ rows.push([T('企業','Company'), o.name]); rows.push([T('員工編號','Employee ID'), a.employeeNo]); }
   rows.push([T('登入方式','Sign-in'), a.email ? T('Email：','Email: ')+a.email : T('企業代碼 ','Company code ')+(o?o.code:'')+T('＋員工編號',' + employee ID')]);
   return rows.map(function(r){ return '<div class="ctx-row"><span>'+PL.esc(r[0])+'</span><span>'+PL.esc(r[1])+'</span></div>'; }).join('');
 }
@@ -454,7 +455,7 @@ function entryMode(){ return $('emOrg').classList.contains('on') ? 'org' : 'emai
 function acctInit(){
   var q={email:PL.qs('email')||'', org:PL.qs('org')||'', emp:PL.qs('emp')||'', code:PL.qs('code')||''};
   if(q.code && (q.email||q.org)){ enterAcct(q,true); return; }
-  if(q.org||q.emp){ setEntryMode('org'); $('eOrg').value=q.org; $('eEmp').value=q.emp; }
+  if((q.org||q.emp) && TLI_PHASE.atLeast('1B')){ setEntryMode('org'); $('eOrg').value=q.org; $('eEmp').value=q.emp; }
   else if(q.email){ $('eEmail').value=q.email; }
   showPane('paneEntry');
 }

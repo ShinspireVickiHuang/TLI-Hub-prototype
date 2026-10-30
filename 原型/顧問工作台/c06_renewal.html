@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>續約與到期提醒｜TLI Hub 管理後台</title>
@@ -344,7 +345,8 @@ html,body{overflow-x:hidden;}
     <main>
       <div class="kicker"><span data-i18n="brand.consultantPortal">顧問工作台</span>・<span data-i18n="nav.group.advisor">顧問作業</span></div>
       <h1 class="page-title" data-i18n="c06.pageTitle">續約與到期提醒</h1>
-      <p class="page-sub" data-i18n="c06.pageSub">課時效期、方案效期、分期逾期三份清單，各附建議動作；企業續約／加購／展延申請於「企業申請」分頁承接。</p>
+      <p class="page-sub" data-phase="2" data-i18n="c06.pageSub">課時效期、方案效期、分期逾期三份清單，各附建議動作；企業續約／加購／展延申請於「企業申請」分頁承接。</p>
+      <p class="page-sub" data-phase-max="1C" id="c06SubE"></p>
 
       <div class="order-type-tabs" id="renewalTabs">
         <button type="button" class="ott-btn active" data-tab="personal" onclick="tliSwitchRenewalTab('personal')" data-i18n="c06.tabPersonal">個人續約</button>
@@ -402,7 +404,7 @@ html,body{overflow-x:hidden;}
         </table>
       </div>
 
-      <div class="card">
+      <div class="card" data-phase="2">
         <h2><span data-i18n="c06.secInstallmentOverdue">分期逾期</span> <span class="cnt">2 筆</span></h2>
         <table>
           <thead><tr><th data-i18n="col.orderNo">訂單編號</th><th data-i18n="col.student">學生</th><th data-i18n="c06.colInstallment">期別</th><th data-i18n="c06.colOverdueDays">逾期天數</th><th data-i18n="col.amount">金額</th><th data-i18n="col.suggestedAction">建議動作</th><th></th></tr></thead>
@@ -464,7 +466,7 @@ html,body{overflow-x:hidden;}
       <div class="ai-msg bot" data-i18n="c06.aiIntro">我可以幫你排出優先跟進順序，或直接開一張續約單草稿。</div>
     </div>
     <div class="ai-quick">
-      <button onclick="tliAskDemo()" data-i18n="c06.aiQ1">這些逾期名單裡，哪個最急？</button>
+      <button data-phase="2" onclick="tliAskDemo()" data-i18n="c06.aiQ1">這些逾期名單裡，哪個最急？</button>
       <button onclick="tliAskDemo2()" data-i18n="c06.aiQ2">有哪些學生課時效期將到但還沒續約？</button>
     </div>
     <div class="ai-input">
@@ -684,12 +686,13 @@ function closeSidebar(){
   document.getElementById('sidebarBackdrop').classList.remove('open');
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
-var NOTIFS = [
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = TLI_PHASE.atLeast('2') ? NOTIFS_ALL : NOTIFS_ALL.filter(function(n){ return n.t.indexOf('逾期') < 0; });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;
@@ -789,5 +792,7 @@ document.addEventListener('click', function(ev){
 </script>
 <script src="../assets/_phase_map.js"></script>
 <script src="../assets/_phase_switch.js"></script>
+<script>/* 檢視階段：較早階段用的替代文字（中英） */
+(function(){var L=[["c06SubE", "課時效期、方案效期兩份清單，各附建議動作；企業續約／加購／展延申請於「企業申請」分頁承接。", "Two lists — hours expiring and plan expiring — each with a suggested action; enterprise renewal/add-on/extension requests are handled under the \"Enterprise Applications\" tab."]];function f(){L.forEach(function(p){var e=document.getElementById(p[0]);if(e){e.textContent=window.TLI_I18N?TLI_I18N.t(p[1],p[2]):p[1];}});}f();document.addEventListener('DOMContentLoaded',f);if(window.TLI_I18N&&TLI_I18N.onRefresh){TLI_I18N.onRefresh(f);}})();</script>
 </body>
 </html>

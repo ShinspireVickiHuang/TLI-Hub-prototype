@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TLI Connect 會員區－首頁</title>
@@ -309,8 +310,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </button>
       <div class="bell-panel" id="bellPanel">
         <h4 data-i18n="member.notifications">通知</h4>
-        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="m01.notifPlanExpiring">你的方案將於 14 天後到期</p><span><span data-i18n="member.today">今天</span> 09:20</span></div></div>
-        <div class="bell-item"><span class="b-dot"></span><div><p data-i18n="m01.notifClassReminder">明天 14:00 課程提醒</p><span><span data-i18n="member.today">今天</span> 08:00</span></div></div>
+        <div class="bell-item" data-phase-max="1A"><div><p class="muted" id="bellEmpty">目前沒有新通知</p></div></div>
+        <div class="bell-item" data-phase="1B"><span class="b-dot"></span><div><p data-i18n="m01.notifPlanExpiring">你的方案將於 14 天後到期</p><span><span data-i18n="member.today">今天</span> 09:20</span></div></div>
+        <div class="bell-item" data-phase="1B"><span class="b-dot"></span><div><p data-i18n="m01.notifClassReminder">明天 14:00 課程提醒</p><span><span data-i18n="member.today">今天</span> 08:00</span></div></div>
       </div>
     </div>
   </header>
@@ -512,8 +514,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <a class="btn btn-accent btn-sm" href="m21_placement_test.html" data-en="Start the test">開始測驗</a>
     </div>
 
-    <div class="section-title" data-i18n="m01.askAdvisorTitle">有問題找顧問</div>
-    <div class="card">
+    <div class="section-title" data-phase="1B" data-i18n="m01.askAdvisorTitle">有問題找顧問</div>
+    <div class="card" data-phase="1B">
       <div class="list-row">
         <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></div>
         <div class="body"><h4>林顧問・<span data-i18n="m01.roleLearningAdvisor">學習顧問</span></h4><p data-i18n="m01.advisorHours">平日 09:00–18:00 線上服務</p></div>
@@ -573,8 +575,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       <div class="progress" style="margin-top:12px;"><div id="pjBar" style="width:0%"></div></div>
     </div>
 
-    <div class="section-title" data-en="Questions? Ask your teacher or advisor">有問題找老師或顧問</div>
-    <div class="card">
+    <div class="section-title" data-phase="1B" data-en="Questions? Ask your teacher or advisor">有問題找老師或顧問</div>
+    <div class="card" data-phase="1B">
       <div class="list-row">
         <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></div>
         <div class="body"><h4>林顧問・<span data-i18n="m01.roleLearningAdvisor">學習顧問</span></h4><p data-i18n="m01.advisorHours">平日 09:00–18:00 線上服務</p></div>
@@ -903,6 +905,8 @@ function getTodosByRole(role){
 
 // 依規則分組：只有 feedback／quiz 這類「重複性同任務」會合併成一列，其餘（含金流／逾期）逐筆顯示
 function buildTodoRows(rawList){
+  /* 檢視階段：課後回饋待辦屬 1C */
+  rawList = rawList.filter(function(it){ return it.type!=='feedback' || TLI_PHASE.atLeast('1C'); });
   var byType={}, order=[];
   rawList.forEach(function(item){
     if(TODO_MERGEABLE[item.type]){

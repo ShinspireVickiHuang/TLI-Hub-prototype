@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>活動管理｜TLI Hub 管理後台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1128,12 +1129,14 @@ function closeSidebar(){
   document.getElementById('sidebarBackdrop').classList.remove('open');
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
-var NOTIFS = [
+/* 檢視階段：內容管理通知（校區主管發佈）與訂單逾期通知屬第二階段、銷售方案下架通知屬 1B */
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = NOTIFS_ALL.filter(function(n){ var p = n.t.indexOf('內容管理') === 0 ? '2' : (n.t.indexOf('訂單') === 0 && n.t.indexOf('逾期') > 0) ? '2' : (n.t.indexOf('方案') >= 0 && n.t.indexOf('下架') > 0) ? '1B' : '1A'; return TLI_PHASE.atLeast(p); });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;

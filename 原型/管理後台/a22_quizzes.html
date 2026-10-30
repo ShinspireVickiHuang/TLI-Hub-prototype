@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>測驗管理｜TLI Hub 管理後台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -260,7 +261,7 @@ html,body{overflow-x:hidden;}
 </div>
 <div class="formrow"><label id="lblCqName">測驗名稱<span class="req">*</span></label><input type="text" id="cq_name" placeholder="例如：第 9 單元：機場延伸會話・單元測驗"></div>
 <div class="grid2">
-<div class="formrow"><label id="lblCqType">類型<span class="req">*</span></label><select id="cq_type" onchange="syncCqType()"><option value="">請選擇</option><option value="程度測驗">程度測驗</option><option value="隨堂單元考">隨堂單元考</option><option value="階段考">階段考</option><optgroup label="檢定模擬考（第二階段）" id="cqOptgrpP2"><option disabled data-p2="HSK 模擬考">HSK 模擬考（第二階段）</option><option disabled data-p2="TOCFL 模擬考">TOCFL 模擬考（第二階段）</option><option disabled data-p2="CPT 模擬考">CPT 模擬考（第二階段）</option></optgroup></select><div class="hint" style="margin-top:4px" id="cqP2Hint">檢定模擬考 <span class="badge grey">第二階段</span> 目前不可建立</div></div>
+<div class="formrow"><label id="lblCqType">類型<span class="req">*</span></label><select id="cq_type" onchange="syncCqType()"><option value="">請選擇</option><option value="程度測驗">程度測驗</option><option value="隨堂單元考">隨堂單元考</option><option value="階段考">階段考</option><optgroup label="檢定模擬考（第二階段）" id="cqOptgrpP2" data-phase="2"><option disabled data-p2="HSK 模擬考">HSK 模擬考（第二階段）</option><option disabled data-p2="TOCFL 模擬考">TOCFL 模擬考（第二階段）</option><option disabled data-p2="CPT 模擬考">CPT 模擬考（第二階段）</option></optgroup></select><div class="hint" style="margin-top:4px" id="cqP2Hint" data-phase="2">檢定模擬考 <span class="badge grey">第二階段</span> 目前不可建立</div></div>
 <div class="formrow" id="cq_passscoreRow"><label id="lblCqPassscore">及格分數（0–100）<span class="req">*</span></label><input type="number" id="cq_passscore" min="0" max="100" value="60"></div>
 </div>
 <div id="cq_plSection" style="display:none">
@@ -524,7 +525,7 @@ var TYPE_EN = {'程度測驗':'Placement Test','隨堂單元考':'Quiz / Unit Te
 function examSrcLabel(v){ return v==='custom' ? TLI_I18N.t('老師自訂','Teacher-defined') : TLI_I18N.t('TLI 教材固定題','TLI material (fixed)'); }
 function lessonRangeLabel(q){ return (q.qtype==='階段考' && q.lessonFrom && q.lessonTo) ? TLI_I18N.t('第 '+q.lessonFrom+'–'+q.lessonTo+' 課','Lessons '+q.lessonFrom+'-'+q.lessonTo) : '—'; }
 function stageSrcCell(q){ return q.qtype==='階段考' ? examSrcLabel(q.examSource||'tli') : '—'; }
-var PHASE2_TYPES = ['HSK 模擬考','TOCFL 模擬考','CPT 模擬考'];
+var PHASE2_TYPES = TLI_PHASE.atLeast('2') ? ['HSK 模擬考','TOCFL 模擬考','CPT 模擬考'] : []; /* 檢定模擬考第二階段才有 */
 var PHASE2_EN = {'HSK 模擬考':'HSK Mock Exam','TOCFL 模擬考':'TOCFL Mock Exam','CPT 模擬考':'CPT Mock Exam'};
 function p2Label(n){ return TLI_I18N.t(n, PHASE2_EN[n]||n); }
 var STATUS_OPTIONS = ['已發布','草稿'];
@@ -1131,12 +1132,14 @@ function toggleSuMenu(ev){
   var el = document.getElementById('suMenu');
   if (el) el.classList.toggle('open');
 }
-var NOTIFS = [
+/* 檢視階段：內容管理通知（校區主管發佈）與訂單逾期通知屬第二階段、銷售方案下架通知屬 1B */
+var NOTIFS_ALL = [
   {t:'測驗「第 5 單元：Email 商務書信・單元測驗」近 7 天作答量下降 12%', en:'Quiz \u201c第 5 單元：Email 商務書信・單元測驗\u201d response volume dropped 12% over the last 7 days', time:'20 分鐘前', timeEn:'20 minutes ago', unread:true},
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = NOTIFS_ALL.filter(function(n){ var p = n.t.indexOf('內容管理') === 0 ? '2' : (n.t.indexOf('訂單') === 0 && n.t.indexOf('逾期') > 0) ? '2' : (n.t.indexOf('方案') >= 0 && n.t.indexOf('下架') > 0) ? '1B' : '1A'; return TLI_PHASE.atLeast(p); });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;

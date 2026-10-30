@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TLI Hub 教師端－今日</title>
@@ -241,7 +242,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
       </div>
     </div>
 
-    <div class="card" id="feedbackPendingCard" style="cursor:pointer;margin-top:12px;" onclick="goFeedbackPending()">
+    <div class="card" id="feedbackPendingCard" data-phase="1C" style="cursor:pointer;margin-top:12px;" onclick="goFeedbackPending()">
       <div class="flex-between">
         <div>
           <div style="font-size:14px;font-weight:700;"><span data-i18n="section.feedbackPending">學員回饋待回應</span><span class="phase1-pill" data-i18n="badge.phase1c">一階段 C</span> <span id="feedbackPendingCount">1</span><span data-i18n="today.unit.count"> 筆</span></div>

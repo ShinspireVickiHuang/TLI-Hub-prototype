@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TLI Hub 教師端－時數與薪資</title>
@@ -189,7 +190,7 @@ tbody tr.row-detail.hidden{display:none;}
       </div>
     </div>
 
-    <div class="card" style="cursor:pointer;" onclick="location.href='t07_students.html'">
+    <div class="card" data-phase="1C" style="cursor:pointer;" onclick="location.href='t07_students.html'">
       <div class="flex-between">
         <div class="section-title" style="margin:0;"><span data-i18n="hourspay.studentFeedbackTitle">學生對我的回饋</span><span class="phase1-pill" data-i18n="badge.phase1c">一階段 C</span></div>
         <span class="small muted">›</span>
@@ -219,7 +220,7 @@ tbody tr.row-detail.hidden{display:none;}
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-phase="2">
       <div class="section-title" style="margin-top:0;"><span data-i18n="hourspay.tierBreakdown">依人數級距拆解</span><span class="phase2-pill" data-i18n="hourspay.phase2">二階段</span></div>
       <div class="tier-note" data-i18n="hourspay.tierNote">依課堂學生人數對應不同時薪級距核算。</div>
       <div class="table-scroll">
@@ -231,7 +232,7 @@ tbody tr.row-detail.hidden{display:none;}
       <div class="amount-note" data-i18n="hourspay.amountNote">＊實際薪資以人資核發之薪資單為準。</div>
     </div>
 
-    <div class="card">
+    <div class="card" data-phase="2">
       <div class="section-title" style="margin-top:0;"><span data-i18n="hourspay.lessonDetail">逐堂明細</span><span class="phase2-pill" data-i18n="hourspay.phase2">二階段</span></div>
       <div class="table-scroll">
         <table>

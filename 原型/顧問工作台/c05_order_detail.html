@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>訂單詳情｜TLI Hub 管理後台</title>
@@ -580,6 +581,18 @@ var ORDERS={
     benefit:[{item:'教材授權',qty:'1 份',used:'—',time:'2026-08-18 16:00'}],
     history:[{t:'2026-08-18',d:'收款完成，等待開立發票',en:'Payment completed; awaiting invoice issuance'}]}
 };
+/* 檢視階段：Excel 一階段已有應收分期畫面（分期照常顯示）；逾期狀態、逾期天數與催收屬第二階段，1B～1C 原逾期的期別改顯示「待收款」、訂單狀態為「分期進行中」 */
+if(!TLI_PHASE.atLeast('2')){
+  C05_LABELS['分期進行中']='Installments in Progress'; C05_LABELS['待收款']='Pending';
+  var _o1=ORDERS['0841'];
+  _o1.status='分期進行中'; _o1.statusType='warn';
+  _o1.payment[2].status='待收款';
+  _o1.history.splice(0,1);
+  var _o2=ORDERS['0872'];
+  _o2.status='分期進行中'; _o2.statusType='warn';
+  _o2.payment[1].status='待收款';
+  _o2.history.splice(0,1);
+}
 function qs(k){return new URLSearchParams(location.search).get(k);}
 var curNo=qs('order')||'0841';
 var O=ORDERS[curNo]||ORDERS['0841'];
@@ -618,9 +631,9 @@ function renderPayment(){
     if(p.status==='已作廢') return;
     if(p.status==='已收款') totalPaid+=parseMoney(p.amount); else totalDue+=parseMoney(p.amount);
   });
-  document.getElementById('paymentTotals').textContent=T('合計已收款 ','Total Received ')+fmtMoney(totalPaid)+T('　｜　合計未收（含逾期／未到期）','   |   Total Outstanding (incl. overdue / not yet due) ')+fmtMoney(totalDue);
+  document.getElementById('paymentTotals').textContent=T('合計已收款 ','Total Received ')+fmtMoney(totalPaid)+(TLI_PHASE.atLeast('2') ? T('　｜　合計未收（含逾期／未到期）','   |   Total Outstanding (incl. overdue / not yet due) ') : T('　｜　合計未收（含未到期）','   |   Total Outstanding (incl. not yet due) '))+fmtMoney(totalDue);
   document.getElementById('paymentBody').innerHTML=O.payment.map(function(p,i){
-    var cls=p.status.indexOf('作廢')>-1?'muted':p.status.indexOf('逾期')>-1?'danger':(p.status.indexOf('未到期')>-1?'muted':'ok');
+    var cls=p.status.indexOf('作廢')>-1?'muted':p.status.indexOf('逾期')>-1?'danger':(p.status.indexOf('待收款')>-1&&!TLI_PHASE.atLeast('2'))?'warn':(p.status.indexOf('未到期')>-1?'muted':'ok');
     if(p.status==='已作廢'){
       return '<tr><td>'+TX(p.term)+'</td><td>'+p.due+'</td><td>'+p.amount+'</td><td><span class="badge '+cls+'">'+TX(p.status)+'</span></td><td style="color:#98a2b3;">'+T('已作廢，原因：','Voided, reason: ')+(p.voidReason||'—')+'</td></tr>';
     }
@@ -933,12 +946,13 @@ function closeSidebar(){
   document.getElementById('sidebarBackdrop').classList.remove('open');
 }
 /* ================= 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ================= */
-var NOTIFS = [
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = TLI_PHASE.atLeast('2') ? NOTIFS_ALL : NOTIFS_ALL.filter(function(n){ return n.t.indexOf('逾期') < 0; });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;

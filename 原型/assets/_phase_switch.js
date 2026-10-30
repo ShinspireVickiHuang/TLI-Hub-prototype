@@ -82,17 +82,23 @@
   }
 
   function build() {
-    /* ---------- 2. 導覽連結標示 ---------- */
-    var isIndex = /(^|\/)index\.html$/.test(page) || /\/$/.test(location.pathname);
-    var navSel = isIndex ? 'body a[href]' : '.side-nav a[href], .bottom-nav a[href], .sidebar a[href], .site-nav a[href], .nav-segment a[href]';
-    Array.prototype.forEach.call(document.querySelectorAll(navSel), function (a) {
-      if (a.classList.contains('brand') || a.closest('.side-brand')) { return; }
-      var h = a.getAttribute('href') || ''; if (!/\.html/.test(h)) { return; }
-      var m = MAP[keyOf(h)]; if (!m || rank(m.p) <= rank(sel)) { return; }
-      a.classList.add('ph-off');
-      var tag = document.createElement('span'); tag.className = 'ph-tag'; tag.textContent = SHORT[m.p] + ' 上線';
-      var lab = a.querySelector('span') || a; lab.appendChild(tag);
-    });
+    /* ---------- 2. 連結標示：導覽與頁內按鈕凡連到「選定階段之後才上線」的頁，變灰並標上線階段 ---------- */
+    function tagLinks() {
+      Array.prototype.forEach.call(document.querySelectorAll('a[href]:not([data-ph-done])'), function (a) {
+        a.setAttribute('data-ph-done', '1');
+        if (a.closest('.ph-sw, .ph-cover')) { return; }
+        var h = a.getAttribute('href') || ''; if (!/\.html/.test(h) || /^(https?:|mailto:|javascript:)/.test(h)) { return; }
+        var m = MAP[keyOf(h)]; if (!m || rank(m.p) <= rank(sel)) { return; }
+        a.classList.add('ph-off');
+        if (a.closest('.side-brand') || a.classList.contains('brand')) { a.title = SHORT[m.p] + ' 上線'; return; }
+        var tag = document.createElement('span'); tag.className = 'ph-tag'; tag.textContent = SHORT[m.p] + ' 上線';
+        var sp = a.querySelector('span'); var lab = (sp && sp.parentNode === a) ? sp : a; lab.appendChild(tag);
+      });
+    }
+    tagLinks();
+    /* 頁面用 JS 後續產生的按鈕也要標 */
+    var tq = null;
+    new MutationObserver(function () { if (tq) { return; } tq = setTimeout(function () { tq = null; tagLinks(); }, 150); }).observe(document.body, { childList: true, subtree: true });
 
     /* ---------- 1. 切換列 ---------- */
     var feats = info ? info.f : [];

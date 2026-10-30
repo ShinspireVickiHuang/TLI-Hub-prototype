@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>系統權限管理｜TLI Hub 管理後台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -211,7 +212,7 @@ html,body{overflow-x:hidden;}
 <div class="tabs">
 <button class="active" onclick="permTab(this,'accounts')" data-i18n="tab.accounts">帳號與人員</button>
 <button onclick="permTab(this,'roles')" data-i18n="tab.roles">角色管理</button>
-<button onclick="permTab(this,'scope')" data-i18n="tab.scope">資料範圍</button>
+<button data-phase="2" onclick="permTab(this,'scope')" data-i18n="tab.scope">資料範圍</button>
 <button onclick="permTab(this,'logs')" data-i18n="tab.logs">登入與操作紀錄</button>
 </div>
 
@@ -236,7 +237,7 @@ html,body{overflow-x:hidden;}
 </div>
 </div>
 
-<div class="tabpanel" id="permpanel-scope">
+<div class="tabpanel" data-phase="2" id="permpanel-scope">
 <div class="card">
 <h2 data-i18n="h2.dataScope">資料範圍（角色 × 可見校區）</h2>
 <div class="desc" style="margin-bottom:10px" data-i18n="desc.dataScopeHint">控制該角色登入後預設能看到全公司資料，或僅限指定校區的資料（例：校區主管只看得到自己校區的會員與訂單）。</div>
@@ -303,6 +304,12 @@ var ACCOUNTS = [
  {id:'u6', name:'顧問 A', email:'advisorA@tli.example', role:'顧問', unit:'羅斯福校區', status:'啟用', lastLogin:'2026-08-25 10:03'},
  {id:'u7', name:'顧問 D', email:'advisorD@tli.example', role:'顧問', unit:'士林校區', status:'停用', lastLogin:'2026-06-11 09:30'}
 ];
+/* 檢視階段：校區與實體分校屬第二階段，1A～1C 不出現校區主管角色、校區帳號與校區資料範圍 */
+if (!TLI_PHASE.atLeast('2')) {
+  ROLES = ROLES.filter(function(r){ return r !== '校區主管'; });
+  ACCOUNTS = ACCOUNTS.filter(function(a){ return a.role !== '校區主管'; });
+  ACCOUNTS.forEach(function(a){ a.unit = '總公司'; });
+}
 var nextAcctId = 8;
 var editingAcctId = null;
 function i18nT(zh, en){ return window.TLI_I18N ? TLI_I18N.t(zh, en) : zh; }
@@ -386,8 +393,8 @@ ROLES.forEach(function(r){
   });
 });
 // 預設權限（示範資料）
-function grantAll(role, features){ features.forEach(function(f){ ACTIONS.forEach(function(a){ PERM[role][f][a] = 1; }); }); }
-function grantView(role, features){ features.forEach(function(f){ PERM[role][f]['查看'] = 1; }); }
+function grantAll(role, features){ if (!PERM[role]) return; features.forEach(function(f){ ACTIONS.forEach(function(a){ PERM[role][f][a] = 1; }); }); }
+function grantView(role, features){ if (!PERM[role]) return; features.forEach(function(f){ PERM[role][f]['查看'] = 1; }); }
 grantAll('總公司管理者', FEATURES);
 grantAll('校區主管', ['會員','訂單','合約','排課','報表']);
 grantView('校區主管', ['產品','銷售方案','發票']);
@@ -449,6 +456,7 @@ function saveNewRole(){
 // 校區清單改讀共用主檔 TLI_MASTERS.campuses（來源 a17「校區與線上據點」），排除「線上」（無實體校區，非人員所屬單位）；
 // 陣列元素仍維持原本的校區名稱字串，下游程式碼（人員所屬單位、資料範圍勾選）不用改
 var CAMPUS_ALL = TLI_MASTERS.campuses.filter(function(c){ return c.id !== 'online'; }).map(function(c){ return c.name; });
+if (!TLI_PHASE.atLeast('2')) { CAMPUS_ALL = []; }
 var SCOPE = {'總公司管理者':'全公司','校區主管':'指定校區','行政人員':'指定校區','財務':'全公司','顧問':'指定校區'};
 var SCOPE_CAMPUS = {'總公司管理者':CAMPUS_ALL.slice(),'校區主管':['士林校區'],'行政人員':['士林校區'],'財務':CAMPUS_ALL.slice(),'顧問':['羅斯福校區']};
 function renderScopeList(){
@@ -493,6 +501,7 @@ var LOGS = [
  {t:'2026-08-11 14:20', who:'顧問 D', role:'顧問', action:'登出', detail:'手動登出'},
  {t:'2026-06-11 09:30', who:'顧問 D', role:'顧問', action:'登入', detail:'最後一次登入（帳號已停用）'}
 ];
+if (!TLI_PHASE.atLeast('2')) { LOGS = LOGS.filter(function(l){ return l.role !== '校區主管' && l.detail.indexOf('校區') < 0 && l.detail.indexOf('教室') < 0; }); }
 var LOG_PAGE_SIZE = 10;
 var logShown = LOG_PAGE_SIZE;
 var LOG_ACTION_EN = {'登入':'Login','登出':'Logout','新增':'Add','編輯':'Edit','刪除':'Delete','匯出':'Export'};
@@ -575,12 +584,14 @@ function closeSidebar(){
   document.getElementById('sidebarBackdrop').classList.remove('open');
 }
 /* ---- 共用：頂欄通知／使用者選單／登出／toast（全站同一段） ---- */
-var NOTIFS = [
+/* 檢視階段：內容管理通知（校區主管發佈）與訂單逾期通知屬第二階段、銷售方案下架通知屬 1B */
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+var NOTIFS = NOTIFS_ALL.filter(function(n){ var p = n.t.indexOf('內容管理') === 0 ? '2' : (n.t.indexOf('訂單') === 0 && n.t.indexOf('逾期') > 0) ? '2' : (n.t.indexOf('方案') >= 0 && n.t.indexOf('下架') > 0) ? '1B' : '1A'; return TLI_PHASE.atLeast(p); });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel');
   if (!panel) return;

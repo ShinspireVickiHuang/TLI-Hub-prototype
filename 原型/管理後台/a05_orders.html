@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="utf-8">
 <title>訂單｜TLI Hub 管理後台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -343,7 +344,7 @@ html,body{overflow-x:hidden;}
 <select id="f_bizsource" onchange="onSelFilterChange('bizSource', this.value)"><option value="" data-i18n="filter.allBizSource">全部訂單來源</option><option value="直營" data-i18n="bizsource.direct">直營</option><option value="代理" data-i18n="bizsource.agent">代理</option><option value="企業合約" data-i18n="bizsource.enterpriseContract">企業合約</option><option value="經銷訂單" data-i18n="bizsource.distributorProject">經銷訂單</option></select>
 <select id="f_partner" onchange="onSelFilterChange('partner', this.value)" aria-label="來源夥伴"><option value="">全部來源夥伴</option></select>
 <select id="f_status" onchange="onSelFilterChange('status', this.value)"><option value="">全部狀態</option></select>
-<select id="f_campus" onchange="onSelFilterChange('campus', this.value)"><option value="">全部校區</option></select>
+<select id="f_campus" data-phase="2" onchange="onSelFilterChange('campus', this.value)"><option value="">全部校區</option></select>
 <button type="button" class="btn ghost sm" onclick="toggleMoreFilters()" data-i18n="common.moreFilters">更多篩選</button>
 <button class="clearlink" onclick="clearAllFilters()" data-i18n="btn.clearAllFilters2">清除全部篩選</button>
 </div>
@@ -423,7 +424,7 @@ html,body{overflow-x:hidden;}
 <div class="formrow"><label data-i18n="label.dueDate">應收日期</label><input type="date" id="pm_due"></div>
 <div class="formrow"><label data-i18n="label.amount">金額</label><input type="number" id="pm_amount" placeholder="0"></div>
 <div class="formrow"><label data-i18n="label.collectionChannel">收款渠道</label><select id="pm_channel"><option value="藍新金流" data-i18n="chan.newebpay">藍新金流</option><option value="Stripe">Stripe</option><option value="刷卡機（現場）" data-i18n="chan.posOnsite">刷卡機（現場）</option><option value="匯款／現金" data-i18n="chan.bankTransferCash">匯款／現金</option></select></div>
-<div class="formrow"><label data-i18n="common.status">狀態</label><select id="pm_status"><option value="已收款" data-i18n="status.orderPaid">已收款</option><option value="待收款" data-i18n="status.orderDue">待收款</option><option value="逾期" data-i18n="status.orderOverdue">逾期</option></select></div>
+<div class="formrow"><label data-i18n="common.status">狀態</label><select id="pm_status"><option value="已收款" data-i18n="status.orderPaid">已收款</option><option value="待收款" data-i18n="status.orderDue">待收款</option><option value="逾期" data-phase="2" data-i18n="status.orderOverdue">逾期</option></select></div>
 <div class="formrow"><label data-i18n="label.reconStatus">對帳狀態</label><select id="pm_recon"><option value="未對帳" data-i18n="status.notReconciled">未對帳</option><option value="已對帳" data-i18n="status.reconciled">已對帳</option></select></div>
 <div style="text-align:right;margin-top:6px"><button class="btn ghost" onclick="closeModal('payModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="savePayment()" data-i18n="common.save">儲存</button></div>
 </div></div>
@@ -438,7 +439,7 @@ html,body{overflow-x:hidden;}
 <!-- 發送收款提醒 modal -->
 <div class="modal-mask" id="remindModal" onclick="if(event.target===this) closeModal('remindModal')"><div class="modal">
 <div style="display:flex;justify-content:space-between;align-items:flex-start"><h3 data-i18n="modal.sendPaymentReminder">發送收款提醒</h3><button type="button" class="drawer-close" onclick="closeModal('remindModal')" aria-label="關閉" data-i18n-aria-label="common.close">&times;</button></div>
-<div class="formrow"><label data-i18n="label.notifyTemplate">通知範本</label><select id="remindTmplSel"><option value="付款提醒" data-i18n="tmpl.paymentReminder">付款提醒</option><option value="逾期催收" data-i18n="tmpl.overdueCollection">逾期催收</option><option value="自訂訊息" data-i18n="tmpl.customMessage">自訂訊息</option></select></div>
+<div class="formrow"><label data-i18n="label.notifyTemplate">通知範本</label><select id="remindTmplSel"><option value="付款提醒" data-i18n="tmpl.paymentReminder">付款提醒</option><option value="逾期催收" data-phase="2" data-i18n="tmpl.overdueCollection">逾期催收</option><option value="自訂訊息" data-i18n="tmpl.customMessage">自訂訊息</option></select></div>
 <div class="hint" id="remindHint" style="margin-bottom:10px"></div>
 <div style="text-align:right"><button class="btn ghost" onclick="closeModal('remindModal')" data-i18n="common.cancel">取消</button> <button class="btn" onclick="doBatchRemind()" data-i18n="common.submit">送出</button></div>
 </div></div>
@@ -536,6 +537,8 @@ var DEMO_PLANS = TLI_MASTERS.packages.filter(function(pk){
   };
 });
 var CAMPUSES = TLI_MASTERS.campuses.filter(function(c){ return c.id!=='online'; }).map(function(c){ return c.name; });
+/* 檢視階段：Excel 一階段已有訂單、合約與應收分期畫面（分期中照常顯示）；逾期狀態、催收、自動沖銷屬第二階段，1B～1C 原逾期那筆改顯示分期中 */
+var INST_ON = TLI_PHASE.atLeast('2');
 var STATUSES = ['待收款','分期中','已完成','已取消'];
 var PAYMODES = ['一次付清','訂金＋尾款','分期','月結'];
 var SOURCES = ['Connect 線上自助下單','顧問建訂單'];
@@ -648,7 +651,7 @@ function buildPaymentsFor(mode, total, baseDate, status){
   } else if (mode === '分期'){
     var n = 3, per = Math.round(total/n);
     for (var i=0;i<n;i++){
-      var st = i===0 ? '已收款' : (status==='待收款' && i===n-1 ? '待收款' : (i===n-1&&status==='分期中'?'逾期':'已收款'));
+      var st = i===0 ? '已收款' : (status==='待收款' && i===n-1 ? '待收款' : (i===n-1&&status==='分期中'?(INST_ON?'逾期':'待收款'):'已收款'));
       pays.push({id:'py'+i, term:'第 '+(i+1)+' 期', due:addDays(baseDate, i*30), amount: i===n-1 ? total-per*(n-1) : per, status:st, channel:CHANNELS[i%4], recon: st==='已收款'?'已對帳':'未對帳'});
     }
   } else { // 月結
@@ -1304,7 +1307,7 @@ function renderOdPay(o){
       var rb = p.recon==='已對帳' ? '<span class="badge blue">'+tr('已對帳')+'</span>' : '<span class="badge grey">'+tr('未對帳')+'</span>';
       return '<tr><td>'+tr(p.term)+'</td><td>'+p.due+'</td><td>'+curSym(o)+Number(p.amount).toLocaleString()+'</td><td>'+tr(p.channel)+'</td><td>'+rb+'</td><td>'+b+'</td>' +
         '<td><button class="btn ghost sm" onclick="openPayModal(\''+p.id+'\')">'+tr2('編輯','Edit')+'</button> <button class="btn ghost sm" onclick="voidPayment(\''+p.id+'\')">'+tr2('作廢','Void')+'</button></td></tr>';
-    }).join('') + '</table></div><div class="hint">'+tr2('收款排程依付款方式自動產生；逾期會同步進入顧問工作台的續約與到期提醒清單；對帳狀態供財務與藍新／Stripe／刷卡機對帳單勾稽。','Payment schedules are auto-generated from the payment terms; overdue items also appear in the Consultant Workbench renewal/expiry reminder list; reconciliation status is used by Finance to match against NewebPay/Stripe/POS statements.')+'</div>';
+    }).join('') + '</table></div><div class="hint">'+(INST_ON ? tr2('收款排程依付款方式自動產生；逾期會同步進入顧問工作台的續約與到期提醒清單；對帳狀態供財務與藍新／Stripe／刷卡機對帳單勾稽。','Payment schedules are auto-generated from the payment terms; overdue items also appear in the Consultant Workbench renewal/expiry reminder list; reconciliation status is used by Finance to match against NewebPay/Stripe/POS statements.') : tr2('收款排程依付款方式自動產生；對帳狀態供財務與藍新／Stripe／刷卡機對帳單勾稽。','Payment schedules are auto-generated from the payment terms; reconciliation status is used by Finance to match against NewebPay/Stripe/POS statements.'))+'</div>';
   document.getElementById('odpanel-pay').innerHTML = html;
 }
 function renderOdInvoice(o){
@@ -1727,12 +1730,14 @@ function neoWizFinish(){
 /* ================= 側欄／頂欄／RBAC（全站共用） ================= */
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarBackdrop').classList.toggle('open'); }
 function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarBackdrop').classList.remove('open'); }
-var NOTIFS = [
+var NOTIFS_ALL = [
   {t:'訂單 ORD-2026-0102 已逾期 5 天未收款', en:'Order ORD-2026-0102 is 5 days overdue for payment', time:'10 分鐘前', timeEn:'10 minutes ago', unread:true},
   {t:'銷售方案「學期班 Lv.5–8 一期方案」即將於 1/31 下架', en:'Sales plan \u201c學期班 Lv.5\u20138 一期方案\u201d will be delisted on 1/31', time:'1 小時前', timeEn:'1 hour ago', unread:true},
   {t:'內容管理：首頁 Hero 文案已由校區主管發佈', en:'Content Management: homepage hero copy has been published by the campus manager', time:'今天 09:12', timeEn:'Today 09:12', unread:false},
   {t:'老師黃志遠已切換為留職停薪', en:'Teacher 黃志遠 has switched to unpaid leave', time:'昨天', timeEn:'Yesterday', unread:false}
 ];
+/* 檢視階段：內容管理通知（校區主管發佈）與訂單逾期通知屬第二階段、銷售方案下架通知屬 1B */
+var NOTIFS = NOTIFS_ALL.filter(function(n){ var p = n.t.indexOf('內容管理') === 0 ? '2' : (n.t.indexOf('訂單') === 0 && n.t.indexOf('逾期') > 0) ? '2' : (n.t.indexOf('方案') >= 0 && n.t.indexOf('下架') > 0) ? '1B' : '1A'; return TLI_PHASE.atLeast(p); });
 function renderNotifPanel(){
   var panel = document.getElementById('notifPanel'); if (!panel) return;
   var unread = NOTIFS.filter(function(n){return n.unread;}).length;

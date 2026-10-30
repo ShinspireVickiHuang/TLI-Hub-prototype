@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="meta_title">TLI Connect｜企業培訓</title>
@@ -392,7 +393,8 @@ main{max-width:1080px;}
   <section class="home-section">
     <div class="section-head2">
       <h2 data-i18n="p10_dash_head">HR 管理後台示意</h2>
-      <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-i18n="p10_dash_sub">出勤率、學習時數、進度與老師評語一次看，報表可直接匯出</p>
+      <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-phase="1C" data-i18n="p10_dash_sub">出勤率、學習時數、進度與老師評語一次看，報表可直接匯出</p>
+      <p style="margin-top:12px;font-size:14.5px;color:var(--c-muted);" data-phase-max="1B" id="p10DashSubB"></p>
     </div>
     <div class="dash-mock">
       <div class="dash-mock-head">
@@ -409,11 +411,11 @@ main{max-width:1080px;}
       </div>
       <div class="dash-table-wrap">
         <table class="dash-table">
-          <thead><tr><th data-i18n="p10_dash_col_student">學員</th><th data-i18n="p10_dash_col_site">廠區</th><th data-i18n="p10_dash_col_attendance">出勤</th><th data-i18n="p10_dash_col_hours">時數</th><th data-i18n="p10_dash_col_progress">進度</th><th data-i18n="p10_dash_col_comment">老師評語</th></tr></thead>
+          <thead><tr><th data-i18n="p10_dash_col_student">學員</th><th data-i18n="p10_dash_col_site">廠區</th><th data-i18n="p10_dash_col_attendance">出勤</th><th data-i18n="p10_dash_col_hours">時數</th><th data-i18n="p10_dash_col_progress">進度</th><th data-phase="1C" data-i18n="p10_dash_col_comment">老師評語</th></tr></thead>
           <tbody>
-            <tr><td data-i18n="p10_dash_row1_student">學員 A</td><td data-i18n="p10_dash_row1_site">美國廠</td><td>100%</td><td>32</td><td data-i18n="p10_dash_row1_progress">第 9 週</td><td data-i18n="p10_dash_row1_comment">會議聽力進步明顯</td></tr>
-            <tr><td data-i18n="p10_dash_row2_student">學員 B</td><td data-i18n="p10_dash_row2_site">日本廠</td><td>92%</td><td>28</td><td data-i18n="p10_dash_row2_progress">第 7 週</td><td data-i18n="p10_dash_row2_comment">口說可再主動一些</td></tr>
-            <tr><td data-i18n="p10_dash_row3_student">學員 C</td><td data-i18n="p10_dash_row3_site">美國廠</td><td>96%</td><td>30</td><td data-i18n="p10_dash_row3_progress">第 8 週</td><td data-i18n="p10_dash_row3_comment">產線術語掌握穩定</td></tr>
+            <tr><td data-i18n="p10_dash_row1_student">學員 A</td><td data-i18n="p10_dash_row1_site">美國廠</td><td>100%</td><td>32</td><td data-i18n="p10_dash_row1_progress">第 9 週</td><td data-phase="1C" data-i18n="p10_dash_row1_comment">會議聽力進步明顯</td></tr>
+            <tr><td data-i18n="p10_dash_row2_student">學員 B</td><td data-i18n="p10_dash_row2_site">日本廠</td><td>92%</td><td>28</td><td data-i18n="p10_dash_row2_progress">第 7 週</td><td data-phase="1C" data-i18n="p10_dash_row2_comment">口說可再主動一些</td></tr>
+            <tr><td data-i18n="p10_dash_row3_student">學員 C</td><td data-i18n="p10_dash_row3_site">美國廠</td><td>96%</td><td>30</td><td data-i18n="p10_dash_row3_progress">第 8 週</td><td data-phase="1C" data-i18n="p10_dash_row3_comment">產線術語掌握穩定</td></tr>
           </tbody>
         </table>
       </div>
@@ -996,5 +998,7 @@ TLI_I18N.init();
 </script>
 <script src="../assets/_phase_map.js"></script>
 <script src="../assets/_phase_switch.js"></script>
+<script>/* 檢視階段：較早階段用的替代文字（中英） */
+(function(){var L=[["p10DashSubB", "出勤率、學習時數與進度一次看，報表可直接匯出", "Attendance rate, learning hours and progress in one view — reports can be exported directly"]];function f(){L.forEach(function(p){var e=document.getElementById(p[0]);if(e){e.textContent=window.TLI_I18N?TLI_I18N.t(p[1],p[2]):p[1];}});}f();document.addEventListener('DOMContentLoaded',f);if(window.TLI_I18N&&TLI_I18N.onRefresh){TLI_I18N.onRefresh(f);}})();</script>
 </body>
 </html>

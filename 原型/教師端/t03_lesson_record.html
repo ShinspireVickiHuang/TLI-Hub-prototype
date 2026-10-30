@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script src="../assets/_phase_core.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TLI Hub 教師端－課後紀錄與回饋</title>
@@ -187,10 +188,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
   <main class="content">
     <div id="listView" class="hidden">
-      <div class="section-title" style="margin-top:4px;" data-i18n="record.section.feedbackThreads">課後回饋</div>
-      <p class="page-sub" data-i18n="record.desc.feedbackListIntro">送出課後紀錄後，系統會自動寄信與站內通知學員填寫回饋；學員回覆時你會收到通知。</p>
-      <div class="filter-tabs" id="filterTabs"></div>
-      <div id="threadListWrap"></div>
+      <div class="card" data-phase-max="1B"><p class="small muted" style="margin:0 0 10px;" id="recHint">請從「今日」選擇要填寫課後紀錄的課堂。</p><a class="btn btn-primary" href="t01_today.html" id="recHintBtn">回今日</a></div>
+      <div class="section-title" data-phase="1C" style="margin-top:4px;" data-i18n="record.section.feedbackThreads">課後回饋</div>
+      <p class="page-sub" data-phase="1C" data-i18n="record.desc.feedbackListIntro">送出課後紀錄後，系統會自動寄信與站內通知學員填寫回饋；學員回覆時你會收到通知。</p>
+      <div class="filter-tabs" data-phase="1C" id="filterTabs"></div>
+      <div id="threadListWrap" data-phase="1C"></div>
     </div>
 
     <div class="lesson-hero" id="lessonHero">
@@ -304,8 +306,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
     <div class="card empty-state" id="successCard" style="display:none">
       <div class="e-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <h4 data-i18n="record.success.title">回饋已送出</h4>
-      <p id="successNote" data-i18n="record.success.note">「今日」頁面的待辦提醒已更新，學生可於會員區查看這則回饋。</p>
+      <h4 data-phase-max="1B" id="successTitleB">課後紀錄已送出</h4>
+      <p data-phase-max="1B" id="successNoteB">「今日」頁面的待辦提醒已更新。</p>
+      <h4 data-phase="1C" data-i18n="record.success.title">回饋已送出</h4>
+      <p data-phase="1C" id="successNote" data-i18n="record.success.note">「今日」頁面的待辦提醒已更新，學生可於會員區查看這則回饋。</p>
       <div class="flex-between" style="gap:10px;">
         <a class="btn btn-outline" style="flex:1;" href="t01_today.html" data-i18n="record.btn.backToToday">回今日</a>
         <a class="btn btn-primary" style="flex:1;" id="successNextBtn" href="t02_schedule.html">下一堂</a>
@@ -457,6 +461,8 @@ function showListView(){
   document.getElementById('threadView').classList.add('hidden');
   document.getElementById('successCard').style.display = 'none';
   document.getElementById('submitBar').classList.add('hidden');
+  document.getElementById('recHint').textContent = TLI_I18N.t('請從「今日」選擇要填寫課後紀錄的課堂。','Pick a lesson from Today to write its lesson record.');
+  document.getElementById('recHintBtn').textContent = TLI_I18N.t('回今日','Back to Today');
   renderFilterTabs();
   renderThreadListWrap();
   if (window.TLI_I18N) TLI_I18N.refresh();
@@ -678,6 +684,16 @@ function showToast(msg){
 function submitRecord(){
   localStorage.setItem('tli_teacher_record_'+lessonId, '1');
   /* 送出課後紀錄後，該堂進入回饋對話串：紀錄為第一則訊息，20260910m 新增 */
+  if(!TLI_PHASE.atLeast('1C')){
+    /* 1B 只有課後紀錄；學員回饋流程（通知學員、對話串）屬 1C */
+    document.getElementById('successTitleB').textContent = TLI_I18N.t('課後紀錄已送出','Lesson record submitted');
+    document.getElementById('successNoteB').textContent = TLI_I18N.t('「今日」頁面的待辦提醒已更新。','The to-do reminders on the Today page have been updated.');
+    document.getElementById('formCard').classList.add('hidden');
+    document.getElementById('submitBar').classList.add('hidden');
+    document.getElementById('successCard').style.display = '';
+    showToast(TLI_I18N.t('已送出','Submitted'));
+    return;
+  }
   var skills = {};
   document.querySelectorAll('.rate-chips').forEach(function(group){
     var active = group.querySelector('.rate-chip.active');
@@ -725,7 +741,7 @@ if (window.TLI_I18N) TLI_I18N.onRefresh(refreshCurrentView);
 /* ---------- 進入頁面時的顯示分流：無 lesson 參數→列表；已有回饋對話串→直接展開，20260910m 新增 ---------- */
 if(!hasLessonParam){
   showListView();
-}else if(FEEDBACK_THREADS[lessonId]){
+}else if(FEEDBACK_THREADS[lessonId] && TLI_PHASE.atLeast('1C')){
   showThreadView(lessonId, true);
 }
 if (window.TLI_I18N) TLI_I18N.init();
