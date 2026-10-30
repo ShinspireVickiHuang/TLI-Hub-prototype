@@ -247,7 +247,7 @@ var teachers = [
 var partners = [
  {id:'p02', name:'範例州立大學', contact:'Dr. Chen', country:'美國', type:'project',
   tenant:'TENANT-US-AZU', status:'啟用', from:'2027-02-01', to:'2027-05-31', createdAt:'2026-09-05',
-  loungeQuota:{perStudentPerMonth:4, groupCap:8},
+  loungeQuota:{perStudentPerWeek:3, groupCap:8},
   videoTool:'teams', langs:['en','zh-TW']},
  {id:'p05', code:'DST-MY05', name:'大馬旅遊教育集團', contact:'Ahmad Faisal', country:'馬來西亞', type:'distributor',
   status:'啟用', from:'2025-06-01', to:'2027-05-31',

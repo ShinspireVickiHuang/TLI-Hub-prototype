@@ -3,7 +3,7 @@
   var PL = g.TLI_PL, T = PL.T, ME = PL.teacherMe();
   function $(i){ return document.getElementById(i); }
   function toast(m){ var t=$('toast'); if(!t) return; t.textContent=m; t.classList.remove('hidden'); clearTimeout(g._tt); g._tt=setTimeout(function(){ t.classList.add('hidden'); },2400); }
-  function quota(){ return PL.quotaCfg().perMonth; }
+  function quota(){ return PL.quotaCfg().perWeek; }
   function classStatus(c){ return PL.today < c.from ? 'pending' : (PL.today > c.to ? 'done' : 'ongoing'); }
   function statusLbl(s){ return s==='ongoing' ? T('上課中','Ongoing') : (s==='pending' ? T('尚未開課','Not started') : T('已結束','Ended')); }
   function myClasses(){ return ME.classes; }
@@ -28,7 +28,7 @@
     var r = PL.rosterById(rid), c = PL.classById(r.classId), p = PL.progress(rid), lg = PL.lounge(rid, quota());
     var hist = PL.seedHistory(rid).concat(PL.myBookings(rid).filter(function(b){ return b.status==='booked'; }));
     var h = '<div class="flex-between" style="align-items:flex-start;"><div><h3 style="margin:0;font-size:17px;">'+PL.esc(r.name)+'</h3><div class="small muted">'+PL.esc(r.email)+'</div><div class="small muted">'+PL.esc(c.name)+'</div></div><span class="badge '+stBadge(r.status)+'">'+stLbl(r.status)+'</span></div>'+
-      '<div class="kgrid"><div><span>'+T('完成率','Completion')+'</span><b>'+p.pct+'%</b></div><div><span>'+T('自學時數','Study hrs')+'</span><b>'+p.hours+'</b></div><div><span>'+T('最後學習','Last study')+'</span><b>'+lastTxt(p)+'</b></div><div><span>'+T('Lounge 本月','Lounge this month')+'</span><b>'+lg.used+'／'+lg.quota+'</b></div></div>'+
+      '<div class="kgrid"><div><span>'+T('完成率','Completion')+'</span><b>'+p.pct+'%</b></div><div><span>'+T('自學時數','Study hrs')+'</span><b>'+p.hours+'</b></div><div><span>'+T('最後學習','Last study')+'</span><b>'+lastTxt(p)+'</b></div><div><span>'+T('Lounge 本週','Lounge this week')+'</span><b>'+lg.used+'／'+lg.quota+'</b></div></div>'+
       '<h4 class="dh">'+T('各單元進度','Progress by unit')+'</h4>'+
       p.units.map(function(u,i){ return '<div class="urow"><span>'+(i+1)+' '+PL.esc(T(u.zh,u.en))+'</span><span class="small muted">'+u.done+'／'+u.lessons+'</span></div>'+bar(u.pct); }).join('')+
       '<h4 class="dh">'+T('最近學習','Recent activity')+'</h4>'+
@@ -39,14 +39,14 @@
     $('drawerBody').innerHTML = h; $('drawerOv').classList.remove('hidden');
     $('dwClose').onclick = closeDrawer;
     $('dwCsv').onclick = function(){
-      var rr = [[T('學生自學報告','Student learning report')],[T('姓名','Name'),r.name],['Email',r.email],[T('班級','Class'),c.name],[T('完成率','Completion'),p.pct+'%'],[T('自學時數','Study hours'),p.hours],[T('最後學習','Last study'),lastTxt(p)],[T('Lounge 本月','Lounge this month'),lg.used+'/'+lg.quota],[],[T('單元','Unit'),T('已完成','Done'),T('課數','Lessons'),T('完成率','Rate')]];
+      var rr = [[T('學生自學報告','Student learning report')],[T('姓名','Name'),r.name],['Email',r.email],[T('班級','Class'),c.name],[T('完成率','Completion'),p.pct+'%'],[T('自學時數','Study hours'),p.hours],[T('最後學習','Last study'),lastTxt(p)],[T('Lounge 本週','Lounge this week'),lg.used+'/'+lg.quota],[],[T('單元','Unit'),T('已完成','Done'),T('課數','Lessons'),T('完成率','Rate')]];
       p.units.forEach(function(u,i){ rr.push([(i+1)+' '+T(u.zh,u.en),u.done,u.lessons,u.pct+'%']); });
       PL.download('student_'+r.name.replace(/\s+/g,'_')+'_'+PL.today+'.csv', PL.csv(rr)); toast(T('個人報告已下載','Report downloaded'));
     };
   }
   function closeDrawer(){ $('drawerOv').classList.add('hidden'); }
   function exportRows(list, name){
-    var rr = [[T('班級','Class'),T('姓名','Name'),'Email',T('帳號狀態','Account'),T('完成率','Completion'),T('已完成課數','Lessons done'),T('自學時數','Study hours'),T('最後學習','Last study'),T('Lounge 本月已用','Lounge used'),T('Lounge 額度','Quota'),T('Lounge 累計','Lounge total')]];
+    var rr = [[T('班級','Class'),T('姓名','Name'),'Email',T('帳號狀態','Account'),T('完成率','Completion'),T('已完成課數','Lessons done'),T('自學時數','Study hours'),T('最後學習','Last study'),T('Lounge 本週已用','Lounge used this week'),T('Lounge 額度','Quota'),T('Lounge 累計','Lounge total')]];
     list.forEach(function(x){ rr.push([x.cls.name,x.r.name,x.r.email,stLbl(x.r.status),x.p.pct+'%',x.p.done+'/'+x.p.total,x.p.hours,lastTxt(x.p),x.lg.used,x.lg.quota,x.lg.term]); });
     PL.download(name+'_'+PL.today+'.csv', PL.csv(rr)); toast(T('報告已下載','Report downloaded'));
   }

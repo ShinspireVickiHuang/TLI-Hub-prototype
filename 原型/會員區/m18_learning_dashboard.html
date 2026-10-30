@@ -256,7 +256,7 @@ function toggleBell(){ var b=$('bellPanel'); if(b) b.classList.toggle('open'); }
 function barCls(p){ return p>=100?' ok':(p<25?' warn':''); }
 function statusBadge(u){ return u.pct>=100 ? '<span class="badge badge-ok">'+T('已完成','Completed')+'</span>' : (u.done>0 ? '<span class="badge badge-info">'+T('進行中','In progress')+'</span>' : '<span class="badge badge-muted">'+T('未開始','Not started')+'</span>'); }
 
-var P = PL.progress(U.rid), LG = PL.lounge(U.rid, U.perMonth);
+var P = PL.progress(U.rid), LG = PL.lounge(U.rid, U.perWeek);
 var NEXT = null;
 
 function nextBooking(){
@@ -266,7 +266,7 @@ function nextBooking(){
 function typeLbl(t){ return T('團體場次（6–10 人）','Group session (6–10)'); }
 
 function render(){
-  P = PL.progress(U.rid); LG = PL.lounge(U.rid, U.perMonth); NEXT = nextBooking();
+  P = PL.progress(U.rid); LG = PL.lounge(U.rid, U.perWeek); NEXT = nextBooking();
   /* 抬頭 */
   $('dashSub').textContent = U.mode==='project'
     ? T('依你的班級統計，資料每次學習後更新。','Based on your class. Updated after every study session.')
@@ -289,7 +289,7 @@ function render(){
     '<div class="kpi"><div class="k-label">'+T('自學完成率','Course completion')+'</div><div class="k-val">'+P.pct+'<small>%</small></div><div class="progress'+barCls(P.pct)+'"><div style="width:'+P.pct+'%"></div></div></div>'+
     '<div class="kpi"><div class="k-label">'+T('累計學習時數','Total study time')+'</div><div class="k-val">'+P.hours+'<small>'+T('小時','hrs')+'</small></div><div class="k-sub">'+(P.last ? T('最後學習 ','Last study ')+PL.mdLabel(P.last.date)+' '+P.last.time : T('尚無學習紀錄','No study yet'))+'</div></div>'+
     '<div class="kpi"><div class="k-label">'+T('已完成課數','Lessons completed')+'</div><div class="k-val">'+P.done+'<small>／'+P.total+'</small></div><div class="k-sub">'+T('共 8 個單元','8 units in total')+'</div></div>'+
-    '<div class="kpi"><div class="k-label">'+T('Mandarin Lounge 本月剩餘','Mandarin Lounge left this month')+'</div><div class="k-val">'+LG.remaining+'<small>／'+LG.quota+' '+T('次','sessions')+'</small></div><div class="progress'+(LG.remaining===0?' warn':' ok')+'"><div style="width:'+lgPct+'%"></div></div></div>';
+    '<div class="kpi"><div class="k-label">'+T('Mandarin Lounge 本週剩餘','Mandarin Lounge left this week')+'</div><div class="k-val">'+LG.remaining+'<small>／'+LG.quota+' '+T('次','sessions')+'</small></div><div class="progress'+(LG.remaining===0?' warn':' ok')+'"><div style="width:'+lgPct+'%"></div></div></div>';
 
   /* 單元 */
   $('unitList').innerHTML = P.units.map(function(u,i){
@@ -306,10 +306,10 @@ function render(){
 
   /* Lounge */
   var h = '<h3 class="ct">Mandarin Lounge</h3>'+
-    '<div class="flex-between" style="margin-bottom:6px;"><span class="small muted">'+T('本月已預約／額度','Booked this month / quota')+'</span><b>'+LG.used+'／'+LG.quota+'</b></div>'+
+    '<div class="flex-between" style="margin-bottom:6px;"><span class="small muted">'+T('本週已預約／額度','Booked this week / quota')+'</span><b>'+LG.used+'／'+LG.quota+'</b></div>'+
     '<div class="progress'+(LG.remaining===0?' warn':' ok')+'"><div style="width:'+lgPct+'%"></div></div>'+
     '<div class="small muted" style="margin-top:8px;">'+T('累計參加／預約 ','Total joined or booked ')+LG.term+T(' 場',' sessions')+'</div>';
-  if(LG.remaining===0){ h += '<div class="banner banner-warn" style="margin:12px 0 0;">'+T('本月額度已用完，下個月才能再預約。','Your monthly quota is used up. You can book again next month.')+'</div>'; }
+  if(LG.remaining===0){ h += '<div class="banner banner-warn" style="margin:12px 0 0;">'+T('本週額度已用完，下週才能再預約。','Your weekly quota is used up. You can book again next week.')+'</div>'; }
   if(NEXT){
     h += '<div class="lg-next"><b>'+T('下一場','Next session')+'</b>'+PL.mdLabel(NEXT.date)+' '+PL.wd(NEXT.date)+' '+NEXT.time+'・'+typeLbl(NEXT.type)+'・'+PL.toolName(NEXT.tool)+'<br>'+PL.esc(NEXT.teacher)+(NEXT.topic?'・'+PL.esc(T(NEXT.topic,NEXT.topicEn)):'')+'</div>';
   }
@@ -317,7 +317,7 @@ function render(){
        (NEXT && PL.cancellable(NEXT) ? '<button type="button" class="btn btn-outline btn-sm" onclick="openCancel()">'+T('取消這場','Cancel this session')+'</button>' : '')+'</div>';
   $('loungeCard').innerHTML = h;
 }
-function openCancel(){ if(!NEXT) return; $('cancelDetail').textContent = PL.mdLabel(NEXT.date)+' '+NEXT.time+'・'+typeLbl(NEXT.type)+'　'+T('取消後本月額度會退回。','Your quota is returned after cancelling.'); $('cancelOverlay').classList.remove('hidden'); }
+function openCancel(){ if(!NEXT) return; $('cancelDetail').textContent = PL.mdLabel(NEXT.date)+' '+NEXT.time+'・'+typeLbl(NEXT.type)+'　'+T('取消後當週額度會退回。','Your quota is returned after cancelling.'); $('cancelOverlay').classList.remove('hidden'); }
 function closeCancel(){ $('cancelOverlay').classList.add('hidden'); }
 $('cancelOk').addEventListener('click', function(){ if(NEXT && PL.cancel(NEXT.id)){ closeCancel(); render(); showToast(T('已取消預約，額度已退回','Session cancelled and quota returned')); } });
 
@@ -327,7 +327,7 @@ $('btnCsv').addEventListener('click', function(){
   if(U.mode==='project'){ rows.push([T('單位','Institution'),U.partnerName],[T('班級','Class'),U.className],[T('老師','Teacher'),U.teacherName]); }
   rows.push([T('課程','Course'),PL.courseName()],[T('報告日期','Report date'),PL.today],[],
     [T('自學完成率','Completion'),P.pct+'%'],[T('累計學習時數（小時）','Study hours'),P.hours],[T('已完成課數','Lessons done'),P.done+'/'+P.total],
-    [T('Mandarin Lounge 本月已用','Lounge used this month'),LG.used+'/'+LG.quota],[T('Mandarin Lounge 累計場次','Lounge total'),LG.term],[],
+    [T('Mandarin Lounge 本週已用','Lounge used this week'),LG.used+'/'+LG.quota],[T('Mandarin Lounge 累計場次','Lounge total'),LG.term],[],
     [T('單元','Unit'),T('已完成課數','Done'),T('總課數','Lessons'),T('完成率','Rate')]);
   P.units.forEach(function(u,i){ rows.push([(i+1)+' '+T(u.zh,u.en),u.done,u.lessons,u.pct+'%']); });
   PL.download('learning_report_'+U.name.replace(/\s+/g,'_')+'_'+PL.today+'.csv', PL.csv(rows));

@@ -237,7 +237,7 @@ function renderList(){
     var lgSum = r.reduce(function(a,x){ return a+x.lg.used; },0), behind = r.filter(function(x){ return x.flag==='behind'; }).length;
     return '<div class="cls-card"><div class="flex-between" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;"><div><h4>'+PL.esc(c.name)+' <span class="badge '+(s==='ongoing'?'badge-ok':(s==='pending'?'badge-info':'badge-muted'))+'">'+TC.statusLbl(s)+'</span></h4><div class="cls-meta">'+PL.esc(PL.partner().name)+'・'+c.from+' ～ '+c.to+'</div></div></div>'+
       '<div class="cls-stats"><div>'+T('學生人數','Students')+'<b>'+r.length+'</b></div><div>'+T('已開通','Activated')+'<b>'+act.length+'／'+r.length+'</b></div><div>'+T('平均完成率','Avg completion')+'<b>'+Math.round(avg(act,function(x){return x.p.pct;}))+'%</b></div><div>'+T('平均自學時數','Avg study hrs')+'<b>'+avg(act,function(x){return x.p.minutes/60;}).toFixed(1)+'</b></div></div>'+
-      '<div class="small muted" style="margin-top:10px;">'+T('本月 Mandarin Lounge 已預約 ','Mandarin Lounge booked this month: ')+lgSum+T(' 場',' sessions')+(behind?'・'+T('需關心 ','Needs follow-up: ')+behind+T(' 位',''):'')+'</div>'+
+      '<div class="small muted" style="margin-top:10px;">'+T('本週 Mandarin Lounge 已預約 ','Mandarin Lounge booked this week: ')+lgSum+T(' 場',' sessions')+(behind?'・'+T('需關心 ','Needs follow-up: ')+behind+T(' 位',''):'')+'</div>'+
       '<div class="cls-foot"><button class="btn btn-primary btn-sm" onclick="openClass(\''+c.id+'\')">'+T('查看班級學生','View students')+'</button><button class="btn btn-outline btn-sm" onclick="quickCsv(\''+c.id+'\')">'+T('匯出班級報告','Export class report')+'</button></div></div>';
   }).join('');
   /* 通知 */
@@ -255,7 +255,7 @@ function renderClass(){
   var all = clsRows(c), act = all.filter(function(x){ return x.r.status==='已啟用'; });
   $('clsTitle').textContent = c.name; $('clsMeta').textContent = PL.partner().name+'・'+c.from+' ～ '+c.to;
   $('btnDetail').href = 't09_lesson_log.html?class='+c.id+(PL.qs('rid')?'&rid='+PL.qs('rid'):'');
-  $('sumRow').innerHTML = '<div>'+T('學生人數','Students')+'<b>'+all.length+'</b></div><div>'+T('已開通','Activated')+'<b>'+act.length+'／'+all.length+'</b></div><div>'+T('平均完成率','Avg completion')+'<b>'+Math.round(avg(act,function(x){return x.p.pct;}))+'%</b></div><div>'+T('Lounge 本月已預約','Lounge booked')+'<b>'+all.reduce(function(a,x){return a+x.lg.used;},0)+'</b></div>';
+  $('sumRow').innerHTML = '<div>'+T('學生人數','Students')+'<b>'+all.length+'</b></div><div>'+T('已開通','Activated')+'<b>'+act.length+'／'+all.length+'</b></div><div>'+T('平均完成率','Avg completion')+'<b>'+Math.round(avg(act,function(x){return x.p.pct;}))+'%</b></div><div>'+T('Lounge 本週已預約','Lounge booked this week')+'<b>'+all.reduce(function(a,x){return a+x.lg.used;},0)+'</b></div>';
   $('fSel').innerHTML = [['all',T('全部學生','All students')],['behind',T('需關心','Needs follow-up')],['inactive',T('尚未開通','Not activated')],['active',T('已開通','Activated')]].map(function(o){ return '<option value="'+o[0]+'"'+(st.filt===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('');
   $('sSel').innerHTML = [['name',T('依姓名','By name')],['pct',T('完成率高到低','Completion high to low')],['pctAsc',T('完成率低到高','Completion low to high')],['hours',T('自學時數','Study hours')],['last',T('最後學習時間','Last study')],['lounge',T('Lounge 使用','Lounge use')]].map(function(o){ return '<option value="'+o[0]+'"'+(st.sort===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('');
   var q = st.q.toLowerCase();

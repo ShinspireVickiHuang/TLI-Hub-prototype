@@ -10,7 +10,6 @@
 
   var TODAY = '2027-03-15';                       /* 合作期間內的「今天」（2027-02-01～05-31） */
   var NOW_UTC = Date.UTC(2027, 2, 15, 16, 0);     /* 2027-03-15 09:00 亞利桑那時間（UTC-7） */
-  var MONTH = TODAY.slice(0, 7);
   var BK_KEY = 'tliLoungeBookings_v1';
   var OPEN_KEY = 'tliLoungeOpened_v1';             /* 中心教師開設的團體場次（直營）；專案合作場次由 TLI 中心教師帶，一階段 A 由新達於資料庫設定 */
   var FRESH_KEY = 'tliPLFreshActivated_v1';       /* 由開通頁剛啟用、尚無學習紀錄的名單 id */
@@ -37,7 +36,7 @@
 
   /* ---------- 主檔讀取 ---------- */
   function partner() { return M.partners.filter(function (p) { return p.id === 'p02'; })[0]; }
-  function quotaCfg() { var q = (partner() || {}).loungeQuota || {}; return { perMonth: q.perStudentPerMonth || 4, groupCap: q.groupCap || 8 }; }
+  function quotaCfg() { var q = (partner() || {}).loungeQuota || {}; return { perWeek: q.perStudentPerWeek || 3, groupCap: q.groupCap || 8 }; }
   function toolName(id) { var v = (M.videoTools || []).filter(function (t) { return t.id === id; })[0]; return v ? v.name : (id === 'zoom' ? 'Zoom' : 'Microsoft Teams'); }
   function project() { return (M.projects || []).filter(function (p) { return p.id === 'PRJ-EDU-AZU'; })[0]; }
   function projectName() { var p = project(); return p ? p.name : 'Gateway 專案合作．美國 範例州立大學'; }
@@ -88,10 +87,10 @@
     if (ss.mode === 'project' && ss.rid && rosterById(ss.rid)) {
       var r = rosterById(ss.rid), c = classById(r.classId), t = c ? rosterById(c.teacherRid) : null, q = quotaCfg();
       return { mode: 'project', rid: r.id, name: r.name, email: r.email, classId: r.classId, className: c ? c.name : '', teacherName: t ? t.name : '', teacherId: t ? t.id : '',
-        partnerName: partner().name, projectName: projectName(), perMonth: q.perMonth, groupCap: q.groupCap, tool: partner().videoTool, tzOffset: -7, from: partner().from, to: partner().to };
+        partnerName: partner().name, projectName: projectName(), perWeek: q.perWeek, groupCap: q.groupCap, tool: partner().videoTool, tzOffset: -7, from: partner().from, to: partner().to };
     }
     return { mode: 'general', rid: 'gen', name: 'Emma Johnson', email: 'emma.johnson@example.com', classId: '', className: '', teacherName: '', partnerName: '', projectName: '',
-      perMonth: 4, groupCap: quotaCfg().groupCap, tool: 'zoom', tzOffset: 8 };
+      perWeek: 3, groupCap: quotaCfg().groupCap, tool: 'zoom', tzOffset: 8 };
   }
   function signInStudent(rid) { setSS({ mode: 'project', rid: rid }); }
   function signInTeacher(rid) { var s = getSS(); s.trid = rid; setSS(s); }
@@ -178,14 +177,17 @@
   function seedUsed(rid) { if (rid === 'gen') { return 1; } var r = rosterById(rid); if (!r || r.status !== '已啟用' || isFresh(rid)) { return 0; } return Math.floor(rnd(rid + ':l') * 3); }
   function seedTerm(rid) { if (rid === 'gen') { return 3; } var r = rosterById(rid); if (!r || r.status !== '已啟用' || isFresh(rid)) { return 0; } return seedUsed(rid) + Math.floor(rnd(rid + ':f') * 4); }
   function myBookings(rid) { return bookings().filter(function (b) { return b.rid === rid; }); }
-  function usedInMonth(rid, mk) {
-    var n = myBookings(rid).filter(function (b) { return b.status === 'booked' && b.date.slice(0, 7) === mk; }).length;
-    return n + (mk === MONTH ? seedUsed(rid) : 0);
+  /* 週以週一為首日、週日為末日；回傳該日所在週的週一日期（YYYY-MM-DD） */
+  function weekStart(str) { var p = str.split('-'); var dow = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay(); return addDays(str, -((dow + 6) % 7)); }
+  var WEEK = weekStart(TODAY);
+  /* 額度以週計：只算該週內仍有效的預約；種子歷史場次（seedHistory）都在本週之前，不計入本週 */
+  function usedInWeek(rid, wk) {
+    return myBookings(rid).filter(function (b) { return b.status === 'booked' && weekStart(b.date) === wk; }).length;
   }
-  function lounge(rid, perMonth, mk) {
-    mk = mk || MONTH;
-    var used = usedInMonth(rid, mk);
-    return { month: mk, quota: perMonth, used: used, remaining: Math.max(0, perMonth - used), term: seedTerm(rid) + myBookings(rid).filter(function (b) { return b.status === 'booked'; }).length };
+  function lounge(rid, perWeek, wk) {
+    wk = wk || WEEK;
+    var used = usedInWeek(rid, wk);
+    return { week: wk, weekEnd: addDays(wk, 6), quota: perWeek, used: used, remaining: Math.max(0, perWeek - used), term: seedTerm(rid) + myBookings(rid).filter(function (b) { return b.status === 'booked'; }).length };
   }
   function seedHistory(rid) {
     var n = seedUsed(rid), out = [];
@@ -270,7 +272,7 @@
   /* 預約團體場次，視訊工具由場次設定 */
   function book(user, session, opts) {
     opts = opts || {};
-    var lg = lounge(user.rid, user.perMonth, session.date.slice(0, 7));
+    var lg = lounge(user.rid, user.perWeek, weekStart(session.date));
     if (lg.remaining <= 0) { return { ok: false, code: 'quota' }; }
     if (session.mineBooking) { return { ok: false, code: 'dup' }; }
     if (session.full) { return { ok: false, code: 'full' }; }
@@ -442,7 +444,7 @@
     next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
   };
   function pjBuild(kind, u) {
-    var P = progress(u.rid), LG = lounge(u.rid, u.perMonth), h = '';
+    var P = progress(u.rid), LG = lounge(u.rid, u.perWeek), h = '';
     if (kind === 'm08') {
       h += pjHead(T('自學課程', 'Self-paced Course'), T('依自己的步調觀看章節影音，追蹤各單元完成進度。', 'Study at your own pace and track progress by unit.'));
       h += '<div class="card"><div class="pj-top" style="cursor:default"><span>' + esc(courseName()) + '</span><span class="badge badge-info">' + esc(u.projectName.replace(/^.*．/, '')) + '</span></div>' +
@@ -467,8 +469,8 @@
       });
       h += '</div>';
     } else if (kind === 'm02') {
-      h += pjHead(T('預約 Mandarin Lounge', 'Book Mandarin Lounge'), T('每月可預約的口說練習場次，由 TLI 中心教師帶領。', 'Monthly speaking practice sessions led by TLI center teachers.'));
-      h += '<div class="card"><div class="pj-row"><span>' + T('本月剩餘', 'Left this month') + '</span><b>' + LG.remaining + '／' + LG.quota + T(' 次', '') + '</b></div>' +
+      h += pjHead(T('預約 Mandarin Lounge', 'Book Mandarin Lounge'), T('每週可預約的口說練習場次，由 TLI 中心教師帶領。', 'Weekly speaking practice sessions led by TLI center teachers.'));
+      h += '<div class="card"><div class="pj-row"><span>' + T('本週剩餘', 'Left this week') + '</span><b>' + LG.remaining + '／' + LG.quota + T(' 次', '') + '</b></div>' +
         '<div class="progress" style="margin:4px 0 12px"><div style="width:' + Math.round(LG.used / Math.max(1, LG.quota) * 100) + '%"></div></div>' +
         '<a class="btn btn-primary" href="m14_chat_booking.html">' + T('預約場次', 'Book a session') + '</a></div>';
       var up = pjUpcoming(u.rid);
@@ -491,7 +493,7 @@
         '<div class="pj-row"><span>' + T('學習期間', 'Period') + '</span><b>' + u.from.slice(0, 10) + ' – ' + u.to.slice(0, 10) + '</b></div></div>';
       h += '<div class="section-title">' + T('包含內容', 'What is included') + '</div><div class="card">' +
         '<div class="pj-row"><span>' + T('自學課程', 'Self-paced course') + '</span><b>' + esc(courseName()) + '</b></div>' +
-        '<div class="pj-row"><span>Mandarin Lounge</span><b>' + T('每月 ', '') + u.perMonth + T(' 次，團體場次', ' group sessions per month') + '</b></div>' +
+        '<div class="pj-row"><span>Mandarin Lounge</span><b>' + T('每週 ', '') + u.perWeek + T(' 次，團體場次', ' group sessions per week') + '</b></div>' +
         '<div class="pj-row"><span>' + T('學習儀表板', 'Learning dashboard') + '</span><b>' + T('進度與學習時數', 'Progress and study time') + '</b></div>' +
         /* 證書與階段考一階段 B 上線（功能展開表），1A 檢視時不列 */
         (g.TLI_PHASE && !g.TLI_PHASE.atLeast('1B') ? '' : '<div class="pj-row"><span>' + T('證書', 'Certificate') + '</span><b>' + T('完成課程後核發', 'Issued on completion') + '</b></div>') +
@@ -662,7 +664,7 @@
   }
 
   g.TLI_PL = {
-    today: TODAY, month: MONTH, nowUtc: NOW_UTC, T: T, esc: esc, wd: wd, mdLabel: mdLabel, addDays: addDays, pad: pad, qs: qs, xl: xl,
+    today: TODAY, week: WEEK, weekStart: weekStart, nowUtc: NOW_UTC, T: T, esc: esc, wd: wd, mdLabel: mdLabel, addDays: addDays, pad: pad, qs: qs, xl: xl,
     partner: partner, quotaCfg: quotaCfg, toolName: toolName, projectName: projectName, classes: classes, classById: classById, teacherById: teacherById, teacherRosters: teacherRosters, rosterById: rosterById,
     rosterByEmail: rosterByEmail, students: students, teacherOfClass: teacherOfClass, teacherForRoster: teacherForRoster, isExistingMember: isExistingMember,
     UNITS: UNITS, TOTAL_LESSONS: TOTAL_LESSONS, courseName: courseName, unitName: unitName,

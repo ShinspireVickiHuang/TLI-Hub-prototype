@@ -206,7 +206,7 @@ Object.assign(TLI_I18N_DICT.en,{
 "m02.chatTitle":"Mandarin Lounge",
 "m02.chatBadgeSelfBook":"Self-Service Booking",
 "m02.btnSeeAllSessions":"See All Sessions",
-"m02.chatDesc":"Mandarin Lounge is a group speaking session of 30 minutes with 6–10 learners. You enroll yourself and have a monthly quota. Available sessions follow what the Mandarin Lounge page shows.",
+"m02.chatDesc":"Mandarin Lounge is a group speaking session of 30 minutes with 6–10 learners. You enroll yourself and have a weekly quota. Available sessions follow what the Mandarin Lounge page shows.",
 "m02.eventsTitle":"Online Events",
 "m02.eventsOneTimeFeeNote":"Events are one-time paid",
 "m02.notifPlanExpiring":"Your plan expires in 14 days",

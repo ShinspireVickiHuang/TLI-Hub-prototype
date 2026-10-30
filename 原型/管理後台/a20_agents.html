@@ -729,15 +729,15 @@ function sectionBasic(mode, o){
 function sectionProjectTerms(mode, o){
   var h = '';
 
-  var q = o.loungeQuota || {perStudentPerMonth:4, groupCap:8};
+  var q = o.loungeQuota || {perStudentPerWeek:3, groupCap:8};
   h += '<div class="sectiontitle">' + TT('Mandarin Lounge 額度') + '</div>';
-  h += fieldRow(mode, '每位學生每月可預約次數', escHtml(q.perStudentPerMonth) + TLI_I18N.t(' 次',' sessions'),
-    '<input type="number" min="1" max="30" id="pe_loungePer" value="' + escHtml(q.perStudentPerMonth) + '" onchange="pdSetLounge(\'perStudentPerMonth\',this.value)">',
-    {id:'pf_loungeQuota', required:true, errMsg:'請輸入每月可預約次數（1–30 的整數）'});
+  h += fieldRow(mode, '每位學生每週可預約次數', escHtml(q.perStudentPerWeek) + TLI_I18N.t(' 次',' sessions'),
+    '<input type="number" min="1" max="30" id="pe_loungePer" value="' + escHtml(q.perStudentPerWeek) + '" onchange="pdSetLounge(\'perStudentPerWeek\',this.value)">',
+    {id:'pf_loungeQuota', required:true, errMsg:'請輸入每週可預約次數（1–30 的整數）'});
   var capOpts = [6,7,8,9,10].map(function(n){ return '<option value="' + n + '"' + (Number(q.groupCap) === n ? ' selected' : '') + '>' + n + TLI_I18N.t(' 人',' people') + '</option>'; }).join('');
   h += fieldRow(mode, '團體場次人數上限', escHtml(q.groupCap) + TLI_I18N.t(' 人',' people'),
     '<select id="pe_loungeCap" onchange="pdSetLounge(\'groupCap\',this.value)">' + capOpts + '</select>');
-  h += '<div class="hint">' + TT('團體場次每場 6–10 人，額度用完需等下月重置。') + '</div>';
+  h += '<div class="hint">' + TT('團體場次每場 6–10 人，額度用完需等下週重置。') + '</div>';
 
   h += '<div class="sectiontitle">' + TT('視訊工具') + '</div>';
   var vt = o.videoTool || 'teams';
@@ -750,7 +750,7 @@ function sectionProjectTerms(mode, o){
 }
 function pdSetLounge(field, v){
   if (!pdDraft) return;
-  pdDraft.loungeQuota = pdDraft.loungeQuota || {perStudentPerMonth:4, groupCap:8};
+  pdDraft.loungeQuota = pdDraft.loungeQuota || {perStudentPerWeek:3, groupCap:8};
   pdDraft.loungeQuota[field] = v;
 }
 
@@ -984,7 +984,7 @@ function applyTypeDefaults(o){
   if (o.type === 'distributor' && !o.rebateTiers) o.rebateTiers = [];
   if (o.type === 'distributor' && !o.discountPrices) o.discountPrices = {};
   if (o.type === 'project'){
-    if (!o.loungeQuota) o.loungeQuota = {perStudentPerMonth:4, groupCap:8};
+    if (!o.loungeQuota) o.loungeQuota = {perStudentPerWeek:3, groupCap:8};
     if (!o.videoTool) o.videoTool = 'teams';
   }
 }
@@ -1042,7 +1042,7 @@ function validatePartnerDraft(){
   var ok = true;
   var type = pdDraft.type;
   if (type === 'project'){
-    var per = Number((pdDraft.loungeQuota || {}).perStudentPerMonth);
+    var per = Number((pdDraft.loungeQuota || {}).perStudentPerWeek);
     if (!(per >= 1 && per <= 30 && Math.floor(per) === per)){ pdMarkReqError('pf_loungeQuota'); ok = false; }
   } else if (type === 'distributor'){
     if (!String(pdDraft.depositRate == null ? '' : pdDraft.depositRate).trim()){ pdMarkReqError('pf_depositRate'); ok = false; }
@@ -1058,7 +1058,7 @@ function validatePartnerDraft(){
 }
 function pdNormalizeNumbers(o){
   if (o.type === 'project' && o.loungeQuota){
-    o.loungeQuota.perStudentPerMonth = Number(o.loungeQuota.perStudentPerMonth) || 4;
+    o.loungeQuota.perStudentPerWeek = Number(o.loungeQuota.perStudentPerWeek) || 3;
     o.loungeQuota.groupCap = Number(o.loungeQuota.groupCap) || 8;
   }
 }

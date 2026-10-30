@@ -198,7 +198,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     </nav>
 
     <div class="page-h">Mandarin Lounge</div>
-    <p class="page-sub" id="subTxt" data-en="Group speaking sessions of 30 minutes, 6 to 10 learners each, led by a TLI teacher. A monthly quota applies.">團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每月有預約額度。</p>
+    <p class="page-sub" id="subTxt" data-en="Group speaking sessions of 30 minutes, 6 to 10 learners each, led by a TLI teacher. A weekly quota applies.">團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每週有預約額度。</p>
 
     <div class="card quota-card" id="quotaCard"></div>
     <div class="banner banner-warn hidden" id="quotaBanner" style="margin-top:12px;">
@@ -254,7 +254,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 var PL = TLI_PL, T = PL.T, U = PL.me();
 /* 1A 專案合作學生只有 Mandarin Lounge，不顯示直營才有的團體與活動報名、活動分頁 */
 if(U.mode==='project'){ var _ns=document.querySelector('.nav-segment'); if(_ns) _ns.style.display='none'; }
-if(U.mode==='project'){ var _st=document.getElementById('subTxt'); _st.textContent='團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每月有預約額度。'; _st.setAttribute('data-en','Group speaking sessions of 30 minutes, 6 to 10 learners each, led by TLI center teachers. A monthly quota applies.'); }
+if(U.mode==='project'){ var _st=document.getElementById('subTxt'); _st.textContent='團體場次，每場 30 分鐘、6–10 人，由 TLI 中心教師帶領。每週有預約額度。'; _st.setAttribute('data-en','Group speaking sessions of 30 minutes, 6 to 10 learners each, led by TLI center teachers. A weekly quota applies.'); }
 function $(i){ return document.getElementById(i); }
 function showToast(msg){ var t=$('toast'); t.textContent=msg; t.classList.remove('hidden'); clearTimeout(window._tt); window._tt=setTimeout(function(){ t.classList.add('hidden'); },2600); }
 function toggleBell(){ var b=$('bellPanel'); if(b) b.classList.toggle('open'); }
@@ -271,19 +271,19 @@ function dateLabel(d){ return PL.mdLabel(d)+' '+PL.wd(d); }
 function secondTz(x){ return U.mode==='project' ? T('台北 ','Taipei ')+PL.mdLabel(x.tpDate)+' '+x.tpTime : ''; }
 
 function refreshData(){ SESS = PL.sessionsFor(U); }
-function lg(){ return PL.lounge(U.rid, U.perMonth); }
+function lg(){ return PL.lounge(U.rid, U.perWeek); }
 
 function renderQuota(){
   var L = lg(), pct = L.quota ? Math.round(L.used/L.quota*100) : 0;
   $('quotaCard').innerHTML =
-    '<div class="q-top"><div><div class="small muted" style="font-weight:700;">'+T('本月剩餘預約次數','Sessions left this month')+'（'+L.month.replace('-','/')+'）</div>'+
+    '<div class="q-top"><div><div class="small muted" style="font-weight:700;">'+T('本週剩餘預約次數','Sessions left this week')+'（'+PL.mdLabel(L.week)+'–'+PL.mdLabel(L.weekEnd)+'）</div>'+
     '<div class="q-big">'+L.remaining+'<small>／ '+L.quota+' '+T('次','sessions')+'</small></div></div>'+
     '<div class="small muted" style="text-align:right;">'+T('已預約 ','Booked ')+L.used+T(' 次',' sessions')+'<br>'+T('取消預約會退回額度','Cancelling returns the quota')+'</div></div>'+
     '<div class="progress'+(L.remaining===0?' warn':'')+'"><div style="width:'+pct+'%"></div></div>'+
     '<div class="q-meta"><span>'+T('時間顯示：','Times shown in: ')+'<b>'+tzName()+'</b></span>'+
     (U.mode==='project' ? '<span>'+T('額度由 ','Quota set by ')+'<b>'+PL.esc(U.partnerName)+'</b>'+T(' 專案設定','')+'</span>' : '')+'</div>';
   $('quotaBanner').classList.toggle('hidden', L.remaining>0);
-  $('quotaBannerText').textContent = T('本月預約額度已用完，無法再預約新場次。取消既有預約可以退回額度，或等下個月重新計算。','Your monthly quota is used up, so you cannot book new sessions. Cancel an existing booking to get a session back, or wait for next month.');
+  $('quotaBannerText').textContent = T('本週額度已用完，本週內無法再預約新場次。取消既有預約可以退回額度，或等下週重新計算。','Your weekly quota is used up, so you cannot book more sessions this week. Cancel an existing booking to get a session back, or wait for next week.');
 }
 
 function myUpcoming(){ return PL.myBookings(U.rid).filter(function(b){ return b.status==='booked' && b.utc>PL.nowUtc; }).sort(function(a,b){ return a.utc-b.utc; }); }
@@ -318,10 +318,10 @@ function filtered(){
   return a;
 }
 function actionHtml(s){
-  var L = lg(), remainingForMonth = PL.lounge(U.rid, U.perMonth, s.date.slice(0,7)).remaining;
+  var L = lg(), remainingForWeek = PL.lounge(U.rid, U.perWeek, PL.weekStart(s.date)).remaining;
   if(s.mineBooking) return '<span class="badge badge-ok">'+T('已預約','Booked')+'</span><button type="button" class="btn btn-outline btn-sm" onclick="askCancel(\''+s.mineBooking.id+'\')"'+(PL.cancellable(s.mineBooking)?'':' disabled')+'>'+T('取消','Cancel')+'</button>';
   if(s.full) return '<span class="badge badge-full">'+T('已額滿','Full')+'</span>';
-  if(remainingForMonth<=0) return '<button type="button" class="btn btn-primary btn-sm" disabled>'+T('額度已用完','Quota used up')+'</button>';
+  if(remainingForWeek<=0) return '<button type="button" class="btn btn-primary btn-sm" disabled>'+T('額度已用完','Quota used up')+'</button>';
   return '<button type="button" class="btn btn-primary btn-sm" onclick="openBook(\''+s.id+'\')">'+T('預約','Book')+'</button>';
 }
 function renderList(){
@@ -371,7 +371,7 @@ function openBook(id){
     '<dt>'+T('型態','Type')+'</dt><dd>'+typeName(s.type)+'（6–10 '+T('人','learners')+'）'+'</dd>'+
     '<dt>'+T('老師','Teacher')+'</dt><dd>'+PL.esc(s.teacher)+'</dd>'+
     ('<dt>'+T('主題','Topic')+'</dt><dd>'+PL.esc(T(s.topic,s.topicEn))+'</dd><dt>'+T('名額','Seats')+'</dt><dd>'+T('剩 ','Left ')+s.left+T(' ／ 上限 ',' / max ')+s.cap+'</dd>')+'<dt>'+T('視訊工具','Video tool')+'</dt><dd>'+PL.toolName(s.tool)+T('（由場次設定）',' (set by the session)')+'</dd>'+
-    '<dt>'+T('本月額度','Quota')+'</dt><dd>'+T('預約後剩 ','After booking: ')+(PL.lounge(U.rid,U.perMonth,s.date.slice(0,7)).remaining-1)+T(' 次',' left')+'</dd></dl>';
+    '<dt>'+T('當週額度','Quota that week')+'</dt><dd>'+T('預約後剩 ','After booking: ')+(PL.lounge(U.rid,U.perWeek,PL.weekStart(s.date)).remaining-1)+T(' 次',' left')+'</dd></dl>';
   h += '<div class="small muted" style="margin:12px 0;">'+T('預約成功後，開始前 2 小時以前都可以取消，額度會退回。','You can cancel up to 2 hours before the start and the quota is returned.')+'</div>'+
     '<div style="display:flex;flex-direction:column;gap:8px;"><button type="button" class="btn btn-primary" onclick="confirmBook()">'+T('確認預約','Confirm booking')+'</button><button type="button" class="btn btn-outline" onclick="closeSheet()">'+T('先不要','Not now')+'</button></div>';
   $('sheetBody').innerHTML = h; $('ov').classList.remove('hidden');
@@ -379,16 +379,16 @@ function openBook(id){
 function confirmBook(){
   var res = PL.book(U, CUR);
   closeSheet();
-  if(res.ok){ showToast(T('預約完成，本月額度已扣 1 次','Booked. One session deducted from this month’s quota')); }
+  if(res.ok){ showToast(T('預約完成，當週額度已扣 1 次','Booked. One session deducted from that week’s quota')); }
   else {
-    var m = {quota:T('本月預約額度已用完','Your monthly quota is used up'), dup:T('你已預約這個場次','You already booked this session'), full:T('這場名額已滿','This session is full'), clash:T('這個時段你已有其他預約','You already have a booking at this time')};
+    var m = {quota:T('本週額度已用完','Your weekly quota is used up'), dup:T('你已預約這個場次','You already booked this session'), full:T('這場名額已滿','This session is full'), clash:T('這個時段你已有其他預約','You already have a booking at this time')};
     showToast(m[res.code]||T('無法預約','Could not book'));
   }
   renderAll();
 }
 function askCancel(id){
   var b = PL.bookings().filter(function(x){ return x.id===id; })[0]; if(!b) return;
-  $('sheetBody').innerHTML = '<h3>'+T('取消這場預約？','Cancel this booking?')+'</h3><p class="small muted" style="margin:0 0 14px;">'+dateLabel(b.date)+' '+b.time+'・'+typeName(b.type)+'・'+PL.esc(b.teacher)+'<br>'+T('取消後本月額度退回 1 次。','One session is returned to your monthly quota.')+'</p>'+
+  $('sheetBody').innerHTML = '<h3>'+T('取消這場預約？','Cancel this booking?')+'</h3><p class="small muted" style="margin:0 0 14px;">'+dateLabel(b.date)+' '+b.time+'・'+typeName(b.type)+'・'+PL.esc(b.teacher)+'<br>'+T('取消後當週額度退回 1 次。','One session is returned to that week’s quota.')+'</p>'+
     '<div style="display:flex;flex-direction:column;gap:8px;"><button type="button" class="btn btn-primary" onclick="doCancel(\''+id+'\')">'+T('取消預約','Cancel booking')+'</button><button type="button" class="btn btn-outline" onclick="closeSheet()">'+T('保留預約','Keep it')+'</button></div>';
   $('ov').classList.remove('hidden');
 }

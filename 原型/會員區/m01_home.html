@@ -502,7 +502,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
         <h3 style="margin:0;font-size:15px;" data-i18n="m01.groupChatTitle">Mandarin Lounge</h3>
         <a href="m14_chat_booking.html" class="small muted" data-i18n="m01.btnLearnMore">了解更多 ›</a>
       </div>
-      <p class="small muted" style="margin:8px 0 0;" data-en="Group speaking sessions of 30 minutes with a teacher, 6 to 10 learners each. Booking opens with your plan and a monthly quota applies.">團體場次，每場 30 分鐘、6–10 人，由老師帶領。購買方案後開放預約，每月有預約額度。</p>
+      <p class="small muted" style="margin:8px 0 0;" data-en="Group speaking sessions of 30 minutes with a teacher, 6 to 10 learners each. Booking opens with your plan and a weekly quota applies.">團體場次，每場 30 分鐘、6–10 人，由老師帶領。購買方案後開放預約，每週有預約額度。</p>
     </div>
 
     <div class="card placement-home-card" style="margin-top:12px;" id="placementHomeCard">
@@ -1046,7 +1046,7 @@ var _memberState = getMemberState();
 renderMemberState(_memberState);
 function renderProjectView(){
   if(_memberState!=='project') return;
-  var U = TLI_PL.me(), P = TLI_PL.progress(U.rid), LG = TLI_PL.lounge(U.rid, U.perMonth), PL = TLI_PL;
+  var U = TLI_PL.me(), P = TLI_PL.progress(U.rid), LG = TLI_PL.lounge(U.rid, U.perWeek), PL = TLI_PL;
   function set(id,v){ document.getElementById(id).textContent=v; }
   set('pjWelcome', T('嗨，','Hi, ')+U.name);
   set('pjWelcomeSub', U.partnerName+'・'+T('專案合作學員','Project student'));
@@ -1054,7 +1054,7 @@ function renderProjectView(){
   set('pjClassMeta', U.partnerName+'・'+PL.mdLabel(U.from.slice(0,10))+' – '+PL.mdLabel(U.to.slice(0,10))+'（'+U.from.slice(0,4)+'）');
   set('pjTeacher', U.teacherName+T(' 老師',''));
   set('pjCourseLine', P.started ? T('已完成 ','Completed ')+P.done+'／'+P.total+T(' 課・',' lessons · ')+P.pct+'%' : T('尚未開始，從單元 1 開始','Not started — begin with Unit 1'));
-  set('pjLoungeLine', T('本月已用 ','Used this month ')+LG.used+'／'+LG.quota+T('・剩餘 ','・Left ')+LG.remaining+T(' 次',''));
+  set('pjLoungeLine', T('本週已用 ','Used this week ')+LG.used+'／'+LG.quota+T('・剩餘 ','・Left ')+LG.remaining+T(' 次',''));
   document.getElementById('pjKpis').innerHTML =
     '<div class="card" style="padding:12px;"><div class="small muted">'+T('完成率','Completion')+'</div><div style="font-size:20px;font-weight:700;">'+P.pct+'%</div></div>'+
     '<div class="card" style="padding:12px;"><div class="small muted">'+T('學習時數','Study hrs')+'</div><div style="font-size:20px;font-weight:700;">'+P.hours+'</div></div>'+
@@ -1065,7 +1065,7 @@ function renderProjectView(){
   var rows = [];
   var ico = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>';
   if(next){ rows.push([T('下一場 Mandarin Lounge：','Next Mandarin Lounge: ')+PL.mdLabel(next.date)+' '+next.time, PL.toolName(next.tool)+'・'+next.teacher, 'm16_classroom.html?lesson='+encodeURIComponent(next.id)+'&type=chat', T('進入教室','Enter')]); }
-  else if(LG.remaining>0){ rows.push([T('預約本月的 Mandarin Lounge','Book your Mandarin Lounge for this month'), T('本月還剩 ','Left this month: ')+LG.remaining+T(' 次',''), 'm14_chat_booking.html', T('去預約','Book')]); }
+  else if(LG.remaining>0){ rows.push([T('預約本週的 Mandarin Lounge','Book your Mandarin Lounge for this week'), T('本週還剩 ','Left this week: ')+LG.remaining+T(' 次',''), 'm14_chat_booking.html', T('去預約','Book')]); }
   if(!P.started){ rows.push([T('開始第一課自學','Start your first lesson'), T('單元 1　發音與聲調','Unit 1  Pronunciation and Tones'), 'm08_self_paced.html', T('開始','Start')]); }
   else if(P.lastGap>=7){ rows.push([T('已 '+P.lastGap+' 天沒有學習','No study for '+P.lastGap+' days'), T('繼續單元進度','Pick up where you left off'), 'm08_self_paced.html', T('繼續','Continue')]); }
   document.getElementById('pjTodo').innerHTML = rows.length ? rows.map(function(r){
