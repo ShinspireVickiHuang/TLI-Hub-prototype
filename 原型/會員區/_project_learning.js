@@ -399,7 +399,8 @@
     var map = { 'm02_booking.html': ['m14_chat_booking.html', 'Mandarin Lounge'], 'm03_schedule.html': [null, T('我的課表', 'My Schedule')], 'm04_course_detail.html': [null, T('我的專案', 'My Program')] };
     document.querySelectorAll('.side-nav a.side-link, .bottom-nav a').forEach(function (a) {
       var href = a.getAttribute('href') || '';
-      if (/m06_renew|m13_checkout/.test(href)) { a.style.display = 'none'; return; }
+      /* 成績單、證書、我的（個人資料）屬一階段 B，1A 專案合作學生不顯示 */
+      if (/m06_renew|m13_checkout|m19_certificates|m20_transcripts|m07_profile/.test(href)) { a.style.display = 'none'; return; }
       Object.keys(map).forEach(function (k) {
         if (href.indexOf(k) < 0) { return; }
         var sp = a.querySelector('span'); if (sp) { sp.removeAttribute('data-i18n'); sp.removeAttribute('data-en'); sp.textContent = k === 'm02_booking.html' ? 'Mandarin Lounge' : map[k][1]; }
@@ -407,9 +408,22 @@
       });
     });
   }
+  /* 側欄拿掉「我的」後，登出改放右上帳號選單（選單會隨語系重繪，故在開啟時補上） */
+  function pjAcctLogout() {
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest || !e.target.closest('#acctBtn')) { return; }
+      setTimeout(function () {
+        var p = document.getElementById('acctPanel'); if (!p || p.querySelector('[data-pj-logout]')) { return; }
+        var a = document.createElement('a'); a.href = 'javascript:void(0)'; a.setAttribute('data-pj-logout', '1'); a.textContent = T('登出', 'Sign out');
+        a.style.cssText = 'display:block;padding:7px 14px;color:#101828;text-decoration:none;border-top:1px solid #E4E7EC';
+        a.onclick = function () { setSS({}); location.href = '../公開網站/p01_home.html'; };
+        p.appendChild(a);
+      }, 0);
+    }, true);
+  }
   function projectMember() {
     var u = me(); if (u.mode !== 'project') { return; }
-    pjNav(u);
+    pjNav(u); pjAcctLogout();
     var m = /(m0[2-478])_[^\/]*\.html/.exec(g.location.pathname);
     if (m && /^m(02|03|04|07|08)$/.test(m[1])) { pjMount(m[1], u); }
   }
